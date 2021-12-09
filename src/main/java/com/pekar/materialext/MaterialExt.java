@@ -22,8 +22,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(MaterialExtensionMod.MODID)
-public class MaterialExtensionMod
+@Mod(MaterialExt.MODID)
+public class MaterialExt
 {
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
@@ -32,7 +32,7 @@ public class MaterialExtensionMod
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
-    public MaterialExtensionMod()
+    public MaterialExt()
     {
         // Register the setup method for modloading
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
