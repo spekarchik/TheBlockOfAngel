@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "":
+    {
+      "model": "materialext:block/diamithic_material_block"
+    }
+  }
+}

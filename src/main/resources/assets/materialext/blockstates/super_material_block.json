@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "":
+    {
+      "model": "materialext:block/super_material_block"
+    }
+  }
+}
