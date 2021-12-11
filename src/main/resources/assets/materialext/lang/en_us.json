@@ -4,7 +4,7 @@
   "language.code": "en_us",
   "author": "Sergey Pekarchik",
 
-  "itemGroup.compactmod": "Material Extension Mod",
+  "itemGroup.materialext": "Material Extension Mod",
 
   "item.materialext.rendelithic_boots": "Rendelithic Boots",
   "item.materialext.rendelithic_leggings": "Rendelithic Leggings",

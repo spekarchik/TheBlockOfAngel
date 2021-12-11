@@ -31,7 +31,7 @@ public class ItemRegistry
     public static final RegistryObject<Item> FLAX_FIBRE = MaterialExt.ITEMS.register("flax_fibre", ModItem::new);
     public static final RegistryObject<Item> ENERGY_CRYSTAL = MaterialExt.ITEMS.register("energy_crystal", ModItem::new);
     public static final RegistryObject<Item> ARMOR_FIBER = MaterialExt.ITEMS.register("armor_fiber", ModItem::new);
-    public static final RegistryObject<Item> ENERGY_FIBER = MaterialExt.ITEMS.register("", ModItem::new);
+    public static final RegistryObject<Item> ENERGY_FIBER = MaterialExt.ITEMS.register("energy_fiber", ModItem::new);
     public static final RegistryObject<Item> BIOS_DIAMOND = MaterialExt.ITEMS.register("bios_diamond", ModItem::new);
     public static final RegistryObject<Item> END_SAPPHIRE = MaterialExt.ITEMS.register("end_sapphire", ModItem::new);
     public static final RegistryObject<Item> FLAME_STONE = MaterialExt.ITEMS.register("flame_stone", ModItem::new);
