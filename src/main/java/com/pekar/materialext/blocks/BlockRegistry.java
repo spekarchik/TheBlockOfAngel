@@ -7,7 +7,8 @@ import net.minecraftforge.registries.RegistryObject;
 public class BlockRegistry
 {
     public static final RegistryObject<Block> CRACKED_ENDSTONE = MaterialExt.BLOCKS.register("cracked_endstone_block", CrackedEndStoneBlock::new);
-//    public static final RegistryObject<Block>  = MaterialExtensionMod.BLOCKS.register("", ::new);
+    public static final RegistryObject<Block> CRACKED_OBSIDIAN = MaterialExt.BLOCKS.register("cracked_obsidian_block", CrackedObsidianBlock::new);
+//    public static final RegistryObject<Block>  = MaterialExt.BLOCKS.register("", ::new);
 
     public static void initStatic()
     {
