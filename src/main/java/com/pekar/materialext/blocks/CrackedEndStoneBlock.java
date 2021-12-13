@@ -13,7 +13,7 @@ public class CrackedEndStoneBlock extends ModBlock
 {
     public CrackedEndStoneBlock()
     {
-        super(BlockBehaviour.Properties.of(Material.SNOW)
+        super(BlockBehaviour.Properties.of(Material.SAND)
                 .strength(0.5f)
                 .sound(SoundType.SNOW)
                 .requiresCorrectToolForDrops());

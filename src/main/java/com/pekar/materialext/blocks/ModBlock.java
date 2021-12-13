@@ -4,7 +4,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
-public abstract class ModBlock extends Block
+public class ModBlock extends Block
 {
     protected ModBlock(Material material)
     {
