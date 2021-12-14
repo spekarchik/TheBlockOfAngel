@@ -1,6 +1,7 @@
 package com.pekar.materialext.blocks;
 
 import com.pekar.materialext.blocks.tile_entities.AngelBlockEntity;
+import com.pekar.materialext.blocks.tile_entities.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -10,7 +11,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,38 +21,21 @@ public class AngelBlock extends Block implements EntityBlock
         super(BlockBehaviour.Properties.of(Material.HEAVY_METAL)
                 .strength(8f)
                 .lightLevel(state -> 200));
-
-        //super(Material.DRAGON_EGG);
-//        setHardness(8F);
-//        setLightLevel(0.9F);
-//        setLightOpacity(150);
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState)
     {
-        return new AngelBlockEntity(blockPos, blockState);
-    }
-    /*
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-    {
-        getTileEntity(worldIn, pos);
-    }
-
-    @Override
-    public Class<AngelTileEntity> getTileEntityClass()
-    {
-        return AngelTileEntity.class;
+        return EntityRegistry.ANGEL_BLOCK_ENTITY.get().create(blockPos, blockState);
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> entityType)
     {
-        return new AngelTileEntity();
+        return level.isClientSide()
+                ? null
+                : (level0, pos, blockState0, blockEntity) -> ((AngelBlockEntity)blockEntity).tick(level0, pos, blockState0, (AngelBlockEntity) blockEntity);
     }
-
-     */
 }
