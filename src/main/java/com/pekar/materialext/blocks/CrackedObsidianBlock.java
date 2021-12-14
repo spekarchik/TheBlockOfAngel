@@ -2,6 +2,7 @@ package com.pekar.materialext.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -9,7 +10,7 @@ import net.minecraft.world.level.material.Material;
 
 import java.util.Random;
 
-public class CrackedObsidianBlock extends ModBlock
+public class CrackedObsidianBlock extends Block
 {
     protected CrackedObsidianBlock()
     {

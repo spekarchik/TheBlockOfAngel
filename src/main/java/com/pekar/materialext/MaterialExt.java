@@ -1,11 +1,13 @@
 package com.pekar.materialext;
 
 import com.pekar.materialext.blocks.BlockRegistry;
+import com.pekar.materialext.blocks.tile_entities.EntityRegistry;
 import com.pekar.materialext.items.ItemRegistry;
 import com.pekar.materialext.tab.MaterialExtTab;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,6 +33,7 @@ public class MaterialExt
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
 
     public MaterialExt()
     {
@@ -44,14 +47,17 @@ public class MaterialExt
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
-        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        var bus = FMLJavaModLoadingContext.get().getModEventBus();
+        BLOCKS.register(bus);
+        ITEMS.register(bus);
+        BLOCK_ENTITIES.register(bus);
     }
 
     private void initialyzeRegistry()
     {
         BlockRegistry.initStatic();
         ItemRegistry.initStatic();
+        EntityRegistry.initStatic();
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -91,6 +97,11 @@ public class MaterialExt
         {
             // register a new block here
             LOGGER.info("HELLO from Register Block");
+        }
+
+        //@SubscribeEvent
+        public static void registerBlockEntities(RegistryEvent.Register<BlockEntityType<?>> event)
+        {
         }
 
         @SubscribeEvent
