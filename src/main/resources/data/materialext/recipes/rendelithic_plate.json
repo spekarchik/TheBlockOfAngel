@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:rendelithic_ingot"
+    },
+    "B":
+    {
+      "item": "materialext:armor_fiber"
+    },
+    "C":
+    {
+      "item": "materialext:vesicular_terracotta"
+    }
+  },
+  "result": {
+    "item": "materialext:rendelithic_plate",
+    "count": 12
+  }
+}

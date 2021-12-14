@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A B",
+    " E ",
+    "C D"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:bios_diamond"
+    },
+    "B":
+    {
+      "item": "materialext:strength_pearl"
+    },
+    "C":
+    {
+      "item": "materialext:flame_stone"
+    },
+    "D":
+    {
+      "item": "materialext:marine_crystal"
+    },
+    "E":
+    {
+      "item": "materialext:end_sapphire"
+    }
+  },
+  "result": {
+    "item": "materialext:super_crystal",
+    "count": 1
+  }
+}

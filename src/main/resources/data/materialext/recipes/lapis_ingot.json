@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "materialext:lapis_material_block"
+    }
+  ],
+  "result": {
+    "item": "materialext:lapis_ingot",
+    "count": 9
+  }
+}

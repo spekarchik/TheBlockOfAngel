@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:super_plate"
+    },
+    "B":
+    {
+      "item": "materialext:lapis_helmet"
+    }
+  },
+  "result": {
+    "item": "materialext:super_helmet",
+    "count": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "minecraft:flint"
+    },
+    "B":
+    {
+      "item": "materialext:super_primary_axe"
+    }
+  },
+  "result": {
+    "item": "materialext:super_primary_axe",
+    "count": 1
+  }
+}

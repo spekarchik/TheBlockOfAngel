@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "A A"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:diamithic_plate"
+    },
+    "B":
+    {
+      "item": "minecraft:diamond_boots"
+    }
+  },
+  "result": {
+    "item": "materialext:diamithic_boots",
+    "count": 1
+  }
+}

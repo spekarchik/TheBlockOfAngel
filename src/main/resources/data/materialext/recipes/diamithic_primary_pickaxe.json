@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    " B ",
+    " B "
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:diamithic_ingot"
+    },
+    "B":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "materialext:diamithic_primary_pickaxe",
+    "count": 1
+  }
+}

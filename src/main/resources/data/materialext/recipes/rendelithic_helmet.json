@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:rendelithic_plate"
+    },
+    "B":
+    {
+      "item": "minecraft:chainmail_helmet"
+    }
+  },
+  "result": {
+    "item": "materialext:rendelithic_helmet",
+    "count": 1
+  }
+}

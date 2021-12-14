@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A",
+    "A",
+    "B"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:super_ingot"
+    },
+    "B":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "materialext:super_primary_sword",
+    "count": 1
+  }
+}

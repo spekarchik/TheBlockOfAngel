@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A",
+    "A",
+    "B"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:rendelithic_ingot"
+    },
+    "B":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "materialext:rendelithic_primary_sword",
+    "count": 1
+  }
+}

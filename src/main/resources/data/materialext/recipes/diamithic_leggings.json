@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "A A"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:diamithic_plate"
+    },
+    "B":
+    {
+      "item": "minecraft:diamond_leggings"
+    }
+  },
+  "result": {
+    "item": "materialext:diamithic_leggings",
+    "count": 1
+  }
+}

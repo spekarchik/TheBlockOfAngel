@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AA",
+    "AB",
+    " B"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:super_ingot"
+    },
+    "B":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "materialext:super_primary_axe",
+    "count": 1
+  }
+}

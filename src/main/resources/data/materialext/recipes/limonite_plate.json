@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:limonite_ingot"
+    },
+    "B":
+    {
+      "item": "materialext:armor_fiber"
+    },
+    "C":
+    {
+      "item": "materialext:flax_fibre"
+    }
+  },
+  "result": {
+    "item": "materialext:limonite_plate",
+    "count": 12
+  }
+}

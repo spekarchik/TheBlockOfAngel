@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "materialext:obsidian_powder"
+    },
+    {
+      "item": "materialext:endstone_powder"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    }
+  ],
+  "result": {
+    "item": "materialext:rendelithic_powder",
+    "count": 3
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "ECE",
+    "DDD"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:evoker_amulet"
+    },
+    "C":
+    {
+      "item": "materialext:devil_block"
+    },
+    "D":
+    {
+      "item": "materialext:ancient_scroll"
+    },
+    "E":
+    {
+      "item": "materialext:miner_figure"
+    }
+  },
+  "result": {
+    "item": "materialext:angel_block",
+    "count": 1
+  }
+}

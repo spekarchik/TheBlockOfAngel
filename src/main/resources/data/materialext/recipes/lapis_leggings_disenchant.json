@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "minecraft:flint"
+    },
+    "B":
+    {
+      "item": "materialext:lapis_leggings"
+    }
+  },
+  "result": {
+    "item": "materialext:lapis_leggings",
+    "count": 1
+  }
+}

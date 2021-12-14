@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "BDB",
+    "CCC"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:guardian_eye"
+    },
+    "B":
+    {
+      "item": "materialext:ancient_canine"
+    },
+    "C":
+    {
+      "item": "materialext:nether_bars"
+    },
+    "D":
+    {
+      "item": "minecraft:skull",
+      "data": 5
+    }
+  },
+  "result": {
+    "item": "materialext:devil_block",
+    "count": 1
+  }
+}
