@@ -1,9 +1,9 @@
 package com.pekar.materialext.tab;
 
 import com.pekar.materialext.MaterialExt;
+import com.pekar.materialext.items.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 public class MaterialExtTab extends CreativeModeTab
 {
@@ -17,6 +17,6 @@ public class MaterialExtTab extends CreativeModeTab
     @Override
     public ItemStack makeIcon()
     {
-        return new ItemStack(Items.STRING);
+        return new ItemStack(ItemRegistry.RENDELITHIC_POWDER.get());
     }
 }
