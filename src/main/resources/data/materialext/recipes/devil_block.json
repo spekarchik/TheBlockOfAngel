@@ -20,8 +20,7 @@
     },
     "D":
     {
-      "item": "minecraft:skull",
-      "data": 5
+      "item": "minecraft:dragon_head"
     }
   },
   "result": {

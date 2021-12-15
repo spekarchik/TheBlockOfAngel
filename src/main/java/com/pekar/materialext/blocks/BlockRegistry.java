@@ -29,21 +29,7 @@ public class BlockRegistry
             new Block(BlockBehaviour.Properties.of(Material.STONE).strength(0.7f, 9f)));
 
     public static final RegistryObject<Block> ANGEL_BLOCK = MaterialExt.BLOCKS.register("angel_block", AngelBlock::new);
-
-//    public static final RegistryObject<Block>  = MaterialExt.BLOCKS.register("", () ->
-//          new ModBlock(BlockBehaviour.Properties.of(Material.).strength(f)));
-//    public static final RegistryObject<Block>  = MaterialExt.BLOCKS.register("", () ->
-//          new ModBlock(BlockBehaviour.Properties.of(Material.).strength(f)));
-//    public static final RegistryObject<Block>  = MaterialExt.BLOCKS.register("", () ->
-//          new ModBlock(BlockBehaviour.Properties.of(Material.).strength(f)));
-//    public static final RegistryObject<Block>  = MaterialExt.BLOCKS.register("", () ->
-//          new ModBlock(BlockBehaviour.Properties.of(Material.).strength(f)));
-//    public static final RegistryObject<Block>  = MaterialExt.BLOCKS.register("", () ->
-//          new ModBlock(BlockBehaviour.Properties.of(Material.).strength(f)));
-//    public static final RegistryObject<Block>  = MaterialExt.BLOCKS.register("", () ->
-//          new ModBlock(BlockBehaviour.Properties.of(Material.).strength(f)));
-//    public static final RegistryObject<Block>  = MaterialExt.BLOCKS.register("", () ->
-//          new ModBlock(BlockBehaviour.Properties.of(Material.).strength(f)));
+    public static final RegistryObject<Block> DEVIL_BLOCK = MaterialExt.BLOCKS.register("devil_block", DevilBlock::new);
 
     public static void initStatic()
     {
