@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:lapis_plate"
+    },
+    "B":
+    {
+      "item": "minecraft:chainmail_chestplate"
+    }
+  },
+  "result": {
+    "item": "materialext:lapis_chestplate",
+    "count": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "materialext:super_plate"
+    },
+    "B":
+    {
+      "item": "materialext:diamithic_chestplate"
+    }
+  },
+  "result": {
+    "item": "materialext:super_chestplate",
+    "count": 1
+  }
+}

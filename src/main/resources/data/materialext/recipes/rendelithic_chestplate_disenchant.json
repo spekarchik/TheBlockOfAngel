@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "minecraft:flint"
+    },
+    "B":
+    {
+      "item": "materialext:rendelithic_chestplate"
+    }
+  },
+  "result": {
+    "item": "materialext:rendelithic_chestplate",
+    "count": 1
+  }
+}
