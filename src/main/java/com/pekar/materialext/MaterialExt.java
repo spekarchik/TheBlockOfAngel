@@ -1,5 +1,6 @@
 package com.pekar.materialext;
 
+import com.pekar.materialext.armor.ArmorRegistry;
 import com.pekar.materialext.blocks.BlockRegistry;
 import com.pekar.materialext.blocks.tile_entities.EntityRegistry;
 import com.pekar.materialext.items.ItemRegistry;
@@ -58,6 +59,7 @@ public class MaterialExt
         BlockRegistry.initStatic();
         ItemRegistry.initStatic();
         EntityRegistry.initStatic();
+        ArmorRegistry.initStatic();
     }
 
     private void setup(final FMLCommonSetupEvent event)
