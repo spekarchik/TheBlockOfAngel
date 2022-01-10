@@ -28,6 +28,7 @@ public class ModArmor extends ArmorItem
 
 //    public int getRepairAmount()
 //    {
+//        //getMaterial().getDurabilityForSlot()
 //        return getArmorMaterial().getDurability(armorType) / 5;
 //    }
 }
