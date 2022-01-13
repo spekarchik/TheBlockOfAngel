@@ -3,6 +3,7 @@ package com.pekar.materialext;
 import com.pekar.materialext.armor.ArmorRegistry;
 import com.pekar.materialext.blocks.BlockRegistry;
 import com.pekar.materialext.blocks.tile_entities.EntityRegistry;
+import com.pekar.materialext.events.EventRegistry;
 import com.pekar.materialext.items.ItemRegistry;
 import com.pekar.materialext.tab.MaterialExtTab;
 import net.minecraft.world.item.BlockItem;
@@ -43,10 +44,11 @@ public class MaterialExt
 
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
-        initialyzeRegistry();
+        initializeRegistry();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        EventRegistry.registerEvents();
 
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(bus);
@@ -54,7 +56,7 @@ public class MaterialExt
         BLOCK_ENTITIES.register(bus);
     }
 
-    private void initialyzeRegistry()
+    private void initializeRegistry()
     {
         BlockRegistry.initStatic();
         ItemRegistry.initStatic();
