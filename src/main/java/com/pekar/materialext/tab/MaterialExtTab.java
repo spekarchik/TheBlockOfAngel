@@ -1,13 +1,13 @@
 package com.pekar.materialext.tab;
 
-import com.pekar.materialext.MaterialExt;
+import com.pekar.materialext.Main;
 import com.pekar.materialext.items.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
 public class MaterialExtTab extends CreativeModeTab
 {
-    public static CreativeModeTab MATERIAL_EXT_TAB = new MaterialExtTab(MaterialExt.MODID);
+    public static CreativeModeTab MATERIAL_EXT_TAB = new MaterialExtTab(Main.MODID);
 
     public MaterialExtTab(String tabName)
     {

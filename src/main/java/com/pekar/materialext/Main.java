@@ -25,18 +25,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(MaterialExt.MODID)
-public class MaterialExt
+@Mod(Main.MODID)
+public class Main
 {
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
-    public static final String MODID = "materialext";
+    public static final String MODID = "angelblock";
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
 
-    public MaterialExt()
+    public Main()
     {
         // Register the setup method for modloading
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
@@ -91,7 +91,7 @@ public class MaterialExt
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+    @net.minecraftforge.fml.common.Mod.EventBusSubscriber(bus= net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents
     {
         //@SubscribeEvent

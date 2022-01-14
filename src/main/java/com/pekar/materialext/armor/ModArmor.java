@@ -1,6 +1,6 @@
 package com.pekar.materialext.armor;
 
-import com.pekar.materialext.MaterialExt;
+import com.pekar.materialext.Main;
 import com.pekar.materialext.tab.MaterialExtTab;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
@@ -23,7 +23,7 @@ public class ModArmor extends ArmorItem
     protected static RegistryObject<ArmorItem> register(String name, Supplier<ArmorItem> sup)
     {
         ArmorNames.add(name);
-        return MaterialExt.ITEMS.register(name, sup);
+        return Main.ITEMS.register(name, sup);
     }
 
 //    public int getRepairAmount()
