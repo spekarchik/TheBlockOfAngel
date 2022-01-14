@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:super_helmet"
+      "item": "angelblock:super_helmet"
     }
   },
   "result": {
-    "item": "materialext:super_helmet",
+    "item": "angelblock:super_helmet",
     "count": 1
   }
 }

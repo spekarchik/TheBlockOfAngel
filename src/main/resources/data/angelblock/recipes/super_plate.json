@@ -8,19 +8,19 @@
   "key": {
     "A":
     {
-      "item": "materialext:super_ingot"
+      "item": "angelblock:super_ingot"
     },
     "B":
     {
-      "item": "materialext:energy_fiber"
+      "item": "angelblock:energy_fiber"
     },
     "C":
     {
-      "item": "materialext:energy_crystal"
+      "item": "angelblock:energy_crystal"
     }
   },
   "result": {
-    "item": "materialext:super_plate",
+    "item": "angelblock:super_plate",
     "count": 12
   }
 }

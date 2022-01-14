@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "materialext:items/obsidian_powder"
+    "layer0": "angelblock:items/obsidian_powder"
   }
 }

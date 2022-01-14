@@ -21,23 +21,23 @@ public class ModArmorMaterial implements ArmorMaterial
     private final Supplier<Ingredient> repairIngredient;
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
 
-    protected static final ArmorMaterial RENDELITHIC = new ModArmorMaterial("materialext:rendelithic_armor",
+    protected static final ArmorMaterial RENDELITHIC = new ModArmorMaterial("angelblock:rendelithic_armor",
             21, new int[] { 3, 6, 8, 3 }, 5, SoundEvents.ARMOR_EQUIP_DIAMOND,
             0F, 0F, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
 
-    protected static final ArmorMaterial LIMONITE = new ModArmorMaterial("materialext:limonite_armor",
+    protected static final ArmorMaterial LIMONITE = new ModArmorMaterial("angelblock:limonite_armor",
             28, new int[] { 3, 5, 8, 3 }, 30, SoundEvents.ARMOR_EQUIP_LEATHER,
             1F, 0F, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
 
-    protected static final ArmorMaterial DIAMITHIC = new ModArmorMaterial("materialext:diamithic_armor",
+    protected static final ArmorMaterial DIAMITHIC = new ModArmorMaterial("angelblock:diamithic_armor",
             41, new int[] { 3, 6, 9, 3 }, 11, SoundEvents.ARMOR_EQUIP_DIAMOND,
             3F, 0.1F, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
 
-    protected static final ArmorMaterial LAPIS = new ModArmorMaterial("materialext:lapis_armor",
+    protected static final ArmorMaterial LAPIS = new ModArmorMaterial("angelblock:lapis_armor",
             37, new int[] { 3, 6, 8, 3 }, 21, SoundEvents.ARMOR_EQUIP_DIAMOND,
             2F, 0F, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
 
-    protected static final ArmorMaterial SUPER = new ModArmorMaterial("materialext:super_armor",
+    protected static final ArmorMaterial SUPER = new ModArmorMaterial("angelblock:super_armor",
             43, new int[] { 3, 6, 9, 3 }, 19, SoundEvents.ARMOR_EQUIP_DIAMOND,
             4F, 0.2F, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
 

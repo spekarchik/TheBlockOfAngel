@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "materialext:rendelithic_material_block"
+      "item": "angelblock:rendelithic_material_block"
     }
   ],
   "result": {
-    "item": "materialext:rendelithic_ingot",
+    "item": "angelblock:rendelithic_ingot",
     "count": 9
   }
 }

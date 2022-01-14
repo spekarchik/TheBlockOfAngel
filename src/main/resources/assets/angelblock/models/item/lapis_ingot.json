@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "materialext:items/lapis_ingot"
+    "layer0": "angelblock:items/lapis_ingot"
   }
 }

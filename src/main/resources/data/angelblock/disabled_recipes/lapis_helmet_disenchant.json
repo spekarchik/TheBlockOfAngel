@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:lapis_helmet"
+      "item": "angelblock:lapis_helmet"
     }
   },
   "result": {
-    "item": "materialext:lapis_helmet",
+    "item": "angelblock:lapis_helmet",
     "count": 1
   }
 }

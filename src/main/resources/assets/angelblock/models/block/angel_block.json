@@ -3,9 +3,9 @@
   "ambientocclusion": false,
   "textures":
   {
-    "front": "materialext:blocks/angel_block",
-    "side": "materialext:blocks/angel_block",
-    "top": "materialext:blocks/angel_block_up",
-    "bottom": "materialext:blocks/angel_block_up"
+    "front": "angelblock:blocks/angel_block",
+    "side": "angelblock:blocks/angel_block",
+    "top": "angelblock:blocks/angel_block_up",
+    "bottom": "angelblock:blocks/angel_block_up"
   }
 }

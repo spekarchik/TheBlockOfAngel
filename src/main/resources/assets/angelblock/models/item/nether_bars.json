@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "materialext:items/nether_bars"
+        "layer0": "angelblock:items/nether_bars"
     }
 }

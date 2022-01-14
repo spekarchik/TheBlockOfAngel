@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:lapis_pickaxe"
+      "item": "angelblock:lapis_pickaxe"
     }
   },
   "result": {
-    "item": "materialext:lapis_pickaxe",
+    "item": "angelblock:lapis_pickaxe",
     "count": 1
   }
 }

@@ -8,7 +8,7 @@
   "key": {
     "A":
     {
-      "item": "materialext:lapis_ingot"
+      "item": "angelblock:lapis_ingot"
     },
     "B":
     {
@@ -16,7 +16,7 @@
     }
   },
   "result": {
-    "item": "materialext:lapis_primary_hoe",
+    "item": "angelblock:lapis_primary_hoe",
     "count": 1
   }
 }

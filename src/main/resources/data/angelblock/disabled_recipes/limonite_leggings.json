@@ -8,7 +8,7 @@
   "key": {
     "A":
     {
-      "item": "materialext:limonite_plate"
+      "item": "angelblock:limonite_plate"
     },
     "B":
     {
@@ -16,7 +16,7 @@
     }
   },
   "result": {
-    "item": "materialext:limonite_leggings",
+    "item": "angelblock:limonite_leggings",
     "count": 1
   }
 }

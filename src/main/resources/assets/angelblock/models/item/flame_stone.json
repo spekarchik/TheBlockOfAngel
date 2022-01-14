@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "materialext:items/flame_stone"
+    "layer0": "angelblock:items/flame_stone"
   }
 }

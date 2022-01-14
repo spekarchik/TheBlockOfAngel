@@ -3,7 +3,7 @@
   {
     "":
     {
-      "model": "materialext:block/rendelithic_material_block"
+      "model": "angelblock:block/rendelithic_material_block"
     }
   }
 }

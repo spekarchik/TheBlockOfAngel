@@ -8,19 +8,19 @@
   "key": {
     "A":
     {
-      "item": "materialext:rendelithic_ingot"
+      "item": "angelblock:rendelithic_ingot"
     },
     "B":
     {
-      "item": "materialext:armor_fiber"
+      "item": "angelblock:armor_fiber"
     },
     "C":
     {
-      "item": "materialext:vesicular_terracotta"
+      "item": "angelblock:vesicular_terracotta"
     }
   },
   "result": {
-    "item": "materialext:rendelithic_plate",
+    "item": "angelblock:rendelithic_plate",
     "count": 12
   }
 }

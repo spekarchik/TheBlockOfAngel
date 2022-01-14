@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "materialext:items/limonite_leggings"
+        "layer0": "angelblock:items/limonite_leggings"
     }
 }

@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:super_boots"
+      "item": "angelblock:super_boots"
     }
   },
   "result": {
-    "item": "materialext:super_boots",
+    "item": "angelblock:super_boots",
     "count": 1
   }
 }

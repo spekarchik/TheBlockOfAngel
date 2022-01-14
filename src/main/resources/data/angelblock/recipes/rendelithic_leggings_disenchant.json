@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:rendelithic_leggings"
+      "item": "angelblock:rendelithic_leggings"
     }
   },
   "result": {
-    "item": "materialext:rendelithic_leggings",
+    "item": "angelblock:rendelithic_leggings",
     "count": 1
   }
 }

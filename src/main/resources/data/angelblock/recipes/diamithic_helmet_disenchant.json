@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:diamithic_helmet"
+      "item": "angelblock:diamithic_helmet"
     }
   },
   "result": {
-    "item": "materialext:diamithic_helmet",
+    "item": "angelblock:diamithic_helmet",
     "count": 1
   }
 }

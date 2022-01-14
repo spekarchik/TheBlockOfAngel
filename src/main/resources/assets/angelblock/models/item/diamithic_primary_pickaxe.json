@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "materialext:items/diamithic_primary_pickaxe"
+    "layer0": "angelblock:items/diamithic_primary_pickaxe"
   }
 }

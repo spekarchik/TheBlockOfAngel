@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:rendelithic_pickaxe"
+      "item": "angelblock:rendelithic_pickaxe"
     }
   },
   "result": {
-    "item": "materialext:rendelithic_pickaxe",
+    "item": "angelblock:rendelithic_pickaxe",
     "count": 1
   }
 }

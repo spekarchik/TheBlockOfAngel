@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:limonite_axe"
+      "item": "angelblock:limonite_axe"
     }
   },
   "result": {
-    "item": "materialext:limonite_axe",
+    "item": "angelblock:limonite_axe",
     "count": 1
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "materialext:items/endstone_powder"
+    "layer0": "angelblock:items/endstone_powder"
   }
 }

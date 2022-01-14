@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:super_primary_shovel"
+      "item": "angelblock:super_primary_shovel"
     }
   },
   "result": {
-    "item": "materialext:super_primary_shovel",
+    "item": "angelblock:super_primary_shovel",
     "count": 1
   }
 }

@@ -8,11 +8,11 @@
   "key": {
     "A":
     {
-      "item": "materialext:obsidian_powder"
+      "item": "angelblock:obsidian_powder"
     }
   },
   "result": {
-    "item": "materialext:obsidian_powder_block",
+    "item": "angelblock:obsidian_powder_block",
     "count": 1
   }
 }

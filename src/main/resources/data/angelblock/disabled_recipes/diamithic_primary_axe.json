@@ -8,7 +8,7 @@
   "key": {
     "A":
     {
-      "item": "materialext:diamithic_ingot"
+      "item": "angelblock:diamithic_ingot"
     },
     "B":
     {
@@ -16,7 +16,7 @@
     }
   },
   "result": {
-    "item": "materialext:diamithic_primary_axe",
+    "item": "angelblock:diamithic_primary_axe",
     "count": 1
   }
 }

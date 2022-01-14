@@ -8,11 +8,11 @@
   "key": {
     "A":
     {
-      "item": "materialext:lapis_ingot"
+      "item": "angelblock:lapis_ingot"
     }
   },
   "result": {
-    "item": "materialext:lapis_material_block",
+    "item": "angelblock:lapis_material_block",
     "count": 1
   }
 }

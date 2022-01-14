@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "materialext:diamithic_material_block"
+      "item": "angelblock:diamithic_material_block"
     }
   ],
   "result": {
-    "item": "materialext:diamithic_ingot",
+    "item": "angelblock:diamithic_ingot",
     "count": 9
   }
 }

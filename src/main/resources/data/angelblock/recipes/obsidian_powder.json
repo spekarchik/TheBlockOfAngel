@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "materialext:obsidian_powder_block"
+      "item": "angelblock:obsidian_powder_block"
     }
   ],
   "result": {
-    "item": "materialext:obsidian_powder",
+    "item": "angelblock:obsidian_powder",
     "count": 9
   }
 }

@@ -7,7 +7,7 @@
   "key": {
     "A":
     {
-      "item": "materialext:lapis_plate"
+      "item": "angelblock:lapis_plate"
     },
     "B":
     {
@@ -15,7 +15,7 @@
     }
   },
   "result": {
-    "item": "materialext:lapis_boots",
+    "item": "angelblock:lapis_boots",
     "count": 1
   }
 }

@@ -8,11 +8,11 @@
   "key": {
     "A":
     {
-      "item": "materialext:lapis_ingot"
+      "item": "angelblock:lapis_ingot"
     },
     "B":
     {
-      "item": "materialext:armor_fiber"
+      "item": "angelblock:armor_fiber"
     },
     "C":
     {
@@ -21,7 +21,7 @@
     }
   },
   "result": {
-    "item": "materialext:lapis_plate",
+    "item": "angelblock:lapis_plate",
     "count": 12
   }
 }

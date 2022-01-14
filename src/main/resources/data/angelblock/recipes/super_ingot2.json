@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "materialext:rendelithic_ingot"
+      "item": "angelblock:rendelithic_ingot"
     },
     {
-      "item": "materialext:diamithic_ingot"
+      "item": "angelblock:diamithic_ingot"
     },
     {
-      "item": "materialext:limonite_ingot"
+      "item": "angelblock:limonite_ingot"
     },
     {
-      "item": "materialext:lapis_ingot"
+      "item": "angelblock:lapis_ingot"
     }
   ],
   "result": {
-    "item": "materialext:super_ingot",
+    "item": "angelblock:super_ingot",
     "count": 4
   }
 }

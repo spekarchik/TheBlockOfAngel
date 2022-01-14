@@ -3,7 +3,7 @@
   {
     "":
     {
-      "model": "materialext:block/obsidian_powder_block"
+      "model": "angelblock:block/obsidian_powder_block"
     }
   }
 }

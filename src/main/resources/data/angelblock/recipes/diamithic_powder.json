@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "materialext:obsidian_powder"
+      "item": "angelblock:obsidian_powder"
     },
     {
-      "item": "materialext:endstone_powder"
+      "item": "angelblock:endstone_powder"
     },
     {
-      "item": "materialext:diamond_powder"
+      "item": "angelblock:diamond_powder"
     },
     {
       "item": "minecraft:slime_ball"
     }
   ],
   "result": {
-    "item": "materialext:diamithic_powder",
+    "item": "angelblock:diamithic_powder",
     "count": 3
   }
 }

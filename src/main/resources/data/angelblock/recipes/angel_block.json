@@ -8,23 +8,23 @@
   "key": {
     "A":
     {
-      "item": "materialext:evoker_amulet"
+      "item": "angelblock:evoker_amulet"
     },
     "C":
     {
-      "item": "materialext:devil_block"
+      "item": "angelblock:devil_block"
     },
     "D":
     {
-      "item": "materialext:ancient_scroll"
+      "item": "angelblock:ancient_scroll"
     },
     "E":
     {
-      "item": "materialext:miner_figure"
+      "item": "angelblock:miner_figure"
     }
   },
   "result": {
-    "item": "materialext:angel_block",
+    "item": "angelblock:angel_block",
     "count": 1
   }
 }

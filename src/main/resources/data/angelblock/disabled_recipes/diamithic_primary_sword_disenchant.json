@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:diamithic_primary_sword"
+      "item": "angelblock:diamithic_primary_sword"
     }
   },
   "result": {
-    "item": "materialext:diamithic_primary_sword",
+    "item": "angelblock:diamithic_primary_sword",
     "count": 1
   }
 }

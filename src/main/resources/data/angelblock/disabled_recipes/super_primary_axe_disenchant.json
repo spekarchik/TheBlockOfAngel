@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:super_primary_axe"
+      "item": "angelblock:super_primary_axe"
     }
   },
   "result": {
-    "item": "materialext:super_primary_axe",
+    "item": "angelblock:super_primary_axe",
     "count": 1
   }
 }

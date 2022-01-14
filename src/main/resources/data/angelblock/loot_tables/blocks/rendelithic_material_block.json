@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "materialext:rendelithic_material_block"
+          "name": "angelblock:rendelithic_material_block"
         }
       ],
       "conditions": [

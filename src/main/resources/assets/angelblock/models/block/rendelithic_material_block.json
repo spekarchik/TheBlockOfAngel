@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "textures":
   {
-    "all": "materialext:blocks/rendelithic_material_block"
+    "all": "angelblock:blocks/rendelithic_material_block"
   }
 }

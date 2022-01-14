@@ -8,15 +8,15 @@
   "key": {
     "A":
     {
-      "item": "materialext:super_plate"
+      "item": "angelblock:super_plate"
     },
     "B":
     {
-      "item": "materialext:diamithic_chestplate"
+      "item": "angelblock:diamithic_chestplate"
     }
   },
   "result": {
-    "item": "materialext:super_chestplate",
+    "item": "angelblock:super_chestplate",
     "count": 1
   }
 }

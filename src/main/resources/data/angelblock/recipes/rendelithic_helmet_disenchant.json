@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:rendelithic_helmet"
+      "item": "angelblock:rendelithic_helmet"
     }
   },
   "result": {
-    "item": "materialext:rendelithic_helmet",
+    "item": "angelblock:rendelithic_helmet",
     "count": 1
   }
 }

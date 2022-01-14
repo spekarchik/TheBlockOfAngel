@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:diamithic_axe"
+      "item": "angelblock:diamithic_axe"
     }
   },
   "result": {
-    "item": "materialext:diamithic_axe",
+    "item": "angelblock:diamithic_axe",
     "count": 1
   }
 }

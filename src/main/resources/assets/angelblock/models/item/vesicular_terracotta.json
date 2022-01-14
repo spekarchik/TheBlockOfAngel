@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "materialext:items/vesicular_terracotta"
+    "layer0": "angelblock:items/vesicular_terracotta"
   }
 }

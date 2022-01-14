@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:limonite_primary_axe"
+      "item": "angelblock:limonite_primary_axe"
     }
   },
   "result": {
-    "item": "materialext:limonite_primary_axe",
+    "item": "angelblock:limonite_primary_axe",
     "count": 1
   }
 }

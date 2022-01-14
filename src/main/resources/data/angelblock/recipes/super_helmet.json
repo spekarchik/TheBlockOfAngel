@@ -7,15 +7,15 @@
   "key": {
     "A":
     {
-      "item": "materialext:super_plate"
+      "item": "angelblock:super_plate"
     },
     "B":
     {
-      "item": "materialext:lapis_helmet"
+      "item": "angelblock:lapis_helmet"
     }
   },
   "result": {
-    "item": "materialext:super_helmet",
+    "item": "angelblock:super_helmet",
     "count": 1
   }
 }

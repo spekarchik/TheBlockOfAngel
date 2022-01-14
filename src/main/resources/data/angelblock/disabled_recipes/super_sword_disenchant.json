@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:super_sword"
+      "item": "angelblock:super_sword"
     }
   },
   "result": {
-    "item": "materialext:super_sword",
+    "item": "angelblock:super_sword",
     "count": 1
   }
 }

@@ -3,7 +3,7 @@
   {
     "":
     {
-      "model": "materialext:block/cracked_obsidian_block"
+      "model": "angelblock:block/cracked_obsidian_block"
     }
   }
 }

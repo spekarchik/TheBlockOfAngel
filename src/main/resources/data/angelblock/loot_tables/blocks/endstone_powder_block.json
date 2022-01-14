@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "materialext:endstone_powder_block"
+          "name": "angelblock:endstone_powder_block"
         }
       ],
       "conditions": [

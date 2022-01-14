@@ -8,11 +8,11 @@
   "key": {
     "A":
     {
-      "item": "materialext:diamond_powder"
+      "item": "angelblock:diamond_powder"
     }
   },
   "result": {
-    "item": "materialext:diamond_powder_block",
+    "item": "angelblock:diamond_powder_block",
     "count": 1
   }
 }

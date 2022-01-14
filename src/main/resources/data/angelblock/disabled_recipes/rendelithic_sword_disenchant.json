@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:rendelithic_sword"
+      "item": "angelblock:rendelithic_sword"
     }
   },
   "result": {
-    "item": "materialext:rendelithic_sword",
+    "item": "angelblock:rendelithic_sword",
     "count": 1
   }
 }

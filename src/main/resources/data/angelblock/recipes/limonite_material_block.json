@@ -8,11 +8,11 @@
   "key": {
     "A":
     {
-      "item": "materialext:limonite_ingot"
+      "item": "angelblock:limonite_ingot"
     }
   },
   "result": {
-    "item": "materialext:limonite_material_block",
+    "item": "angelblock:limonite_material_block",
     "count": 1
   }
 }

@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:lapis_chestplate"
+      "item": "angelblock:lapis_chestplate"
     }
   },
   "result": {
-    "item": "materialext:lapis_chestplate",
+    "item": "angelblock:lapis_chestplate",
     "count": 1
   }
 }

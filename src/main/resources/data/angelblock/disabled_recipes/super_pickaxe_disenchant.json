@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:super_pickaxe"
+      "item": "angelblock:super_pickaxe"
     }
   },
   "result": {
-    "item": "materialext:super_pickaxe",
+    "item": "angelblock:super_pickaxe",
     "count": 1
   }
 }

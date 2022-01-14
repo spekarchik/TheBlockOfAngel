@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "materialext:items/lapis_shovel"
+    "layer0": "angelblock:items/lapis_shovel"
   }
 }

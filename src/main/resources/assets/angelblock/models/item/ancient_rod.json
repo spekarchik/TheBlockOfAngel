@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "materialext:items/ancient_rod"
+        "layer0": "angelblock:items/ancient_rod"
     }
 }

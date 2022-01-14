@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "materialext:items/marine_crystal"
+    "layer0": "angelblock:items/marine_crystal"
   }
 }

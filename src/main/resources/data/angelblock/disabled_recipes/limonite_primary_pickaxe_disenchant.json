@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:limonite_primary_pickaxe"
+      "item": "angelblock:limonite_primary_pickaxe"
     }
   },
   "result": {
-    "item": "materialext:limonite_primary_pickaxe",
+    "item": "angelblock:limonite_primary_pickaxe",
     "count": 1
   }
 }

@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:rendelithic_boots"
+      "item": "angelblock:rendelithic_boots"
     }
   },
   "result": {
-    "item": "materialext:rendelithic_boots",
+    "item": "angelblock:rendelithic_boots",
     "count": 1
   }
 }

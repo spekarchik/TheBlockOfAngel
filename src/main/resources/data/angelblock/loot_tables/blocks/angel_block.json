@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "materialext:angel_block"
+          "name": "angelblock:angel_block"
         }
       ],
       "conditions": [

@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:super_shovel"
+      "item": "angelblock:super_shovel"
     }
   },
   "result": {
-    "item": "materialext:super_shovel",
+    "item": "angelblock:super_shovel",
     "count": 1
   }
 }

@@ -3,7 +3,7 @@
   {
     "":
     {
-      "model": "materialext:block/limonite_material_block"
+      "model": "angelblock:block/limonite_material_block"
     }
   }
 }

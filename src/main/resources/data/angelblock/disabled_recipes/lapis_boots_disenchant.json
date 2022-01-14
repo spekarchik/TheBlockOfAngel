@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:lapis_boots"
+      "item": "angelblock:lapis_boots"
     }
   },
   "result": {
-    "item": "materialext:lapis_boots",
+    "item": "angelblock:lapis_boots",
     "count": 1
   }
 }

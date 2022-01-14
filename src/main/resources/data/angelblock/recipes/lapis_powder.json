@@ -2,10 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "materialext:obsidian_powder"
+      "item": "angelblock:obsidian_powder"
     },
     {
-      "item": "materialext:endstone_powder"
+      "item": "angelblock:endstone_powder"
     },
     {
       "item": "minecraft:lapis_lazuli",
@@ -16,7 +16,7 @@
     }
   ],
   "result": {
-    "item": "materialext:lapis_powder",
+    "item": "angelblock:lapis_powder",
     "count": 3
   }
 }

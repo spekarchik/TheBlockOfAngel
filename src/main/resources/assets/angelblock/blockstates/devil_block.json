@@ -3,7 +3,7 @@
   {
     "":
     {
-      "model": "materialext:block/devil_block"
+      "model": "angelblock:block/devil_block"
     }
   }
 }

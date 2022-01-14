@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:diamithic_pickaxe"
+      "item": "angelblock:diamithic_pickaxe"
     }
   },
   "result": {
-    "item": "materialext:diamithic_pickaxe",
+    "item": "angelblock:diamithic_pickaxe",
     "count": 1
   }
 }

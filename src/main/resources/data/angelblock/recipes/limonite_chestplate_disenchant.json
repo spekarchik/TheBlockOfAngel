@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:limonite_chestplate"
+      "item": "angelblock:limonite_chestplate"
     }
   },
   "result": {
-    "item": "materialext:limonite_chestplate",
+    "item": "angelblock:limonite_chestplate",
     "count": 1
   }
 }

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "materialext:items/rendelithic_leggings"
+        "layer0": "angelblock:items/rendelithic_leggings"
     }
 }

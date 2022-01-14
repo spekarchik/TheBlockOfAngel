@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "materialext:limonite_material_block"
+      "item": "angelblock:limonite_material_block"
     }
   ],
   "result": {
-    "item": "materialext:limonite_ingot",
+    "item": "angelblock:limonite_ingot",
     "count": 9
   }
 }

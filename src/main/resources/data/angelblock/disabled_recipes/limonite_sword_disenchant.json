@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:limonite_sword"
+      "item": "angelblock:limonite_sword"
     }
   },
   "result": {
-    "item": "materialext:limonite_sword",
+    "item": "angelblock:limonite_sword",
     "count": 1
   }
 }

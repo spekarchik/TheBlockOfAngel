@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:super_chestplate"
+      "item": "angelblock:super_chestplate"
     }
   },
   "result": {
-    "item": "materialext:super_chestplate",
+    "item": "angelblock:super_chestplate",
     "count": 1
   }
 }

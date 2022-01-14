@@ -8,15 +8,15 @@
   "key": {
     "A":
     {
-      "item": "materialext:guardian_eye"
+      "item": "angelblock:guardian_eye"
     },
     "B":
     {
-      "item": "materialext:ancient_canine"
+      "item": "angelblock:ancient_canine"
     },
     "C":
     {
-      "item": "materialext:nether_bars"
+      "item": "angelblock:nether_bars"
     },
     "D":
     {
@@ -24,7 +24,7 @@
     }
   },
   "result": {
-    "item": "materialext:devil_block",
+    "item": "angelblock:devil_block",
     "count": 1
   }
 }

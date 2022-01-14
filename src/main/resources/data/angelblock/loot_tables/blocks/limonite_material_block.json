@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "materialext:limonite_material_block"
+          "name": "angelblock:limonite_material_block"
         }
       ],
       "conditions": [

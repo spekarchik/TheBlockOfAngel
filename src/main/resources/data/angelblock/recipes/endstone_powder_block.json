@@ -8,11 +8,11 @@
   "key": {
     "A":
     {
-      "item": "materialext:endstone_powder"
+      "item": "angelblock:endstone_powder"
     }
   },
   "result": {
-    "item": "materialext:endstone_powder_block",
+    "item": "angelblock:endstone_powder_block",
     "count": 1
   }
 }

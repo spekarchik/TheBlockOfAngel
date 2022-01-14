@@ -3,7 +3,7 @@
   {
     "":
     {
-      "model": "materialext:block/super_material_block"
+      "model": "angelblock:block/super_material_block"
     }
   }
 }

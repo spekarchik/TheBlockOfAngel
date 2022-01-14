@@ -8,7 +8,7 @@
   "key": {
     "A":
     {
-      "item": "materialext:limonite_ingot"
+      "item": "angelblock:limonite_ingot"
     },
     "B":
     {
@@ -16,7 +16,7 @@
     }
   },
   "result": {
-    "item": "materialext:limonite_primary_pickaxe",
+    "item": "angelblock:limonite_primary_pickaxe",
     "count": 1
   }
 }

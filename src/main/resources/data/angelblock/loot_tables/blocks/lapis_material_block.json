@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "materialext:lapis_material_block"
+          "name": "angelblock:lapis_material_block"
         }
       ],
       "conditions": [

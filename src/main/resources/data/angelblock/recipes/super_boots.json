@@ -7,15 +7,15 @@
   "key": {
     "A":
     {
-      "item": "materialext:super_plate"
+      "item": "angelblock:super_plate"
     },
     "B":
     {
-      "item": "materialext:limonite_boots"
+      "item": "angelblock:limonite_boots"
     }
   },
   "result": {
-    "item": "materialext:super_boots",
+    "item": "angelblock:super_boots",
     "count": 1
   }
 }

@@ -8,11 +8,11 @@
   "key": {
     "A":
     {
-      "item": "materialext:rendelithic_ingot"
+      "item": "angelblock:rendelithic_ingot"
     }
   },
   "result": {
-    "item": "materialext:rendelithic_material_block",
+    "item": "angelblock:rendelithic_material_block",
     "count": 1
   }
 }

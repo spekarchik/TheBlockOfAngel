@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:lapis_shovel"
+      "item": "angelblock:lapis_shovel"
     }
   },
   "result": {
-    "item": "materialext:lapis_shovel",
+    "item": "angelblock:lapis_shovel",
     "count": 1
   }
 }

@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:limonite_helmet"
+      "item": "angelblock:limonite_helmet"
     }
   },
   "result": {
-    "item": "materialext:limonite_helmet",
+    "item": "angelblock:limonite_helmet",
     "count": 1
   }
 }

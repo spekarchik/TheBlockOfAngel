@@ -8,11 +8,11 @@
   "key": {
     "A":
     {
-      "item": "materialext:diamithic_ingot"
+      "item": "angelblock:diamithic_ingot"
     }
   },
   "result": {
-    "item": "materialext:diamithic_material_block",
+    "item": "angelblock:diamithic_material_block",
     "count": 1
   }
 }

@@ -8,19 +8,19 @@
   "key": {
     "A":
     {
-      "item": "materialext:limonite_ingot"
+      "item": "angelblock:limonite_ingot"
     },
     "B":
     {
-      "item": "materialext:armor_fiber"
+      "item": "angelblock:armor_fiber"
     },
     "C":
     {
-      "item": "materialext:flax_fibre"
+      "item": "angelblock:flax_fibre"
     }
   },
   "result": {
-    "item": "materialext:limonite_plate",
+    "item": "angelblock:limonite_plate",
     "count": 12
   }
 }

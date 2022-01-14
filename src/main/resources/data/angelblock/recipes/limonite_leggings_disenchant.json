@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:limonite_leggings"
+      "item": "angelblock:limonite_leggings"
     }
   },
   "result": {
-    "item": "materialext:limonite_leggings",
+    "item": "angelblock:limonite_leggings",
     "count": 1
   }
 }

@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:lapis_primary_shovel"
+      "item": "angelblock:lapis_primary_shovel"
     }
   },
   "result": {
-    "item": "materialext:lapis_primary_shovel",
+    "item": "angelblock:lapis_primary_shovel",
     "count": 1
   }
 }

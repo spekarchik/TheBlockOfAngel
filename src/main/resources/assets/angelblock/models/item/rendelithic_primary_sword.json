@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "materialext:items/rendelithic_primary_sword"
+    "layer0": "angelblock:items/rendelithic_primary_sword"
   }
 }

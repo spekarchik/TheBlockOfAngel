@@ -3,7 +3,7 @@
   {
     "":
     {
-      "model": "materialext:block/lapis_material_block"
+      "model": "angelblock:block/lapis_material_block"
     }
   }
 }

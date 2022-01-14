@@ -8,27 +8,27 @@
   "key": {
     "A":
     {
-      "item": "materialext:bios_diamond"
+      "item": "angelblock:bios_diamond"
     },
     "B":
     {
-      "item": "materialext:strength_pearl"
+      "item": "angelblock:strength_pearl"
     },
     "C":
     {
-      "item": "materialext:flame_stone"
+      "item": "angelblock:flame_stone"
     },
     "D":
     {
-      "item": "materialext:marine_crystal"
+      "item": "angelblock:marine_crystal"
     },
     "E":
     {
-      "item": "materialext:end_sapphire"
+      "item": "angelblock:end_sapphire"
     }
   },
   "result": {
-    "item": "materialext:super_crystal",
+    "item": "angelblock:super_crystal",
     "count": 1
   }
 }

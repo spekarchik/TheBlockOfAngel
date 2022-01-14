@@ -48,12 +48,12 @@
 				}
 			],
 			"weight": 20,
-			"name": "materialext:strength_pearl"
+			"name": "angelblock:strength_pearl"
 		},
 		{
 			"type": "minecraft:item",
 			"weight": 10,
-			"name": "materialext:miner_figure"
+			"name": "angelblock:miner_figure"
 		},
         {
           "type": "minecraft:empty",
@@ -83,12 +83,12 @@
 				}
 			],
 			"weight": 20,
-			"name": "materialext:strength_pearl"
+			"name": "angelblock:strength_pearl"
 		},
 		{
 			"type": "minecraft:item",
 			"weight": 10,
-			"name": "materialext:miner_figure"
+			"name": "angelblock:miner_figure"
 		},
         {
           "type": "minecraft:item",

@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "materialext:items/rendelithic_shovel"
+    "layer0": "angelblock:items/rendelithic_shovel"
   }
 }

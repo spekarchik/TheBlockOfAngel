@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "materialext:items/limonite_axe"
+        "layer0": "angelblock:items/limonite_axe"
     }
 }

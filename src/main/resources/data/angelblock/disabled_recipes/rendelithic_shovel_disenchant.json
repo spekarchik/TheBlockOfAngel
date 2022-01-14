@@ -12,11 +12,11 @@
     },
     "B":
     {
-      "item": "materialext:rendelithic_shovel"
+      "item": "angelblock:rendelithic_shovel"
     }
   },
   "result": {
-    "item": "materialext:rendelithic_shovel",
+    "item": "angelblock:rendelithic_shovel",
     "count": 1
   }
 }
