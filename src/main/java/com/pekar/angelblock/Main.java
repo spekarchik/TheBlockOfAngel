@@ -4,7 +4,7 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
-import com.pekar.angelblock.tab.MaterialExtTab;
+import com.pekar.angelblock.tab.ModTab;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -114,7 +114,7 @@ public class Main
                     .map(RegistryObject::get)
                     .forEach(block ->
                     {
-                        final var prop = new Item.Properties().tab(MaterialExtTab.MATERIAL_EXT_TAB);
+                        final var prop = new Item.Properties().tab(ModTab.MOD_TAB);
                         var blockItem = new BlockItem(block, prop);
                         blockItem.setRegistryName(block.getRegistryName());
                         registry.register(blockItem);

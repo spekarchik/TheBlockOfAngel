@@ -5,11 +5,11 @@ import com.pekar.angelblock.items.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
-public class MaterialExtTab extends CreativeModeTab
+public class ModTab extends CreativeModeTab
 {
-    public static CreativeModeTab MATERIAL_EXT_TAB = new MaterialExtTab(Main.MODID);
+    public static CreativeModeTab MOD_TAB = new ModTab(Main.MODID);
 
-    public MaterialExtTab(String tabName)
+    public ModTab(String tabName)
     {
         super(tabName);
     }
