@@ -1,7 +1,7 @@
-package com.pekar.materialext.tab;
+package com.pekar.angelblock.tab;
 
-import com.pekar.materialext.Main;
-import com.pekar.materialext.items.ItemRegistry;
+import com.pekar.angelblock.Main;
+import com.pekar.angelblock.items.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 

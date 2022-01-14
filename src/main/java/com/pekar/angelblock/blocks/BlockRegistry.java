@@ -1,6 +1,6 @@
-package com.pekar.materialext.blocks;
+package com.pekar.angelblock.blocks;
 
-import com.pekar.materialext.Main;
+import com.pekar.angelblock.Main;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -28,7 +28,7 @@ public class BlockRegistry
     public static final RegistryObject<Block> SUPER_MATERIAL_BLOCK = Main.BLOCKS.register("super_material_block", () ->
             new Block(BlockBehaviour.Properties.of(Material.STONE).strength(0.7f, 9f)));
 
-    public static final RegistryObject<Block> ANGEL_BLOCK = Main.BLOCKS.register("angel_block", com.pekar.materialext.blocks.AngelBlock::new);
+    public static final RegistryObject<Block> ANGEL_BLOCK = Main.BLOCKS.register("angel_block", com.pekar.angelblock.blocks.AngelBlock::new);
     public static final RegistryObject<Block> DEVIL_BLOCK = Main.BLOCKS.register("devil_block", DevilBlock::new);
 
     public static void initStatic()

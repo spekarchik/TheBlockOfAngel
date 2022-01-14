@@ -1,4 +1,4 @@
-package com.pekar.materialext.blocks;
+package com.pekar.angelblock.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;

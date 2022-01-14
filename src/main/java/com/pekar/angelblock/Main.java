@@ -1,10 +1,10 @@
-package com.pekar.materialext;
+package com.pekar.angelblock;
 
-import com.pekar.materialext.armor.ArmorRegistry;
-import com.pekar.materialext.blocks.BlockRegistry;
-import com.pekar.materialext.blocks.tile_entities.EntityRegistry;
-import com.pekar.materialext.items.ItemRegistry;
-import com.pekar.materialext.tab.MaterialExtTab;
+import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
+import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.tab.MaterialExtTab;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

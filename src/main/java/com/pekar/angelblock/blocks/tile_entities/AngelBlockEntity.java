@@ -1,4 +1,4 @@
-package com.pekar.materialext.blocks.tile_entities;
+package com.pekar.angelblock.blocks.tile_entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;

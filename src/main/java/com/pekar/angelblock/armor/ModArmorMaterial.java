@@ -1,6 +1,6 @@
-package com.pekar.materialext.armor;
+package com.pekar.angelblock.armor;
 
-import com.pekar.materialext.items.ItemRegistry;
+import com.pekar.angelblock.items.ItemRegistry;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;

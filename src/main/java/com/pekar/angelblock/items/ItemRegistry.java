@@ -1,6 +1,6 @@
-package com.pekar.materialext.items;
+package com.pekar.angelblock.items;
 
-import com.pekar.materialext.Main;
+import com.pekar.angelblock.Main;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 

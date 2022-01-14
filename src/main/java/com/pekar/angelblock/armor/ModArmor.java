@@ -1,7 +1,7 @@
-package com.pekar.materialext.armor;
+package com.pekar.angelblock.armor;
 
-import com.pekar.materialext.Main;
-import com.pekar.materialext.tab.MaterialExtTab;
+import com.pekar.angelblock.Main;
+import com.pekar.angelblock.tab.MaterialExtTab;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;

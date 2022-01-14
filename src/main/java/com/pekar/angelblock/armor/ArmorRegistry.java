@@ -1,4 +1,4 @@
-package com.pekar.materialext.armor;
+package com.pekar.angelblock.armor;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;

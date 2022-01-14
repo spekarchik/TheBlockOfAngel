@@ -1,7 +1,7 @@
-package com.pekar.materialext.blocks;
+package com.pekar.angelblock.blocks;
 
-import com.pekar.materialext.blocks.tile_entities.AngelBlockEntity;
-import com.pekar.materialext.blocks.tile_entities.EntityRegistry;
+import com.pekar.angelblock.blocks.tile_entities.AngelBlockEntity;
+import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
