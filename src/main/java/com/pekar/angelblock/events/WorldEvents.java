@@ -5,6 +5,9 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.items.ItemRegistry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -73,10 +76,10 @@ public class WorldEvents implements IEventHandler
     @SubscribeEvent
     public void onAnvilUpdateEvent(AnvilUpdateEvent event)
     {
-//        Item rightSlotItem = event.getRight().getItem();
-//        ItemStack left = event.getLeft();
-//        Item leftSlotItem = left.getItem();
-//
+        Item rightSlotItem = event.getRight().getItem();
+        ItemStack left = event.getLeft();
+        Item leftSlotItem = left.getItem();
+
 //        if (rightSlotItem == Items.STICK)
 //        {
 //            if (leftSlotItem == ToolRegistry.RENDELITHIC_PICKAXE || leftSlotItem == ToolRegistry.RENDELITHIC_SHOVEL
@@ -226,31 +229,31 @@ public class WorldEvents implements IEventHandler
 //
 //            return;
 //        }
-//
-//        if (rightSlotItem == Items.DIAMOND)
-//        {
-//            if (leftSlotItem instanceof ItemTool)
-//            {
-//                ItemTool tool = (ItemTool)leftSlotItem;
-//                if (tool.getToolMaterialName().equals(Item.ToolMaterial.DIAMOND.toString()))
-//                {
-//                    event.setOutput(left);
-//                    event.setCost(REPAIR_COST);
-//                }
-//            }
-//            else if (leftSlotItem == Items.DIAMOND_LEGGINGS || leftSlotItem == Items.DIAMOND_BOOTS
-//                    || leftSlotItem == Items.DIAMOND_CHESTPLATE || leftSlotItem == Items.DIAMOND_HELMET
-//                    || leftSlotItem == Items.DIAMOND_SWORD || leftSlotItem == Items.DIAMOND_PICKAXE
-//                    || leftSlotItem == Items.DIAMOND_HOE || leftSlotItem == Items.DIAMOND_SHOVEL
-//                    || leftSlotItem == Items.DIAMOND_AXE)
-//            {
-//                event.setOutput(left);
-//                event.setCost(REPAIR_COST);
-//            }
-//
-//            return;
-//        }
-//
+
+        if (rightSlotItem == Items.DIAMOND)
+        {
+            if (leftSlotItem instanceof ItemTool)
+            {
+                ItemTool tool = (ItemTool)leftSlotItem;
+                if (tool.getToolMaterialName().equals(Item.ToolMaterial.DIAMOND.toString()))
+                {
+                    event.setOutput(left);
+                    event.setCost(REPAIR_COST);
+                }
+            }
+            else if (leftSlotItem == Items.DIAMOND_LEGGINGS || leftSlotItem == Items.DIAMOND_BOOTS
+                    || leftSlotItem == Items.DIAMOND_CHESTPLATE || leftSlotItem == Items.DIAMOND_HELMET
+                    || leftSlotItem == Items.DIAMOND_SWORD || leftSlotItem == Items.DIAMOND_PICKAXE
+                    || leftSlotItem == Items.DIAMOND_HOE || leftSlotItem == Items.DIAMOND_SHOVEL
+                    || leftSlotItem == Items.DIAMOND_AXE)
+            {
+                event.setOutput(left);
+                event.setCost(REPAIR_COST);
+            }
+
+            return;
+        }
+
 //        if (rightSlotItem == Items.IRON_INGOT)
 //        {
 //            if (leftSlotItem instanceof ItemTool)
