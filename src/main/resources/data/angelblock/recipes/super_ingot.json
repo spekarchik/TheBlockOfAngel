@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "angelblock:super_material_block"
+    }
+  ],
+  "result": {
+    "item": "angelblock:super_ingot",
+    "count": 9
+  }
+}

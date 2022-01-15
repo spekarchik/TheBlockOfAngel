@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "angelblock:super_plate"
+    },
+    "B":
+    {
+      "item": "angelblock:lapis_helmet"
+    }
+  },
+  "result": {
+    "item": "angelblock:super_helmet",
+    "count": 1
+  }
+}

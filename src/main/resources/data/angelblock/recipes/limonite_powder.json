@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "angelblock:obsidian_powder"
+    },
+    {
+      "item": "angelblock:endstone_powder"
+    },
+    {
+      "item": "minecraft:vine"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    }
+  ],
+  "result": {
+    "item": "angelblock:limonite_powder",
+    "count": 3
+  }
+}

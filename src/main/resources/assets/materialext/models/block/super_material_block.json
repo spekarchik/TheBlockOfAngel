@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures":
-  {
-    "all": "materialext:blocks/super_material_block"
-  }
-}

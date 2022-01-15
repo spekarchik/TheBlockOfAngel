@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "angelblock:diamithic_plate"
+    },
+    "B":
+    {
+      "item": "minecraft:diamond_helmet"
+    }
+  },
+  "result": {
+    "item": "angelblock:diamithic_helmet",
+    "count": 1
+  }
+}

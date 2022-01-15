@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "minecraft:flint"
+    },
+    "B":
+    {
+      "item": "angelblock:limonite_boots"
+    }
+  },
+  "result": {
+    "item": "angelblock:limonite_boots",
+    "count": 1
+  }
+}

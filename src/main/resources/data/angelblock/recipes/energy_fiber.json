@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IRI",
+    "RMR",
+    "IRI"
+  ],
+  "key": {
+    "I":
+    {
+      "item": "minecraft:redstone"
+    },
+    "R":
+    {
+      "item": "minecraft:end_rod"
+    },
+    "M":
+    {
+      "item": "minecraft:magma_block"
+    }
+  },
+  "result": {
+    "item": "angelblock:energy_fiber",
+    "count": 4
+  }
+}

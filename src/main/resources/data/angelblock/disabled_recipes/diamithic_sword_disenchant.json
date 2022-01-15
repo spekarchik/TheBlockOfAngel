@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "minecraft:flint"
+    },
+    "B":
+    {
+      "item": "angelblock:diamithic_sword"
+    }
+  },
+  "result": {
+    "item": "angelblock:diamithic_sword",
+    "count": 1
+  }
+}

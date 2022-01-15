@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "minecraft:flint"
+    },
+    "B":
+    {
+      "item": "angelblock:lapis_helmet"
+    }
+  },
+  "result": {
+    "item": "angelblock:lapis_helmet",
+    "count": 1
+  }
+}
