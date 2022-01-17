@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:blasting",
+    "ingredient": {
+        "item": "angelblock:rendelithic_powder"
+    },
+    "result": "angelblock:rendelithic_ingot",
+    "experience": 1.2,
+    "cookingtime": 100
+}

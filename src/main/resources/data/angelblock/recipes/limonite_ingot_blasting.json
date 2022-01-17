@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:blasting",
+    "ingredient": {
+        "item": "angelblock:limonite_powder"
+    },
+    "result": "angelblock:limonite_ingot",
+    "experience": 1.2,
+    "cookingtime": 100
+}
