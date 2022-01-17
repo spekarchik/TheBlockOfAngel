@@ -1,21 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ABA",
-    "A A"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:super_plate"
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:limonite_boots"
     },
-    "B":
-    {
-      "item": "angelblock:limonite_boots"
+    "addition": {
+        "item": "angelblock:super_plate"
+    },
+    "result": {
+        "item": "angelblock:super_boots"
     }
-  },
-  "result": {
-    "item": "angelblock:super_boots",
-    "count": 1
-  }
 }

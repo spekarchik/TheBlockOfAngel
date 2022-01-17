@@ -1,21 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ABA",
-    "A A"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:lapis_plate"
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:diamond_boots"
     },
-    "B":
-    {
-      "item": "minecraft:chainmail_boots"
+    "addition": {
+        "item": "angelblock:lapis_plate"
+    },
+    "result": {
+        "item": "angelblock:lapis_boots"
     }
-  },
-  "result": {
-    "item": "angelblock:lapis_boots",
-    "count": 1
-  }
 }
