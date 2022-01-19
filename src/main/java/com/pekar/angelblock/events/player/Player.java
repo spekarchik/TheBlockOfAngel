@@ -20,14 +20,12 @@ public class Player implements IPlayer
     private static final int DIMENSION_ENDER_WORLD = 1;
 
     private net.minecraft.world.entity.player.Player entity;
-    private final String playerName;
     private final Set<IArmor> armorInUse = new HashSet<>();
     private final Set<IArmor> allArmor = new HashSet<>();
 
     public Player(net.minecraft.world.entity.player.Player entity)
     {
         this.entity = entity;
-        playerName = entity.getStringUUID();
         registerArmor();
     }
 
@@ -108,7 +106,7 @@ public class Player implements IPlayer
     @Override
     public String getPlayerName()
     {
-        return entity.getName().getString();
+        return entity.getName().getContents();
     }
 
     @Override
