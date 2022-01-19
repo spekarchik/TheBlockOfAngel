@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
+import com.pekar.angelblock.events.effect.IArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 
 import java.util.Collection;
@@ -47,21 +48,21 @@ abstract class Armor implements IArmor
         return player.isAnyArmorElementPutOn(elementNames);
     }
 
-//    protected void synchronizeEffect(IArmorEffect basicEffect, IArmorEffect dependentEffect)
-//    {
-//        if (basicEffect.isEffectOn() != dependentEffect.isEffectOn())
-//        {
-//            dependentEffect.invertSwitchState();
-//        }
-//    }
-//
-//    protected void synchronizeEffectInversely(IArmorEffect basicEffect, IArmorEffect dependentEffect)
-//    {
-//        if (basicEffect.isEffectOn() == dependentEffect.isEffectOn())
-//        {
-//            dependentEffect.invertSwitchState();
-//        }
-//    }
+    protected void synchronizeEffect(IArmorEffect basicEffect, IArmorEffect dependentEffect)
+    {
+        if (basicEffect.isEffectOn() != dependentEffect.isEffectOn())
+        {
+            dependentEffect.invertSwitchState();
+        }
+    }
+
+    protected void synchronizeEffectInversely(IArmorEffect basicEffect, IArmorEffect dependentEffect)
+    {
+        if (basicEffect.isEffectOn() == dependentEffect.isEffectOn())
+        {
+            dependentEffect.invertSwitchState();
+        }
+    }
 
     protected void message(String message)
     {
