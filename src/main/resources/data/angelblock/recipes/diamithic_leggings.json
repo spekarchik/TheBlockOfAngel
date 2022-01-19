@@ -1,22 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "ABA",
-    "A A"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:diamithic_plate"
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:netherite_leggings"
     },
-    "B":
-    {
-      "item": "minecraft:diamond_leggings"
+    "addition": {
+        "item": "angelblock:diamithic_plate"
+    },
+    "result": {
+        "item": "angelblock:diamithic_leggings"
     }
-  },
-  "result": {
-    "item": "angelblock:diamithic_leggings",
-    "count": 1
-  }
 }

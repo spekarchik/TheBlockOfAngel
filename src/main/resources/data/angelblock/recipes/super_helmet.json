@@ -1,21 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "ABA"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:super_plate"
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:lapis_helmet"
     },
-    "B":
-    {
-      "item": "angelblock:lapis_helmet"
+    "addition": {
+        "item": "angelblock:super_plate"
+    },
+    "result": {
+        "item": "angelblock:super_helmet"
     }
-  },
-  "result": {
-    "item": "angelblock:super_helmet",
-    "count": 1
-  }
 }

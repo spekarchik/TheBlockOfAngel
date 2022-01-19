@@ -1,22 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ABA",
-    "AAA",
-    "AAA"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:lapis_plate"
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:diamond_chestplate"
     },
-    "B":
-    {
-      "item": "minecraft:chainmail_chestplate"
+    "addition": {
+        "item": "angelblock:lapis_plate"
+    },
+    "result": {
+        "item": "angelblock:lapis_chestplate"
     }
-  },
-  "result": {
-    "item": "angelblock:lapis_chestplate",
-    "count": 1
-  }
 }

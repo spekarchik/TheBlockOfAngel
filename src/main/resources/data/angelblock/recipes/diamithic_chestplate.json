@@ -1,22 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ABA",
-    "AAA",
-    "AAA"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:diamithic_plate"
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:netherite_chestplate"
     },
-    "B":
-    {
-      "item": "minecraft:diamond_chestplate"
+    "addition": {
+        "item": "angelblock:diamithic_plate"
+    },
+    "result": {
+        "item": "angelblock:diamithic_chestplate"
     }
-  },
-  "result": {
-    "item": "angelblock:diamithic_chestplate",
-    "count": 1
-  }
 }

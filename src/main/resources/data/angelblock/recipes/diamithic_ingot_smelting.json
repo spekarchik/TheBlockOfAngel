@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient":
+    {
+        "item": "angelblock:diamithic_powder"
+    },
+    "result": "angelblock:diamithic_ingot",
+    "experience": 1.2,
+    "cookingtime": 200
+}

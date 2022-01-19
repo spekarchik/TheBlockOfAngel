@@ -1,21 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "ABA"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:lapis_plate"
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:turtle_helmet"
     },
-    "B":
-    {
-      "item": "minecraft:chainmail_helmet"
+    "addition": {
+        "item": "angelblock:lapis_plate"
+    },
+    "result": {
+        "item": "angelblock:lapis_helmet"
     }
-  },
-  "result": {
-    "item": "angelblock:lapis_helmet",
-    "count": 1
-  }
 }

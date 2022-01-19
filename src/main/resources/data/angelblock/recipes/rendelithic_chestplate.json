@@ -1,22 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ABA",
-    "AAA",
-    "AAA"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:rendelithic_plate"
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:chainmail_chestplate"
     },
-    "B":
-    {
-      "item": "minecraft:chainmail_chestplate"
+    "addition": {
+        "item": "angelblock:rendelithic_plate"
+    },
+    "result": {
+        "item": "angelblock:rendelithic_chestplate"
     }
-  },
-  "result": {
-    "item": "angelblock:rendelithic_chestplate",
-    "count": 1
-  }
 }
