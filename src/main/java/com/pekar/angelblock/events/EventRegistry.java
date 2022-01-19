@@ -6,7 +6,7 @@ public class EventRegistry
 {
     public static void registerEvents()
     {
-//        register((PlayerBasicEvents)PlayerBasicEvents.instance());
+        register((PlayerManager)PlayerManager.instance());
 //        register(new PlayerDataEvents());
 //        register(new PlayerInteractionEvents());
 //        register(new KeyboardMouseEvents());
