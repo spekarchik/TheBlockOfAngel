@@ -25,6 +25,5 @@ public interface IPlayer
     Player getEntity();
 
     void updateEntity(Player entity);
-//    void updateDimension(int dimension);
     void sendMessage(String message);
 }

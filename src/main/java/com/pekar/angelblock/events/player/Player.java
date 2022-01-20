@@ -15,10 +15,6 @@ import java.util.Set;
 
 public class Player implements IPlayer
 {
-    private static final int DIMENSION_REAL_WORLD = 0;
-    private static final int DIMENSION_NETHER_WORLD = -1;
-    private static final int DIMENSION_ENDER_WORLD = 1;
-
     private net.minecraft.world.entity.player.Player entity;
     private final Set<IArmor> armorInUse = new HashSet<>();
     private final Set<IArmor> allArmor = new HashSet<>();
@@ -120,12 +116,6 @@ public class Player implements IPlayer
     {
         this.entity = entity;
     }
-//
-//    @Override
-//    public void updateDimension(int dimension)
-//    {
-//        this.dimension = dimension;
-//    }
 
     @Override
     public void sendMessage(String message)

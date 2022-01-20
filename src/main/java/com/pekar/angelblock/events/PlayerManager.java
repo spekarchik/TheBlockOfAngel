@@ -5,7 +5,6 @@ import com.pekar.angelblock.events.armor.IArmorEvents;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -80,6 +79,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         IPlayer player = players.get(entity.getName().getContents());
         if (player == null) return;
 
+        player.sendMessage("Player was cloned.");
+
         if (entity instanceof net.minecraft.world.entity.player.Player)
         {
             player.updateEntity((net.minecraft.world.entity.player.Player) entity);
@@ -93,17 +94,16 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         if (player == null) return;
 
         clearSwordEffects(player.getEntity());
-//        player.sendMessage("EquipmentChange " + event.getEntityLiving().getName());
-
-//        if (player.getEntity() != event.getEntityLiving())
-//            player.sendMessage("player <> EntityLiving !!!");
+        player.sendMessage("EquipmentChange: " + event.getEntityLiving().getName().getContents());
 
         // after coming back from the End World a player entity becomes another instance.
         // player.getArmorInventoryList() works incorrect on the old instance.
         // so, it's necessary to update the player
         if (player.getEntity() != event.getEntityLiving())
         {
-            player.updateEntity((net.minecraft.world.entity.player.Player) event.getEntityLiving());
+            player.sendMessage("player <> EntityLiving !!!");
+            // IT'S UPDATED IN onPlayerClone()
+//            player.updateEntity((net.minecraft.world.entity.player.Player) event.getEntityLiving());
         }
 
         Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
@@ -139,13 +139,6 @@ public class PlayerManager implements IEventHandler, IPlayerManager
             player.sendMessage(message);
         }
     }
-
-//    private void updateDimension(EntityTravelToDimensionEvent event)
-//    {
-//        net.minecraft.world.entity.player.Player player = (net.minecraft.world.entity.player.Player) event.getEntity();
-//        int dimension = player.dimension == event.getDimension() ? 0 : event.getDimension(); // minecraft bug?
-//        players.get(player.getName()).updateDimension(dimension);
-//    }
 
     private void clearSwordEffects(net.minecraft.world.entity.player.Player player)
     {
