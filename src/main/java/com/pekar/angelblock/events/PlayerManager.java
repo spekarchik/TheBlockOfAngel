@@ -2,6 +2,7 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IArmorEvents;
+import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import net.minecraft.world.entity.LivingEntity;
@@ -50,7 +51,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event)
     {
-//        BlockCleaner.clean(event.player);
+        BlockCleaner.clean(event.getPlayer());
         players.remove(event.getPlayer().getName().getContents());
     }
 
@@ -60,9 +61,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         IPlayer player = players.get(event.getEntity().getName().getContents());
         if (player == null) return;
 
-//        BlockCleaner.clean(player.getEntity());
+        BlockCleaner.clean(player.getEntity());
 
-//        updateDimension(event);
         player.sendMessage("was dimension: " + player.getEntity().level.dimension().location().getPath());
         player.sendMessage("set dimension: " + event.getDimension().location().getPath());
 
@@ -94,7 +94,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         if (player == null) return;
 
         clearSwordEffects(player.getEntity());
-        player.sendMessage("EquipmentChange: " + event.getEntityLiving().getName().getContents());
+//        player.sendMessage("EquipmentChange: " + event.getEntityLiving().getName().getContents());
 
         // after coming back from the End World a player entity becomes another instance.
         // player.getArmorInventoryList() works incorrect on the old instance.
