@@ -5,6 +5,7 @@ import com.pekar.angelblock.events.armor.IArmorEvents;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -36,8 +37,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         IPlayer player = new Player(event.getPlayer());
         players.put(player.getPlayerName(), player);
 
-//        player.sendMessage("Player joined: " + event.player.getName());
-//        player.sendMessage("set initial dimension: " + event.player.dimension);
+        player.sendMessage("Player joined: " + player.getPlayerName());
+        player.sendMessage("set initial dimension: " + event.getPlayer().level.dimension().location().getPath());
 
         player.updateArmorUsed();
 
@@ -63,7 +64,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 //        BlockCleaner.clean(player.getEntity());
 
 //        updateDimension(event);
-//        player.sendMessage("set dimension: " + player.getDimension());
+        player.sendMessage("was dimension: " + player.getEntity().level.dimension().location().getPath());
+        player.sendMessage("set dimension: " + event.getDimension().location().getPath());
 
         for (IArmorEvents armor : player.getArmorTypesUsed())
         {
