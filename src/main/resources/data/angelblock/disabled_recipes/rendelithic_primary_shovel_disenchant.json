@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "minecraft:flint"
+    },
+    "B":
+    {
+      "item": "angelblock:rendelithic_primary_shovel"
+    }
+  },
+  "result": {
+    "item": "angelblock:rendelithic_primary_shovel",
+    "count": 1
+  }
+}

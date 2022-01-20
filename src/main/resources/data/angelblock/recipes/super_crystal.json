@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A B",
+    " E ",
+    "C D"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "angelblock:bios_diamond"
+    },
+    "B":
+    {
+      "item": "angelblock:strength_pearl"
+    },
+    "C":
+    {
+      "item": "angelblock:flame_stone"
+    },
+    "D":
+    {
+      "item": "angelblock:marine_crystal"
+    },
+    "E":
+    {
+      "item": "angelblock:end_sapphire"
+    }
+  },
+  "result": {
+    "item": "angelblock:super_crystal",
+    "count": 1
+  }
+}

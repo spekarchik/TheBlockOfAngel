@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "A A"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "angelblock:limonite_plate"
+    },
+    "B":
+    {
+      "item": "minecraft:chainmail_boots"
+    }
+  },
+  "result": {
+    "item": "angelblock:limonite_boots",
+    "count": 1
+  }
+}

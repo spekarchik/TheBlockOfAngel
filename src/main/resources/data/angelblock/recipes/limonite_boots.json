@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:chainmail_boots"
+    },
+    "addition": {
+        "item": "angelblock:limonite_plate"
+    },
+    "result": {
+        "item": "angelblock:limonite_boots"
+    }
+}

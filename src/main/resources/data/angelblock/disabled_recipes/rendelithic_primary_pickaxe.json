@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    " B ",
+    " B "
+  ],
+  "key": {
+    "A":
+    {
+      "item": "angelblock:rendelithic_ingot"
+    },
+    "B":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "angelblock:rendelithic_primary_pickaxe",
+    "count": 1
+  }
+}

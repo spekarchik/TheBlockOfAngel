@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "angelblock:diamithic_ingot"
+    },
+    "B":
+    {
+      "item": "angelblock:armor_fiber"
+    },
+    "C":
+    {
+      "item": "minecraft:shulker_shell"
+    }
+  },
+  "result": {
+    "item": "angelblock:diamithic_plate",
+    "count": 2
+  }
+}

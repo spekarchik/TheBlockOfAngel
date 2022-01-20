@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "angelblock:diamithic_material_block"
+    }
+  ],
+  "result": {
+    "item": "angelblock:diamithic_ingot",
+    "count": 9
+  }
+}

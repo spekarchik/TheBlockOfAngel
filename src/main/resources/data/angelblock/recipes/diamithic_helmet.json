@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:netherite_helmet"
+    },
+    "addition": {
+        "item": "angelblock:diamithic_plate"
+    },
+    "result": {
+        "item": "angelblock:diamithic_helmet"
+    }
+}

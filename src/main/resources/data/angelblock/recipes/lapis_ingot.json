@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "angelblock:lapis_material_block"
+    }
+  ],
+  "result": {
+    "item": "angelblock:lapis_ingot",
+    "count": 9
+  }
+}

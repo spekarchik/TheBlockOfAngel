@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    {
+      "item": "angelblock:lapis_ingot"
+    },
+    "B":
+    {
+      "item": "angelblock:armor_fiber"
+    },
+    "C":
+    {
+      "item": "minecraft:sponge",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "angelblock:lapis_plate",
+    "count": 2
+  }
+}

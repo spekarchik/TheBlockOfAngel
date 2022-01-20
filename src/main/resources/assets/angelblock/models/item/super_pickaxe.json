@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "angelblock:items/super_pickaxe"
+  }
+}

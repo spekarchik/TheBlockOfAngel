@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:chainmail_helmet"
+    },
+    "addition": {
+        "item": "angelblock:rendelithic_plate"
+    },
+    "result": {
+        "item": "angelblock:rendelithic_helmet"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:diamond_boots"
+    },
+    "addition": {
+        "item": "angelblock:lapis_plate"
+    },
+    "result": {
+        "item": "angelblock:lapis_boots"
+    }
+}
