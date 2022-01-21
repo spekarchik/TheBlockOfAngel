@@ -31,6 +31,6 @@ public final class PacketHandler
         var packetContainer = new PacketContainer<>(packet);
         INSTANCE.messageBuilder(packetContainer.getType(), packetContainer.getPacketId(), packetContainer.getDirection())
                 .encoder(packetContainer.getEncoder()).decoder(packetContainer.getDecoder())
-                .consumer(packetContainer.getPacketHandler());
+                .consumer(packetContainer.getPacketHandler()).add();
     }
 }
