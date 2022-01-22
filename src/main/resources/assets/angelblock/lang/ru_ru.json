@@ -110,5 +110,12 @@
   "block.angelblock.super_material_block": "Супер сплав",
   "block.angelblock.endstone_powder_block": "Блок эндерняковой пыли",
   "block.angelblock.obsidian_powder_block": "Блок обсидиановой пыли",
-  "block.angelblock.diamond_powder_block": "Блок алмазной пыли"
+  "block.angelblock.diamond_powder_block": "Блок алмазной пыли",
+
+  "key.angelblock.night_vision": "Режим ночного зрения",
+  "key.angelblock.jump_boost": "Режим прыгучести",
+  "key.angelblock.glowing": "Режим сияния",
+  "key.angelblock.regen": "Восстановление здоровья",
+  "key.angelblock.levitation": "Режим левитации",
+  "key.angelblock.sword_effects": "Эффекты оружия/инструментов"
 }

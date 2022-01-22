@@ -110,5 +110,12 @@
   "block.angelblock.super_material_block": "Super Material Block",
   "block.angelblock.endstone_powder_block": "Endstone Powder Block",
   "block.angelblock.obsidian_powder_block": "Obsidian Powder Block",
-  "block.angelblock.diamond_powder_block": "Diamond Powder Block"
+  "block.angelblock.diamond_powder_block": "Diamond Powder Block",
+
+  "key.angelblock.night_vision": "Night Vision Mode",
+  "key.angelblock.jump_boost": "Jump Boost Mode",
+  "key.angelblock.glowing": "Glowing Mode",
+  "key.angelblock.regen": "Regeneration",
+  "key.angelblock.levitation": "Levitation Mode",
+  "key.angelblock.sword_effects": "Sword/Tool Effects"
 }
