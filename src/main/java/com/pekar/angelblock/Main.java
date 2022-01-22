@@ -5,6 +5,7 @@ import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.events.EventRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.network.PacketHandler;
 import com.pekar.angelblock.tab.ModTab;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -62,6 +63,7 @@ public class Main
         ItemRegistry.initStatic();
         EntityRegistry.initStatic();
         ArmorRegistry.initStatic();
+        PacketHandler.init();
     }
 
     private void setup(final FMLCommonSetupEvent event)
