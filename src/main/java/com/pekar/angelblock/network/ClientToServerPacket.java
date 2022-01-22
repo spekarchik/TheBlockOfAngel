@@ -1,6 +1,5 @@
 package com.pekar.angelblock.network;
 
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
@@ -12,11 +11,6 @@ public abstract class ClientToServerPacket extends Packet
 {
     protected ClientToServerPacket()
     {}
-
-    protected ClientToServerPacket(FriendlyByteBuf buffer)
-    {
-        super(buffer);
-    }
 
     public void sendToServer()
     {

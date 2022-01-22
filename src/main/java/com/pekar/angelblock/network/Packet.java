@@ -13,10 +13,6 @@ public abstract class Packet
     {
     }
 
-    protected Packet(FriendlyByteBuf buffer)
-    {
-    }
-
     protected void encode(FriendlyByteBuf buffer)
     {
     }

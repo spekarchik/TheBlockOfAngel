@@ -1,6 +1,5 @@
 package com.pekar.angelblock.network;
 
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -14,11 +13,6 @@ public abstract class ServerToClientPacket extends Packet
 {
     protected ServerToClientPacket()
     {}
-
-    public ServerToClientPacket(FriendlyByteBuf buffer)
-    {
-        super(buffer);
-    }
 
     public final void sendToPlayer(ServerPlayer player)
     {

@@ -8,15 +8,6 @@ import net.minecraft.sounds.SoundEvents;
 
 public class CreeperDetectedPacket extends ServerToClientPacket
 {
-    public CreeperDetectedPacket()
-    {
-    }
-
-    protected CreeperDetectedPacket(FriendlyByteBuf buffer)
-    {
-        super(buffer);
-    }
-
     @Override
     protected void onReceive()
     {
@@ -32,6 +23,6 @@ public class CreeperDetectedPacket extends ServerToClientPacket
     @Override
     protected Packet create(FriendlyByteBuf buffer)
     {
-        return new CreeperDetectedPacket(buffer);
+        return new CreeperDetectedPacket();
     }
 }
