@@ -2,6 +2,8 @@ package com.pekar.angelblock.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
@@ -18,9 +20,19 @@ public abstract class ServerToClientPacket extends Packet
         super(buffer);
     }
 
-    public final void sendToClient(ServerPlayer player)
+    public final void sendToPlayer(ServerPlayer player)
     {
         PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), this);
+    }
+
+    public final void sendToEntity(Entity entity)
+    {
+        PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), this);
+    }
+
+    public final void sendToChunk(LevelChunk chunk)
+    {
+        PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), this);
     }
 
     @Override
