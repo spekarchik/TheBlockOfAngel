@@ -11,6 +11,10 @@ public class KeyPressedPacket extends ClientToServerPacket
 {
     private String pressedKeyName;
 
+    public KeyPressedPacket()
+    {
+    }
+
     public KeyPressedPacket(String pressedKeyName)
     {
         this.pressedKeyName = pressedKeyName;

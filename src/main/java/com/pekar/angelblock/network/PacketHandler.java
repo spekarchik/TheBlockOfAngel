@@ -24,6 +24,8 @@ public final class PacketHandler
     {
         // Register concrete packets
         registerPacket(new CreeperDetectedPacket());
+        registerPacket(new ClientTickPacket());
+        registerPacket(new KeyPressedPacket());
     }
 
     private static <T extends Packet> void registerPacket(T packet)
