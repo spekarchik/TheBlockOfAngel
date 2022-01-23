@@ -12,9 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.apache.commons.compress.utils.CharsetNames;
 
-import java.util.*;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerInteractionEvents implements IEventHandler
@@ -170,29 +169,6 @@ public class PlayerInteractionEvents implements IEventHandler
 
         if (!entity.level.isClientSide())
         {
-//            if (entity instanceof ElderGuardian)
-//            {
-//                Random random = new Random();
-//                if ((random.nextInt() & 1) == 0)
-//                {
-//                    entity. dropItem(ItemRegistry.MARINE_CRYSTAL, 1);
-//                }
-//
-//                if ((random.nextInt() % 4) == 0)
-//                {
-//                    entity.dropItem(ItemRegistry.GUARDIAN_EYE, 1);
-//                }
-//            }
-//
-//            if (entity instanceof EntityEvoker)
-//            {
-//                Random random = new Random();
-//                if ((random.nextInt() % 4) == 0)
-//                {
-//                    entity.dropItem(ItemRegistry.EVOKER_AMULET, 1);
-//                }
-//            }
-
             for (var handler : livingDeathEventListeners.values())
             {
                 handler.onLivingDeathEvent(event);
