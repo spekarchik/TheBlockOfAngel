@@ -1,0 +1,41 @@
+package com.pekar.angelblock.network.packets;
+
+import com.pekar.angelblock.events.PlayerManager;
+import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.network.ClientToServerPacket;
+import com.pekar.angelblock.network.Packet;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+
+public class ClientTickPacket extends ClientToServerPacket
+{
+    @Override
+    protected void onReceive(ServerPlayer serverPlayer)
+    {
+        String playerName = serverPlayer.getName().getContents();
+        IPlayer player = PlayerManager.instance().getPlayerByEntityName(playerName);
+
+        for (IArmor armor : player.getArmorTypesUsed())
+        {
+            armor.onCreeperCheck();
+
+            if (player.getEntity().isInWater())
+            {
+                armor.onBeingInWater();
+            }
+        }
+    }
+
+    @Override
+    protected int getPacketId()
+    {
+        return Packets.ClientTickPacketId;
+    }
+
+    @Override
+    protected Packet create(FriendlyByteBuf buffer)
+    {
+        return new ClientTickPacket();
+    }
+}

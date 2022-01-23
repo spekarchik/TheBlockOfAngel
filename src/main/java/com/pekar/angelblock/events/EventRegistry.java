@@ -10,7 +10,7 @@ public class EventRegistry
 //        register(new PlayerDataEvents());
 //        register(new PlayerInteractionEvents());
 //        register(new KeyboardMouseEvents());
-//        register(new TickEvents());
+        register(new TickEvents());
         register(new WorldEvents());
     }
 
