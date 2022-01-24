@@ -19,7 +19,7 @@ public class ArmorRegistry
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> LAPIS_CHESTPLATE = ModArmor.register("lapis_chestplate", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.CHEST));
-    public static final RegistryObject<ArmorItem> LAPIS_LIGGINGS = ModArmor.register("lapis_leggings", () ->
+    public static final RegistryObject<ArmorItem> LAPIS_LEGGINGS = ModArmor.register("lapis_leggings", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.LEGS));
     public static final RegistryObject<ArmorItem> LAPIS_BOOTS = ModArmor.register("lapis_boots", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.FEET));
@@ -28,7 +28,7 @@ public class ArmorRegistry
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> LIMONITE_CHESTPLATE = ModArmor.register("limonite_chestplate", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.CHEST));
-    public static final RegistryObject<ArmorItem> LIMONITE_LIGGINGS = ModArmor.register("limonite_leggings", () ->
+    public static final RegistryObject<ArmorItem> LIMONITE_LEGGINGS = ModArmor.register("limonite_leggings", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.LEGS));
     public static final RegistryObject<ArmorItem> LIMONITE_BOOTS = ModArmor.register("limonite_boots", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.FEET));
@@ -37,7 +37,7 @@ public class ArmorRegistry
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> DIAMITHIC_CHESTPLATE = ModArmor.register("diamithic_chestplate", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST));
-    public static final RegistryObject<ArmorItem> DIAMITHIC_LIGGINGS = ModArmor.register("diamithic_leggings", () ->
+    public static final RegistryObject<ArmorItem> DIAMITHIC_LEGGINGS = ModArmor.register("diamithic_leggings", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.LEGS));
     public static final RegistryObject<ArmorItem> DIAMITHIC_BOOTS = ModArmor.register("diamithic_boots", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.FEET));
@@ -46,7 +46,7 @@ public class ArmorRegistry
             new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> SUPER_CHESTPLATE = ModArmor.register("super_chestplate", () ->
             new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.CHEST));
-    public static final RegistryObject<ArmorItem> SUPER_LIGGINGS = ModArmor.register("super_leggings", () ->
+    public static final RegistryObject<ArmorItem> SUPER_LEGGINGS = ModArmor.register("super_leggings", () ->
             new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.LEGS));
     public static final RegistryObject<ArmorItem> SUPER_BOOTS = ModArmor.register("super_boots", () ->
             new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.FEET));
