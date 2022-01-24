@@ -107,11 +107,11 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         }
 
         Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
-        Set<IArmorEvents> armorAffected = new HashSet<>((Collection<? extends IArmorEvents>) armorUsed);
+        Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);
         player.updateArmorUsed();
-        armorAffected.addAll((Collection<? extends IArmorEvents>) player.getArmorTypesUsed());
+        armorAffected.addAll((Collection<IArmor>) player.getArmorTypesUsed());
 
-        for (IArmorEvents armor : armorAffected)
+        for (IArmor armor : armorAffected)
         {
             armor.onLivingEquipmentChangeEvent(event);
         }
