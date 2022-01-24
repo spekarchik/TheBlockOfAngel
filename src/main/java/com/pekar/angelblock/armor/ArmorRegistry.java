@@ -10,7 +10,7 @@ public class ArmorRegistry
             new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> RENDELITHIC_CHESTPLATE = ModArmor.register("rendelithic_chestplate", () ->
             new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.CHEST));
-    public static final RegistryObject<ArmorItem> RENDELITHIC_LIGGINGS = ModArmor.register("rendelithic_leggings", () ->
+    public static final RegistryObject<ArmorItem> RENDELITHIC_LEGGINGS = ModArmor.register("rendelithic_leggings", () ->
             new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.LEGS));
     public static final RegistryObject<ArmorItem> RENDELITHIC_BOOTS = ModArmor.register("rendelithic_boots", () ->
             new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.FEET));
