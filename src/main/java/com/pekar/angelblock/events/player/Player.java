@@ -149,7 +149,7 @@ public class Player implements IPlayer
 
         for (ItemStack itemStack : itemStacks)
         {
-            String name = itemStack.getItem().getRegistryName().toString();
+            String name = itemStack.getItem().getRegistryName().getPath();
             armorNames.add(name);
         }
         return armorNames;
