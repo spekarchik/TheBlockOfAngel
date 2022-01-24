@@ -1,0 +1,194 @@
+package com.pekar.angelblock.events.armor;
+
+import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.events.effect.*;
+import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.keybinds.KeyRegistry;
+import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+
+public class DiamithicArmor extends Armor
+{
+    private final IArmorEffect strengthEffect;
+    private final IArmorEffect nightVisionEffect;
+    private final IArmorEffect levitationEffect;
+    private final IArmorEffect healthBoostEffect;
+    private final IArmorEffect hasteEffect;
+    private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
+    private int creeperDetectedCounter;
+
+    private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
+    private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
+
+    public DiamithicArmor(IPlayer player)
+    {
+        super(player);
+        strengthEffect = new StrengthArmorEffect(player, this, 1);
+        nightVisionEffect = new NightVisionArmorEffect(player, this);
+        levitationEffect = new LevitationSwitchingEffect(player, this, 250, true);
+        healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
+        hasteEffect = new HasteArmorEffect(player, this);
+    }
+
+    @Override
+    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
+    {
+        nightVisionEffect.updateSwitchState();
+        levitationEffect.updateSwitchState();
+    }
+
+    @Override
+    public void onLivingHurtEvent(LivingHurtEvent event)
+    {
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+        if (isFullArmorSet && event.getSource().isExplosion())
+        {
+            event.setAmount(event.getAmount() * 0.5f);
+        }
+    }
+
+    @Override
+    public void onLivingAttackEvent(LivingAttackEvent event)
+    {
+        // none
+    }
+
+    @Override
+    public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
+    {
+        nightVisionEffect.updateEffectAvailability();
+        strengthEffect.updateEffectAvailability();
+        levitationEffect.updateEffectAvailability();
+        healthBoostEffect.updateEffectAvailability();
+        hasteEffect.updateEffectAvailability();
+
+        updatePotionEffects();
+    }
+
+    @Override
+    public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
+    {
+        if (!player.isArmorElementPutOn(getLeggingsName())) return;
+
+        player.setEffect(MobEffects.JUMP, 30, 1);
+    }
+
+    @Override
+    public void onLivingFallEvent(LivingFallEvent event)
+    {
+        if (levitationEffect.isEffectOn() && levitationEffect.isActive())
+        {
+            event.setDamageMultiplier(0);
+        }
+        else if (player.isArmorElementPutOn(getBootsName()))
+        {
+            event.setDamageMultiplier(0.3f);
+        }
+    }
+
+    @Override
+    public void onCreeperCheck()
+    {
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+        if (!isFullArmorSet) return;
+
+        Player entityPlayer = player.getEntity();
+        var level = entityPlayer.level;
+        if (level.isClientSide()) return;
+
+        var monsters = level.getEntities((Entity)null, entityPlayer.getBoundingBox().inflate(CREEPER_NOTIFY_DISTANCE),
+                entity -> entity instanceof Creeper);
+
+        for (Entity monster : monsters)
+        {
+            var entity = (LivingEntity) monster;
+            if (!entity.hasEffect(MobEffects.GLOWING))
+            {
+                var potionEffect = new MobEffectInstance(MobEffects.GLOWING, CREEPER_GLOWING_EFFECT_DURATION, 0 /*amplifier*/, false /*ambient*/, false /*visible*/, false /*showIcon*/);
+                entity.addEffect(potionEffect);
+            }
+
+            if (++creeperDetectedCounter > 3)
+            {
+                creeperDetectedPacket.sendToPlayer((ServerPlayer) entityPlayer);
+                creeperDetectedCounter = 0;
+            }
+
+            return;
+        }
+    }
+
+    @Override
+    public void onKeyInputEvent(String pressedKeyDescription)
+    {
+        if (pressedKeyDescription.equals(KeyRegistry.NIGHT_VISION.getName()))
+        {
+            nightVisionEffect.trySwitch();
+        }
+
+        if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
+        {
+            levitationEffect.trySwitch();
+        }
+    }
+
+    @Override
+    public void onEntityTravelToDimensionEvent(EntityTravelToDimensionEvent event)
+    {
+        // none
+    }
+
+    @Override
+    public void onBreakSpeed(net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed event)
+    {
+        // none
+    }
+
+    @Override
+    public void onBeingInWater()
+    {
+        // none
+    }
+
+    @Override
+    public String getHelmetName()
+    {
+        return ArmorRegistry.DIAMITHIC_HELMET.get().getRegistryName().getPath();
+    }
+
+    @Override
+    public String getChestPlateName()
+    {
+        return ArmorRegistry.DIAMITHIC_CHESTPLATE.get().getRegistryName().getPath();
+    }
+
+    @Override
+    public String getLeggingsName()
+    {
+        return ArmorRegistry.DIAMITHIC_LEGGINGS.get().getRegistryName().getPath();
+    }
+
+    @Override
+    public String getBootsName()
+    {
+        return ArmorRegistry.DIAMITHIC_BOOTS.get().getRegistryName().getPath();
+    }
+
+    private void updatePotionEffects()
+    {
+        nightVisionEffect.updateEffectActivity();
+        strengthEffect.updateEffectActivity();
+        levitationEffect.updateEffectActivity();
+        healthBoostEffect.updateEffectActivity();
+        hasteEffect.updateEffectActivity();
+    }
+}
