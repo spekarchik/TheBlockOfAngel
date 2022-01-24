@@ -24,6 +24,10 @@ public interface IPlayer
     String getPlayerName();
     Player getEntity();
 
+    boolean isOverworld();
+    boolean isNether();
+    boolean isEnd();
+
     void updateEntity(Player entity);
     void sendMessage(String message);
 }

@@ -6,6 +6,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 //import net.minecraft.world.entity.player.Player;
 
 import java.util.Arrays;
@@ -109,6 +110,24 @@ public class Player implements IPlayer
     public net.minecraft.world.entity.player.Player getEntity()
     {
         return entity;
+    }
+
+    @Override
+    public boolean isOverworld()
+    {
+        return entity.level.dimension().location().equals(Level.OVERWORLD.location());
+    }
+
+    @Override
+    public boolean isNether()
+    {
+        return entity.level.dimension().location().equals(Level.NETHER.location());
+    }
+
+    @Override
+    public boolean isEnd()
+    {
+        return entity.level.dimension().location().equals(Level.END.location());
     }
 
     @Override
