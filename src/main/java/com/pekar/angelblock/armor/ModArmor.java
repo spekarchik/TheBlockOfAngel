@@ -25,10 +25,4 @@ public class ModArmor extends ArmorItem
         ArmorNames.add(name);
         return Main.ITEMS.register(name, sup);
     }
-
-//    public int getRepairAmount()
-//    {
-//        //getMaterial().getDurabilityForSlot()
-//        return getArmorMaterial().getDurability(armorType) / 5;
-//    }
 }
