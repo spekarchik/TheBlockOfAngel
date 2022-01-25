@@ -32,8 +32,10 @@ public class ModArmor extends ArmorItem
     @Override
     public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer)
     {
-        var material = ((ArmorItem) stack.getItem()).getMaterial();
-        return stack.getItem() instanceof ArmorItem &&
-                (material == ArmorMaterials.GOLD || material == ModArmorMaterial.RENDELITHIC);
+        if (!(stack.getItem() instanceof ArmorItem)) return false;
+
+        var armorItem = (ArmorItem) stack.getItem();
+        return armorItem.getMaterial() == ArmorMaterials.GOLD
+                || armorItem.getRegistryName().getPath().equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getRegistryName().getPath());
     }
 }
