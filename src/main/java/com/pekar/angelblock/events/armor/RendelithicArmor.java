@@ -5,6 +5,7 @@ import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -60,7 +61,11 @@ public class RendelithicArmor extends Armor
         else
         {
             boolean isFullArmorSetPutOn = player.isFullArmorSetPutOn(getArmorElementNames());
-            event.setCanceled(isFullArmorSetPutOn && damageSource == DamageSource.WITHER);
+            if (isFullArmorSetPutOn && damageSource == DamageSource.WITHER)
+            {
+                event.setCanceled(true);
+                player.getEntity().removeEffect(MobEffects.WITHER);
+            }
         }
     }
 
