@@ -4,6 +4,8 @@ import com.pekar.angelblock.Main;
 import com.pekar.angelblock.tab.ModTab;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
@@ -36,6 +38,17 @@ public class ModArmor extends ArmorItem
 
         var armorItem = (ArmorItem) stack.getItem();
         return armorItem.getMaterial() == ArmorMaterials.GOLD
-                || armorItem.getRegistryName().getPath().equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getRegistryName().getPath());
+                || armorItem.getRegistryName().getPath().equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getRegistryName().getPath())
+                || armorItem.getRegistryName().getPath().equals(ArmorRegistry.SUPER_LEGGINGS.get().getRegistryName().getPath());
+    }
+
+    @Override
+    public boolean isEnderMask(ItemStack stack, Player player, EnderMan endermanEntity)
+    {
+        if (super.isEnderMask(stack, player, endermanEntity)) return true;
+        if (!(stack.getItem() instanceof ArmorItem)) return false;
+
+        var armorItem = (ArmorItem) stack.getItem();
+        return armorItem.getRegistryName().getPath().equals(ArmorRegistry.SUPER_HELMET.get().getRegistryName().getPath());
     }
 }
