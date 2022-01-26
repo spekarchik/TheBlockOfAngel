@@ -92,10 +92,19 @@ public class LimoniteArmor extends Armor
 
         DamageSource damageSource = event.getSource();
 
-        event.setCanceled(hasEffectImmunity(damageSource));
+        if (isFreezeDamage(damageSource))
+        {
+            boolean areBootsWorn = player.isArmorElementPutOn(ArmorRegistry.LIMONITE_BOOTS.get().getRegistryName().getPath());
+            event.setCanceled(areBootsWorn);
+        }
+        else
+        {
+            event.setCanceled(isFullArmorSet && hasEffectImmunity(damageSource));
+        }
 
         if (!isFullArmorSet) return;
         if (!(damageSource.getEntity() instanceof LivingEntity)) return;
+
         LivingEntity entityAttackedBy = (LivingEntity) damageSource.getEntity();
 
         if (entityAttackedBy != null)
@@ -283,13 +292,17 @@ public class LimoniteArmor extends Armor
         }
     }
 
+    private boolean isFreezeDamage(DamageSource damageSource)
+    {
+        return damageSource == DamageSource.FREEZE;
+    }
+
     private boolean hasEffectImmunity(DamageSource damageSource)
     {
         boolean isCactus = damageSource == DamageSource.CACTUS;
         boolean isSweetBerryBush = damageSource == DamageSource.SWEET_BERRY_BUSH;
         boolean isLightning = damageSource == DamageSource.LIGHTNING_BOLT;
-        boolean isFreezing = damageSource == DamageSource.FREEZE;
 
-        return isCactus || isSweetBerryBush || isLightning || isFreezing || damageSource.isMagic();
+        return isCactus || isSweetBerryBush || isLightning || damageSource.isMagic();
     }
 }
