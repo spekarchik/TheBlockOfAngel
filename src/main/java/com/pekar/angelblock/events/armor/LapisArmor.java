@@ -13,26 +13,28 @@ public class LapisArmor extends Armor
 {
     private final IArmorEffect nightVisionEffect;
     private final IArmorEffect glowingEffect;
-    private final IArmorEffect waterBreatingEffect;
+    private final IArmorEffect waterBreathingEffect;
     private final IArmorEffect hasteEffect;
     private final IArmorEffect luckEffect;
     private final IArmorEffect regenerationEffect;
     private final IArmorEffect blindnessEffect;
     private final IArmorEffect witherEffect;
     private final IArmorEffect strengthEffect;
+    private final IArmorEffect dolphinsGrace;
 
     public LapisArmor(IPlayer player)
     {
         super(player);
         nightVisionEffect = new NightVisionArmorEffect(player, this);
         glowingEffect = new GlowingArmorEffect(player, this);
-        waterBreatingEffect = new WaterBreathingEffect(player, this);
+        waterBreathingEffect = new WaterBreathingEffect(player, this);
         hasteEffect = new HasteArmorEffect(player, this);
         luckEffect = new LuckArmorEffect(player, this);
         regenerationEffect = new RegenerationArmorEffect(player, this, 1, 100);
         blindnessEffect = new BlindnessArmorEffect(player, this, 140);
-        witherEffect = new WitherEffect(player, this, 0, 300);
+        witherEffect = new WitherEffect(player, this, 0, 600);
         strengthEffect = new StrengthArmorEffect(player, this, 0);
+        dolphinsGrace = new DolphinsGraceEffect(player, this);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class LapisArmor extends Armor
         else if (isLavaDamage(event.getSource()))
         {
             float amount = event.getAmount();
-            event.setAmount(amount * 1.5f);
+            event.setAmount(amount * 1.2f);
         }
     }
 
@@ -67,13 +69,14 @@ public class LapisArmor extends Armor
     {
         nightVisionEffect.updateEffectAvailability();
         hasteEffect.updateEffectAvailability();
-        waterBreatingEffect.updateEffectAvailability();
+        waterBreathingEffect.updateEffectAvailability();
         luckEffect.updateEffectAvailability();
         glowingEffect.updateEffectAvailability();
         regenerationEffect.updateEffectAvailability();
         blindnessEffect.updateEffectAvailability();
         witherEffect.updateEffectAvailability();
         strengthEffect.updateEffectAvailability();
+        dolphinsGrace.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -165,12 +168,13 @@ public class LapisArmor extends Armor
     {
         nightVisionEffect.updateEffectActivity();
         hasteEffect.updateEffectActivity();
-        waterBreatingEffect.updateEffectActivity();
+        waterBreathingEffect.updateEffectActivity();
         luckEffect.updateEffectActivity();
         glowingEffect.updateEffectActivity();
         regenerationEffect.updateEffectActivity();
         blindnessEffect.updateEffectActivity();
         strengthEffect.updateEffectActivity();
+        dolphinsGrace.updateEffectActivity();
     }
 
     private boolean isFireOrMagmaDamage(DamageSource damageSource)

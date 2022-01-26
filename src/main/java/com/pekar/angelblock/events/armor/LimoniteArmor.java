@@ -73,15 +73,23 @@ public class LimoniteArmor extends Armor
     @Override
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
-        var attacker = event.getSource().getEntity();
+        var damageSource = event.getSource();
+        var attacker = damageSource.getEntity();
         boolean isSilverfish = attacker instanceof Silverfish;
         boolean isEndermite = attacker instanceof Endermite;
         boolean isSpider = attacker instanceof Spider;
 
         if (isSilverfish || isEndermite || isSpider)
         {
-            float damageAmount = event.getAmount();
-            event.setAmount(damageAmount * 0.2F);
+            if (player.isFullArmorSetPutOn(getArmorElementNames()))
+            {
+                float damageAmount = event.getAmount();
+                event.setAmount(damageAmount * 0.2F);
+            }
+        }
+        else if (damageSource.isFire() || damageSource.isExplosion())
+        {
+            event.setAmount(event.getAmount() * 2F);
         }
     }
 
@@ -94,7 +102,7 @@ public class LimoniteArmor extends Armor
 
         if (isFreezeDamage(damageSource))
         {
-            boolean areBootsWorn = player.isArmorElementPutOn(ArmorRegistry.LIMONITE_BOOTS.get().getRegistryName().getPath());
+            boolean areBootsWorn = player.isArmorElementPutOn(getBootsName());
             event.setCanceled(areBootsWorn);
         }
         else

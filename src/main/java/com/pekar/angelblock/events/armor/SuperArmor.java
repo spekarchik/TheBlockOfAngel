@@ -28,6 +28,7 @@ public class SuperArmor extends Armor
     private final IArmorEffect slownessEffect;
     private final IArmorEffect jumpNegativeEffect;
     private final IArmorEffect levitationEffect;
+    private final IArmorEffect dolphinsGrace;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter;
 
@@ -49,6 +50,7 @@ public class SuperArmor extends Armor
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_EFFECT_DURATION);
         levitationEffect = new LevitationSwitchingEffect(player, this, 3, true);
+        dolphinsGrace = new DolphinsGraceEffect(player, this);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);
         var speedEffect = new SpeedArmorEffect(player, this);
@@ -184,6 +186,7 @@ public class SuperArmor extends Armor
         slownessEffect.updateEffectAvailability();
         jumpNegativeEffect.updateEffectAvailability();
         levitationEffect.updateEffectAvailability();
+        dolphinsGrace.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -353,6 +356,7 @@ public class SuperArmor extends Armor
         healthBoostEffect.updateEffectActivity();
         slownessEffect.updateEffectActivity();
         jumpNegativeEffect.updateEffectActivity();
+        dolphinsGrace.updateEffectActivity();
 
         levitationEffect.updateEffectActivity(getLevitationAmplifier());
 
