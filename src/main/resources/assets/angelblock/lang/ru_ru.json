@@ -118,5 +118,10 @@
   "key.angelblock.glowing": "Режим сияния",
   "key.angelblock.regen": "Восстановление здоровья",
   "key.angelblock.levitation": "Режим левитации",
-  "key.angelblock.sword_effects": "Эффекты оружия/инструментов"
+  "key.angelblock.sword_effects": "Эффекты оружия/инструментов",
+
+  "item.minecraft.potion.effect.block_breaker_potion": "Разрушающее зелье",
+  "item.minecraft.splash_potion.effect.block_breaker_potion": "Взрывное разрушающее зелье",
+  "item.minecraft.lingering_potion.effect.block_breaker_potion": "Туманное разрушающее зелье",
+  "effect.angelblock.block_breaker_effect": "Разрушение"
 }

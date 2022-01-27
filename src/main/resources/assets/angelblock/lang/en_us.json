@@ -118,5 +118,10 @@
   "key.angelblock.glowing": "Glowing Mode",
   "key.angelblock.regen": "Regeneration",
   "key.angelblock.levitation": "Levitation Mode",
-  "key.angelblock.sword_effects": "Sword/Tool Effects"
+  "key.angelblock.sword_effects": "Sword/Tool Effects",
+
+  "item.minecraft.potion.effect.block_breaker_potion": "Splash Destroying Potion",
+  "item.minecraft.splash_potion.effect.block_breaker_potion": "Splash Destroying Potion",
+  "item.minecraft.lingering_potion.effect.block_breaker_potion": "Lingering Destroying Potion",
+  "effect.angelblock.block_breaker_effect": "Destroying"
 }
