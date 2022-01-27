@@ -9,13 +9,24 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class PotionRegistry
 {
+    // Mob Effects
     public static final RegistryObject<MobEffect> BLOCK_BREAKER_EFFECT = Main.MOB_EFFECTS.register("block_breaker_effect",
             () -> new BlockBreakerMobEffect(MobEffectCategory.NEUTRAL, 0xFF22FF));
+
+    public static final RegistryObject<MobEffect> SWORD_FIRE_MODE_EFFECT = Main.MOB_EFFECTS.register("sword_fire_mode_effect",
+            () -> new SwordFireModeMobEffect());
+
+    public static final RegistryObject<MobEffect> SWORD_EXPLOSION_MODE_EFFECT = Main.MOB_EFFECTS.register("sword_explosion_mode_effect",
+            () -> new SwordExplosionModeMobEffect());
+
+    public static final RegistryObject<MobEffect> TOOL_ADVANCED_MODE_EFFECT = Main.MOB_EFFECTS.register("tool_advanced_mode_effect",
+        () -> new ToolAdvancedModeMobEffect());
+
+
+    // Potions
     public static final RegistryObject<Potion> BLOCK_BREAKER_POTION = Main.POTIONS.register("block_breaker_potion",
             () -> new Potion(new MobEffectInstance(BLOCK_BREAKER_EFFECT.get())));
-//    public static final Potion FIRE_MODE_POTION = new FireModePotion();
-//    public static final Potion EXPLOSION_MODE_POTION = new ExplosionModePotion();
-//    public static final Potion SINGLE_MODE_POTION = new SingleModePotion();
+
 
     public static void initStatic()
     {
