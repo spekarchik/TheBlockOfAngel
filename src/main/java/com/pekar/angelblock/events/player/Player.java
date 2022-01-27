@@ -8,7 +8,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-//import net.minecraft.world.entity.player.Player;
 
 import java.util.Arrays;
 import java.util.Collection;
