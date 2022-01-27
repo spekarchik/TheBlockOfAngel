@@ -20,7 +20,7 @@ public class DiamithicArmor extends Armor
 {
     private final IArmorEffect strengthEffect;
     private final IArmorEffect nightVisionEffect;
-    private final IArmorEffect levitationEffect;
+    private final SwitchingEffectSynchronizer jumpBoostEffect;
     private final IArmorEffect healthBoostEffect;
     private final IArmorEffect hasteEffect;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
@@ -34,16 +34,20 @@ public class DiamithicArmor extends Armor
         super(player);
         strengthEffect = new StrengthArmorEffect(player, this, 1);
         nightVisionEffect = new NightVisionArmorEffect(player, this);
-        levitationEffect = new LevitationSwitchingEffect(player, this, 250, true);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         hasteEffect = new HasteArmorEffect(player, this);
+
+        var jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
+        var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
+        this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
+        this.jumpBoostEffect.addDependentEffect(slowFallingEffect);
     }
 
     @Override
     public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
     {
         nightVisionEffect.updateSwitchState();
-        levitationEffect.updateSwitchState();
+        jumpBoostEffect.updateSwitchState();
     }
 
     @Override
@@ -67,7 +71,7 @@ public class DiamithicArmor extends Armor
     {
         nightVisionEffect.updateEffectAvailability();
         strengthEffect.updateEffectAvailability();
-        levitationEffect.updateEffectAvailability();
+        jumpBoostEffect.updateEffectAvailability();
         healthBoostEffect.updateEffectAvailability();
         hasteEffect.updateEffectAvailability();
 
@@ -77,15 +81,15 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        if (!player.isArmorElementPutOn(getLeggingsName())) return;
+//        if (!player.isArmorElementPutOn(getLeggingsName())) return;
 
-        player.setEffect(MobEffects.JUMP, 30, 1);
+//        player.setEffect(MobEffects.JUMP, 30, 1);
     }
 
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        if (levitationEffect.isEffectOn() && levitationEffect.isActive())
+        if (jumpBoostEffect.isEffectOn() && jumpBoostEffect.isActive())
         {
             event.setDamageMultiplier(0);
         }
@@ -137,7 +141,7 @@ public class DiamithicArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            levitationEffect.trySwitch();
+            jumpBoostEffect.trySwitch();
         }
     }
 
@@ -187,7 +191,7 @@ public class DiamithicArmor extends Armor
     {
         nightVisionEffect.updateEffectActivity();
         strengthEffect.updateEffectActivity();
-        levitationEffect.updateEffectActivity();
+        jumpBoostEffect.updateEffectActivity();
         healthBoostEffect.updateEffectActivity();
         hasteEffect.updateEffectActivity();
     }

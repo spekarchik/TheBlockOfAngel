@@ -194,10 +194,10 @@ public class SuperArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        if (!player.isArmorElementPutOn(getLeggingsName())) return;
-        if (jumpEffect.isActive() || slownessEffect.isActive()) return;
+//        if (!player.isArmorElementPutOn(getLeggingsName())) return;
+//        if (jumpEffect.isActive() || slownessEffect.isActive()) return;
 
-        player.setEffect(MobEffects.JUMP, 50, 1);
+//        player.setEffect(MobEffects.JUMP, 50, 1);
     }
 
     @Override

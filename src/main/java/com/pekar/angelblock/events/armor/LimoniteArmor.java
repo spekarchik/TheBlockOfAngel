@@ -49,9 +49,9 @@ public class LimoniteArmor extends Armor
         slownessEffect = new SlownessArmorEffect(player, this, 0, REGENERATION_NEGATIVE_EFFECT_DURATION, true);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_NEGATIVE_EFFECT_DURATION);
 
-        JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, 16);
-        SpeedArmorEffect speedEffect = new SpeedArmorEffect(player, this);
-        LevitationSwitchingEffect levitationEffect = new LevitationSwitchingEffect(player, this, 250, false);
+        var jumpEffect = new JumpBoostArmorEffect(player, this, 16);
+        var speedEffect = new SpeedArmorEffect(player, this);
+        var levitationEffect = new LevitationSwitchingEffect(player, this, 250, false);
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
