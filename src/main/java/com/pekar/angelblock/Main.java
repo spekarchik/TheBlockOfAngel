@@ -9,6 +9,7 @@ import com.pekar.angelblock.events.EventRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.PacketHandler;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.recipe.RecipeRegistry;
 import com.pekar.angelblock.tab.ModTab;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.BlockItem;
@@ -49,7 +50,7 @@ public class Main
     public Main()
     {
         // Register the setup method for modloading
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
@@ -81,11 +82,12 @@ public class Main
         PacketHandler.init();
     }
 
-    private void setup(final FMLCommonSetupEvent event)
+    private void commonSetup(final FMLCommonSetupEvent event)
     {
         // some preinit code
-        //LOGGER.info("HELLO FROM PREINIT");
-        //LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        RecipeRegistry.init();
+//        LOGGER.info("*********************HELLO FROM PREINIT**********************");
+//        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
