@@ -6,6 +6,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ArmorRegistry
 {
+    public static final String FLYING_SUFFIX = "_flying";
+
     public static final RegistryObject<ArmorItem> RENDELITHIC_HELMET = ModArmor.register("rendelithic_helmet", () ->
             new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> RENDELITHIC_CHESTPLATE = ModArmor.register("rendelithic_chestplate", () ->
@@ -45,6 +47,8 @@ public class ArmorRegistry
     public static final RegistryObject<ArmorItem> SUPER_HELMET = ModArmor.register("super_helmet", () ->
             new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> SUPER_CHESTPLATE = ModArmor.register("super_chestplate", () ->
+            new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.CHEST));
+    public static final RegistryObject<ArmorItem> SUPER_CHESTPLATE_FLYING = ModArmor.register("super_chestplate" + FLYING_SUFFIX, () ->
             new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.CHEST));
     public static final RegistryObject<ArmorItem> SUPER_LEGGINGS = ModArmor.register("super_leggings", () ->
             new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.LEGS));

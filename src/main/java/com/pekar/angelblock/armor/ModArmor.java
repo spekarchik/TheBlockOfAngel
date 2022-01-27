@@ -51,4 +51,26 @@ public class ModArmor extends ArmorItem
         var armorItem = (ArmorItem) stack.getItem();
         return armorItem.getRegistryName().getPath().equals(ArmorRegistry.SUPER_HELMET.get().getRegistryName().getPath());
     }
+
+    @Override
+    public boolean canElytraFly(ItemStack stack, LivingEntity entity)
+    {
+        if (!(stack.getItem() instanceof ArmorItem)) return super.canElytraFly(stack, entity);
+
+        var armorItem = (ArmorItem) stack.getItem();
+
+        return armorItem.getRegistryName().getPath().equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getRegistryName().getPath())
+            || super.canElytraFly(stack, entity);
+    }
+
+    @Override
+    public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
+    {
+        if (!(stack.getItem() instanceof ArmorItem)) return super.elytraFlightTick(stack, entity, flightTicks);
+
+        var armorItem = (ArmorItem) stack.getItem();
+
+        return armorItem.getRegistryName().getPath().equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getRegistryName().getPath())
+                || super.elytraFlightTick(stack, entity, flightTicks);
+    }
 }
