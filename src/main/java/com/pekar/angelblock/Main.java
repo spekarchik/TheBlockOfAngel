@@ -8,9 +8,12 @@ import com.pekar.angelblock.events.ClientTickEvents;
 import com.pekar.angelblock.events.EventRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.PacketHandler;
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tab.ModTab;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,6 +43,8 @@ public class Main
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
+    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
+    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, MODID);
 
     public Main()
     {
@@ -58,6 +63,8 @@ public class Main
         BLOCKS.register(bus);
         ITEMS.register(bus);
         BLOCK_ENTITIES.register(bus);
+        MOB_EFFECTS.register(bus);
+        POTIONS.register(bus);
     }
 
     private void initializeRegistry()
@@ -66,8 +73,11 @@ public class Main
         ItemRegistry.initStatic();
         EntityRegistry.initStatic();
         ArmorRegistry.initStatic();
+        PotionRegistry.initStatic();
+
         ClientSetupEvents.initStatic();
         ClientTickEvents.initStatic();
+
         PacketHandler.init();
     }
 
