@@ -4,6 +4,7 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,10 +21,14 @@ public class ModShovel extends ShovelItem implements IModTool
         super(material, attackDamage, attackSpeed, properties);
     }
 
-    protected final void dropAdditionalBlocks(Level level, BlockState state, BlockPos pos, LivingEntity entityLiving, ItemStack itemStack)
+    protected final void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide() || (double)state.getDestroySpeed(null, pos) == 0.0D)
+        BlockState blockState = level.getBlockState(pos);
+        float initialHardness = blockState.getBlock().defaultDestroyTime();
+
+        if (level.isClientSide() || initialHardness == 0.0F)
             return;
+
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -46,15 +51,12 @@ public class ModShovel extends ShovelItem implements IModTool
                 a = 1; b = 0; c = 1; break;
         }
 
-        BlockState blockState = level.getBlockState(pos);
-        float initialHardness = blockState.getBlock().defaultDestroyTime();
-
         for (int x = posX - a; x <= posX + a; x++)
             for (int y = posY - b; y <= posY + b; y++)
                 for (int z = posZ - c; z <= posZ + c; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockDropping(level, blockState, initialHardness, new BlockPos(x, y, z), entityLiving, itemStack);
+                    onBlockDropping(level, blockState, initialHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
@@ -102,7 +104,7 @@ public class ModShovel extends ShovelItem implements IModTool
         return isCorrectToolForDrops(null, blockState);
     }
 
-    protected void onBlockDropping(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving, ItemStack itemStack)
+    protected void onBlockDropping(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
     {
         // nothing by default
     }
@@ -113,8 +115,18 @@ public class ModShovel extends ShovelItem implements IModTool
         return itemstack.isEmpty() || itemstack.getItem() == Items.TOTEM_OF_UNDYING;
     }
 
-    protected final void damageItem(int amount)
+    protected final void damageItem(LivingEntity livingEntity, int amount)
     {
-        super.damageItem(null, amount, null, (c) -> {});
+//        if (!p_40999_.isClientSide && p_41000_.getDestroySpeed(p_40999_, p_41001_) != 0.0F) {
+//            p_40998_.hurtAndBreak(1, p_41002_, (p_40992_) -> {
+//                p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
+//            });
+//        }
+
+        var itemStack = new ItemStack(this);
+        if (!itemStack.isDamageableItem()) return;
+
+        itemStack.hurtAndBreak(amount, livingEntity, player -> player.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+        //super.damageItem(null, amount, null, (c) -> {});
     }
 }
