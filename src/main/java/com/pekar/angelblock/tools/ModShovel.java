@@ -4,7 +4,6 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -99,8 +98,6 @@ public class ModShovel extends ShovelItem implements IModTool
     protected final boolean isToolEffective(Level level, BlockPos pos)
     {
         BlockState blockState = level.getBlockState(pos);
-//        Block block = blockState.getBlock();
-//        return block.isToolEffective("shovel", blockState);
         return isCorrectToolForDrops(null, blockState);
     }
 
@@ -123,10 +120,13 @@ public class ModShovel extends ShovelItem implements IModTool
 //            });
 //        }
 
-        var itemStack = new ItemStack(this);
-        if (!itemStack.isDamageableItem()) return;
-
+        var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
         itemStack.hurtAndBreak(amount, livingEntity, player -> player.broadcastBreakEvent(InteractionHand.MAIN_HAND));
-        //super.damageItem(null, amount, null, (c) -> {});
+    }
+
+    @Override
+    public boolean isEnhancedTool()
+    {
+        return false;
     }
 }

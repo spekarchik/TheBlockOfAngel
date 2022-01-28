@@ -59,4 +59,10 @@ public class ModAxe extends AxeItem implements IModTool
         ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
         return itemstack.isEmpty() || itemstack.getItem() == Items.TOTEM_OF_UNDYING;
     }
+
+    @Override
+    public boolean isEnhancedTool()
+    {
+        return false;
+    }
 }

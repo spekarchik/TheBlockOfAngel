@@ -218,4 +218,10 @@ class ModSword extends SwordItem implements IModTool
             return InteractionResult.FAIL;
         }
     }
+
+    @Override
+    public boolean isEnhancedTool()
+    {
+        return false;
+    }
 }
