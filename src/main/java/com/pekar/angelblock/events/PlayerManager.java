@@ -124,6 +124,12 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     }
 
     @Override
+    public IPlayer getPlayerByUUID(UUID uuid)
+    {
+        return players.values().stream().filter(p -> p.getEntity().getUUID().equals(uuid)).findAny().get();
+    }
+
+    @Override
     public void addEntityPlayer(net.minecraft.world.entity.player.Player entity)
     {
         IPlayer player = new Player(entity);
