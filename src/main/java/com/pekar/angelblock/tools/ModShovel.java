@@ -114,12 +114,6 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected final void damageItem(LivingEntity livingEntity, int amount)
     {
-//        if (!p_40999_.isClientSide && p_41000_.getDestroySpeed(p_40999_, p_41001_) != 0.0F) {
-//            p_40998_.hurtAndBreak(1, p_41002_, (p_40992_) -> {
-//                p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-//            });
-//        }
-
         var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
         itemStack.hurtAndBreak(amount, livingEntity, player -> player.broadcastBreakEvent(InteractionHand.MAIN_HAND));
     }

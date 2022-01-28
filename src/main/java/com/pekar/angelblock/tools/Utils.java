@@ -226,15 +226,6 @@ public class Utils
         }
     }
 
-//    public static boolean isEnhancedTool(Item item)
-//    {
-//        return item == ToolRegistry.DIAMITHIC_AXE || item == ToolRegistry.DIAMITHIC_PICKAXE
-//                || item == ToolRegistry.RENDELITHIC_PICKAXE || item == ToolRegistry.RENDELITHIC_SHOVEL
-//                || item == ToolRegistry.LIMONITE_AXE || item == ToolRegistry.LIMONITE_PICKAXE
-//                || item == ToolRegistry.LAPIS_HOE || item == ToolRegistry.LAPIS_PICKAXE || item == ToolRegistry.LAPIS_SHOVEL
-//                || item == ToolRegistry.SUPER_AXE || item == ToolRegistry.SUPER_PICKAXE || item == ToolRegistry.SUPER_SHOVEL;
-//    }
-
     private static boolean isAboveLavaOrWaterOrAir(Level level, BlockPos pos)
     {
         Block block = level.getBlockState(pos.below()).getBlock();
