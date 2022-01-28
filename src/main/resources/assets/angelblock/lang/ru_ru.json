@@ -123,5 +123,6 @@
   "item.minecraft.potion.effect.block_breaker_potion": "Разрушающее зелье",
   "item.minecraft.splash_potion.effect.block_breaker_potion": "Взрывное разрушающее зелье",
   "item.minecraft.lingering_potion.effect.block_breaker_potion": "Туманное разрушающее зелье",
-  "effect.angelblock.block_breaker_effect": "Разрушение"
+  "effect.angelblock.block_breaker_effect": "Разрушение",
+  "effect.angelblock.tool_advanced_mode_effect": "Эффект инструментов"
 }
