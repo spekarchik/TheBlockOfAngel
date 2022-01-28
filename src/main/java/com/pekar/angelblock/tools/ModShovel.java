@@ -11,7 +11,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 
 public class ModShovel extends ShovelItem implements IModTool
 {
@@ -92,7 +95,14 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected void onBlockTransforming(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
     {
-        // nothing by default
+        Block block = level.getBlockState(pos).getBlock();
+
+        if (facing != Direction.DOWN && level.getBlockState(pos.above()).getMaterial() == Material.AIR &&
+                (block == Blocks.GRASS || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL || block == Blocks.MYCELIUM))
+        {
+            BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
+            level.setBlock(pos, newBlockState, 11);
+        }
     }
 
     protected final boolean isToolEffective(Level level, BlockPos pos)
@@ -112,7 +122,7 @@ public class ModShovel extends ShovelItem implements IModTool
         return itemstack.isEmpty() || itemstack.getItem() == Items.TOTEM_OF_UNDYING;
     }
 
-    protected final void damageItem(LivingEntity livingEntity, int amount)
+    protected final void damageItem(int amount, LivingEntity livingEntity)
     {
         var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
         itemStack.hurtAndBreak(amount, livingEntity, player -> player.broadcastBreakEvent(InteractionHand.MAIN_HAND));

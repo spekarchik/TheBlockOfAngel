@@ -1,7 +1,6 @@
 package com.pekar.angelblock.tools;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,10 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class RendelithicShovel extends ModShovel
 {
@@ -46,7 +42,7 @@ public class RendelithicShovel extends ModShovel
 
             if (blockState.getDestroySpeed(level, pos) != 0.0F)
             {
-                damageItem(player, 1);
+                damageItem(1, player);
             }
 
             return InteractionResult.SUCCESS;
@@ -91,19 +87,7 @@ public class RendelithicShovel extends ModShovel
         if (hardness <= initialHardness && isToolEffective(level, pos) && !Utils.isNearLava(level, pos))
         {
             level.destroyBlock(pos, true);
-            damageItem(entityLiving, 1);
-        }
-    }
-
-    @Override
-    protected void onBlockTransforming(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
-    {
-        Block block = level.getBlockState(pos).getBlock();
-
-        if (facing != Direction.DOWN && level.getBlockState(pos.above()).getMaterial() == Material.AIR && block == Blocks.GRASS)
-        {
-            BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
-            level.setBlock(pos, newBlockState, 11);
+            damageItem(1, entityLiving);
         }
     }
 }
