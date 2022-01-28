@@ -7,7 +7,7 @@ import com.pekar.angelblock.events.ClientSetupEvents;
 import com.pekar.angelblock.events.ClientTickEvents;
 import com.pekar.angelblock.events.EventRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
-import com.pekar.angelblock.network.PacketHandler;
+import com.pekar.angelblock.network.PacketRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.recipe.RecipeRegistry;
 import com.pekar.angelblock.tab.ModTab;
@@ -81,7 +81,7 @@ public class Main
         ClientSetupEvents.initStatic();
         ClientTickEvents.initStatic();
 
-        PacketHandler.init();
+        PacketRegistry.init();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

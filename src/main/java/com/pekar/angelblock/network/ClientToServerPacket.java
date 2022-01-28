@@ -14,7 +14,7 @@ public abstract class ClientToServerPacket extends Packet
 
     public void sendToServer()
     {
-        PacketHandler.INSTANCE.sendToServer(this);
+        PacketRegistry.INSTANCE.sendToServer(this);
     }
 
     @Override

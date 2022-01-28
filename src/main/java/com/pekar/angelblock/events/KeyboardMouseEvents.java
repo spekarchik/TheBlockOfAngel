@@ -2,6 +2,7 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.network.packets.KeyPressedPacket;
+import com.pekar.angelblock.network.packets.ToolsModeChangePacket;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -37,7 +38,7 @@ public class KeyboardMouseEvents implements IEventHandler
 
         if (KeyRegistry.SWORD_EFFECT.isDown())
         {
-//            new SwordModeChangePacket().sendToServer();
+            new ToolsModeChangePacket().sendToServer();
         }
     }
 }

@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-public final class PacketHandler
+public final class PacketRegistry
 {
     private static final String PROTOCOL_VERSION = "1";
 
@@ -16,7 +16,7 @@ public final class PacketHandler
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals);
 
-    private PacketHandler()
+    private PacketRegistry()
     {
     }
 
@@ -26,6 +26,7 @@ public final class PacketHandler
         registerPacket(new CreeperDetectedPacket());
         registerPacket(new ClientTickPacket());
         registerPacket(new KeyPressedPacket());
+        registerPacket(new ToolsModeChangePacket());
     }
 
     private static <T extends Packet> void registerPacket(T packet)

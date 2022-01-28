@@ -16,17 +16,17 @@ public abstract class ServerToClientPacket extends Packet
 
     public final void sendToPlayer(ServerPlayer player)
     {
-        PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), this);
+        PacketRegistry.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), this);
     }
 
     public final void sendToEntity(Entity entity)
     {
-        PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), this);
+        PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), this);
     }
 
     public final void sendToChunk(LevelChunk chunk)
     {
-        PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), this);
+        PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), this);
     }
 
     @Override
