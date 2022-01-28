@@ -11,6 +11,7 @@ import com.pekar.angelblock.network.PacketHandler;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.recipe.RecipeRegistry;
 import com.pekar.angelblock.tab.ModTab;
+import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -74,6 +75,7 @@ public class Main
         ItemRegistry.initStatic();
         EntityRegistry.initStatic();
         ArmorRegistry.initStatic();
+        ToolRegistry.initStatic();
         PotionRegistry.initStatic();
 
         ClientSetupEvents.initStatic();
