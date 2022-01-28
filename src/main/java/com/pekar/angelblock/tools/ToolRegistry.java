@@ -8,9 +8,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ToolRegistry
 {
-//    public static final RegistryObject<ModShovel> RENDELITHIC_SHOVEL = Main.ITEMS.register("rendelithic_shovel",
-//            () -> new RendelithicShovel(ToolMaterials.RENDELITHIC, 1.5F, -3.0F,
-//                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+    public static final RegistryObject<ModShovel> RENDELITHIC_SHOVEL = Main.ITEMS.register("rendelithic_shovel",
+            () -> new RendelithicShovel(ToolMaterials.RENDELITHIC, 1.5F, -3.0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
 //    public static final Item DIAMITHIC_PRIMARY_SWORD = new ModSword("diamithic_primary_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item DIAMITHIC_SWORD = new DiamithicSword("diamithic_sword", ToolMaterials.DIAMITHIC);
