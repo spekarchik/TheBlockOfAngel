@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SuperShovel extends ModShovel
@@ -42,9 +43,10 @@ public class SuperShovel extends ModShovel
                 damageItem(1, player);
             }
 
-            return InteractionResult.SUCCESS;
+            return InteractionResult.CONSUME;
         }
-        else if (block == BlockRegistry.CRACKED_ENDSTONE.get())
+
+        if (block == BlockRegistry.CRACKED_ENDSTONE.get())
         {
             level.destroyBlock(pos, true, player);
 
@@ -53,7 +55,13 @@ public class SuperShovel extends ModShovel
                 damageItem(1, player);
             }
 
-            return InteractionResult.SUCCESS;
+            return InteractionResult.CONSUME;
+        }
+
+        if (block == Blocks.END_STONE)
+        {
+            level.setBlock(pos, BlockRegistry.CRACKED_ENDSTONE.get().defaultBlockState(), 11);
+            return InteractionResult.CONSUME;
         }
 
         InteractionResult result = super.useOn(context);

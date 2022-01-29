@@ -42,9 +42,10 @@ public class LapisShovel extends ModShovel
                 damageItem(1, player);
             }
 
-            return InteractionResult.SUCCESS;
+            return InteractionResult.CONSUME;
         }
-        else if (block == BlockRegistry.CRACKED_ENDSTONE.get())
+
+        if (block == BlockRegistry.CRACKED_ENDSTONE.get())
         {
             level.destroyBlock(pos, true, player);
 
@@ -53,7 +54,7 @@ public class LapisShovel extends ModShovel
                 damageItem(1, player);
             }
 
-            return InteractionResult.SUCCESS;
+            return InteractionResult.CONSUME;
         }
 
         InteractionResult result = super.useOn(context);

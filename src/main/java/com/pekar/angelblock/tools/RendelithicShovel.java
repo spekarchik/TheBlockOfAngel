@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.blocks.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
@@ -9,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class RendelithicShovel extends ModShovel
@@ -30,18 +33,25 @@ public class RendelithicShovel extends ModShovel
 
         var pos = context.getClickedPos();
 
+        BlockState blockState = level.getBlockState(pos);
+        Block block = blockState.getBlock();
+
         if (isToolEffective(level, pos) && Utils.isNearLava(level, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
         {
             level.destroyBlock(pos, true);
-
-            BlockState blockState = level.getBlockState(pos);
 
             if (blockState.getDestroySpeed(level, pos) != 0.0F)
             {
                 damageItem(1, player);
             }
 
-            return InteractionResult.SUCCESS;
+            return InteractionResult.CONSUME;
+        }
+
+        if (block == Blocks.END_STONE)
+        {
+            level.setBlock(pos, BlockRegistry.CRACKED_ENDSTONE.get().defaultBlockState(), 11);
+            return InteractionResult.CONSUME;
         }
 
         InteractionResult result = super.useOn(context);
