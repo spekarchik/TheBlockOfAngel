@@ -31,7 +31,6 @@ public class RendelithicPickaxe extends ModPickaxe
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         BlockState blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
