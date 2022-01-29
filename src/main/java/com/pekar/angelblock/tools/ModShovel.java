@@ -137,12 +137,6 @@ public class ModShovel extends ShovelItem implements IModTool
         return itemstack.isEmpty() || itemstack.getItem() == Items.TOTEM_OF_UNDYING;
     }
 
-    protected final void damageItem(int amount, LivingEntity livingEntity)
-    {
-        var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
-        itemStack.hurtAndBreak(amount, livingEntity, player -> player.broadcastBreakEvent(InteractionHand.MAIN_HAND));
-    }
-
     @Override
     public boolean isEnhancedTool()
     {
