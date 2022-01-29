@@ -51,7 +51,7 @@ public class Utils
         {
             return Direction.UP;
         }
-        else if (entityY > pos.getY())
+        else if (entityY >= pos.getY())
         {
             return Direction.DOWN;
         }

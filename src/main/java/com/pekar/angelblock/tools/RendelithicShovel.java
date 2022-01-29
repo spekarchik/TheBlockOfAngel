@@ -22,14 +22,10 @@ public class RendelithicShovel extends ModShovel
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
-        ItemStack tool = context.getItemInHand();
         var player = context.getPlayer();
         var level = player.level;
 
-
-//        if (!player.canPlayerEdit(pos.offset(facing), facing, tool)) return EnumActionResult.FAIL;
         if (level.isClientSide) return InteractionResult.PASS;
-
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
@@ -50,7 +46,7 @@ public class RendelithicShovel extends ModShovel
 
         InteractionResult result = super.useOn(context);
 
-        if (result == InteractionResult.SUCCESS)
+        if (result.shouldAwardStats())
         {
             transformAdditionalBlocks(player, level, pos, context.getClickedFace());
         }

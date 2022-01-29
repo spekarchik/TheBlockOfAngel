@@ -25,14 +25,15 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected final void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
+        if (!isEnhancedTool()) return;
+
+        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+            return;
+
         BlockState blockState = level.getBlockState(pos);
         float initialHardness = blockState.getBlock().defaultDestroyTime();
 
         if (level.isClientSide() || initialHardness == 0.0F)
-            return;
-
-
-        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
 
         var facing = Utils.getDirectionForShovel(entityLiving, pos);
@@ -64,6 +65,11 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected final void transformAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
     {
+        if (!isEnhancedTool()) return;
+
+        if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+            return;
+
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
         int a1, a2, b1, b2;
@@ -95,13 +101,22 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected void onBlockTransforming(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
     {
-        Block block = level.getBlockState(pos).getBlock();
+        var blockState = level.getBlockState(pos);
+        Block block = blockState.getBlock();
 
-        if (facing != Direction.DOWN && level.getBlockState(pos.above()).getMaterial() == Material.AIR &&
-                (block == Blocks.GRASS || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL || block == Blocks.MYCELIUM))
+        if (facing != Direction.DOWN && level.getBlockState(pos.above()).getMaterial() == Material.AIR)
         {
-            BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
-            level.setBlock(pos, newBlockState, 11);
+            if (block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL
+                    || block == Blocks.MYCELIUM || block == Blocks.ROOTED_DIRT)
+            {
+                BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
+                level.setBlock(pos, newBlockState, 11);
+
+                if (blockState.getDestroySpeed(level, pos) != 0.0F)
+                {
+                    damageItem(1, player);
+                }
+            }
         }
     }
 
