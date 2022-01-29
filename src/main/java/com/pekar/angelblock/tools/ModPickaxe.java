@@ -63,9 +63,6 @@ public class ModPickaxe extends PickaxeItem implements IModTool
     {
         BlockState blockState = level.getBlockState(pos);
         return isCorrectToolForDrops(null, blockState);
-//        BlockState blockState = level.getBlockState(pos);
-//        Block block = blockState.getBlock();
-//        return block.isToolEffective("pickaxe", blockState);
     }
 
     protected void onBlockProcessing(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving, ItemStack itemStack)
