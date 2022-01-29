@@ -13,7 +13,7 @@ public class ToolMaterials
     // netherite : 4, 2031, 9F, 4, 15
     // gold: 0, 32, 12F, 0.0F, 22
 
-    // pickaxe - efficiency only
+    // pickaxe - efficiency (speed) only
     // sword - damage only
 
     static final Tier RENDELITHIC = new ModToolMaterial(1300, 7.4F, 4.4F, 3, 17,
