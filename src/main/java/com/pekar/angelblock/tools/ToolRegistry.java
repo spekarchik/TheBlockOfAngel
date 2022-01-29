@@ -12,6 +12,10 @@ public class ToolRegistry
             () -> new RendelithicShovel(ToolMaterials.RENDELITHIC, 1.5F, -3.0F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
+    public static final RegistryObject<ModShovel> LAPIS_SHOVEL = Main.ITEMS.register("lapis_shovel",
+            () -> new LapisShovel(ToolMaterials.LAPIS, 1.5F, -3.0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
 //    public static final Item DIAMITHIC_PRIMARY_SWORD = new ModSword("diamithic_primary_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item DIAMITHIC_SWORD = new DiamithicSword("diamithic_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item LIMONITE_PRIMARY_SWORD = new ModSword("limonite_primary_sword", ToolMaterials.LIMONITE);
