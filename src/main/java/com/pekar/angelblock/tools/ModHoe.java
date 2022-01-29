@@ -2,7 +2,6 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
@@ -21,9 +20,17 @@ public class ModHoe extends HoeItem implements IModTool
         super(material, attackDamage, attackSpeed, properties);
     }
 
-    protected final void processAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
+    protected final void processAdditionalBlocks(Player player, Level level, BlockPos pos)
     {
+        if (!isEnhancedTool() || !isToolEffective(level, pos)) return;
+
         if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+            return;
+
+        BlockState blockState = level.getBlockState(pos);
+        float initialHardness = blockState.getBlock().defaultDestroyTime();
+
+        if (level.isClientSide() || initialHardness == 0.0F)
             return;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
@@ -58,6 +65,12 @@ public class ModHoe extends HoeItem implements IModTool
     protected void onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos)
     {
         // nothing by default
+    }
+
+    protected final boolean isToolEffective(Level level, BlockPos pos)
+    {
+        BlockState blockState = level.getBlockState(pos);
+        return isCorrectToolForDrops(null, blockState);
     }
 
     protected boolean updateIfWater(Level level, BlockPos pos)

@@ -21,12 +21,17 @@ public class ModPickaxe extends PickaxeItem implements IModTool
         super(material, attackDamage, attackSpeed, properties);
     }
 
-    protected final void processAdditionalBlocks(Level level, BlockState state, BlockPos pos, LivingEntity entityLiving, ItemStack itemStack)
+    protected final void processAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || (double)state.getDestroySpeed(level, pos) == 0.0D)
-            return;
+        if (!isEnhancedTool() || !isToolEffective(level, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+            return;
+
+        BlockState blockState = level.getBlockState(pos);
+        float initialHardness = blockState.getBlock().defaultDestroyTime();
+
+        if (level.isClientSide() || initialHardness == 0.0F)
             return;
 
         Direction facing = Utils.getDirection(entityLiving, pos);
@@ -47,15 +52,12 @@ public class ModPickaxe extends PickaxeItem implements IModTool
                 a = 1; b = 0; c = 1; break;
         }
 
-        BlockState blockState = level.getBlockState(pos);
-        float initialHardness = blockState.getBlock().defaultDestroyTime();
-
         for (int x = posX - a; x <= posX + a; x++)
             for (int y = posY - b; y <= posY + b; y++)
                 for (int z = posZ - c; z <= posZ + c; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockProcessing(level, blockState, initialHardness, new BlockPos(x, y, z), entityLiving, itemStack);
+                    onBlockProcessing(level, blockState, initialHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
@@ -65,7 +67,7 @@ public class ModPickaxe extends PickaxeItem implements IModTool
         return isCorrectToolForDrops(null, blockState);
     }
 
-    protected void onBlockProcessing(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving, ItemStack itemStack)
+    protected void onBlockProcessing(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
     {
         // nothing by default
     }

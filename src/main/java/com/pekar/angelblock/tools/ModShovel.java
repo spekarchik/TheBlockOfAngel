@@ -25,7 +25,7 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected final void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (!isEnhancedTool()) return;
+        if (!isEnhancedTool() || !isToolEffective(level, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;

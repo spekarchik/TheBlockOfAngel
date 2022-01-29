@@ -19,37 +19,37 @@ public class ModAxe extends AxeItem implements IModTool
         super(material, attackDamage, attackSpeed, properties);
     }
 
-    protected void dropAdditionalBlocks(Level level, BlockState state, BlockPos pos, LivingEntity entityLiving, ItemStack itemStack)
+    protected void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide() || (double)state.getDestroySpeed(null, pos) == 0.0D || !isToolEffective(level, pos))
-            return;
+        if (!isEnhancedTool() || !isToolEffective(level, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
 
-        final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
-
         BlockState blockState = level.getBlockState(pos);
         float initialHardness = blockState.getBlock().defaultDestroyTime();
+
+        if (level.isClientSide() || initialHardness == 0.0F)
+            return;
+
+        final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
         for (int x = posX - 1; x <= posX + 1; x++)
             for (int y = posY - 1; y <= posY + 1; y++)
                 for (int z = posZ - 1; z <= posZ + 1; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockDropping(level, blockState, initialHardness, new BlockPos(x, y, z), entityLiving, itemStack);
+                    onBlockDropping(level, blockState, initialHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
     protected final boolean isToolEffective(Level level, BlockPos pos)
     {
         BlockState blockState = level.getBlockState(pos);
-//        Block block = blockState.getBlock();
-//        return block.isToolEffective("axe", blockState);
         return isCorrectToolForDrops(null, blockState);
     }
 
-    protected void onBlockDropping(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving, ItemStack itemStack)
+    protected void onBlockDropping(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
     {
         // nothing by default
     }
