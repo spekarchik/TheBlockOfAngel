@@ -8,12 +8,29 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ToolRegistry
 {
+    // Shovels
+    public static final RegistryObject<ModShovel> RENDELITHIC_PRIMARY_SHOVEL = Main.ITEMS.register("rendelithic_primary_shovel",
+            () -> new ModShovel(ToolMaterials.RENDELITHIC, 1.5F, -3.0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
     public static final RegistryObject<ModShovel> RENDELITHIC_SHOVEL = Main.ITEMS.register("rendelithic_shovel",
             () -> new RendelithicShovel(ToolMaterials.RENDELITHIC, 1.5F, -3.0F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
+    public static final RegistryObject<ModShovel> LAPIS_PRIMARY_SHOVEL = Main.ITEMS.register("lapis_primary_shovel",
+            () -> new ModShovel(ToolMaterials.LAPIS, 1.5F, -3.0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
     public static final RegistryObject<ModShovel> LAPIS_SHOVEL = Main.ITEMS.register("lapis_shovel",
             () -> new LapisShovel(ToolMaterials.LAPIS, 1.5F, -3.0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
+    public static final RegistryObject<ModShovel> SUPER_PRIMARY_SHOVEL = Main.ITEMS.register("super_primary_shovel",
+            () -> new ModShovel(ToolMaterials.SUPER, 1.5F, -3.0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
+    public static final RegistryObject<ModShovel> SUPER_SHOVEL = Main.ITEMS.register("super_shovel",
+            () -> new SuperShovel(ToolMaterials.SUPER, 1.5F, -3.0F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
 //    public static final Item DIAMITHIC_PRIMARY_SWORD = new ModSword("diamithic_primary_sword", ToolMaterials.DIAMITHIC);
