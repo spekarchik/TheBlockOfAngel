@@ -92,26 +92,8 @@ public class ToolRegistry
 //    public static final Item SUPER_PRIMARY_SWORD = new ModSword("super_primary_sword", ToolMaterials.SUPER);
 //    public static final Item SUPER_SWORD = new SuperSword("super_sword", ToolMaterials.SUPER);
 //
-//    public static final Item DIAMITHIC_PRIMARY_PICKAXE = new ModPickaxe("diamithic_primary_pickaxe", ToolMaterials.DIAMITHIC);
-//    public static final Item DIAMITHIC_PICKAXE = new DiamithicPickaxe("diamithic_pickaxe", ToolMaterials.DIAMITHIC);
-//    public static final Item RENDELITHIC_PRIMARY_PICKAXE = new ModPickaxe("rendelithic_primary_pickaxe", ToolMaterials.RENDELITHIC);
-//    public static final Item RENDELITHIC_PICKAXE = new RendelithicPickaxe("rendelithic_pickaxe", ToolMaterials.RENDELITHIC);
-//    public static final Item LAPIS_PRIMARY_PICKAXE = new ModPickaxe("lapis_primary_pickaxe", ToolMaterials.LAPIS);
-//    public static final Item LAPIS_PICKAXE = new LapisPickaxe("lapis_pickaxe", ToolMaterials.LAPIS);
-//    public static final Item LIMONITE_PRIMARY_PICKAXE = new ModPickaxe("limonite_primary_pickaxe", ToolMaterials.LIMONITE);
-//    public static final Item LIMONITE_PICKAXE = new LimonitePickaxe("limonite_pickaxe", ToolMaterials.LIMONITE);
-//    public static final Item SUPER_PRIMARY_PICKAXE = new ModPickaxe("super_primary_pickaxe", ToolMaterials.SUPER);
-//    public static final Item SUPER_PICKAXE = new SuperPickaxe("super_pickaxe", ToolMaterials.SUPER);
-//
 //    public static final Item LAPIS_PRIMARY_HOE = new ModHoe("lapis_primary_hoe", ToolMaterials.LAPIS);
 //    public static final Item LAPIS_HOE = new LapisHoe("lapis_hoe", ToolMaterials.LAPIS);
-//
-//    public static final Item RENDELITHIC_PRIMARY_SHOVEL = new ModShovel("rendelithic_primary_shovel", ToolMaterials.RENDELITHIC);
-//    public static final Item RENDELITHIC_SHOVEL = new RendelithicShovel("rendelithic_shovel", ToolMaterials.RENDELITHIC);
-//    public static final Item LAPIS_PRIMARY_SHOVEL = new ModShovel("lapis_primary_shovel", ToolMaterials.LAPIS);
-//    public static final Item LAPIS_SHOVEL = new LapisShovel("lapis_shovel", ToolMaterials.LAPIS);
-//    public static final Item SUPER_PRIMARY_SHOVEL = new ModShovel("super_primary_shovel", ToolMaterials.SUPER);
-//    public static final Item SUPER_SHOVEL = new SuperShovel("super_shovel", ToolMaterials.SUPER);
 //
 //    public static final Item DIAMITHIC_PRIMARY_AXE = new ModAxe("diamithic_primary_axe", ToolMaterials.DIAMITHIC, 9, -3.2F);
 //    public static final Item DIAMITHIC_AXE = new DiamithicAxe("diamithic_axe", ToolMaterials.DIAMITHIC);
