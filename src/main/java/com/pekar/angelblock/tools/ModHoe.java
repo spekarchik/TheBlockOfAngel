@@ -22,7 +22,7 @@ public class ModHoe extends HoeItem implements IModTool
 
     protected final void processAdditionalBlocks(Player player, Level level, BlockPos pos)
     {
-        if (!isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
 
         if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -30,7 +30,7 @@ public class ModHoe extends HoeItem implements IModTool
         BlockState blockState = level.getBlockState(pos);
         float initialHardness = blockState.getBlock().defaultDestroyTime();
 
-        if (level.isClientSide() || initialHardness == 0.0F)
+        if (initialHardness == 0.0F)
             return;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();

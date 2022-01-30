@@ -21,7 +21,7 @@ public class ModAxe extends AxeItem implements IModTool
 
     protected void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (!isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -29,7 +29,7 @@ public class ModAxe extends AxeItem implements IModTool
         BlockState blockState = level.getBlockState(pos);
         float initialHardness = blockState.getBlock().defaultDestroyTime();
 
-        if (level.isClientSide() || initialHardness == 0.0F)
+        if (initialHardness == 0.0F)
             return;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();

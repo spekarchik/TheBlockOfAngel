@@ -25,7 +25,7 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected final void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (!isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -33,7 +33,7 @@ public class ModShovel extends ShovelItem implements IModTool
         BlockState blockState = level.getBlockState(pos);
         float initialHardness = blockState.getBlock().defaultDestroyTime();
 
-        if (level.isClientSide() || initialHardness == 0.0F)
+        if (initialHardness == 0.0F)
             return;
 
         var facing = Utils.getDirectionForShovel(entityLiving, pos);
