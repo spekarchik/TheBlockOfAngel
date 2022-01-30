@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class LimoniteAxe extends ModAxe
@@ -28,6 +29,13 @@ public class LimoniteAxe extends ModAxe
     {
         dropAdditionalBlocks(level, pos, livingEntity);
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
+    {
+        if (blockState.getBlock() == Blocks.CACTUS) return 12.0F;
+        return super.getDestroySpeed(itemStack, blockState);
     }
 
     @Override
