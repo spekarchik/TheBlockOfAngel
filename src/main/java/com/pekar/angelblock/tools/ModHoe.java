@@ -2,6 +2,7 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
@@ -20,9 +21,9 @@ public class ModHoe extends HoeItem implements IModTool
         super(material, attackDamage, attackSpeed, properties);
     }
 
-    protected final void processAdditionalBlocks(Player player, Level level, BlockPos pos)
+    protected final void processAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || facing != Direction.UP) return;
 
         if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -58,32 +59,25 @@ public class ModHoe extends HoeItem implements IModTool
             for (int z = posZ - b1; z <= posZ + b2; z++)
             {
                 if (x == posX && z == posZ) continue;
-                onBlockProcessing(player, level, pos, new BlockPos(x, posY, z));
+                onBlockProcessing(player, level, pos, new BlockPos(x, posY, z), facing);
             }
     }
 
-    protected void onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos)
+    protected void onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
     {
         // nothing by default
     }
 
-    protected final boolean isToolEffective(Level level, BlockPos pos)
-    {
-        BlockState blockState = level.getBlockState(pos);
-        return isCorrectToolForDrops(null, blockState);
-    }
-
-    protected boolean updateIfWater(Level level, BlockPos pos)
+    protected boolean updateNeighbors(Level level, BlockPos pos)
     {
         BlockState waterBlockState = level.getBlockState(pos);
-        if (!(waterBlockState.getBlock() instanceof LiquidBlock))
+        if (waterBlockState.getBlock() instanceof LiquidBlock liquidBlock)
         {
-            return false;
+            liquidBlock.neighborChanged(waterBlockState, level, pos, liquidBlock, pos, false /* ignored */);
+            return true;
         }
 
-        LiquidBlock liquidBlock = (LiquidBlock) waterBlockState.getBlock();
-        liquidBlock.neighborChanged(waterBlockState, level, pos, liquidBlock, pos, false /* ignored */);
-        return true;
+        return false;
     }
 
     protected final boolean canUseToolEffect(Player player)

@@ -99,6 +99,16 @@ public class ToolRegistry
             () -> new SuperAxe(ToolMaterials.SUPER, 5.0F, -3.0F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
+    // Hoes
+    public static final RegistryObject<ModHoe> LAPIS_PRIMARY_HOE = Main.ITEMS.register("lapis_primary_hoe",
+            () -> new ModHoe(ToolMaterials.LAPIS, -3, 0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+
+    public static final RegistryObject<ModHoe> LAPIS_HOE = Main.ITEMS.register("lapis_hoe",
+            () -> new LapisHoe(ToolMaterials.LAPIS, -3, 0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
+
 //    public static final Item DIAMITHIC_PRIMARY_SWORD = new ModSword("diamithic_primary_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item DIAMITHIC_SWORD = new DiamithicSword("diamithic_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item LIMONITE_PRIMARY_SWORD = new ModSword("limonite_primary_sword", ToolMaterials.LIMONITE);
@@ -110,13 +120,6 @@ public class ToolRegistry
 //
 //    public static final Item LAPIS_PRIMARY_HOE = new ModHoe("lapis_primary_hoe", ToolMaterials.LAPIS);
 //    public static final Item LAPIS_HOE = new LapisHoe("lapis_hoe", ToolMaterials.LAPIS);
-//
-//    public static final Item DIAMITHIC_PRIMARY_AXE = new ModAxe("diamithic_primary_axe", ToolMaterials.DIAMITHIC, 9, -3.2F);
-//    public static final Item DIAMITHIC_AXE = new DiamithicAxe("diamithic_axe", ToolMaterials.DIAMITHIC);
-//    public static final Item LIMONITE_PRIMARY_AXE = new ModAxe("limonite_primary_axe", ToolMaterials.LIMONITE, 7, -2.9F);
-//    public static final Item LIMONITE_AXE = new LimoniteAxe("limonite_axe", ToolMaterials.LIMONITE);
-//    public static final Item SUPER_PRIMARY_AXE = new ModAxe("super_primary_axe", ToolMaterials.SUPER, 9, -2.9F);
-//    public static final Item SUPER_AXE = new SuperAxe("super_axe", ToolMaterials.SUPER);
 //
 //    public static final Item ANCIENT_ROD = new AncientRod("ancient_rod", Item.ToolMaterial.WOOD);
 
