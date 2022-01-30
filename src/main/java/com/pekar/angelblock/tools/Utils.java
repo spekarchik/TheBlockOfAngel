@@ -233,7 +233,7 @@ public class Utils
                 || block == Blocks.WATER || block == Blocks.WATER_CAULDRON;
     }
 
-    private static boolean isNearLavaOrWater(Level level, BlockPos pos)
+    public static boolean isNearLavaOrWater(Level level, BlockPos pos)
     {
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
