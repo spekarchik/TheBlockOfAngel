@@ -83,6 +83,14 @@ public class ToolRegistry
             () -> new DiamithicAxe(ToolMaterials.DIAMITHIC, 5.0F, -3.0F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
+    public static final RegistryObject<ModAxe> LIMONITE_PRIMARY_AXE = Main.ITEMS.register("limonite_primary_axe",
+            () -> new ModAxe(ToolMaterials.LIMONITE, 5.0F, -3.0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+
+    public static final RegistryObject<ModAxe> LIMONITE_AXE = Main.ITEMS.register("limonite_axe",
+            () -> new LimoniteAxe(ToolMaterials.LIMONITE, 5.0F, -3.0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
 //    public static final Item DIAMITHIC_PRIMARY_SWORD = new ModSword("diamithic_primary_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item DIAMITHIC_SWORD = new DiamithicSword("diamithic_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item LIMONITE_PRIMARY_SWORD = new ModSword("limonite_primary_sword", ToolMaterials.LIMONITE);
