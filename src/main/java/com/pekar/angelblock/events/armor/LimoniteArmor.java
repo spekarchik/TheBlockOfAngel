@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
@@ -78,8 +79,9 @@ public class LimoniteArmor extends Armor
         boolean isSilverfish = attacker instanceof Silverfish;
         boolean isEndermite = attacker instanceof Endermite;
         boolean isSpider = attacker instanceof Spider;
+        boolean isBee = attacker instanceof Bee;
 
-        if (isSilverfish || isEndermite || isSpider)
+        if (isSilverfish || isEndermite || isSpider || isBee)
         {
             if (player.isFullArmorSetPutOn(getArmorElementNames()))
             {
