@@ -4,6 +4,8 @@ import com.pekar.angelblock.Main;
 import com.pekar.angelblock.tab.ModTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ToolRegistry
@@ -106,6 +108,11 @@ public class ToolRegistry
 
     public static final RegistryObject<ModHoe> LAPIS_HOE = Main.ITEMS.register("lapis_hoe",
             () -> new LapisHoe(ToolMaterials.LAPIS, -3, 0F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
+    // Rods
+    public static final RegistryObject<ModRod> ANCIENT_ROD = Main.ITEMS.register("ancient_rod",
+            () -> new AncientRod(Tiers.WOOD, 0, -3F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
 
