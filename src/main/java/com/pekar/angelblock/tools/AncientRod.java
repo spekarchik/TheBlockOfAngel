@@ -12,12 +12,8 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.InfestedBlock;
-import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.IPlantable;
 
 import java.util.Random;
 
@@ -41,7 +37,7 @@ public class AncientRod extends ModRod
         BlockState blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
-        if (block == Blocks.DIAMOND_ORE)
+        if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
         {
             level.setBlock(pos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState(), 11);
             return InteractionResult.CONSUME;
@@ -69,83 +65,106 @@ public class AncientRod extends ModRod
 
             if (facing == Direction.UP)
             {
-                if (block == Blocks.DIRT_PATH || block == Blocks.DIRT)
+                BlockPos upPos = pos.above();
+
+                if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
+                        && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
+                        || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
                 {
-                    level.setBlock(pos.above(), Blocks.GRASS.defaultBlockState(), 11);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
+                    damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
+
+                    if (!updateNeighbors(level, upPos))
+                    {
+                        return InteractionResult.FAIL;
+                    }
+
                     return InteractionResult.CONSUME;
+                }
+
+                if (Utils.isNearWaterHorizoltal(level, pos) && (block == Blocks.DIRT || block == Blocks.COARSE_DIRT
+                    || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || block instanceof SandBlock
+                        || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM))
+                {
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    return plant(player, level, pos, hand, facing, Blocks.SUGAR_CANE);
+                }
+
+                if (block == Blocks.FARMLAND)
+                {
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    int randomValue = itemRand.nextInt() % 4;
+
+                    switch (randomValue)
+                    {
+                        case 0:
+                            return plant(player, level, pos, hand, facing, Blocks.WHEAT);
+                        case 1:
+                            return plant(player, level, pos, hand, facing, Blocks.POTATOES);
+                        case 2:
+                            return plant(player, level, pos, hand, facing, Blocks.CARROTS);
+                        default:
+                            return plant(player, level, pos, hand, facing, Blocks.BEETROOTS);
+                    }
+                }
+
+                if (block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.MOSS_BLOCK)
+                {
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    int randomValue = itemRand.nextInt() % 3;
+
+                    switch (randomValue)
+                    {
+                        case 0:
+                            return plant(player, level, pos, hand, facing, Blocks.SWEET_BERRY_BUSH);
+                        case 1:
+                            return plant(player, level, pos, hand, facing, Blocks.FERN);
+                        default:
+                            {
+                                int random = itemRand.nextInt() & 2;
+                                Block plantBlock = random > 0 ? Blocks.AZALEA : Blocks.FLOWERING_AZALEA;
+                                return plant(player, level, pos, hand, facing, plantBlock);
+                            }
+                    }
+                }
+
+                if (block == Blocks.GRASS_BLOCK)
+                {
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    int randomValue = itemRand.nextInt() % 16;
+                    return plant(player, level, pos, hand, facing, chooseFlowerByValue(randomValue));
                 }
 
                 if (block == Blocks.SAND)
                 {
                     damageItemIfSurvival(player, level, pos, blockState);
-                    return plantBlock(player, level, pos, hand, facing, Blocks.CACTUS, (IPlantable) Blocks.CACTUS);
+                    return plant(player, level, pos, hand, facing, Blocks.CACTUS);
+                }
+
+                if (block == Blocks.PODZOL || block == Blocks.MYCELIUM)
+                {
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    int randomValue = itemRand.nextInt() & 1;
+                    var plantBlock = randomValue == 0 ? Blocks.BROWN_MUSHROOM : Blocks.RED_MUSHROOM;
+                    return plant(player, level, pos, hand, facing, plantBlock);
+                }
+
+                if (block == Blocks.RED_SAND || block == Blocks.GRAVEL)
+                {
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    return plant(player, level, pos, hand, facing, Blocks.BAMBOO);
                 }
 
                 if (block == Blocks.SOUL_SAND)
                 {
                     damageItemIfSurvival(player, level, pos, blockState);
-                    return plantSeed(player, level, pos, hand, facing, Blocks.NETHER_WART);
+                    return plant(player, level, pos, hand, facing, Blocks.NETHER_WART);
                 }
 
                 if (block == Blocks.END_STONE)
                 {
                     damageItemIfSurvival(player, level, pos, blockState);
-                    return plantSeed(player, level, pos, hand, facing, Blocks.CHORUS_FLOWER);
-                }
-
-                if (block == Blocks.GRASS)
-                {
-                    int lightLevel = level.getLightEmission(pos.above());
-
-                    if (lightLevel > 12)
-                    {
-                        damageItemIfSurvival(player, level, pos, blockState);
-
-                        int randomValue = itemRand.nextInt() % 16;
-                        return plantSeed(player, level, pos, hand, facing, chooseFlowerByValue(randomValue));
-                    }
-                    else if (!Utils.isNearMushroomOrMycelium(level, pos))
-                    {
-                        damageItemIfSurvival(player, level, pos, blockState);
-
-                        int randomValue = itemRand.nextInt() & 1;
-                        Block plantBlock = randomValue == 0 ? Blocks.BROWN_MUSHROOM : Blocks.RED_MUSHROOM;
-                        InteractionResult result = plantSeed(player, level, pos, hand, facing, plantBlock);
-                        if (result.shouldAwardStats())
-                        {
-                            Utils.setMyceliumInRadius(level, pos, 2);
-                        }
-
-                        return result;
-                    }
-                }
-
-                // TODO: бамбук, азалия, тростник
-                if (block == Blocks.FARMLAND)
-                {
-                    damageItemIfSurvival(player, level, pos, blockState);
-
-                    int randomValue = itemRand.nextInt() % 4;
-                    switch (randomValue)
-                    {
-                        case 0:
-                            return plantSeed(player, level, pos, hand, facing, Blocks.WHEAT);
-                        case 1:
-                            return plantSeed(player, level, pos, hand, facing, Blocks.POTATOES);
-                        case 2:
-                            return plantSeed(player, level, pos, hand, facing, Blocks.CARROTS);
-                        default:
-                            return plantSeed(player, level, pos, hand, facing, Blocks.BEETROOTS);
-                    }
-                }
-
-                if (block == Blocks.MOSS_BLOCK)
-                {
-                    damageItemIfSurvival(player, level, pos, blockState);
-                    int randomValue = itemRand.nextInt() & 1;
-                    Block plantBlock = randomValue == 0 ? Blocks.AZALEA : Blocks.FLOWERING_AZALEA;
-                    return plantSeed(player, level, pos, hand, facing, plantBlock);
+                    return plant(player, level, pos, hand, facing, Blocks.CHORUS_FLOWER);
                 }
             }
 
@@ -160,24 +179,6 @@ public class AncientRod extends ModRod
             {
                 damageItemIfSurvival(player, level, pos, blockState);
                 return setVine(context);
-            }
-
-            BlockPos upPos = pos.above();
-
-            if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
-                    && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
-                    || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
-            {
-                level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
-
-                damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
-
-                if (!updateNeighbors(level, upPos))
-                {
-                    return InteractionResult.FAIL;
-                }
-
-                return InteractionResult.CONSUME;
             }
         }
 
@@ -201,7 +202,7 @@ public class AncientRod extends ModRod
                 }
     }
 
-    private InteractionResult plantSeed(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
+    private InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
     {
         var itemstack = player.getItemInHand(hand);
 
@@ -221,6 +222,28 @@ public class AncientRod extends ModRod
             return InteractionResult.FAIL;
         }
     }
+
+//    private InteractionResult plantBlock(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, IPlantable block)
+//    {
+//        var itemStack = player.getItemInHand(hand);
+//        BlockState state = level.getBlockState(pos);
+//
+//        if (facing == Direction.UP && state.getBlock().canSustainPlant(state, level, pos, Direction.UP, block) && level.isEmptyBlock(pos.above()))
+//        {
+//            level.setBlock(pos.above(), ((Block)block).defaultBlockState(), 11);
+//
+//            if (player instanceof ServerPlayer serverPlayer)
+//            {
+//                CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
+//            }
+//
+//            return InteractionResult.CONSUME;
+//        }
+//        else
+//        {
+//            return InteractionResult.FAIL;
+//        }
+//    }
 
     private Block chooseFlowerByValue(int value)
     {
@@ -242,28 +265,6 @@ public class AncientRod extends ModRod
             case 14: return Blocks.ROSE_BUSH;
             case 15: return Blocks.PEONY;
             default: return Blocks.DANDELION;
-        }
-    }
-
-    private InteractionResult plantBlock(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock, IPlantable plantable)
-    {
-        var itemStack = player.getItemInHand(hand);
-        BlockState state = level.getBlockState(pos);
-
-        if (facing == Direction.UP && state.getBlock().canSustainPlant(state, level, pos, Direction.UP, plantable) && level.isEmptyBlock(pos.above()))
-        {
-            level.setBlock(pos.above(), plantBlock.defaultBlockState(), 11);
-
-            if (player instanceof ServerPlayer serverPlayer)
-            {
-                CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
-            }
-
-            return InteractionResult.CONSUME;
-        }
-        else
-        {
-            return InteractionResult.FAIL;
         }
     }
 

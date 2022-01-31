@@ -106,6 +106,12 @@ public class Utils
         return false;
     }
 
+    public static boolean isNearWaterHorizoltal(Level level, BlockPos pos)
+    {
+        return level.isWaterAt(pos.east()) || level.isWaterAt(pos.west()) || level.isWaterAt(pos.north())
+                || level.isWaterAt(pos.south());
+    }
+
     public static boolean isFallSafeWide(LivingEntity entityPlayer, BlockPos pos)
     {
         BlockPos playerPos = entityPlayer.blockPosition();
@@ -277,7 +283,7 @@ public class Utils
             return true;
         }
 
-        if (block == Blocks.COBBLESTONE_SLAB)
+        if (block == Blocks.COBBLESTONE_SLAB || block == Blocks.STONE_SLAB)
         {
             level.setBlock(pos, Blocks.MOSSY_COBBLESTONE_SLAB.defaultBlockState(), 11);
             return true;
@@ -290,7 +296,7 @@ public class Utils
         }
 
         // bricks
-        if (block == Blocks.STONE_BRICKS)
+        if (block == Blocks.STONE_BRICKS || block == Blocks.DEEPSLATE_BRICKS)
         {
             level.setBlock(pos, Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 11);
             return true;
@@ -298,11 +304,12 @@ public class Utils
 
         if (block == Blocks.MOSSY_STONE_BRICKS)
         {
-            level.setBlock(pos, Blocks.STONE_BRICKS.defaultBlockState(), 11);
+            var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICKS : Blocks.DEEPSLATE_BRICKS;
+            level.setBlock(pos, resultBlock.defaultBlockState(), 11);
             return true;
         }
 
-        if (block == Blocks.STONE_BRICK_SLAB)
+        if (block == Blocks.STONE_BRICK_SLAB || block == Blocks.DEEPSLATE_BRICK_SLAB)
         {
             level.setBlock(pos, Blocks.MOSSY_STONE_BRICK_SLAB.defaultBlockState(), 11);
             return true;
@@ -310,7 +317,8 @@ public class Utils
 
         if (block == Blocks.MOSSY_STONE_BRICK_SLAB)
         {
-            level.setBlock(pos, Blocks.STONE_BRICK_SLAB.defaultBlockState(), 11);
+            var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICK_SLAB : Blocks.DEEPSLATE_BRICK_SLAB;
+            level.setBlock(pos, resultBlock.defaultBlockState(), 11);
             return true;
         }
 
