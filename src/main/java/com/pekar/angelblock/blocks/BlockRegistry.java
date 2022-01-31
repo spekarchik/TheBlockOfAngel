@@ -31,6 +31,8 @@ public class BlockRegistry
     public static final RegistryObject<Block> ANGEL_BLOCK = Main.BLOCKS.register("angel_block", com.pekar.angelblock.blocks.AngelBlock::new);
     public static final RegistryObject<Block> DEVIL_BLOCK = Main.BLOCKS.register("devil_block", DevilBlock::new);
 
+    public static final RegistryObject<Block> GREEN_DIAMOND_ORE = Main.BLOCKS.register("green_diamond_ore", GreenDiamondBlock::new);
+
     public static void initStatic()
     {
         // just to initialize static members

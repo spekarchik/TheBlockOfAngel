@@ -2,6 +2,7 @@
 	"replace": false,
 	"values":
 		[
-			"angelblock:cracked_obsidian_block"
+			"angelblock:cracked_obsidian_block",
+			"angelblock:green_diamond_ore"
 		]
 }
