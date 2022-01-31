@@ -29,16 +29,12 @@ public class LapisHoe extends ModHoe
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
-
         BlockState blockState = level.getBlockState(pos);
-        Block block = blockState.getBlock();
-
         BlockPos upPos = pos.above();
-        var upperBlock = level.getBlockState(upPos).getBlock();
 
         if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
-                && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
-                || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
+            && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
+            || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
         {
             level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
 
@@ -83,29 +79,9 @@ public class LapisHoe extends ModHoe
         }
     }
 
-    private boolean canBeFarmland(Block block)
-    {
-        return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH || block == Blocks.DIRT;
-    }
-
-    private boolean isFarmTypeBlock(Level level, BlockPos pos)
-    {
-        var block = level.getBlockState(pos).getBlock();
-        return block == Blocks.FARMLAND || canBeFarmland(block) || block instanceof SandBlock
-                || block == Blocks.GRAVEL || level.isWaterAt(pos);
-    }
-
     @Override
     public boolean isEnhancedTool()
     {
         return true;
-    }
-
-    private void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
-    {
-        if (blockState.getDestroySpeed(level, pos) != 0.0F)
-        {
-            damageItem(1, player);
-        }
     }
 }

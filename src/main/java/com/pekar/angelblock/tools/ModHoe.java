@@ -10,7 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ModHoe extends HoeItem implements IModTool
@@ -84,6 +87,26 @@ public class ModHoe extends HoeItem implements IModTool
     {
         ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
         return itemstack.isEmpty() || itemstack.getItem() == Items.TOTEM_OF_UNDYING;
+    }
+
+    protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
+    {
+        if (blockState.getDestroySpeed(level, pos) != 0.0F)
+        {
+            damageItem(1, player);
+        }
+    }
+
+    protected boolean canBeFarmland(Block block)
+    {
+        return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH || block == Blocks.DIRT;
+    }
+
+    protected final boolean isFarmTypeBlock(Level level, BlockPos pos)
+    {
+        var block = level.getBlockState(pos).getBlock();
+        return block == Blocks.FARMLAND || canBeFarmland(block) || block instanceof SandBlock
+                || block == Blocks.GRAVEL || level.isWaterAt(pos);
     }
 
     @Override
