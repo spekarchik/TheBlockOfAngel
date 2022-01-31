@@ -10,7 +10,6 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.InfestedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -35,61 +34,14 @@ public class LimonitePickaxe extends ModPickaxe
         BlockState blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
 
-        // stones
-        if (block == Blocks.COBBLESTONE || block == Blocks.STONE || block == Blocks.COBBLED_DEEPSLATE
-            || block == Blocks.DEEPSLATE)
-        {
-            level.setBlock(pos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 11);
-            return InteractionResult.CONSUME;
-        }
-
-        if (block == Blocks.MOSSY_COBBLESTONE)
-        {
-            var resultBlock = pos.getY() > 4 ? Blocks.COBBLESTONE : Blocks.COBBLED_DEEPSLATE;
-            level.setBlock(pos, resultBlock.defaultBlockState(), 11);
-            return InteractionResult.CONSUME;
-        }
-
         if (block instanceof InfestedBlock infestedBlock)
         {
             level.setBlock(pos, infestedBlock.getHostBlock().defaultBlockState(), 11);
             return InteractionResult.CONSUME;
         }
 
-        if (block == Blocks.COBBLESTONE_SLAB)
+        if (Utils.mossyTransforming(level, pos, block))
         {
-            level.setBlock(pos, Blocks.MOSSY_COBBLESTONE_SLAB.defaultBlockState(), 11);
-            return InteractionResult.CONSUME;
-        }
-
-        if (block == Blocks.MOSSY_COBBLESTONE_SLAB)
-        {
-            level.setBlock(pos, Blocks.COBBLESTONE_SLAB.defaultBlockState(), 11);
-            return InteractionResult.CONSUME;
-        }
-
-        // bricks
-        if (block == Blocks.STONE_BRICKS)
-        {
-            level.setBlock(pos, Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 11);
-            return InteractionResult.CONSUME;
-        }
-
-        if (block == Blocks.MOSSY_STONE_BRICKS)
-        {
-            level.setBlock(pos, Blocks.STONE_BRICKS.defaultBlockState(), 11);
-            return InteractionResult.CONSUME;
-        }
-
-        if (block == Blocks.STONE_BRICK_SLAB)
-        {
-            level.setBlock(pos, Blocks.MOSSY_STONE_BRICK_SLAB.defaultBlockState(), 11);
-            return InteractionResult.CONSUME;
-        }
-
-        if (block == Blocks.MOSSY_STONE_BRICK_SLAB)
-        {
-            level.setBlock(pos, Blocks.STONE_BRICK_SLAB.defaultBlockState(), 11);
             return InteractionResult.CONSUME;
         }
 
