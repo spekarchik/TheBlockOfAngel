@@ -5,6 +5,7 @@ import com.pekar.angelblock.network.Packet;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.potions.PotionUtils;
 import com.pekar.angelblock.tools.IModTool;
+import com.pekar.angelblock.tools.ModSword;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,25 +16,63 @@ public class ToolsModeChangePacket extends ClientToServerPacket
     protected void onReceive(ServerPlayer player)
     {
         boolean isAdvancedModeActive = player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get());
+        boolean isSwordExplosionModeActive = player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get());
+        boolean isSwordFireModeActive = player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get());
+
+        var heldItem = player.getMainHandItem().getItem();
+
+        if (heldItem instanceof IModTool tool)
+        {
+            if (tool.isEnhancedTool())
+            {
+                if (!isAdvancedModeActive)
+                {
+                    var effect = new MobEffectInstance(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get(),
+                            PotionUtils.DURATION_UNLIMITED, 0, false, true);
+                    player.addEffect(effect);
+                }
+                else
+                {
+                    player.removeEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get());
+                }
+                return;
+            }
+            else if (tool.isEnhancedWeapon())
+            {
+                var sword = (ModSword)tool;
+                if (isSwordExplosionModeActive)
+                {
+                    player.removeEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get());
+
+                    if (sword.hasFireMode())
+                    {
+                        var effect = new MobEffectInstance(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get(),
+                                PotionUtils.DURATION_UNLIMITED, 0, false, true);
+                        player.addEffect(effect);
+                    }
+                }
+                else if (isSwordFireModeActive)
+                {
+                    player.removeEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get());
+                }
+                else if (sword.hasExplosionMode())
+                {
+                    var effect = new MobEffectInstance(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get(),
+                            PotionUtils.DURATION_UNLIMITED, 0, false, true);
+                    player.addEffect(effect);
+                }
+                return;
+            }
+        }
 
         if (isAdvancedModeActive)
-        {
             player.removeEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get());
-        }
-        else
-        {
-            var heldItem = player.getMainHandItem().getItem();
-            if (!(heldItem instanceof IModTool)) return;
 
-            var tool = (IModTool) heldItem;
-            if (!tool.isEnhancedTool()) return;
+        if (isSwordExplosionModeActive)
+            player.removeEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get());
 
-            var effect = new MobEffectInstance(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get(),
-                    PotionUtils.DURATION_UNLIMITED, 0, false, true);
-
-            player.addEffect(effect);
-        }
-
+        if (isSwordFireModeActive)
+            player.removeEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get());
     }
 
     @Override

@@ -38,9 +38,21 @@ public class DiamithicSword extends ModSword
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get()))
         {
-            attacker.level.explode(attacker, target.getX() + 0.1, target.getY() + 1.5, target.getZ() + 0.1, 1.2f, true, Explosion.BlockInteraction.BREAK);
+            attacker.level.explode(attacker, target.getX() + 0.1, target.getY() + 1.5, target.getZ() + 0.1, 1.2f, false, Explosion.BlockInteraction.NONE);
         }
 
         return super.hurtEnemy(stack, target, attacker);
+    }
+
+    @Override
+    public boolean isEnhancedWeapon()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean hasExplosionMode()
+    {
+        return true;
     }
 }

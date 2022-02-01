@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.IPlantable;
 
-class ModSword extends SwordItem implements IModTool
+public class ModSword extends SwordItem implements IModTool
 {
     private static final int[] dx = { 3, -3, 2, 2, -2, -2, 0, 0, 1, 1, -1, -1 };
     private static final int[] dz = { 0, 0, 1, -1, 1, -1, 3, -3, 2, -2, 2, -2 };
@@ -143,11 +143,11 @@ class ModSword extends SwordItem implements IModTool
 
     protected void explode(Player player, Level level, BlockPos pos)
     {
-        level.explode(player, pos.getX(), pos.getY() + 1.5, pos.getZ(), 0.4f, true /*fire*/, Explosion.BlockInteraction.BREAK /*influences on explosion particles?*/);
-        level.explode(player, pos.getX() + 0.8, pos.getY() + 1.6, pos.getZ() + 0.8, 0.4f, Explosion.BlockInteraction.BREAK);
-        level.explode(player, pos.getX() + 0.8, pos.getY() + 1.7, pos.getZ() - 0.8, 0.4f, Explosion.BlockInteraction.BREAK);
-        level.explode(player, pos.getX() - 0.8, pos.getY() + 1.8, pos.getZ() + 0.8, 0.4f, Explosion.BlockInteraction.BREAK);
-        level.explode(player, pos.getX() - 0.8, pos.getY() + 1.5, pos.getZ() - 0.8, 0.4f, Explosion.BlockInteraction.BREAK);
+        level.explode(player, pos.getX(), pos.getY() + 1.5, pos.getZ(), 0.4f, false /*fire*/, Explosion.BlockInteraction.BREAK /*influences on explosion particles?*/);
+        level.explode(player, pos.getX() + 0.8, pos.getY() + 1.6, pos.getZ() + 0.8, 0.4f, Explosion.BlockInteraction.NONE);
+        level.explode(player, pos.getX() + 0.8, pos.getY() + 1.7, pos.getZ() - 0.8, 0.4f, Explosion.BlockInteraction.NONE);
+        level.explode(player, pos.getX() - 0.8, pos.getY() + 1.8, pos.getZ() + 0.8, 0.4f, Explosion.BlockInteraction.NONE);
+        level.explode(player, pos.getX() - 0.8, pos.getY() + 1.5, pos.getZ() - 0.8, 0.4f, Explosion.BlockInteraction.NONE);
     }
 
     protected final void plantCacti(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
@@ -227,6 +227,16 @@ class ModSword extends SwordItem implements IModTool
 
     @Override
     public boolean isEnhancedWeapon()
+    {
+        return false;
+    }
+
+    public boolean hasExplosionMode()
+    {
+        return false;
+    }
+
+    public boolean hasFireMode()
     {
         return false;
     }
