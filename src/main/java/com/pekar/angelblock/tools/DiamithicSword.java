@@ -29,8 +29,10 @@ public class DiamithicSword extends ModSword
         if (player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get()))
         {
             explode(player, level, pos);
+            return InteractionResult.CONSUME;
         }
-        return InteractionResult.SUCCESS;
+
+        return InteractionResult.PASS;
     }
 
     @Override
