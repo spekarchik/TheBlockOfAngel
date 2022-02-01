@@ -204,7 +204,7 @@ public class ModSword extends SwordItem implements IModTool
         BlockState state = level.getBlockState(pos);
         if (facing == Direction.UP && state.getBlock().canSustainPlant(state, level, pos, Direction.UP, (IPlantable) Blocks.CACTUS) && level.isEmptyBlock(pos.above()))
         {
-            level.setBlock(pos.above(), Blocks.CACTUS.defaultBlockState(), 0);
+            level.setBlock(pos.above(), Blocks.CACTUS.defaultBlockState(), 11);
 
             if (player instanceof ServerPlayer)
             {
@@ -237,6 +237,11 @@ public class ModSword extends SwordItem implements IModTool
     }
 
     public boolean hasFireMode()
+    {
+        return false;
+    }
+
+    public boolean hasWebMode()
     {
         return false;
     }
