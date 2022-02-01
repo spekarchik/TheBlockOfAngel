@@ -143,11 +143,11 @@ public class ModSword extends SwordItem implements IModTool
 
     protected void explode(Player player, Level level, BlockPos pos)
     {
-        level.explode(player, pos.getX(), pos.getY() + 1.5, pos.getZ(), 0.4f, false /*fire*/, Explosion.BlockInteraction.BREAK /*influences on explosion particles?*/);
-        level.explode(player, pos.getX() + 0.8, pos.getY() + 1.6, pos.getZ() + 0.8, 0.4f, Explosion.BlockInteraction.NONE);
-        level.explode(player, pos.getX() + 0.8, pos.getY() + 1.7, pos.getZ() - 0.8, 0.4f, Explosion.BlockInteraction.NONE);
-        level.explode(player, pos.getX() - 0.8, pos.getY() + 1.8, pos.getZ() + 0.8, 0.4f, Explosion.BlockInteraction.NONE);
-        level.explode(player, pos.getX() - 0.8, pos.getY() + 1.5, pos.getZ() - 0.8, 0.4f, Explosion.BlockInteraction.NONE);
+        level.explode(player, pos.getX(), pos.getY() + 0.5, pos.getZ(), 0.8f, false /*fire*/, Explosion.BlockInteraction.NONE /*influences on explosion particles?*/);
+        level.explode(player, pos.getX() + 0.8, pos.getY() + 0.2, pos.getZ() + 0.8, 0.8f, Explosion.BlockInteraction.NONE);
+        level.explode(player, pos.getX() + 0.8, pos.getY() + 0.7, pos.getZ() - 0.8, 0.8f, Explosion.BlockInteraction.NONE);
+        level.explode(player, pos.getX() - 0.8, pos.getY() + 0.4, pos.getZ() + 0.8, 0.8f, Explosion.BlockInteraction.NONE);
+        level.explode(player, pos.getX() - 0.8, pos.getY() + 1.5, pos.getZ() - 0.8, 0.8f, Explosion.BlockInteraction.NONE);
     }
 
     protected final void plantCacti(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
