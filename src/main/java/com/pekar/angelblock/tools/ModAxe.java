@@ -65,4 +65,10 @@ public class ModAxe extends AxeItem implements IModTool
     {
         return false;
     }
+
+    @Override
+    public boolean isEnhancedWeapon()
+    {
+        return false;
+    }
 }

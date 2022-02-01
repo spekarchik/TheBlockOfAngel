@@ -115,6 +115,14 @@ public class ToolRegistry
             () -> new AncientRod(Tiers.WOOD, 0, -3F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
+    // Swords
+    public static final RegistryObject<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",
+            () -> new ModSword(ToolMaterials.DIAMITHIC, 3, -2.4F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+
+    public static final RegistryObject<ModSword> DIAMITHIC_SWORD = Main.ITEMS.register("diamithic_sword",
+            () -> new DiamithicSword(ToolMaterials.DIAMITHIC, 3, -2.4F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
 //    public static final Item DIAMITHIC_PRIMARY_SWORD = new ModSword("diamithic_primary_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item DIAMITHIC_SWORD = new DiamithicSword("diamithic_sword", ToolMaterials.DIAMITHIC);

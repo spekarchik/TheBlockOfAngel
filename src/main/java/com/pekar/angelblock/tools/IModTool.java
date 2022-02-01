@@ -7,6 +7,8 @@ public interface IModTool
 {
     boolean isEnhancedTool();
 
+    boolean isEnhancedWeapon();
+
     default void damageItem(int amount, LivingEntity livingEntity)
     {
         var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);

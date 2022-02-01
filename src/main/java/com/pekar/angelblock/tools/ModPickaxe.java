@@ -83,4 +83,10 @@ public class ModPickaxe extends PickaxeItem implements IModTool
     {
         return false;
     }
+
+    @Override
+    public boolean isEnhancedWeapon()
+    {
+        return false;
+    }
 }
