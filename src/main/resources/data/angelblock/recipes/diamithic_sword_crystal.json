@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "angelblock:diamithic_sword"
+    },
+    "result": "angelblock:strength_pearl",
+    "group": "tools",
+    "count": 1
+}

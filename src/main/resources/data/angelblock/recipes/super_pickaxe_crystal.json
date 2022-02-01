@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "angelblock:super_pickaxe"
+    },
+    "result": "angelblock:super_crystal",
+    "group": "tools",
+    "count": 1
+}

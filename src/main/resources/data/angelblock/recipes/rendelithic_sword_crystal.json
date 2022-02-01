@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "angelblock:rendelithic_sword"
+    },
+    "result": "angelblock:flame_stone",
+    "group": "tools",
+    "count": 1
+}
