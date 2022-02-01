@@ -1,0 +1,40 @@
+package com.pekar.angelblock.tools;
+
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class LimonitePrimarySword extends ModSword
+{
+    public LimonitePrimarySword(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    {
+        super(material, attackDamage, attackSpeed, properties);
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    {
+        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, true, true));
+        return super.hurtEnemy(stack, target, attacker);
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
+    {
+        var block = blockState.getBlock();
+        if (block == Blocks.COBWEB)
+        {
+            return 60.0F;
+        }
+        else if (block == Blocks.CACTUS)
+        {
+            return 40.0F;
+        }
+
+        return super.getDestroySpeed(itemStack, blockState);
+    }
+}

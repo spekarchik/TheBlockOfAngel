@@ -117,7 +117,7 @@ public class ToolRegistry
 
     // Swords
     public static final RegistryObject<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",
-            () -> new ModSword(ToolMaterials.DIAMITHIC, 3, -2.4F,
+            () -> new DiamithicPrimarySword(ToolMaterials.DIAMITHIC, 3, -2.4F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> DIAMITHIC_SWORD = Main.ITEMS.register("diamithic_sword",
@@ -125,7 +125,7 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> RENDELITHIC_PRIMARY_SWORD = Main.ITEMS.register("rendelithic_primary_sword",
-            () -> new ModSword(ToolMaterials.RENDELITHIC, 3, -2.4F,
+            () -> new RendelithicPrimarySword(ToolMaterials.RENDELITHIC, 3, -2.4F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> RENDELITHIC_SWORD = Main.ITEMS.register("rendelithic_sword",
@@ -133,7 +133,7 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> LIMONITE_PRIMARY_SWORD = Main.ITEMS.register("limonite_primary_sword",
-            () -> new ModSword(ToolMaterials.LIMONITE, 3, -2.4F,
+            () -> new LimonitePrimarySword(ToolMaterials.LIMONITE, 3, -2.4F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> LIMONITE_SWORD = Main.ITEMS.register("limonite_sword",
@@ -141,7 +141,7 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> SUPER_PRIMARY_SWORD = Main.ITEMS.register("super_primary_sword",
-            () -> new ModSword(ToolMaterials.SUPER, 3, -2.4F,
+            () -> new SuperPrimarySword(ToolMaterials.SUPER, 3, -2.4F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> SUPER_SWORD = Main.ITEMS.register("super_sword",
