@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:rendelithic_primary_pickaxe"
+    },
+    "addition": {
+        "item": "angelblock:flame_stone"
+    },
+    "result": {
+        "item": "angelblock:rendelithic_pickaxe"
+    }
+}

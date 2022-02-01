@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:super_primary_shovel"
+    },
+    "addition": {
+        "item": "angelblock:super_crystal"
+    },
+    "result": {
+        "item": "angelblock:super_shovel"
+    }
+}

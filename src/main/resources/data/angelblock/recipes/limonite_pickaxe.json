@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:limonite_primary_pickaxe"
+    },
+    "addition": {
+        "item": "angelblock:bios_diamond"
+    },
+    "result": {
+        "item": "angelblock:limonite_pickaxe"
+    }
+}
