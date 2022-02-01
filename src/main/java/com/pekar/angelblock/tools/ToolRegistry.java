@@ -140,19 +140,13 @@ public class ToolRegistry
             () -> new LimoniteSword(ToolMaterials.LIMONITE, 3, -2.4F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
-//    public static final Item DIAMITHIC_PRIMARY_SWORD = new ModSword("diamithic_primary_sword", ToolMaterials.DIAMITHIC);
-//    public static final Item DIAMITHIC_SWORD = new DiamithicSword("diamithic_sword", ToolMaterials.DIAMITHIC);
-//    public static final Item LIMONITE_PRIMARY_SWORD = new ModSword("limonite_primary_sword", ToolMaterials.LIMONITE);
-//    public static final Item LIMONITE_SWORD = new LimoniteSword("limonite_sword", ToolMaterials.LIMONITE);
-//    public static final Item RENDELITHIC_PRIMARY_SWORD = new ModSword("rendelithic_primary_sword", ToolMaterials.RENDELITHIC);
-//    public static final Item RENDELITHIC_SWORD = new RendelithicSword("rendelithic_sword", ToolMaterials.RENDELITHIC);
-//    public static final Item SUPER_PRIMARY_SWORD = new ModSword("super_primary_sword", ToolMaterials.SUPER);
-//    public static final Item SUPER_SWORD = new SuperSword("super_sword", ToolMaterials.SUPER);
-//
-//    public static final Item LAPIS_PRIMARY_HOE = new ModHoe("lapis_primary_hoe", ToolMaterials.LAPIS);
-//    public static final Item LAPIS_HOE = new LapisHoe("lapis_hoe", ToolMaterials.LAPIS);
-//
-//    public static final Item ANCIENT_ROD = new AncientRod("ancient_rod", Item.ToolMaterial.WOOD);
+    public static final RegistryObject<ModSword> SUPER_PRIMARY_SWORD = Main.ITEMS.register("super_primary_sword",
+            () -> new ModSword(ToolMaterials.SUPER, 3, -2.4F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+
+    public static final RegistryObject<ModSword> SUPER_SWORD = Main.ITEMS.register("super_sword",
+            () -> new SuperSword(ToolMaterials.SUPER, 3, -2.4F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     // + морской кристалл - Marine Crystal - древний страж 50%
     // + огненный камень - Flame Stone - сундуки крепости 10%
