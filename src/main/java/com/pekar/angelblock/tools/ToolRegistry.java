@@ -124,6 +124,14 @@ public class ToolRegistry
             () -> new DiamithicSword(ToolMaterials.DIAMITHIC, 3, -2.4F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
+    public static final RegistryObject<ModSword> RENDELITHIC_PRIMARY_SWORD = Main.ITEMS.register("rendelithic_primary_sword",
+            () -> new ModSword(ToolMaterials.RENDELITHIC, 3, -2.4F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+
+    public static final RegistryObject<ModSword> RENDELITHIC_SWORD = Main.ITEMS.register("rendelithic_sword",
+            () -> new RendelithicSword(ToolMaterials.RENDELITHIC, 3, -2.4F,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+
 //    public static final Item DIAMITHIC_PRIMARY_SWORD = new ModSword("diamithic_primary_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item DIAMITHIC_SWORD = new DiamithicSword("diamithic_sword", ToolMaterials.DIAMITHIC);
 //    public static final Item LIMONITE_PRIMARY_SWORD = new ModSword("limonite_primary_sword", ToolMaterials.LIMONITE);

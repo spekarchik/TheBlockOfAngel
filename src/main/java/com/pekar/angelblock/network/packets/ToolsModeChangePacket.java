@@ -61,6 +61,12 @@ public class ToolsModeChangePacket extends ClientToServerPacket
                             PotionUtils.DURATION_UNLIMITED, 0, false, true);
                     player.addEffect(effect);
                 }
+                else if (sword.hasFireMode())
+                {
+                    var effect = new MobEffectInstance(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get(),
+                            PotionUtils.DURATION_UNLIMITED, 0, false, true);
+                    player.addEffect(effect);
+                }
                 return;
             }
         }
