@@ -19,6 +19,9 @@ public class PotionRegistry
     public static final RegistryObject<MobEffect> SWORD_EXPLOSION_MODE_EFFECT = Main.MOB_EFFECTS.register("sword_explosion_mode_effect",
             () -> new SwordExplosionModeMobEffect());
 
+    public static final RegistryObject<MobEffect> SWORD_WEB_MODE_EFFECT = Main.MOB_EFFECTS.register("sword_web_mode_effect",
+            () -> new SwordWebModeMobEffect());
+
     public static final RegistryObject<MobEffect> TOOL_ADVANCED_MODE_EFFECT = Main.MOB_EFFECTS.register("tool_advanced_mode_effect",
         () -> new ToolAdvancedModeMobEffect());
 
