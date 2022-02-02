@@ -5,6 +5,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
@@ -40,6 +41,10 @@ public class ModArmorMaterial implements ArmorMaterial
     protected static final ArmorMaterial SUPER = new ModArmorMaterial("angelblock:super_armor",
             43, new int[] { 3, 6, 9, 3 }, 19, SoundEvents.ARMOR_EQUIP_DIAMOND,
             4F, 0.2F, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
+
+    protected static final ArmorMaterial FLYING = new ModArmorMaterial("angelblock:flying_armor",
+            3, new int[] { 1, 1, 1, 1 }, 30, SoundEvents.ARMOR_EQUIP_ELYTRA,
+            0F, 0F, () -> Ingredient.of(Items.PHANTOM_MEMBRANE));
 
     public ModArmorMaterial(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue,
                             SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient)

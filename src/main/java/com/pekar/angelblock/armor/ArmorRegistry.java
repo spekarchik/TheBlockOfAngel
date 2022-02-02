@@ -55,6 +55,15 @@ public class ArmorRegistry
     public static final RegistryObject<ArmorItem> SUPER_BOOTS = ModArmor.register("super_boots", () ->
             new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.FEET));
 
+    public static final RegistryObject<ArmorItem> FLYING_HELMET = ModArmor.register("flying_helmet", () ->
+            new ModArmor(ModArmorMaterial.FLYING, EquipmentSlot.HEAD));
+    public static final RegistryObject<ArmorItem> FLYING_CHESTPLATE = ModArmor.register("flying_chestplate", () ->
+            new ModArmor(ModArmorMaterial.FLYING, EquipmentSlot.CHEST));
+    public static final RegistryObject<ArmorItem> FLYING_LEGGINGS = ModArmor.register("flying_leggings", () ->
+            new ModArmor(ModArmorMaterial.FLYING, EquipmentSlot.LEGS));
+    public static final RegistryObject<ArmorItem> FLYING_BOOTS = ModArmor.register("flying_boots", () ->
+            new ModArmor(ModArmorMaterial.FLYING, EquipmentSlot.FEET));
+
     public static void initStatic()
     {
         // just to initialize static members
