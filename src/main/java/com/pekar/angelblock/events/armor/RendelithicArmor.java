@@ -26,7 +26,7 @@ public class RendelithicArmor extends Armor
         levitationEffect = new LevitationSwitchingEffect(player, this, 1, true);
 
         JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, 5);
-        SpeedArmorEffect speedEffect = new SpeedArmorEffect(player, this);
+        SpeedSwitchingEffect speedEffect = new SpeedSwitchingEffect(player, this, 0);
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
     }

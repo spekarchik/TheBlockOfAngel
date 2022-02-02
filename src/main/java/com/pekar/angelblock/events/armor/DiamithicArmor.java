@@ -139,7 +139,7 @@ public class DiamithicArmor extends Armor
             nightVisionEffect.trySwitch();
         }
 
-        if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
+        if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
             jumpBoostEffect.trySwitch();
         }

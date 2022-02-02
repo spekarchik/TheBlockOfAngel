@@ -4,11 +4,11 @@ import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class SpeedArmorEffect extends SwitchingArmorEffect
+public class SpeedSwitchingEffect extends SwitchingArmorEffect
 {
-    public SpeedArmorEffect(IPlayer player, IArmor armor)
+    public SpeedSwitchingEffect(IPlayer player, IArmor armor, int amplifier)
     {
-        super(player, armor, MobEffects.MOVEMENT_SPEED, 0);
+        super(player, armor, MobEffects.MOVEMENT_SPEED, amplifier);
     }
 
     @Override

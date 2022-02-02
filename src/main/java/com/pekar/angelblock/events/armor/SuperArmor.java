@@ -54,7 +54,7 @@ public class SuperArmor extends Armor
         dolphinsGrace = new DolphinsGraceEffect(player, this);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);
-        var speedEffect = new SpeedArmorEffect(player, this);
+        var speedEffect = new SpeedSwitchingEffect(player, this, 1);
         var strengthEffect = new StrengthSwitchingEffect(player, this, 1);
         var waterBreathingEffect = new WaterBreathSwitchingEffect(player, this);
         var hasteEffect = new HasteSwitchingEffect(player, this, 1);
