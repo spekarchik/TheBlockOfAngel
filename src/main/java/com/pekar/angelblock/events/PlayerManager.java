@@ -76,7 +76,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         IPlayer player = players.get(entity.getName().getContents());
         if (player == null) return;
 
-        player.sendMessage("Player was cloned.");
+//        player.sendMessage("Player was cloned.");
 
         if (entity instanceof net.minecraft.world.entity.player.Player)
         {
