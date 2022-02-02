@@ -9,13 +9,13 @@ public class ArmorRegistry
     public static final String FLYING_SUFFIX = "_flying";
 
     public static final RegistryObject<ArmorItem> RENDELITHIC_HELMET = ModArmor.register("rendelithic_helmet", () ->
-            new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.HEAD));
+            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> RENDELITHIC_CHESTPLATE = ModArmor.register("rendelithic_chestplate", () ->
-            new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.CHEST));
+            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.CHEST));
     public static final RegistryObject<ArmorItem> RENDELITHIC_LEGGINGS = ModArmor.register("rendelithic_leggings", () ->
-            new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.LEGS));
+            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.LEGS));
     public static final RegistryObject<ArmorItem> RENDELITHIC_BOOTS = ModArmor.register("rendelithic_boots", () ->
-            new ModArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.FEET));
+            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.FEET));
 
     public static final RegistryObject<ArmorItem> LAPIS_HELMET = ModArmor.register("lapis_helmet", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.HEAD));
@@ -45,24 +45,24 @@ public class ArmorRegistry
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.FEET));
 
     public static final RegistryObject<ArmorItem> SUPER_HELMET = ModArmor.register("super_helmet", () ->
-            new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.HEAD));
+            new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> SUPER_CHESTPLATE = ModArmor.register("super_chestplate", () ->
-            new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.CHEST));
+            new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.CHEST));
     public static final RegistryObject<ArmorItem> SUPER_CHESTPLATE_FLYING = ModArmor.register("super_chestplate" + FLYING_SUFFIX, () ->
-            new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.CHEST));
+            new SuperArmorFlying(ModArmorMaterial.SUPER, EquipmentSlot.CHEST));
     public static final RegistryObject<ArmorItem> SUPER_LEGGINGS = ModArmor.register("super_leggings", () ->
-            new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.LEGS));
+            new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.LEGS));
     public static final RegistryObject<ArmorItem> SUPER_BOOTS = ModArmor.register("super_boots", () ->
-            new ModArmor(ModArmorMaterial.SUPER, EquipmentSlot.FEET));
+            new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.FEET));
 
     public static final RegistryObject<ArmorItem> FLYING_HELMET = ModArmor.register("flying_helmet", () ->
-            new ModArmor(ModArmorMaterial.FLYING, EquipmentSlot.HEAD));
+            new FlyingArmor(ModArmorMaterial.FLYING, EquipmentSlot.HEAD));
     public static final RegistryObject<ArmorItem> FLYING_CHESTPLATE = ModArmor.register("flying_chestplate", () ->
-            new ModArmor(ModArmorMaterial.FLYING, EquipmentSlot.CHEST));
+            new FlyingArmor(ModArmorMaterial.FLYING, EquipmentSlot.CHEST));
     public static final RegistryObject<ArmorItem> FLYING_LEGGINGS = ModArmor.register("flying_leggings", () ->
-            new ModArmor(ModArmorMaterial.FLYING, EquipmentSlot.LEGS));
+            new FlyingArmor(ModArmorMaterial.FLYING, EquipmentSlot.LEGS));
     public static final RegistryObject<ArmorItem> FLYING_BOOTS = ModArmor.register("flying_boots", () ->
-            new ModArmor(ModArmorMaterial.FLYING, EquipmentSlot.FEET));
+            new FlyingArmor(ModArmorMaterial.FLYING, EquipmentSlot.FEET));
 
     public static void initStatic()
     {
