@@ -17,6 +17,5 @@ public interface IArmorEffect
     boolean trySwitchOn();
     void invertSwitchState();
     void updateSwitchState();
-    void setSwitchState(boolean isOn);
     MobEffect getEffect();
 }
