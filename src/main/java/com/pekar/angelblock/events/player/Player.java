@@ -167,6 +167,7 @@ public class Player implements IPlayer
         allArmor.add(new LapisArmor(this));
         allArmor.add(new SuperArmor(this));
         allArmor.add(new LimoniteArmor(this));
+        allArmor.add(new FlyingArmor(this));
         // TODO
     }
 }
