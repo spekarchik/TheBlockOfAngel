@@ -72,8 +72,7 @@ abstract class ArmorEffect implements IArmorEffect
         isOn = !isOn;
     }
 
-    @Override
-    public final void setSwitchState(boolean isOn)
+    protected final void setSwitchState(boolean isOn)
     {
         this.isOn = isOn;
     }

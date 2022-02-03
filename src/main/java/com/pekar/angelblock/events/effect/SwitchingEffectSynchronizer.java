@@ -152,8 +152,7 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
         updateDependentSwitchStates();
     }
 
-    @Override
-    public void setSwitchState(boolean isOn)
+    protected void setSwitchState(boolean isOn)
     {
         masterEffect.setSwitchState(isOn);
         updateDependentSwitchStates();
