@@ -9,11 +9,6 @@ public class GlowingArmorEffect extends SwitchingArmorEffect
     public GlowingArmorEffect(IPlayer player, IArmor armor)
     {
         super(player, armor, MobEffects.GLOWING, 0);
-    }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        availableOnFullArmorSet();
     }
 }

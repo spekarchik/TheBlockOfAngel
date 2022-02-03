@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.monster.*;
@@ -47,10 +48,10 @@ public class SuperArmor extends Armor
 
         luckEffect = new LuckArmorEffect(player, this);
         regenerationEffect = new RegenerationArmorEffect(player, this, 1, REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessArmorEffect(player, this, 4, REGENERATION_EFFECT_DURATION, true);
+        slownessEffect = new SlownessArmorEffect(player, this, 4, REGENERATION_EFFECT_DURATION).availableOnAnyArmorElement();
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_EFFECT_DURATION);
-        levitationEffect = new LevitationSwitchingEffect(player, this, 3, true);
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
+        levitationEffect = new LevitationSwitchingEffect(player, this, 3).availableOnFullArmorSet();
         dolphinsGrace = new DolphinsGraceEffect(player, this);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);

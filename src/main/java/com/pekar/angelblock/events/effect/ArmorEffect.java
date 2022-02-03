@@ -3,6 +3,9 @@ package com.pekar.angelblock.events.effect;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EquipmentSlot;
+
+import java.util.function.BiPredicate;
 
 abstract class ArmorEffect implements IArmorEffect
 {
@@ -12,6 +15,7 @@ abstract class ArmorEffect implements IArmorEffect
     protected boolean isOn;
     protected boolean isAvailable;
     protected int defaultAmplifier;
+    private BiPredicate<IPlayer, IArmor> availabilityPredicate = (p, a) -> false;
 
     protected ArmorEffect(IPlayer player, IArmor armor, MobEffect effectType, int defaultAmplifier)
     {
@@ -42,7 +46,7 @@ abstract class ArmorEffect implements IArmorEffect
     @Override
     public final boolean updateEffectAvailability()
     {
-        return isAvailable = isAvailable();
+        return isAvailable = availabilityPredicate.test(player, armor);
     }
 
     @Override
@@ -136,6 +140,101 @@ abstract class ArmorEffect implements IArmorEffect
         return effectType;
     }
 
+    @Override
+    public final IArmorEffect setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
+    {
+        availabilityPredicate = predicate;
+        return this;
+    }
+
+    @Override
+    public final IArmorEffect availableOnFullArmorSet()
+    {
+        availabilityPredicate = (player1, armor1) ->
+                player1.isFullArmorSetPutOn(armor1.getArmorElementNames());
+
+        return this;
+    }
+
+    @Override
+    public final IArmorEffect availableOnAnyArmorElement()
+    {
+        availabilityPredicate = (player1, armor1) ->
+                player1.isAnyArmorElementPutOn(armor1.getArmorElementNames());
+
+        return this;
+    }
+
+    @Override
+    public final IArmorEffect availableOnBootsAndLeggings()
+    {
+        availabilityPredicate = (player1, armor1) ->
+                player1.isAllArmorElementsPutOn(armor1.getBootsName(), armor1.getLeggingsName());
+
+        return this;
+    }
+
+    @Override
+    public final IArmorEffect availableOnHelmetAndChestplate()
+    {
+        availabilityPredicate = (player1, armor1) ->
+                player1.isAllArmorElementsPutOn(armor1.getHelmetName(), armor1.getChestPlateName());
+
+        return this;
+    }
+
+    @Override
+    public final IArmorEffect availableIfSlotSet(EquipmentSlot slot)
+    {
+        availabilityPredicate = (player1, armor1) ->
+        {
+            var requiredElement = switch (slot)
+                    {
+                        case HEAD -> armor1.getHelmetName();
+                        case CHEST -> armor1.getChestPlateName();
+                        case LEGS -> armor1.getLeggingsName();
+                        case FEET -> armor1.getBootsName();
+                        default -> null;
+                    };
+
+            return player1.isArmorElementPutOn(requiredElement);
+        };
+
+        return this;
+    }
+
+    @Override
+    public final IArmorEffect availableIfSlotsSet(EquipmentSlot... slots)
+    {
+        availabilityPredicate = (player1, armor1) ->
+        {
+            for (var slot : slots)
+            {
+                switch (slot)
+                {
+                    case HEAD:
+                        if (!player1.isArmorElementPutOn(armor1.getHelmetName())) return false;
+                        break;
+                    case CHEST:
+                        if (!player1.isArmorElementPutOn(armor1.getChestPlateName())) return false;
+                        break;
+                    case LEGS:
+                        if (!player1.isArmorElementPutOn(armor1.getLeggingsName())) return false;
+                        break;
+                    case FEET:
+                        if (!player1.isArmorElementPutOn(armor1.getBootsName())) return false;
+                        break;
+                    default:
+                };
+
+            }
+
+            return true;
+        };
+
+        return this;
+    }
+
     protected boolean canClearEffect()
     {
         return true;
@@ -145,6 +244,4 @@ abstract class ArmorEffect implements IArmorEffect
     {
         return true;
     }
-
-    protected abstract boolean isAvailable();
 }

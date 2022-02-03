@@ -1,9 +1,13 @@
 package com.pekar.angelblock.events.effect;
 
+import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class SwitchingEffectSynchronizer implements IArmorEffect
 {
@@ -174,6 +178,48 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
     {
         dependentInvertedEffects.add(effect);
         effect.setSwitchState(!masterEffect.isOn);
+    }
+
+    @Override
+    public IArmorEffect setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnFullArmorSet()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnAnyArmorElement()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnBootsAndLeggings()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnHelmetAndChestplate()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableIfSlotSet(EquipmentSlot slot)
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableIfSlotsSet(EquipmentSlot... slot)
+    {
+        return this;
     }
 
     private void switchDependentEffects()

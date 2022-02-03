@@ -9,11 +9,6 @@ public class WaterBreathSwitchingEffect extends SwitchingArmorEffect
     public WaterBreathSwitchingEffect(IPlayer player, IArmor armor)
     {
         super(player, armor, MobEffects.WATER_BREATHING, 0);
-    }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        availableOnFullArmorSet();
     }
 }

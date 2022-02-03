@@ -22,10 +22,4 @@ public class WitherEffect extends TemporaryArmorEffect
     {
         return false;
     }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isAnyArmorElementPutOn(armor.getArmorElementNames());
-    }
 }

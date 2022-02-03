@@ -17,10 +17,4 @@ public class NauseaTemporaryEffect extends TemporaryArmorEffect
         if (player.isEffectActive(effectType)) return false;
         return super.trySwitch(amplifier);
     }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isAnyArmorElementPutOn(armor.getArmorElementNames());
-    }
 }

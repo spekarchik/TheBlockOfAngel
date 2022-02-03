@@ -20,11 +20,13 @@ public class FlyingArmor extends Armor
     {
         super(player);
 
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
-        levitationEffect = new LevitationTemporaryEffect(player, this, 1, 200);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnFullArmorSet();
+        levitationEffect = new LevitationTemporaryEffect(player, this, 1, 200).availableOnFullArmorSet();
 
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
+        speedEffect.availableOnFullArmorSet();
         var jumpBoostEffect = new JumpBoostArmorEffect(player, this, 24);
+        jumpBoostEffect.availableOnFullArmorSet();
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
         this.jumpBoostEffect.addDependentEffect(speedEffect);
     }

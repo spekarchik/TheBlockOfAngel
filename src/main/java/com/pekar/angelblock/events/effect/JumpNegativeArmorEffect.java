@@ -26,10 +26,4 @@ public class JumpNegativeArmorEffect extends TemporaryArmorEffect
     {
         return false;
     }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames());
-    }
 }

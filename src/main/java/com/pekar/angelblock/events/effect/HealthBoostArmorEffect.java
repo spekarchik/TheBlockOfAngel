@@ -9,12 +9,7 @@ public class HealthBoostArmorEffect extends PermanentArmorEffect
     public HealthBoostArmorEffect(IPlayer player, IArmor armor, int amplifier)
     {
         super(player, armor, MobEffects.HEALTH_BOOST, amplifier);
-    }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        availableOnFullArmorSet();
     }
 
     @Override

@@ -9,11 +9,6 @@ public class WaterBreathingEffect extends PermanentArmorEffect
     public WaterBreathingEffect(IPlayer player, IArmor armor)
     {
         super(player, armor, MobEffects.WATER_BREATHING, 0);
-    }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        availableOnFullArmorSet();
     }
 }

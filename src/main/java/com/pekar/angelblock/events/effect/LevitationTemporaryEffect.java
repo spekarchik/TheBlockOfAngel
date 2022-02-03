@@ -11,9 +11,4 @@ public class LevitationTemporaryEffect extends TemporaryArmorEffect
         super(player, armor, MobEffects.LEVITATION, defaultAmplifier, duration);
     }
 
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames());
-    }
 }

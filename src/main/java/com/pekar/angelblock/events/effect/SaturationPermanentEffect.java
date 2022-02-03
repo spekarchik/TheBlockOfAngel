@@ -6,14 +6,8 @@ import net.minecraft.world.effect.MobEffects;
 
 public class SaturationPermanentEffect extends PermanentArmorEffect
 {
-    public SaturationPermanentEffect(IPlayer player, IArmor armor)
+    public SaturationPermanentEffect(IPlayer player, IArmor armor, int amplifier)
     {
-        super(player, armor, MobEffects.SATURATION, 0);
-    }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        super(player, armor, MobEffects.SATURATION, amplifier);
     }
 }

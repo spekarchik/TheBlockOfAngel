@@ -9,11 +9,6 @@ public class RegenerationArmorEffect extends TemporaryArmorEffect
     public RegenerationArmorEffect(IPlayer player, IArmor armor, int amplifier, int duration)
     {
         super(player, armor, MobEffects.REGENERATION, amplifier, duration);
-    }
-
-    @Override
-    protected boolean isAvailable()
-    {
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        availableOnFullArmorSet();
     }
 }
