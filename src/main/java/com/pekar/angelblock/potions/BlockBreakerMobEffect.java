@@ -60,5 +60,10 @@ public class BlockBreakerMobEffect extends MobEffect
             level.setBlock(pos, BlockRegistry.GUNPOWDER_BLOCK.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
+        else if (block == Blocks.CRYING_OBSIDIAN)
+        {
+            level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_BLOCK.get().defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
     }
 }

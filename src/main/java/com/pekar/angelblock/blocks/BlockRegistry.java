@@ -32,6 +32,9 @@ public class BlockRegistry
     public static final RegistryObject<Block> GUNPOWDER_BLOCK = Main.BLOCKS.register("gunpowder_block", () ->
             new FallingBlock(BlockBehaviour.Properties.of(Material.SAND).sound(SoundType.SNOW).strength(0.2F)));
 
+    public static final RegistryObject<Block> DESTROYING_DIAMOND_BLOCK = Main.BLOCKS.register("destroying_diamond_block", () ->
+            new Block(BlockBehaviour.Properties.of(Material.AIR)));
+
     public static final RegistryObject<Block> ANGEL_BLOCK = Main.BLOCKS.register("angel_block", com.pekar.angelblock.blocks.AngelBlock::new);
     public static final RegistryObject<Block> DEVIL_BLOCK = Main.BLOCKS.register("devil_block", DevilBlock::new);
 
