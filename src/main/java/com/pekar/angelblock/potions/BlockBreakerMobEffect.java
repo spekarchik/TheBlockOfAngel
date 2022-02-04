@@ -55,5 +55,10 @@ public class BlockBreakerMobEffect extends MobEffect
         {
             level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);
         }
+        else if (block == Blocks.TUFF)
+        {
+            level.setBlock(pos, BlockRegistry.GUNPOWDER_BLOCK.get().defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
     }
 }
