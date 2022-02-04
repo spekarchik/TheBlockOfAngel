@@ -29,15 +29,18 @@ public class BlockRegistry
     public static final RegistryObject<Block> SUPER_MATERIAL_BLOCK = Main.BLOCKS.register("super_material_block", () ->
             new Block(BlockBehaviour.Properties.of(Material.STONE).strength(0.7f, 9f)));
 
-    public static final RegistryObject<Block> GUNPOWDER_BLOCK = Main.BLOCKS.register("gunpowder_block", GunpowderBlock::new);
-
-    public static final RegistryObject<Block> DESTROYING_DIAMOND_BLOCK = Main.BLOCKS.register("destroying_diamond_block", () ->
-            new Block(BlockBehaviour.Properties.of(Material.AIR)));
-
     public static final RegistryObject<Block> ANGEL_BLOCK = Main.BLOCKS.register("angel_block", AngelBlock::new);
     public static final RegistryObject<Block> DEVIL_BLOCK = Main.BLOCKS.register("devil_block", DevilBlock::new);
 
     public static final RegistryObject<Block> GREEN_DIAMOND_ORE = Main.BLOCKS.register("green_diamond_ore", GreenDiamondBlock::new);
+    public static final RegistryObject<Block> GUNPOWDER_BLOCK = Main.BLOCKS.register("gunpowder_block", GunpowderBlock::new);
+
+    // Internal blocks. Material should be AIR not to add it to creative tab
+    public static final RegistryObject<Block> DESTROYING_DIAMOND_BLOCK = Main.BLOCKS.register("destroying_diamond_block", () ->
+            new Block(BlockBehaviour.Properties.of(Material.AIR)));
+
+    public static final RegistryObject<Block> DESTROYING_DIAMOND_POWDER_BLOCK = Main.BLOCKS.register("destroying_diamond_powder_block", () ->
+            new Block(BlockBehaviour.Properties.of(Material.AIR)));
 
     public static void initStatic()
     {

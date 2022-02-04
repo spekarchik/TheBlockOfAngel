@@ -48,7 +48,7 @@ public class BlockBreakerMobEffect extends MobEffect
 
         if (block == Blocks.DIAMOND_BLOCK)
         {
-            level.setBlock(pos, BlockRegistry.DIAMOND_POWDER_BLOCK.get().defaultBlockState(), 0);
+            level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_POWDER_BLOCK.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
         else if (block == Blocks.LAVA)
