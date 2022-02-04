@@ -51,6 +51,19 @@ public class BlockBreakerMobEffect extends MobEffect
             level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_POWDER_BLOCK.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
+        else if (block == Blocks.COBBLESTONE)
+        {
+            level.setBlock(pos, Blocks.GRAVEL.defaultBlockState(), 11);
+        }
+        else if (block == Blocks.STONE)
+        {
+            level.setBlock(pos, Blocks.SAND.defaultBlockState(), 11);
+        }
+        else if (block == Blocks.WHITE_WOOL)
+        {
+            level.setBlock(pos, BlockRegistry.DESTROYING_WHITE_WOOL.get().defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
         else if (block == Blocks.LAVA)
         {
             level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);
@@ -70,19 +83,14 @@ public class BlockBreakerMobEffect extends MobEffect
             level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_SHARD_BLOCK.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
-        else if (block == Blocks.GRANITE)
-        {
-            level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), 11);
-        }
-        else if (block == Blocks.WHITE_WOOL)
-        {
-            level.setBlock(pos, BlockRegistry.DESTROYING_WHITE_WOOL.get().defaultBlockState(), 0);
-            level.destroyBlock(pos, true, source, 1);
-        }
         else if (block == Blocks.GLOWSTONE)
         {
             level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
+        }
+        else if (block == Blocks.GRANITE)
+        {
+            level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), 11);
         }
     }
 }
