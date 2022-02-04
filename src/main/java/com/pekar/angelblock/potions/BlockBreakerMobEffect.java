@@ -65,5 +65,19 @@ public class BlockBreakerMobEffect extends MobEffect
             level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_BLOCK.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
+        else if (block == Blocks.BASALT)
+        {
+            level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_SHARD_BLOCK.get().defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
+        else if (block == Blocks.GRANITE)
+        {
+            level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), 11);
+        }
+        else if (block == Blocks.WHITE_WOOL)
+        {
+            level.setBlock(pos, BlockRegistry.DESTROYING_WHITE_WOOL.get().defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
     }
 }

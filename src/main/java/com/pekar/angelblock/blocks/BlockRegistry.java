@@ -42,6 +42,12 @@ public class BlockRegistry
     public static final RegistryObject<Block> DESTROYING_DIAMOND_POWDER_BLOCK = Main.BLOCKS.register("destroying_diamond_powder_block", () ->
             new Block(BlockBehaviour.Properties.of(Material.AIR)));
 
+    public static final RegistryObject<Block> DESTROYING_PRISMARINE_SHARD_BLOCK = Main.BLOCKS.register("destroying_prismarine_shard_block", () ->
+            new Block(BlockBehaviour.Properties.of(Material.AIR)));
+
+    public static final RegistryObject<Block> DESTROYING_WHITE_WOOL = Main.BLOCKS.register("destroying_white_wool", () ->
+            new Block(BlockBehaviour.Properties.of(Material.AIR)));
+
     public static void initStatic()
     {
         // just to initialize static members
