@@ -14,6 +14,7 @@ public interface IArmorEvents
     void onLivingFallEvent(LivingFallEvent event);
     void onKeyInputEvent(String pressedKeyDescription);
     void onEntityTravelToDimensionEvent(EntityTravelToDimensionEvent event);
+    void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event);
     void onBreakSpeed(net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed event);
     void onBeingInWater();
     void onCreeperCheck();

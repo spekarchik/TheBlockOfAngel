@@ -20,13 +20,13 @@ public class FlyingArmor extends Armor
     {
         super(player);
 
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnFullArmorSet();
-        levitationEffect = new LevitationTemporaryEffect(player, this, 1, 200).availableOnFullArmorSet();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isSlowFallingEffectAvailable);
+        levitationEffect = new LevitationTemporaryEffect(player, this, 1, 200).setupAvailability(this::isLevitationEffectAvailable);
 
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
-        speedEffect.availableOnFullArmorSet();
+        speedEffect.setupAvailability(this::isJumpEffectAvailable);
         var jumpBoostEffect = new JumpBoostArmorEffect(player, this, 24);
-        jumpBoostEffect.availableOnFullArmorSet();
+        jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable);
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
         this.jumpBoostEffect.addDependentEffect(speedEffect);
     }
@@ -60,7 +60,8 @@ public class FlyingArmor extends Armor
     {
         jumpBoostEffect.updateSwitchState();
         levitationEffect.updateSwitchState();
-        slowFallingEffect.updateSwitchState();
+
+        slowFallingEffect.trySwitchOn();
     }
 
     @Override
@@ -80,6 +81,7 @@ public class FlyingArmor extends Armor
         slowFallingEffect.updateEffectAvailability();
         levitationEffect.updateEffectAvailability();
 
+        slowFallingEffect.trySwitchOn();
         updatePotionEffects();
     }
 
@@ -102,9 +104,13 @@ public class FlyingArmor extends Armor
             {
                 jumpBoostEffect.trySwitch();
             }
-            else if (player.isEnd())
+        }
+
+        if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
+        {
+            if (player.isEnd())
             {
-                levitationEffect.trySwitchOn();
+                levitationEffect.trySwitch();
             }
         }
     }
@@ -112,17 +118,33 @@ public class FlyingArmor extends Armor
     @Override
     public void onEntityTravelToDimensionEvent(EntityTravelToDimensionEvent event)
     {
-        var destDimension = event.getDimension();
-        if (isNether(destDimension))
-        {
-            slowFallingEffect.trySwitchOff();
-            jumpBoostEffect.trySwitchOff();
-            levitationEffect.trySwitchOff();
-        }
-        else
-        {
-            slowFallingEffect.trySwitchOn();
-        }
+//        var destDimension = event.getDimension();
+//        if (isNether(destDimension))
+//        {
+//            slowFallingEffect.trySwitchOff();
+//            jumpBoostEffect.trySwitchOff();
+//            levitationEffect.trySwitchOff();
+//        }
+//        else if (isEnd(destDimension))
+//        {
+//            slowFallingEffect.trySwitchOn();
+//            jumpBoostEffect.trySwitchOff();
+//        }
+//        else
+//        {
+//            slowFallingEffect.trySwitchOn();
+//        }
+    }
+
+    @Override
+    public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
+    {
+        jumpBoostEffect.updateEffectAvailability();
+        slowFallingEffect.updateEffectAvailability();
+        levitationEffect.updateEffectAvailability();
+
+        slowFallingEffect.trySwitchOn();
+        updatePotionEffects();
     }
 
     @Override
@@ -161,5 +183,20 @@ public class FlyingArmor extends Armor
     private boolean isEnd(ResourceKey<Level> dimension)
     {
         return dimension.location().equals(Level.END.location());
+    }
+
+    private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return  !player.isNether() && player.isFullArmorSetPutOn(armor.getArmorElementNames());
+    }
+
+    private boolean isLevitationEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isEnd() && player.isFullArmorSetPutOn(armor.getArmorElementNames());
+    }
+
+    private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return  player.isOverworld() && player.isFullArmorSetPutOn(armor.getArmorElementNames());
     }
 }

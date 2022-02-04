@@ -152,6 +152,12 @@ public class DiamithicArmor extends Armor
     }
 
     @Override
+    public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
+    {
+        // none
+    }
+
+    @Override
     public void onBreakSpeed(net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed event)
     {
         // none

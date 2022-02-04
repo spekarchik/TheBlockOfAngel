@@ -70,6 +70,18 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     }
 
     @SubscribeEvent
+    public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
+    {
+        IPlayer player = players.get(event.getEntity().getName().getContents());
+        if (player == null) return;
+
+        for (IArmorEvents armor : player.getArmorTypesUsed())
+        {
+            armor.onPlayerChangedDimensionEvent(event);
+        }
+    }
+
+    @SubscribeEvent
     public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event)
     {
         LivingEntity entity = event.getEntityLiving();
