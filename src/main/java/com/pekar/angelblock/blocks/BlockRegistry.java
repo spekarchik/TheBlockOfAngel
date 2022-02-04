@@ -2,6 +2,7 @@ package com.pekar.angelblock.blocks;
 
 import com.pekar.angelblock.Main;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -27,6 +28,9 @@ public class BlockRegistry
             new Block(BlockBehaviour.Properties.of(Material.STONE).strength(0.7f, 9f)));
     public static final RegistryObject<Block> SUPER_MATERIAL_BLOCK = Main.BLOCKS.register("super_material_block", () ->
             new Block(BlockBehaviour.Properties.of(Material.STONE).strength(0.7f, 9f)));
+
+    public static final RegistryObject<Block> GUNPOWDER_BLOCK = Main.BLOCKS.register("gunpowder_block", () ->
+            new FallingBlock(BlockBehaviour.Properties.of(Material.SAND).sound(SoundType.SNOW).strength(0.2F)));
 
     public static final RegistryObject<Block> ANGEL_BLOCK = Main.BLOCKS.register("angel_block", com.pekar.angelblock.blocks.AngelBlock::new);
     public static final RegistryObject<Block> DEVIL_BLOCK = Main.BLOCKS.register("devil_block", DevilBlock::new);
