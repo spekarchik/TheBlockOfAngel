@@ -79,5 +79,10 @@ public class BlockBreakerMobEffect extends MobEffect
             level.setBlock(pos, BlockRegistry.DESTROYING_WHITE_WOOL.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
+        else if (block == Blocks.GLOWSTONE)
+        {
+            level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
     }
 }
