@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockBreakerMobEffect extends MobEffect
@@ -36,12 +37,23 @@ public class BlockBreakerMobEffect extends MobEffect
                 for (int z = Z - 1; z <= Z + 1; z++)
                 {
                     BlockPos currentPos = new BlockPos(x, y, z);
-                    var level = entity.level;
-                    Block block = level.getBlockState(currentPos).getBlock();
-                    if (block != Blocks.DIAMOND_BLOCK) continue;
-
-                    level.setBlock(currentPos, BlockRegistry.DIAMOND_POWDER_BLOCK.get().defaultBlockState(), 0);
-                    level.destroyBlock(currentPos, true, source, 1);
+                    applyPotionToBlock(source, currentPos);
                 }
+    }
+
+    private void applyPotionToBlock(@NotNull Entity source, BlockPos pos)
+    {
+        var level = source.level;
+        Block block = level.getBlockState(pos).getBlock();
+
+        if (block == Blocks.DIAMOND_BLOCK)
+        {
+            level.setBlock(pos, BlockRegistry.DIAMOND_POWDER_BLOCK.get().defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
+        else if (block == Blocks.LAVA)
+        {
+            level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);
+        }
     }
 }
