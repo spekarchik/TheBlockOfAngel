@@ -5,7 +5,6 @@ import com.pekar.angelblock.tab.ModTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ToolRegistry
@@ -112,8 +111,36 @@ public class ToolRegistry
 
     // Rods
     public static final RegistryObject<ModRod> ANCIENT_ROD = Main.ITEMS.register("ancient_rod",
-            () -> new AncientRod(Tiers.WOOD, 0, -3F,
+            () -> new AncientRod(Tiers.WOOD, 0, -3F, false,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
+    public static final RegistryObject<ModRod> MARINE_ROD = Main.ITEMS.register("marine_rod",
+            () -> new MarineRod(Tiers.WOOD, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
+    public static final RegistryObject<ModRod> FIRE_ROD = Main.ITEMS.register("fire_rod",
+            () -> new FireRod(Tiers.WOOD, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
+    public static final RegistryObject<ModRod> AMETHYST_ROD = Main.ITEMS.register("amethyst_rod",
+            () -> new AmethystRod(Tiers.WOOD, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
+    public static final RegistryObject<ModRod> ANCIENT_MAGNETIC_ROD = Main.ITEMS.register("ancient_magnetic_rod",
+            () -> new AncientRod(Tiers.WOOD, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<ModRod> MARINE_MAGNETIC_ROD = Main.ITEMS.register("marine_magnetic_rod",
+            () -> new MarineRod(Tiers.WOOD, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<ModRod> FIRE_MAGNETIC_ROD = Main.ITEMS.register("fire_magnetic_rod",
+            () -> new FireRod(Tiers.WOOD, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<ModRod> AMETHYST_MAGNETIC_ROD = Main.ITEMS.register("amethyst_magnetic_rod",
+            () -> new AmethystRod(Tiers.WOOD, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
 
     // Swords
     public static final RegistryObject<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",
@@ -122,7 +149,7 @@ public class ToolRegistry
 
     public static final RegistryObject<ModSword> DIAMITHIC_SWORD = Main.ITEMS.register("diamithic_sword",
             () -> new DiamithicSword(ToolMaterials.DIAMITHIC, 3, -2.4F,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModSword> RENDELITHIC_PRIMARY_SWORD = Main.ITEMS.register("rendelithic_primary_sword",
             () -> new RendelithicPrimarySword(ToolMaterials.RENDELITHIC, 3, -2.4F,
@@ -130,7 +157,7 @@ public class ToolRegistry
 
     public static final RegistryObject<ModSword> RENDELITHIC_SWORD = Main.ITEMS.register("rendelithic_sword",
             () -> new RendelithicSword(ToolMaterials.RENDELITHIC, 3, -2.4F,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModSword> LIMONITE_PRIMARY_SWORD = Main.ITEMS.register("limonite_primary_sword",
             () -> new LimonitePrimarySword(ToolMaterials.LIMONITE, 3, -2.4F,
@@ -138,7 +165,7 @@ public class ToolRegistry
 
     public static final RegistryObject<ModSword> LIMONITE_SWORD = Main.ITEMS.register("limonite_sword",
             () -> new LimoniteSword(ToolMaterials.LIMONITE, 3, -2.4F,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModSword> SUPER_PRIMARY_SWORD = Main.ITEMS.register("super_primary_sword",
             () -> new SuperPrimarySword(ToolMaterials.SUPER, 3, -2.4F,
@@ -146,7 +173,7 @@ public class ToolRegistry
 
     public static final RegistryObject<ModSword> SUPER_SWORD = Main.ITEMS.register("super_sword",
             () -> new SuperSword(ToolMaterials.SUPER, 3, -2.4F,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     // + морской кристалл - Marine Crystal - древний страж 50%
     // + огненный камень - Flame Stone - сундуки крепости 10%

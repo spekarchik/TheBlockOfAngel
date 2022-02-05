@@ -53,6 +53,9 @@ public class BlockRegistry
     public static final RegistryObject<Block> DESTROYING_BLAZE_POWDER = Main.BLOCKS.register("destroying_blaze_powder", () ->
             new Block(BlockBehaviour.Properties.of(Material.AIR)));
 
+    public static final RegistryObject<Block> DESTROYING_BONE_MEAL = Main.BLOCKS.register("destroying_bone_meal", () ->
+            new Block(BlockBehaviour.Properties.of(Material.AIR)));
+
     public static void initStatic()
     {
         // just to initialize static members
