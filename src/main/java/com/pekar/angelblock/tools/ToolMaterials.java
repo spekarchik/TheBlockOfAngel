@@ -2,6 +2,7 @@ package com.pekar.angelblock.tools;
 
 
 import com.pekar.angelblock.items.ItemRegistry;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -30,6 +31,15 @@ public class ToolMaterials
 
     static final Tier SUPER = new ModToolMaterial(3000, 11.0F, 5.8F, 4, 25,
             Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
+
+    static final Tier ROD_MATERIAL1 = new ModToolMaterial(60, 2.0F, 0F, 0, 0,
+            Ingredient.of(Items.BAMBOO));
+
+    static final Tier ROD_MATERIAL3 = new ModToolMaterial(120, 2.0F, 0F, 0, 0,
+            Ingredient.of(Items.BAMBOO));
+
+    static final Tier ROD_MATERIAL4 = new ModToolMaterial(250, 2.0F, 0F, 0, 0,
+            Ingredient.of(Items.BAMBOO));
 
 //    static final Tier RENDELITHIC = EnumHelper
 //            .addToolMaterial("materialext:rendelithic_tool", 3, 2200, 7, 3, 15)
