@@ -71,4 +71,10 @@ public class ModAxe extends AxeItem implements IModTool
     {
         return false;
     }
+
+    @Override
+    public boolean isEnhancedRod()
+    {
+        return false;
+    }
 }

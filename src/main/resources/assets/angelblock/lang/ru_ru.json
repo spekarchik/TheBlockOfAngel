@@ -143,5 +143,6 @@
   "effect.angelblock.tool_advanced_mode_effect": "Эффект инструментов",
   "effect.angelblock.sword_explosion_mode_effect": "Меч взрывающий",
   "effect.angelblock.sword_fire_mode_effect": "Меч поджигающий",
-  "effect.angelblock.sword_web_mode_effect": "Меч связывающий"
+  "effect.angelblock.sword_web_mode_effect": "Меч связывающий",
+  "effect.angelblock.rod_magnetic_mode_effect": "Магнитный посох"
 }

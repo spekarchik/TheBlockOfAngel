@@ -19,6 +19,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
         boolean isSwordExplosionModeActive = player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get());
         boolean isSwordFireModeActive = player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get());
         boolean isSwordWebModeActive = player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT.get());
+        boolean isRodMagneticModeActive = player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get());
 
         var heldItem = player.getMainHandItem().getItem();
 
@@ -89,6 +90,20 @@ public class ToolsModeChangePacket extends ClientToServerPacket
 
                 return;
             }
+            else if (tool.isEnhancedRod())
+            {
+                if (!isRodMagneticModeActive)
+                {
+                    var effect = new MobEffectInstance(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get(),
+                            PotionUtils.DURATION_UNLIMITED, 0, false, true);
+                    player.addEffect(effect);
+                }
+                else
+                {
+                    player.removeEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get());
+                }
+                return;
+            }
         }
 
         if (isAdvancedModeActive)
@@ -102,6 +117,9 @@ public class ToolsModeChangePacket extends ClientToServerPacket
 
         if (isSwordWebModeActive)
             player.removeEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT.get());
+
+        if (isRodMagneticModeActive)
+            player.removeEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get());
     }
 
     @Override

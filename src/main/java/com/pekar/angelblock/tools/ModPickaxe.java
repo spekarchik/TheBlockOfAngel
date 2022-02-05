@@ -89,4 +89,10 @@ public class ModPickaxe extends PickaxeItem implements IModTool
     {
         return false;
     }
+
+    @Override
+    public boolean isEnhancedRod()
+    {
+        return false;
+    }
 }

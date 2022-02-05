@@ -143,5 +143,6 @@
   "effect.angelblock.tool_advanced_mode_effect": "Tool Effect On",
   "effect.angelblock.sword_explosion_mode_effect": "Sword Explosion Mode",
   "effect.angelblock.sword_fire_mode_effect": "Sword Fire Mode",
-  "effect.angelblock.sword_web_mode_effect": "Sword Web Mode"
+  "effect.angelblock.sword_web_mode_effect": "Sword Web Mode",
+  "effect.angelblock.rod_magnetic_mode_effect": "Rod Magnetic Mode"
 }

@@ -148,4 +148,10 @@ public class ModShovel extends ShovelItem implements IModTool
     {
         return false;
     }
+
+    @Override
+    public boolean isEnhancedRod()
+    {
+        return false;
+    }
 }

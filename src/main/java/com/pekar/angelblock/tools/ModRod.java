@@ -7,9 +7,12 @@ import net.minecraftforge.common.ToolAction;
 
 public class ModRod extends ModHoe
 {
-    public ModRod(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    private final boolean isMagnetic;
+
+    public ModRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties);
+        this.isMagnetic = isMagnetic;
     }
 
     @Override
@@ -34,5 +37,11 @@ public class ModRod extends ModHoe
     public boolean isBookEnchantable(ItemStack stack, ItemStack book)
     {
         return false;
+    }
+
+    @Override
+    public boolean isEnhancedRod()
+    {
+        return isMagnetic;
     }
 }

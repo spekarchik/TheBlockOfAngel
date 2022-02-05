@@ -120,4 +120,10 @@ public class ModHoe extends HoeItem implements IModTool
     {
         return false;
     }
+
+    @Override
+    public boolean isEnhancedRod()
+    {
+        return false;
+    }
 }

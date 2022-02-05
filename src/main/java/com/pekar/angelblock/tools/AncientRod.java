@@ -18,12 +18,9 @@ import java.util.function.BiFunction;
 
 public class AncientRod extends ModRod
 {
-    protected final boolean isMagnetic;
-
     public AncientRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
-        this.isMagnetic = isMagnetic;
+        super(material, attackDamage, attackSpeed, isMagnetic, properties);
     }
 
     @Override

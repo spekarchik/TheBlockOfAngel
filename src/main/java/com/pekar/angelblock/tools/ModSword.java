@@ -231,6 +231,12 @@ public class ModSword extends SwordItem implements IModTool
         return false;
     }
 
+    @Override
+    public boolean isEnhancedRod()
+    {
+        return false;
+    }
+
     public boolean hasExplosionMode()
     {
         return false;
