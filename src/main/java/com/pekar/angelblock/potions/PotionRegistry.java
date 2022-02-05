@@ -26,7 +26,7 @@ public class PotionRegistry
             () -> new ToolAdvancedModeMobEffect());
 
     public static final RegistryObject<MobEffect> ROD_MAGNETIC_MODE_EFFECT = Main.MOB_EFFECTS.register("rod_magnetic_mode_effect",
-            () -> new RodMagneticEffect());
+            () -> new RodMagneticModeEffect());
 
 
     // Potions

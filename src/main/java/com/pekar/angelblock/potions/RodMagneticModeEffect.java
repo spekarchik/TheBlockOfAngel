@@ -4,9 +4,9 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-public class RodMagneticEffect extends MobEffect
+public class RodMagneticModeEffect extends MobEffect
 {
-    protected RodMagneticEffect()
+    protected RodMagneticModeEffect()
     {
         super(MobEffectCategory.NEUTRAL, 0);
     }
