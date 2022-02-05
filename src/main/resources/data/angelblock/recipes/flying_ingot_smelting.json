@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "angelblock:flying_powder"
+    },
+    "result": "angelblock:flying_ingot",
+    "experience": 1.2,
+    "cookingtime": 200
+}

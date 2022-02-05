@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:leather_helmet"
+    },
+    "addition": {
+        "item": "angelblock:flying_plate"
+    },
+    "result": {
+        "item": "angelblock:flying_helmet"
+    }
+}

@@ -28,6 +28,8 @@ public class BlockRegistry
             new Block(BlockBehaviour.Properties.of(Material.STONE).strength(0.7f, 9f)));
     public static final RegistryObject<Block> SUPER_MATERIAL_BLOCK = Main.BLOCKS.register("super_material_block", () ->
             new Block(BlockBehaviour.Properties.of(Material.STONE).strength(0.7f, 9f)));
+    public static final RegistryObject<Block> FLYING_MATERIAL_BLOCK = Main.BLOCKS.register("flying_material_block", () ->
+            new Block(BlockBehaviour.Properties.of(Material.STONE).strength(0.7f, 9f)));
 
     public static final RegistryObject<Block> ANGEL_BLOCK = Main.BLOCKS.register("angel_block", AngelBlock::new);
     public static final RegistryObject<Block> DEVIL_BLOCK = Main.BLOCKS.register("devil_block", DevilBlock::new);

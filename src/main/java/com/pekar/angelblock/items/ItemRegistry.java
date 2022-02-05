@@ -14,18 +14,21 @@ public class ItemRegistry
     public static final RegistryObject<Item> LAPIS_POWDER = Main.ITEMS.register("lapis_powder", ModItem::new);
     public static final RegistryObject<Item> LIMONITE_POWDER = Main.ITEMS.register("limonite_powder", ModItem::new);
     public static final RegistryObject<Item> SUPER_POWDER = Main.ITEMS.register("super_powder", ModItem::new);
+    public static final RegistryObject<Item> FLYING_POWDER = Main.ITEMS.register("flying_powder", ModItem::new);
 
     public static final RegistryObject<Item> RENDELITHIC_INGOT = Main.ITEMS.register("rendelithic_ingot", ModItem::new);
     public static final RegistryObject<Item> DIAMITHIC_INGOT = Main.ITEMS.register("diamithic_ingot", ModItem::new);
     public static final RegistryObject<Item> LAPIS_INGOT = Main.ITEMS.register("lapis_ingot", ModItem::new);
     public static final RegistryObject<Item> LIMONITE_INGOT = Main.ITEMS.register("limonite_ingot", ModItem::new);
     public static final RegistryObject<Item> SUPER_INGOT = Main.ITEMS.register("super_ingot", ModItem::new);
+    public static final RegistryObject<Item> FLYING_INGOT = Main.ITEMS.register("flying_ingot", ModItem::new);
 
     public static final RegistryObject<Item> RENDELITHIC_PLATE = Main.ITEMS.register("rendelithic_plate", ModItem::new);
     public static final RegistryObject<Item> DIAMITHIC_PLATE = Main.ITEMS.register("diamithic_plate", ModItem::new);
     public static final RegistryObject<Item> LAPIS_PLATE = Main.ITEMS.register("lapis_plate", ModItem::new);
     public static final RegistryObject<Item> LIMONITE_PLATE = Main.ITEMS.register("limonite_plate", ModItem::new);
     public static final RegistryObject<Item> SUPER_PLATE = Main.ITEMS.register("super_plate", ModItem::new);
+    public static final RegistryObject<Item> FLYING_PLATE = Main.ITEMS.register("flying_plate", ModItem::new);
 
     public static final RegistryObject<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", ModItem::new);
     public static final RegistryObject<Item> FLAX_FIBRE = Main.ITEMS.register("flax_fibre", ModItem::new);

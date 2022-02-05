@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:fire_coral_fan"
+        },
+        {
+            "item": "minecraft:rabbit_foot"
+        },
+        {
+            "item": "minecraft:horn_coral_fan"
+        },
+        {
+            "item": "minecraft:slime_ball"
+        }
+    ],
+    "result": {
+        "item": "angelblock:flying_powder",
+        "count": 3
+    }
+}
