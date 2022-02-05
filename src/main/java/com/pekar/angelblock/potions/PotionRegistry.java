@@ -23,7 +23,10 @@ public class PotionRegistry
             () -> new SwordWebModeMobEffect());
 
     public static final RegistryObject<MobEffect> TOOL_ADVANCED_MODE_EFFECT = Main.MOB_EFFECTS.register("tool_advanced_mode_effect",
-        () -> new ToolAdvancedModeMobEffect());
+            () -> new ToolAdvancedModeMobEffect());
+
+    public static final RegistryObject<MobEffect> ROD_MAGNETIC_MODE_EFFECT = Main.MOB_EFFECTS.register("rod_magnetic_mode_effect",
+            () -> new RodMagneticEffect());
 
 
     // Potions
