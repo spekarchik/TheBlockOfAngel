@@ -23,6 +23,12 @@ abstract class TemporaryArmorEffect extends ArmorEffect
     }
 
     @Override
+    public boolean trySwitchOn(int amplifier)
+    {
+        return trySwitch(amplifier);
+    }
+
+    @Override
     public boolean isEffectOn()
     {
         return false;
