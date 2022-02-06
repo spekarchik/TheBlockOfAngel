@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
@@ -69,14 +70,15 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    protected boolean canBeReplaced(Level level, Block block)
+    protected boolean canBeReplaced(Level level, BlockPos pos)
     {
         if (Utils.isNether(level.dimension()))
         {
+            var block = level.getBlockState(pos).getBlock();
             return block == Blocks.NETHERRACK || block == Blocks.BASALT || block == Blocks.BLACKSTONE;
         }
 
-        return super.canBeReplaced(level, block);
+        return super.canBeReplaced(level, pos);
     }
 
     @Override

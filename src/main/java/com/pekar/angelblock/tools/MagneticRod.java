@@ -9,7 +9,9 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.material.FluidState;
 
 public class MagneticRod extends ModRod
 {
@@ -32,8 +34,7 @@ public class MagneticRod extends ModRod
         }
 
         var pos = context.getClickedPos();
-        var block = level.getBlockState(pos).getBlock();
-        if (!canBeReplaced(level, block)) return super.useOn(context);
+        if (!canBeReplaced(level, pos)) return super.useOn(context);
 
         return shiftOres(level, pos, context.getClickedFace());
     }
@@ -52,9 +53,8 @@ public class MagneticRod extends ModRod
                     {
                         var currentPos = new BlockPos(x, y, z);
                         var currectBlock = level.getBlockState(currentPos).getBlock();
-                        var upperBlock = level.getBlockState(currentPos.above()).getBlock();
                         if (!isOre(currectBlock)) continue;
-                        if (!canBeReplaced(level, upperBlock)) continue;
+                        if (!canBeReplaced(level, currentPos.above())) continue;
                         exchange(level, currentPos);
                     }
 
@@ -84,12 +84,14 @@ public class MagneticRod extends ModRod
         level.setBlock(currentPos.above(), currectBlockState, 11);
     }
 
-    protected boolean canBeReplaced(Level level, Block block)
+    protected boolean canBeReplaced(Level level, BlockPos pos)
     {
         if (!Utils.isOverworld(level.dimension())) return false;
 
-        return block == Blocks.AIR || block == Blocks.WATER || block == Blocks.STONE || block == Blocks.GRANITE
-                || block == Blocks.DIORITE || block == Blocks.ANDESITE
+        var block = level.getBlockState(pos).getBlock();
+
+        return block == Blocks.AIR || (block instanceof LiquidBlock && level.getFluidState(pos).getAmount() < FluidState.AMOUNT_FULL)
+                || block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.DIORITE || block == Blocks.ANDESITE
                 || block == Blocks.DEEPSLATE || block == Blocks.TUFF || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE;
     }
 
