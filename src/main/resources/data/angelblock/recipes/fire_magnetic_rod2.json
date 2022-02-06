@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:marine_magnetic_rod"
+    },
+    "addition": {
+        "item": "angelblock:flame_stone"
+    },
+    "result": {
+        "item": "angelblock:fire_magnetic_rod"
+    }
+}

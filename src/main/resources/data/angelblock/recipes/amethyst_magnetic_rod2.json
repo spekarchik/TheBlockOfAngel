@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:fire_magnetic_rod"
+    },
+    "addition": {
+        "item": "minecraft:amethyst_shard"
+    },
+    "result": {
+        "item": "angelblock:amethyst_magnetic_rod"
+    }
+}

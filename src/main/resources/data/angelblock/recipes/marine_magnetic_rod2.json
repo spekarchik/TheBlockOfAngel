@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:ancient_magnetic_rod"
+    },
+    "addition": {
+        "item": "angelblock:marine_crystal"
+    },
+    "result": {
+        "item": "angelblock:marine_magnetic_rod"
+    }
+}
