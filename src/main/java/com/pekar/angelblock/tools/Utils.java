@@ -74,7 +74,7 @@ public class Utils
                     if (z != posZ && (x != posX || y != posY)) continue;
 
                     Block block = level.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block == Blocks.LAVA || block == Blocks.LAVA_CAULDRON)
+                    if (block == Blocks.LAVA)
                         return true;
                 }
             }
@@ -98,7 +98,7 @@ public class Utils
                     if (z != posZ && (x != posX || y != posY)) continue;
 
                     Block block = level.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block == Blocks.WATER || block == Blocks.WATER_CAULDRON)
+                    if (block == Blocks.WATER)
                         return true;
                 }
             }
@@ -236,8 +236,8 @@ public class Utils
     {
         Block block = level.getBlockState(pos.below()).getBlock();
         return level.isEmptyBlock(pos.below())
-                || block == Blocks.LAVA || block == Blocks.LAVA_CAULDRON
-                || block == Blocks.WATER || block == Blocks.WATER_CAULDRON;
+                || block == Blocks.LAVA
+                || block == Blocks.WATER;
     }
 
     public static boolean isNearLavaOrWater(Level level, BlockPos pos)
@@ -255,8 +255,7 @@ public class Utils
                     if (z != posZ && (x != posX || y != posY)) continue;
 
                     Block block = level.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block == Blocks.LAVA || block == Blocks.LAVA_CAULDRON
-                            || block == Blocks.WATER || block == Blocks.WATER_CAULDRON)
+                    if (block == Blocks.LAVA || block == Blocks.WATER)
                     {
                         return true;
                     }

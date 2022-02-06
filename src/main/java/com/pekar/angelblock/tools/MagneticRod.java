@@ -88,7 +88,7 @@ public class MagneticRod extends ModRod
     {
         if (!Utils.isOverworld(level.dimension())) return false;
 
-        return block == Blocks.AIR || block == Blocks.WATER_CAULDRON || block == Blocks.STONE || block == Blocks.GRANITE
+        return block == Blocks.AIR || block == Blocks.WATER || block == Blocks.STONE || block == Blocks.GRANITE
                 || block == Blocks.DIORITE || block == Blocks.ANDESITE
                 || block == Blocks.DEEPSLATE || block == Blocks.TUFF || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE;
     }
