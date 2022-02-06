@@ -1,7 +1,9 @@
 package com.pekar.angelblock.tools;
 
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.common.ToolAction;
 
@@ -13,6 +15,12 @@ public class ModRod extends ModHoe
     {
         super(material, attackDamage, attackSpeed, properties);
         this.isMagnetic = isMagnetic;
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context)
+    {
+        return InteractionResult.PASS;
     }
 
     @Override
