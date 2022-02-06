@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:ancient_rod"
+    },
+    "addition": {
+        "item": "minecraft:lodestone"
+    },
+    "result": {
+        "item": "angelblock:ancient_magnetic_rod"
+    }
+}
