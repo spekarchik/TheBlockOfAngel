@@ -41,7 +41,7 @@ public class MagneticRod extends ModRod
         var pos = context.getClickedPos();
         if (!canBeReplaced(level, pos) && !isOre(level, pos) && !isDiamondOre(level.getBlockState(pos).getBlock()))
         {
-            return InteractionResult.PASS;
+            return InteractionResult.CONSUME;
         }
 
         return shiftOres(player, level, pos, context.getClickedFace());
