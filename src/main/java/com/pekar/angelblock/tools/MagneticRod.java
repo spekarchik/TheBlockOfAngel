@@ -178,7 +178,7 @@ public class MagneticRod extends ModRod
         boolean isDiamondOre = block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE;
 
         if (!isOre(level, currentPos)) return isDiamondOre ? OreType.DIAMOND_ORE : OreType.NOT_ORE;
-        if (!canBeReplaced(level, closerPos)) return OreType.ORE;
+        if (!canBeReplaced(level, closerPos)) return OreType.NOT_ORE;
         exchange(level, currentPos, closerPos);
         return OreType.ORE;
     }

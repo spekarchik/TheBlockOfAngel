@@ -40,7 +40,7 @@ public class OreDetectedPacket extends ServerToClientPacket
     @Override
     protected void onReceive()
     {
-        var sound = isDiamondOre ? SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE : SoundEvents.STONE_BREAK;
+        var sound = isDiamondOre ? SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE : SoundEvents.GRAVEL_PLACE;
         Minecraft.getInstance().player.playSound(sound, 1.0F, 5.0F);
     }
 }
