@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.BiFunction;
 
-public class AncientRod extends ModRod
+public class AncientRod extends MagneticRod
 {
     public AncientRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {
@@ -26,6 +26,9 @@ public class AncientRod extends ModRod
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var result = super.useOn(context);
+        if (result != InteractionResult.PASS) return result;
+
         var player = context.getPlayer();
         var level = player.level;
 
