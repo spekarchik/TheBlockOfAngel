@@ -1,7 +1,8 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.network.packets.OnPlantPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -111,7 +112,7 @@ public class AncientRod extends MagneticRod
         if (!level.isEmptyBlock(pos)) return InteractionResult.FAIL;
 
         level.setBlock(pos, state, 11);
-        new OnPlantPacket().sendToPlayer((ServerPlayer) context.getPlayer());
+        new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) context.getPlayer());
         return InteractionResult.CONSUME;
     }
 

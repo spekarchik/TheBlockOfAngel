@@ -1,8 +1,8 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
-import com.pekar.angelblock.network.packets.OnPlantPacket;
-import com.pekar.angelblock.network.packets.BlockChangedPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -257,6 +257,6 @@ public class ModSword extends SwordItem implements IModTool
     protected void setBlock(Player player, BlockPos pos, Block block)
     {
         player.level.setBlock(pos, block.defaultBlockState(), 11);
-        new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
+        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 }

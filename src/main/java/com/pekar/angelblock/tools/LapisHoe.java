@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.OnPlantPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,6 +39,7 @@ public class LapisHoe extends ModHoe
             || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
         {
             level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
+            new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
 
             damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 
@@ -70,7 +72,7 @@ public class LapisHoe extends ModHoe
             if (canBeFarmland(block))
             {
                 level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 11);
-                new OnPlantPacket().sendToPlayer((ServerPlayer) player);
+                new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
                 damageItemIfSurvival(player, level, pos, blockState);
             }
             else if (block == Blocks.COARSE_DIRT)

@@ -77,7 +77,7 @@ public class FireRod extends MarineRod
         if (Utils.isNether(level.dimension()))
         {
             var block = level.getBlockState(pos).getBlock();
-            return block == Blocks.NETHERRACK || block == Blocks.BASALT || block == Blocks.BLACKSTONE;
+            return block == Blocks.NETHERRACK || block == Blocks.BASALT || block == Blocks.BLACKSTONE || block == Blocks.MAGMA_BLOCK;
         }
 
         return super.canBeReplaced(level, pos);

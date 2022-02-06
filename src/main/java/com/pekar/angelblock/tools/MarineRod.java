@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.OnPlantPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -59,6 +60,7 @@ public class MarineRod extends AncientRod
                         || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
                 {
                     level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
+                    new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
                     damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 
                     if (!updateNeighbors(level, upPos))
@@ -165,7 +167,7 @@ public class MarineRod extends AncientRod
 
             if (player instanceof ServerPlayer serverPlayer)
             {
-                new OnPlantPacket().sendToPlayer(serverPlayer);
+                new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
                 CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
             }
 

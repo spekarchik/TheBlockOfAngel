@@ -1,7 +1,7 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.OnPlantPacket;
-import com.pekar.angelblock.network.packets.BlockChangedPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -114,7 +114,7 @@ public class ModShovel extends ShovelItem implements IModTool
             {
                 BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
                 level.setBlock(pos, newBlockState, 11);
-                new OnPlantPacket().sendToPlayer((ServerPlayer) player);
+                new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
 
                 if (blockState.getDestroySpeed(level, pos) != 0.0F)
                 {
@@ -162,6 +162,6 @@ public class ModShovel extends ShovelItem implements IModTool
     protected void setBlock(Player player, BlockPos pos, Block block)
     {
         player.level.setBlock(pos, block.defaultBlockState(), 11);
-        new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
+        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 }

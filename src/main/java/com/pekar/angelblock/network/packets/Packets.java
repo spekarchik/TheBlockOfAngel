@@ -10,6 +10,5 @@ class Packets
     static final int ClientTickPacketId = 3;
     static final int ToolsModeChangePacketId = 4;
     static final int OreDetectedPacketId = 5;
-    static final int RodAddedPlantPacketId = 6;
-    static final int RodChangedBlockPacketId = 7;
+    static final int PlaySoundPacketId = 6;
 }

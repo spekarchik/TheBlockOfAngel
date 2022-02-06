@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.BlockChangedPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -89,7 +90,7 @@ public class AmethystRod extends FireRod
 
         if (!level.isEmptyBlock(pos)) return InteractionResult.FAIL;
 
-        new BlockChangedPacket().sendToPlayer((ServerPlayer) context.getPlayer());
+        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) context.getPlayer());
         level.setBlock(pos, state, 11);
         return InteractionResult.CONSUME;
     }

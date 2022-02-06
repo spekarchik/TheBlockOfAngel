@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.BlockChangedPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -346,6 +347,6 @@ public class Utils
     public static void setBlock(Player player, BlockPos pos, Block block)
     {
         player.level.setBlock(pos, block.defaultBlockState(), 11);
-        new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
+        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 }
