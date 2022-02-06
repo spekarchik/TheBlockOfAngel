@@ -32,7 +32,6 @@ public class AmethystRod extends FireRod
         BlockState blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
-
         var itemStack = player.getItemInHand(context.getHand());
         boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
 
@@ -67,6 +66,18 @@ public class AmethystRod extends FireRod
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    protected int getShiftingRadius()
+    {
+        return 3;
+    }
+
+    @Override
+    protected int getShiftDepth()
+    {
+        return 7;
     }
 
     private InteractionResult setGlowLichen(BlockPlaceContext context, BlockPos pos)

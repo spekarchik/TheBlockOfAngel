@@ -86,4 +86,10 @@ public class FireRod extends MarineRod
     {
         return block == Blocks.ANCIENT_DEBRIS || super.isOre(block);
     }
+
+    @Override
+    protected int getShiftingRadius()
+    {
+        return 2;
+    }
 }

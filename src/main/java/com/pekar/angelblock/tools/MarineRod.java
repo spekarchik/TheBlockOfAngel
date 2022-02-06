@@ -175,6 +175,12 @@ public class MarineRod extends AncientRod
         }
     }
 
+    @Override
+    protected int getShiftDepth()
+    {
+        return 6;
+    }
+
     private Block chooseFlowerByValue(int value)
     {
         switch (value)
