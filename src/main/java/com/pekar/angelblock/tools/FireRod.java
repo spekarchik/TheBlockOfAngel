@@ -5,6 +5,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -64,5 +66,22 @@ public class FireRod extends MarineRod
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    protected boolean canBeReplaced(Level level, Block block)
+    {
+        if (Utils.isNether(level.dimension()))
+        {
+            return block == Blocks.NETHERRACK || block == Blocks.BASALT || block == Blocks.BLACKSTONE;
+        }
+
+        return super.canBeReplaced(level, block);
+    }
+
+    @Override
+    protected boolean isOre(Block block)
+    {
+        return block == Blocks.ANCIENT_DEBRIS || super.isOre(block);
     }
 }

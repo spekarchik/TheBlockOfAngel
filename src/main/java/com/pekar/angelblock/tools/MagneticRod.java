@@ -45,7 +45,7 @@ public class MagneticRod extends ModRod
             int X = pos.getX(), Y = pos.getY(), Z = pos.getZ();
             for (int x = X - 1; x <= X + 1; x++)
                 for (int z = Z - 1; z <= Z + 1; z++)
-                    for (int y = Y - 5; y < Y; y++)
+                    for (int y = Y - getShiftDepth(); y < Y; y++)
                     {
                         var currentPos = new BlockPos(x, y, z);
                         var currectBlock = level.getBlockState(currentPos).getBlock();
@@ -58,7 +58,14 @@ public class MagneticRod extends ModRod
             return InteractionResult.CONSUME;
         }
 
+        // TODO: other sides
+
         return InteractionResult.PASS;
+    }
+
+    protected int getShiftDepth()
+    {
+        return 5;
     }
 
     private void exchange(Level level, BlockPos currentPos)
