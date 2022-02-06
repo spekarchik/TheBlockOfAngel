@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -34,6 +35,8 @@ public class AncientRod extends MagneticRod
 
         if (level.isClientSide) return InteractionResult.PASS;
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
+        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
+            return super.useOn(context);
 
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);

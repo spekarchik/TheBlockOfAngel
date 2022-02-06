@@ -1,8 +1,10 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.network.packets.OreDetectedPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
@@ -91,5 +93,11 @@ public class FireRod extends MarineRod
     protected int getShiftingRadius()
     {
         return 2;
+    }
+
+    @Override
+    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound)
+    {
+        new OreDetectedPacket(isDiamondOreFound).sendToPlayer(player);
     }
 }

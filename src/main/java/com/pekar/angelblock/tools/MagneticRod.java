@@ -1,9 +1,12 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.OreDetectedPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -36,12 +39,15 @@ public class MagneticRod extends ModRod
         }
 
         var pos = context.getClickedPos();
-        if (!canBeReplaced(level, pos) && !isOre(level, pos)) return InteractionResult.PASS;
+        if (!canBeReplaced(level, pos) && !isOre(level, pos) && !isDiamondOre(level.getBlockState(pos).getBlock()))
+        {
+            return InteractionResult.PASS;
+        }
 
-        return shiftOres(level, pos, context.getClickedFace());
+        return shiftOres(player, level, pos, context.getClickedFace());
     }
 
-    private InteractionResult shiftOres(Level level, BlockPos pos, Direction clickedFace)
+    private InteractionResult shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
     {
         int radius = getShiftingRadius();
         int depth = getShiftDepth();
@@ -82,8 +88,7 @@ public class MagneticRod extends ModRod
                         }
                     }
 
-            if (isDiamondOreFound) diamondOreFoundEvent();
-            else if (isOreFound) oreFoundEvent();
+            if (isOreFound || isDiamondOreFound) oreFoundEvent((ServerPlayer) player, isOreFound, isDiamondOreFound);
 
             return InteractionResult.CONSUME;
         }
@@ -118,8 +123,7 @@ public class MagneticRod extends ModRod
                         }
                     }
 
-            if (isDiamondOreFound) diamondOreFoundEvent();
-            else if (isOreFound) oreFoundEvent();
+            if (isOreFound || isDiamondOreFound) oreFoundEvent((ServerPlayer) player, isOreFound, isDiamondOreFound);
 
             return InteractionResult.CONSUME;
         }
@@ -154,8 +158,7 @@ public class MagneticRod extends ModRod
                         }
                     }
 
-            if (isDiamondOreFound) diamondOreFoundEvent();
-            else if (isOreFound) oreFoundEvent();
+            if (isOreFound || isDiamondOreFound) oreFoundEvent((ServerPlayer) player, isOreFound, isDiamondOreFound);
 
             return InteractionResult.CONSUME;
         }
@@ -163,12 +166,10 @@ public class MagneticRod extends ModRod
         return InteractionResult.PASS;
     }
 
-    protected void oreFoundEvent()
+    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound)
     {
-    }
-
-    protected void diamondOreFoundEvent()
-    {
+        if (isOreFound)
+            new OreDetectedPacket(false).sendToPlayer(player);
     }
 
     private OreType tryExchange(Level level, BlockPos currentPos, BlockPos closerPos)
@@ -213,12 +214,17 @@ public class MagneticRod extends ModRod
 
     protected boolean isOre(Block block)
     {
-        return block instanceof OreBlock && block != Blocks.DIAMOND_ORE && block != Blocks.DEEPSLATE_DIAMOND_ORE;
+        return block instanceof OreBlock && !isDiamondOre(block);
     }
 
     private boolean isOre(Level level, BlockPos pos)
     {
         var block = level.getBlockState(pos).getBlock();
         return isOre(block);
+    }
+
+    private boolean isDiamondOre(Block block)
+    {
+        return block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE;
     }
 }

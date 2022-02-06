@@ -9,4 +9,5 @@ class Packets
     static final int KeyPressedPacketId = 2;
     static final int ClientTickPacketId = 3;
     static final int ToolsModeChangePacketId = 4;
+    static final int OreDetectedPacketId = 5;
 }
