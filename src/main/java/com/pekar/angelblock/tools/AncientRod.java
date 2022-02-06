@@ -48,9 +48,12 @@ public class AncientRod extends ModRod
             return InteractionResult.CONSUME;
         }
 
-        if (Utils.mossyTransforming(level, pos, block))
+        if (block != Blocks.STONE || context.getClickedFace() == Direction.UP)
         {
-            return InteractionResult.CONSUME;
+            if (Utils.mossyTransforming(level, pos, block))
+            {
+                return InteractionResult.CONSUME;
+            }
         }
 
         var itemStack = player.getItemInHand(context.getHand());
@@ -58,16 +61,10 @@ public class AncientRod extends ModRod
 
         if (!isBroken)
         {
-            var facing = context.getClickedFace();
-
-            if (facing == Direction.UP)
+            if (block instanceof LeavesBlock)
             {
-
-                if (block instanceof LeavesBlock)
-                {
-                    damageItemIfSurvival(player, level, pos, blockState);
-                    return setOnBlockSide(context, this::setVine);
-                }
+                damageItemIfSurvival(player, level, pos, blockState);
+                return setOnBlockSide(context, this::setVine);
             }
 
             if (block == Blocks.COBWEB)

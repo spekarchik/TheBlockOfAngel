@@ -269,7 +269,7 @@ public class Utils
     public static boolean mossyTransforming(Level level, BlockPos pos, Block block)
     {
         // stones
-        if (block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE
+        if (block == Blocks.STONE || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE
                 || block == Blocks.DEEPSLATE)
         {
             level.setBlock(pos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 11);
