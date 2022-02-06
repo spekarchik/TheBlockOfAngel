@@ -98,28 +98,6 @@ public class AncientRod extends MagneticRod
                 }
     }
 
-//    private InteractionResult plantBlock(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, IPlantable block)
-//    {
-//        var itemStack = player.getItemInHand(hand);
-//        BlockState state = level.getBlockState(pos);
-//
-//        if (facing == Direction.UP && state.getBlock().canSustainPlant(state, level, pos, Direction.UP, block) && level.isEmptyBlock(pos.above()))
-//        {
-//            level.setBlock(pos.above(), ((Block)block).defaultBlockState(), 11);
-//
-//            if (player instanceof ServerPlayer serverPlayer)
-//            {
-//                CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
-//            }
-//
-//            return InteractionResult.CONSUME;
-//        }
-//        else
-//        {
-//            return InteractionResult.FAIL;
-//        }
-//    }
-
     private InteractionResult setVine(BlockPlaceContext context, BlockPos pos)
     {
         var level = context.getLevel();
