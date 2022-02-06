@@ -42,10 +42,13 @@ public class MagneticRod extends ModRod
     {
         if (clickedFace == Direction.UP)
         {
+            int radius = getShiftingRadius();
+            int depth = getShiftDepth();
+
             int X = pos.getX(), Y = pos.getY(), Z = pos.getZ();
-            for (int x = X - 1; x <= X + 1; x++)
-                for (int z = Z - 1; z <= Z + 1; z++)
-                    for (int y = Y - getShiftDepth(); y < Y; y++)
+            for (int x = X - radius; x <= X + radius; x++)
+                for (int z = Z - radius; z <= Z + radius; z++)
+                    for (int y = Y - depth; y < Y; y++)
                     {
                         var currentPos = new BlockPos(x, y, z);
                         var currectBlock = level.getBlockState(currentPos).getBlock();
@@ -61,6 +64,11 @@ public class MagneticRod extends ModRod
         // TODO: other sides
 
         return InteractionResult.PASS;
+    }
+
+    protected int getShiftingRadius()
+    {
+        return 1;
     }
 
     protected int getShiftDepth()
