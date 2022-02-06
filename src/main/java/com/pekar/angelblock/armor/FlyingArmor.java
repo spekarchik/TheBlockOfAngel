@@ -1,5 +1,6 @@
 package com.pekar.angelblock.armor;
 
+import com.pekar.angelblock.tools.Utils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,7 +16,7 @@ public class FlyingArmor extends ModArmor
     }
 
     @Override
-    public boolean isEnchantable(ItemStack p_41456_)
+    public boolean isEnchantable(ItemStack stack)
     {
         return false;
     }
@@ -29,7 +30,7 @@ public class FlyingArmor extends ModArmor
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
-        if (!isOverworld(entity.level.dimension())) return false;
+        if (!Utils.isOverworld(entity.level.dimension())) return false;
 
         var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
         var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();
@@ -41,7 +42,7 @@ public class FlyingArmor extends ModArmor
     @Override
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
     {
-        if (!isOverworld(entity.level.dimension())) return false;
+        if (!Utils.isOverworld(entity.level.dimension())) return false;
 
         var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
         var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();

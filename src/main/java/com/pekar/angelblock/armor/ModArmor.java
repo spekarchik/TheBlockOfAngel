@@ -27,19 +27,4 @@ public class ModArmor extends ArmorItem
         ArmorNames.add(name);
         return Main.ITEMS.register(name, sup);
     }
-
-    protected boolean isOverworld(ResourceKey<Level> dimension)
-    {
-        return dimension.location().equals(Level.OVERWORLD.location());
-    }
-
-    protected boolean isNether(ResourceKey<Level> dimension)
-    {
-        return dimension.location().equals(Level.NETHER.location());
-    }
-
-    protected boolean isEnd(ResourceKey<Level> dimension)
-    {
-        return dimension.location().equals(Level.END.location());
-    }
 }

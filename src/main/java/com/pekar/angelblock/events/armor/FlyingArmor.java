@@ -176,21 +176,6 @@ public class FlyingArmor extends Armor
         levitationSwitchingEffect.updateEffectActivity();
     }
 
-    private boolean isOverworld(ResourceKey<Level> dimension)
-    {
-        return dimension.location().equals(Level.OVERWORLD.location());
-    }
-
-    private boolean isNether(ResourceKey<Level> dimension)
-    {
-        return dimension.location().equals(Level.NETHER.location());
-    }
-
-    private boolean isEnd(ResourceKey<Level> dimension)
-    {
-        return dimension.location().equals(Level.END.location());
-    }
-
     private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
     {
         return player.isEnd() && player.isFullArmorSetPutOn(armor.getArmorElementNames());
