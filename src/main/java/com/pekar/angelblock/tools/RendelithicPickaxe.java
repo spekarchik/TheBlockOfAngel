@@ -49,7 +49,7 @@ public class RendelithicPickaxe extends ModPickaxe
 
         if (block == Blocks.OBSIDIAN)
         {
-            level.setBlock(pos, BlockRegistry.CRACKED_OBSIDIAN.get().defaultBlockState(), 11);
+            setBlock(player, pos, BlockRegistry.CRACKED_OBSIDIAN.get());
             return InteractionResult.CONSUME;
         }
 

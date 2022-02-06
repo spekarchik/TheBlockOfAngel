@@ -50,7 +50,7 @@ public class RendelithicShovel extends ModShovel
 
         if (block == Blocks.END_STONE)
         {
-            level.setBlock(pos, BlockRegistry.CRACKED_ENDSTONE.get().defaultBlockState(), 11);
+            setBlock(player, pos, BlockRegistry.CRACKED_ENDSTONE.get());
             return InteractionResult.CONSUME;
         }
 

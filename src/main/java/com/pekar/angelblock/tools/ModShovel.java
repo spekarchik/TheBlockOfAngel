@@ -1,8 +1,11 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.OnPlantPacket;
+import com.pekar.angelblock.network.packets.BlockChangedPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -111,6 +114,7 @@ public class ModShovel extends ShovelItem implements IModTool
             {
                 BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
                 level.setBlock(pos, newBlockState, 11);
+                new OnPlantPacket().sendToPlayer((ServerPlayer) player);
 
                 if (blockState.getDestroySpeed(level, pos) != 0.0F)
                 {
@@ -153,5 +157,11 @@ public class ModShovel extends ShovelItem implements IModTool
     public boolean isEnhancedRod()
     {
         return false;
+    }
+
+    protected void setBlock(Player player, BlockPos pos, Block block)
+    {
+        player.level.setBlock(pos, block.defaultBlockState(), 11);
+        new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
     }
 }

@@ -1,7 +1,10 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.BlockChangedPacket;
+import com.pekar.angelblock.network.packets.OnPlantPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -58,15 +61,18 @@ public class SuperSword extends ModSword
             if (level.getBlockState(pos).getBlock() == Blocks.SAND)
             {
                 plantCacti(player, level, pos, context.getHand(), context.getClickedFace());
+                new OnPlantPacket().sendToPlayer((ServerPlayer) player);
             }
             else if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
                     && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
             {
                 setEffectAround(player, level, pos);
+                new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
             }
             else
             {
                 setEffectAhead(player, level, pos);
+                new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
             }
             return InteractionResult.CONSUME;
         }

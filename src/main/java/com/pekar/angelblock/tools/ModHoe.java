@@ -1,8 +1,10 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.BlockChangedPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
@@ -125,5 +127,11 @@ public class ModHoe extends HoeItem implements IModTool
     public boolean isEnhancedRod()
     {
         return false;
+    }
+
+    protected void setBlock(Player player, BlockPos pos, Block block)
+    {
+        player.level.setBlock(pos, block.defaultBlockState(), 11);
+        new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
     }
 }

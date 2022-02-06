@@ -1,7 +1,9 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.BlockChangedPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -52,7 +54,7 @@ public class AmethystRod extends FireRod
             if (block == Blocks.OBSIDIAN)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
-                level.setBlock(pos, Blocks.CRYING_OBSIDIAN.defaultBlockState(), 11);
+                setBlock(player, pos, Blocks.CRYING_OBSIDIAN);
                 return InteractionResult.CONSUME;
             }
 
@@ -87,6 +89,7 @@ public class AmethystRod extends FireRod
 
         if (!level.isEmptyBlock(pos)) return InteractionResult.FAIL;
 
+        new BlockChangedPacket().sendToPlayer((ServerPlayer) context.getPlayer());
         level.setBlock(pos, state, 11);
         return InteractionResult.CONSUME;
     }

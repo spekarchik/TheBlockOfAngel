@@ -1,9 +1,11 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.network.packets.OnPlantPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -44,19 +46,19 @@ public class AncientRod extends MagneticRod
 
         if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
         {
-            level.setBlock(pos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState(), 11);
+            setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
             return InteractionResult.CONSUME;
         }
 
         if (block instanceof InfestedBlock infestedBlock)
         {
-            level.setBlock(pos, infestedBlock.getHostBlock().defaultBlockState(), 11);
+            setBlock(player, pos, infestedBlock.getHostBlock());
             return InteractionResult.CONSUME;
         }
 
         if (block != Blocks.STONE || context.getClickedFace() == Direction.UP)
         {
-            if (Utils.mossyTransforming(level, pos, block))
+            if (Utils.mossyTransforming(player, pos, block))
             {
                 return InteractionResult.CONSUME;
             }
@@ -109,6 +111,7 @@ public class AncientRod extends MagneticRod
         if (!level.isEmptyBlock(pos)) return InteractionResult.FAIL;
 
         level.setBlock(pos, state, 11);
+        new OnPlantPacket().sendToPlayer((ServerPlayer) context.getPlayer());
         return InteractionResult.CONSUME;
     }
 

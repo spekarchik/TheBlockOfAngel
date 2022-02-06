@@ -68,11 +68,11 @@ public class SuperPickaxe extends ModPickaxe
 
         if (block instanceof InfestedBlock infestedBlock)
         {
-            level.setBlock(pos, infestedBlock.getHostBlock().defaultBlockState(), 11);
+            setBlock(player, pos, infestedBlock.getHostBlock());
             return InteractionResult.CONSUME;
         }
 
-        if (Utils.mossyTransforming(level, pos, block))
+        if (Utils.mossyTransforming(player, pos, block))
         {
             return InteractionResult.CONSUME;
         }

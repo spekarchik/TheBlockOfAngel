@@ -1,7 +1,9 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.OnPlantPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
@@ -9,7 +11,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class LapisHoe extends ModHoe
@@ -69,11 +70,12 @@ public class LapisHoe extends ModHoe
             if (canBeFarmland(block))
             {
                 level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 11);
+                new OnPlantPacket().sendToPlayer((ServerPlayer) player);
                 damageItemIfSurvival(player, level, pos, blockState);
             }
             else if (block == Blocks.COARSE_DIRT)
             {
-                level.setBlock(pos, Blocks.DIRT.defaultBlockState(), 11);
+                setBlock(player, pos, Blocks.DIRT);
                 damageItemIfSurvival(player, level, pos, blockState);
             }
         }

@@ -1,6 +1,8 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
+import com.pekar.angelblock.network.packets.OnPlantPacket;
+import com.pekar.angelblock.network.packets.BlockChangedPacket;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -206,7 +208,7 @@ public class ModSword extends SwordItem implements IModTool
         {
             level.setBlock(pos.above(), Blocks.CACTUS.defaultBlockState(), 11);
 
-            if (player instanceof ServerPlayer)
+            if (player instanceof ServerPlayer serverPlayer)
             {
                 CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos.above(), itemstack);
             }
@@ -250,5 +252,11 @@ public class ModSword extends SwordItem implements IModTool
     public boolean hasWebMode()
     {
         return false;
+    }
+
+    protected void setBlock(Player player, BlockPos pos, Block block)
+    {
+        player.level.setBlock(pos, block.defaultBlockState(), 11);
+        new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
     }
 }

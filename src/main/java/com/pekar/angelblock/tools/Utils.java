@@ -1,9 +1,12 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.BlockChangedPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -266,59 +269,59 @@ public class Utils
         return false;
     }
 
-    public static boolean mossyTransforming(Level level, BlockPos pos, Block block)
+    public static boolean mossyTransforming(Player player, BlockPos pos, Block block)
     {
         // stones
         if (block == Blocks.STONE || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE
                 || block == Blocks.DEEPSLATE)
         {
-            level.setBlock(pos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 11);
+            setBlock(player, pos, Blocks.MOSSY_COBBLESTONE);
             return true;
         }
 
         if (block == Blocks.MOSSY_COBBLESTONE)
         {
             var resultBlock = pos.getY() > 4 ? Blocks.COBBLESTONE : Blocks.COBBLED_DEEPSLATE;
-            level.setBlock(pos, resultBlock.defaultBlockState(), 11);
+            setBlock(player, pos, resultBlock);
             return true;
         }
 
         if (block == Blocks.COBBLESTONE_SLAB || block == Blocks.STONE_SLAB)
         {
-            level.setBlock(pos, Blocks.MOSSY_COBBLESTONE_SLAB.defaultBlockState(), 11);
+            setBlock(player, pos, Blocks.MOSSY_COBBLESTONE_SLAB);
             return true;
         }
 
         if (block == Blocks.MOSSY_COBBLESTONE_SLAB)
         {
-            level.setBlock(pos, Blocks.COBBLESTONE_SLAB.defaultBlockState(), 11);
+            setBlock(player, pos, Blocks.COBBLESTONE_SLAB);
             return true;
         }
 
         // bricks
         if (block == Blocks.STONE_BRICKS || block == Blocks.DEEPSLATE_BRICKS)
         {
-            level.setBlock(pos, Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 11);
+            setBlock(player, pos, Blocks.MOSSY_STONE_BRICKS);
             return true;
         }
 
         if (block == Blocks.MOSSY_STONE_BRICKS)
         {
             var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICKS : Blocks.DEEPSLATE_BRICKS;
-            level.setBlock(pos, resultBlock.defaultBlockState(), 11);
+            setBlock(player, pos, resultBlock);
             return true;
         }
 
         if (block == Blocks.STONE_BRICK_SLAB || block == Blocks.DEEPSLATE_BRICK_SLAB)
         {
-            level.setBlock(pos, Blocks.MOSSY_STONE_BRICK_SLAB.defaultBlockState(), 11);
+            setBlock(player, pos, Blocks.MOSSY_STONE_BRICK_SLAB);
             return true;
         }
 
         if (block == Blocks.MOSSY_STONE_BRICK_SLAB)
         {
             var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICK_SLAB : Blocks.DEEPSLATE_BRICK_SLAB;
-            level.setBlock(pos, resultBlock.defaultBlockState(), 11);
+            setBlock(player, pos, resultBlock);
             return true;
         }
 
@@ -338,5 +341,11 @@ public class Utils
     public static boolean isEnd(ResourceKey<Level> dimension)
     {
         return dimension.location().equals(Level.END.location());
+    }
+
+    public static void setBlock(Player player, BlockPos pos, Block block)
+    {
+        player.level.setBlock(pos, block.defaultBlockState(), 11);
+        new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
     }
 }

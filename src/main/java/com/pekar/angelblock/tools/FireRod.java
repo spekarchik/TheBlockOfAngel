@@ -56,7 +56,7 @@ public class FireRod extends MarineRod
             if (block == Blocks.PUMPKIN)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
-                level.setBlock(pos, Blocks.GLOWSTONE.defaultBlockState(), 11);
+                setBlock(player, pos, Blocks.GLOWSTONE);
                 return InteractionResult.CONSUME;
             }
 

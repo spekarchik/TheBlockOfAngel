@@ -1,8 +1,10 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.BlockChangedPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +13,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ModPickaxe extends PickaxeItem implements IModTool
@@ -94,5 +97,11 @@ public class ModPickaxe extends PickaxeItem implements IModTool
     public boolean isEnhancedRod()
     {
         return false;
+    }
+
+    protected void setBlock(Player player, BlockPos pos, Block block)
+    {
+        player.level.setBlock(pos, block.defaultBlockState(), 11);
+        new BlockChangedPacket().sendToPlayer((ServerPlayer) player);
     }
 }

@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.OnPlantPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -146,7 +147,7 @@ public class MarineRod extends AncientRod
             if (block == Blocks.MELON)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
-                level.setBlock(pos, Blocks.SLIME_BLOCK.defaultBlockState(), 11);
+                setBlock(player, pos, Blocks.SLIME_BLOCK);
                 return InteractionResult.CONSUME;
             }
         }
@@ -156,7 +157,7 @@ public class MarineRod extends AncientRod
 
     protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
     {
-        var itemstack = player.getItemInHand(hand);
+        var itemStack = player.getItemInHand(hand);
 
         if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
         {
@@ -164,7 +165,8 @@ public class MarineRod extends AncientRod
 
             if (player instanceof ServerPlayer serverPlayer)
             {
-                CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemstack);
+                new OnPlantPacket().sendToPlayer(serverPlayer);
+                CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
             }
 
             return InteractionResult.CONSUME;

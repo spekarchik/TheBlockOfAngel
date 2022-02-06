@@ -28,6 +28,8 @@ public final class PacketRegistry
         registerPacket(new KeyPressedPacket());
         registerPacket(new ToolsModeChangePacket());
         registerPacket(new OreDetectedPacket());
+        registerPacket(new OnPlantPacket());
+        registerPacket(new BlockChangedPacket());
     }
 
     private static <T extends Packet> void registerPacket(T packet)
