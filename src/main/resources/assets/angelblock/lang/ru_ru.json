@@ -137,6 +137,7 @@
   "key.angelblock.regen": "Восстановление здоровья",
   "key.angelblock.levitation": "Режим левитации",
   "key.angelblock.sword_effects": "Эффекты оружия/инструментов",
+  "key.angelblock.super_jump": "Режим суперпрыжка",
 
   "item.minecraft.potion.effect.block_breaker_potion": "Разрушающее зелье",
   "item.minecraft.splash_potion.effect.block_breaker_potion": "Взрывное разрушающее зелье",
@@ -146,5 +147,6 @@
   "effect.angelblock.sword_explosion_mode_effect": "Меч взрывающий",
   "effect.angelblock.sword_fire_mode_effect": "Меч поджигающий",
   "effect.angelblock.sword_web_mode_effect": "Меч связывающий",
-  "effect.angelblock.rod_magnetic_mode_effect": "Магнитный посох"
+  "effect.angelblock.rod_magnetic_mode_effect": "Магнитный посох",
+  "effect.angelblock.armor_super_jump_mode_effect": "Супер прыжки"
 }

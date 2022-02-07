@@ -40,5 +40,10 @@ public class KeyboardMouseEvents implements IEventHandler
         {
             new ToolsModeChangePacket().sendToServer();
         }
+
+        if (KeyRegistry.SUPER_JUMP.isDown())
+        {
+            new KeyPressedPacket(KeyRegistry.SUPER_JUMP.getName()).sendToServer();
+        }
     }
 }

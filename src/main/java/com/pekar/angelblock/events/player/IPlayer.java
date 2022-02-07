@@ -18,7 +18,9 @@ public interface IPlayer
 
     boolean isEffectActive(MobEffect effect);
     void setEffect(MobEffect effect, int amplifier);
+    void setEffect(MobEffect effect, int amplifier, boolean showIcon);
     void setEffect(MobEffect effect, int duration, int amplifier);
+    void setEffect(MobEffect effect, int duration, int amplifier, boolean showIcon);
     void clearEffect(MobEffect effect);
 
     String getPlayerName();

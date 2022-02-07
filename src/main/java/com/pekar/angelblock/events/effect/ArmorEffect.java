@@ -15,6 +15,7 @@ abstract class ArmorEffect implements IArmorEffect
     protected boolean isOn;
     protected boolean isAvailable;
     protected int defaultAmplifier;
+    protected boolean showIcon;
     private BiPredicate<IPlayer, IArmor> availabilityPredicate = (p, a) -> false;
 
     protected ArmorEffect(IPlayer player, IArmor armor, MobEffect effectType, int defaultAmplifier)
@@ -93,7 +94,7 @@ abstract class ArmorEffect implements IArmorEffect
 
             if (!isActive() || canResetEffect())
             {
-                player.setEffect(effectType, amplifier);
+                player.setEffect(effectType, amplifier, showIcon);
             }
         }
         else

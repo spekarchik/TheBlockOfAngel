@@ -89,9 +89,21 @@ public class Player implements IPlayer
     }
 
     @Override
+    public void setEffect(MobEffect effect, int amplifier, boolean showIcon)
+    {
+        setEffect(effect, PotionUtils.DURATION_UNLIMITED, amplifier, showIcon);
+    }
+
+    @Override
     public void setEffect(MobEffect effect, int duration, int amplifier)
     {
         entity.addEffect(new MobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, false /*showIcon*/));
+    }
+
+    @Override
+    public void setEffect(MobEffect effect, int duration, int amplifier, boolean showIcon)
+    {
+        entity.addEffect(new MobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/));
     }
 
     @Override

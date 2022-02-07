@@ -10,7 +10,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.monster.*;
@@ -31,6 +30,7 @@ public class SuperArmor extends Armor
     private final IArmorEffect jumpNegativeEffect;
     private final IArmorEffect levitationEffect;
     private final IArmorEffect dolphinsGrace;
+    private final IArmorEffect superJumpEffect;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter;
 
@@ -53,6 +53,7 @@ public class SuperArmor extends Armor
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
         levitationEffect = new LevitationSwitchingEffect(player, this, 3).availableOnFullArmorSet();
         dolphinsGrace = new DolphinsGraceEffect(player, this);
+        superJumpEffect = new SuperJumpSwitchingEffect(player, this).availableOnFullArmorSet();
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
@@ -77,6 +78,7 @@ public class SuperArmor extends Armor
         {
             jumpEffect.updateSwitchState();
             levitationEffect.updateSwitchState();
+            superJumpEffect.updateSwitchState();
         }
     }
 
@@ -190,6 +192,7 @@ public class SuperArmor extends Armor
         jumpNegativeEffect.updateEffectAvailability();
         levitationEffect.updateEffectAvailability();
         dolphinsGrace.updateEffectAvailability();
+        superJumpEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -199,9 +202,15 @@ public class SuperArmor extends Armor
     {
         if (!player.isArmorElementPutOn(getLeggingsName())) return;
         if (jumpEffect.isActive() || slownessEffect.isActive()) return;
-        if (!levitationEffect.isEffectOn() || !levitationEffect.isActive()) return;
 
-        player.setEffect(MobEffects.JUMP, 30, 6);
+        if (levitationEffect.isEffectOn() && levitationEffect.isActive())
+        {
+            player.setEffect(MobEffects.JUMP, 30, 6);
+        }
+        else if (superJumpEffect.isEffectOn() && superJumpEffect.isActive())
+        {
+            player.setEffect(MobEffects.JUMP, 20, 30);
+        }
     }
 
     @Override
@@ -210,6 +219,10 @@ public class SuperArmor extends Armor
         if (levitationEffect.isEffectOn() && levitationEffect.isActive())
         {
             event.setDamageMultiplier(0);
+        }
+        else if (superJumpEffect.isEffectOn() && superJumpEffect.isActive())
+        {
+            event.setDamageMultiplier(0.3f);
         }
         else if (jumpEffect.isEffectOn() && jumpEffect.isActive())
         {
@@ -243,7 +256,7 @@ public class SuperArmor extends Armor
                 entity.addEffect(potionEffect);
             }
 
-            if (++creeperDetectedCounter > 3)
+            if (++creeperDetectedCounter > 2)
             {
                 creeperDetectedPacket.sendToPlayer((ServerPlayer) entityPlayer);
                 creeperDetectedCounter = 0;
@@ -293,6 +306,11 @@ public class SuperArmor extends Armor
             {
                 levitationEffect.trySwitch(getLevitationAmplifier());
             }
+        }
+
+        if (pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
+        {
+            superJumpEffect.trySwitch();
         }
     }
 
@@ -367,6 +385,7 @@ public class SuperArmor extends Armor
         slownessEffect.updateEffectActivity();
         jumpNegativeEffect.updateEffectActivity();
         dolphinsGrace.updateEffectActivity();
+        superJumpEffect.updateEffectActivity();
 
         levitationEffect.updateEffectActivity(getLevitationAmplifier());
 
