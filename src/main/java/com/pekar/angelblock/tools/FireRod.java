@@ -68,7 +68,7 @@ public class FireRod extends MarineRod
                 }
             }
 
-            if (block == Blocks.PUMPKIN)
+            if (block == Blocks.MAGMA_BLOCK)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
                 setBlock(player, pos, Blocks.GLOWSTONE);
