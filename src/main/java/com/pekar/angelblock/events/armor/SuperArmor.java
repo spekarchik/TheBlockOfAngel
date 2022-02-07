@@ -222,7 +222,7 @@ public class SuperArmor extends Armor
         }
         else if (superJumpEffect.isEffectOn() && superJumpEffect.isActive())
         {
-            event.setDamageMultiplier(0.1f);
+            event.setDamageMultiplier(0.3f);
         }
         else if (jumpEffect.isEffectOn() && jumpEffect.isActive())
         {
@@ -256,7 +256,7 @@ public class SuperArmor extends Armor
                 entity.addEffect(potionEffect);
             }
 
-            if (++creeperDetectedCounter > 3)
+            if (++creeperDetectedCounter > 2)
             {
                 creeperDetectedPacket.sendToPlayer((ServerPlayer) entityPlayer);
                 creeperDetectedCounter = 0;
