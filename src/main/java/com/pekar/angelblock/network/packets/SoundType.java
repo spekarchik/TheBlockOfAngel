@@ -6,7 +6,8 @@ public enum SoundType
     PLANT,
     BLOCK_CHANGED,
     WATER_PLACED,
-    LAVA_PLACED;
+    LAVA_PLACED,
+    STEAM;
 
     public static int getIndex(SoundType soundType)
     {
@@ -17,6 +18,7 @@ public enum SoundType
                     case BLOCK_CHANGED -> 2;
                     case WATER_PLACED -> 3;
                     case LAVA_PLACED -> 4;
+                    case STEAM -> 5;
                 };
     }
 
@@ -28,6 +30,7 @@ public enum SoundType
                     case 2 -> BLOCK_CHANGED;
                     case 3 -> WATER_PLACED;
                     case 4 -> LAVA_PLACED;
+                    case 5 -> STEAM;
                     default -> UNDEFINED;
                 };
     }

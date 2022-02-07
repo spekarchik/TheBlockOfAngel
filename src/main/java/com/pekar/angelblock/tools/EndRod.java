@@ -91,7 +91,7 @@ public class EndRod extends AmethystRod
                 }
 
                 if (!blocksToTransform.isEmpty())
-                    new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+                    new PlaySoundPacket(SoundType.STEAM).sendToPlayer((ServerPlayer) player);
 
                 damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 

@@ -50,7 +50,8 @@ public class PlaySoundPacket extends ServerToClientPacket
             case PLANT -> SoundEvents.CROP_PLANTED;
             case BLOCK_CHANGED -> SoundEvents.STONE_BREAK;
             case WATER_PLACED -> SoundEvents.PLAYER_SPLASH_HIGH_SPEED;
-            case LAVA_PLACED -> SoundEvents.LAVA_AMBIENT;
+            case LAVA_PLACED -> SoundEvents.LAVA_POP;
+            case STEAM -> SoundEvents.LAVA_EXTINGUISH;
             case UNDEFINED -> null;
         };
     }
