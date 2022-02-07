@@ -137,6 +137,7 @@
   "key.angelblock.regen": "Regeneration",
   "key.angelblock.levitation": "Levitation Mode",
   "key.angelblock.sword_effects": "Sword/Tool Effects",
+  "key.angelblock.super_jump": "Super Jump Mode",
 
   "item.minecraft.potion.effect.block_breaker_potion": "Splash Destroying Potion",
   "item.minecraft.splash_potion.effect.block_breaker_potion": "Splash Destroying Potion",
@@ -146,5 +147,6 @@
   "effect.angelblock.sword_explosion_mode_effect": "Sword Explosion Mode",
   "effect.angelblock.sword_fire_mode_effect": "Sword Fire Mode",
   "effect.angelblock.sword_web_mode_effect": "Sword Web Mode",
-  "effect.angelblock.rod_magnetic_mode_effect": "Rod Magnetic Mode"
+  "effect.angelblock.rod_magnetic_mode_effect": "Rod Magnetic Mode",
+  "effect.angelblock.armor_super_jump_mode_effect": "Super Jump Mode"
 }

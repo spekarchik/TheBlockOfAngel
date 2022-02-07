@@ -28,6 +28,9 @@ public class PotionRegistry
     public static final RegistryObject<MobEffect> ROD_MAGNETIC_MODE_EFFECT = Main.MOB_EFFECTS.register("rod_magnetic_mode_effect",
             () -> new RodMagneticModeEffect());
 
+    public static final RegistryObject<MobEffect> ARMOR_SUPER_JUMP_MODE_EFFECT = Main.MOB_EFFECTS.register("armor_super_jump_mode_effect",
+            () -> new SuperJumpModeEffect());
+
 
     // Potions
     public static final RegistryObject<Potion> BLOCK_BREAKER_POTION = Main.POTIONS.register("block_breaker_potion",
