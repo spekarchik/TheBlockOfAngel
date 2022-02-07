@@ -66,7 +66,8 @@ public class EndRod extends AmethystRod
                         case DOWN -> pos.above();
                     };
 
-            if (level.getBlockState(startPos).getBlock() == Blocks.LAVA)
+            if (level.getBlockState(startPos).getBlock() == Blocks.LAVA
+                && level.getBlockState(startPos.below()).getBlock() != Blocks.OBSIDIAN)
             {
                 int X = pos.getX(), Y = startPos.getY(), Z = pos.getZ();
                 var blocksToTransform = new ArrayList<BlockPos>();

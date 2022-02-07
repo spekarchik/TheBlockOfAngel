@@ -45,12 +45,6 @@ public class AncientRod extends MagneticRod
         BlockState blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
-        if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
-        {
-            setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
-            return InteractionResult.CONSUME;
-        }
-
         if (block instanceof InfestedBlock infestedBlock)
         {
             setBlock(player, pos, infestedBlock.getHostBlock());
@@ -70,6 +64,13 @@ public class AncientRod extends MagneticRod
 
         if (!isBroken)
         {
+            if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
+            {
+                setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
             if (block instanceof LeavesBlock)
             {
                 damageItemIfSurvival(player, level, pos, blockState);

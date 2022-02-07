@@ -39,7 +39,10 @@ public class AmethystRod extends FireRod
 
         if (!isBroken)
         {
-            if (block == Blocks.OBSIDIAN)
+            var upPos = pos.above();
+            var upBlock = level.getBlockState(upPos).getBlock();
+
+            if (block == Blocks.OBSIDIAN && upBlock != Blocks.LAVA)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
                 setBlock(player, pos, Blocks.CRYING_OBSIDIAN);

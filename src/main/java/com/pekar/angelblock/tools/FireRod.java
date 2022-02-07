@@ -2,6 +2,9 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.OreDetectedPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 
 public class FireRod extends MarineRod
 {
@@ -29,8 +33,8 @@ public class FireRod extends MarineRod
         if (level.isClientSide) return InteractionResult.PASS;
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
-        var result = super.useOn(context);
-        if (result != InteractionResult.PASS) return result;
+        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
+            return super.useOn(context);
 
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);
@@ -51,6 +55,17 @@ public class FireRod extends MarineRod
                     damageItemIfSurvival(player, level, pos, blockState);
                     return plant(player, level, pos, hand, facing, Blocks.NETHER_WART);
                 }
+
+                var upPos = pos.above();
+                var upBlock = level.getBlockState(upPos).getBlock();
+                if (block == Blocks.OBSIDIAN && upBlock == Blocks.LAVA && level.getFluidState(upPos).getAmount() < FluidState.AMOUNT_FULL)
+                {
+                    level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
+                    updateNeighbors(level, upPos);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
+                    return InteractionResult.CONSUME;
+                }
             }
 
             if (block == Blocks.PUMPKIN)
@@ -68,7 +83,7 @@ public class FireRod extends MarineRod
             }
         }
 
-        return InteractionResult.PASS;
+        return super.useOn(context);
     }
 
     @Override
