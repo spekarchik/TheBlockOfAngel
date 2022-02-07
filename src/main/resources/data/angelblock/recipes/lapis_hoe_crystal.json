@@ -1,7 +1,7 @@
 {
     "type": "minecraft:stonecutting",
     "ingredient": {
-        "item": "angelblock:lapis_sword"
+        "item": "angelblock:lapis_hoe"
     },
     "result": "angelblock:marine_crystal",
     "group": "tools",
