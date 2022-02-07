@@ -38,6 +38,10 @@ public class MagneticRod extends ModRod
             return super.useOn(context);
         }
 
+        var itemStack = player.getItemInHand(context.getHand());
+        boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
+        if (isBroken) return InteractionResult.PASS;
+
         var pos = context.getClickedPos();
         if (!canBeReplaced(level, pos) && !isOre(level, pos) && !isDiamondOre(level.getBlockState(pos).getBlock()))
         {
