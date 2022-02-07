@@ -63,10 +63,7 @@ public class MarineRod extends AncientRod
                     new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
                     damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 
-                    if (!updateNeighbors(level, upPos))
-                    {
-                        return InteractionResult.FAIL;
-                    }
+                    updateNeighbors(level, upPos);
 
                     return InteractionResult.CONSUME;
                 }
