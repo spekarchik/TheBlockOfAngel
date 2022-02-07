@@ -41,6 +41,9 @@ public class ToolMaterials
     static final Tier ROD_MATERIAL4 = new ModToolMaterial(250, 2.0F, 0F, 0, 0,
             Ingredient.of(Items.BAMBOO));
 
+    static final Tier ROD_MATERIAL5 = new ModToolMaterial(500, 2.0F, 0F, 0, 0,
+            Ingredient.of(Items.BAMBOO));
+
 //    static final Tier RENDELITHIC = EnumHelper
 //            .addToolMaterial("materialext:rendelithic_tool", 3, 2200, 7, 3, 15)
 //            .setRepairItem(new ItemStack(ItemRegistry.RENDELITHIC_INGOT));

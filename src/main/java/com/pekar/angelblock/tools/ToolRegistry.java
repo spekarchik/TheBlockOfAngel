@@ -126,6 +126,10 @@ public class ToolRegistry
             () -> new AmethystRod(ToolMaterials.ROD_MATERIAL4, 0, -3F, false,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
+    public static final RegistryObject<ModRod> END_ROD = Main.ITEMS.register("end_rod",
+            () -> new EndRod(ToolMaterials.ROD_MATERIAL5, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+
     public static final RegistryObject<ModRod> ANCIENT_MAGNETIC_ROD = Main.ITEMS.register("ancient_magnetic_rod",
             () -> new AncientRod(ToolMaterials.ROD_MATERIAL1, 0, -3F, true,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
@@ -140,6 +144,10 @@ public class ToolRegistry
 
     public static final RegistryObject<ModRod> AMETHYST_MAGNETIC_ROD = Main.ITEMS.register("amethyst_magnetic_rod",
             () -> new AmethystRod(ToolMaterials.ROD_MATERIAL4, 0, -3F, true,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<ModRod> END_MAGNETIC_ROD = Main.ITEMS.register("end_magnetic_rod",
+            () -> new EndRod(ToolMaterials.ROD_MATERIAL5, 0, -3F, true,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
 
     // Swords

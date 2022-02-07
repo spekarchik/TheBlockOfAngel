@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:amethyst_rod"
+    },
+    "addition": {
+        "item": "angelblock:super_crystal"
+    },
+    "result": {
+        "item": "angelblock:end_rod"
+    }
+}

@@ -3,7 +3,6 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
@@ -40,18 +39,6 @@ public class AmethystRod extends FireRod
 
         if (!isBroken)
         {
-            var hand = context.getHand();
-            var facing = context.getClickedFace();
-
-            if (facing == Direction.UP)
-            {
-                if (block == Blocks.END_STONE)
-                {
-                    damageItemIfSurvival(player, level, pos, blockState);
-                    return plant(player, level, pos, hand, facing, Blocks.CHORUS_FLOWER);
-                }
-            }
-
             if (block == Blocks.OBSIDIAN)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
@@ -75,12 +62,6 @@ public class AmethystRod extends FireRod
     protected int getShiftingRadius()
     {
         return 3;
-    }
-
-    @Override
-    protected int getShiftDepth()
-    {
-        return 7;
     }
 
     private InteractionResult setGlowLichen(BlockPlaceContext context, BlockPos pos)
