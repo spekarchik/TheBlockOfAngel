@@ -1,7 +1,7 @@
 package com.pekar.angelblock.tab;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.blocks.BlockRegistry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,6 +17,6 @@ public class ModTab extends CreativeModeTab
     @Override
     public ItemStack makeIcon()
     {
-        return new ItemStack(ItemRegistry.RENDELITHIC_POWDER.get());
+        return new ItemStack(BlockRegistry.ANGEL_BLOCK.get());
     }
 }
