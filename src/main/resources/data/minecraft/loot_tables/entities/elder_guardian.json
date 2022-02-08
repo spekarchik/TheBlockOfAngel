@@ -104,32 +104,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "angelblock:marine_crystal"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:killed_by_player"
-        }
-      ]
-    },
-    {
-      "rolls": 1.0,
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
 		  "weight": 1,
           "name": "angelblock:guardian_eye"
         },
         {
           "type": "minecraft:empty",
 		  "weight": 2
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:killed_by_player"
         }
       ]
     },
