@@ -12,10 +12,10 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.OreBlock;
-import net.minecraft.world.level.material.FluidState;
+import org.apache.commons.lang3.function.TriFunction;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MagneticRod extends ModRod
@@ -53,121 +53,93 @@ public class MagneticRod extends ModRod
 
     private InteractionResult shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
     {
-        int radius = getShiftingRadius();
         int depth = getShiftDepth();
-        int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
-        int initialDepth, inc;
-        Function<BlockPos, BlockPos> closerPosFunc;
-
-        boolean isDiamondOreFound = false;
-        boolean isOreFound = false;
+        int initialDepth;
+        Function<BlockPos, Integer> getDepthCoord, getRadiusCoord1, getRadiusCoord2;
+        TriFunction<Integer, Integer, Integer, BlockPos> createPos;
 
         if (clickedFace == Direction.UP || clickedFace == Direction.DOWN)
         {
-            if (clickedFace == Direction.UP)
-            {
-                initialDepth = depth;
-                inc = 1;
-                closerPosFunc = BlockPos::above;
-            }
-            else
-            {
-                initialDepth = -depth;
-                inc = -1;
-                closerPosFunc = BlockPos::below;
-            }
-
-            for (int x = posX - radius; x <= posX + radius; x++)
-                for (int z = posZ - radius; z <= posZ + radius; z++)
-                    for (int y = posY - initialDepth; y != posY; y += inc)
-                    {
-                        var currentPos = new BlockPos(x, y, z);
-                        var result = tryExchange(level, currentPos, closerPosFunc.apply(currentPos));
-                        switch (result)
-                        {
-                            case ORE -> isOreFound = true;
-                            case DIAMOND_ORE -> isDiamondOreFound = true;
-                            default -> {}
-                        }
-                    }
-
-            if (isOreFound || isDiamondOreFound) oreFoundEvent((ServerPlayer) player, isOreFound, isDiamondOreFound);
-
-            return InteractionResult.CONSUME;
+            getDepthCoord = p -> p.getY();
+            getRadiusCoord1 = p -> p.getX();
+            getRadiusCoord2 = p -> p.getZ();
+            createPos = (x1, x2, d) -> new BlockPos(x1, d, x2);
+            initialDepth = clickedFace == Direction.UP ? depth : -depth;
         }
-
-        if (clickedFace == Direction.SOUTH || clickedFace == Direction.NORTH)
+        else if (clickedFace == Direction.SOUTH || clickedFace == Direction.NORTH)
         {
             // south: z++
-            if (clickedFace == Direction.SOUTH)
-            {
-                initialDepth = depth;
-                inc = 1;
-                closerPosFunc = BlockPos::south;
-            }
-            else
-            {
-                initialDepth = -depth;
-                inc = -1;
-                closerPosFunc = BlockPos::north;
-            }
-
-            for (int x = posX - radius; x <= posX + radius; x++)
-                for (int y = posY - radius; y <= posY + radius; y++)
-                    for (int z = posZ - initialDepth; z != posZ; z += inc)
-                    {
-                        var currentPos = new BlockPos(x, y, z);
-                        var result = tryExchange(level, currentPos, closerPosFunc.apply(currentPos));
-                        switch (result)
-                        {
-                            case ORE -> isOreFound = true;
-                            case DIAMOND_ORE -> isDiamondOreFound = true;
-                            default -> {}
-                        }
-                    }
-
-            if (isOreFound || isDiamondOreFound) oreFoundEvent((ServerPlayer) player, isOreFound, isDiamondOreFound);
-
-            return InteractionResult.CONSUME;
+            getDepthCoord = p -> p.getZ();
+            getRadiusCoord1 = p -> p.getX();
+            getRadiusCoord2 = p -> p.getY();
+            createPos = (x1, x2, d) -> new BlockPos(x1, x2, d);
+            initialDepth = clickedFace == Direction.SOUTH ? depth : -depth;
         }
-
-        if (clickedFace == Direction.EAST || clickedFace == Direction.WEST)
+        else // (clickedFace == Direction.EAST || clickedFace == Direction.WEST)
         {
             // east: x++
-            if (clickedFace == Direction.EAST)
-            {
-                initialDepth = depth;
-                inc = 1;
-                closerPosFunc = BlockPos::east;
-            }
-            else
-            {
-                initialDepth = -depth;
-                inc = -1;
-                closerPosFunc = BlockPos::west;
-            }
+            getDepthCoord = p -> p.getX();
+            getRadiusCoord1 = p -> p.getY();
+            getRadiusCoord2 = p -> p.getZ();
+            createPos = (x1, x2, d) -> new BlockPos(d, x1, x2);
+            initialDepth = clickedFace == Direction.EAST ? depth : -depth;
+        }
 
-            for (int z = posZ - radius; z <= posZ + radius; z++)
-                for (int y = posY - radius; y <= posY + radius; y++)
-                    for (int x = posX - initialDepth; x != posX; x += inc)
+        shiftOreBlocks((ServerPlayer) player, level, pos, clickedFace, initialDepth, getDepthCoord, getRadiusCoord1, getRadiusCoord2, createPos);
+
+        return InteractionResult.CONSUME;
+    }
+
+    private void shiftOreBlocks(ServerPlayer player, Level level, BlockPos pos, Direction clickedFace, int initialDepth, Function<BlockPos, Integer> getDepthCoord, Function<BlockPos, Integer> getRadiusCoord1, Function<BlockPos, Integer> getRadiusCoord2, TriFunction<Integer, Integer, Integer, BlockPos> createPos)
+    {
+        int radius = getShiftingRadius();
+        boolean isDiamondOreFound = false;
+        boolean isShiftingOreFound = false;
+
+        for (int x1 = getRadiusCoord1.apply(pos) - radius; x1 <= getRadiusCoord1.apply(pos) + radius; x1++)
+            for (int x2 = getRadiusCoord2.apply(pos) - radius; x2 <= getRadiusCoord2.apply(pos) + radius; x2++)
+            {
+                BlockPos currentPos, replacedPos;
+                for (currentPos = createPos.apply(x1, x2, getDepthCoord.apply(pos) - initialDepth); getDepthCoord.apply(currentPos) != getDepthCoord.apply(pos); currentPos = replacedPos)
+                {
+                    // check current block: ore? diamond?
+                    var currentBlock = level.getBlockState(currentPos).getBlock();
+                    boolean isDiamondOre = isDiamondOre(currentBlock);
+                    boolean isShiftingOre = isShiftingOre(currentBlock);
+
+                    if (isDiamondOre) isDiamondOreFound = true;
+
+                    if (isShiftingOre)
                     {
-                        var currentPos = new BlockPos(x, y, z);
-                        var result = tryExchange(level, currentPos, closerPosFunc.apply(currentPos));
-                        switch (result)
+                        isShiftingOreFound = true;
+                    }
+                    else
+                    {
+                        replacedPos = currentPos.relative(clickedFace);
+                        continue;
+                    }
+
+                    // check next block to replace
+                    boolean solidBlockFound = false;
+                    for (replacedPos = currentPos.relative(clickedFace); getDepthCoord.apply(replacedPos) != getDepthCoord.apply(pos.relative(clickedFace)); replacedPos = replacedPos.relative(clickedFace))
+                    {
+                        var blockState = level.getBlockState(replacedPos);
+                        if (!blockState.isAir() && !blockState.getMaterial().isLiquid())
                         {
-                            case ORE -> isOreFound = true;
-                            case DIAMOND_ORE -> isDiamondOreFound = true;
-                            default -> {}
+                            solidBlockFound = true;
+                            break;
                         }
                     }
 
-            if (isOreFound || isDiamondOreFound) oreFoundEvent((ServerPlayer) player, isOreFound, isDiamondOreFound);
+                    // replace blocks if possible, break the loop otherwise (the rest of the blocks are air ot liquid)
+                    if (!solidBlockFound) break;
 
-            return InteractionResult.CONSUME;
-        }
+                    tryExchange(level, currentPos, replacedPos);
+                }
+            }
 
-        return InteractionResult.PASS;
+        if (isShiftingOreFound || isDiamondOreFound) oreFoundEvent(player, isShiftingOreFound, isDiamondOreFound);
     }
 
     protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound)
@@ -179,7 +151,7 @@ public class MagneticRod extends ModRod
     private OreType tryExchange(Level level, BlockPos currentPos, BlockPos closerPos)
     {
         var block = level.getBlockState(currentPos).getBlock();
-        boolean isDiamondOre = block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE;
+        boolean isDiamondOre = isDiamondOre(block);
 
         if (!isOre(level, currentPos)) return isDiamondOre ? OreType.DIAMOND_ORE : OreType.NOT_ORE;
         if (!canBeReplaced(level, closerPos)) return OreType.NOT_ORE;
@@ -199,10 +171,10 @@ public class MagneticRod extends ModRod
 
     private void exchange(Level level, BlockPos currentPos, BlockPos closerPos)
     {
-        var currectBlockState = level.getBlockState(currentPos);
+        var currentBlockState = level.getBlockState(currentPos);
         var upperBlockState = level.getBlockState(closerPos);
         level.setBlock(currentPos, upperBlockState, 11);
-        level.setBlock(closerPos, currectBlockState, 11);
+        level.setBlock(closerPos, currentBlockState, 11);
     }
 
     protected boolean canBeReplaced(Level level, BlockPos pos)
@@ -211,12 +183,11 @@ public class MagneticRod extends ModRod
 
         var block = level.getBlockState(pos).getBlock();
 
-        return block == Blocks.AIR || (block instanceof LiquidBlock && level.getFluidState(pos).getAmount() < FluidState.AMOUNT_FULL)
-                || block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.DIORITE || block == Blocks.ANDESITE
+        return block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.DIORITE || block == Blocks.ANDESITE
                 || block == Blocks.DEEPSLATE || block == Blocks.TUFF || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE;
     }
 
-    protected boolean isOre(Block block)
+    protected boolean isShiftingOre(Block block)
     {
         return block instanceof OreBlock && !isDiamondOre(block);
     }
@@ -224,7 +195,7 @@ public class MagneticRod extends ModRod
     private boolean isOre(Level level, BlockPos pos)
     {
         var block = level.getBlockState(pos).getBlock();
-        return isOre(block);
+        return isShiftingOre(block);
     }
 
     private boolean isDiamondOre(Block block)

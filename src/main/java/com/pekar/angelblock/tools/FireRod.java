@@ -99,9 +99,9 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    protected boolean isOre(Block block)
+    protected boolean isShiftingOre(Block block)
     {
-        return block == Blocks.ANCIENT_DEBRIS || super.isOre(block);
+        return block == Blocks.ANCIENT_DEBRIS || super.isShiftingOre(block);
     }
 
     @Override
