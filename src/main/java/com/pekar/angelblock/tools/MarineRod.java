@@ -179,7 +179,7 @@ public class MarineRod extends AncientRod
     @Override
     protected int getShiftDepth()
     {
-        return 6;
+        return 7;
     }
 
     private Block chooseFlowerByValue(int value)

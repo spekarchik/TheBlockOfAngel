@@ -62,9 +62,9 @@ public class AmethystRod extends FireRod
     }
 
     @Override
-    protected int getShiftingRadius()
+    protected int getShiftDepth()
     {
-        return 3;
+        return 12;
     }
 
     private InteractionResult setGlowLichen(BlockPlaceContext context, BlockPos pos)

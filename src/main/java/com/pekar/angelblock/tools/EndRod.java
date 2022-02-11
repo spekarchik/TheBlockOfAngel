@@ -105,6 +105,12 @@ public class EndRod extends AmethystRod
     @Override
     protected int getShiftDepth()
     {
-        return 7;
+        return 15;
+    }
+
+    @Override
+    protected int getShiftingRadius()
+    {
+        return 3;
     }
 }

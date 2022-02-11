@@ -111,6 +111,12 @@ public class FireRod extends MarineRod
     }
 
     @Override
+    protected int getShiftDepth()
+    {
+        return 9;
+    }
+
+    @Override
     protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound)
     {
         new OreDetectedPacket(isDiamondOreFound).sendToPlayer(player);
