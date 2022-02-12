@@ -64,6 +64,11 @@ public class BlockBreakerMobEffect extends MobEffect
             level.setBlock(pos, BlockRegistry.DESTROYING_WHITE_WOOL.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
+        else if (block == Blocks.GRAVEL)
+        {
+            level.setBlock(pos, BlockRegistry.DESTROYING_RAW_IRON.get().defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
         else if (block == Blocks.LAVA)
         {
             level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);

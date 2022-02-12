@@ -2,7 +2,6 @@ package com.pekar.angelblock.blocks;
 
 import com.pekar.angelblock.Main;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -54,6 +53,9 @@ public class BlockRegistry
             new Block(BlockBehaviour.Properties.of(Material.AIR)));
 
     public static final RegistryObject<Block> DESTROYING_BONE_MEAL = Main.BLOCKS.register("destroying_bone_meal", () ->
+            new Block(BlockBehaviour.Properties.of(Material.AIR)));
+
+    public static final RegistryObject<Block> DESTROYING_RAW_IRON = Main.BLOCKS.register("destroying_raw_iron", () ->
             new Block(BlockBehaviour.Properties.of(Material.AIR)));
 
     public static void initStatic()
