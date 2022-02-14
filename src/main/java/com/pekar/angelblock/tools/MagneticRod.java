@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.OreBlock;
 import org.apache.commons.lang3.function.TriFunction;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MagneticRod extends ModRod

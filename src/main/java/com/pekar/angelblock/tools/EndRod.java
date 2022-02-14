@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -14,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class EndRod extends AmethystRod
 {
@@ -95,6 +95,14 @@ public class EndRod extends AmethystRod
 
                 damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 
+                return InteractionResult.CONSUME;
+            }
+
+            if (block == Blocks.TUFF)
+            {
+                level.setBlock(pos, BlockRegistry.DESTROYING_GUNPOWDER.get().defaultBlockState(), 0);
+                level.destroyBlock(pos, true, player, 1);
+                damageItemIfSurvival(player, level, pos, blockState);
                 return InteractionResult.CONSUME;
             }
         }
