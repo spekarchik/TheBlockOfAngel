@@ -5,19 +5,8 @@
       "rolls": {
         "type": "minecraft:uniform",
         "min": 1.0,
-        "max": 3.0
+        "max": 2.0
       },
-      "bonus_rolls": 0.0,
-      "entries":
-	  [
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:experience_bottle"
-        }
-	  ]
-	},
-    {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries":
 	  [
@@ -25,9 +14,7 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:enchant_with_levels",
-              "levels": 30.0,
-              "treasure": true
+              "function": "minecraft:enchant_randomly"
             }
           ],
           "name": "minecraft:book"
@@ -37,11 +24,15 @@
     {
       "rolls": {
         "type": "minecraft:uniform",
-        "min": 3.0,
-        "max": 8.0
+        "min": 1.0,
+        "max": 5.0
       },
       "bonus_rolls": 0.0,
       "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald"
+        },
         {
           "type": "minecraft:item",
           "weight": 2,
@@ -51,89 +42,76 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1.0,
-                "max": 4.0
+                "max": 3.0
               },
               "add": false
             }
           ],
-          "name": "minecraft:redstone"
+          "name": "minecraft:arrow"
         },
         {
           "type": "minecraft:item",
-          "weight": 7,
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1.0,
-                "max": 4.0
+                "max": 3.0
               },
               "add": false
             }
           ],
-          "name": "minecraft:bread"
+          "name": "minecraft:feather"
         },
         {
           "type": "minecraft:item",
-          "weight": 7,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1.0,
-                "max": 4.0
+                "max": 3.0
               },
               "add": false
             }
           ],
-          "name": "minecraft:rotten_flesh"
+          "name": "minecraft:egg"
         },
         {
           "type": "minecraft:item",
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1.0,
-                "max": 4.0
+                "max": 3.0
               },
               "add": false
             }
           ],
-          "name": "minecraft:lapis_lazuli"
+          "name": "minecraft:flint"
         },
         {
           "type": "minecraft:item",
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1.0,
-                "max": 4.0
+                "max": 3.0
               },
               "add": false
             }
           ],
-          "name": "minecraft:gold_ingot"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 4.0
-              },
-              "add": false
-            }
-          ],
-          "name": "minecraft:emerald"
+          "name": "minecraft:stick"
         }
       ]
     }
