@@ -16,6 +16,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 public class FireRod extends MarineRod
 {
@@ -68,18 +70,61 @@ public class FireRod extends MarineRod
                 }
             }
 
-            if (block == Blocks.MAGMA_BLOCK)
-            {
-                damageItemIfSurvival(player, level, pos, blockState);
-                setBlock(player, pos, Blocks.GLOWSTONE);
-                return InteractionResult.CONSUME;
-            }
-
             if (block == Blocks.WHITE_WOOL)
             {
                 level.setBlock(pos, BlockRegistry.DESTROYING_BONE_MEAL.get().defaultBlockState(), 0);
                 level.destroyBlock(pos, true, player, 1);
+                damageItemIfSurvival(player, level, pos, blockState);
                 return InteractionResult.CONSUME;
+            }
+
+            if (block == Blocks.MAGMA_BLOCK)
+            {
+                setBlock(player, pos, Blocks.GLOWSTONE);
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
+            if (block == Blocks.GLOWSTONE)
+            {
+                level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
+                level.destroyBlock(pos, true, player, 1);
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
+            if (block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM)
+            {
+                setBlock(player, pos, Blocks.SHROOMLIGHT);
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
+            if (block == Blocks.SHROOMLIGHT)
+            {
+                for (int x = pos.getX() - 1; x <= pos.getX() + 1; x++)
+                    for (int y = pos.getY() - 1; y <= pos.getY() + 1; y++)
+                        for (int z = pos.getZ() - 1; z <= pos.getZ() + 1; z++)
+                        {
+                            if (x == pos.getX() && y == pos.getY() && z == pos.getZ()) continue;
+                            var block1 = level.getBlockState(new BlockPos(x, y, z)).getBlock();
+
+                            if (block1 == Blocks.CRIMSON_STEM || block1 == Blocks.CRIMSON_NYLIUM || block1 == Blocks.NETHER_WART_BLOCK
+                                    || block1 == Blocks.NETHER_WART || block1 == Blocks.CRIMSON_HYPHAE)
+                            {
+                                setBlock(player, pos, Blocks.CRIMSON_STEM);
+                                damageItemIfSurvival(player, level, pos, blockState);
+                                return InteractionResult.CONSUME;
+                            }
+
+                            if (block1 == Blocks.WARPED_STEM || block1 == Blocks.WARPED_NYLIUM || block1 == Blocks.WARPED_WART_BLOCK
+                                    || block1 == Blocks.WARPED_HYPHAE)
+                            {
+                                setBlock(player, pos, Blocks.WARPED_STEM);
+                                damageItemIfSurvival(player, level, pos, blockState);
+                                return InteractionResult.CONSUME;
+                            }
+                        }
             }
         }
 
