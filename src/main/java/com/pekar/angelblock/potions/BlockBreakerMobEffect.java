@@ -73,6 +73,10 @@ public class BlockBreakerMobEffect extends MobEffect
         {
             level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);
         }
+        else if (block == Blocks.WATER)
+        {
+            level.setBlock(pos, Blocks.ICE.defaultBlockState(), 11);
+        }
         else if (block == Blocks.TUFF)
         {
             level.setBlock(pos, BlockRegistry.DESTROYING_GUNPOWDER.get().defaultBlockState(), 0);
@@ -83,7 +87,7 @@ public class BlockBreakerMobEffect extends MobEffect
 //            level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_BLOCK.get().defaultBlockState(), 0);
 //            level.destroyBlock(pos, true, source, 1);
 //        }
-        else if (block == Blocks.BASALT)
+        else if (block == Blocks.GLASS)
         {
             level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_SHARD_BLOCK.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);

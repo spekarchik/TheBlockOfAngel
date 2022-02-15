@@ -93,6 +93,20 @@ public class FireRod extends MarineRod
                 return InteractionResult.CONSUME;
             }
 
+            if (block == Blocks.BASALT)
+            {
+                setBlock(player, pos, Blocks.BLACKSTONE);
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
+            if (block == Blocks.BLACKSTONE)
+            {
+                setBlock(player, pos, Blocks.NETHERRACK);
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
             if (block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM)
             {
                 setBlock(player, pos, Blocks.SHROOMLIGHT);

@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
@@ -56,6 +55,20 @@ public class AmethystRod extends FireRod
             {
                 damageItemIfSurvival(player, level, pos, blockState);
                 return setOnBlockSide(context, this::setGlowLichen);
+            }
+
+            if (block == Blocks.DIAMOND_BLOCK)
+            {
+                setBlock(player, pos, Blocks.BUDDING_AMETHYST);
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
+            if (block == Blocks.BONE_BLOCK)
+            {
+                setBlock(player, pos, Blocks.CALCITE);
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
             }
         }
 
