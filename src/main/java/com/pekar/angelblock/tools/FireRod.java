@@ -177,14 +177,14 @@ public class FireRod extends MarineRod
     @Override
     protected int getAmethystDetectionDepth()
     {
-        return 20;
+        return 30;
     }
 
     @Override
     protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound, boolean isAmethystFound)
     {
-        var sound = isAmethystFound ? SoundType.AMETHYST_FOUND :
-                (isDiamondOreFound ? SoundType.DIAMOND_FOUND : SoundType.ORE_FOUND);
+        var sound = isDiamondOreFound ? SoundType.DIAMOND_FOUND :
+                (isAmethystFound ? SoundType.AMETHYST_FOUND : SoundType.ORE_FOUND);
         new PlaySoundPacket(sound).sendToPlayer(player);
     }
 }

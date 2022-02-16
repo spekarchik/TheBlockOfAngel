@@ -84,7 +84,7 @@ public class AmethystRod extends FireRod
     @Override
     protected int getAmethystDetectionDepth()
     {
-        return 30;
+        return 40;
     }
 
     private InteractionResult setGlowLichen(BlockPlaceContext context, BlockPos pos)

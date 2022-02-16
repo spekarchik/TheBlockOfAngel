@@ -196,9 +196,9 @@ public class MagneticRod extends ModRod
         return 5;
     }
 
-    protected  int getAmethystDetectionDepth()
+    protected int getAmethystDetectionDepth()
     {
-        return 10;
+        return 20;
     }
 
     private void exchange(Level level, BlockPos currentPos, BlockPos closerPos)

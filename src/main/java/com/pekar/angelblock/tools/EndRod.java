@@ -121,10 +121,4 @@ public class EndRod extends AmethystRod
     {
         return 3;
     }
-
-    @Override
-    protected int getAmethystDetectionDepth()
-    {
-        return 40;
-    }
 }
