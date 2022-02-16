@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.OreDetectedPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.OreBlock;
 import org.apache.commons.lang3.function.TriFunction;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 public class MagneticRod extends ModRod
@@ -52,7 +54,7 @@ public class MagneticRod extends ModRod
 
     private InteractionResult shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
     {
-        int depth = getShiftDepth();
+        int depth = Math.max(getAmethystDetectionDepth(), getShiftDepth());
 
         int initialDepth;
         Function<BlockPos, Integer> getDepthCoord, getRadiusCoord1, getRadiusCoord2;
@@ -95,17 +97,43 @@ public class MagneticRod extends ModRod
         int radius = getShiftingRadius();
         boolean isDiamondOreFound = false;
         boolean isShiftingOreFound = false;
+        boolean isAmethystFound = false;
+        int maxDepthCoord = getDepthCoord.apply(pos) - initialDepth;
+        int oreDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getShiftDepth() : -getShiftDepth());
+        int amethystDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getAmethystDetectionDepth() : -getAmethystDetectionDepth());
 
         for (int x1 = getRadiusCoord1.apply(pos) - radius; x1 <= getRadiusCoord1.apply(pos) + radius; x1++)
             for (int x2 = getRadiusCoord2.apply(pos) - radius; x2 <= getRadiusCoord2.apply(pos) + radius; x2++)
             {
                 BlockPos currentPos, replacedPos;
-                for (currentPos = createPos.apply(x1, x2, getDepthCoord.apply(pos) - initialDepth); getDepthCoord.apply(currentPos) != getDepthCoord.apply(pos); currentPos = replacedPos)
+                for (currentPos = createPos.apply(x1, x2, maxDepthCoord); !Objects.equals(getDepthCoord.apply(currentPos), getDepthCoord.apply(pos)); currentPos = replacedPos)
                 {
                     // check current block: ore? diamond?
                     var currentBlock = level.getBlockState(currentPos).getBlock();
                     boolean isDiamondOre = isDiamondOre(currentBlock);
                     boolean isShiftingOre = isShiftingOre(currentBlock);
+                    boolean isAmethystGeode = isAmethystGeode(currentBlock);
+                    boolean canShiftOres;
+                    boolean canDetectAmethyst;
+
+                    if (initialDepth >= 0)
+                    {
+                        canShiftOres = getDepthCoord.apply(currentPos) >= oreDepthCoord;
+                        canDetectAmethyst = getDepthCoord.apply(currentPos) >= amethystDepthCoord;
+                    }
+                    else
+                    {
+                        canShiftOres = getDepthCoord.apply(currentPos) <= oreDepthCoord;
+                        canDetectAmethyst = getDepthCoord.apply(currentPos) <= amethystDepthCoord;
+                    }
+
+                    if (canDetectAmethyst && isAmethystGeode) isAmethystFound = true;
+
+                    if (!canShiftOres)
+                    {
+                        replacedPos = currentPos.relative(clickedFace);
+                        continue;
+                    }
 
                     if (isDiamondOre) isDiamondOreFound = true;
 
@@ -121,7 +149,7 @@ public class MagneticRod extends ModRod
 
                     // check next block to replace
                     boolean solidBlockFound = false;
-                    for (replacedPos = currentPos.relative(clickedFace); getDepthCoord.apply(replacedPos) != getDepthCoord.apply(pos.relative(clickedFace)); replacedPos = replacedPos.relative(clickedFace))
+                    for (replacedPos = currentPos.relative(clickedFace); !Objects.equals(getDepthCoord.apply(replacedPos), getDepthCoord.apply(pos.relative(clickedFace))); replacedPos = replacedPos.relative(clickedFace))
                     {
                         var blockState = level.getBlockState(replacedPos);
                         if (!blockState.isAir() && !blockState.getMaterial().isLiquid())
@@ -138,24 +166,24 @@ public class MagneticRod extends ModRod
                 }
             }
 
-        if (isShiftingOreFound || isDiamondOreFound) oreFoundEvent(player, isShiftingOreFound, isDiamondOreFound);
+        if (isShiftingOreFound || isDiamondOreFound || isAmethystFound)
+            oreFoundEvent(player, isShiftingOreFound, isDiamondOreFound, isAmethystFound);
     }
 
-    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound)
+    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound, boolean isAmethystFound)
     {
         if (isOreFound)
-            new OreDetectedPacket(false).sendToPlayer(player);
+            new PlaySoundPacket(SoundType.ORE_FOUND).sendToPlayer(player);
     }
 
-    private OreType tryExchange(Level level, BlockPos currentPos, BlockPos closerPos)
+    private void tryExchange(Level level, BlockPos currentPos, BlockPos closerPos)
     {
         var block = level.getBlockState(currentPos).getBlock();
         boolean isDiamondOre = isDiamondOre(block);
 
-        if (!isOre(level, currentPos)) return isDiamondOre ? OreType.DIAMOND_ORE : OreType.NOT_ORE;
-        if (!canBeReplaced(level, closerPos)) return OreType.NOT_ORE;
+        if (!isOre(level, currentPos)) return;
+        if (!canBeReplaced(level, closerPos)) return;
         exchange(level, currentPos, closerPos);
-        return OreType.ORE;
     }
 
     protected int getShiftingRadius()
@@ -166,6 +194,11 @@ public class MagneticRod extends ModRod
     protected int getShiftDepth()
     {
         return 5;
+    }
+
+    protected  int getAmethystDetectionDepth()
+    {
+        return 10;
     }
 
     private void exchange(Level level, BlockPos currentPos, BlockPos closerPos)
@@ -195,6 +228,11 @@ public class MagneticRod extends ModRod
     {
         var block = level.getBlockState(pos).getBlock();
         return isShiftingOre(block);
+    }
+
+    private boolean isAmethystGeode(Block block)
+    {
+        return block == Blocks.SMOOTH_BASALT || block == Blocks.CALCITE;
     }
 
     private boolean isDiamondOre(Block block)

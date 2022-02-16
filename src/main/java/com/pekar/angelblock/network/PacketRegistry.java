@@ -27,7 +27,6 @@ public final class PacketRegistry
         registerPacket(new ClientTickPacket());
         registerPacket(new KeyPressedPacket());
         registerPacket(new ToolsModeChangePacket());
-        registerPacket(new OreDetectedPacket());
         registerPacket(new PlaySoundPacket(SoundType.UNDEFINED));
     }
 

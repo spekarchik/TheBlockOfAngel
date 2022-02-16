@@ -7,7 +7,10 @@ public enum SoundType
     BLOCK_CHANGED,
     WATER_PLACED,
     LAVA_PLACED,
-    STEAM;
+    STEAM,
+    AMETHYST_FOUND,
+    DIAMOND_FOUND,
+    ORE_FOUND;
 
     public static int getIndex(SoundType soundType)
     {
@@ -19,6 +22,9 @@ public enum SoundType
                     case WATER_PLACED -> 3;
                     case LAVA_PLACED -> 4;
                     case STEAM -> 5;
+                    case AMETHYST_FOUND -> 6;
+                    case DIAMOND_FOUND -> 7;
+                    case ORE_FOUND -> 8;
                 };
     }
 
@@ -31,6 +37,9 @@ public enum SoundType
                     case 3 -> WATER_PLACED;
                     case 4 -> LAVA_PLACED;
                     case 5 -> STEAM;
+                    case 6 -> AMETHYST_FOUND;
+                    case 7 -> DIAMOND_FOUND;
+                    case 8 -> ORE_FOUND;
                     default -> UNDEFINED;
                 };
     }

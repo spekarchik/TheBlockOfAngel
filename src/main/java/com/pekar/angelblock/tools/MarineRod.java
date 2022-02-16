@@ -116,4 +116,13 @@ public class MarineRod extends AncientRod
     {
         return 7;
     }
+
+    @Override
+    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound, boolean isAmethystFound)
+    {
+        if (isAmethystFound)
+            new PlaySoundPacket(SoundType.AMETHYST_FOUND).sendToPlayer(player);
+        else if (isOreFound)
+            new PlaySoundPacket(SoundType.ORE_FOUND).sendToPlayer(player);
+    }
 }

@@ -1,7 +1,6 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.network.packets.OreDetectedPacket;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -16,8 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 
 public class FireRod extends MarineRod
 {
@@ -69,6 +66,15 @@ public class FireRod extends MarineRod
                     return InteractionResult.CONSUME;
                 }
             }
+            else
+            {
+                if (block == Blocks.END_STONE)
+                {
+                    setBlock(player, pos, Blocks.NETHERRACK);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    return InteractionResult.CONSUME;
+                }
+            }
 
             if (block == Blocks.WHITE_WOOL)
             {
@@ -96,13 +102,6 @@ public class FireRod extends MarineRod
             if (block == Blocks.BASALT)
             {
                 setBlock(player, pos, Blocks.BLACKSTONE);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
-            }
-
-            if (block == Blocks.BLACKSTONE)
-            {
-                setBlock(player, pos, Blocks.NETHERRACK);
                 damageItemIfSurvival(player, level, pos, blockState);
                 return InteractionResult.CONSUME;
             }
@@ -176,8 +175,16 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound)
+    protected int getAmethystDetectionDepth()
     {
-        new OreDetectedPacket(isDiamondOreFound).sendToPlayer(player);
+        return 20;
+    }
+
+    @Override
+    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound, boolean isAmethystFound)
+    {
+        var sound = isAmethystFound ? SoundType.AMETHYST_FOUND :
+                (isDiamondOreFound ? SoundType.DIAMOND_FOUND : SoundType.ORE_FOUND);
+        new PlaySoundPacket(sound).sendToPlayer(player);
     }
 }

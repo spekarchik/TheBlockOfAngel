@@ -52,6 +52,9 @@ public class PlaySoundPacket extends ServerToClientPacket
             case WATER_PLACED -> SoundEvents.PLAYER_SPLASH_HIGH_SPEED;
             case LAVA_PLACED -> SoundEvents.LAVA_POP;
             case STEAM -> SoundEvents.LAVA_EXTINGUISH;
+            case AMETHYST_FOUND -> SoundEvents.NOTE_BLOCK_XYLOPHONE;
+            case DIAMOND_FOUND -> SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE;
+            case ORE_FOUND -> SoundEvents.GRAVEL_PLACE;
             case UNDEFINED -> null;
         };
     }
