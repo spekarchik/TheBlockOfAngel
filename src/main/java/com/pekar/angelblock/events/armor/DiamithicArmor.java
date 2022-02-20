@@ -160,7 +160,10 @@ public class DiamithicArmor extends Armor
     @Override
     public void onBreakSpeed(net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed event)
     {
-        // none
+        if (jumpBoostEffect.isEffectOn())
+        {
+            event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
+        }
     }
 
     @Override

@@ -142,7 +142,7 @@ public class RendelithicArmor extends Armor
         }
         else if (jumpEffect.isEffectOn())
         {
-            event.setNewSpeed(event.getOriginalSpeed() * 0.5f);
+            event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
     }
 

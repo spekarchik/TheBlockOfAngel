@@ -30,7 +30,7 @@ public class FlyingArmor extends ModArmor
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
-        if (!Utils.isOverworld(entity.level.dimension())) return false;
+        if (!Utils.isOverworld(entity.level.dimension()) || entity.isInWaterRainOrBubble()) return false;
 
         var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
         var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();
@@ -42,7 +42,7 @@ public class FlyingArmor extends ModArmor
     @Override
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
     {
-        if (!Utils.isOverworld(entity.level.dimension())) return false;
+        if (!Utils.isOverworld(entity.level.dimension()) || entity.isInWaterRainOrBubble()) return false;
 
         var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
         var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();

@@ -155,7 +155,10 @@ public class FlyingArmor extends Armor
     @Override
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        event.setNewSpeed(0);
+        if (player.getEntity().isInWaterRainOrBubble() || jumpBoostEffect.isEffectOn())
+        {
+            event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
+        }
     }
 
     @Override

@@ -255,7 +255,7 @@ public class LimoniteArmor extends Armor
     {
         if (jumpEffect.isEffectOn())
         {
-            event.setNewSpeed(event.getOriginalSpeed() * 0.5f);
+            event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
     }
 
