@@ -18,7 +18,7 @@ abstract class TemporaryArmorEffect extends ArmorEffect
     public boolean trySwitch(int amplifier)
     {
         if (!isAvailable) return false;
-        player.setEffect(effectType, duration, amplifier);
+        player.setEffect(effectType, duration, amplifier, showIcon);
         return true;
     }
 

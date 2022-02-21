@@ -9,5 +9,6 @@ public class LevitationSwitchingEffect extends SwitchingArmorEffect
     public LevitationSwitchingEffect(IPlayer player, IArmor armor, int amplifier)
     {
         super(player, armor, MobEffects.LEVITATION, amplifier);
+        showIcon = true;
     }
 }

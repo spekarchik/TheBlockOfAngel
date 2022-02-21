@@ -10,5 +10,6 @@ public class GlowingArmorEffect extends SwitchingArmorEffect
     {
         super(player, armor, MobEffects.GLOWING, 0);
         availableOnFullArmorSet();
+        showIcon = true;
     }
 }

@@ -10,5 +10,6 @@ public class NightVisionArmorEffect extends SwitchingArmorEffect
     {
         super(player, armor, MobEffects.NIGHT_VISION, 0);
         availableOnHelmetAndChestplate();
+        showIcon = true;
     }
 }

@@ -10,5 +10,6 @@ public class RegenerationArmorEffect extends TemporaryArmorEffect
     {
         super(player, armor, MobEffects.REGENERATION, amplifier, duration);
         availableOnFullArmorSet();
+        showIcon = true;
     }
 }

@@ -10,5 +10,6 @@ public class JumpBoostArmorEffect extends SwitchingArmorEffect
     {
         super(player, armor, MobEffects.JUMP, amplifier);
         availableOnBootsAndLeggings();
+        showIcon = true;
     }
 }
