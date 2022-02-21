@@ -30,15 +30,15 @@ public class AmethystRod extends FireRod
         var result = super.useOn(context);
         if (result != InteractionResult.PASS) return result;
 
-        var pos = context.getClickedPos();
-        BlockState blockState = level.getBlockState(pos);
-        var block = blockState.getBlock();
-
         var itemStack = player.getItemInHand(context.getHand());
         boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
 
         if (!isBroken)
         {
+            var pos = context.getClickedPos();
+            BlockState blockState = level.getBlockState(pos);
+            var block = blockState.getBlock();
+
             var upPos = pos.above();
             var upBlock = level.getBlockState(upPos).getBlock();
 

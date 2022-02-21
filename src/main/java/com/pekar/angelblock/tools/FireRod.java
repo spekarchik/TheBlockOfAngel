@@ -35,15 +35,15 @@ public class FireRod extends MarineRod
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
             return super.useOn(context);
 
-        var pos = context.getClickedPos();
-        BlockState blockState = level.getBlockState(pos);
-        var block = blockState.getBlock();
-
         var itemStack = player.getItemInHand(context.getHand());
         boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
 
         if (!isBroken)
         {
+            var pos = context.getClickedPos();
+            BlockState blockState = level.getBlockState(pos);
+            var block = blockState.getBlock();
+
             var hand = context.getHand();
             var facing = context.getClickedFace();
 

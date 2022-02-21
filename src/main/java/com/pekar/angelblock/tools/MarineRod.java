@@ -67,15 +67,15 @@ public class MarineRod extends AncientRod
 
             if (block == Blocks.MELON)
             {
-                damageItemIfSurvival(player, level, pos, blockState);
                 setBlock(player, pos, Blocks.SLIME_BLOCK);
+                damageItemIfSurvival(player, level, pos, blockState);
                 return InteractionResult.CONSUME;
             }
 
             if (block == Blocks.POWDER_SNOW)
             {
-                damageItemIfSurvival(player, level, pos, blockState);
                 setBlock(player, pos, Blocks.SNOW_BLOCK);
+                damageItemIfSurvival(player, level, pos, blockState);
                 return InteractionResult.CONSUME;
             }
 

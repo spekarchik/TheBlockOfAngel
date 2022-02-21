@@ -46,12 +46,6 @@ public class AncientRod extends MagneticRod
         BlockState blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
-        if (block instanceof InfestedBlock infestedBlock)
-        {
-            setBlock(player, pos, infestedBlock.getHostBlock());
-            return InteractionResult.CONSUME;
-        }
-
         if (block != Blocks.STONE || context.getClickedFace() == Direction.UP)
         {
             if (Utils.mossyTransforming(player, pos, block))
@@ -65,6 +59,13 @@ public class AncientRod extends MagneticRod
 
         if (!isBroken)
         {
+            if (block instanceof InfestedBlock infestedBlock)
+            {
+                setBlock(player, pos, infestedBlock.getHostBlock());
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
             if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
             {
                 setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
