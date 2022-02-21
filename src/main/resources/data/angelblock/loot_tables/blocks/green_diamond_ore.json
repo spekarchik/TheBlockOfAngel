@@ -48,11 +48,8 @@
                   "enchantment": "minecraft:fortune",
                   "formula": "minecraft:uniform_bonus_count",
                   "parameters": {
-                    "bonusMultiplier": 0.67
+                    "bonusMultiplier": 1.0
                   }
-                },
-                {
-                  "function": "minecraft:explosion_decay"
                 }
               ],
               "name": "angelblock:bios_diamond"
