@@ -1,12 +1,12 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "minecraft:netherite_sword"
+    "item": "angelblock:diamithic_pickaxe"
   },
   "addition": {
     "item": "angelblock:super_ingot"
   },
   "result": {
-    "item": "angelblock:super_primary_sword"
+    "item": "angelblock:super_primary_pickaxe"
   }
 }

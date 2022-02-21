@@ -1,22 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "A",
-    "A",
-    "B"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:rendelithic_ingot"
-    },
-    "B":
-    {
-      "item": "minecraft:stick"
-    }
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:diamond_sword"
+  },
+  "addition": {
+    "item": "angelblock:rendelithic_ingot"
   },
   "result": {
-    "item": "angelblock:rendelithic_primary_sword",
-    "count": 1
+    "item": "angelblock:rendelithic_primary_sword"
   }
 }

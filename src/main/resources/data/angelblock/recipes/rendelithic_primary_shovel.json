@@ -1,22 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "A",
-    "B",
-    "B"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:rendelithic_ingot"
-    },
-    "B":
-    {
-      "item": "minecraft:stick"
-    }
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:diamond_shovel"
+  },
+  "addition": {
+    "item": "angelblock:rendelithic_ingot"
   },
   "result": {
-    "item": "angelblock:rendelithic_primary_shovel",
-    "count": 1
+    "item": "angelblock:rendelithic_primary_shovel"
   }
 }

@@ -1,22 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AA",
-    "AB",
-    " B"
-  ],
-  "key": {
-    "A":
-    {
-      "item": "angelblock:diamithic_ingot"
-    },
-    "B":
-    {
-      "item": "minecraft:stick"
-    }
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:netherite_axe"
+  },
+  "addition": {
+    "item": "angelblock:diamithic_ingot"
   },
   "result": {
-    "item": "angelblock:diamithic_primary_axe",
-    "count": 1
+    "item": "angelblock:diamithic_primary_axe"
   }
 }
