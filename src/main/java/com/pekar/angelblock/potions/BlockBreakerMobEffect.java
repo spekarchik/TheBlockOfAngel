@@ -101,5 +101,9 @@ public class BlockBreakerMobEffect extends MobEffect
         {
             level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), 11);
         }
+        else if (block == Blocks.ICE)
+        {
+            level.setBlock(pos, Blocks.POWDER_SNOW.defaultBlockState(), 11);
+        }
     }
 }
