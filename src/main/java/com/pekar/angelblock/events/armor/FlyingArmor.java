@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -196,6 +197,15 @@ public class FlyingArmor extends Armor
 
     private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)
     {
-        return player.isOverworld() && player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
+        var leggings = player.getEntity().getItemBySlot(EquipmentSlot.LEGS);
+
+        int bootsDamage = boots.getDamageValue();
+        int leggingsDamage = leggings.getDamageValue();
+        int maxBootsDamageToJump = boots.getMaxDamage() / 2;
+        int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
+
+        return player.isOverworld() && player.isFullArmorSetPutOn(armor.getArmorElementNames())
+                && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
     }
 }

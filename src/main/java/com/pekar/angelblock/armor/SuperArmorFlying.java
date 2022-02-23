@@ -15,14 +15,29 @@ public class SuperArmorFlying extends SuperArmor
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
+        if (slot != EquipmentSlot.CHEST) return false;
+
         var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
-        return chestplate.getRegistryName().equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getRegistryName());
+
+        boolean isFlyingHelmet = entity.getItemBySlot(EquipmentSlot.HEAD).getItem().getRegistryName()
+                .equals(ArmorRegistry.SUPER_HELMET.get().getRegistryName());
+        boolean isFlyingLeggings = entity.getItemBySlot(EquipmentSlot.LEGS).getItem().getRegistryName()
+                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getRegistryName());
+        boolean isFlyingBoots = entity.getItemBySlot(EquipmentSlot.FEET).getItem().getRegistryName()
+                .equals(ArmorRegistry.SUPER_BOOTS.get().getRegistryName());
+        boolean isFlyingChestplate = chestplate.getRegistryName()
+                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getRegistryName());
+        boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
+
+        int maxDamageToFly = getMaxDamage(stack) / 2;
+        int chestDamage = getDamage(stack);
+
+        return isFullArmorSet && chestDamage < maxDamageToFly;
     }
 
     @Override
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
     {
-        var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
-        return chestplate.getRegistryName().equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getRegistryName());
+        return canElytraFly(stack, entity);
     }
 }

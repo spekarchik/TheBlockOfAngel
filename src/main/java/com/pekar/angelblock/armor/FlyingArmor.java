@@ -30,24 +30,32 @@ public class FlyingArmor extends ModArmor
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
+        if (slot != EquipmentSlot.CHEST) return false;
         if (!Utils.isOverworld(entity.level.dimension()) || entity.isInWaterRainOrBubble()) return false;
 
-        var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
+        var chestplate = stack.getItem();
         var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();
 
-        return chestplate.getRegistryName().equals(ArmorRegistry.FLYING_CHESTPLATE.get().getRegistryName())
+        boolean isFlyingHelmet = entity.getItemBySlot(EquipmentSlot.HEAD).getItem().getRegistryName()
+                .equals(ArmorRegistry.FLYING_HELMET.get().getRegistryName());
+        boolean isFlyingLeggings = entity.getItemBySlot(EquipmentSlot.LEGS).getItem().getRegistryName()
+                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getRegistryName());
+        boolean isFlyingBoots = entity.getItemBySlot(EquipmentSlot.FEET).getItem().getRegistryName()
+                .equals(ArmorRegistry.FLYING_BOOTS.get().getRegistryName());
+        boolean isFlyingChestplate = chestplate.getRegistryName()
+                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getRegistryName());
+        boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
+
+        int maxDamageToFly = getMaxDamage(stack) / 2;
+        int chestDamage = getDamage(stack);
+
+        return isFullArmorSet && chestDamage < maxDamageToFly
                 && !mainHandItem.getRegistryName().equals(Items.FIREWORK_ROCKET.getRegistryName());
     }
 
     @Override
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
     {
-        if (!Utils.isOverworld(entity.level.dimension()) || entity.isInWaterRainOrBubble()) return false;
-
-        var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
-        var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();
-
-        return chestplate.getRegistryName().equals(ArmorRegistry.FLYING_CHESTPLATE.get().getRegistryName())
-                && !mainHandItem.getRegistryName().equals(Items.FIREWORK_ROCKET.getRegistryName());
+        return canElytraFly(stack, entity);
     }
 }
