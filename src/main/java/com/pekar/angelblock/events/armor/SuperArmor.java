@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.monster.*;
@@ -53,7 +54,8 @@ public class SuperArmor extends Armor
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
         levitationEffect = new LevitationSwitchingEffect(player, this, 3).availableOnFullArmorSet();
         dolphinsGrace = new DolphinsGraceEffect(player, this);
-        superJumpEffect = new SuperJumpSwitchingEffect(player, this).availableOnFullArmorSet();
+        superJumpEffect = new SuperJumpSwitchingEffect(player, this);
+        superJumpEffect.setupAvailability(this::isSuperJumpEffectAvailable);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
@@ -422,5 +424,19 @@ public class SuperArmor extends Armor
     private int getLevitationAmplifier()
     {
         return jumpEffect.isEffectOn() && jumpEffect.isActive() ? 3 : 250;
+    }
+
+    private boolean isSuperJumpEffectAvailable(IPlayer player, IArmor armor)
+    {
+        var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
+        var leggings = player.getEntity().getItemBySlot(EquipmentSlot.LEGS);
+
+        int bootsDamage = boots.getDamageValue();
+        int leggingsDamage = leggings.getDamageValue();
+        int maxBootsDamageToJump = boots.getMaxDamage() / 2;
+        int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
+
+        return player.isFullArmorSetPutOn(armor.getArmorElementNames())
+                && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
     }
 }
