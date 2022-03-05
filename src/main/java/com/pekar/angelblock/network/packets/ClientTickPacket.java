@@ -24,6 +24,10 @@ public class ClientTickPacket extends ClientToServerPacket
             {
                 armor.onBeingInWater();
             }
+            else if (player.getEntity().isInWaterOrRain())
+            {
+                armor.onBeingUnderRain();
+            }
         }
     }
 

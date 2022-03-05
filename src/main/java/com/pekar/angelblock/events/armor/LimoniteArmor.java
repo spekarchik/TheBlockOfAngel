@@ -210,7 +210,7 @@ public class LimoniteArmor extends Armor
     {
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isEffectAvailable())
+            if (regenerationEffect.isEffectAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
                 jumpEffect.trySwitchOff();
                 regenerationEffect.trySwitch();
@@ -263,6 +263,15 @@ public class LimoniteArmor extends Armor
     public void onBeingInWater()
     {
         // none
+    }
+
+    @Override
+    public void onBeingUnderRain()
+    {
+        if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+        {
+            regenerationEffect.trySwitch();
+        }
     }
 
     @Override

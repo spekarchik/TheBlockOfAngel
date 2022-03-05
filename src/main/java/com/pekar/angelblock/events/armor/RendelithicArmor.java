@@ -153,6 +153,12 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
+    public void onBeingUnderRain()
+    {
+        checkForNausea();
+    }
+
+    @Override
     public String getHelmetName()
     {
         return ArmorRegistry.RENDELITHIC_HELMET.get().getRegistryName().getPath();
@@ -201,7 +207,7 @@ public class RendelithicArmor extends Armor
     private void checkForNausea()
     {
         Player entity = player.getEntity();
-        if (entity.isInWater())
+        if (entity.isInWaterOrRain())
         {
 //            if (nauseaEffect.isActive())
 //            {

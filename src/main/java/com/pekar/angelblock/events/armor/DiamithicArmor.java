@@ -173,6 +173,12 @@ public class DiamithicArmor extends Armor
     }
 
     @Override
+    public void onBeingUnderRain()
+    {
+        // none
+    }
+
+    @Override
     public String getHelmetName()
     {
         return ArmorRegistry.DIAMITHIC_HELMET.get().getRegistryName().getPath();

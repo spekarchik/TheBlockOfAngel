@@ -17,5 +17,6 @@ public interface IArmorEvents
     void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event);
     void onBreakSpeed(net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed event);
     void onBeingInWater();
+    void onBeingUnderRain();
     void onCreeperCheck();
 }

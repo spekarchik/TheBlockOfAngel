@@ -344,6 +344,12 @@ public class SuperArmor extends Armor
     }
 
     @Override
+    public void onBeingUnderRain()
+    {
+        // none
+    }
+
+    @Override
     public String getHelmetName()
     {
         return ArmorRegistry.SUPER_HELMET.get().getRegistryName().getPath();

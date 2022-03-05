@@ -168,6 +168,11 @@ public class FlyingArmor extends Armor
     }
 
     @Override
+    public void onBeingUnderRain()
+    {
+    }
+
+    @Override
     public void onCreeperCheck()
     {
     }

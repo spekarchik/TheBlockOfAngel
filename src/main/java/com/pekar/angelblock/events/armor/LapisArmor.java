@@ -148,6 +148,12 @@ public class LapisArmor extends Armor
     }
 
     @Override
+    public void onBeingUnderRain()
+    {
+        // none
+    }
+
+    @Override
     public String getHelmetName()
     {
         return ArmorRegistry.LAPIS_HELMET.get().getRegistryName().getPath();
