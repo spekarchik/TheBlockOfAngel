@@ -43,6 +43,7 @@ public class LapisArmor extends Armor
     {
         nightVisionEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
+        dolphinsGrace.updateSwitchState();
     }
 
     @Override
@@ -111,6 +112,11 @@ public class LapisArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))
         {
             glowingEffect.trySwitch();
+        }
+
+        if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
+        {
+            dolphinsGrace.trySwitch();
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))

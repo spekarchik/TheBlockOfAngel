@@ -30,8 +30,7 @@ public class SuperArmor extends Armor
     private final IArmorEffect slownessEffect;
     private final IArmorEffect jumpNegativeEffect;
     private final IArmorEffect levitationEffect;
-    private final IArmorEffect dolphinsGrace;
-    private final IArmorEffect superJumpEffect;
+    private final SwitchingEffectSynchronizer superJumpEffect;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter;
 
@@ -53,9 +52,12 @@ public class SuperArmor extends Armor
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
         levitationEffect = new LevitationSwitchingEffect(player, this, 3).availableOnFullArmorSet();
-        dolphinsGrace = new DolphinsGraceEffect(player, this);
-        superJumpEffect = new SuperJumpSwitchingEffect(player, this);
+
+        var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
         superJumpEffect.setupAvailability(this::isSuperJumpEffectAvailable);
+        var dolphinsGraceEffect = new DolphinsGraceEffect(player, this);
+        this.superJumpEffect = new SwitchingEffectSynchronizer(superJumpEffect);
+        this.superJumpEffect.addDependentEffect(dolphinsGraceEffect);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
@@ -193,7 +195,6 @@ public class SuperArmor extends Armor
         slownessEffect.updateEffectAvailability();
         jumpNegativeEffect.updateEffectAvailability();
         levitationEffect.updateEffectAvailability();
-        dolphinsGrace.updateEffectAvailability();
         superJumpEffect.updateEffectAvailability();
 
         updatePotionEffects();
@@ -392,7 +393,6 @@ public class SuperArmor extends Armor
         healthBoostEffect.updateEffectActivity();
         slownessEffect.updateEffectActivity();
         jumpNegativeEffect.updateEffectActivity();
-        dolphinsGrace.updateEffectActivity();
         superJumpEffect.updateEffectActivity();
 
         levitationEffect.updateEffectActivity(getLevitationAmplifier());
