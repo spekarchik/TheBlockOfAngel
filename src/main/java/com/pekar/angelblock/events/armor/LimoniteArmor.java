@@ -268,6 +268,8 @@ public class LimoniteArmor extends Armor
     @Override
     public void onBeingUnderRain()
     {
+        if (!player.isFullArmorSetPutOn(getArmorElementNames())) return;
+
         if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
         {
             regenerationEffect.trySwitch();
