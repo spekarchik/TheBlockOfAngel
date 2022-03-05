@@ -61,7 +61,7 @@ public class BlockBreakerMobEffect extends MobEffect
         }
         else if (block == Blocks.WHITE_WOOL)
         {
-            level.setBlock(pos, BlockRegistry.DESTROYING_WHITE_WOOL.get().defaultBlockState(), 0);
+            level.setBlock(pos, BlockRegistry.DESTROYING_WHITE_WOOL_BY_POTION.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
 //        else if (block == Blocks.GRAVEL)
