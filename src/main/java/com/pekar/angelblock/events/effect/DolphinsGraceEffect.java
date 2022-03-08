@@ -11,5 +11,6 @@ public class DolphinsGraceEffect extends SwitchingArmorEffect
     {
         super(player, armor, MobEffects.DOLPHINS_GRACE, 0);
         availableIfSlotSet(EquipmentSlot.FEET);
+        showIcon = true;
     }
 }
