@@ -284,7 +284,7 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isEffectAvailable())
+            if (regenerationEffect.isEffectAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
                 regenerationEffect.trySwitch();
                 slownessEffect.trySwitch();
