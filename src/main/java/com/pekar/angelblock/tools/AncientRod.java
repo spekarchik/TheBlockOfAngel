@@ -150,6 +150,13 @@ public class AncientRod extends MagneticRod
                             return plant(player, level, pos, hand, facing, Blocks.BEETROOTS);
                     }
                 }
+
+                if (block == Blocks.DIRT_PATH)
+                {
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    setBlock(player, pos, Blocks.GRASS_BLOCK);
+                    return InteractionResult.CONSUME;
+                }
             }
         }
 
