@@ -8,6 +8,22 @@
 	  [
         {
           "type": "minecraft:item",
+		  "weight": 2,
+          "name": "angelblock:evoker_amulet"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 1
+        }
+	  ]
+	},
+	{
+	  "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries":
+	  [
+        {
+          "type": "minecraft:item",
           "weight": 1,
           "functions": [
             {
