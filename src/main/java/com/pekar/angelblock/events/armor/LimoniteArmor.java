@@ -31,7 +31,7 @@ public class LimoniteArmor extends Armor
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter;
 
-    private static final int REGENERATION_EFFECT_DURATION = 100;
+    private static final int REGENERATION_EFFECT_DURATION = 200;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
     private static final int REGENERATION_NEGATIVE_EFFECT_DURATION = 1200;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
@@ -47,8 +47,8 @@ public class LimoniteArmor extends Armor
         luckEffect = new LuckArmorEffect(player, this);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 1);
         regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessArmorEffect(player, this, 0, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnAnyArmorElement();
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet();
+        slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnAnyArmorElement();
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet();
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 16);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);

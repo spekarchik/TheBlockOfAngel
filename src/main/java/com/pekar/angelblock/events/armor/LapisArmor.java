@@ -31,7 +31,7 @@ public class LapisArmor extends Armor
         waterBreathingEffect = new WaterBreathingEffect(player, this);
         hasteEffect = new HasteArmorEffect(player, this);
         luckEffect = new LuckArmorEffect(player, this);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 1, 100);
+        regenerationEffect = new RegenerationArmorEffect(player, this, 1, 200);
         blindnessEffect = new BlindnessArmorEffect(player, this, 140).availableOnFullArmorSet();
         witherEffect = new WitherEffect(player, this, 0, 600).availableOnAnyArmorElement();
         strengthEffect = new StrengthArmorEffect(player, this, 0);

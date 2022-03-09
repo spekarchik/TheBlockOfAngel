@@ -34,7 +34,7 @@ public class SuperArmor extends Armor
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter;
 
-    private static final int REGENERATION_EFFECT_DURATION = 140;
+    private static final int REGENERATION_EFFECT_DURATION = 200;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
@@ -48,9 +48,9 @@ public class SuperArmor extends Armor
 
         luckEffect = new LuckArmorEffect(player, this);
         regenerationEffect = new RegenerationArmorEffect(player, this, 1, REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessArmorEffect(player, this, 4, REGENERATION_EFFECT_DURATION).availableOnAnyArmorElement();
+        slownessEffect = new SlownessArmorEffect(player, this, 2, REGENERATION_EFFECT_DURATION).availableOnAnyArmorElement();
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -6, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
         levitationEffect = new LevitationSwitchingEffect(player, this, 3).availableOnFullArmorSet();
 
         var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
