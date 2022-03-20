@@ -347,7 +347,12 @@ public class SuperArmor extends Armor
     @Override
     public void onBeingUnderRain()
     {
-        // none
+        if (!player.isFullArmorSetPutOn(getArmorElementNames())) return;
+
+        if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+        {
+            regenerationEffect.trySwitch();
+        }
     }
 
     @Override
