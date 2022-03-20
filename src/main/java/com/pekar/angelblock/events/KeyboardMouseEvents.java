@@ -1,49 +1,78 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.packets.KeyPressedPacket;
 import com.pekar.angelblock.network.packets.ToolsModeChangePacket;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.time.Clock;
+import java.util.HashMap;
+import java.util.Map;
+
 public class KeyboardMouseEvents implements IEventHandler
 {
+    private final Map<String, Long> lastTime = new HashMap<>();
+
     @SubscribeEvent
     public void onKeyInputEvent(InputEvent.KeyInputEvent event)
     {
         if (KeyRegistry.JUMP_BOOST.isDown())
         {
-            new KeyPressedPacket(KeyRegistry.JUMP_BOOST.getName()).sendToServer();
+            var keyName = KeyRegistry.JUMP_BOOST.getName();
+            trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
         if (KeyRegistry.NIGHT_VISION.isDown())
         {
-            new KeyPressedPacket(KeyRegistry.NIGHT_VISION.getName()).sendToServer();
+            var keyName = KeyRegistry.NIGHT_VISION.getName();
+            trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
         if (KeyRegistry.GLOWING.isDown())
         {
-            new KeyPressedPacket(KeyRegistry.GLOWING.getName()).sendToServer();
+            var keyName = KeyRegistry.GLOWING.getName();
+            trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
         if (KeyRegistry.REGENERATION.isDown())
         {
-            new KeyPressedPacket(KeyRegistry.REGENERATION.getName()).sendToServer();
+            var keyName = KeyRegistry.REGENERATION.getName();
+            trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
         if (KeyRegistry.LEVITATION.isDown())
         {
-            new KeyPressedPacket(KeyRegistry.LEVITATION.getName()).sendToServer();
+            var keyName = KeyRegistry.LEVITATION.getName();
+            trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
         if (KeyRegistry.SWORD_EFFECT.isDown())
         {
-            new ToolsModeChangePacket().sendToServer();
+            var keyName = KeyRegistry.SWORD_EFFECT.getName();
+            trySendPacket(keyName, new ToolsModeChangePacket());
         }
 
         if (KeyRegistry.SUPER_JUMP.isDown())
         {
-            new KeyPressedPacket(KeyRegistry.SUPER_JUMP.getName()).sendToServer();
+            var keyName = KeyRegistry.SUPER_JUMP.getName();
+            trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
+    }
+
+    private synchronized void trySendPacket(String keyName, ClientToServerPacket packet)
+    {
+        long time2 = Clock.systemUTC().millis();
+        var last = lastTime.get(keyName);
+
+        if (last != null)
+        {
+            long time1 = last;
+            if (time2 - time1 < 100) return;
+        }
+
+        lastTime.put(keyName, time2);
+        packet.sendToServer();
     }
 }
