@@ -20,7 +20,7 @@ public class DevilBlock extends Block implements EntityBlock
     public DevilBlock()
     {
         super(BlockBehaviour.Properties.of(Material.HEAVY_METAL)
-                .strength(10F, 20F)
+                .strength(10F, 1200F)
                 .lightLevel(blockState -> 10));
     }
 

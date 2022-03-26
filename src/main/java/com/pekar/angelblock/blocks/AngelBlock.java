@@ -19,7 +19,7 @@ public class AngelBlock extends Block implements EntityBlock
     public AngelBlock()
     {
         super(BlockBehaviour.Properties.of(Material.HEAVY_METAL)
-                .strength(8f, 20f)
+                .strength(1.5F, 1200F)
                 .lightLevel(state -> 15));
     }
 
