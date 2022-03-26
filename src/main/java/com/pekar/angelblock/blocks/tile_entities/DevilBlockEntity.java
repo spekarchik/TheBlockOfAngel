@@ -20,13 +20,13 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
     public void activate()
     {
-        PlayerManager.instance().sendMessage("activate");
+//        PlayerManager.instance().sendMessage("activate");
         PlayerInteractionEvents.subscribeLivingDeath(this);
     }
 
     public void dispose()
     {
-        PlayerManager.instance().sendMessage("dispose");
+//        PlayerManager.instance().sendMessage("dispose");
         PlayerInteractionEvents.unsubscribeLivingDeath(this);
     }
 
@@ -34,7 +34,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
     public void onLivingDeathEvent(LivingDeathEvent event)
     {
         LivingEntity entity = event.getEntityLiving();
-        PlayerManager.instance().sendMessage("living death");
+//        PlayerManager.instance().sendMessage("living death");
         if (!(entity instanceof Enemy)) return;
 
         var pos = getPosition();
