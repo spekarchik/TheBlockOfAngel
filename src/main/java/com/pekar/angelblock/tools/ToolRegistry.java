@@ -112,43 +112,43 @@ public class ToolRegistry
     // Rods
     public static final RegistryObject<ModRod> ANCIENT_ROD = Main.ITEMS.register("ancient_rod",
             () -> new AncientRod(ToolMaterials.ROD_MATERIAL1, 0, -3F, false,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModRod> MARINE_ROD = Main.ITEMS.register("marine_rod",
             () -> new MarineRod(ToolMaterials.ROD_MATERIAL1, 0, -3F, false,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModRod> FIRE_ROD = Main.ITEMS.register("fire_rod",
             () -> new FireRod(ToolMaterials.ROD_MATERIAL3, 0, -3F, false,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModRod> AMETHYST_ROD = Main.ITEMS.register("amethyst_rod",
             () -> new AmethystRod(ToolMaterials.ROD_MATERIAL4, 0, -3F, false,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModRod> END_ROD = Main.ITEMS.register("end_rod",
             () -> new EndRod(ToolMaterials.ROD_MATERIAL5, 0, -3F, false,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModRod> ANCIENT_MAGNETIC_ROD = Main.ITEMS.register("ancient_magnetic_rod",
             () -> new AncientRod(ToolMaterials.ROD_MATERIAL1, 0, -3F, true,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
     public static final RegistryObject<ModRod> MARINE_MAGNETIC_ROD = Main.ITEMS.register("marine_magnetic_rod",
             () -> new MarineRod(ToolMaterials.ROD_MATERIAL1, 0, -3F, true,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
     public static final RegistryObject<ModRod> FIRE_MAGNETIC_ROD = Main.ITEMS.register("fire_magnetic_rod",
             () -> new FireRod(ToolMaterials.ROD_MATERIAL3, 0, -3F, true,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
     public static final RegistryObject<ModRod> AMETHYST_MAGNETIC_ROD = Main.ITEMS.register("amethyst_magnetic_rod",
             () -> new AmethystRod(ToolMaterials.ROD_MATERIAL4, 0, -3F, true,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
     public static final RegistryObject<ModRod> END_MAGNETIC_ROD = Main.ITEMS.register("end_magnetic_rod",
             () -> new EndRod(ToolMaterials.ROD_MATERIAL5, 0, -3F, true,
-                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.EPIC)));
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
     // Swords
     public static final RegistryObject<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",
