@@ -1,6 +1,7 @@
 package com.pekar.angelblock.potions;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.tools.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -108,6 +109,11 @@ public class BlockBreakerMobEffect extends MobEffect
         else if (block == Blocks.BLUE_ICE)
         {
             level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 11);
+        }
+        else if (block == Blocks.SAND && Utils.isNearWaterHorizoltal(level, pos))
+        {
+            level.setBlock(pos, Blocks.CLAY.defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
         }
     }
 }
