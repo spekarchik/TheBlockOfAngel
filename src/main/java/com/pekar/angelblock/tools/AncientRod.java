@@ -103,20 +103,14 @@ public class AncientRod extends MagneticRod
                 if (block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.MOSS_BLOCK)
                 {
                     damageItemIfSurvival(player, level, pos, blockState);
-                    int randomValue = itemRand.nextInt() % 3;
+                    int randomValue = itemRand.nextInt() & 1;
 
                     switch (randomValue)
                     {
                         case 0:
                             return plant(player, level, pos, hand, facing, Blocks.SWEET_BERRY_BUSH);
-                        case 1:
-                            return plant(player, level, pos, hand, facing, Blocks.FERN);
                         default:
-                        {
-                            int random = itemRand.nextInt() & 2;
-                            Block plantBlock = random > 0 ? Blocks.AZALEA : Blocks.FLOWERING_AZALEA;
-                            return plant(player, level, pos, hand, facing, plantBlock);
-                        }
+                            return plant(player, level, pos, hand, facing, Blocks.FERN);
                     }
                 }
 

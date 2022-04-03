@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
@@ -91,7 +92,7 @@ public class MarineRod extends AncientRod
         var result = super.useOn(context);
         if (result.shouldAwardStats()) return result;
 
-        if (!isBroken)
+        if (!isBroken && facing == Direction.UP)
         {
             if (block == Blocks.PODZOL || block == Blocks.MYCELIUM)
             {
@@ -105,6 +106,12 @@ public class MarineRod extends AncientRod
             {
                 damageItemIfSurvival(player, level, pos, blockState);
                 return plant(player, level, pos, hand, facing, Blocks.BAMBOO);
+            }
+
+            if (Utils.isNearWaterHorizoltal(level, pos) && block == Blocks.CLAY)
+            {
+                damageItemIfSurvival(player, level, pos, blockState);
+                return plant(player, level, pos, hand, facing, Blocks.SMALL_DRIPLEAF);
             }
         }
 
