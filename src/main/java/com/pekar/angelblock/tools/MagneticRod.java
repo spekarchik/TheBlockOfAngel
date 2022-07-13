@@ -13,7 +13,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.Objects;
@@ -44,7 +44,7 @@ public class MagneticRod extends ModRod
         if (isBroken) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
-        if (!canBeReplaced(level, pos) && !isOre(level, pos) && !isDiamondOre(level.getBlockState(pos).getBlock()))
+        if (!canBeReplaced(level, pos) && !isShiftingOre(level, pos) && !isDiamondOre(level.getBlockState(pos).getBlock()))
         {
             return InteractionResult.CONSUME;
         }
@@ -181,7 +181,7 @@ public class MagneticRod extends ModRod
         var block = level.getBlockState(currentPos).getBlock();
         boolean isDiamondOre = isDiamondOre(block);
 
-        if (!isOre(level, currentPos)) return;
+        if (!isShiftingOre(level, currentPos)) return;
         if (!canBeReplaced(level, closerPos)) return;
         exchange(level, currentPos, closerPos);
     }
@@ -221,10 +221,10 @@ public class MagneticRod extends ModRod
 
     protected boolean isShiftingOre(Block block)
     {
-        return block instanceof OreBlock && !isDiamondOre(block);
+        return block instanceof DropExperienceBlock && !isDiamondOre(block);
     }
 
-    private boolean isOre(Level level, BlockPos pos)
+    private boolean isShiftingOre(Level level, BlockPos pos)
     {
         var block = level.getBlockState(pos).getBlock();
         return isShiftingOre(block);
