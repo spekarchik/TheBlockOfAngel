@@ -161,25 +161,25 @@ public class RendelithicArmor extends Armor
     @Override
     public String getHelmetName()
     {
-        return ArmorRegistry.RENDELITHIC_HELMET.get().getRegistryName().getPath();
+        return ArmorRegistry.RENDELITHIC_HELMET.getId().getPath();
     }
 
     @Override
     public String getChestPlateName()
     {
-        return ArmorRegistry.RENDELITHIC_CHESTPLATE.get().getRegistryName().getPath();
+        return ArmorRegistry.RENDELITHIC_CHESTPLATE.getId().getPath();
     }
 
     @Override
     public String getLeggingsName()
     {
-        return ArmorRegistry.RENDELITHIC_LEGGINGS.get().getRegistryName().getPath();
+        return ArmorRegistry.RENDELITHIC_LEGGINGS.getId().getPath();
     }
 
     @Override
     public String getBootsName()
     {
-        return ArmorRegistry.RENDELITHIC_BOOTS.get().getRegistryName().getPath();
+        return ArmorRegistry.RENDELITHIC_BOOTS.getId().getPath();
     }
 
     private void updatePotionEffects()

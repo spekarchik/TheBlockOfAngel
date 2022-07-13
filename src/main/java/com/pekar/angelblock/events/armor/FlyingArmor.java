@@ -38,25 +38,25 @@ public class FlyingArmor extends Armor
     @Override
     public String getHelmetName()
     {
-        return ArmorRegistry.FLYING_HELMET.get().getRegistryName().getPath();
+        return ArmorRegistry.FLYING_HELMET.getId().getPath();
     }
 
     @Override
     public String getChestPlateName()
     {
-        return ArmorRegistry.FLYING_CHESTPLATE.get().getRegistryName().getPath();
+        return ArmorRegistry.FLYING_CHESTPLATE.getId().getPath();
     }
 
     @Override
     public String getLeggingsName()
     {
-        return ArmorRegistry.FLYING_LEGGINGS.get().getRegistryName().getPath();
+        return ArmorRegistry.FLYING_LEGGINGS.getId().getPath();
     }
 
     @Override
     public String getBootsName()
     {
-        return ArmorRegistry.FLYING_BOOTS.get().getRegistryName().getPath();
+        return ArmorRegistry.FLYING_BOOTS.getId().getPath();
     }
 
     @Override

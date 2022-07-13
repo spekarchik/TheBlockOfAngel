@@ -137,7 +137,7 @@ public class SuperArmor extends Armor
         }
         else if (isFreezeDamage(damageSource))
         {
-            boolean areBootsWorn = player.isArmorElementPutOn(ArmorRegistry.SUPER_BOOTS.get().getRegistryName().getPath());
+            boolean areBootsWorn = player.isArmorElementPutOn(ArmorRegistry.SUPER_BOOTS.getId().getPath());
             event.setCanceled(areBootsWorn);
         }
         else if (isFullArmorSet)
@@ -358,25 +358,25 @@ public class SuperArmor extends Armor
     @Override
     public String getHelmetName()
     {
-        return ArmorRegistry.SUPER_HELMET.get().getRegistryName().getPath();
+        return ArmorRegistry.SUPER_HELMET.getId().getPath();
     }
 
     @Override
     public String getChestPlateName()
     {
-        return ArmorRegistry.SUPER_CHESTPLATE.get().getRegistryName().getPath();
+        return ArmorRegistry.SUPER_CHESTPLATE.getId().getPath();
     }
 
     @Override
     public String getLeggingsName()
     {
-        return ArmorRegistry.SUPER_LEGGINGS.get().getRegistryName().getPath();
+        return ArmorRegistry.SUPER_LEGGINGS.getId().getPath();
     }
 
     @Override
     public String getBootsName()
     {
-        return ArmorRegistry.SUPER_BOOTS.get().getRegistryName().getPath();
+        return ArmorRegistry.SUPER_BOOTS.getId().getPath();
     }
 
     private float getRealDamage(float initialDamageAmount)
