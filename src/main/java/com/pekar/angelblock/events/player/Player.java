@@ -115,7 +115,7 @@ public class Player implements IPlayer
     @Override
     public String getPlayerName()
     {
-        return entity.getName().getContents();
+        return entity.getName().getContents().toString();
     }
 
     @Override
@@ -161,7 +161,7 @@ public class Player implements IPlayer
 
         for (ItemStack itemStack : itemStacks)
         {
-            String name = itemStack.getItem().getRegistryName().getPath();
+            String name = itemStack.getItem().getName(itemStack).getContents().toString();
             if (name.endsWith(ArmorRegistry.FLYING_SUFFIX))
             {
                 int index = name.indexOf(ArmorRegistry.FLYING_SUFFIX);
