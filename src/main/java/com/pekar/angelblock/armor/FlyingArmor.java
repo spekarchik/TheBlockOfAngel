@@ -36,21 +36,21 @@ public class FlyingArmor extends ModArmor
         var chestplate = stack.getItem();
         var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();
 
-        boolean isFlyingHelmet = entity.getItemBySlot(EquipmentSlot.HEAD).getItem().getRegistryName()
-                .equals(ArmorRegistry.FLYING_HELMET.get().getRegistryName());
-        boolean isFlyingLeggings = entity.getItemBySlot(EquipmentSlot.LEGS).getItem().getRegistryName()
-                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getRegistryName());
-        boolean isFlyingBoots = entity.getItemBySlot(EquipmentSlot.FEET).getItem().getRegistryName()
-                .equals(ArmorRegistry.FLYING_BOOTS.get().getRegistryName());
-        boolean isFlyingChestplate = chestplate.getRegistryName()
-                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getRegistryName());
+        boolean isFlyingHelmet = entity.getItemBySlot(EquipmentSlot.HEAD).getItem().getName(null)
+                .equals(ArmorRegistry.FLYING_HELMET.get().getName(null));
+        boolean isFlyingLeggings = entity.getItemBySlot(EquipmentSlot.LEGS).getItem().getName(null)
+                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getName(null));
+        boolean isFlyingBoots = entity.getItemBySlot(EquipmentSlot.FEET).getItem().getName(null)
+                .equals(ArmorRegistry.FLYING_BOOTS.get().getName(null));
+        boolean isFlyingChestplate = chestplate.getName(null)
+                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getName(null));
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = getMaxDamage(stack) / 2;
         int chestDamage = getDamage(stack);
 
         return isFullArmorSet && chestDamage < maxDamageToFly
-                && !mainHandItem.getRegistryName().equals(Items.FIREWORK_ROCKET.getRegistryName());
+                && !mainHandItem.getName(null).equals(Items.FIREWORK_ROCKET.getName(null));
     }
 
     @Override

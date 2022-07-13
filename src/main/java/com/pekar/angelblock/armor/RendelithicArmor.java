@@ -16,6 +16,6 @@ public class RendelithicArmor extends ModArmor
     public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer)
     {
         var leggings = wearer.getItemBySlot(EquipmentSlot.LEGS).getItem();
-        return leggings.getRegistryName().equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getRegistryName());
+        return leggings.getName(null).equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getName(null));
     }
 }
