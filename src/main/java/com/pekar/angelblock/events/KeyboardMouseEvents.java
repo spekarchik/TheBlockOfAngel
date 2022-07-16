@@ -29,45 +29,45 @@ public class KeyboardMouseEvents implements IEventHandler
     }
 
     @SubscribeEvent
-    public void onKeyInputEvent(InputEvent.KeyInputEvent event)
+    public void onKeyInputEvent(InputEvent.Key event)
     {
-        if (KeyRegistry.JUMP_BOOST.isDown())
+        if (event.getKey() == KeyRegistry.JUMP_BOOST.getKey().getValue())
         {
             var keyName = KeyRegistry.JUMP_BOOST.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (KeyRegistry.NIGHT_VISION.isDown())
+        if (event.getKey() == KeyRegistry.NIGHT_VISION.getKey().getValue())
         {
             var keyName = KeyRegistry.NIGHT_VISION.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (KeyRegistry.GLOWING.isDown())
+        if (event.getKey() == KeyRegistry.GLOWING.getKey().getValue())
         {
             var keyName = KeyRegistry.GLOWING.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (KeyRegistry.REGENERATION.isDown())
+        if (event.getKey() == KeyRegistry.REGENERATION.getKey().getValue())
         {
             var keyName = KeyRegistry.REGENERATION.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (KeyRegistry.LEVITATION.isDown())
+        if (event.getKey() == KeyRegistry.LEVITATION.getKey().getValue())
         {
             var keyName = KeyRegistry.LEVITATION.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (KeyRegistry.SWORD_EFFECT.isDown())
+        if (event.getKey() == KeyRegistry.SWORD_EFFECT.getKey().getValue())
         {
             var keyName = KeyRegistry.SWORD_EFFECT.getName();
             trySendPacket(keyName, new ToolsModeChangePacket());
         }
 
-        if (KeyRegistry.SUPER_JUMP.isDown())
+        if (event.getKey() == KeyRegistry.SUPER_JUMP.getKey().getValue())
         {
             var keyName = KeyRegistry.SUPER_JUMP.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
