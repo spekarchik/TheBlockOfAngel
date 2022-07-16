@@ -8,7 +8,7 @@ import net.minecraftforge.fml.LogicalSide;
 public class TickEvents implements IEventHandler
 {
     @SubscribeEvent
-    public void onWorldTickEvent(TickEvent.WorldTickEvent event)
+    public void onWorldTickEvent(TickEvent.LevelTickEvent event)
     {
         if (event.phase != TickEvent.Phase.END) return;
         if (event.side != LogicalSide.SERVER) return;

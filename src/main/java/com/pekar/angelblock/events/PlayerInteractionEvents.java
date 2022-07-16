@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Map;
@@ -24,7 +24,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         IPlayer player = playerBasic.getPlayerByEntityName(entity.getName().getContents().toString());
         if (player == null) return;
 
@@ -37,7 +37,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingAttackEvent(LivingAttackEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntityLiving().getName().getContents().toString());
+        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getContents().toString());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -49,7 +49,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntityLiving().getName().getContents().toString());
+        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getContents().toString());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -61,7 +61,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntityLiving().getName().getContents().toString());
+        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getContents().toString());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -165,7 +165,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingDeathEvent(LivingDeathEvent event)
     {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
 
         if (!entity.level.isClientSide())
         {
