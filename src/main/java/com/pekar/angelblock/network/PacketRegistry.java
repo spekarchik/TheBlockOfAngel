@@ -35,6 +35,6 @@ public final class PacketRegistry
         var packetContainer = new PacketContainer<>(packet);
         INSTANCE.messageBuilder(packetContainer.getType(), packetContainer.getPacketId(), packetContainer.getDirection())
                 .encoder(packetContainer.getEncoder()).decoder(packetContainer.getDecoder())
-                .consumer(packetContainer.getPacketHandler()).add();
+                .consumerNetworkThread(packetContainer.getPacketHandler()).add();
     }
 }
