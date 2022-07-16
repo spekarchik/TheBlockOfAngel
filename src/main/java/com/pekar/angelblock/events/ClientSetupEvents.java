@@ -1,7 +1,6 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +20,6 @@ public final class ClientSetupEvents
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
-        KeyRegistry.registerKeys();
+        //KeyRegistry.registerKeys();
     }
 }

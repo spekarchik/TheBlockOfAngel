@@ -5,6 +5,7 @@ import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.packets.KeyPressedPacket;
 import com.pekar.angelblock.network.packets.ToolsModeChangePacket;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.time.Clock;
@@ -14,6 +15,18 @@ import java.util.Map;
 public class KeyboardMouseEvents implements IEventHandler
 {
     private final Map<String, Long> lastTime = new HashMap<>();
+
+    @SubscribeEvent
+    public void onRegisterKeyMappingsEvent(RegisterKeyMappingsEvent event)
+    {
+        event.register(KeyRegistry.NIGHT_VISION);
+        event.register(KeyRegistry.JUMP_BOOST);
+        event.register(KeyRegistry.SUPER_JUMP);
+        event.register(KeyRegistry.GLOWING);
+        event.register(KeyRegistry.REGENERATION);
+        event.register(KeyRegistry.LEVITATION);
+        event.register(KeyRegistry.SWORD_EFFECT);
+    }
 
     @SubscribeEvent
     public void onKeyInputEvent(InputEvent.KeyInputEvent event)
