@@ -2,7 +2,6 @@ package com.pekar.angelblock.blocks.tile_entities;
 
 import com.pekar.angelblock.events.ILivingDeathEventHandler;
 import com.pekar.angelblock.events.PlayerInteractionEvents;
-import com.pekar.angelblock.events.PlayerManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
@@ -33,7 +32,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
     @Override
     public void onLivingDeathEvent(LivingDeathEvent event)
     {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
 //        PlayerManager.instance().sendMessage("living death");
         if (!(entity instanceof Enemy)) return;
 

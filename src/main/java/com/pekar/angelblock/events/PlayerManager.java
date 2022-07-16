@@ -34,7 +34,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
 //        event.player.sendMessage(new TextComponentString("Player appeared: " + event.player.getName()));
 
-        IPlayer player = new Player(event.getPlayer());
+        IPlayer player = new Player(event.getEntity());
         players.put(player.getPlayerName(), player);
 
 //        player.sendMessage("Player joined: " + player.getPlayerName());
@@ -51,8 +51,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event)
     {
-        BlockCleaner.clean(event.getPlayer());
-        players.remove(event.getPlayer().getName().getContents());
+        BlockCleaner.clean(event.getEntity());
+        players.remove(event.getEntity().getName().getContents());
     }
 
     @SubscribeEvent
@@ -84,7 +84,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event)
     {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         IPlayer player = players.get(entity.getName().getContents());
         if (player == null) return;
 
@@ -99,7 +99,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        IPlayer player = players.get(event.getEntityLiving().getName().getContents());
+        IPlayer player = players.get(event.getEntity().getName().getContents());
         if (player == null) return;
 
 //        player.sendMessage("EquipmentChange: " + event.getEntityLiving().getName().getContents());
@@ -107,7 +107,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         // after coming back from the End World a player entity becomes another instance.
         // player.getArmorInventoryList() works incorrect on the old instance.
         // so, it's necessary to update the player
-        if (player.getEntity() != event.getEntityLiving())
+        if (player.getEntity() != event.getEntity())
         {
             player.sendMessage("player <> EntityLiving !!!");
             // IT'S UPDATED IN onPlayerClone()
