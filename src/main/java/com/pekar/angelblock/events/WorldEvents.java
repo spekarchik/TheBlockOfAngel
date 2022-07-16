@@ -246,12 +246,12 @@ public class WorldEvents implements IEventHandler
 //        }
     }
 
-    @SubscribeEvent
+    //@SubscribeEvent
     public void onAnvilRepairEvent(AnvilRepairEvent event)
     {
-        ItemStack itemResult = event.getItemResult();
-        Item item = itemResult.getItem();
-        Item ingredient = event.getIngredientInput().getItem();
+//        ItemStack itemResult = event.getItemResult();
+//        Item item = itemResult.getItem();
+//        Item ingredient = event.getIngredientInput().getItem();
 
 //        if (ingredient == Item.getItemFromBlock(Blocks.VINE))
 //        {
