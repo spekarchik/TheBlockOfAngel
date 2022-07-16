@@ -3,7 +3,6 @@ package com.pekar.angelblock.events.player;
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.potions.PotionUtils;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
@@ -151,7 +150,7 @@ public class Player implements IPlayer
     @Override
     public void sendMessage(String message)
     {
-        entity.sendMessage(new TextComponent(message), entity.getUUID());
+        //entity.asChatSender().write(new FriendlyByteBuf(new EmptyByteBuf()));
     }
 
     private Collection<String> getSlotArmorNames()
