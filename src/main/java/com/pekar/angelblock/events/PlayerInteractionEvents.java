@@ -70,7 +70,7 @@ public class PlayerInteractionEvents implements IEventHandler
         }
     }
 
-    @SubscribeEvent
+    // TODO: Remove?
     public void onBreakEvent(BlockEvent.BreakEvent event)
     {
         IPlayer player = playerBasic.getPlayerByEntityName(event.getPlayer().getName().getContents().toString());
