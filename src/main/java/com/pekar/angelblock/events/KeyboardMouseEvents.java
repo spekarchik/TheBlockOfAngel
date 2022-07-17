@@ -1,35 +1,31 @@
 package com.pekar.angelblock.events;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.packets.KeyPressedPacket;
 import com.pekar.angelblock.network.packets.ToolsModeChangePacket;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.time.Clock;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KeyboardMouseEvents implements IEventHandler
+@Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+public class KeyboardMouseEvents
 {
-    private final Map<String, Long> lastTime = new HashMap<>();
+    private static final Map<String, Long> lastTime = new HashMap<>();
 
-    @SubscribeEvent
-    public void onRegisterKeyMappingsEvent(RegisterKeyMappingsEvent event)
+    public static void initStatic()
     {
-        event.register(KeyRegistry.NIGHT_VISION);
-        event.register(KeyRegistry.JUMP_BOOST);
-        event.register(KeyRegistry.SUPER_JUMP);
-        event.register(KeyRegistry.GLOWING);
-        event.register(KeyRegistry.REGENERATION);
-        event.register(KeyRegistry.LEVITATION);
-        event.register(KeyRegistry.SWORD_EFFECT);
+        // do nothing
     }
 
     @SubscribeEvent
-    public void onKeyInputEvent(InputEvent.Key event)
+    public static void onKeyInputEvent(InputEvent.Key event)
     {
         if (event.getKey() == KeyRegistry.JUMP_BOOST.getKey().getValue())
         {
@@ -74,7 +70,7 @@ public class KeyboardMouseEvents implements IEventHandler
         }
     }
 
-    private synchronized void trySendPacket(String keyName, ClientToServerPacket packet)
+    private static synchronized void trySendPacket(String keyName, ClientToServerPacket packet)
     {
         long time2 = Clock.systemUTC().millis();
         var last = lastTime.get(keyName);

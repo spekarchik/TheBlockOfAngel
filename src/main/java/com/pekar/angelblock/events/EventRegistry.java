@@ -9,7 +9,6 @@ public class EventRegistry
         register((PlayerManager)PlayerManager.instance());
         register(new PlayerDataEvents());
         register(new PlayerInteractionEvents());
-        register(new KeyboardMouseEvents());
         register(new TickEvents());
         register(new WorldEvents());
     }
