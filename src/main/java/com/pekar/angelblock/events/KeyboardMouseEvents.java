@@ -78,7 +78,7 @@ public class KeyboardMouseEvents
         if (last != null)
         {
             long time1 = last;
-            if (time2 - time1 < 100) return;
+            if (time2 - time1 < 200) return;
         }
 
         lastTime.put(keyName, time2);
