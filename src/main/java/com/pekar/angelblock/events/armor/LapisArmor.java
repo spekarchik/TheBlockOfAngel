@@ -162,25 +162,25 @@ public class LapisArmor extends Armor
     @Override
     public String getHelmetName()
     {
-        return ArmorRegistry.LAPIS_HELMET.getId().getPath();
+        return ArmorRegistry.LAPIS_HELMET.get().getDescriptionId();
     }
 
     @Override
     public String getChestPlateName()
     {
-        return ArmorRegistry.LAPIS_CHESTPLATE.getId().getPath();
+        return ArmorRegistry.LAPIS_CHESTPLATE.get().getDescriptionId();
     }
 
     @Override
     public String getLeggingsName()
     {
-        return ArmorRegistry.LAPIS_LEGGINGS.getId().getPath();
+        return ArmorRegistry.LAPIS_LEGGINGS.get().getDescriptionId();
     }
 
     @Override
     public String getBootsName()
     {
-        return ArmorRegistry.LAPIS_BOOTS.getId().getPath();
+        return ArmorRegistry.LAPIS_BOOTS.get().getDescriptionId();
     }
 
     private void updatePotionEffects()

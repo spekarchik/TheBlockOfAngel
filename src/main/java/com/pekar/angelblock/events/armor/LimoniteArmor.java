@@ -279,25 +279,25 @@ public class LimoniteArmor extends Armor
     @Override
     public String getHelmetName()
     {
-        return ArmorRegistry.LIMONITE_HELMET.getId().getPath();
+        return ArmorRegistry.LIMONITE_HELMET.get().getDescriptionId();
     }
 
     @Override
     public String getChestPlateName()
     {
-        return ArmorRegistry.LIMONITE_CHESTPLATE.getId().getPath();
+        return ArmorRegistry.LIMONITE_CHESTPLATE.get().getDescriptionId();
     }
 
     @Override
     public String getLeggingsName()
     {
-        return ArmorRegistry.LIMONITE_LEGGINGS.getId().getPath();
+        return ArmorRegistry.LIMONITE_LEGGINGS.get().getDescriptionId();
     }
 
     @Override
     public String getBootsName()
     {
-        return ArmorRegistry.LIMONITE_BOOTS.getId().getPath();
+        return ArmorRegistry.LIMONITE_BOOTS.get().getDescriptionId();
     }
 
     private void updatePotionEffects()

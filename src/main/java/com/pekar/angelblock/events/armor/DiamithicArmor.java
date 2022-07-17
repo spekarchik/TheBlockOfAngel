@@ -181,25 +181,25 @@ public class DiamithicArmor extends Armor
     @Override
     public String getHelmetName()
     {
-        return ArmorRegistry.DIAMITHIC_HELMET.getId().getPath();
+        return ArmorRegistry.DIAMITHIC_HELMET.get().getDescriptionId();
     }
 
     @Override
     public String getChestPlateName()
     {
-        return ArmorRegistry.DIAMITHIC_CHESTPLATE.getId().getPath();
+        return ArmorRegistry.DIAMITHIC_CHESTPLATE.get().getDescriptionId();
     }
 
     @Override
     public String getLeggingsName()
     {
-        return ArmorRegistry.DIAMITHIC_LEGGINGS.getId().getPath();
+        return ArmorRegistry.DIAMITHIC_LEGGINGS.get().getDescriptionId();
     }
 
     @Override
     public String getBootsName()
     {
-        return ArmorRegistry.DIAMITHIC_BOOTS.getId().getPath();
+        return ArmorRegistry.DIAMITHIC_BOOTS.get().getDescriptionId();
     }
 
     private void updatePotionEffects()
