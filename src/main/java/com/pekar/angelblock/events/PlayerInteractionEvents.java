@@ -25,7 +25,7 @@ public class PlayerInteractionEvents implements IEventHandler
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
         LivingEntity entity = event.getEntity();
-        IPlayer player = playerBasic.getPlayerByEntityName(entity.getName().getContents().toString());
+        IPlayer player = playerBasic.getPlayerByEntityName(entity.getName().getString());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -37,7 +37,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingAttackEvent(LivingAttackEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getContents().toString());
+        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getString());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -49,7 +49,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getContents().toString());
+        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getString());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -61,7 +61,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getContents().toString());
+        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getString());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -73,7 +73,7 @@ public class PlayerInteractionEvents implements IEventHandler
     // TODO: Remove?
     public void onBreakEvent(BlockEvent.BreakEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getPlayer().getName().getContents().toString());
+        IPlayer player = playerBasic.getPlayerByEntityName(event.getPlayer().getName().getString());
         if (player == null) return;
 
         ItemStack tool = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);

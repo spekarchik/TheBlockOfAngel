@@ -30,7 +30,7 @@ public class ClientTickEvents
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
 
-        String playerName = localPlayer.getName().getContents().toString();
+        String playerName = localPlayer.getName().getString();
         if (!tickCounter.containsKey(playerName))
         {
             tickCounter.put(playerName, 0);

@@ -52,13 +52,13 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event)
     {
         BlockCleaner.clean(event.getEntity());
-        players.remove(event.getEntity().getName().getContents());
+        players.remove(event.getEntity().getName().getString());
     }
 
     @SubscribeEvent
     public void onEntityTravelToDimensionEvent(EntityTravelToDimensionEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getName().getContents());
+        IPlayer player = players.get(event.getEntity().getName().getString());
         if (player == null) return;
 
         BlockCleaner.clean(player.getEntity());
@@ -72,7 +72,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getName().getContents());
+        IPlayer player = players.get(event.getEntity().getName().getString());
         if (player == null) return;
 
         for (IArmorEvents armor : player.getArmorTypesUsed())
@@ -85,7 +85,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event)
     {
         LivingEntity entity = event.getEntity();
-        IPlayer player = players.get(entity.getName().getContents());
+        IPlayer player = players.get(entity.getName().getString());
         if (player == null) return;
 
 //        player.sendMessage("Player was cloned.");
@@ -99,10 +99,10 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getName().getContents());
+        IPlayer player = players.get(event.getEntity().getName().getString());
         if (player == null) return;
 
-//        player.sendMessage("EquipmentChange: " + event.getEntityLiving().getName().getContents());
+//        player.sendMessage("EquipmentChange: " + event.getEntityLiving().getName().getString());
 
         // after coming back from the End World a player entity becomes another instance.
         // player.getArmorInventoryList() works incorrect on the old instance.

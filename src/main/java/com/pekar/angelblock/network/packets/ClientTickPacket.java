@@ -13,7 +13,7 @@ public class ClientTickPacket extends ClientToServerPacket
     @Override
     protected void onReceive(ServerPlayer serverPlayer)
     {
-        String playerName = serverPlayer.getName().getContents().toString();
+        String playerName = serverPlayer.getName().getString();
         IPlayer player = PlayerManager.instance().getPlayerByEntityName(playerName);
 
         for (IArmor armor : player.getArmorTypesUsed())
