@@ -18,9 +18,24 @@
               "add": false
             }
           ],
-          "name": "angelblock:marine_crystal"
+          "name": "minecraft:fire_coral"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0.0,
+                "max": 2.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:horn_coral"
         }
-	  ]
+      ]
 	},
     {
       "rolls": {
