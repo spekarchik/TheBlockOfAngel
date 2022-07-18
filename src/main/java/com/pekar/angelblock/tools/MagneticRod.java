@@ -54,7 +54,7 @@ public class MagneticRod extends ModRod
 
     private InteractionResult shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
     {
-        int depth = Math.max(getAmethystDetectionDepth(), getShiftDepth());
+        int depth = Math.max(getSculkDetectionDepth(), Math.max(getAmethystDetectionDepth(), getShiftDepth()));
 
         int initialDepth;
         Function<BlockPos, Integer> getDepthCoord, getRadiusCoord1, getRadiusCoord2;
@@ -115,7 +115,7 @@ public class MagneticRod extends ModRod
                     boolean isDiamondOre = isDiamondOre(currentBlock);
                     boolean isShiftingOre = isShiftingOre(currentBlock);
                     boolean isAmethystGeode = isAmethystGeode(currentBlock);
-                    boolean isSculkVein = isSculkVein(currentBlock);
+                    boolean isSculkVein = isSculk(currentBlock);
                     boolean canShiftOres;
                     boolean canDetectAmethyst;
                     boolean canDetectSculk;
@@ -250,8 +250,8 @@ public class MagneticRod extends ModRod
         return block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE;
     }
 
-    private boolean isSculkVein(Block block)
+    private boolean isSculk(Block block)
     {
-        return block == Blocks.SCULK_VEIN;
+        return block == Blocks.SCULK || block == Blocks.SCULK_VEIN;
     }
 }

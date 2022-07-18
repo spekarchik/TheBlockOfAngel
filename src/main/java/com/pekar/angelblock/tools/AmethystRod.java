@@ -90,7 +90,7 @@ public class AmethystRod extends FireRod
     @Override
     protected int getSculkDetectionDepth()
     {
-        return 40;
+        return 60;
     }
 
     private InteractionResult setGlowLichen(BlockPlaceContext context, BlockPos pos)
