@@ -10,6 +10,7 @@ public enum SoundType
     STEAM,
     AMETHYST_FOUND,
     DIAMOND_FOUND,
+    SCULK_FOUND,
     ORE_FOUND;
 
     public static int getIndex(SoundType soundType)
@@ -25,6 +26,7 @@ public enum SoundType
                     case AMETHYST_FOUND -> 6;
                     case DIAMOND_FOUND -> 7;
                     case ORE_FOUND -> 8;
+                    case SCULK_FOUND -> 9;
                 };
     }
 
@@ -40,6 +42,7 @@ public enum SoundType
                     case 6 -> AMETHYST_FOUND;
                     case 7 -> DIAMOND_FOUND;
                     case 8 -> ORE_FOUND;
+                    case 9 -> SCULK_FOUND;
                     default -> UNDEFINED;
                 };
     }

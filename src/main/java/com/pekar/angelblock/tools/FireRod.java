@@ -249,10 +249,31 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound, boolean isAmethystFound)
+    protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
     {
-        var sound = isDiamondOreFound ? SoundType.DIAMOND_FOUND :
-                (isAmethystFound ? SoundType.AMETHYST_FOUND : SoundType.ORE_FOUND);
-        new PlaySoundPacket(sound).sendToPlayer(player);
+        SoundType soundType;
+
+        if (detectorFlags.isDiamondOreFound())
+        {
+            soundType = SoundType.DIAMOND_FOUND;
+        }
+        else if (detectorFlags.isAmethystFound())
+        {
+            soundType = SoundType.AMETHYST_FOUND;
+        }
+        else if (detectorFlags.isSculkVeinFound())
+        {
+            soundType = SoundType.SCULK_FOUND;
+        }
+        else if (detectorFlags.isShiftingOreFound())
+        {
+            soundType = SoundType.ORE_FOUND;
+        }
+        else
+        {
+            return;
+        }
+
+        new PlaySoundPacket(soundType).sendToPlayer(player);
     }
 }

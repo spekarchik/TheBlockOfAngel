@@ -98,9 +98,11 @@ public class MagneticRod extends ModRod
         boolean isDiamondOreFound = false;
         boolean isShiftingOreFound = false;
         boolean isAmethystFound = false;
+        boolean isSculkVeinFound = false;
         int maxDepthCoord = getDepthCoord.apply(pos) - initialDepth;
         int oreDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getShiftDepth() : -getShiftDepth());
         int amethystDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getAmethystDetectionDepth() : -getAmethystDetectionDepth());
+        int sculkDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getSculkDetectionDepth() : -getSculkDetectionDepth());
 
         for (int x1 = getRadiusCoord1.apply(pos) - radius; x1 <= getRadiusCoord1.apply(pos) + radius; x1++)
             for (int x2 = getRadiusCoord2.apply(pos) - radius; x2 <= getRadiusCoord2.apply(pos) + radius; x2++)
@@ -113,21 +115,27 @@ public class MagneticRod extends ModRod
                     boolean isDiamondOre = isDiamondOre(currentBlock);
                     boolean isShiftingOre = isShiftingOre(currentBlock);
                     boolean isAmethystGeode = isAmethystGeode(currentBlock);
+                    boolean isSculkVein = isSculkVein(currentBlock);
                     boolean canShiftOres;
                     boolean canDetectAmethyst;
+                    boolean canDetectSculk;
 
                     if (initialDepth >= 0)
                     {
                         canShiftOres = getDepthCoord.apply(currentPos) >= oreDepthCoord;
                         canDetectAmethyst = getDepthCoord.apply(currentPos) >= amethystDepthCoord;
+                        canDetectSculk = getDepthCoord.apply(currentPos) >= sculkDepthCoord;
                     }
                     else
                     {
                         canShiftOres = getDepthCoord.apply(currentPos) <= oreDepthCoord;
                         canDetectAmethyst = getDepthCoord.apply(currentPos) <= amethystDepthCoord;
+                        canDetectSculk = getDepthCoord.apply(currentPos) <= sculkDepthCoord;
                     }
 
                     if (canDetectAmethyst && isAmethystGeode) isAmethystFound = true;
+
+                    if (canDetectSculk && isSculkVein) isSculkVeinFound = true;
 
                     if (!canShiftOres)
                     {
@@ -166,21 +174,18 @@ public class MagneticRod extends ModRod
                 }
             }
 
-        if (isShiftingOreFound || isDiamondOreFound || isAmethystFound)
-            oreFoundEvent(player, isShiftingOreFound, isDiamondOreFound, isAmethystFound);
+        if (isShiftingOreFound || isDiamondOreFound || isAmethystFound || isSculkVeinFound)
+            oreFoundEvent(player, new DetectorFlags(isShiftingOreFound, isDiamondOreFound, isAmethystFound, isSculkVeinFound));
     }
 
-    protected void oreFoundEvent(ServerPlayer player, boolean isOreFound, boolean isDiamondOreFound, boolean isAmethystFound)
+    protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
     {
-        if (isOreFound)
+        if (detectorFlags.isShiftingOreFound())
             new PlaySoundPacket(SoundType.ORE_FOUND).sendToPlayer(player);
     }
 
     private void tryExchange(Level level, BlockPos currentPos, BlockPos closerPos)
     {
-        var block = level.getBlockState(currentPos).getBlock();
-        boolean isDiamondOre = isDiamondOre(block);
-
         if (!isShiftingOre(level, currentPos)) return;
         if (!canBeReplaced(level, closerPos)) return;
         exchange(level, currentPos, closerPos);
@@ -199,6 +204,11 @@ public class MagneticRod extends ModRod
     protected int getAmethystDetectionDepth()
     {
         return 20;
+    }
+
+    protected int getSculkDetectionDepth()
+    {
+        return 15;
     }
 
     private void exchange(Level level, BlockPos currentPos, BlockPos closerPos)
@@ -238,5 +248,10 @@ public class MagneticRod extends ModRod
     private boolean isDiamondOre(Block block)
     {
         return block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE;
+    }
+
+    private boolean isSculkVein(Block block)
+    {
+        return block == Blocks.SCULK_VEIN;
     }
 }
