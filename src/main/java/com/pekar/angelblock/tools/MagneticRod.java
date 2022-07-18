@@ -231,7 +231,7 @@ public class MagneticRod extends ModRod
 
     protected boolean isShiftingOre(Block block)
     {
-        return block instanceof DropExperienceBlock && !isDiamondOre(block);
+        return block instanceof DropExperienceBlock && !isDiamondOre(block) && !isSculk(block);
     }
 
     private boolean isShiftingOre(Level level, BlockPos pos)
