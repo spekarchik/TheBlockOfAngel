@@ -7,9 +7,9 @@ import net.minecraft.world.item.ItemStack;
 
 public class RendelithicArmor extends ModArmor
 {
-    protected RendelithicArmor(ArmorMaterial material, EquipmentSlot equipmentSlot)
+    protected RendelithicArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
     {
-        super(material, equipmentSlot);
+        super(material, equipmentSlot, armorItemName);
     }
 
     @Override

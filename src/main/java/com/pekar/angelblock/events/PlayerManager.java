@@ -107,12 +107,12 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         // after coming back from the End World a player entity becomes another instance.
         // player.getArmorInventoryList() works incorrect on the old instance.
         // so, it's necessary to update the player
-        if (player.getEntity() != event.getEntity())
-        {
-            player.sendMessage("player <> EntityLiving !!!");
-            // IT'S UPDATED IN onPlayerClone()
-//            player.updateEntity((net.minecraft.world.entity.player.Player) event.getEntityLiving());
-        }
+//        if (player.getEntity() != event.getEntity())
+//        {
+//            player.sendMessage("player <> EntityLiving !!!");
+//            // IT'S UPDATED IN onPlayerClone()
+////            player.updateEntity((net.minecraft.world.entity.player.Player) event.getEntityLiving());
+//        }
 
         Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
         Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);

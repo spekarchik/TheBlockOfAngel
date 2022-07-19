@@ -10,9 +10,9 @@ import net.minecraft.world.item.Items;
 
 public class FlyingArmor extends ModArmor
 {
-    protected FlyingArmor(ArmorMaterial material, EquipmentSlot equipmentSlot)
+    protected FlyingArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
     {
-        super(material, equipmentSlot);
+        super(material, equipmentSlot, armorItemName);
     }
 
     @Override

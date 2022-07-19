@@ -358,25 +358,25 @@ public class SuperArmor extends Armor
     @Override
     public String getHelmetName()
     {
-        return ArmorRegistry.SUPER_HELMET.get().getDescriptionId();
+        return ArmorRegistry.SUPER_HELMET.get().getArmorItemName();
     }
 
     @Override
     public String getChestPlateName()
     {
-        return ArmorRegistry.SUPER_CHESTPLATE.get().getDescriptionId();
+        return ArmorRegistry.SUPER_CHESTPLATE.get().getArmorItemName();
     }
 
     @Override
     public String getLeggingsName()
     {
-        return ArmorRegistry.SUPER_LEGGINGS.get().getDescriptionId();
+        return ArmorRegistry.SUPER_LEGGINGS.get().getArmorItemName();
     }
 
     @Override
     public String getBootsName()
     {
-        return ArmorRegistry.SUPER_BOOTS.get().getDescriptionId();
+        return ArmorRegistry.SUPER_BOOTS.get().getArmorItemName();
     }
 
     private float getRealDamage(float initialDamageAmount)

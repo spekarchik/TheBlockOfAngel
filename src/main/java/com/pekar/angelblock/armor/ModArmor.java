@@ -1,23 +1,22 @@
 package com.pekar.angelblock.armor;
 
-import com.pekar.angelblock.Main;
 import com.pekar.angelblock.tab.ModTab;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraftforge.registries.RegistryObject;
-
-import java.util.function.Supplier;
 
 public class ModArmor extends ArmorItem
 {
-    protected ModArmor(ArmorMaterial material, EquipmentSlot equipmentSlot)
+    protected final String armorItemName;
+
+    protected ModArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
     {
         super(material, equipmentSlot, new Properties().tab(ModTab.MOD_TAB));
+        this.armorItemName = armorItemName;
     }
 
-    protected static RegistryObject<ArmorItem> register(String name, Supplier<ArmorItem> sup)
+    public String getArmorItemName()
     {
-        return Main.ITEMS.register(name, sup);
+        return armorItemName;
     }
 }

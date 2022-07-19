@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.player;
 
-import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.potions.PotionUtils;
 import net.minecraft.world.effect.MobEffect;
@@ -161,12 +161,13 @@ public class Player implements IPlayer
 
         for (ItemStack itemStack : itemStacks)
         {
-            String name = itemStack.getItem().getDescriptionId();
-            if (name.endsWith(ArmorRegistry.FLYING_SUFFIX))
-            {
-                int index = name.indexOf(ArmorRegistry.FLYING_SUFFIX);
-                name = name.substring(0, index);
-            }
+            var item = itemStack.getItem();
+
+            if (!(item instanceof ModArmor)) continue;
+
+            var armorItem = (ModArmor) item;
+
+            String name = armorItem.getArmorItemName();
             armorNames.add(name);
         }
         return armorNames;
