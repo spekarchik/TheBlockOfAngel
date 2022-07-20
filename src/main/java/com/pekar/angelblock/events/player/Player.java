@@ -64,13 +64,13 @@ public class Player implements IPlayer
     {
         for (IArmor armor : allArmor)
         {
-            if (!isAnyArmorElementPutOn(armor.getArmorElementNames()))
+            if (isAnyArmorElementPutOn(armor.getArmorElementNames()))
             {
-                armorInUse.remove(armor);
+                armorInUse.add(armor);
             }
             else
             {
-                armorInUse.add(armor);
+                armorInUse.remove(armor);
             }
         }
     }
