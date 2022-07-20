@@ -5,24 +5,33 @@ import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.potions.PotionUtils;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Player implements IPlayer
 {
+    private final IArmor rendelithicArmorModel = new RendelithicArmor(this);
+    private final IArmor diamithicArmorModel = new DiamithicArmor(this);
+    private final IArmor lapisArmorModel = new LapisArmor(this);
+    private final IArmor superArmorModel = new SuperArmor(this);
+    private final IArmor limoniteArmorModel = new LimoniteArmor(this);
+    private final IArmor flyingArmorModel = new FlyingArmor(this);
+
+    private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
+
     private net.minecraft.world.entity.player.Player entity;
     private final Set<IArmor> armorInUse = new HashSet<>();
-    private final Set<IArmor> allArmor = new HashSet<>();
 
     public Player(net.minecraft.world.entity.player.Player entity)
     {
         this.entity = entity;
-        registerArmor();
+        equipmentSlots.add(EquipmentSlot.FEET);
+        equipmentSlots.add(EquipmentSlot.LEGS);
+        equipmentSlots.add(EquipmentSlot.CHEST);
+        equipmentSlots.add(EquipmentSlot.HEAD);
     }
 
     @Override
@@ -32,46 +41,63 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean isArmorElementPutOn(String armorElementName)
+    public boolean isArmorElementPutOn(IArmor armor, EquipmentSlot equipmentSlot)
     {
-        Collection<String> armorNames = getSlotArmorNames();
-        return armorNames.contains(armorElementName);
+        var itemStack = getEntity().getItemBySlot(equipmentSlot);
+        if (itemStack.isEmpty()) return false;
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem)) return false;
+
+        return armor.getModelName().equals(armorItem.getArmorModelName());
     }
 
     @Override
-    public boolean isFullArmorSetPutOn(Collection<String> armorNames)
+    public boolean isFullArmorSetPutOn(IArmor armor)
     {
-        Collection<String> armorNamesPutOn = getSlotArmorNames();
-        return armorNamesPutOn.containsAll(armorNames);
+        var armorNamesPutOn = getSlotArmorNames();
+        return armorNamesPutOn.stream().allMatch(x -> x.equals(armor.getModelName()));
     }
 
     @Override
-    public boolean isAllArmorElementsPutOn(String... armorNames)
+    public boolean isAllArmorElementsPutOn(IArmor armor, EquipmentSlot... equipmentSlots)
     {
-        Collection<String> armorNamesPutOn = getSlotArmorNames();
-        return Arrays.stream(armorNames).allMatch(x -> armorNamesPutOn.contains(x));
+        for (var slot : equipmentSlots)
+        {
+            var itemStack = getEntity().getItemBySlot(slot);
+            if (itemStack.isEmpty()) return false;
+            var item = itemStack.getItem();
+            if (!(item instanceof ModArmor armorItem)) return false;
+
+            if (!armor.getModelName().equals(armorItem.getArmorModelName())) return false;
+        }
+
+        return true;
     }
 
     @Override
-    public boolean isAnyArmorElementPutOn(Collection<String> armorNames)
+    public boolean isAnyArmorElementPutOn(IArmor armor)
     {
-        Collection<String> armorNamesPutOn = getSlotArmorNames();
-        return armorNamesPutOn.stream().anyMatch(x -> armorNames.contains(x));
+        for (var slot : equipmentSlots)
+        {
+            var itemStack = getEntity().getItemBySlot(slot);
+            if (itemStack.isEmpty()) continue;
+            var item = itemStack.getItem();
+            if (!(item instanceof ModArmor armorItem)) continue;
+
+            if (armor.getModelName().equals(armorItem.getArmorModelName())) return true;
+        }
+
+        return false;
     }
 
     @Override
     public synchronized void updateArmorUsed()
     {
-        for (IArmor armor : allArmor)
+        armorInUse.clear();
+
+        for (var armor : getSlotArmorItems())
         {
-            if (isAnyArmorElementPutOn(armor.getArmorElementNames()))
-            {
-                armorInUse.add(armor);
-            }
-            else
-            {
-                armorInUse.remove(armor);
-            }
+            armorInUse.add(getArmorModel(armor));
         }
     }
 
@@ -163,24 +189,68 @@ public class Player implements IPlayer
         {
             var item = itemStack.getItem();
 
-            if (!(item instanceof ModArmor)) continue;
-
-            var armorItem = (ModArmor) item;
-
-            String name = armorItem.getArmorItemName();
-            armorNames.add(name);
+            if (item instanceof ModArmor armorItem)
+            {
+                String name = armorItem.getArmorModelName();
+                armorNames.add(name);
+            }
+            else
+            {
+                armorNames.add(item.getName(itemStack).getString());
+            }
         }
+
         return armorNames;
     }
 
-    private void registerArmor()
+    private Collection<ModArmor> getSlotArmorItems()
     {
-        allArmor.add(new RendelithicArmor(this));
-        allArmor.add(new DiamithicArmor(this));
-        allArmor.add(new LapisArmor(this));
-        allArmor.add(new SuperArmor(this));
-        allArmor.add(new LimoniteArmor(this));
-        allArmor.add(new FlyingArmor(this));
-        // TODO
+        Iterable<ItemStack> itemStacks = entity.getArmorSlots();
+        var armorItems = new ArrayList<ModArmor>();
+
+        for (ItemStack itemStack : itemStacks)
+        {
+            var item = itemStack.getItem();
+
+            if (!(item instanceof ModArmor)) continue;
+
+            armorItems.add((ModArmor) item);
+        }
+
+        return armorItems;
+    }
+
+    private IArmor getArmorModel(ModArmor modArmor)
+    {
+        var modelName = modArmor.getArmorModelName();
+
+        if (modelName.equals(rendelithicArmorModel.getModelName()))
+        {
+            return rendelithicArmorModel;
+        }
+        else if (modelName.equals(diamithicArmorModel.getModelName()))
+        {
+            return diamithicArmorModel;
+        }
+        else if (modelName.equals(lapisArmorModel.getModelName()))
+        {
+            return lapisArmorModel;
+        }
+        else if (modelName.equals(superArmorModel.getModelName()))
+        {
+            return superArmorModel;
+        }
+        else if (modelName.equals(limoniteArmorModel.getModelName()))
+        {
+            return limoniteArmorModel;
+        }
+        else if (modelName.equals(flyingArmorModel.getModelName()))
+        {
+            return flyingArmorModel;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

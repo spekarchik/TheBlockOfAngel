@@ -99,7 +99,7 @@ public class SuperArmor extends Armor
         }
         else
         {
-            boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+            boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
             if (isFullArmorSet)
             {
                 if (damageSource.isExplosion())
@@ -128,7 +128,7 @@ public class SuperArmor extends Armor
     public void onLivingAttackEvent(LivingAttackEvent event)
     {
         DamageSource damageSource = event.getSource();
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
 
         if (isFireDamage(damageSource))
         {
@@ -137,7 +137,7 @@ public class SuperArmor extends Armor
         }
         else if (isFreezeDamage(damageSource))
         {
-            boolean areBootsWorn = player.isArmorElementPutOn(ArmorRegistry.SUPER_BOOTS.get().getDescriptionId());
+            boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
             event.setCanceled(areBootsWorn);
         }
         else if (isFullArmorSet)
@@ -203,7 +203,7 @@ public class SuperArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        if (!player.isArmorElementPutOn(getLeggingsName())) return;
+        if (!player.isArmorElementPutOn(this, EquipmentSlot.LEGS)) return;
         if (jumpEffect.isActive() || slownessEffect.isActive()) return;
 
         if (levitationEffect.isEffectOn() && levitationEffect.isActive())
@@ -231,7 +231,7 @@ public class SuperArmor extends Armor
         {
             event.setDamageMultiplier(0.3f);
         }
-        else if (player.isArmorElementPutOn(getBootsName()))
+        else if (player.isArmorElementPutOn(this, EquipmentSlot.FEET))
         {
             event.setDamageMultiplier(0.6f);
         }
@@ -240,7 +240,7 @@ public class SuperArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
         if (!isFullArmorSet) return;
 
         Player entityPlayer = player.getEntity();
@@ -347,7 +347,7 @@ public class SuperArmor extends Armor
     @Override
     public void onBeingUnderRain()
     {
-        if (!player.isFullArmorSetPutOn(getArmorElementNames())) return;
+        if (!player.isFullArmorSetPutOn(this)) return;
 
         if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
         {
@@ -356,35 +356,17 @@ public class SuperArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.SUPER_HELMET.get().getArmorItemName();
-    }
-
-    @Override
-    public String getChestPlateName()
-    {
-        return ArmorRegistry.SUPER_CHESTPLATE.get().getArmorItemName();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.SUPER_LEGGINGS.get().getArmorItemName();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.SUPER_BOOTS.get().getArmorItemName();
+        return ArmorRegistry.SUPER_BOOTS.get().getArmorModelName();
     }
 
     private float getRealDamage(float initialDamageAmount)
     {
-        float helmetProtection = player.isArmorElementPutOn(getHelmetName()) ? initialDamageAmount * 0.2f : 0;
-        float bootsProtection = player.isArmorElementPutOn(getBootsName()) ? initialDamageAmount * 0.2f : 0;
-        float chestplateProtection = player.isArmorElementPutOn(getChestPlateName()) ? initialDamageAmount * 0.35f : 0;
-        float leggingsProtection = player.isArmorElementPutOn(getLeggingsName()) ? initialDamageAmount * 0.3f : 0;
+        float helmetProtection = player.isArmorElementPutOn(this, EquipmentSlot.HEAD) ? initialDamageAmount * 0.2f : 0;
+        float bootsProtection = player.isArmorElementPutOn(this, EquipmentSlot.FEET) ? initialDamageAmount * 0.2f : 0;
+        float chestplateProtection = player.isArmorElementPutOn(this, EquipmentSlot.CHEST) ? initialDamageAmount * 0.35f : 0;
+        float leggingsProtection = player.isArmorElementPutOn(this, EquipmentSlot.LEGS) ? initialDamageAmount * 0.3f : 0;
         float realDamage = initialDamageAmount - helmetProtection - bootsProtection - chestplateProtection - leggingsProtection;
         return realDamage > 0 ? realDamage : 0;
     }
@@ -447,7 +429,7 @@ public class SuperArmor extends Armor
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
         int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
 
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames())
+        return player.isFullArmorSetPutOn(this)
                 && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
     }
 }
