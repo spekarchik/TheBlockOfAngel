@@ -90,6 +90,15 @@ public class Player implements IPlayer
     }
 
     @Override
+    public boolean isArmorModifiedWithDetector(IArmor armor)
+    {
+        var item = getEntity().getItemBySlot(EquipmentSlot.HEAD).getItem();
+        if (!(item instanceof ModArmor armorItem)) return false;
+        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        return armorItem.isModifiedWithDetector();
+    }
+
+    @Override
     public synchronized void updateArmorUsed()
     {
         armorInUse.clear();

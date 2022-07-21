@@ -13,6 +13,7 @@ public interface IPlayer
     boolean isFullArmorSetPutOn(IArmor armor);
     boolean isAllArmorElementsPutOn(IArmor armor, EquipmentSlot ... equipmentSlots);
     boolean isAnyArmorElementPutOn(IArmor armor);
+    boolean isArmorModifiedWithDetector(IArmor armor);
     void updateArmorUsed();
 
     boolean isEffectActive(MobEffect effect);

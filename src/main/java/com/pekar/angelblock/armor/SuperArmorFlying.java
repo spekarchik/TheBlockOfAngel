@@ -17,14 +17,14 @@ public class SuperArmorFlying extends SuperArmor
     {
         if (slot != EquipmentSlot.CHEST) return false;
 
-        boolean isFlyingHelmet = entity.getItemBySlot(EquipmentSlot.HEAD).getItem().getDescriptionId()
-                .equals(ArmorRegistry.SUPER_HELMET.get().getDescriptionId());
-        boolean isFlyingLeggings = entity.getItemBySlot(EquipmentSlot.LEGS).getItem().getDescriptionId()
-                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getDescriptionId());
-        boolean isFlyingBoots = entity.getItemBySlot(EquipmentSlot.FEET).getItem().getDescriptionId()
-                .equals(ArmorRegistry.SUPER_BOOTS.get().getDescriptionId());
-        boolean isFlyingChestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem().getDescriptionId()
-                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getDescriptionId());
+        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
+                .equals(ArmorRegistry.SUPER_HELMET.get().getArmorModelName());
+        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
+                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorModelName());
+        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
+                .equals(ArmorRegistry.SUPER_BOOTS.get().getArmorModelName());
+        boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
+                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getArmorModelName());
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = getMaxDamage(stack) / 2;
@@ -37,5 +37,12 @@ public class SuperArmorFlying extends SuperArmor
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
     {
         return canElytraFly(stack, entity);
+    }
+
+    private String getModelName(LivingEntity entity, EquipmentSlot slot)
+    {
+        var item = entity.getItemBySlot(slot).getItem();
+        if (!(item instanceof ModArmor armorItem)) return "";
+        return armorItem.getArmorModelName();
     }
 }

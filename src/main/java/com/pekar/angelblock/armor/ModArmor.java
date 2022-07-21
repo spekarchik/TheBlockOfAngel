@@ -19,4 +19,9 @@ public class ModArmor extends ArmorItem
     {
         return armorModelName;
     }
+
+    public boolean isModifiedWithDetector()
+    {
+        return false;
+    }
 }

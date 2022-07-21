@@ -26,6 +26,8 @@ public class ArmorRegistry
 
     public static final RegistryObject<ModArmor> LIMONITE_HELMET = Main.ITEMS.register("limonite_helmet", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.HEAD, "limonite"));
+    public static final RegistryObject<ModArmor> LIMONITE_HELMET_WITH_DETECTOR = Main.ITEMS.register("limonite_helmet_with_detector", () ->
+            new LimoniteArmorWithDetector(ModArmorMaterial.LIMONITE, EquipmentSlot.HEAD, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_CHESTPLATE = Main.ITEMS.register("limonite_chestplate", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.CHEST, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS = Main.ITEMS.register("limonite_leggings", () ->
@@ -35,8 +37,8 @@ public class ArmorRegistry
 
     public static final RegistryObject<ModArmor> DIAMITHIC_HELMET = Main.ITEMS.register("diamithic_helmet", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.HEAD, "diamithic"));
-    public static final RegistryObject<ModArmor> DIAMITHIC_HELMET_DETECTOR = Main.ITEMS.register("diamithic_helmet_detector", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.HEAD, "diamithic"));
+    public static final RegistryObject<ModArmor> DIAMITHIC_HELMET_WITH_DETECTOR = Main.ITEMS.register("diamithic_helmet_with_detector", () ->
+            new DiamithicArmorWithDetector(ModArmorMaterial.DIAMITHIC, EquipmentSlot.HEAD, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE = Main.ITEMS.register("diamithic_chestplate", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_LEGGINGS = Main.ITEMS.register("diamithic_leggings", () ->
@@ -46,6 +48,8 @@ public class ArmorRegistry
 
     public static final RegistryObject<ModArmor> SUPER_HELMET = Main.ITEMS.register("super_helmet", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.HEAD, "super"));
+    public static final RegistryObject<ModArmor> SUPER_HELMET_WITH_DETECTOR = Main.ITEMS.register("super_helmet_with_detector", () ->
+            new SuperArmorWithDetector(ModArmorMaterial.SUPER, EquipmentSlot.HEAD, "super"));
     public static final RegistryObject<ModArmor> SUPER_CHESTPLATE = Main.ITEMS.register("super_chestplate", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.CHEST, "super"));
     public static final RegistryObject<ModArmor> SUPER_CHESTPLATE_FLYING = Main.ITEMS.register("super_chestplate_flying", () ->
