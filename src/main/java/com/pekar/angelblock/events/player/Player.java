@@ -20,9 +20,8 @@ public class Player implements IPlayer
     private final IArmor limoniteArmorModel = new LimoniteArmor(this);
     private final IArmor flyingArmorModel = new FlyingArmor(this);
 
-    private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
-
     private net.minecraft.world.entity.player.Player entity;
+    private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
     private final Set<IArmor> armorInUse = new HashSet<>();
 
     public Player(net.minecraft.world.entity.player.Player entity)
@@ -212,9 +211,9 @@ public class Player implements IPlayer
         {
             var item = itemStack.getItem();
 
-            if (!(item instanceof ModArmor)) continue;
+            if (!(item instanceof ModArmor armorItem)) continue;
 
-            armorItems.add((ModArmor) item);
+            armorItems.add(armorItem);
         }
 
         return armorItems;
