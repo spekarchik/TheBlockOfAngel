@@ -3,4 +3,5 @@ package com.pekar.angelblock.events.armor;
 public interface IArmor extends IArmorEvents
 {
     String getModelName();
+    int getPriority();
 }

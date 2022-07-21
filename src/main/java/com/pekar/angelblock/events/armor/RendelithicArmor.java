@@ -165,6 +165,12 @@ public class RendelithicArmor extends Armor
         return ArmorRegistry.RENDELITHIC_BOOTS.get().getArmorModelName();
     }
 
+    @Override
+    public int getPriority()
+    {
+        return 2;
+    }
+
     private void updatePotionEffects()
     {
         jumpEffect.updateEffectActivity(getJumpBoostAmplifier());

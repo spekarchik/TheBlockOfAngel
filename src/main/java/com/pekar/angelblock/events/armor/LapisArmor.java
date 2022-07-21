@@ -164,6 +164,12 @@ public class LapisArmor extends Armor
         return ArmorRegistry.LAPIS_BOOTS.get().getArmorModelName();
     }
 
+    @Override
+    public int getPriority()
+    {
+        return 5;
+    }
+
     private void updatePotionEffects()
     {
         nightVisionEffect.updateEffectActivity();

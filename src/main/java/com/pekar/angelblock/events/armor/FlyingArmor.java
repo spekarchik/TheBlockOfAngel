@@ -40,6 +40,12 @@ public class FlyingArmor extends Armor
     }
 
     @Override
+    public int getPriority()
+    {
+        return 1;
+    }
+
+    @Override
     public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
     {
         jumpBoostEffect.updateSwitchState();

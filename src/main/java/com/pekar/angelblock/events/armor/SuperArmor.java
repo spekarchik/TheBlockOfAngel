@@ -361,6 +361,12 @@ public class SuperArmor extends Armor
         return ArmorRegistry.SUPER_BOOTS.get().getArmorModelName();
     }
 
+    @Override
+    public int getPriority()
+    {
+        return 6;
+    }
+
     private float getRealDamage(float initialDamageAmount)
     {
         float helmetProtection = player.isArmorElementPutOn(this, EquipmentSlot.HEAD) ? initialDamageAmount * 0.2f : 0;

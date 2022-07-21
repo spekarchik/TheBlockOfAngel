@@ -185,6 +185,12 @@ public class DiamithicArmor extends Armor
         return ArmorRegistry.DIAMITHIC_BOOTS.get().getArmorModelName();
     }
 
+    @Override
+    public int getPriority()
+    {
+        return 3;
+    }
+
     private void updatePotionEffects()
     {
         nightVisionEffect.updateEffectActivity();

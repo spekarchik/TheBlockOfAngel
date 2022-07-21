@@ -116,7 +116,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         player.updateArmorUsed();
         armorAffected.addAll((Collection<IArmor>) player.getArmorTypesUsed());
 
-        for (IArmor armor : armorAffected)
+        for (IArmor armor : armorAffected.stream().sorted(Comparator.comparing(IArmor::getPriority)).toList())
         {
             armor.onLivingEquipmentChangeEvent(event);
         }

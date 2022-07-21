@@ -283,6 +283,12 @@ public class LimoniteArmor extends Armor
         return ArmorRegistry.LIMONITE_BOOTS.get().getArmorModelName();
     }
 
+    @Override
+    public int getPriority()
+    {
+        return 4;
+    }
+
     private void updatePotionEffects()
     {
         nightVisionEffect.updateEffectActivity();
