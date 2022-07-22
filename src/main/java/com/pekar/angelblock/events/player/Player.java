@@ -99,6 +99,15 @@ public class Player implements IPlayer
     }
 
     @Override
+    public boolean isArmorModifiedWithHealthRegenerator(IArmor armor)
+    {
+        var item = getEntity().getItemBySlot(EquipmentSlot.LEGS).getItem();
+        if (!(item instanceof ModArmor armorItem)) return false;
+        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        return armorItem.isModifiedWithHealthRegenerator();
+    }
+
+    @Override
     public synchronized void updateArmorUsed()
     {
         armorInUse.clear();

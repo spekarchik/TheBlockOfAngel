@@ -21,6 +21,8 @@ public class ArmorRegistry
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.CHEST, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_LEGGINGS = Main.ITEMS.register("lapis_leggings", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.LEGS, "lapis"));
+    public static final RegistryObject<ModArmor> LAPIS_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("lapis_leggings_with_regenerator", () ->
+            new LapisArmorWithRegenerator(ModArmorMaterial.LAPIS, EquipmentSlot.LEGS, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_BOOTS = Main.ITEMS.register("lapis_boots", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.FEET, "lapis"));
 
@@ -32,6 +34,8 @@ public class ArmorRegistry
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.CHEST, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS = Main.ITEMS.register("limonite_leggings", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.LEGS, "limonite"));
+    public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("limonite_leggings_with_regenerator", () ->
+            new LimoniteArmorWithRegenerator(ModArmorMaterial.LIMONITE, EquipmentSlot.LEGS, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_BOOTS = Main.ITEMS.register("limonite_boots", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.FEET, "limonite"));
 
@@ -56,6 +60,8 @@ public class ArmorRegistry
             new SuperArmorFlying(ModArmorMaterial.SUPER, EquipmentSlot.CHEST, "super"));
     public static final RegistryObject<ModArmor> SUPER_LEGGINGS = Main.ITEMS.register("super_leggings", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.LEGS, "super"));
+    public static final RegistryObject<ModArmor> SUPER_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("super_leggings_with_regenerator", () ->
+            new SuperArmorWithRegenerator(ModArmorMaterial.SUPER, EquipmentSlot.LEGS, "super"));
     public static final RegistryObject<ModArmor> SUPER_BOOTS = Main.ITEMS.register("super_boots", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
 

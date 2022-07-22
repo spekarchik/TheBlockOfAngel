@@ -24,4 +24,9 @@ public class ModArmor extends ArmorItem
     {
         return false;
     }
+
+    public boolean isModifiedWithHealthRegenerator()
+    {
+        return false;
+    }
 }

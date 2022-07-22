@@ -5,6 +5,7 @@ import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -30,7 +31,7 @@ public class LapisArmor extends Armor
         waterBreathingEffect = new WaterBreathingEffect(player, this);
         hasteEffect = new HasteArmorEffect(player, this);
         luckEffect = new LuckArmorEffect(player, this);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 1, 200);
+        regenerationEffect = new RegenerationArmorEffect(player, this, 1, 200).setupAvailability(this::isRegenerationEffectAvailable);
         blindnessEffect = new BlindnessArmorEffect(player, this, 140).availableOnFullArmorSet();
         witherEffect = new WitherEffect(player, this, 0, 600).availableOnAnyArmorElement();
         strengthEffect = new StrengthArmorEffect(player, this, 0);
@@ -194,5 +195,10 @@ public class LapisArmor extends Armor
     private boolean isLavaDamage(DamageSource damageSource)
     {
         return damageSource == DamageSource.LAVA;
+    }
+
+    private boolean isRegenerationEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isArmorElementPutOn(armor, EquipmentSlot.LEGS) && player.isArmorModifiedWithHealthRegenerator(this);
     }
 }

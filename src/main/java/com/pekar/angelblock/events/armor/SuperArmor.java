@@ -47,7 +47,7 @@ public class SuperArmor extends Armor
         glowingEffect = new GlowingArmorEffect(player, this);
 
         luckEffect = new LuckArmorEffect(player, this);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 1, REGENERATION_EFFECT_DURATION);
+        regenerationEffect = new RegenerationArmorEffect(player, this, 1, REGENERATION_EFFECT_DURATION).setupAvailability(this::isRegenerationEffectAvailable);
         slownessEffect = new SlownessArmorEffect(player, this, 2, REGENERATION_EFFECT_DURATION).availableOnAnyArmorElement();
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
@@ -437,5 +437,10 @@ public class SuperArmor extends Armor
 
         return player.isFullArmorSetPutOn(this)
                 && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
+    }
+
+    private boolean isRegenerationEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isArmorElementPutOn(armor, EquipmentSlot.LEGS) && player.isArmorModifiedWithHealthRegenerator(this);
     }
 }

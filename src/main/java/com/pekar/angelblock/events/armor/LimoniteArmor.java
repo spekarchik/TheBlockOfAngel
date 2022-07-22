@@ -47,7 +47,7 @@ public class LimoniteArmor extends Armor
         glowingEffect = new GlowingArmorEffect(player, this);
         luckEffect = new LuckArmorEffect(player, this);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 1);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
+        regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION).setupAvailability(this::isRegenerationEffectAvailable);
         slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnAnyArmorElement();
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet();
 
@@ -321,5 +321,10 @@ public class LimoniteArmor extends Armor
         boolean isLightning = damageSource == DamageSource.LIGHTNING_BOLT;
 
         return isCactus || isSweetBerryBush || isLightning || damageSource.isMagic();
+    }
+
+    private boolean isRegenerationEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isArmorElementPutOn(armor, EquipmentSlot.LEGS) && player.isArmorModifiedWithHealthRegenerator(this);
     }
 }
