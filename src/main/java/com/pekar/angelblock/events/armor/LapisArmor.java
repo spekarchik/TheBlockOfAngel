@@ -5,7 +5,6 @@ import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -160,27 +159,15 @@ public class LapisArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.LAPIS_HELMET.get().getArmorItemName();
+        return ArmorRegistry.LAPIS_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.LAPIS_CHESTPLATE.get().getArmorItemName();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.LAPIS_LEGGINGS.get().getArmorItemName();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.LAPIS_BOOTS.get().getArmorItemName();
+        return 5;
     }
 
     private void updatePotionEffects()

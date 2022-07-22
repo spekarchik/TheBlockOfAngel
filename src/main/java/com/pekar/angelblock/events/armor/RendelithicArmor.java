@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -60,7 +61,7 @@ public class RendelithicArmor extends Armor
         }
         else
         {
-            boolean isFullArmorSetPutOn = player.isFullArmorSetPutOn(getArmorElementNames());
+            boolean isFullArmorSetPutOn = player.isFullArmorSetPutOn(this);
             if (isFullArmorSetPutOn && damageSource == DamageSource.WITHER)
             {
                 event.setCanceled(true);
@@ -159,27 +160,15 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.RENDELITHIC_HELMET.get().getArmorItemName();
+        return ArmorRegistry.RENDELITHIC_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.RENDELITHIC_CHESTPLATE.get().getArmorItemName();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.RENDELITHIC_LEGGINGS.get().getArmorItemName();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.RENDELITHIC_BOOTS.get().getArmorItemName();
+        return 2;
     }
 
     private void updatePotionEffects()
@@ -231,10 +220,10 @@ public class RendelithicArmor extends Armor
 
     private float getRealDamage(float initialDamageAmount)
     {
-        float helmetProtection = player.isArmorElementPutOn(getHelmetName()) ? initialDamageAmount * 0.2f : 0;
-        float bootsProtection = player.isArmorElementPutOn(getBootsName()) ? initialDamageAmount * 0.2f : 0;
-        float chestplateProtection = player.isArmorElementPutOn(getChestPlateName()) ? initialDamageAmount * 0.35f : 0;
-        float leggingsProtection = player.isArmorElementPutOn(getLeggingsName()) ? initialDamageAmount * 0.3f : 0;
+        float helmetProtection = player.isArmorElementPutOn(this, EquipmentSlot.HEAD) ? initialDamageAmount * 0.2f : 0;
+        float bootsProtection = player.isArmorElementPutOn(this, EquipmentSlot.FEET) ? initialDamageAmount * 0.2f : 0;
+        float chestplateProtection = player.isArmorElementPutOn(this, EquipmentSlot.CHEST) ? initialDamageAmount * 0.35f : 0;
+        float leggingsProtection = player.isArmorElementPutOn(this, EquipmentSlot.LEGS) ? initialDamageAmount * 0.3f : 0;
         float realDamage = initialDamageAmount - helmetProtection - bootsProtection - chestplateProtection - leggingsProtection;
         return realDamage > 0 ? realDamage : 0;
     }

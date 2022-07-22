@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.monster.*;
@@ -84,7 +85,7 @@ public class LimoniteArmor extends Armor
 
         if (isSilverfish || isEndermite || isSpider || isBee)
         {
-            if (player.isFullArmorSetPutOn(getArmorElementNames()))
+            if (player.isFullArmorSetPutOn(this))
             {
                 float damageAmount = event.getAmount();
                 event.setAmount(damageAmount * 0.2F);
@@ -99,13 +100,13 @@ public class LimoniteArmor extends Armor
     @Override
     public void onLivingAttackEvent(LivingAttackEvent event)
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
 
         DamageSource damageSource = event.getSource();
 
         if (isFreezeDamage(damageSource))
         {
-            boolean areBootsWorn = player.isArmorElementPutOn(getBootsName());
+            boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
             event.setCanceled(areBootsWorn);
         }
         else
@@ -176,8 +177,8 @@ public class LimoniteArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
-        if (!isFullArmorSet) return;
+        boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
+        if (!isHelmetModifiedWithDetector) return;
 
         Player entityPlayer = player.getEntity();
         var level = entityPlayer.level;
@@ -268,7 +269,7 @@ public class LimoniteArmor extends Armor
     @Override
     public void onBeingUnderRain()
     {
-        if (!player.isFullArmorSetPutOn(getArmorElementNames())) return;
+        if (!player.isFullArmorSetPutOn(this)) return;
 
         if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
         {
@@ -277,27 +278,15 @@ public class LimoniteArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.LIMONITE_HELMET.get().getArmorItemName();
+        return ArmorRegistry.LIMONITE_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.LIMONITE_CHESTPLATE.get().getArmorItemName();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.LIMONITE_LEGGINGS.get().getArmorItemName();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.LIMONITE_BOOTS.get().getArmorItemName();
+        return 4;
     }
 
     private void updatePotionEffects()

@@ -4,10 +4,8 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -36,27 +34,15 @@ public class FlyingArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.FLYING_HELMET.get().getArmorItemName();
+        return ArmorRegistry.FLYING_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.FLYING_CHESTPLATE.get().getArmorItemName();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.FLYING_LEGGINGS.get().getArmorItemName();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.FLYING_BOOTS.get().getArmorItemName();
+        return 1;
     }
 
     @Override
@@ -187,17 +173,17 @@ public class FlyingArmor extends Armor
 
     private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
     {
-        return player.isEnd() && player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        return player.isEnd() && player.isFullArmorSetPutOn(this);
     }
 
     private boolean isLevitationTemporaryEffectAvailable(IPlayer player, IArmor armor)
     {
-        return player.isEnd() && player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        return player.isEnd() && player.isFullArmorSetPutOn(this);
     }
 
     private boolean isLevitationSwitchingEffectAvailable(IPlayer player, IArmor armor)
     {
-        return player.isOverworld() && player.isFullArmorSetPutOn(armor.getArmorElementNames());
+        return player.isOverworld() && player.isFullArmorSetPutOn(this);
     }
 
     private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)
@@ -210,7 +196,7 @@ public class FlyingArmor extends Armor
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
         int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
 
-        return player.isOverworld() && player.isFullArmorSetPutOn(armor.getArmorElementNames())
+        return player.isOverworld() && player.isFullArmorSetPutOn(this)
                 && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
     }
 }

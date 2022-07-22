@@ -84,16 +84,13 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event)
     {
-        LivingEntity entity = event.getEntity();
+        var entity = event.getEntity();
         IPlayer player = players.get(entity.getName().getString());
         if (player == null) return;
 
 //        player.sendMessage("Player was cloned.");
 
-        if (entity instanceof net.minecraft.world.entity.player.Player)
-        {
-            player.updateEntity((net.minecraft.world.entity.player.Player) entity);
-        }
+        player.updateEntity(entity);
     }
 
     @SubscribeEvent
@@ -119,7 +116,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         player.updateArmorUsed();
         armorAffected.addAll((Collection<IArmor>) player.getArmorTypesUsed());
 
-        for (IArmor armor : armorAffected)
+        for (IArmor armor : armorAffected.stream().sorted(Comparator.comparing(IArmor::getPriority)).toList())
         {
             armor.onLivingEquipmentChangeEvent(event);
         }

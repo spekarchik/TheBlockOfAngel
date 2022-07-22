@@ -151,18 +151,14 @@ abstract class ArmorEffect implements IArmorEffect
     @Override
     public final IArmorEffect availableOnFullArmorSet()
     {
-        availabilityPredicate = (player1, armor1) ->
-                player1.isFullArmorSetPutOn(armor1.getArmorElementNames());
-
+        availabilityPredicate = IPlayer::isFullArmorSetPutOn;
         return this;
     }
 
     @Override
     public final IArmorEffect availableOnAnyArmorElement()
     {
-        availabilityPredicate = (player1, armor1) ->
-                player1.isAnyArmorElementPutOn(armor1.getArmorElementNames());
-
+        availabilityPredicate = IPlayer::isAnyArmorElementPutOn;
         return this;
     }
 
@@ -170,7 +166,7 @@ abstract class ArmorEffect implements IArmorEffect
     public final IArmorEffect availableOnBootsAndLeggings()
     {
         availabilityPredicate = (player1, armor1) ->
-                player1.isAllArmorElementsPutOn(armor1.getBootsName(), armor1.getLeggingsName());
+                player1.isAllArmorElementsPutOn(armor1, EquipmentSlot.FEET, EquipmentSlot.LEGS);
 
         return this;
     }
@@ -179,7 +175,7 @@ abstract class ArmorEffect implements IArmorEffect
     public final IArmorEffect availableOnHelmetAndChestplate()
     {
         availabilityPredicate = (player1, armor1) ->
-                player1.isAllArmorElementsPutOn(armor1.getHelmetName(), armor1.getChestPlateName());
+                player1.isAllArmorElementsPutOn(armor1, EquipmentSlot.HEAD, EquipmentSlot.CHEST);
 
         return this;
     }
@@ -187,52 +183,14 @@ abstract class ArmorEffect implements IArmorEffect
     @Override
     public final IArmorEffect availableIfSlotSet(EquipmentSlot slot)
     {
-        availabilityPredicate = (player1, armor1) ->
-        {
-            var requiredElement = switch (slot)
-                    {
-                        case HEAD -> armor1.getHelmetName();
-                        case CHEST -> armor1.getChestPlateName();
-                        case LEGS -> armor1.getLeggingsName();
-                        case FEET -> armor1.getBootsName();
-                        default -> null;
-                    };
-
-            return player1.isArmorElementPutOn(requiredElement);
-        };
-
+        availabilityPredicate = (player1, armor1) -> player1.isArmorElementPutOn(armor1, slot);
         return this;
     }
 
     @Override
     public final IArmorEffect availableIfSlotsSet(EquipmentSlot... slots)
     {
-        availabilityPredicate = (player1, armor1) ->
-        {
-            for (var slot : slots)
-            {
-                switch (slot)
-                {
-                    case HEAD:
-                        if (!player1.isArmorElementPutOn(armor1.getHelmetName())) return false;
-                        break;
-                    case CHEST:
-                        if (!player1.isArmorElementPutOn(armor1.getChestPlateName())) return false;
-                        break;
-                    case LEGS:
-                        if (!player1.isArmorElementPutOn(armor1.getLeggingsName())) return false;
-                        break;
-                    case FEET:
-                        if (!player1.isArmorElementPutOn(armor1.getBootsName())) return false;
-                        break;
-                    default:
-                };
-
-            }
-
-            return true;
-        };
-
+        availabilityPredicate = (player1, armor1) -> player1.isAllArmorElementsPutOn(armor1, slots);
         return this;
     }
 

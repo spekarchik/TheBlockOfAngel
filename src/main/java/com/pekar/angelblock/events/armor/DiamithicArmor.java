@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
@@ -53,7 +54,7 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
         if (isFullArmorSet && event.getSource().isExplosion())
         {
             event.setAmount(event.getAmount() * 0.5f);
@@ -93,7 +94,7 @@ public class DiamithicArmor extends Armor
         {
             event.setDamageMultiplier(0);
         }
-        else if (player.isArmorElementPutOn(getBootsName()))
+        else if (player.isArmorElementPutOn(this, EquipmentSlot.FEET))
         {
             event.setDamageMultiplier(0.3f);
         }
@@ -102,8 +103,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
-        if (!isFullArmorSet) return;
+        boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
+        if (!isHelmetModifiedWithDetector) return;
 
         Player entityPlayer = player.getEntity();
         var level = entityPlayer.level;
@@ -179,27 +180,15 @@ public class DiamithicArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.DIAMITHIC_HELMET.get().getArmorItemName();
+        return ArmorRegistry.DIAMITHIC_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.DIAMITHIC_CHESTPLATE.get().getArmorItemName();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.DIAMITHIC_LEGGINGS.get().getArmorItemName();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.DIAMITHIC_BOOTS.get().getArmorItemName();
+        return 3;
     }
 
     private void updatePotionEffects()

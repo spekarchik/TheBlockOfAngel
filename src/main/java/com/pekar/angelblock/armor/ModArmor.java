@@ -7,16 +7,21 @@ import net.minecraft.world.item.ArmorMaterial;
 
 public class ModArmor extends ArmorItem
 {
-    protected final String armorItemName;
+    protected final String armorModelName;
 
-    protected ModArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
+    protected ModArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorModelName)
     {
         super(material, equipmentSlot, new Properties().tab(ModTab.MOD_TAB));
-        this.armorItemName = armorItemName;
+        this.armorModelName = armorModelName;
     }
 
-    public String getArmorItemName()
+    public String getArmorModelName()
     {
-        return armorItemName;
+        return armorModelName;
+    }
+
+    public boolean isModifiedWithDetector()
+    {
+        return false;
     }
 }

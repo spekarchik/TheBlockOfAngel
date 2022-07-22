@@ -2,18 +2,18 @@ package com.pekar.angelblock.events.player;
 
 import com.pekar.angelblock.events.armor.IArmor;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-
-import java.util.Collection;
 
 public interface IPlayer
 {
     Iterable<IArmor> getArmorTypesUsed();
 
-    boolean isArmorElementPutOn(String armorElementName);
-    boolean isFullArmorSetPutOn(Collection<String> armorNames);
-    boolean isAllArmorElementsPutOn(String ... armorNames);
-    boolean isAnyArmorElementPutOn(Collection<String> armorNames);
+    boolean isArmorElementPutOn(IArmor armor, EquipmentSlot equipmentSlot);
+    boolean isFullArmorSetPutOn(IArmor armor);
+    boolean isAllArmorElementsPutOn(IArmor armor, EquipmentSlot ... equipmentSlots);
+    boolean isAnyArmorElementPutOn(IArmor armor);
+    boolean isArmorModifiedWithDetector(IArmor armor);
     void updateArmorUsed();
 
     boolean isEffectActive(MobEffect effect);
