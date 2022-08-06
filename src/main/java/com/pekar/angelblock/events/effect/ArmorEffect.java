@@ -149,6 +149,41 @@ abstract class ArmorEffect implements IArmorEffect
     }
 
     @Override
+    public IArmorEffect availableOnHelmetWithDetector()
+    {
+        availabilityPredicate = IPlayer::isArmorModifiedWithDetector;
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnBootsWithStrengthBooster()
+    {
+        availabilityPredicate = IPlayer::areBootsModifiedWithStrengthBooster;
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnBootsWithSeaPower()
+    {
+        availabilityPredicate = IPlayer::areBootsModifiedWithSeaPower;
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnChestPlateWithStrengthBooster()
+    {
+        availabilityPredicate = IPlayer::isChestPlateModifiedWithStrengthBooster;
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnLeggingsWithHealthRegenerator()
+    {
+        availabilityPredicate = IPlayer::isArmorModifiedWithHealthRegenerator;
+        return this;
+    }
+
+    @Override
     public final IArmorEffect availableOnFullArmorSet()
     {
         availabilityPredicate = IPlayer::isFullArmorSetPutOn;
@@ -159,24 +194,6 @@ abstract class ArmorEffect implements IArmorEffect
     public final IArmorEffect availableOnAnyArmorElement()
     {
         availabilityPredicate = IPlayer::isAnyArmorElementPutOn;
-        return this;
-    }
-
-    @Override
-    public final IArmorEffect availableOnBootsAndLeggings()
-    {
-        availabilityPredicate = (player1, armor1) ->
-                player1.isAllArmorElementsPutOn(armor1, EquipmentSlot.FEET, EquipmentSlot.LEGS);
-
-        return this;
-    }
-
-    @Override
-    public final IArmorEffect availableOnHelmetAndChestplate()
-    {
-        availabilityPredicate = (player1, armor1) ->
-                player1.isAllArmorElementsPutOn(armor1, EquipmentSlot.HEAD, EquipmentSlot.CHEST);
-
         return this;
     }
 

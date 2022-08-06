@@ -24,10 +24,13 @@ public interface IArmorEffect
     void updateSwitchState();
 
     IArmorEffect setupAvailability(BiPredicate<IPlayer, IArmor> predicate);
+    IArmorEffect availableOnHelmetWithDetector();
+    IArmorEffect availableOnBootsWithStrengthBooster();
+    IArmorEffect availableOnBootsWithSeaPower();
+    IArmorEffect availableOnChestPlateWithStrengthBooster();
+    IArmorEffect availableOnLeggingsWithHealthRegenerator();
     IArmorEffect availableOnFullArmorSet();
     IArmorEffect availableOnAnyArmorElement();
-    IArmorEffect availableOnBootsAndLeggings();
-    IArmorEffect availableOnHelmetAndChestplate();
     IArmorEffect availableIfSlotSet(EquipmentSlot slot);
     IArmorEffect availableIfSlotsSet(EquipmentSlot ...slot);
 

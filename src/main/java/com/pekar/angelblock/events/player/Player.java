@@ -108,29 +108,21 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean isArmorModifiedWithStrengthBooster(IArmor armor)
+    public boolean areBootsModifiedWithStrengthBooster(IArmor armor)
     {
-        boolean isChestplateModified = false, areBootsModified = false;
+        var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
+        if (!(item instanceof ModArmor armorItem)) return false;
+        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        return armorItem.isModifiedWithStrengthBooster();
+    }
 
-        var chestItem = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
-        if (chestItem instanceof ModArmor armorItem)
-        {
-            if (armorItem.getArmorModelName().equals(armor.getModelName()))
-            {
-                isChestplateModified = armorItem.isModifiedWithStrengthBooster();
-            }
-        }
-
-        var bootsItem = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
-        if (bootsItem instanceof ModArmor armorItem)
-        {
-            if (armorItem.getArmorModelName().equals(armor.getModelName()))
-            {
-                areBootsModified = armorItem.isModifiedWithStrengthBooster();
-            }
-        }
-
-        return isChestplateModified || areBootsModified;
+    @Override
+    public boolean isChestPlateModifiedWithStrengthBooster(IArmor armor)
+    {
+        var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
+        if (!(item instanceof ModArmor armorItem)) return false;
+        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        return armorItem.isModifiedWithStrengthBooster();
     }
 
     @Override
@@ -143,29 +135,21 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean isModifiedWithSeaPower(IArmor armor)
+    public boolean isChestPlateModifiedWithSeaPower(IArmor armor)
     {
-        boolean isChestplateModified = false, areBootsModified = false;
+        var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
+        if (!(item instanceof ModArmor armorItem)) return false;
+        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        return armorItem.isModifiedWithSeaPower();
+    }
 
-        var chestItem = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
-        if (chestItem instanceof ModArmor armorItem)
-        {
-            if (armorItem.getArmorModelName().equals(armor.getModelName()))
-            {
-                isChestplateModified = armorItem.isModifiedWithSeaPower();
-            }
-        }
-
-        var bootsItem = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
-        if (bootsItem instanceof ModArmor armorItem)
-        {
-            if (armorItem.getArmorModelName().equals(armor.getModelName()))
-            {
-                areBootsModified = armorItem.isModifiedWithSeaPower();
-            }
-        }
-
-        return isChestplateModified || areBootsModified;
+    @Override
+    public boolean areBootsModifiedWithSeaPower(IArmor armor)
+    {
+        var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
+        if (!(item instanceof ModArmor armorItem)) return false;
+        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        return armorItem.isModifiedWithSeaPower();
     }
 
     @Override
