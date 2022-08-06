@@ -15,6 +15,9 @@ public interface IPlayer
     boolean isAnyArmorElementPutOn(IArmor armor);
     boolean isArmorModifiedWithDetector(IArmor armor);
     boolean isArmorModifiedWithHealthRegenerator(IArmor armor);
+    boolean isArmorModifiedWithStrengthBooster(IArmor armor);
+    boolean isArmorModifiedWithLevitation(IArmor armor);
+    boolean isModifiedWithSeaPower(IArmor armor);
     void updateArmorUsed();
 
     boolean isEffectActive(MobEffect effect);

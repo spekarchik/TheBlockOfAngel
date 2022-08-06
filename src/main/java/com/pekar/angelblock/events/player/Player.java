@@ -108,6 +108,67 @@ public class Player implements IPlayer
     }
 
     @Override
+    public boolean isArmorModifiedWithStrengthBooster(IArmor armor)
+    {
+        boolean isChestplateModified = false, areBootsModified = false;
+
+        var chestItem = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
+        if (chestItem instanceof ModArmor armorItem)
+        {
+            if (armorItem.getArmorModelName().equals(armor.getModelName()))
+            {
+                isChestplateModified = armorItem.isModifiedWithStrengthBooster();
+            }
+        }
+
+        var bootsItem = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
+        if (bootsItem instanceof ModArmor armorItem)
+        {
+            if (armorItem.getArmorModelName().equals(armor.getModelName()))
+            {
+                areBootsModified = armorItem.isModifiedWithStrengthBooster();
+            }
+        }
+
+        return isChestplateModified || areBootsModified;
+    }
+
+    @Override
+    public boolean isArmorModifiedWithLevitation(IArmor armor)
+    {
+        var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
+        if (!(item instanceof ModArmor armorItem)) return false;
+        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        return armorItem.isModifiedWithLevitation();
+    }
+
+    @Override
+    public boolean isModifiedWithSeaPower(IArmor armor)
+    {
+        boolean isChestplateModified = false, areBootsModified = false;
+
+        var chestItem = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
+        if (chestItem instanceof ModArmor armorItem)
+        {
+            if (armorItem.getArmorModelName().equals(armor.getModelName()))
+            {
+                isChestplateModified = armorItem.isModifiedWithSeaPower();
+            }
+        }
+
+        var bootsItem = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
+        if (bootsItem instanceof ModArmor armorItem)
+        {
+            if (armorItem.getArmorModelName().equals(armor.getModelName()))
+            {
+                areBootsModified = armorItem.isModifiedWithSeaPower();
+            }
+        }
+
+        return isChestplateModified || areBootsModified;
+    }
+
+    @Override
     public synchronized void updateArmorUsed()
     {
         armorInUse.clear();

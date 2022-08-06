@@ -29,4 +29,19 @@ public class ModArmor extends ArmorItem
     {
         return false;
     }
+
+    public boolean isModifiedWithStrengthBooster()
+    {
+        return false;
+    }
+
+    public boolean isModifiedWithLevitation()
+    {
+        return false;
+    }
+
+    public boolean isModifiedWithSeaPower()
+    {
+        return false;
+    }
 }
