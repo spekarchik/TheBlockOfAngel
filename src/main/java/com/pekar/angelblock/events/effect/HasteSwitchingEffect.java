@@ -10,6 +10,6 @@ public class HasteSwitchingEffect extends SwitchingArmorEffect
     public HasteSwitchingEffect(IPlayer player, IArmor armor, int amplifier)
     {
         super(player, armor, MobEffects.DIG_SPEED, amplifier);
-        availableIfSlotSet(EquipmentSlot.CHEST);
+        availableOnChestPlateWithStrengthBooster();
     }
 }

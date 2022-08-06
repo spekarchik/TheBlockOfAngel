@@ -187,6 +187,36 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
     }
 
     @Override
+    public IArmorEffect availableOnHelmetWithDetector()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnBootsWithStrengthBooster()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnBootsWithSeaPower()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnChestPlateWithStrengthBooster()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect availableOnLeggingsWithHealthRegenerator()
+    {
+        return this;
+    }
+
+    @Override
     public IArmorEffect availableOnFullArmorSet()
     {
         return this;
@@ -194,18 +224,6 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
 
     @Override
     public IArmorEffect availableOnAnyArmorElement()
-    {
-        return this;
-    }
-
-    @Override
-    public IArmorEffect availableOnBootsAndLeggings()
-    {
-        return this;
-    }
-
-    @Override
-    public IArmorEffect availableOnHelmetAndChestplate()
     {
         return this;
     }

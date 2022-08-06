@@ -45,16 +45,15 @@ public class LimoniteArmor extends Armor
 
         nightVisionEffect = new NightVisionArmorEffect(player, this);
         glowingEffect = new GlowingArmorEffect(player, this);
-        luckEffect = new LuckArmorEffect(player, this);
+        luckEffect = new LuckArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 1);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION).setupAvailability(this::isRegenerationEffectAvailable);
+        regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
         slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnAnyArmorElement();
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet();
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 16);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
         var levitationEffect = new LevitationSwitchingEffect(player, this, 250);
-        levitationEffect.availableOnBootsAndLeggings();
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -323,8 +322,8 @@ public class LimoniteArmor extends Armor
         return isCactus || isSweetBerryBush || isLightning || damageSource.isMagic();
     }
 
-    private boolean isRegenerationEffectAvailable(IPlayer player, IArmor armor)
+    private boolean isLuckEffectAvailable(IPlayer player, IArmor armor)
     {
-        return player.isArmorElementPutOn(armor, EquipmentSlot.LEGS) && player.isArmorModifiedWithHealthRegenerator(this);
+        return player.isFullArmorSetPutOn(armor) && player.isChestPlateModifiedWithSeaPower(armor);
     }
 }

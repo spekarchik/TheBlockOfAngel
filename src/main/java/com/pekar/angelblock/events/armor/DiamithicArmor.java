@@ -40,6 +40,7 @@ public class DiamithicArmor extends Armor
 
         var jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
         var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
+        slowFallingEffect.setupAvailability(this::isSlowFallingEffectAvailable);
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
         this.jumpBoostEffect.addDependentEffect(slowFallingEffect);
     }
@@ -90,11 +91,7 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        if (jumpBoostEffect.isEffectOn() && jumpBoostEffect.isActive())
-        {
-            event.setDamageMultiplier(0);
-        }
-        else if (player.isArmorElementPutOn(this, EquipmentSlot.FEET))
+        if (player.areBootsModifiedWithStrengthBooster(this))
         {
             event.setDamageMultiplier(0.3f);
         }
@@ -198,5 +195,10 @@ public class DiamithicArmor extends Armor
         jumpBoostEffect.updateEffectActivity();
         healthBoostEffect.updateEffectActivity();
         hasteEffect.updateEffectActivity();
+    }
+
+    private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isArmorModifiedWithLevitation(armor);
     }
 }

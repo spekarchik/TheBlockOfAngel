@@ -24,7 +24,7 @@ public class RendelithicArmor extends Armor
         super(player);
         nauseaEffect = new NauseaTemporaryEffect(player, this, 200).availableOnAnyArmorElement();
         slownessEffect = new SlownessArmorEffect(player, this, 5, 400).availableOnAnyArmorElement();
-        levitationEffect = new LevitationSwitchingEffect(player, this, 1).availableOnFullArmorSet();
+        levitationEffect = new LevitationSwitchingEffect(player, this, 1).setupAvailability(this::isLevitationAvailable);
 
         JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, 5);
         SpeedSwitchingEffect speedEffect = new SpeedSwitchingEffect(player, this, 0);
@@ -61,8 +61,8 @@ public class RendelithicArmor extends Armor
         }
         else
         {
-            boolean isFullArmorSetPutOn = player.isFullArmorSetPutOn(this);
-            if (isFullArmorSetPutOn && damageSource == DamageSource.WITHER)
+            boolean hasHealthRegeneration = player.isArmorModifiedWithHealthRegenerator(this);
+            if (hasHealthRegeneration && damageSource == DamageSource.WITHER)
             {
                 event.setCanceled(true);
                 player.getEntity().removeEffect(MobEffects.WITHER);
@@ -92,7 +92,10 @@ public class RendelithicArmor extends Armor
     {
         if (jumpEffect.isEffectOn() && jumpEffect.isActive())
         {
-            event.setDamageMultiplier(0.6f);
+            if (player.areBootsModifiedWithStrengthBooster(this))
+            {
+                event.setDamageMultiplier(0.6f);
+            }
         }
     }
 
@@ -234,5 +237,10 @@ public class RendelithicArmor extends Armor
         boolean isDamagedByOnFire = damageSource == DamageSource.ON_FIRE;
         boolean isDamagedByLava = damageSource == DamageSource.LAVA;
         return isDamagedByInFire || isDamagedByLava || isDamagedByOnFire;
+    }
+
+    private boolean isLevitationAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isFullArmorSetPutOn(armor) && player.isArmorModifiedWithLevitation(armor);
     }
 }
