@@ -9,7 +9,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
@@ -29,11 +28,13 @@ public class DiamithicArmor extends Armor
 
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
+    private static final int STRENGTH_EFFECT_AMPLIFIER_DEFAULT = 0;
+    private static final int STRENGTH_EFFECT_AMPLIFIER_IMPROVED = 1;
 
     public DiamithicArmor(IPlayer player)
     {
         super(player);
-        strengthEffect = new StrengthArmorEffect(player, this, 1);
+        strengthEffect = new StrengthArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
         nightVisionEffect = new NightVisionArmorEffect(player, this);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         hasteEffect = new HasteArmorEffect(player, this);
@@ -191,10 +192,17 @@ public class DiamithicArmor extends Armor
     private void updatePotionEffects()
     {
         nightVisionEffect.updateEffectActivity();
-        strengthEffect.updateEffectActivity();
+        strengthEffect.updateEffectActivity(getStrengthEffectAmplifier());
         jumpBoostEffect.updateEffectActivity();
         healthBoostEffect.updateEffectActivity();
         hasteEffect.updateEffectActivity();
+    }
+
+    private int getStrengthEffectAmplifier()
+    {
+        return player.isChestPlateModifiedWithStrengthBooster(this)
+                ? STRENGTH_EFFECT_AMPLIFIER_IMPROVED
+                : STRENGTH_EFFECT_AMPLIFIER_DEFAULT;
     }
 
     private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
