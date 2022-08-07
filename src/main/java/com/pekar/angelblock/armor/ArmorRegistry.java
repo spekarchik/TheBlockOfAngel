@@ -44,12 +44,16 @@ public class ArmorRegistry
             new LimoniteArmorWithDetector(ModArmorMaterial.LIMONITE, EquipmentSlot.HEAD, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_CHESTPLATE = Main.ITEMS.register("limonite_chestplate", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.CHEST, "limonite"));
+    public static final RegistryObject<ModArmor> LIMONITE_CHESTPLATE_WITH_SEA_POWER = Main.ITEMS.register("limonite_chestplate_with_sea_power", () ->
+            new LimoniteArmorWithSeaPower(ModArmorMaterial.LIMONITE, EquipmentSlot.CHEST, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS = Main.ITEMS.register("limonite_leggings", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.LEGS, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("limonite_leggings_with_regenerator", () ->
             new LimoniteArmorWithRegenerator(ModArmorMaterial.LIMONITE, EquipmentSlot.LEGS, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_BOOTS = Main.ITEMS.register("limonite_boots", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.FEET, "limonite"));
+    public static final RegistryObject<ModArmor> LIMONITE_BOOTS_WITH_STRENGTH = Main.ITEMS.register("limonite_boots_with_strength", () ->
+            new LimoniteArmorWithStrengthBoost(ModArmorMaterial.LIMONITE, EquipmentSlot.FEET, "limonite"));
 
     public static final RegistryObject<ModArmor> DIAMITHIC_HELMET = Main.ITEMS.register("diamithic_helmet", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.HEAD, "diamithic"));

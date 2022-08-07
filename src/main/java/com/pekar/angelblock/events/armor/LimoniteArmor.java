@@ -38,6 +38,8 @@ public class LimoniteArmor extends Armor
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
+    private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 7;
+    private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 16;
 
     public LimoniteArmor(IPlayer player)
     {
@@ -51,7 +53,8 @@ public class LimoniteArmor extends Armor
         slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnAnyArmorElement();
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet();
 
-        var jumpEffect = new JumpBoostArmorEffect(player, this, 16);
+        var jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
+        jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
         var levitationEffect = new LevitationSwitchingEffect(player, this, 250);
 
@@ -233,7 +236,7 @@ public class LimoniteArmor extends Armor
         {
             if (!slownessEffect.isActive())
             {
-                jumpEffect.trySwitch();
+                jumpEffect.trySwitch(getJumpEffectAmplifier());
             }
         }
     }
@@ -300,12 +303,17 @@ public class LimoniteArmor extends Armor
 
         if (!slownessEffect.isActive())
         {
-            jumpEffect.updateEffectActivity();
+            jumpEffect.updateEffectActivity(getJumpEffectAmplifier());
         }
         else
         {
             jumpEffect.updateDependentEffectsActivity();
         }
+    }
+
+    private int getJumpEffectAmplifier()
+    {
+        return player.areBootsModifiedWithStrengthBooster(this) ? JUMP_EFFECT_AMPLIFIER_BOOSTED : JUMP_EFFECT_AMPLIFIER_DEFAULT;
     }
 
     private boolean isFreezeDamage(DamageSource damageSource)
