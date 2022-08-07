@@ -19,6 +19,9 @@ public class RendelithicArmor extends Armor
     private final IArmorEffect levitationEffect;
     private final SwitchingEffectSynchronizer jumpEffect;
 
+    private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 3;
+    private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 5;
+
     public RendelithicArmor(IPlayer player)
     {
         super(player);
@@ -26,7 +29,8 @@ public class RendelithicArmor extends Armor
         slownessEffect = new SlownessArmorEffect(player, this, 5, 400).availableOnAnyArmorElement();
         levitationEffect = new LevitationSwitchingEffect(player, this, 1).setupAvailability(this::isLevitationAvailable);
 
-        JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, 5);
+        JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
+        jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
         SpeedSwitchingEffect speedEffect = new SpeedSwitchingEffect(player, this, 0);
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -188,12 +192,14 @@ public class RendelithicArmor extends Armor
 
     private int getJumpBoostAmplifier()
     {
-        if (player.isNether())
-            return 5;
-        else if (player.isEnd())
-            return 5;
+        var amplifier = player.areBootsModifiedWithStrengthBooster(this)
+                ? JUMP_EFFECT_AMPLIFIER_BOOSTED
+                : JUMP_EFFECT_AMPLIFIER_DEFAULT;
+
+        if (player.isOverworld())
+            return amplifier - 1;
         else
-            return 4;
+            return amplifier;
     }
 
     private void checkForNausea()

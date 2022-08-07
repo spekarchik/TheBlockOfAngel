@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:rendelithic_chestplate"
+    },
+    "addition": {
+        "item": "minecraft:pearlescent_froglight"
+    },
+    "result": {
+        "item": "angelblock:rendelithic_chestplate_with_levitation"
+    }
+}

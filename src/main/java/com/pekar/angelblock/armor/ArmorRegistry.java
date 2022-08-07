@@ -10,10 +10,16 @@ public class ArmorRegistry
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.HEAD, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_CHESTPLATE = Main.ITEMS.register("rendelithic_chestplate", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.CHEST, "rendelithic"));
+    public static final RegistryObject<ModArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("rendelithic_chestplate_with_levitation", () ->
+            new RendelithicArmorWithLevitation(ModArmorMaterial.RENDELITHIC, EquipmentSlot.CHEST, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_LEGGINGS = Main.ITEMS.register("rendelithic_leggings", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.LEGS, "rendelithic"));
+    public static final RegistryObject<ModArmor> RENDELITHIC_LEGGINGS_WITH_HEALTH_REGENERATOR = Main.ITEMS.register("rendelithic_leggings_with_regenerator", () ->
+            new RendelithicArmorWithHealthRegenerator(ModArmorMaterial.RENDELITHIC, EquipmentSlot.LEGS, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_BOOTS = Main.ITEMS.register("rendelithic_boots", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.FEET, "rendelithic"));
+    public static final RegistryObject<ModArmor> RENDELITHIC_BOOTS_WITH_STRENGTH_BOOST = Main.ITEMS.register("rendelithic_boots_with_strength_boost", () ->
+            new RendelithicArmorWithStrengthBoost(ModArmorMaterial.RENDELITHIC, EquipmentSlot.FEET, "rendelithic"));
 
     public static final RegistryObject<ModArmor> LAPIS_HELMET = Main.ITEMS.register("lapis_helmet", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.HEAD, "lapis"));

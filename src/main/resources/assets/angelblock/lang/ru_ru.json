@@ -7,8 +7,11 @@
   "itemGroup.angelblock": "Angel Block Mod",
 
   "item.angelblock.rendelithic_boots": "Ренделитовые ботинки",
+  "item.angelblock.rendelithic_boots_with_strength_boost": "Ренделитовые ботинки с усилителем",
   "item.angelblock.rendelithic_leggings": "Ренделитовые поножи",
+  "item.angelblock.rendelithic_leggings_with_regenerator": "Ренделитовые поножи с регенератором здоровья",
   "item.angelblock.rendelithic_chestplate": "Ренделитовый нагрудник",
+  "item.angelblock.rendelithic_chestplate_with_levitation": "Ренделитовый нагрудник с левитацией",
   "item.angelblock.rendelithic_helmet": "Ренделитовый шлем",
   "item.angelblock.diamithic_boots": "Диамитовые ботинки",
   "item.angelblock.diamithic_leggings": "Диамитовые поножи",
