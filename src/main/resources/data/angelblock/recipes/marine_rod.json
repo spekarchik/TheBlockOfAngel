@@ -4,7 +4,7 @@
         "item": "angelblock:ancient_rod"
     },
     "addition": {
-        "item": "minecraft:heart_of_the_sea"
+        "item": "angelblock:marine_crystal"
     },
     "result": {
         "item": "angelblock:marine_rod"
