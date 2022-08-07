@@ -56,7 +56,7 @@ public class DiamithicArmor extends Armor
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
         boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
-        if (isFullArmorSet && event.getSource().isExplosion())
+        if (isFullArmorSet && event.getSource().isExplosion() && player.isChestPlateModifiedWithStrengthBooster(this))
         {
             event.setAmount(event.getAmount() * 0.5f);
         }

@@ -51,10 +51,20 @@ public class ArmorRegistry
             new DiamithicArmorWithDetector(ModArmorMaterial.DIAMITHIC, EquipmentSlot.HEAD, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE = Main.ITEMS.register("diamithic_chestplate", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
+    public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH = Main.ITEMS.register("diamithic_chestplate_with_strength", () ->
+            new DiamithicArmorWithStrengthBoost(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
+    public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("diamithic_chestplate_with_levitation", () ->
+            new DiamithicArmorWithLevitation(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
+    public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH_AND_LEVITATION = Main.ITEMS.register("diamithic_chestplate_with_strength_and_levitation", () ->
+            new DiamithicArmorWithStrengthBoostAndLevitation(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_LEGGINGS = Main.ITEMS.register("diamithic_leggings", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.LEGS, "diamithic"));
+    public static final RegistryObject<ModArmor> DIAMITHIC_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("diamithic_leggings_with_regenerator", () ->
+            new DiamithicArmorWithHealthRegenerator(ModArmorMaterial.DIAMITHIC, EquipmentSlot.LEGS, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_BOOTS = Main.ITEMS.register("diamithic_boots", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.FEET, "diamithic"));
+    public static final RegistryObject<ModArmor> DIAMITHIC_BOOTS_WITH_STRENGTH = Main.ITEMS.register("diamithic_boots_with_strength", () ->
+            new DiamithicArmorWithStrengthBoost(ModArmorMaterial.DIAMITHIC, EquipmentSlot.FEET, "diamithic"));
 
     public static final RegistryObject<ModArmor> SUPER_HELMET = Main.ITEMS.register("super_helmet", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.HEAD, "super"));
