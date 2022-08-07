@@ -90,6 +90,12 @@ public class ArmorRegistry
             new SuperArmorWithRegenerator(ModArmorMaterial.SUPER, EquipmentSlot.LEGS, "super"));
     public static final RegistryObject<ModArmor> SUPER_BOOTS = Main.ITEMS.register("super_boots", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
+    public static final RegistryObject<ModArmor> SUPER_BOOTS_WITH_STRENGTH = Main.ITEMS.register("super_boots_with_strength", () ->
+            new SuperArmorWithStrengthBoost(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
+    public static final RegistryObject<ModArmor> SUPER_BOOTS_WITH_SEA_POWER = Main.ITEMS.register("super_boots_with_sea_power", () ->
+            new SuperArmorWithSeaPower(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
+    public static final RegistryObject<ModArmor> SUPER_BOOTS_WITH_STRENGTH_AND_SEA_POWER = Main.ITEMS.register("super_boots_with_strength_and_sea_power", () ->
+            new SuperArmorWithStrengthBoostAndSeaPower(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
 
     public static final RegistryObject<ModArmor> FLYING_HELMET = Main.ITEMS.register("flying_helmet", () ->
             new FlyingArmor(ModArmorMaterial.FLYING, EquipmentSlot.HEAD, "flying"));
