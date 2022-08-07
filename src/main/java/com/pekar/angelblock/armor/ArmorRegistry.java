@@ -23,14 +23,20 @@ public class ArmorRegistry
 
     public static final RegistryObject<ModArmor> LAPIS_HELMET = Main.ITEMS.register("lapis_helmet", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.HEAD, "lapis"));
+    public static final RegistryObject<ModArmor> LAPIS_HELMET_WITH_DETECTOR = Main.ITEMS.register("lapis_helmet_with_detector", () ->
+            new LapisArmorWithDetector(ModArmorMaterial.LAPIS, EquipmentSlot.HEAD, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_CHESTPLATE = Main.ITEMS.register("lapis_chestplate", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.CHEST, "lapis"));
+    public static final RegistryObject<ModArmor> LAPIS_CHESTPLATE_WITH_STRENGTH = Main.ITEMS.register("lapis_chestplate_with_strength", () ->
+            new LapisArmorWithStrengthBoost(ModArmorMaterial.LAPIS, EquipmentSlot.CHEST, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_LEGGINGS = Main.ITEMS.register("lapis_leggings", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.LEGS, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("lapis_leggings_with_regenerator", () ->
             new LapisArmorWithRegenerator(ModArmorMaterial.LAPIS, EquipmentSlot.LEGS, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_BOOTS = Main.ITEMS.register("lapis_boots", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.FEET, "lapis"));
+    public static final RegistryObject<ModArmor> LAPIS_BOOTS_WITH_SEA_POWER = Main.ITEMS.register("lapis_boots_with_sea_power", () ->
+            new LapisArmorWithSeaPower(ModArmorMaterial.LAPIS, EquipmentSlot.FEET, "lapis"));
 
     public static final RegistryObject<ModArmor> LIMONITE_HELMET = Main.ITEMS.register("limonite_helmet", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.HEAD, "limonite"));
