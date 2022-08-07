@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.monster.*;
@@ -37,6 +38,8 @@ public class LimoniteArmor extends Armor
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
+    private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 7;
+    private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 16;
 
     public LimoniteArmor(IPlayer player)
     {
@@ -44,16 +47,16 @@ public class LimoniteArmor extends Armor
 
         nightVisionEffect = new NightVisionArmorEffect(player, this);
         glowingEffect = new GlowingArmorEffect(player, this);
-        luckEffect = new LuckArmorEffect(player, this);
+        luckEffect = new LuckArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 1);
         regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
         slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnAnyArmorElement();
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet();
 
-        var jumpEffect = new JumpBoostArmorEffect(player, this, 16);
+        var jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
+        jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
         var levitationEffect = new LevitationSwitchingEffect(player, this, 250);
-        levitationEffect.availableOnBootsAndLeggings();
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -84,7 +87,7 @@ public class LimoniteArmor extends Armor
 
         if (isSilverfish || isEndermite || isSpider || isBee)
         {
-            if (player.isFullArmorSetPutOn(getArmorElementNames()))
+            if (player.isFullArmorSetPutOn(this))
             {
                 float damageAmount = event.getAmount();
                 event.setAmount(damageAmount * 0.2F);
@@ -99,13 +102,13 @@ public class LimoniteArmor extends Armor
     @Override
     public void onLivingAttackEvent(LivingAttackEvent event)
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
 
         DamageSource damageSource = event.getSource();
 
         if (isFreezeDamage(damageSource))
         {
-            boolean areBootsWorn = player.isArmorElementPutOn(getBootsName());
+            boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
             event.setCanceled(areBootsWorn);
         }
         else
@@ -176,8 +179,8 @@ public class LimoniteArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
-        if (!isFullArmorSet) return;
+        boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
+        if (!isHelmetModifiedWithDetector) return;
 
         Player entityPlayer = player.getEntity();
         var level = entityPlayer.level;
@@ -233,7 +236,7 @@ public class LimoniteArmor extends Armor
         {
             if (!slownessEffect.isActive())
             {
-                jumpEffect.trySwitch();
+                jumpEffect.trySwitch(getJumpEffectAmplifier());
             }
         }
     }
@@ -268,7 +271,7 @@ public class LimoniteArmor extends Armor
     @Override
     public void onBeingUnderRain()
     {
-        if (!player.isFullArmorSetPutOn(getArmorElementNames())) return;
+        if (!player.isFullArmorSetPutOn(this)) return;
 
         if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
         {
@@ -277,27 +280,15 @@ public class LimoniteArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.LIMONITE_HELMET.get().getDescriptionId();
+        return ArmorRegistry.LIMONITE_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.LIMONITE_CHESTPLATE.get().getDescriptionId();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.LIMONITE_LEGGINGS.get().getDescriptionId();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.LIMONITE_BOOTS.get().getDescriptionId();
+        return 4;
     }
 
     private void updatePotionEffects()
@@ -312,12 +303,17 @@ public class LimoniteArmor extends Armor
 
         if (!slownessEffect.isActive())
         {
-            jumpEffect.updateEffectActivity();
+            jumpEffect.updateEffectActivity(getJumpEffectAmplifier());
         }
         else
         {
             jumpEffect.updateDependentEffectsActivity();
         }
+    }
+
+    private int getJumpEffectAmplifier()
+    {
+        return player.areBootsModifiedWithStrengthBooster(this) ? JUMP_EFFECT_AMPLIFIER_BOOSTED : JUMP_EFFECT_AMPLIFIER_DEFAULT;
     }
 
     private boolean isFreezeDamage(DamageSource damageSource)
@@ -332,5 +328,10 @@ public class LimoniteArmor extends Armor
         boolean isLightning = damageSource == DamageSource.LIGHTNING_BOLT;
 
         return isCactus || isSweetBerryBush || isLightning || damageSource.isMagic();
+    }
+
+    private boolean isLuckEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isFullArmorSetPutOn(armor) && player.isChestPlateModifiedWithSeaPower(armor);
     }
 }

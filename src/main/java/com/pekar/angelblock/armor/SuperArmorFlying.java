@@ -7,9 +7,9 @@ import net.minecraft.world.item.ItemStack;
 
 public class SuperArmorFlying extends SuperArmor
 {
-    protected SuperArmorFlying(ArmorMaterial material, EquipmentSlot equipmentSlot)
+    protected SuperArmorFlying(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
     {
-        super(material, equipmentSlot);
+        super(material, equipmentSlot, armorItemName);
     }
 
     @Override
@@ -17,16 +17,14 @@ public class SuperArmorFlying extends SuperArmor
     {
         if (slot != EquipmentSlot.CHEST) return false;
 
-        var chestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
-
-        boolean isFlyingHelmet = entity.getItemBySlot(EquipmentSlot.HEAD).getItem().getName(null)
-                .equals(ArmorRegistry.SUPER_HELMET.get().getName(null));
-        boolean isFlyingLeggings = entity.getItemBySlot(EquipmentSlot.LEGS).getItem().getName(null)
-                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getName(null));
-        boolean isFlyingBoots = entity.getItemBySlot(EquipmentSlot.FEET).getItem().getName(null)
-                .equals(ArmorRegistry.SUPER_BOOTS.get().getName(null));
-        boolean isFlyingChestplate = chestplate.getName(null)
-                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getName(null));
+        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
+                .equals(ArmorRegistry.SUPER_HELMET.get().getArmorModelName());
+        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
+                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorModelName());
+        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
+                .equals(ArmorRegistry.SUPER_BOOTS.get().getArmorModelName());
+        boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
+                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getArmorModelName());
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = getMaxDamage(stack) / 2;
@@ -39,5 +37,12 @@ public class SuperArmorFlying extends SuperArmor
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
     {
         return canElytraFly(stack, entity);
+    }
+
+    private String getModelName(LivingEntity entity, EquipmentSlot slot)
+    {
+        var item = entity.getItemBySlot(slot).getItem();
+        if (!(item instanceof ModArmor armorItem)) return "";
+        return armorItem.getArmorModelName();
     }
 }

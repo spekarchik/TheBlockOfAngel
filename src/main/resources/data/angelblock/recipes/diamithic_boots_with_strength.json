@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:diamithic_boots"
+    },
+    "addition": {
+        "item": "angelblock:strength_pearl"
+    },
+    "result": {
+        "item": "angelblock:diamithic_boots_with_strength"
+    }
+}

@@ -34,7 +34,7 @@ public class LapisArmor extends Armor
         regenerationEffect = new RegenerationArmorEffect(player, this, 1, 200);
         blindnessEffect = new BlindnessArmorEffect(player, this, 140).availableOnFullArmorSet();
         witherEffect = new WitherEffect(player, this, 0, 600).availableOnAnyArmorElement();
-        strengthEffect = new StrengthArmorEffect(player, this, 0);
+        strengthEffect = new StrengthArmorEffect(player, this, 0).availableOnChestPlateWithStrengthBooster();
         dolphinsGrace = new DolphinsGraceEffect(player, this);
     }
 
@@ -160,27 +160,15 @@ public class LapisArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.LAPIS_HELMET.get().getDescriptionId();
+        return ArmorRegistry.LAPIS_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.LAPIS_CHESTPLATE.get().getDescriptionId();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.LAPIS_LEGGINGS.get().getDescriptionId();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.LAPIS_BOOTS.get().getDescriptionId();
+        return 5;
     }
 
     private void updatePotionEffects()

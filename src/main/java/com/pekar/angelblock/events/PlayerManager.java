@@ -84,16 +84,13 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event)
     {
-        LivingEntity entity = event.getEntity();
+        var entity = event.getEntity();
         IPlayer player = players.get(entity.getName().getString());
         if (player == null) return;
 
 //        player.sendMessage("Player was cloned.");
 
-        if (entity instanceof net.minecraft.world.entity.player.Player)
-        {
-            player.updateEntity((net.minecraft.world.entity.player.Player) entity);
-        }
+        player.updateEntity(entity);
     }
 
     @SubscribeEvent
@@ -107,19 +104,19 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         // after coming back from the End World a player entity becomes another instance.
         // player.getArmorInventoryList() works incorrect on the old instance.
         // so, it's necessary to update the player
-        if (player.getEntity() != event.getEntity())
-        {
-            player.sendMessage("player <> EntityLiving !!!");
-            // IT'S UPDATED IN onPlayerClone()
-//            player.updateEntity((net.minecraft.world.entity.player.Player) event.getEntityLiving());
-        }
+//        if (player.getEntity() != event.getEntity())
+//        {
+//            player.sendMessage("player <> EntityLiving !!!");
+//            // IT'S UPDATED IN onPlayerClone()
+////            player.updateEntity((net.minecraft.world.entity.player.Player) event.getEntityLiving());
+//        }
 
         Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
         Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);
         player.updateArmorUsed();
         armorAffected.addAll((Collection<IArmor>) player.getArmorTypesUsed());
 
-        for (IArmor armor : armorAffected)
+        for (IArmor armor : armorAffected.stream().sorted(Comparator.comparing(IArmor::getPriority)).toList())
         {
             armor.onLivingEquipmentChangeEvent(event);
         }

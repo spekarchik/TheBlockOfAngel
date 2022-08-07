@@ -30,7 +30,8 @@ public class SuperArmor extends Armor
     private final IArmorEffect slownessEffect;
     private final IArmorEffect jumpNegativeEffect;
     private final IArmorEffect levitationEffect;
-    private final SwitchingEffectSynchronizer superJumpEffect;
+    private final IArmorEffect superJumpEffect;
+    private final IArmorEffect dolphinsGraceEffect;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter;
 
@@ -43,7 +44,7 @@ public class SuperArmor extends Armor
     public SuperArmor(IPlayer player)
     {
         super(player);
-        nightVisionEffect = new NightVisionArmorEffect(player, this);
+        nightVisionEffect = new NightVisionArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.HEAD);
         glowingEffect = new GlowingArmorEffect(player, this);
 
         luckEffect = new LuckArmorEffect(player, this);
@@ -52,18 +53,17 @@ public class SuperArmor extends Armor
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
         levitationEffect = new LevitationSwitchingEffect(player, this, 3).availableOnFullArmorSet();
-
-        var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
-        superJumpEffect.setupAvailability(this::isSuperJumpEffectAvailable);
-        var dolphinsGraceEffect = new DolphinsGraceEffect(player, this);
-        this.superJumpEffect = new SwitchingEffectSynchronizer(superJumpEffect);
-        this.superJumpEffect.addDependentEffect(dolphinsGraceEffect);
+        superJumpEffect = new SuperJumpSwitchingEffect(player, this).setupAvailability(this::isSuperJumpEffectAvailable);
+        dolphinsGraceEffect = new DolphinsGraceEffect(player, this);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);
+        jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
-        var strengthEffect = new StrengthSwitchingEffect(player, this, 1);
+        speedEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
+        var strengthEffect = new StrengthSwitchingEffect(player, this, 2);
         var waterBreathingEffect = new WaterBreathSwitchingEffect(player, this);
         var hasteEffect = new HasteSwitchingEffect(player, this, 1);
+        hasteEffect.availableIfSlotSet(EquipmentSlot.CHEST);
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -83,6 +83,7 @@ public class SuperArmor extends Armor
             jumpEffect.updateSwitchState();
             levitationEffect.updateSwitchState();
             superJumpEffect.updateSwitchState();
+            dolphinsGraceEffect.updateSwitchState();
         }
     }
 
@@ -99,7 +100,7 @@ public class SuperArmor extends Armor
         }
         else
         {
-            boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+            boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
             if (isFullArmorSet)
             {
                 if (damageSource.isExplosion())
@@ -128,7 +129,7 @@ public class SuperArmor extends Armor
     public void onLivingAttackEvent(LivingAttackEvent event)
     {
         DamageSource damageSource = event.getSource();
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
 
         if (isFireDamage(damageSource))
         {
@@ -137,7 +138,7 @@ public class SuperArmor extends Armor
         }
         else if (isFreezeDamage(damageSource))
         {
-            boolean areBootsWorn = player.isArmorElementPutOn(ArmorRegistry.SUPER_BOOTS.get().getDescriptionId());
+            boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
             event.setCanceled(areBootsWorn);
         }
         else if (isFullArmorSet)
@@ -154,33 +155,28 @@ public class SuperArmor extends Armor
         }
 
         if (!isFullArmorSet) return;
-        if (!(damageSource.getEntity() instanceof LivingEntity)) return;
+        if (!(damageSource.getEntity() instanceof LivingEntity entityAttackedBy)) return;
 
-        LivingEntity entityAttackedBy = (LivingEntity) damageSource.getEntity();
+        boolean isZombie = entityAttackedBy instanceof Zombie;
+        boolean isSkeleton = entityAttackedBy instanceof Skeleton;
+        boolean isWitch = entityAttackedBy instanceof Witch;
+        boolean isIllager = entityAttackedBy instanceof AbstractIllager;
 
-        if (entityAttackedBy != null)
+        if (isZombie || isSkeleton || isIllager || isWitch)
         {
-            boolean isZombie = entityAttackedBy instanceof Zombie;
-            boolean isSkeleton = entityAttackedBy instanceof Skeleton;
-            boolean isWitch = entityAttackedBy instanceof Witch;
-            boolean isIllager = entityAttackedBy instanceof AbstractIllager;
-
-            if (isZombie || isSkeleton || isIllager || isWitch)
+            float distance = player.getEntity().distanceTo(entityAttackedBy);
+            if (!isWitch && distance > 2f)
             {
-                float distance = player.getEntity().distanceTo(entityAttackedBy);
-                if (!isWitch && distance > 2f)
-                {
-                    entityAttackedBy.setSecondsOnFire(5);
-                }
-                else
-                {
-                    entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
-                }
+                entityAttackedBy.setSecondsOnFire(5);
             }
-
-            var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
-            entityAttackedBy.addEffect(effect);
+            else
+            {
+                entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
+            }
         }
+
+        var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
+        entityAttackedBy.addEffect(effect);
     }
 
     @Override
@@ -196,6 +192,7 @@ public class SuperArmor extends Armor
         jumpNegativeEffect.updateEffectAvailability();
         levitationEffect.updateEffectAvailability();
         superJumpEffect.updateEffectAvailability();
+        dolphinsGraceEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -203,7 +200,7 @@ public class SuperArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        if (!player.isArmorElementPutOn(getLeggingsName())) return;
+        if (!player.isArmorElementPutOn(this, EquipmentSlot.LEGS)) return;
         if (jumpEffect.isActive() || slownessEffect.isActive()) return;
 
         if (levitationEffect.isEffectOn() && levitationEffect.isActive())
@@ -231,7 +228,7 @@ public class SuperArmor extends Armor
         {
             event.setDamageMultiplier(0.3f);
         }
-        else if (player.isArmorElementPutOn(getBootsName()))
+        else
         {
             event.setDamageMultiplier(0.6f);
         }
@@ -240,8 +237,8 @@ public class SuperArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
-        if (!isFullArmorSet) return;
+        boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
+        if (!isHelmetModifiedWithDetector) return;
 
         Player entityPlayer = player.getEntity();
         var level = entityPlayer.level;
@@ -314,6 +311,7 @@ public class SuperArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
         {
             superJumpEffect.trySwitch();
+            dolphinsGraceEffect.trySwitch();
         }
     }
 
@@ -347,7 +345,7 @@ public class SuperArmor extends Armor
     @Override
     public void onBeingUnderRain()
     {
-        if (!player.isFullArmorSetPutOn(getArmorElementNames())) return;
+        if (!player.isFullArmorSetPutOn(this)) return;
 
         if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
         {
@@ -356,35 +354,23 @@ public class SuperArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.SUPER_HELMET.get().getDescriptionId();
+        return ArmorRegistry.SUPER_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.SUPER_CHESTPLATE.get().getDescriptionId();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.SUPER_LEGGINGS.get().getDescriptionId();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.SUPER_BOOTS.get().getDescriptionId();
+        return 6;
     }
 
     private float getRealDamage(float initialDamageAmount)
     {
-        float helmetProtection = player.isArmorElementPutOn(getHelmetName()) ? initialDamageAmount * 0.2f : 0;
-        float bootsProtection = player.isArmorElementPutOn(getBootsName()) ? initialDamageAmount * 0.2f : 0;
-        float chestplateProtection = player.isArmorElementPutOn(getChestPlateName()) ? initialDamageAmount * 0.35f : 0;
-        float leggingsProtection = player.isArmorElementPutOn(getLeggingsName()) ? initialDamageAmount * 0.3f : 0;
+        float helmetProtection = player.isArmorElementPutOn(this, EquipmentSlot.HEAD) ? initialDamageAmount * 0.2f : 0;
+        float bootsProtection = player.isArmorElementPutOn(this, EquipmentSlot.FEET) ? initialDamageAmount * 0.2f : 0;
+        float chestplateProtection = player.isArmorElementPutOn(this, EquipmentSlot.CHEST) ? initialDamageAmount * 0.35f : 0;
+        float leggingsProtection = player.isArmorElementPutOn(this, EquipmentSlot.LEGS) ? initialDamageAmount * 0.3f : 0;
         float realDamage = initialDamageAmount - helmetProtection - bootsProtection - chestplateProtection - leggingsProtection;
         return realDamage > 0 ? realDamage : 0;
     }
@@ -399,6 +385,7 @@ public class SuperArmor extends Armor
         slownessEffect.updateEffectActivity();
         jumpNegativeEffect.updateEffectActivity();
         superJumpEffect.updateEffectActivity();
+        dolphinsGraceEffect.updateEffectActivity();
 
         levitationEffect.updateEffectActivity(getLevitationAmplifier());
 
@@ -439,6 +426,9 @@ public class SuperArmor extends Armor
 
     private boolean isSuperJumpEffectAvailable(IPlayer player, IArmor armor)
     {
+        if (!player.isFullArmorSetPutOn(this) || !player.areBootsModifiedWithStrengthBooster(this))
+            return false;
+
         var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
         var leggings = player.getEntity().getItemBySlot(EquipmentSlot.LEGS);
 
@@ -447,7 +437,6 @@ public class SuperArmor extends Armor
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
         int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
 
-        return player.isFullArmorSetPutOn(armor.getArmorElementNames())
-                && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
+        return bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
     }
 }

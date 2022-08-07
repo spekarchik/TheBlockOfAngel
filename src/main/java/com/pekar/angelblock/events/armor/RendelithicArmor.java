@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -18,14 +19,18 @@ public class RendelithicArmor extends Armor
     private final IArmorEffect levitationEffect;
     private final SwitchingEffectSynchronizer jumpEffect;
 
+    private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 3;
+    private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 5;
+
     public RendelithicArmor(IPlayer player)
     {
         super(player);
         nauseaEffect = new NauseaTemporaryEffect(player, this, 200).availableOnAnyArmorElement();
         slownessEffect = new SlownessArmorEffect(player, this, 5, 400).availableOnAnyArmorElement();
-        levitationEffect = new LevitationSwitchingEffect(player, this, 1).availableOnFullArmorSet();
+        levitationEffect = new LevitationSwitchingEffect(player, this, 1).setupAvailability(this::isLevitationAvailable);
 
-        JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, 5);
+        JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
+        jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
         SpeedSwitchingEffect speedEffect = new SpeedSwitchingEffect(player, this, 0);
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -60,8 +65,8 @@ public class RendelithicArmor extends Armor
         }
         else
         {
-            boolean isFullArmorSetPutOn = player.isFullArmorSetPutOn(getArmorElementNames());
-            if (isFullArmorSetPutOn && damageSource == DamageSource.WITHER)
+            boolean hasHealthRegeneration = player.isArmorModifiedWithHealthRegenerator(this);
+            if (hasHealthRegeneration && damageSource == DamageSource.WITHER)
             {
                 event.setCanceled(true);
                 player.getEntity().removeEffect(MobEffects.WITHER);
@@ -91,7 +96,10 @@ public class RendelithicArmor extends Armor
     {
         if (jumpEffect.isEffectOn() && jumpEffect.isActive())
         {
-            event.setDamageMultiplier(0.6f);
+            if (player.areBootsModifiedWithStrengthBooster(this))
+            {
+                event.setDamageMultiplier(0.6f);
+            }
         }
     }
 
@@ -159,27 +167,15 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.RENDELITHIC_HELMET.get().getDescriptionId();
+        return ArmorRegistry.RENDELITHIC_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.RENDELITHIC_CHESTPLATE.get().getDescriptionId();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.RENDELITHIC_LEGGINGS.get().getDescriptionId();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.RENDELITHIC_BOOTS.get().getDescriptionId();
+        return 2;
     }
 
     private void updatePotionEffects()
@@ -196,12 +192,14 @@ public class RendelithicArmor extends Armor
 
     private int getJumpBoostAmplifier()
     {
-        if (player.isNether())
-            return 5;
-        else if (player.isEnd())
-            return 5;
+        var amplifier = player.areBootsModifiedWithStrengthBooster(this)
+                ? JUMP_EFFECT_AMPLIFIER_BOOSTED
+                : JUMP_EFFECT_AMPLIFIER_DEFAULT;
+
+        if (player.isOverworld())
+            return amplifier - 1;
         else
-            return 4;
+            return amplifier;
     }
 
     private void checkForNausea()
@@ -231,10 +229,10 @@ public class RendelithicArmor extends Armor
 
     private float getRealDamage(float initialDamageAmount)
     {
-        float helmetProtection = player.isArmorElementPutOn(getHelmetName()) ? initialDamageAmount * 0.2f : 0;
-        float bootsProtection = player.isArmorElementPutOn(getBootsName()) ? initialDamageAmount * 0.2f : 0;
-        float chestplateProtection = player.isArmorElementPutOn(getChestPlateName()) ? initialDamageAmount * 0.35f : 0;
-        float leggingsProtection = player.isArmorElementPutOn(getLeggingsName()) ? initialDamageAmount * 0.3f : 0;
+        float helmetProtection = player.isArmorElementPutOn(this, EquipmentSlot.HEAD) ? initialDamageAmount * 0.2f : 0;
+        float bootsProtection = player.isArmorElementPutOn(this, EquipmentSlot.FEET) ? initialDamageAmount * 0.2f : 0;
+        float chestplateProtection = player.isArmorElementPutOn(this, EquipmentSlot.CHEST) ? initialDamageAmount * 0.35f : 0;
+        float leggingsProtection = player.isArmorElementPutOn(this, EquipmentSlot.LEGS) ? initialDamageAmount * 0.3f : 0;
         float realDamage = initialDamageAmount - helmetProtection - bootsProtection - chestplateProtection - leggingsProtection;
         return realDamage > 0 ? realDamage : 0;
     }
@@ -245,5 +243,10 @@ public class RendelithicArmor extends Armor
         boolean isDamagedByOnFire = damageSource == DamageSource.ON_FIRE;
         boolean isDamagedByLava = damageSource == DamageSource.LAVA;
         return isDamagedByInFire || isDamagedByLava || isDamagedByOnFire;
+    }
+
+    private boolean isLevitationAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isFullArmorSetPutOn(armor) && player.isArmorModifiedWithLevitation(armor);
     }
 }

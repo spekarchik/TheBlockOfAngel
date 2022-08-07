@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:diamithic_chestplate"
+    },
+    "addition": {
+        "item": "minecraft:verdant_froglight"
+    },
+    "result": {
+        "item": "angelblock:diamithic_chestplate_with_levitation"
+    }
+}

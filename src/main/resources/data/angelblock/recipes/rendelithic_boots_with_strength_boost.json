@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:rendelithic_boots"
+    },
+    "addition": {
+        "item": "angelblock:strength_pearl"
+    },
+    "result": {
+        "item": "angelblock:rendelithic_boots_with_strength_boost"
+    }
+}

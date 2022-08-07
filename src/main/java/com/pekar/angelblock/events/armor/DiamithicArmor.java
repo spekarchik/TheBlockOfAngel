@@ -28,17 +28,20 @@ public class DiamithicArmor extends Armor
 
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
+    private static final int STRENGTH_EFFECT_AMPLIFIER_DEFAULT = 0;
+    private static final int STRENGTH_EFFECT_AMPLIFIER_IMPROVED = 1;
 
     public DiamithicArmor(IPlayer player)
     {
         super(player);
-        strengthEffect = new StrengthArmorEffect(player, this, 1);
+        strengthEffect = new StrengthArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
         nightVisionEffect = new NightVisionArmorEffect(player, this);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         hasteEffect = new HasteArmorEffect(player, this);
 
         var jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
         var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
+        slowFallingEffect.setupAvailability(this::isSlowFallingEffectAvailable);
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
         this.jumpBoostEffect.addDependentEffect(slowFallingEffect);
     }
@@ -53,8 +56,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
-        if (isFullArmorSet && event.getSource().isExplosion())
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
+        if (isFullArmorSet && event.getSource().isExplosion() && player.isChestPlateModifiedWithStrengthBooster(this))
         {
             event.setAmount(event.getAmount() * 0.5f);
         }
@@ -89,11 +92,7 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        if (jumpBoostEffect.isEffectOn() && jumpBoostEffect.isActive())
-        {
-            event.setDamageMultiplier(0);
-        }
-        else if (player.isArmorElementPutOn(getBootsName()))
+        if (player.areBootsModifiedWithStrengthBooster(this))
         {
             event.setDamageMultiplier(0.3f);
         }
@@ -102,8 +101,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(getArmorElementNames());
-        if (!isFullArmorSet) return;
+        boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
+        if (!isHelmetModifiedWithDetector) return;
 
         Player entityPlayer = player.getEntity();
         var level = entityPlayer.level;
@@ -179,35 +178,35 @@ public class DiamithicArmor extends Armor
     }
 
     @Override
-    public String getHelmetName()
+    public String getModelName()
     {
-        return ArmorRegistry.DIAMITHIC_HELMET.get().getDescriptionId();
+        return ArmorRegistry.DIAMITHIC_BOOTS.get().getArmorModelName();
     }
 
     @Override
-    public String getChestPlateName()
+    public int getPriority()
     {
-        return ArmorRegistry.DIAMITHIC_CHESTPLATE.get().getDescriptionId();
-    }
-
-    @Override
-    public String getLeggingsName()
-    {
-        return ArmorRegistry.DIAMITHIC_LEGGINGS.get().getDescriptionId();
-    }
-
-    @Override
-    public String getBootsName()
-    {
-        return ArmorRegistry.DIAMITHIC_BOOTS.get().getDescriptionId();
+        return 3;
     }
 
     private void updatePotionEffects()
     {
         nightVisionEffect.updateEffectActivity();
-        strengthEffect.updateEffectActivity();
+        strengthEffect.updateEffectActivity(getStrengthEffectAmplifier());
         jumpBoostEffect.updateEffectActivity();
         healthBoostEffect.updateEffectActivity();
         hasteEffect.updateEffectActivity();
+    }
+
+    private int getStrengthEffectAmplifier()
+    {
+        return player.isChestPlateModifiedWithStrengthBooster(this)
+                ? STRENGTH_EFFECT_AMPLIFIER_IMPROVED
+                : STRENGTH_EFFECT_AMPLIFIER_DEFAULT;
+    }
+
+    private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isArmorModifiedWithLevitation(armor);
     }
 }

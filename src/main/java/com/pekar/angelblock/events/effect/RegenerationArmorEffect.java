@@ -9,7 +9,7 @@ public class RegenerationArmorEffect extends TemporaryArmorEffect
     public RegenerationArmorEffect(IPlayer player, IArmor armor, int amplifier, int duration)
     {
         super(player, armor, MobEffects.REGENERATION, amplifier, duration);
-        availableOnFullArmorSet();
+        availableOnLeggingsWithHealthRegenerator();
         showIcon = true;
     }
 }

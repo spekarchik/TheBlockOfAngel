@@ -9,6 +9,6 @@ public class SpeedSwitchingEffect extends SwitchingArmorEffect
     public SpeedSwitchingEffect(IPlayer player, IArmor armor, int amplifier)
     {
         super(player, armor, MobEffects.MOVEMENT_SPEED, amplifier);
-        availableOnBootsAndLeggings();
+        availableOnBootsWithStrengthBooster();
     }
 }

@@ -10,9 +10,9 @@ import net.minecraft.world.item.Items;
 
 public class FlyingArmor extends ModArmor
 {
-    protected FlyingArmor(ArmorMaterial material, EquipmentSlot equipmentSlot)
+    protected FlyingArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
     {
-        super(material, equipmentSlot);
+        super(material, equipmentSlot, armorItemName);
     }
 
     @Override
@@ -36,14 +36,14 @@ public class FlyingArmor extends ModArmor
         var chestplate = stack.getItem();
         var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();
 
-        boolean isFlyingHelmet = entity.getItemBySlot(EquipmentSlot.HEAD).getItem().getName(null)
-                .equals(ArmorRegistry.FLYING_HELMET.get().getName(null));
-        boolean isFlyingLeggings = entity.getItemBySlot(EquipmentSlot.LEGS).getItem().getName(null)
-                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getName(null));
-        boolean isFlyingBoots = entity.getItemBySlot(EquipmentSlot.FEET).getItem().getName(null)
-                .equals(ArmorRegistry.FLYING_BOOTS.get().getName(null));
-        boolean isFlyingChestplate = chestplate.getName(null)
-                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getName(null));
+        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
+                .equals(ArmorRegistry.FLYING_HELMET.get().getArmorModelName());
+        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
+                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getArmorModelName());
+        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
+                .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorModelName());
+        boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
+                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getArmorModelName());
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = getMaxDamage(stack) / 2;
@@ -57,5 +57,12 @@ public class FlyingArmor extends ModArmor
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
     {
         return canElytraFly(stack, entity);
+    }
+
+    private String getModelName(LivingEntity entity, EquipmentSlot slot)
+    {
+        var item = entity.getItemBySlot(slot).getItem();
+        if (!(item instanceof ModArmor armorItem)) return "";
+        return armorItem.getArmorModelName();
     }
 }

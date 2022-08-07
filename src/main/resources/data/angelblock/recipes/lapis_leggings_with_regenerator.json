@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:lapis_leggings"
+    },
+    "addition": {
+        "item": "angelblock:bios_diamond"
+    },
+    "result": {
+        "item": "angelblock:lapis_leggings_with_regenerator"
+    }
+}

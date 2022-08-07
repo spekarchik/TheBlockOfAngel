@@ -1,30 +1,47 @@
 package com.pekar.angelblock.armor;
 
-import com.pekar.angelblock.Main;
 import com.pekar.angelblock.tab.ModTab;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.RegistryObject;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Supplier;
 
 public class ModArmor extends ArmorItem
 {
-    public static final Set<String> ArmorNames = new HashSet<>();
+    protected final String armorModelName;
 
-    protected ModArmor(ArmorMaterial material, EquipmentSlot equipmentSlot)
+    protected ModArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorModelName)
     {
         super(material, equipmentSlot, new Properties().tab(ModTab.MOD_TAB));
+        this.armorModelName = armorModelName;
     }
 
-    protected static RegistryObject<ArmorItem> register(String name, Supplier<ArmorItem> sup)
+    public String getArmorModelName()
     {
-        ArmorNames.add(name);
-        return Main.ITEMS.register(name, sup);
+        return armorModelName;
+    }
+
+    public boolean isModifiedWithDetector()
+    {
+        return false;
+    }
+
+    public boolean isModifiedWithHealthRegenerator()
+    {
+        return false;
+    }
+
+    public boolean isModifiedWithStrengthBooster()
+    {
+        return false;
+    }
+
+    public boolean isModifiedWithLevitation()
+    {
+        return false;
+    }
+
+    public boolean isModifiedWithSeaPower()
+    {
+        return false;
     }
 }

@@ -2,24 +2,24 @@ package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.events.effect.IArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 abstract class Armor implements IArmor
 {
     protected final IPlayer player;
-    private final Set<String> elementNames = new HashSet<>();
+    private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
 
     protected Armor(IPlayer player)
     {
         this.player = player;
 
-        elementNames.add(getBootsName());
-        elementNames.add(getHelmetName());
-        elementNames.add(getLeggingsName());
-        elementNames.add(getChestPlateName());
+        equipmentSlots.add(EquipmentSlot.FEET);
+        equipmentSlots.add(EquipmentSlot.LEGS);
+        equipmentSlots.add(EquipmentSlot.CHEST);
+        equipmentSlots.add(EquipmentSlot.HEAD);
     }
 
     @Override
@@ -27,25 +27,13 @@ abstract class Armor implements IArmor
     {
         if (!(obj instanceof Armor)) return false;
         Armor armor = (Armor) obj;
-        return getBootsName().equals(armor.getBootsName());
+        return getModelName().equals(armor.getModelName());
     }
 
     @Override
     public int hashCode()
     {
-        return getBootsName().hashCode();
-    }
-
-    @Override
-    public Collection<String> getArmorElementNames()
-    {
-        return elementNames;
-    }
-
-    @Override
-    public final boolean isAnyArmorElementPutOn()
-    {
-        return player.isAnyArmorElementPutOn(elementNames);
+        return getModelName().hashCode();
     }
 
     protected void synchronizeEffect(IArmorEffect basicEffect, IArmorEffect dependentEffect)
@@ -62,10 +50,5 @@ abstract class Armor implements IArmor
         {
             dependentEffect.invertSwitchState();
         }
-    }
-
-    protected void message(String message)
-    {
-        player.sendMessage(message);
     }
 }

@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:diamithic_leggings"
+    },
+    "addition": {
+        "item": "angelblock:bios_diamond"
+    },
+    "result": {
+        "item": "angelblock:diamithic_leggings_with_regenerator"
+    }
+}

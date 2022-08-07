@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:super_boots_with_sea_power"
+    },
+    "addition": {
+        "item": "angelblock:strength_pearl"
+    },
+    "result": {
+        "item": "angelblock:super_boots_with_strength_and_sea_power"
+    }
+}
