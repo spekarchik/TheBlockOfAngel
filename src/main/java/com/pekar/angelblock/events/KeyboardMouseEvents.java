@@ -27,43 +27,43 @@ public class KeyboardMouseEvents
     @SubscribeEvent
     public static void onKeyInputEvent(InputEvent.Key event)
     {
-        if (event.getKey() == KeyRegistry.JUMP_BOOST.getKey().getValue())
+        if (KeyRegistry.JUMP_BOOST.isDown())
         {
             var keyName = KeyRegistry.JUMP_BOOST.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (event.getKey() == KeyRegistry.NIGHT_VISION.getKey().getValue())
+        if (KeyRegistry.NIGHT_VISION.isDown())
         {
             var keyName = KeyRegistry.NIGHT_VISION.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (event.getKey() == KeyRegistry.GLOWING.getKey().getValue())
+        if (KeyRegistry.GLOWING.isDown())
         {
             var keyName = KeyRegistry.GLOWING.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (event.getKey() == KeyRegistry.REGENERATION.getKey().getValue())
+        if (KeyRegistry.REGENERATION.isDown())
         {
             var keyName = KeyRegistry.REGENERATION.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (event.getKey() == KeyRegistry.LEVITATION.getKey().getValue())
+        if (KeyRegistry.LEVITATION.isDown())
         {
             var keyName = KeyRegistry.LEVITATION.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
         }
 
-        if (event.getKey() == KeyRegistry.SWORD_EFFECT.getKey().getValue())
+        if (KeyRegistry.SWORD_EFFECT.isDown())
         {
             var keyName = KeyRegistry.SWORD_EFFECT.getName();
             trySendPacket(keyName, new ToolsModeChangePacket());
         }
 
-        if (event.getKey() == KeyRegistry.SUPER_JUMP.getKey().getValue())
+        if (KeyRegistry.SUPER_JUMP.isDown())
         {
             var keyName = KeyRegistry.SUPER_JUMP.getName();
             trySendPacket(keyName, new KeyPressedPacket(keyName));
