@@ -72,6 +72,8 @@ public class KeyboardMouseEvents
 
     private static synchronized void trySendPacket(String keyName, ClientToServerPacket packet)
     {
+        if (keyName == null) return;
+
         long time2 = Clock.systemUTC().millis();
         var last = lastTime.get(keyName);
 
