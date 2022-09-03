@@ -1,12 +1,15 @@
 {
-    "type": "minecraft:smithing",
-    "base": {
-        "item": "minecraft:leather_helmet"
-    },
-    "addition": {
-        "item": "angelblock:flying_plate"
-    },
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:leather_helmet"
+        },
+        {
+            "item": "angelblock:flying_plate"
+        }
+    ],
     "result": {
-        "item": "angelblock:flying_helmet"
+        "item": "angelblock:flying_helmet",
+        "count": 1
     }
 }
