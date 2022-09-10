@@ -13,7 +13,8 @@ public class GreenDiamondBlock extends Block
 {
     public GreenDiamondBlock()
     {
-        super(BlockBehaviour.Properties.of(Material.POWDER_SNOW).strength(1F).sound(SoundType.SNOW).requiresCorrectToolForDrops());
+        super(BlockBehaviour.Properties.of(Material.POWDER_SNOW).strength(1F)
+                .lightLevel(state -> 12).sound(SoundType.SNOW).requiresCorrectToolForDrops());
     }
 
     @Override
