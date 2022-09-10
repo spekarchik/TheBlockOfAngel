@@ -111,12 +111,6 @@ public class MagneticRod extends ModRod
                 BlockPos currentPos, replacedPos;
                 for (currentPos = createPos.apply(x1, x2, maxDepthCoord); !Objects.equals(getDepthCoord.apply(currentPos), getDepthCoord.apply(pos)); currentPos = replacedPos)
                 {
-                    // check current block: ore? diamond?
-                    var currentBlock = level.getBlockState(currentPos).getBlock();
-                    boolean isDiamondOre = isDiamondOre(currentBlock);
-                    boolean isShiftingOre = isShiftingOre(currentBlock);
-                    boolean isAmethystGeode = isAmethystGeode(currentBlock);
-                    boolean isSculkVein = isSculk(currentBlock);
                     boolean doCurrentDepthAllowShiftOres;
                     boolean doCurrentDepthAllowDetectAmethyst;
                     boolean doCurrentDepthAllowDetectSculk;
@@ -133,6 +127,13 @@ public class MagneticRod extends ModRod
                         doCurrentDepthAllowDetectAmethyst = getDepthCoord.apply(currentPos) <= amethystDepthCoord;
                         doCurrentDepthAllowDetectSculk = getDepthCoord.apply(currentPos) <= sculkDepthCoord;
                     }
+
+                    // check current block: ore? diamond?
+                    var currentBlock = level.getBlockState(currentPos).getBlock();
+                    boolean isDiamondOre = isDiamondOre(currentBlock);
+                    boolean isShiftingOre = isShiftingOre(currentBlock);
+                    boolean isAmethystGeode = isAmethystGeode(currentBlock);
+                    boolean isSculkVein = isSculk(currentBlock);
 
                     if (doCurrentDepthAllowDetectAmethyst && isAmethystGeode) isAmethystFound = true;
 
@@ -209,7 +210,7 @@ public class MagneticRod extends ModRod
 
     protected int getSculkDetectionDepth()
     {
-        return 15;
+        return 64;
     }
 
     private void exchange(Level level, BlockPos currentPos, BlockPos closerPos)

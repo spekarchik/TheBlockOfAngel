@@ -125,6 +125,6 @@ public class EndRod extends AmethystRod
     @Override
     protected int getSculkDetectionDepth()
     {
-        return 120;
+        return 192;
     }
 }
