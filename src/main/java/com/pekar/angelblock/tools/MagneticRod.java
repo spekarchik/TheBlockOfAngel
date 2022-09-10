@@ -44,7 +44,8 @@ public class MagneticRod extends ModRod
         if (isBroken) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
-        if (!canBeReplaced(level, pos) && !isShiftingOre(level, pos) && !isDiamondOre(level.getBlockState(pos).getBlock()))
+        var blockState = level.getBlockState(pos);
+        if (blockState.isAir() || blockState.getMaterial().isLiquid())
         {
             return InteractionResult.CONSUME;
         }
@@ -116,28 +117,28 @@ public class MagneticRod extends ModRod
                     boolean isShiftingOre = isShiftingOre(currentBlock);
                     boolean isAmethystGeode = isAmethystGeode(currentBlock);
                     boolean isSculkVein = isSculk(currentBlock);
-                    boolean canShiftOres;
-                    boolean canDetectAmethyst;
-                    boolean canDetectSculk;
+                    boolean doCurrentDepthAllowShiftOres;
+                    boolean doCurrentDepthAllowDetectAmethyst;
+                    boolean doCurrentDepthAllowDetectSculk;
 
                     if (initialDepth >= 0)
                     {
-                        canShiftOres = getDepthCoord.apply(currentPos) >= oreDepthCoord;
-                        canDetectAmethyst = getDepthCoord.apply(currentPos) >= amethystDepthCoord;
-                        canDetectSculk = getDepthCoord.apply(currentPos) >= sculkDepthCoord;
+                        doCurrentDepthAllowShiftOres = getDepthCoord.apply(currentPos) >= oreDepthCoord;
+                        doCurrentDepthAllowDetectAmethyst = getDepthCoord.apply(currentPos) >= amethystDepthCoord;
+                        doCurrentDepthAllowDetectSculk = getDepthCoord.apply(currentPos) >= sculkDepthCoord;
                     }
                     else
                     {
-                        canShiftOres = getDepthCoord.apply(currentPos) <= oreDepthCoord;
-                        canDetectAmethyst = getDepthCoord.apply(currentPos) <= amethystDepthCoord;
-                        canDetectSculk = getDepthCoord.apply(currentPos) <= sculkDepthCoord;
+                        doCurrentDepthAllowShiftOres = getDepthCoord.apply(currentPos) <= oreDepthCoord;
+                        doCurrentDepthAllowDetectAmethyst = getDepthCoord.apply(currentPos) <= amethystDepthCoord;
+                        doCurrentDepthAllowDetectSculk = getDepthCoord.apply(currentPos) <= sculkDepthCoord;
                     }
 
-                    if (canDetectAmethyst && isAmethystGeode) isAmethystFound = true;
+                    if (doCurrentDepthAllowDetectAmethyst && isAmethystGeode) isAmethystFound = true;
 
-                    if (canDetectSculk && isSculkVein) isSculkVeinFound = true;
+                    if (doCurrentDepthAllowDetectSculk && isSculkVein) isSculkVeinFound = true;
 
-                    if (!canShiftOres)
+                    if (!doCurrentDepthAllowShiftOres)
                     {
                         replacedPos = currentPos.relative(clickedFace);
                         continue;
@@ -252,6 +253,7 @@ public class MagneticRod extends ModRod
 
     private boolean isSculk(Block block)
     {
-        return block == Blocks.SCULK || block == Blocks.SCULK_VEIN;
+        return block == Blocks.SCULK || block == Blocks.SCULK_VEIN || block == Blocks.SCULK_CATALYST
+                || block == Blocks.SCULK_SENSOR || block == Blocks.SCULK_SHRIEKER;
     }
 }

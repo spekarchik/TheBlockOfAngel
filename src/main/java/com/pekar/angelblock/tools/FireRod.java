@@ -253,17 +253,17 @@ public class FireRod extends MarineRod
     {
         SoundType soundType;
 
-        if (detectorFlags.isDiamondOreFound())
+        if (detectorFlags.isSculkVeinFound())
+        {
+            soundType = SoundType.SCULK_FOUND;
+        }
+        else if (detectorFlags.isDiamondOreFound())
         {
             soundType = SoundType.DIAMOND_FOUND;
         }
         else if (detectorFlags.isAmethystFound())
         {
             soundType = SoundType.AMETHYST_FOUND;
-        }
-        else if (detectorFlags.isSculkVeinFound())
-        {
-            soundType = SoundType.SCULK_FOUND;
         }
         else if (detectorFlags.isShiftingOreFound())
         {
