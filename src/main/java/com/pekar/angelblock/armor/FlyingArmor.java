@@ -5,6 +5,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.CompassItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -34,7 +35,8 @@ public class FlyingArmor extends ModArmor
         if (!Utils.isOverworld(entity.level.dimension()) || entity.isInWaterRainOrBubble()) return false;
 
         var chestplate = stack.getItem();
-        var mainHandItem = entity.getItemInHand(InteractionHand.MAIN_HAND).getItem();
+        var mainHandItemStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
+        var mainHandItem = mainHandItemStack.getItem();
 
         boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
                 .equals(ArmorRegistry.FLYING_HELMET.get().getArmorModelName());
@@ -50,7 +52,7 @@ public class FlyingArmor extends ModArmor
         int chestDamage = getDamage(stack);
 
         return isFullArmorSet && chestDamage < maxDamageToFly
-                && !mainHandItem.getName(null).equals(Items.FIREWORK_ROCKET.getName(null));
+                && !mainHandItem.getName(mainHandItemStack).equals(Items.FIREWORK_ROCKET.getName(mainHandItemStack));
     }
 
     @Override

@@ -17,14 +17,16 @@ public class SuperArmor extends ModArmor
     @Override
     public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer)
     {
-        var leggings = wearer.getItemBySlot(EquipmentSlot.LEGS).getItem();
-        return leggings.getName(null).equals(ArmorRegistry.SUPER_LEGGINGS.get().getName(null));
+        var itemStack = wearer.getItemBySlot(EquipmentSlot.LEGS);
+        var leggings = itemStack.getItem();
+        return leggings.getName(itemStack).equals(ArmorRegistry.SUPER_LEGGINGS.get().getName(itemStack));
     }
 
     @Override
     public boolean isEnderMask(ItemStack stack, Player player, EnderMan endermanEntity)
     {
-        var helmet = player.getItemBySlot(EquipmentSlot.HEAD).getItem();
-        return helmet.getName(null).equals(ArmorRegistry.SUPER_HELMET.get().getName(null));
+        var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
+        var helmet = itemStack.getItem();
+        return helmet.getName(itemStack).equals(ArmorRegistry.SUPER_HELMET.get().getName(itemStack));
     }
 }
