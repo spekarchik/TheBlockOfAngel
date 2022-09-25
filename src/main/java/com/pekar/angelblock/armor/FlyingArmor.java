@@ -31,9 +31,8 @@ public class FlyingArmor extends ModArmor
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
         if (slot != EquipmentSlot.CHEST) return false;
-        if (!Utils.isOverworld(entity.level.dimension()) || entity.isInWaterRainOrBubble()) return false;
+        if (Utils.isNether(entity.level.dimension()) || entity.isInWaterRainOrBubble()) return false;
 
-        var chestplate = stack.getItem();
         var mainHandItemStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
         var mainHandItem = mainHandItemStack.getItem();
 
