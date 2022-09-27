@@ -1,12 +1,12 @@
 {
     "type": "minecraft:smithing",
     "base": {
-        "item": "angelblock:diamithic_chestplate_with_strength_and_levitation"
+        "item": "angelblock:limonite_boots_with_strength"
     },
     "addition": {
         "item": "angelblock:super_plate"
     },
     "result": {
-        "item": "angelblock:super_chestplate"
+        "item": "angelblock:super_boots_with_strength"
     }
 }
