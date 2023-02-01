@@ -82,12 +82,6 @@ public class AmethystRod extends FireRod
     }
 
     @Override
-    protected int getAmethystDetectionDepth()
-    {
-        return 40;
-    }
-
-    @Override
     protected int getSculkDetectionDepth()
     {
         return 128;

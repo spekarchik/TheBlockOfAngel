@@ -102,17 +102,22 @@ public class BlockBreakerMobEffect extends MobEffect
         {
             level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), 11);
         }
-        else if (block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.SNOW_BLOCK)
+        else if (block == Blocks.ICE || block == Blocks.SNOW_BLOCK)
         {
             level.setBlock(pos, Blocks.POWDER_SNOW.defaultBlockState(), 11);
         }
-        else if (block == Blocks.BLUE_ICE)
+        else if (block == Blocks.PACKED_ICE || block == Blocks.BLUE_ICE)
         {
             level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 11);
         }
         else if (block == Blocks.SAND && Utils.isNearWaterHorizoltal(level, pos))
         {
             level.setBlock(pos, Blocks.CLAY.defaultBlockState(), 0);
+            level.destroyBlock(pos, true, source, 1);
+        }
+        else if (block == Blocks.PRISMARINE)
+        {
+            level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_CRYSTALS.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
     }

@@ -78,14 +78,6 @@ public class MarineRod extends AncientRod
                 damageItemIfSurvival(player, level, pos, blockState);
                 return InteractionResult.CONSUME;
             }
-
-            if (block == Blocks.PRISMARINE)
-            {
-                level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_CRYSTALS.get().defaultBlockState(), 0);
-                level.destroyBlock(pos, true, player, 1);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
-            }
         }
 
         var result = super.useOn(context);

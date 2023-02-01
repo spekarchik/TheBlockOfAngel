@@ -181,6 +181,13 @@ public class FireRod extends MarineRod
                 return InteractionResult.CONSUME;
             }
 
+            if (block == Blocks.CLAY)
+            {
+                setBlock(player, pos, Blocks.TERRACOTTA);
+                damageItemIfSurvival(player, level, pos, blockState);
+                return InteractionResult.CONSUME;
+            }
+
             if (block == Blocks.SHROOMLIGHT)
             {
                 for (int x = pos.getX() - 1; x <= pos.getX() + 1; x++)
@@ -245,7 +252,7 @@ public class FireRod extends MarineRod
     @Override
     protected int getAmethystDetectionDepth()
     {
-        return 30;
+        return 40;
     }
 
     @Override
