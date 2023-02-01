@@ -13,6 +13,7 @@ abstract class ArmorEffect implements IArmorEffect
     protected IArmor armor;
     protected MobEffect effectType;
     protected boolean isOn;
+    protected boolean wasAvailable;
     protected boolean isAvailable;
     protected int defaultAmplifier;
     protected boolean showIcon;
@@ -47,6 +48,7 @@ abstract class ArmorEffect implements IArmorEffect
     @Override
     public final boolean updateEffectAvailability()
     {
+        wasAvailable = isAvailable;
         return isAvailable = availabilityPredicate.test(player, armor);
     }
 
@@ -85,22 +87,27 @@ abstract class ArmorEffect implements IArmorEffect
     @Override
     public final void updateEffectActivity(int amplifier)
     {
-        if (isEffectOn() && isEffectAvailable())
+        if (isEffectAvailable() || wasAvailable)
         {
-            if (isActive() && canResetEffect())
+            if (isEffectOn() && isEffectAvailable())
             {
-                player.clearEffect(effectType);
-            }
+                if (isActive() && canResetEffect())
+                {
+                    player.clearEffect(effectType);
+                }
 
-            if (!isActive() || canResetEffect())
+                if (!isActive() || canResetEffect())
+                {
+                    player.setEffect(effectType, amplifier, showIcon);
+                }
+            }
+            else
             {
-                player.setEffect(effectType, amplifier, showIcon);
+                trySwitchOff();
             }
         }
-        else
-        {
-            trySwitchOff();
-        }
+
+        wasAvailable = isAvailable;
     }
 
     @Override
