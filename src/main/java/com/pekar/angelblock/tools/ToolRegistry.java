@@ -11,11 +11,11 @@ public class ToolRegistry
 {
     // Shovels
     public static final RegistryObject<ModShovel> RENDELITHIC_PRIMARY_SHOVEL = Main.ITEMS.register("rendelithic_primary_shovel",
-            () -> new ModShovel(ToolMaterials.RENDELITHIC, 1.5F, -3.0F,
+            () -> new ModShovel(ToolMaterials.RENDELITHIC, 1.5F, -2.8F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModShovel> RENDELITHIC_SHOVEL = Main.ITEMS.register("rendelithic_shovel",
-            () -> new RendelithicShovel(ToolMaterials.RENDELITHIC, 1.5F, -3.0F,
+            () -> new RendelithicShovel(ToolMaterials.RENDELITHIC, 1.5F, -2.8F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModShovel> LAPIS_PRIMARY_SHOVEL = Main.ITEMS.register("lapis_primary_shovel",
@@ -27,20 +27,20 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModShovel> SUPER_PRIMARY_SHOVEL = Main.ITEMS.register("super_primary_shovel",
-            () -> new ModShovel(ToolMaterials.SUPER, 1.5F, -3.0F,
+            () -> new ModShovel(ToolMaterials.SUPER, 1.5F, -2.6F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModShovel> SUPER_SHOVEL = Main.ITEMS.register("super_shovel",
-            () -> new SuperShovel(ToolMaterials.SUPER, 1.5F, -3.0F,
+            () -> new SuperShovel(ToolMaterials.SUPER, 1.5F, -2.6F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     // Pickaxes
     public static final RegistryObject<ModPickaxe> RENDELITHIC_PRIMARY_PICKAXE = Main.ITEMS.register("rendelithic_primary_pickaxe",
-            () -> new ModPickaxe(ToolMaterials.RENDELITHIC, 1, -2.8F,
+            () -> new ModPickaxe(ToolMaterials.RENDELITHIC, 1, -2.4F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModPickaxe> RENDELITHIC_PICKAXE = Main.ITEMS.register("rendelithic_pickaxe",
-            () -> new RendelithicPickaxe(ToolMaterials.RENDELITHIC, 1, -2.8F,
+            () -> new RendelithicPickaxe(ToolMaterials.RENDELITHIC, 1, -2.4F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModPickaxe> LAPIS_PRIMARY_PICKAXE = Main.ITEMS.register("lapis_primary_pickaxe",
@@ -60,19 +60,19 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModPickaxe> LIMONITE_PRIMARY_PICKAXE = Main.ITEMS.register("limonite_primary_pickaxe",
-            () -> new ModPickaxe(ToolMaterials.LIMONITE, 1, -2.8F,
+            () -> new ModPickaxe(ToolMaterials.LIMONITE, 1, -2.2F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModPickaxe> LIMONITE_PICKAXE = Main.ITEMS.register("limonite_pickaxe",
-            () -> new LimonitePickaxe(ToolMaterials.LIMONITE, 1, -2.8F,
+            () -> new LimonitePickaxe(ToolMaterials.LIMONITE, 1, -2.2F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModPickaxe> SUPER_PRIMARY_PICKAXE = Main.ITEMS.register("super_primary_pickaxe",
-            () -> new ModPickaxe(ToolMaterials.SUPER, 1, -2.8F,
+            () -> new ModPickaxe(ToolMaterials.SUPER, 1, -2.2F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModPickaxe> SUPER_PICKAXE = Main.ITEMS.register("super_pickaxe",
-            () -> new SuperPickaxe(ToolMaterials.SUPER, 1, -2.8F,
+            () -> new SuperPickaxe(ToolMaterials.SUPER, 1, -2.2F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     // Axes
@@ -85,28 +85,28 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModAxe> LIMONITE_PRIMARY_AXE = Main.ITEMS.register("limonite_primary_axe",
-            () -> new ModAxe(ToolMaterials.LIMONITE, 5.0F, -3.0F,
+            () -> new ModAxe(ToolMaterials.LIMONITE, 5.0F, -2.5F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModAxe> LIMONITE_AXE = Main.ITEMS.register("limonite_axe",
-            () -> new LimoniteAxe(ToolMaterials.LIMONITE, 5.0F, -3.0F,
+            () -> new LimoniteAxe(ToolMaterials.LIMONITE, 5.0F, -2.5F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModAxe> SUPER_PRIMARY_AXE = Main.ITEMS.register("super_primary_axe",
-            () -> new ModAxe(ToolMaterials.SUPER, 5.0F, -3.0F,
+            () -> new ModAxe(ToolMaterials.SUPER, 5.0F, -2.5F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModAxe> SUPER_AXE = Main.ITEMS.register("super_axe",
-            () -> new SuperAxe(ToolMaterials.SUPER, 5.0F, -3.0F,
+            () -> new SuperAxe(ToolMaterials.SUPER, 5.0F, -2.5F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     // Hoes
     public static final RegistryObject<ModHoe> LAPIS_PRIMARY_HOE = Main.ITEMS.register("lapis_primary_hoe",
-            () -> new ModHoe(ToolMaterials.LAPIS, -3, 0F,
+            () -> new ModHoe(ToolMaterials.LAPIS, -3, 0.5F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModHoe> LAPIS_HOE = Main.ITEMS.register("lapis_hoe",
-            () -> new LapisHoe(ToolMaterials.LAPIS, -3, 0F,
+            () -> new LapisHoe(ToolMaterials.LAPIS, -3, 0.5F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     // Rods
@@ -160,27 +160,27 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModSword> RENDELITHIC_PRIMARY_SWORD = Main.ITEMS.register("rendelithic_primary_sword",
-            () -> new RendelithicPrimarySword(ToolMaterials.RENDELITHIC, 3, -2.4F,
+            () -> new RendelithicPrimarySword(ToolMaterials.RENDELITHIC, 3, -2.2F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> RENDELITHIC_SWORD = Main.ITEMS.register("rendelithic_sword",
-            () -> new RendelithicSword(ToolMaterials.RENDELITHIC, 3, -2.4F,
+            () -> new RendelithicSword(ToolMaterials.RENDELITHIC, 3, -2.2F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModSword> LIMONITE_PRIMARY_SWORD = Main.ITEMS.register("limonite_primary_sword",
-            () -> new LimonitePrimarySword(ToolMaterials.LIMONITE, 3, -2.4F,
+            () -> new LimonitePrimarySword(ToolMaterials.LIMONITE, 3, -1.9F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> LIMONITE_SWORD = Main.ITEMS.register("limonite_sword",
-            () -> new LimoniteSword(ToolMaterials.LIMONITE, 3, -2.4F,
+            () -> new LimoniteSword(ToolMaterials.LIMONITE, 3, -1.9F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModSword> SUPER_PRIMARY_SWORD = Main.ITEMS.register("super_primary_sword",
-            () -> new SuperPrimarySword(ToolMaterials.SUPER, 3, -2.4F,
+            () -> new SuperPrimarySword(ToolMaterials.SUPER, 3, -1.9F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModSword> SUPER_SWORD = Main.ITEMS.register("super_sword",
-            () -> new SuperSword(ToolMaterials.SUPER, 3, -2.4F,
+            () -> new SuperSword(ToolMaterials.SUPER, 3, -1.9F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     // + морской кристалл - Marine Crystal - древний страж 50%
