@@ -25,43 +25,42 @@ public class SuperShovel extends ModShovel
     {
         var player = context.getPlayer();
         var level = player.level;
-
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
-
         var pos = context.getClickedPos();
 
-        BlockState blockState = level.getBlockState(pos);
-        var block = blockState.getBlock();
-
-        if (isToolEffective(level, pos) && Utils.isNearLavaOrWaterOrUnsafe(player, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
+        if (!level.isClientSide && canUseToolEffect(player))
         {
-            level.destroyBlock(pos, true);
+            BlockState blockState = level.getBlockState(pos);
+            var block = blockState.getBlock();
 
-            if (blockState.getDestroySpeed(level, pos) != 0.0F)
+            if (isToolEffective(level, pos) && Utils.isNearLavaOrWaterOrUnsafe(player, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
             {
-                damageItem(1, player);
+                level.destroyBlock(pos, true);
+
+                if (blockState.getDestroySpeed(level, pos) != 0.0F)
+                {
+                    damageItem(1, player);
+                }
+
+                return InteractionResult.CONSUME;
             }
 
-            return InteractionResult.CONSUME;
-        }
-
-        if (block == BlockRegistry.CRACKED_ENDSTONE.get())
-        {
-            level.destroyBlock(pos, true, player);
-
-            if (blockState.getDestroySpeed(level, pos) != 0.0F)
+            if (block == BlockRegistry.CRACKED_ENDSTONE.get())
             {
-                damageItem(1, player);
+                level.destroyBlock(pos, true, player);
+
+                if (blockState.getDestroySpeed(level, pos) != 0.0F)
+                {
+                    damageItem(1, player);
+                }
+
+                return InteractionResult.CONSUME;
             }
 
-            return InteractionResult.CONSUME;
-        }
-
-        if (block == Blocks.END_STONE)
-        {
-            setBlock(player, pos, BlockRegistry.CRACKED_ENDSTONE.get());
-            return InteractionResult.CONSUME;
+            if (block == Blocks.END_STONE)
+            {
+                setBlock(player, pos, BlockRegistry.CRACKED_ENDSTONE.get());
+                return InteractionResult.CONSUME;
+            }
         }
 
         InteractionResult result = super.useOn(context);
