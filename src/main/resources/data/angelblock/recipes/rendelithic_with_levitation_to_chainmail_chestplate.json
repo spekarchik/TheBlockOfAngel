@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:rendelithic_chestplate_with_levitation"
+    },
+    "addition": {
+        "item": "minecraft:flint"
+    },
+    "result": {
+        "item": "minecraft:chainmail_chestplate"
+    }
+}
