@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "angelblock:diamithic_boots_with_strength"
+  },
+  "addition": {
+    "item": "minecraft:flint"
+  },
+  "result": {
+    "item": "minecraft:netherite_boots"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "angelblock:diamithic_primary_axe"
+  },
+  "addition": {
+    "item": "minecraft:flint"
+  },
+  "result": {
+    "item": "minecraft:netherite_axe"
+  }
+}

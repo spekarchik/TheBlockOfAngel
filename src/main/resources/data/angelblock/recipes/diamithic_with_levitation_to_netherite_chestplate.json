@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "angelblock:diamithic_chestplate_with_levitation"
+  },
+  "addition": {
+    "item": "minecraft:flint"
+  },
+  "result": {
+    "item": "minecraft:netherite_chestplate"
+  }
+}
