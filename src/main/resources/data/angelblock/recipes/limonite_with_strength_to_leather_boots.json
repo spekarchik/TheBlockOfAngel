@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "angelblock:limonite_boots_with_strength"
+  },
+  "addition": {
+    "item": "minecraft:flint"
+  },
+  "result": {
+    "item": "minecraft:leather_boots"
+  }
+}

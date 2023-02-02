@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "angelblock:limonite_chestplate_with_sea_power"
+  },
+  "addition": {
+    "item": "minecraft:flint"
+  },
+  "result": {
+    "item": "minecraft:chainmail_chestplate"
+  }
+}
