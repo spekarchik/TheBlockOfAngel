@@ -1,22 +1,22 @@
 {
   "type": "minecraft:chest",
   "pools": [
-	{
-	  "rolls": 1.0,
+    {
+      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries":
-	  [
+      [
         {
           "type": "minecraft:item",
-		  "weight": 2,
+          "weight": 2,
           "name": "angelblock:evoker_amulet"
         },
         {
           "type": "minecraft:empty",
           "weight": 1
         }
-	  ]
-	},
+      ]
+    },
 	{
 	  "rolls": 1.0,
       "bonus_rolls": 0.0,
@@ -63,8 +63,13 @@
           "name": "angelblock:limonite_helmet"
         },
         {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "angelblock:flax_fibre"
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 10
+          "weight": 5
         }
 	  ]
 	},
