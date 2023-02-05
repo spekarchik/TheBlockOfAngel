@@ -20,7 +20,7 @@
               "treasure": true
             }
           ],
-          "name": "angelblock:diamithic_pickaxe"
+          "name": "angelblock:diamithic_primary_pickaxe"
         },
         {
           "type": "minecraft:item",
@@ -32,8 +32,43 @@
               "treasure": true
             }
           ],
-          "name": "angelblock:diamithic_axe"
+          "name": "angelblock:diamithic_primary_axe"
         },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30.0,
+              "treasure": true
+            }
+          ],
+          "name": "angelblock:diamithic_primary_sword"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1.0,
+              "add": false
+            }
+          ],
+          "name": "minecraft:sculk_sensor"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.0,
+        "max": 1.0
+      },
+      "bonus_rolls": 0.0,
+      "entries":
+      [
         {
           "type": "minecraft:item",
           "weight": 1,
@@ -57,41 +92,6 @@
             }
           ],
           "name": "angelblock:diamithic_chestplate"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 1.0,
-              "add": false
-            }
-          ],
-          "name": "minecraft:sculk_sensor"
-        }
-      ]
-    },
-    {
-      "rolls": {
-        "type": "minecraft:uniform",
-        "min": 0.0,
-        "max": 1.0
-      },
-      "bonus_rolls": 1.0,
-      "entries":
-      [
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": 30.0,
-              "treasure": true
-            }
-          ],
-          "name": "angelblock:diamithic_sword"
         },
         {
           "type": "minecraft:item",
