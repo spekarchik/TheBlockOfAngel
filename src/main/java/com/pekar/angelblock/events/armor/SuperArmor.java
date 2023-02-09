@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
@@ -415,8 +416,9 @@ public class SuperArmor extends Armor
         boolean isSweetBerryBush = damageSource == DamageSource.SWEET_BERRY_BUSH;
         boolean isDragonBreath = damageSource == DamageSource.DRAGON_BREATH;
         boolean isLightning = damageSource == DamageSource.LIGHTNING_BOLT;
+        boolean isPufferFish = damageSource.getEntity() instanceof Pufferfish;
 
-        return isCactus || isSweetBerryBush || isDragonBreath || isLightning || damageSource.isMagic();
+        return isCactus || isSweetBerryBush || isDragonBreath || isLightning || damageSource.isMagic() || isPufferFish;
     }
 
     private int getLevitationAmplifier()

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
@@ -326,8 +327,9 @@ public class LimoniteArmor extends Armor
         boolean isCactus = damageSource == DamageSource.CACTUS;
         boolean isSweetBerryBush = damageSource == DamageSource.SWEET_BERRY_BUSH;
         boolean isLightning = damageSource == DamageSource.LIGHTNING_BOLT;
+        boolean isPufferFish = damageSource.getEntity() instanceof Pufferfish;
 
-        return isCactus || isSweetBerryBush || isLightning || damageSource.isMagic();
+        return isCactus || isSweetBerryBush || isLightning || damageSource.isMagic() || isPufferFish;
     }
 
     private boolean isLuckEffectAvailable(IPlayer player, IArmor armor)
