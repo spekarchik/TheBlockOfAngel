@@ -133,7 +133,9 @@ public class MarineRod extends AncientRod
     @Override
     protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
     {
-        if (detectorFlags.isAmethystFound())
+        if (detectorFlags.isDiamondOreFound())
+            new PlaySoundPacket(SoundType.DIAMOND_FOUND).sendToPlayer(player);
+        else if (detectorFlags.isAmethystFound())
             new PlaySoundPacket(SoundType.AMETHYST_FOUND).sendToPlayer(player);
         else if (detectorFlags.isShiftingOreFound())
             new PlaySoundPacket(SoundType.ORE_FOUND).sendToPlayer(player);
