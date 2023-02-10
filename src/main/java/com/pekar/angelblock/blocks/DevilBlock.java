@@ -4,6 +4,7 @@ import com.pekar.angelblock.blocks.tile_entities.DevilBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -15,7 +16,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
-public class DevilBlock extends Block implements EntityBlock
+public class DevilBlock extends ModBlockWithHoverText implements EntityBlock
 {
     public DevilBlock()
     {

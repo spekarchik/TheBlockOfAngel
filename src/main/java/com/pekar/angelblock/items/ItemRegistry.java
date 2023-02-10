@@ -6,9 +6,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ItemRegistry
 {
-    public static final RegistryObject<Item> OBSIDIAN_POWDER = Main.ITEMS.register("obsidian_powder", ModItem::new);
-    public static final RegistryObject<Item> ENDSTONE_POWDER = Main.ITEMS.register("endstone_powder", ModItem::new);
-    public static final RegistryObject<Item> DIAMOND_POWDER = Main.ITEMS.register("diamond_powder", ModItem::new);
+    public static final RegistryObject<Item> OBSIDIAN_POWDER = Main.ITEMS.register("obsidian_powder", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> ENDSTONE_POWDER = Main.ITEMS.register("endstone_powder", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> DIAMOND_POWDER = Main.ITEMS.register("diamond_powder", ModItemWithHoverText::new);
     public static final RegistryObject<Item> RENDELITHIC_POWDER = Main.ITEMS.register("rendelithic_powder", ModItem::new);
     public static final RegistryObject<Item> DIAMITHIC_POWDER = Main.ITEMS.register("diamithic_powder", ModItem::new);
     public static final RegistryObject<Item> LAPIS_POWDER = Main.ITEMS.register("lapis_powder", ModItem::new);
@@ -35,7 +35,7 @@ public class ItemRegistry
     public static final RegistryObject<Item> ENERGY_CRYSTAL = Main.ITEMS.register("energy_crystal", ModItem::new);
     public static final RegistryObject<Item> ARMOR_FIBER = Main.ITEMS.register("armor_fiber", ModItem::new);
     public static final RegistryObject<Item> ENERGY_FIBER = Main.ITEMS.register("energy_fiber", ModItem::new);
-    public static final RegistryObject<Item> BIOS_DIAMOND = Main.ITEMS.register("bios_diamond", ModItem::new);
+    public static final RegistryObject<Item> BIOS_DIAMOND = Main.ITEMS.register("bios_diamond", ModItemWithHoverText::new);
     public static final RegistryObject<Item> END_SAPPHIRE = Main.ITEMS.register("end_sapphire", ModItem::new);
     public static final RegistryObject<Item> FLAME_STONE = Main.ITEMS.register("flame_stone", ModItem::new);
     public static final RegistryObject<Item> MARINE_CRYSTAL = Main.ITEMS.register("marine_crystal", ModItem::new);

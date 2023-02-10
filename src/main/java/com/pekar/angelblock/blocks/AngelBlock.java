@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
-public class AngelBlock extends Block implements EntityBlock
+public class AngelBlock extends ModBlockWithHoverText implements EntityBlock
 {
     public AngelBlock()
     {
