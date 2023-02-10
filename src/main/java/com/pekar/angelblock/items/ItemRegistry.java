@@ -30,23 +30,23 @@ public class ItemRegistry
     public static final RegistryObject<Item> SUPER_PLATE = Main.ITEMS.register("super_plate", ModItem::new);
     public static final RegistryObject<Item> FLYING_PLATE = Main.ITEMS.register("flying_plate", ModItem::new);
 
-    public static final RegistryObject<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", ModItem::new);
-    public static final RegistryObject<Item> FLAX_FIBRE = Main.ITEMS.register("flax_fibre", ModItem::new);
+    public static final RegistryObject<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> FLAX_FIBRE = Main.ITEMS.register("flax_fibre", ModItemWithHoverText::new);
     public static final RegistryObject<Item> ENERGY_CRYSTAL = Main.ITEMS.register("energy_crystal", ModItem::new);
     public static final RegistryObject<Item> ARMOR_FIBER = Main.ITEMS.register("armor_fiber", ModItem::new);
     public static final RegistryObject<Item> ENERGY_FIBER = Main.ITEMS.register("energy_fiber", ModItem::new);
     public static final RegistryObject<Item> BIOS_DIAMOND = Main.ITEMS.register("bios_diamond", ModItemWithHoverText::new);
-    public static final RegistryObject<Item> END_SAPPHIRE = Main.ITEMS.register("end_sapphire", ModItem::new);
-    public static final RegistryObject<Item> FLAME_STONE = Main.ITEMS.register("flame_stone", ModItem::new);
-    public static final RegistryObject<Item> MARINE_CRYSTAL = Main.ITEMS.register("marine_crystal", ModItem::new);
-    public static final RegistryObject<Item> STRENGTH_PEARL = Main.ITEMS.register("strength_pearl", ModItem::new);
+    public static final RegistryObject<Item> END_SAPPHIRE = Main.ITEMS.register("end_sapphire", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> FLAME_STONE = Main.ITEMS.register("flame_stone", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> MARINE_CRYSTAL = Main.ITEMS.register("marine_crystal", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> STRENGTH_PEARL = Main.ITEMS.register("strength_pearl", ModItemWithHoverText::new);
     public static final RegistryObject<Item> SUPER_CRYSTAL = Main.ITEMS.register("super_crystal", ModItem::new);
-    public static final RegistryObject<Item> GUARDIAN_EYE = Main.ITEMS.register("guardian_eye", ModItem::new);
-    public static final RegistryObject<Item> MINER_FIGURE = Main.ITEMS.register("miner_figure", ModItem::new);
-    public static final RegistryObject<Item> ANCIENT_CANINE = Main.ITEMS.register("ancient_canine", ModItem::new);
-    public static final RegistryObject<Item> EVOKER_AMULET = Main.ITEMS.register("evoker_amulet", ModItem::new);
-    public static final RegistryObject<Item> NETHER_BARS = Main.ITEMS.register("nether_bars", ModItem::new);
-    public static final RegistryObject<Item> ANCIENT_SCROLL = Main.ITEMS.register("ancient_scroll", ModItem::new);
+    public static final RegistryObject<Item> GUARDIAN_EYE = Main.ITEMS.register("guardian_eye", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> MINER_FIGURE = Main.ITEMS.register("miner_figure", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> ANCIENT_CANINE = Main.ITEMS.register("ancient_canine", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> EVOKER_AMULET = Main.ITEMS.register("evoker_amulet", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> NETHER_BARS = Main.ITEMS.register("nether_bars", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> ANCIENT_SCROLL = Main.ITEMS.register("ancient_scroll", ModItemWithHoverText::new);
 
     public static void initStatic()
     {
