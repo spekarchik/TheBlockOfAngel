@@ -24,7 +24,7 @@ public class ModBlockWithHoverText extends Block
         components.add(getDisplayName().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
     }
 
-    public MutableComponent getDisplayName() {
+    private MutableComponent getDisplayName() {
         return Component.translatable(this.getDescriptionId() + ".desc");
     }
 }
