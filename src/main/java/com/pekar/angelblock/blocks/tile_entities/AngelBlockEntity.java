@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<AngelBlockEntity>
 {
+    private static final double EFFECTIVE_RADIUS = 70.0;
     private int counter;
 
     public AngelBlockEntity(BlockPos blockPos, BlockState blockState)
@@ -32,7 +33,7 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         if (level.isClientSide()) return;
 
         var monsters = level.getEntities((Entity)null,
-                blockEntity.getRenderBoundingBox().inflate(70.0),
+                blockEntity.getRenderBoundingBox().inflate(EFFECTIVE_RADIUS),
                 entity -> entity instanceof Enemy);
 
         for (Entity entity : monsters)

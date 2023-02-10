@@ -11,6 +11,9 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHandler
 {
+    private static final int EFFECTIVE_RADIUS = 70;
+    private static final int SQR_EFFECTIVE_RADIUS = EFFECTIVE_RADIUS * EFFECTIVE_RADIUS;
+
     public DevilBlockEntity(BlockPos blockPos, BlockState blockState)
     {
         super(EntityRegistry.DEVIL_BLOCK_ENTITY.get(), blockPos, blockState);
@@ -39,7 +42,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
         var pos = getPosition();
         double distance = entity.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
 
-        if (distance < 4900)
+        if (distance < SQR_EFFECTIVE_RADIUS)
         {
             entity.setHealth(entity.getMaxHealth());
             event.setCanceled(true);
