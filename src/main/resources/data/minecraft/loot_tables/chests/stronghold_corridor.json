@@ -45,18 +45,6 @@
             }
           ],
           "name": "angelblock:diamithic_primary_sword"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 1.0,
-              "add": false
-            }
-          ],
-          "name": "minecraft:sculk_sensor"
         }
       ]
     },
