@@ -13,16 +13,12 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 public class FlyingArmor extends Armor
 {
     private final SwitchingEffectSynchronizer jumpBoostEffect;
-    private final IArmorEffect slowFallingEffect;
-    private final IArmorEffect levitationTemporaryEffect;
     private final IArmorEffect levitationSwitchingEffect;
 
     public FlyingArmor(IPlayer player)
     {
         super(player);
 
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isSlowFallingEffectAvailable);
-        levitationTemporaryEffect = new LevitationTemporaryEffect(player, this, 1, 200).setupAvailability(this::isLevitationTemporaryEffectAvailable);
         levitationSwitchingEffect = new LevitationSwitchingEffect(player, this, 250).setupAvailability(this::isLevitationSwitchingEffectAvailable);
 
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
@@ -49,15 +45,10 @@ public class FlyingArmor extends Armor
     public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
     {
         jumpBoostEffect.updateSwitchState();
-        slowFallingEffect.updateSwitchState();
 
-        if (player.isOverworld())
+        if (!player.isNether())
         {
             levitationSwitchingEffect.updateSwitchState();
-        }
-        else if (player.isEnd())
-        {
-            levitationTemporaryEffect.updateSwitchState();
         }
     }
 
@@ -79,12 +70,9 @@ public class FlyingArmor extends Armor
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
         jumpBoostEffect.updateEffectAvailability();
-        slowFallingEffect.updateEffectAvailability();
-        levitationTemporaryEffect.updateEffectAvailability();
         levitationSwitchingEffect.updateEffectAvailability();
 
         levitationSwitchingEffect.updateSwitchState();
-        slowFallingEffect.trySwitchOn();
         updatePotionEffects();
     }
 
@@ -103,7 +91,7 @@ public class FlyingArmor extends Armor
     {
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
-            if (player.isOverworld())
+            if (!player.isNether())
             {
                 jumpBoostEffect.trySwitch();
             }
@@ -111,11 +99,7 @@ public class FlyingArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            if (player.isEnd())
-            {
-                levitationTemporaryEffect.trySwitch();
-            }
-            else if (player.isOverworld())
+            if (!player.isNether())
             {
                 levitationSwitchingEffect.trySwitch();
             }
@@ -131,11 +115,8 @@ public class FlyingArmor extends Armor
     public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
     {
         jumpBoostEffect.updateEffectAvailability();
-        slowFallingEffect.updateEffectAvailability();
-        levitationTemporaryEffect.updateEffectAvailability();
         levitationSwitchingEffect.updateEffectAvailability();
 
-        slowFallingEffect.trySwitchOn();
         updatePotionEffects();
     }
 
@@ -166,24 +147,12 @@ public class FlyingArmor extends Armor
     private void updatePotionEffects()
     {
         jumpBoostEffect.updateEffectActivity();
-        slowFallingEffect.updateEffectActivity();
-        levitationTemporaryEffect.updateEffectActivity();
         levitationSwitchingEffect.updateEffectActivity();
-    }
-
-    private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
-    {
-        return player.isEnd() && player.isFullArmorSetPutOn(this);
-    }
-
-    private boolean isLevitationTemporaryEffectAvailable(IPlayer player, IArmor armor)
-    {
-        return player.isEnd() && player.isFullArmorSetPutOn(this);
     }
 
     private boolean isLevitationSwitchingEffectAvailable(IPlayer player, IArmor armor)
     {
-        return player.isOverworld() && player.isFullArmorSetPutOn(this);
+        return !player.isNether() && player.isFullArmorSetPutOn(this);
     }
 
     private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)
@@ -196,7 +165,7 @@ public class FlyingArmor extends Armor
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
         int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
 
-        return player.isOverworld() && player.isFullArmorSetPutOn(this)
+        return !player.isNether() && player.isFullArmorSetPutOn(this)
                 && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
     }
 }
