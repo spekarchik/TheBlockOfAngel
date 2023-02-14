@@ -240,6 +240,12 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
         return this;
     }
 
+    @Override
+    public IArmorEffect showIcon()
+    {
+        return this;
+    }
+
     private void switchDependentEffects()
     {
         for (SwitchingArmorEffect effect : dependentEffects)

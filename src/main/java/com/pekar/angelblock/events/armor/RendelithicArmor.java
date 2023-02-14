@@ -16,7 +16,7 @@ public class RendelithicArmor extends Armor
 {
     private final IArmorEffect nauseaEffect;
     private final IArmorEffect slownessEffect;
-    private final IArmorEffect levitationEffect;
+    private final IArmorEffect slowFallingEffect;
     private final SwitchingEffectSynchronizer jumpEffect;
 
     private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 3;
@@ -27,7 +27,7 @@ public class RendelithicArmor extends Armor
         super(player);
         nauseaEffect = new NauseaTemporaryEffect(player, this, 200).availableOnAnyArmorElement();
         slownessEffect = new SlownessArmorEffect(player, this, 5, 400).availableOnAnyArmorElement();
-        levitationEffect = new LevitationSwitchingEffect(player, this, 1).setupAvailability(this::isLevitationAvailable);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isSlowFallingAvailable).showIcon();
 
         JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
@@ -40,7 +40,7 @@ public class RendelithicArmor extends Armor
     public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
     {
         jumpEffect.updateSwitchState();
-        levitationEffect.updateSwitchState();
+        slowFallingEffect.updateSwitchState();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class RendelithicArmor extends Armor
         jumpEffect.updateEffectAvailability();
         nauseaEffect.updateEffectAvailability();
         slownessEffect.updateEffectAvailability();
-        levitationEffect.updateEffectAvailability();
+        slowFallingEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -119,11 +119,11 @@ public class RendelithicArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            if (levitationEffect.isEffectAvailable())
+            if (slowFallingEffect.isEffectAvailable())
             {
-                if (!slownessEffect.isActive() || levitationEffect.isEffectOn())
+                if (!slownessEffect.isActive() || slowFallingEffect.isEffectOn())
                 {
-                    levitationEffect.trySwitch();
+                    slowFallingEffect.trySwitch();
                 }
             }
         }
@@ -186,7 +186,7 @@ public class RendelithicArmor extends Armor
 
         if (!slownessEffect.isActive())
         {
-            levitationEffect.updateEffectActivity();
+            slowFallingEffect.updateEffectActivity();
         }
     }
 
@@ -219,9 +219,9 @@ public class RendelithicArmor extends Armor
             {
                 nauseaEffect.trySwitch();
                 slownessEffect.trySwitch();
-                if (levitationEffect.isEffectOn())
+                if (slowFallingEffect.isEffectOn())
                 {
-                    levitationEffect.trySwitchOff();
+                    slowFallingEffect.trySwitchOff();
                 }
             }
         }
@@ -245,7 +245,7 @@ public class RendelithicArmor extends Armor
         return isDamagedByInFire || isDamagedByLava || isDamagedByOnFire;
     }
 
-    private boolean isLevitationAvailable(IPlayer player, IArmor armor)
+    private boolean isSlowFallingAvailable(IPlayer player, IArmor armor)
     {
         return player.isFullArmorSetPutOn(armor) && player.isArmorModifiedWithLevitation(armor);
     }

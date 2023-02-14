@@ -33,6 +33,7 @@ public interface IArmorEffect
     IArmorEffect availableOnAnyArmorElement();
     IArmorEffect availableIfSlotSet(EquipmentSlot slot);
     IArmorEffect availableIfSlotsSet(EquipmentSlot ...slot);
+    IArmorEffect showIcon();
 
     MobEffect getEffect();
 }
