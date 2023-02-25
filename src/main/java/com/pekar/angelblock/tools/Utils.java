@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 
 import java.util.Random;
 
@@ -115,6 +116,12 @@ public class Utils
     {
         return level.isWaterAt(pos.east()) || level.isWaterAt(pos.west()) || level.isWaterAt(pos.north())
                 || level.isWaterAt(pos.south());
+    }
+
+    public static boolean isAboveWaterBlock(Level level, BlockPos pos)
+    {
+        var belowPos = pos.below();
+        return level.isWaterAt(belowPos) && level.getFluidState(belowPos).getAmount() < FluidState.AMOUNT_FULL;
     }
 
     public static boolean isFallSafeWide(LivingEntity entityPlayer, BlockPos pos)

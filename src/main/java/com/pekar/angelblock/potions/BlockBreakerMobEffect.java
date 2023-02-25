@@ -74,7 +74,7 @@ public class BlockBreakerMobEffect extends MobEffect
         {
             level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);
         }
-        else if (block == Blocks.WATER)
+        else if (block == Blocks.WATER && Utils.isAboveWaterBlock(level, pos))
         {
             level.setBlock(pos, Blocks.ICE.defaultBlockState(), 11);
         }
