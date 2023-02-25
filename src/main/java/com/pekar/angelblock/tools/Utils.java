@@ -121,7 +121,7 @@ public class Utils
     public static boolean isAboveWaterBlock(Level level, BlockPos pos)
     {
         var belowPos = pos.below();
-        return level.isWaterAt(belowPos) && level.getFluidState(belowPos).getAmount() < FluidState.AMOUNT_FULL;
+        return level.isWaterAt(belowPos) && level.getFluidState(belowPos).getAmount() == FluidState.AMOUNT_FULL;
     }
 
     public static boolean isFallSafeWide(LivingEntity entityPlayer, BlockPos pos)
