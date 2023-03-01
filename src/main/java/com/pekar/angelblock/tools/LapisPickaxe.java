@@ -4,7 +4,6 @@ import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -34,18 +33,6 @@ public class LapisPickaxe extends ModPickaxe
 
         BlockState blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
-
-        if (isToolEffective(player, pos) && !materialProperties.isSafeToBreak(player, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
-        {
-            level.destroyBlock(pos, true);
-
-            if (blockState.getDestroySpeed(level, pos) != 0.0F)
-            {
-                damageItem(1, player);
-            }
-
-            return InteractionResult.CONSUME;
-        }
 
         if (block == BlockRegistry.CRACKED_OBSIDIAN.get())
         {

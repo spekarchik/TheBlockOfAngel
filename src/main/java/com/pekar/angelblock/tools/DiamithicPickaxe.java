@@ -2,13 +2,10 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tools.properties.DiamithicMaterialProperties;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -17,34 +14,6 @@ public class DiamithicPickaxe extends ModPickaxe
     public DiamithicPickaxe(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties, new DiamithicMaterialProperties());
-    }
-
-    @Override
-    public InteractionResult useOn(UseOnContext context)
-    {
-        var player = context.getPlayer();
-        var level = player.level;
-
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
-
-        var pos = context.getClickedPos();
-
-        BlockState blockState = level.getBlockState(pos);
-
-        if (isToolEffective(player, pos) && !materialProperties.isSafeToBreak(player, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
-        {
-            level.destroyBlock(pos, true);
-
-            if (blockState.getDestroySpeed(level, pos) != 0.0F)
-            {
-                damageItem(1, player);
-            }
-
-            return InteractionResult.CONSUME;
-        }
-
-        return super.useOn(context);
     }
 
     @Override
