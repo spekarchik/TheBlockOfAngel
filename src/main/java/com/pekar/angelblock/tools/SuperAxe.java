@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tools.properties.SuperAxeProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,13 +15,13 @@ public class SuperAxe extends ModAxe
 {
     public SuperAxe(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, attackDamage, attackSpeed, properties, new SuperAxeProperties());
     }
 
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (isToolEffective(player.level, pos) && Utils.isNearLavaOrWaterOrUnsafeOrStandingOnBreakingBlock(player, pos)) return true;
+        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
@@ -50,7 +51,7 @@ public class SuperAxe extends ModAxe
         BlockState blockState = level.getBlockState(pos);
         float hardness = blockState.getBlock().defaultDestroyTime();
 
-        if (hardness <= initialHardness && isToolEffective(level, pos) && !Utils.isNearLavaOrWaterOrUnsafeOrStandingOnBreakingBlock(entityLiving, pos))
+        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
         {
             level.destroyBlock(pos, true);
             damageItem(1, entityLiving);
@@ -60,7 +61,7 @@ public class SuperAxe extends ModAxe
     @Override
     protected void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -72,13 +73,13 @@ public class SuperAxe extends ModAxe
             return;
 
         int increment = 1;
-        while (canProceed(level, pos.above(increment)))
+        while (canProceed(entityLiving, pos.above(increment)))
         {
             onBlockDropping(level, blockState, initialHardness, pos.above(increment++), entityLiving);
         }
 
         increment = 1;
-        while (canProceed(level, pos.below(increment)))
+        while (canProceed(entityLiving, pos.below(increment)))
         {
             onBlockDropping(level, blockState, initialHardness, pos.below(increment++), entityLiving);
         }
@@ -86,8 +87,8 @@ public class SuperAxe extends ModAxe
         super.dropAdditionalBlocks(level, pos, entityLiving);
     }
 
-    private boolean canProceed(Level level, BlockPos pos)
+    private boolean canProceed(LivingEntity entityLiving, BlockPos pos)
     {
-        return !level.isEmptyBlock(pos) && isToolEffective(level, pos);
+        return !entityLiving.level.isEmptyBlock(pos) && isToolEffective(entityLiving, pos);
     }
 }

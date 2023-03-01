@@ -3,6 +3,8 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
+import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,9 +25,17 @@ import net.minecraft.world.level.material.Material;
 
 public class ModShovel extends ShovelItem implements IModTool
 {
-    public ModShovel(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    protected final IMaterialProperties materialProperties;
+
+    public static ModShovel createPrimary(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    {
+        return new ModShovel(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
+    }
+
+    public ModShovel(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
         super(material, attackDamage, attackSpeed, properties);
+        this.materialProperties = materialProperties;
     }
 
     @Override
@@ -52,7 +62,7 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected final void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -148,10 +158,10 @@ public class ModShovel extends ShovelItem implements IModTool
         }
     }
 
-    protected final boolean isToolEffective(Level level, BlockPos pos)
+    protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
     {
-        BlockState blockState = level.getBlockState(pos);
-        return isCorrectToolForDrops(null, blockState);
+        BlockState blockState = entityLiving.level.getBlockState(pos);
+        return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 
     protected void onBlockDropping(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
@@ -187,5 +197,10 @@ public class ModShovel extends ShovelItem implements IModTool
     {
         player.level.setBlock(pos, block.defaultBlockState(), 11);
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+    }
+
+    protected boolean canPreventBlockDropping(LivingEntity entity, BlockPos pos)
+    {
+        return isToolEffective(entity, pos);
     }
 }

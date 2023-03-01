@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.tools.properties.SuperMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
@@ -17,7 +18,7 @@ public class SuperShovel extends ModShovel
 {
     public SuperShovel(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, attackDamage, attackSpeed, properties, new SuperMaterialProperties());
     }
 
     @Override
@@ -32,7 +33,7 @@ public class SuperShovel extends ModShovel
             BlockState blockState = level.getBlockState(pos);
             var block = blockState.getBlock();
 
-            if (isToolEffective(level, pos) && Utils.isNearLavaOrWaterOrUnsafe(player, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
+            if (isToolEffective(player, pos) && Utils.isNearLavaOrWaterOrUnsafe(player, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
             {
                 level.destroyBlock(pos, true);
 
@@ -76,7 +77,7 @@ public class SuperShovel extends ModShovel
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (isToolEffective(player.level, pos) && Utils.isNearLavaOrWaterOrUnsafe(player, pos)) return true;
+        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
@@ -99,7 +100,7 @@ public class SuperShovel extends ModShovel
         BlockState blockState = level.getBlockState(pos);
         float hardness = blockState.getBlock().defaultDestroyTime();
 
-        if (hardness <= initialHardness && isToolEffective(level, pos) && !Utils.isNearLavaOrWaterOrUnsafe(entityLiving, pos))
+        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
         {
             level.destroyBlock(pos, true);
             damageItem(1, entityLiving);

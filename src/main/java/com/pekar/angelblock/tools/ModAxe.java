@@ -1,6 +1,8 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
+import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,14 +16,22 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ModAxe extends AxeItem implements IModTool
 {
-    public ModAxe(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    protected final IMaterialProperties materialProperties;
+
+    public static ModAxe createPrimary(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    {
+        return new ModAxe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
+    }
+
+    public ModAxe(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
         super(material, attackDamage, attackSpeed, properties);
+        this.materialProperties = materialProperties;
     }
 
     protected void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -43,10 +53,10 @@ public class ModAxe extends AxeItem implements IModTool
                 }
     }
 
-    protected final boolean isToolEffective(Level level, BlockPos pos)
+    protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
     {
-        BlockState blockState = level.getBlockState(pos);
-        return isCorrectToolForDrops(null, blockState);
+        BlockState blockState = entityLiving.level.getBlockState(pos);
+        return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 
     protected void onBlockDropping(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
@@ -76,5 +86,10 @@ public class ModAxe extends AxeItem implements IModTool
     public boolean isEnhancedRod()
     {
         return false;
+    }
+
+    protected boolean canPreventBlockDropping(LivingEntity entity, BlockPos pos)
+    {
+        return isToolEffective(entity, pos);
     }
 }

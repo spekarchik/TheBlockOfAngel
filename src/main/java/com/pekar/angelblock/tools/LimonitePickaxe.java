@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tools.properties.LimoniteMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
@@ -17,7 +18,7 @@ public class LimonitePickaxe extends ModPickaxe
 {
     public LimonitePickaxe(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, attackDamage, attackSpeed, properties, new LimoniteMaterialProperties());
     }
 
     @Override
@@ -45,7 +46,7 @@ public class LimonitePickaxe extends ModPickaxe
             return InteractionResult.CONSUME;
         }
 
-        if (isToolEffective(level, pos) && !Utils.isFallSafeExact(player, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
+        if (isToolEffective(player, pos) && !Utils.isFallSafeExact(player, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
         {
             level.destroyBlock(pos, true);
 
@@ -63,7 +64,7 @@ public class LimonitePickaxe extends ModPickaxe
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (isToolEffective(player.level, pos) && !Utils.isFallSafeExact(player, pos)) return true;
+        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
@@ -86,7 +87,7 @@ public class LimonitePickaxe extends ModPickaxe
         BlockState blockState = level.getBlockState(pos);
         float hardness = blockState.getBlock().defaultDestroyTime();
 
-        if (hardness <= initialHardness && isToolEffective(level, pos) && Utils.isFallSafeExact(entityLiving, pos))
+        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
         {
             level.destroyBlock(pos, true);
             damageItem(1, entityLiving);

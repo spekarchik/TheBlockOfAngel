@@ -3,6 +3,8 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
+import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,15 +21,22 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ModPickaxe extends PickaxeItem implements IModTool
 {
+    protected final IMaterialProperties materialProperties;
 
-    public ModPickaxe(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public static ModPickaxe createPrimary(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    {
+        return new ModPickaxe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
+    }
+
+    public ModPickaxe(Tier material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
         super(material, attackDamage, attackSpeed, properties);
+        this.materialProperties = materialProperties;
     }
 
     protected final void processAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -65,10 +74,10 @@ public class ModPickaxe extends PickaxeItem implements IModTool
                 }
     }
 
-    protected final boolean isToolEffective(Level level, BlockPos pos)
+    protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
     {
-        BlockState blockState = level.getBlockState(pos);
-        return isCorrectToolForDrops(null, blockState);
+        BlockState blockState = entityLiving.level.getBlockState(pos);
+        return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 
     protected void onBlockProcessing(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
@@ -104,5 +113,10 @@ public class ModPickaxe extends PickaxeItem implements IModTool
     {
         player.level.setBlock(pos, block.defaultBlockState(), 11);
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+    }
+
+    protected boolean canPreventBlockDropping(LivingEntity entity, BlockPos pos)
+    {
+        return isToolEffective(entity, pos);
     }
 }

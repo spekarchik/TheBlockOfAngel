@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.tools.properties.RendelithicMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
@@ -18,7 +19,7 @@ public class RendelithicPickaxe extends ModPickaxe
 {
     public RendelithicPickaxe(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, attackDamage, attackSpeed, properties, new RendelithicMaterialProperties());
     }
 
     @Override
@@ -35,7 +36,7 @@ public class RendelithicPickaxe extends ModPickaxe
         BlockState blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
 
-        if (isToolEffective(level, pos) && Utils.isNearLava(level, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
+        if (isToolEffective(player, pos) && Utils.isNearLava(level, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
         {
             level.destroyBlock(pos, true);
 
@@ -59,7 +60,7 @@ public class RendelithicPickaxe extends ModPickaxe
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (isToolEffective(player.level, pos) && Utils.isNearLava(player.level, pos)) return true;
+        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
@@ -82,7 +83,7 @@ public class RendelithicPickaxe extends ModPickaxe
         BlockState blockState = level.getBlockState(pos);
         float hardness = blockState.getBlock().defaultDestroyTime();
 
-        if (hardness <= initialHardness && isToolEffective(level, pos) && !Utils.isNearLava(level, pos))
+        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
         {
             level.destroyBlock(pos, true);
             damageItem(1, entityLiving);

@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tools.properties.DiamithicMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -12,13 +13,13 @@ public class DiamithicAxe extends ModAxe
 {
     public DiamithicAxe(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, attackDamage, attackSpeed, properties, new DiamithicMaterialProperties());
     }
 
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (isToolEffective(player.level, pos) && !Utils.isFallSafeWide(player, pos)) return true;
+        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
@@ -41,7 +42,7 @@ public class DiamithicAxe extends ModAxe
         BlockState blockState = level.getBlockState(pos);
         float hardness = blockState.getBlock().defaultDestroyTime();
 
-        if (hardness <= initialHardness && isToolEffective(level, pos) && Utils.isFallSafeWide(entityLiving, pos))
+        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
         {
             level.destroyBlock(pos, true);
             damageItem(1, entityLiving);

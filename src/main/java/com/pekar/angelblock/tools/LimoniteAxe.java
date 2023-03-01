@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tools.properties.LimoniteAxeProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,13 +15,13 @@ public class LimoniteAxe extends ModAxe
 {
     public LimoniteAxe(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, attackDamage, attackSpeed, properties, new LimoniteAxeProperties());
     }
 
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (isToolEffective(player.level, pos) && Utils.isStandingOnBreakingBlock(player, pos)) return true;
+        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
@@ -50,7 +51,7 @@ public class LimoniteAxe extends ModAxe
         BlockState blockState = level.getBlockState(pos);
         float hardness = blockState.getBlock().defaultDestroyTime();
 
-        if (hardness <= initialHardness && isToolEffective(level, pos) && Utils.isFallSafeExact(entityLiving, pos))
+        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
         {
             level.destroyBlock(pos, true);
             damageItem(1, entityLiving);
@@ -60,7 +61,7 @@ public class LimoniteAxe extends ModAxe
     @Override
     protected void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(level, pos)) return;
+        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -72,20 +73,20 @@ public class LimoniteAxe extends ModAxe
             return;
 
         int increment = 1;
-        while (canProceed(level, pos.above(increment)))
+        while (canProceed(entityLiving, pos.above(increment)))
         {
             onBlockDropping(level, blockState, initialHardness, pos.above(increment++), entityLiving);
         }
 
         increment = 1;
-        while (canProceed(level, pos.below(increment)))
+        while (canProceed(entityLiving, pos.below(increment)))
         {
             onBlockDropping(level, blockState, initialHardness, pos.below(increment++), entityLiving);
         }
     }
 
-    private boolean canProceed(Level level, BlockPos pos)
+    private boolean canProceed(LivingEntity entityLiving, BlockPos pos)
     {
-        return !level.isEmptyBlock(pos) && isToolEffective(level, pos);
+        return !entityLiving.level.isEmptyBlock(pos) && isToolEffective(entityLiving, pos);
     }
 }

@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
@@ -16,7 +17,7 @@ public class LapisShovel extends ModShovel
 {
     public LapisShovel(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, attackDamage, attackSpeed, properties, new LapisMaterialProperties());
     }
 
     @Override
@@ -31,7 +32,7 @@ public class LapisShovel extends ModShovel
             BlockState blockState = level.getBlockState(pos);
             var block = blockState.getBlock();
 
-            if (isToolEffective(level, pos) && Utils.isNearWater(level, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
+            if (isToolEffective(player, pos) && Utils.isNearWater(level, pos) && !player.hasEffect(MobEffects.DIG_SLOWDOWN))
             {
                 level.destroyBlock(pos, true);
 
@@ -69,7 +70,7 @@ public class LapisShovel extends ModShovel
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (isToolEffective(player.level, pos) && Utils.isNearWater(player.level, pos)) return true;
+        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
@@ -92,7 +93,7 @@ public class LapisShovel extends ModShovel
         BlockState blockState = level.getBlockState(pos);
         float hardness = blockState.getBlock().defaultDestroyTime();
 
-        if (hardness <= initialHardness && isToolEffective(level, pos) && !Utils.isNearWater(level, pos))
+        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
         {
             level.destroyBlock(pos, true);
             damageItem(1, entityLiving);
