@@ -84,7 +84,8 @@ public class SuperShovel extends ModShovel
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        dropAdditionalBlocks(level, pos, livingEntity);
+        if (!level.isClientSide)
+            dropAdditionalBlocks(level, pos, livingEntity);
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 

@@ -72,7 +72,8 @@ public class LapisPickaxe extends ModPickaxe
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        processAdditionalBlocks(level, pos, livingEntity);
+        if (!level.isClientSide)
+            processAdditionalBlocks(level, pos, livingEntity);
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
