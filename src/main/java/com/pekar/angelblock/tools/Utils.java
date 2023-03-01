@@ -140,11 +140,7 @@ public class Utils
 
     public static boolean isFallSafeExact(LivingEntity entityPlayer, BlockPos pos)
     {
-        BlockPos playerPos = entityPlayer.blockPosition();
-
-        if (playerPos.getY() != pos.getY() + 1
-                || playerPos.getX() != pos.getX()
-                || playerPos.getZ() != pos.getZ())
+        if (!isStandingOnBreakingBlock(entityPlayer, pos))
         {
             return true;
         }
