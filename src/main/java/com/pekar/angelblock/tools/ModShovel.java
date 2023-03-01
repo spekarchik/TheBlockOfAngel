@@ -102,7 +102,7 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected final void transformAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
     {
-        if (!isEnhancedTool()) return;
+        if (level.isClientSide || !isEnhancedTool() || facing != Direction.UP) return;
 
         if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
