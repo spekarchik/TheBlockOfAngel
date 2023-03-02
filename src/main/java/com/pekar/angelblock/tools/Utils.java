@@ -112,7 +112,7 @@ public class Utils
         return false;
     }
 
-    public static boolean isNearWaterHorizoltal(Level level, BlockPos pos)
+    public static boolean isNearWaterHorizontal(Level level, BlockPos pos)
     {
         return level.isWaterAt(pos.east()) || level.isWaterAt(pos.west()) || level.isWaterAt(pos.north())
                 || level.isWaterAt(pos.south());

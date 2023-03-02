@@ -98,7 +98,7 @@ public class AncientRod extends MagneticRod
 
             if (facing == Direction.UP)
             {
-                if (Utils.isNearWaterHorizoltal(level, pos) && (block == Blocks.DIRT || block == Blocks.COARSE_DIRT
+                if (Utils.isNearWaterHorizontal(level, pos) && (block == Blocks.DIRT || block == Blocks.COARSE_DIRT
                         || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || block instanceof SandBlock
                         || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM))
                 {

@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -106,7 +105,7 @@ public class MarineRod extends AncientRod
                 return plant(player, level, pos, hand, facing, Blocks.BAMBOO);
             }
 
-            if (Utils.isNearWaterHorizoltal(level, pos) && block == Blocks.CLAY)
+            if (Utils.isNearWaterHorizontal(level, pos) && block == Blocks.CLAY)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
                 return plant(player, level, pos, hand, facing, Blocks.SMALL_DRIPLEAF);

@@ -110,7 +110,7 @@ public class BlockBreakerMobEffect extends MobEffect
         {
             level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 11);
         }
-        else if (block == Blocks.SAND && Utils.isNearWaterHorizoltal(level, pos))
+        else if (block == Blocks.SAND && Utils.isNearWaterHorizontal(level, pos))
         {
             level.setBlock(pos, Blocks.CLAY.defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
