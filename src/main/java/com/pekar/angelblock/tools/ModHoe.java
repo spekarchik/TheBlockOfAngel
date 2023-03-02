@@ -8,10 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -89,7 +86,7 @@ public class ModHoe extends HoeItem implements IModTool
     protected final boolean canUseToolEffect(Player player)
     {
         ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
-        return itemstack.isEmpty() || itemstack.getItem() == Items.TOTEM_OF_UNDYING;
+        return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
     }
 
     protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)

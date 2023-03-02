@@ -166,7 +166,7 @@ public class ModSword extends SwordItem implements IModTool
     protected final boolean canUseToolEffect(Player player)
     {
         ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
-        return itemstack.isEmpty() || itemstack.getItem() == Items.TOTEM_OF_UNDYING;
+        return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
     }
 
     private boolean tryPlantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
