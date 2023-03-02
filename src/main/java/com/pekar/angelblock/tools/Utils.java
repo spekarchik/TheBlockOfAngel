@@ -5,9 +5,12 @@ import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -18,7 +21,7 @@ import java.util.Random;
 
 public class Utils
 {
-    private Utils()
+    Utils()
     {}
 
     public static Random random = new Random();
@@ -347,7 +350,24 @@ public class Utils
         return dimension.location().equals(Level.END.location());
     }
 
-    public static void setBlock(Player player, BlockPos pos, Block block)
+    public boolean destroyBlockByMainHandTool(Level level, BlockPos pos, LivingEntity entityLiving, BlockState blockState, Block block)
+    {
+        var mainHandItemStack = entityLiving.getMainHandItem();
+        block.playerDestroy(level, (Player) entityLiving, pos, blockState, null, mainHandItemStack);
+        if (mainHandItemStack.getItem() instanceof DiggerItem tool)
+        {
+            int fortuneLevel = tool.getEnchantmentLevel(mainHandItemStack, Enchantments.BLOCK_FORTUNE);
+            int silkTouchLevel = tool.getEnchantmentLevel(mainHandItemStack, Enchantments.SILK_TOUCH);
+            int exp = blockState.getExpDrop(level, level.random, pos, fortuneLevel, silkTouchLevel);
+            block.popExperience((ServerLevel) level, pos, exp);
+            level.removeBlock(pos, true);
+            return true;
+        }
+
+        return false;
+    }
+
+    private static void setBlock(Player player, BlockPos pos, Block block)
     {
         player.level.setBlock(pos, block.defaultBlockState(), 11);
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
