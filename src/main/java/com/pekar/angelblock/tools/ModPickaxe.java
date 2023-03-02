@@ -92,14 +92,9 @@ public class ModPickaxe extends PickaxeItem implements IModTool
 
         if (hardness <= originHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
         {
-            destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block);
+            if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+                damageItem(1, entityLiving);
         }
-    }
-
-    protected void destroyBlockByMainHandTool(Level level, BlockPos pos, LivingEntity entityLiving, BlockState blockState, Block block)
-    {
-        if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
-            damageItem(1, entityLiving);
     }
 
     protected final boolean canUseToolEffect(Player player)
