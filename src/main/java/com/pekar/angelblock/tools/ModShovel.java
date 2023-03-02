@@ -23,6 +23,7 @@ import net.minecraft.world.level.material.Material;
 public class ModShovel extends ShovelItem implements IModTool
 {
     protected final IMaterialProperties materialProperties;
+    protected final Utils utils = new Utils();
 
     public static ModShovel createPrimary(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
@@ -65,9 +66,9 @@ public class ModShovel extends ShovelItem implements IModTool
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        float initialHardness = blockState.getBlock().defaultDestroyTime();
+        float originHardness = blockState.getBlock().defaultDestroyTime();
 
-        if (initialHardness == 0.0F)
+        if (originHardness == 0.0F)
             return;
 
         var facing = Utils.getDirectionForShovel(entityLiving, pos);
@@ -93,7 +94,7 @@ public class ModShovel extends ShovelItem implements IModTool
                 for (int z = posZ - c; z <= posZ + c; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockDropping(level, blockState, initialHardness, new BlockPos(x, y, z), entityLiving);
+                    onBlockDropping(level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
@@ -161,9 +162,20 @@ public class ModShovel extends ShovelItem implements IModTool
         return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 
-    protected void onBlockDropping(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
+    protected void onBlockDropping(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
-        // nothing by default
+        var blockState = level.getBlockState(pos);
+
+        if (blockState.hasBlockEntity()) return;
+
+        var block = blockState.getBlock();
+        float hardness = block.defaultDestroyTime();
+
+        if (hardness <= originHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
+        {
+            if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+                damageItem(1, entityLiving);
+        }
     }
 
     protected final boolean canUseToolEffect(Player player)
