@@ -47,19 +47,6 @@ public class SuperAxe extends ModAxe
     }
 
     @Override
-    protected void onBlockDropping(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
-    {
-        BlockState blockState = level.getBlockState(pos);
-        float hardness = blockState.getBlock().defaultDestroyTime();
-
-        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
-        {
-            level.destroyBlock(pos, true);
-            damageItem(1, entityLiving);
-        }
-    }
-
-    @Override
     protected void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
