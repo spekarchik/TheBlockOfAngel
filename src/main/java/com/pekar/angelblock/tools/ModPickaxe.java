@@ -35,7 +35,7 @@ public class ModPickaxe extends PickaxeItem implements IModTool
         this.materialProperties = materialProperties;
     }
 
-    protected final void processAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
+    protected final void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
 
@@ -71,7 +71,7 @@ public class ModPickaxe extends PickaxeItem implements IModTool
                 for (int z = posZ - c; z <= posZ + c; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockProcessing(level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
+                    onBlockMining(level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
@@ -81,7 +81,7 @@ public class ModPickaxe extends PickaxeItem implements IModTool
         return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 
-    protected void onBlockProcessing(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
+    protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
 

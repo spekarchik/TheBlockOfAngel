@@ -58,7 +58,7 @@ public class ModShovel extends ShovelItem implements IModTool
         return super.useOn(context);
     }
 
-    protected final void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
+    protected final void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
 
@@ -94,7 +94,7 @@ public class ModShovel extends ShovelItem implements IModTool
                 for (int z = posZ - c; z <= posZ + c; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockDropping(level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
+                    onBlockMining(level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
@@ -162,7 +162,7 @@ public class ModShovel extends ShovelItem implements IModTool
         return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 
-    protected void onBlockDropping(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
+    protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
 

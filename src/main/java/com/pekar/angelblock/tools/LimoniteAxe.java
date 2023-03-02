@@ -29,7 +29,7 @@ public class LimoniteAxe extends ModAxe
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
         if (!level.isClientSide)
-            dropAdditionalBlocks(level, pos, livingEntity);
+            mineAdditionalBlocks(level, pos, livingEntity);
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
@@ -47,7 +47,7 @@ public class LimoniteAxe extends ModAxe
     }
 
     @Override
-    protected void dropAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
+    protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
 
@@ -63,13 +63,13 @@ public class LimoniteAxe extends ModAxe
         int increment = 1;
         while (canProceed(entityLiving, pos.above(increment)))
         {
-            onBlockDropping(level, blockState, initialHardness, pos.above(increment++), entityLiving);
+            onBlockMining(level, blockState, initialHardness, pos.above(increment++), entityLiving);
         }
 
         increment = 1;
         while (canProceed(entityLiving, pos.below(increment)))
         {
-            onBlockDropping(level, blockState, initialHardness, pos.below(increment++), entityLiving);
+            onBlockMining(level, blockState, initialHardness, pos.below(increment++), entityLiving);
         }
     }
 

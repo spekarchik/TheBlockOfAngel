@@ -62,7 +62,7 @@ public class RendelithicShovel extends ModShovel
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
         if (!level.isClientSide)
-            dropAdditionalBlocks(level, pos, livingEntity);
+            mineAdditionalBlocks(level, pos, livingEntity);
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
