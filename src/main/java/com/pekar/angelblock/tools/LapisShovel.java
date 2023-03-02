@@ -26,24 +26,6 @@ public class LapisShovel extends ModShovel
         var level = player.level;
         var pos = context.getClickedPos();
 
-        if (!level.isClientSide && canUseToolEffect(player))
-        {
-            BlockState blockState = level.getBlockState(pos);
-            var block = blockState.getBlock();
-
-            if (block == BlockRegistry.CRACKED_ENDSTONE.get())
-            {
-                level.destroyBlock(pos, true, player);
-
-                if (blockState.getDestroySpeed(level, pos) != 0.0F)
-                {
-                    damageItem(1, player);
-                }
-
-                return InteractionResult.CONSUME;
-            }
-        }
-
         InteractionResult result = super.useOn(context);
 
         if (result.shouldAwardStats())

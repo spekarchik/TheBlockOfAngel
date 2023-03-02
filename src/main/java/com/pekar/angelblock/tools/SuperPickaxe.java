@@ -42,18 +42,6 @@ public class SuperPickaxe extends ModPickaxe
             return InteractionResult.CONSUME;
         }
 
-        if (block == BlockRegistry.CRACKED_OBSIDIAN.get())
-        {
-            level.destroyBlock(pos, true, player);
-
-            if (blockState.getDestroySpeed(level, pos) != 0.0F)
-            {
-                damageItem(1, player);
-            }
-
-            return InteractionResult.CONSUME;
-        }
-
         if (block instanceof InfestedBlock infestedBlock)
         {
             setBlock(player, pos, infestedBlock.getHostBlock());

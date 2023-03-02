@@ -21,35 +21,6 @@ public class LapisPickaxe extends ModPickaxe
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context)
-    {
-        var player = context.getPlayer();
-        var level = player.level;
-
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
-
-        var pos = context.getClickedPos();
-
-        BlockState blockState = level.getBlockState(pos);
-        Block block = blockState.getBlock();
-
-        if (block == BlockRegistry.CRACKED_OBSIDIAN.get())
-        {
-            level.destroyBlock(pos, true, player);
-
-            if (blockState.getDestroySpeed(level, pos) != 0.0F)
-            {
-                damageItem(1, player);
-            }
-
-            return InteractionResult.CONSUME;
-        }
-
-        return super.useOn(context);
-    }
-
-    @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
         if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;

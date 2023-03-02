@@ -32,18 +32,6 @@ public class SuperShovel extends ModShovel
             BlockState blockState = level.getBlockState(pos);
             var block = blockState.getBlock();
 
-            if (block == BlockRegistry.CRACKED_ENDSTONE.get())
-            {
-                level.destroyBlock(pos, true, player);
-
-                if (blockState.getDestroySpeed(level, pos) != 0.0F)
-                {
-                    damageItem(1, player);
-                }
-
-                return InteractionResult.CONSUME;
-            }
-
             if (block == Blocks.END_STONE)
             {
                 setBlock(player, pos, BlockRegistry.CRACKED_ENDSTONE.get());
