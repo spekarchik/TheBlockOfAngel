@@ -9,9 +9,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -33,6 +35,49 @@ public class ModHoe extends HoeItem implements IModTool
     {
         super(material, attackDamage, attackSpeed, properties);
         this.materialProperties = materialProperties;
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context)
+    {
+        var player = context.getPlayer();
+        var level = player.level;
+
+        var result = super.useOn(context);
+        if (result == InteractionResult.FAIL) return result;
+
+        if (level.isClientSide) return result;
+        if (!canUseToolEffect(player)) return result;
+
+        var pos = context.getClickedPos();
+        BlockState blockState = level.getBlockState(pos);
+        BlockPos upPos = pos.above();
+
+        if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
+                && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
+                || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
+        {
+            level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
+            new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
+
+            damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
+
+            if (!updateNeighbors(level, upPos))
+            {
+                return InteractionResult.FAIL;
+            }
+
+            return InteractionResult.CONSUME;
+        }
+        else
+        {
+            if (level.isEmptyBlock(upPos) && context.getClickedFace() == Direction.UP)
+                changePodzolToDirt(player, level, pos);
+
+            if (isEnhancedTool())
+                processAdditionalBlocks(player, level, pos, context.getClickedFace());
+            return InteractionResult.CONSUME;
+        }
     }
 
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
@@ -164,6 +209,18 @@ public class ModHoe extends HoeItem implements IModTool
         var block = level.getBlockState(pos).getBlock();
         return block == Blocks.FARMLAND || canBeFarmland(block) || block instanceof SandBlock
                 || block == Blocks.GRAVEL || level.isWaterAt(pos);
+    }
+
+    protected void changePodzolToDirt(Player player, Level level, BlockPos pos)
+    {
+        var blockState = level.getBlockState(pos);
+        var block = blockState.getBlock();
+
+        if (block == Blocks.PODZOL)
+        {
+            setBlock(player, pos, Blocks.DIRT);
+            damageItemIfSurvival(player, level, pos, blockState);
+        }
     }
 
     @Override

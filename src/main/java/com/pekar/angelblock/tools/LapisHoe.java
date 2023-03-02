@@ -6,12 +6,10 @@ import com.pekar.angelblock.tools.properties.LapisHoeProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -22,45 +20,6 @@ public class LapisHoe extends ModHoe
     public LapisHoe(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties, new LapisHoeProperties());
-    }
-
-    @Override
-    public InteractionResult useOn(UseOnContext context)
-    {
-        var player = context.getPlayer();
-        var level = player.level;
-
-        var result = super.useOn(context);
-        if (result == InteractionResult.FAIL) return result;
-
-        if (level.isClientSide) return result;
-        if (!canUseToolEffect(player)) return result;
-
-        var pos = context.getClickedPos();
-        BlockState blockState = level.getBlockState(pos);
-        BlockPos upPos = pos.above();
-
-        if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
-            && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
-            || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
-        {
-            level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
-            new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
-
-            damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
-
-            if (!updateNeighbors(level, upPos))
-            {
-                return InteractionResult.FAIL;
-            }
-
-            return InteractionResult.CONSUME;
-        }
-        else
-        {
-            processAdditionalBlocks(player, level, pos, context.getClickedFace());
-            return InteractionResult.CONSUME;
-        }
     }
 
     @Override
@@ -96,6 +55,10 @@ public class LapisHoe extends ModHoe
             {
                 setBlock(player, pos, Blocks.DIRT);
                 damageItemIfSurvival(player, level, pos, blockState);
+            }
+            else
+            {
+                changePodzolToDirt(player, level, pos);
             }
         }
     }
