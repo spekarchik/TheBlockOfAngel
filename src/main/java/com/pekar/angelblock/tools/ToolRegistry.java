@@ -101,7 +101,7 @@ public class ToolRegistry
 
     // Hoes
     public static final RegistryObject<ModHoe> LAPIS_PRIMARY_HOE = Main.ITEMS.register("lapis_primary_hoe",
-            () -> new ModHoe(ToolMaterials.LAPIS, -3, 0.5F,
+            () -> ModHoe.createPrimary(ToolMaterials.LAPIS, -3, 0.5F,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ModHoe> LAPIS_HOE = Main.ITEMS.register("lapis_hoe",

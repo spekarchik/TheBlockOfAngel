@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -13,7 +14,7 @@ public class ModRod extends ModHoe
 
     public ModRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
         this.isMagnetic = isMagnetic;
     }
 
