@@ -114,6 +114,6 @@ public class ModPickaxe extends PickaxeItem implements IModTool
 
     protected boolean canPreventBlockDropping(LivingEntity entity, BlockPos pos)
     {
-        return isToolEffective(entity, pos);
+        return isToolEffective(entity, pos) && !entity.isShiftKeyDown();
     }
 }
