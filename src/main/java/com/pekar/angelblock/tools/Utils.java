@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
@@ -14,6 +15,8 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 
@@ -348,6 +351,12 @@ public class Utils
     public static boolean isEnd(ResourceKey<Level> dimension)
     {
         return dimension.location().equals(Level.END.location());
+    }
+
+    public static boolean isOre(Block block)
+    {
+        return block instanceof DropExperienceBlock || block instanceof RedStoneOreBlock || block == Blocks.ANCIENT_DEBRIS
+                || block == BlockRegistry.GREEN_DIAMOND_ORE.get();
     }
 
     public boolean destroyBlockByMainHandTool(Level level, BlockPos pos, LivingEntity entityLiving, BlockState blockState, Block block)
