@@ -11,7 +11,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class ModPickaxe extends PickaxeItem implements IModTool
 {
     protected final IMaterialProperties materialProperties;
+    protected final Utils utils = new Utils();
 
     public static ModPickaxe createPrimary(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
@@ -39,10 +43,10 @@ public class ModPickaxe extends PickaxeItem implements IModTool
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        float initialHardness = blockState.getBlock().defaultDestroyTime();
+        if (blockState.hasBlockEntity()) return;
 
-        if (initialHardness == 0.0F)
-            return;
+        float originHardness = blockState.getBlock().defaultDestroyTime();
+        if (originHardness == 0.0F) return;
 
         Direction facing = Utils.getDirection(entityLiving, pos);
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
@@ -67,7 +71,7 @@ public class ModPickaxe extends PickaxeItem implements IModTool
                 for (int z = posZ - c; z <= posZ + c; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockProcessing(level, blockState, initialHardness, new BlockPos(x, y, z), entityLiving);
+                    onBlockProcessing(level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
@@ -77,9 +81,25 @@ public class ModPickaxe extends PickaxeItem implements IModTool
         return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 
-    protected void onBlockProcessing(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
+    protected void onBlockProcessing(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
-        // nothing by default
+        var blockState = level.getBlockState(pos);
+
+        if (blockState.hasBlockEntity()) return;
+
+        var block = blockState.getBlock();
+        float hardness = block.defaultDestroyTime();
+
+        if (hardness <= originHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
+        {
+            destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block);
+        }
+    }
+
+    protected void destroyBlockByMainHandTool(Level level, BlockPos pos, LivingEntity entityLiving, BlockState blockState, Block block)
+    {
+        if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+            damageItem(1, entityLiving);
     }
 
     protected final boolean canUseToolEffect(Player player)

@@ -64,17 +64,4 @@ public class RendelithicPickaxe extends ModPickaxe
     {
         return true;
     }
-
-    @Override
-    protected void onBlockProcessing(Level level, BlockState initialBlockState, float initialHardness, BlockPos pos, LivingEntity entityLiving)
-    {
-        BlockState blockState = level.getBlockState(pos);
-        float hardness = blockState.getBlock().defaultDestroyTime();
-
-        if (hardness <= initialHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
-        {
-            level.destroyBlock(pos, true);
-            damageItem(1, entityLiving);
-        }
-    }
 }
