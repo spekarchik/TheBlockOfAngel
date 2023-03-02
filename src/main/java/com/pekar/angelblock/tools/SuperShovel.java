@@ -43,7 +43,7 @@ public class SuperShovel extends ModShovel
 
         if (result.shouldAwardStats())
         {
-            transformAdditionalBlocks(player, level, pos, context.getClickedFace());
+            processAdditionalBlocks(player, level, pos, context.getClickedFace());
         }
 
         return result;

@@ -98,7 +98,7 @@ public class ModShovel extends ShovelItem implements IModTool
                 }
     }
 
-    protected final void transformAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
+    protected final void processAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
     {
         if (level.isClientSide || !isEnhancedTool() || facing != Direction.UP) return;
 
