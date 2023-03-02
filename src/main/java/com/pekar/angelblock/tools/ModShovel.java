@@ -12,13 +12,15 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class ModShovel extends ShovelItem implements IModTool
 {
@@ -41,21 +43,24 @@ public class ModShovel extends ShovelItem implements IModTool
     {
         var player = context.getPlayer();
         var level = player.level;
+
+        var result = super.useOn(context);
+        if (result == InteractionResult.FAIL) return result;
+
+        if (level.isClientSide) return result;
+        if (!canUseToolEffect(player)) return result;
+
         var pos = context.getClickedPos();
+        BlockState blockState = level.getBlockState(pos);
+        var block = blockState.getBlock();
 
-        if (!level.isClientSide)
+        if (block == Blocks.FARMLAND && context.getClickedFace() == Direction.UP)
         {
-            BlockState blockState = level.getBlockState(pos);
-            var block = blockState.getBlock();
-
-            if (block == Blocks.FARMLAND && context.getClickedFace() == Direction.UP)
-            {
-                setBlock(player, pos, Blocks.DIRT_PATH);
-                return InteractionResult.CONSUME;
-            }
+            setBlock(player, pos, Blocks.DIRT_PATH);
+            return InteractionResult.CONSUME;
         }
 
-        return super.useOn(context);
+        return result;
     }
 
     protected final void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
@@ -139,20 +144,24 @@ public class ModShovel extends ShovelItem implements IModTool
         var blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
 
-        if (facing != Direction.DOWN && level.getBlockState(pos.above()).getMaterial() == Material.AIR)
-        {
-            if (block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL
-                    || block == Blocks.MYCELIUM || block == Blocks.ROOTED_DIRT)
-            {
-                BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
-                level.setBlock(pos, newBlockState, 11);
-                new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
+        if (!level.isEmptyBlock(pos.above())) return;
 
-                if (blockState.getDestroySpeed(level, pos) != 0.0F)
-                {
-                    damageItem(1, player);
-                }
-            }
+        if (block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL
+                || block == Blocks.MYCELIUM || block == Blocks.ROOTED_DIRT || block == Blocks.FARMLAND)
+        {
+            BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
+            level.setBlock(pos, newBlockState, 11);
+            new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
+
+            damageItemIfSurvival(player, level, pos, blockState);
+        }
+    }
+
+    protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
+    {
+        if (blockState.getDestroySpeed(level, pos) != 0.0F)
+        {
+            damageItem(1, player);
         }
     }
 

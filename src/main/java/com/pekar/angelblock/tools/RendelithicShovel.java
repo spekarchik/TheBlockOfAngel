@@ -43,9 +43,10 @@ public class RendelithicShovel extends ModShovel
 
         InteractionResult result = super.useOn(context);
 
-        if (result.shouldAwardStats())
+        if (result != InteractionResult.FAIL)
         {
             processAdditionalBlocks(player, level, pos, context.getClickedFace());
+            return InteractionResult.CONSUME;
         }
 
         return result;
