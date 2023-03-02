@@ -52,7 +52,7 @@ public class SuperShovel extends ModShovel
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
+        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 

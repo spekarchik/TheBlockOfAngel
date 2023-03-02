@@ -1,16 +1,12 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class LapisPickaxe extends ModPickaxe
@@ -23,7 +19,7 @@ public class LapisPickaxe extends ModPickaxe
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
+        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 

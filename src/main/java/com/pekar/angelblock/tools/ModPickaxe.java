@@ -112,7 +112,7 @@ public class ModPickaxe extends PickaxeItem implements IModTool
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 
-    protected boolean canPreventBlockDropping(LivingEntity entity, BlockPos pos)
+    protected boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
     {
         return isToolEffective(entity, pos) && !entity.isShiftKeyDown();
     }

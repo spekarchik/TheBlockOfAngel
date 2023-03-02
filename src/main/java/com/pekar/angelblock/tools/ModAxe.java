@@ -85,7 +85,7 @@ public class ModAxe extends AxeItem implements IModTool
         return false;
     }
 
-    protected boolean canPreventBlockDropping(LivingEntity entity, BlockPos pos)
+    protected boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
     {
         return isToolEffective(entity, pos) && !entity.isShiftKeyDown();
     }

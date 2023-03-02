@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -39,7 +38,7 @@ public class LapisShovel extends ModShovel
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
-        if (canPreventBlockDropping(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
+        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
