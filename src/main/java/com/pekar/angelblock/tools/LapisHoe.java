@@ -23,13 +23,6 @@ public class LapisHoe extends ModHoe
     }
 
     @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
-    {
-        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
-        return super.onBlockStartBreak(itemstack, pos, player);
-    }
-
-    @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
         if (!level.isClientSide)
