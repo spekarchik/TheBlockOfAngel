@@ -6,28 +6,17 @@ import com.pekar.angelblock.tools.properties.LapisHoeProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 
-public class LapisHoe extends ModHoe
+public class LapisHoe extends EnhancedHoe
 {
     public LapisHoe(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties, new LapisHoeProperties());
-    }
-
-    @Override
-    public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
-    {
-        if (!level.isClientSide)
-            mineAdditionalBlocks(level, pos, livingEntity);
-        return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
     @Override
@@ -54,11 +43,5 @@ public class LapisHoe extends ModHoe
                 changePodzolToDirt(player, level, pos);
             }
         }
-    }
-
-    @Override
-    public boolean isEnhancedTool()
-    {
-        return true;
     }
 }
