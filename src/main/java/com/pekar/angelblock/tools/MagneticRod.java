@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -254,7 +255,7 @@ public class MagneticRod extends ModRod
 
     private boolean isDiamondOre(Block block)
     {
-        return block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE;
+        return block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE || block == BlockRegistry.GREEN_DIAMOND_ORE.get();
     }
 
     private boolean isSculk(Block block)
