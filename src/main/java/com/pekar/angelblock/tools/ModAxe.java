@@ -27,6 +27,13 @@ public class ModAxe extends AxeItem implements IModTool
         this.materialProperties = materialProperties;
     }
 
+    @Override
+    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
+    {
+        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
+        return super.onBlockStartBreak(itemstack, pos, player);
+    }
+
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;

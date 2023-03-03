@@ -4,7 +4,6 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.SuperAxeProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
@@ -16,13 +15,6 @@ public class SuperAxe extends ModAxe
     public SuperAxe(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties, new SuperAxeProperties());
-    }
-
-    @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
-    {
-        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
-        return super.onBlockStartBreak(itemstack, pos, player);
     }
 
     @Override
