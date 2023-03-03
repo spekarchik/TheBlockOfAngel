@@ -90,7 +90,8 @@ public class ModPickaxe extends PickaxeItem implements IModTool
         var block = blockState.getBlock();
         float hardness = block.defaultDestroyTime();
 
-        if (hardness <= originHardness && isToolEffective(entityLiving, pos) && materialProperties.isSafeToBreak(entityLiving, pos))
+        if (hardness <= originHardness && isToolEffective(entityLiving, pos)
+                && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
             var originBlock = originBlockState.getBlock();
             if (!Utils.isOre(originBlock) || originBlock == block)
