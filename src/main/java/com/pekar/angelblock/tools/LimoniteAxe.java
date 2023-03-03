@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class LimoniteAxe extends ModAxe
+public class LimoniteAxe extends EnhancedAxe
 {
     public LimoniteAxe(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
@@ -18,24 +18,10 @@ public class LimoniteAxe extends ModAxe
     }
 
     @Override
-    public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
-    {
-        if (!level.isClientSide)
-            mineAdditionalBlocks(level, pos, livingEntity);
-        return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
-    }
-
-    @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
     {
         if (blockState.getBlock() == Blocks.CACTUS) return 12.0F;
         return super.getDestroySpeed(itemStack, blockState);
-    }
-
-    @Override
-    public boolean isEnhancedTool()
-    {
-        return true;
     }
 
     @Override
