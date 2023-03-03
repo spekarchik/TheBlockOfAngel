@@ -63,6 +63,13 @@ public class ModShovel extends ShovelItem implements IModTool
         return result;
     }
 
+    @Override
+    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
+    {
+        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
+        return super.onBlockStartBreak(itemstack, pos, player);
+    }
+
     protected final void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;

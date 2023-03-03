@@ -4,7 +4,6 @@ import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
@@ -34,13 +33,6 @@ public class LapisShovel extends ModShovel
         }
 
         return result;
-    }
-
-    @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
-    {
-        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
-        return super.onBlockStartBreak(itemstack, pos, player);
     }
 
     @Override
