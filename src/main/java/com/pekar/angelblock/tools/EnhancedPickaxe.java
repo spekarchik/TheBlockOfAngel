@@ -11,6 +11,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class EnhancedPickaxe extends ModPickaxe
@@ -85,9 +86,9 @@ public class EnhancedPickaxe extends ModPickaxe
     {
         var blockState = level.getBlockState(pos);
 
-        if (blockState.hasBlockEntity()) return;
-
         var block = blockState.getBlock();
+        if (blockState.hasBlockEntity() || blockState != block.defaultBlockState()) return;
+
         float hardness = block.defaultDestroyTime();
 
         if (hardness <= originHardness && isToolEffective(entityLiving, pos)

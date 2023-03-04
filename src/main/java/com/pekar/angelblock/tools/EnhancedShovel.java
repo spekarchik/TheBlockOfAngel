@@ -168,9 +168,9 @@ public class EnhancedShovel extends ModShovel
     {
         var blockState = level.getBlockState(pos);
 
-        if (blockState.hasBlockEntity()) return;
-
         var block = blockState.getBlock();
+        if (blockState.hasBlockEntity() || blockState != block.defaultBlockState()) return;
+
         float hardness = block.defaultDestroyTime();
 
         if (hardness <= originHardness && isToolEffective(entityLiving, pos)
