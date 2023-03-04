@@ -72,10 +72,10 @@ public class EnhancedShovel extends ModShovel
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        float originHardness = blockState.getBlock().defaultDestroyTime();
+        if (blockState.hasBlockEntity() || blockState != blockState.getBlock().defaultBlockState()) return;
 
-        if (originHardness == 0.0F)
-            return;
+        float originHardness = blockState.getBlock().defaultDestroyTime();
+        if (originHardness == 0.0F) return;
 
         var facing = Utils.getDirectionForShovel(entityLiving, pos);
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();

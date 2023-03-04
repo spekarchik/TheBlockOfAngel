@@ -49,7 +49,7 @@ public class EnhancedPickaxe extends ModPickaxe
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        if (blockState.hasBlockEntity()) return;
+        if (blockState.hasBlockEntity() || blockState != blockState.getBlock().defaultBlockState()) return;
 
         float originHardness = blockState.getBlock().defaultDestroyTime();
         if (originHardness == 0.0F) return;

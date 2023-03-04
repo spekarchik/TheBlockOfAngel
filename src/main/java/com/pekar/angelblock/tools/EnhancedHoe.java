@@ -93,10 +93,10 @@ public class EnhancedHoe extends ModHoe
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        float initialHardness = blockState.getBlock().defaultDestroyTime();
+        if (blockState.hasBlockEntity() || blockState != blockState.getBlock().defaultBlockState()) return;
 
-        if (initialHardness == 0.0F)
-            return;
+        float initialHardness = blockState.getBlock().defaultDestroyTime();
+        if (initialHardness == 0.0F) return;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
