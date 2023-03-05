@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class EnhancedPickaxe extends ModPickaxe
@@ -50,7 +51,8 @@ public class EnhancedPickaxe extends ModPickaxe
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        if (blockState.hasBlockEntity() || blockState != blockState.getBlock().defaultBlockState()) return;
+        var block = blockState.getBlock();
+        if (blockState.hasBlockEntity() || (blockState != block.defaultBlockState() && !(block instanceof RedStoneOreBlock))) return;
 
         float originHardness = blockState.getBlock().defaultDestroyTime();
         if (originHardness == 0.0F) return;
@@ -87,7 +89,7 @@ public class EnhancedPickaxe extends ModPickaxe
         var blockState = level.getBlockState(pos);
 
         var block = blockState.getBlock();
-        if (blockState.hasBlockEntity() || blockState != block.defaultBlockState()) return;
+        if (blockState.hasBlockEntity() || (blockState != block.defaultBlockState() && !(block instanceof RedStoneOreBlock))) return;
 
         float hardness = block.defaultDestroyTime();
 
