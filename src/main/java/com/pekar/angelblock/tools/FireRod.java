@@ -37,8 +37,8 @@ public class FireRod extends MarineRod
         var player = context.getPlayer();
         var level = player.level;
 
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
+//        if (level.isClientSide) return InteractionResult.PASS;
+//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
             return super.useOn(context);
@@ -46,12 +46,14 @@ public class FireRod extends MarineRod
         var itemStack = player.getItemInHand(context.getHand());
         boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
 
+        boolean isClientSide = level.isClientSide();
+
+        var pos = context.getClickedPos();
+        var blockState = level.getBlockState(pos);
+        var block = blockState.getBlock();
+
         if (!isBroken)
         {
-            var pos = context.getClickedPos();
-            BlockState blockState = level.getBlockState(pos);
-            var block = blockState.getBlock();
-
             var hand = context.getHand();
             var facing = context.getClickedFace();
 
@@ -67,132 +69,168 @@ public class FireRod extends MarineRod
                 var upBlock = level.getBlockState(upPos).getBlock();
                 if (block == Blocks.OBSIDIAN && upBlock == Blocks.LAVA && level.getFluidState(upPos).getAmount() < FluidState.AMOUNT_FULL)
                 {
-                    level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
-                    updateNeighbors(level, upPos);
-                    damageItemIfSurvival(player, level, pos, blockState);
-                    new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
-                    return InteractionResult.CONSUME;
+                    if (!isClientSide)
+                    {
+                        level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
+                        updateNeighbors(level, upPos);
+                        damageItemIfSurvival(player, level, pos, blockState);
+                        new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
+                    }
+
+                    return InteractionResult.sidedSuccess(isClientSide);
                 }
             }
             else
             {
                 if (block == Blocks.END_STONE)
                 {
-                    setBlock(player, pos, Blocks.NETHERRACK);
-                    damageItemIfSurvival(player, level, pos, blockState);
-                    return InteractionResult.CONSUME;
+                    if (!isClientSide)
+                    {
+                        setBlock(player, pos, Blocks.NETHERRACK);
+                        damageItemIfSurvival(player, level, pos, blockState);
+                    }
+
+                    return InteractionResult.sidedSuccess(isClientSide);
                 }
             }
+        }
 
+        var result = super.useOn(context);
+        if (result != InteractionResult.PASS) return result;
+
+        if (!isBroken)
+        {
             if (blockState.getMaterial() == Material.WOOL)
             {
-                Block woolBlock;
+                if (!isClientSide)
+                {
+                    Block woolBlock;
 
-                if (block == Blocks.WHITE_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_WHITE_WOOL_BY_ROD.get();
-                }
-                else if (block == Blocks.ORANGE_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_ORANGE_WOOL.get();
-                }
-                else if (block == Blocks.MAGENTA_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_MAGENTA_WOOL.get();
-                }
-                else if (block == Blocks.LIGHT_BLUE_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_LIGHT_BLUE_WOOL.get();
-                }
-                else if (block == Blocks.YELLOW_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_YELLOW_WOOL.get();
-                }
-                else if (block == Blocks.LIME_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_LIME_WOOL.get();
-                }
-                else if (block == Blocks.PINK_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_PINK_WOOL.get();
-                }
-                else if (block == Blocks.GRAY_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_GRAY_WOOL.get();
-                }
-                else if (block == Blocks.LIGHT_GRAY_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_LIGHT_GRAY_WOOL.get();
-                }
-                else if (block == Blocks.CYAN_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_CYAN_WOOL.get();
-                }
-                else if (block == Blocks.PURPLE_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_PURPLE_WOOL.get();
-                }
-                else if (block == Blocks.BLUE_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_BLUE_WOOL.get();
-                }
-                else if (block == Blocks.BROWN_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_BROWN_WOOL.get();
-                }
-                else if (block == Blocks.GREEN_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_GREEN_WOOL.get();
-                }
-                else if (block == Blocks.RED_WOOL)
-                {
-                    woolBlock = BlockRegistry.DESTROYING_RED_WOOL.get();
-                }
-                else // BLACK
-                {
-                    woolBlock = BlockRegistry.DESTROYING_BLACK_WOOL.get();
-                }
+                    if (block == Blocks.WHITE_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_WHITE_WOOL_BY_ROD.get();
+                    }
+                    else if (block == Blocks.ORANGE_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_ORANGE_WOOL.get();
+                    }
+                    else if (block == Blocks.MAGENTA_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_MAGENTA_WOOL.get();
+                    }
+                    else if (block == Blocks.LIGHT_BLUE_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_LIGHT_BLUE_WOOL.get();
+                    }
+                    else if (block == Blocks.YELLOW_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_YELLOW_WOOL.get();
+                    }
+                    else if (block == Blocks.LIME_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_LIME_WOOL.get();
+                    }
+                    else if (block == Blocks.PINK_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_PINK_WOOL.get();
+                    }
+                    else if (block == Blocks.GRAY_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_GRAY_WOOL.get();
+                    }
+                    else if (block == Blocks.LIGHT_GRAY_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_LIGHT_GRAY_WOOL.get();
+                    }
+                    else if (block == Blocks.CYAN_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_CYAN_WOOL.get();
+                    }
+                    else if (block == Blocks.PURPLE_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_PURPLE_WOOL.get();
+                    }
+                    else if (block == Blocks.BLUE_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_BLUE_WOOL.get();
+                    }
+                    else if (block == Blocks.BROWN_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_BROWN_WOOL.get();
+                    }
+                    else if (block == Blocks.GREEN_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_GREEN_WOOL.get();
+                    }
+                    else if (block == Blocks.RED_WOOL)
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_RED_WOOL.get();
+                    }
+                    else // BLACK
+                    {
+                        woolBlock = BlockRegistry.DESTROYING_BLACK_WOOL.get();
+                    }
 
-                level.setBlock(pos, woolBlock.defaultBlockState(), 0);
-                level.destroyBlock(pos, true, player, 1);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                    level.setBlock(pos, woolBlock.defaultBlockState(), 0);
+                    level.destroyBlock(pos, true, player, 1);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.MAGMA_BLOCK)
             {
-                setBlock(player, pos, Blocks.GLOWSTONE);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, Blocks.GLOWSTONE);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.GLOWSTONE)
             {
-                level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
-                level.destroyBlock(pos, true, player, 1);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
+                    level.destroyBlock(pos, true, player, 1);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.BASALT)
             {
-                setBlock(player, pos, Blocks.BLACKSTONE);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, Blocks.BLACKSTONE);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM)
             {
-                setBlock(player, pos, Blocks.SHROOMLIGHT);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, Blocks.SHROOMLIGHT);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
-            if (block == Blocks.CLAY)
+            if (block == Blocks.CLAY) // it's important to check CLAY near WATER (MarineRod) earlier
             {
-                setBlock(player, pos, Blocks.TERRACOTTA);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, Blocks.TERRACOTTA);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.SHROOMLIGHT)
@@ -207,23 +245,29 @@ public class FireRod extends MarineRod
                             if (block1 == Blocks.CRIMSON_STEM || block1 == Blocks.CRIMSON_NYLIUM || block1 == Blocks.NETHER_WART_BLOCK
                                     || block1 == Blocks.NETHER_WART || block1 == Blocks.CRIMSON_HYPHAE)
                             {
-                                setBlock(player, pos, Blocks.CRIMSON_STEM);
-                                damageItemIfSurvival(player, level, pos, blockState);
-                                return InteractionResult.CONSUME;
+                                if (!isClientSide)
+                                {
+                                    setBlock(player, pos, Blocks.CRIMSON_STEM);
+                                    damageItemIfSurvival(player, level, pos, blockState);
+                                }
+                                return InteractionResult.sidedSuccess(isClientSide);
                             }
 
                             if (block1 == Blocks.WARPED_STEM || block1 == Blocks.WARPED_NYLIUM || block1 == Blocks.WARPED_WART_BLOCK
                                     || block1 == Blocks.WARPED_HYPHAE)
                             {
-                                setBlock(player, pos, Blocks.WARPED_STEM);
-                                damageItemIfSurvival(player, level, pos, blockState);
-                                return InteractionResult.CONSUME;
+                                if (!isClientSide)
+                                {
+                                    setBlock(player, pos, Blocks.WARPED_STEM);
+                                    damageItemIfSurvival(player, level, pos, blockState);
+                                }
+                                return InteractionResult.sidedSuccess(isClientSide);
                             }
                         }
             }
         }
 
-        return super.useOn(context);
+        return result;
     }
 
     @Override

@@ -27,10 +27,9 @@ public class EndRod extends AmethystRod
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
 
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
+//        if (level.isClientSide) return InteractionResult.PASS;
+//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
             return super.useOn(context);
@@ -41,11 +40,14 @@ public class EndRod extends AmethystRod
         if (!isBroken)
         {
             var pos = context.getClickedPos();
-            BlockState blockState = level.getBlockState(pos);
+            var level = player.level;
+            var blockState = level.getBlockState(pos);
             var block = blockState.getBlock();
 
             var hand = context.getHand();
             var facing = context.getClickedFace();
+
+            boolean isClientSide = level.isClientSide();
 
             if (facing == Direction.UP)
             {
@@ -69,6 +71,8 @@ public class EndRod extends AmethystRod
             if (level.getBlockState(startPos).getBlock() == Blocks.LAVA
                 && level.getBlockState(startPos.below()).getBlock() != Blocks.OBSIDIAN)
             {
+                if (isClientSide) return InteractionResult.SUCCESS;
+
                 int X = pos.getX(), Y = startPos.getY(), Z = pos.getZ();
                 var blocksToTransform = new ArrayList<BlockPos>();
 
@@ -100,10 +104,14 @@ public class EndRod extends AmethystRod
 
             if (block == Blocks.TUFF)
             {
-                level.setBlock(pos, BlockRegistry.DESTROYING_GUNPOWDER.get().defaultBlockState(), 0);
-                level.destroyBlock(pos, true, player, 1);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    level.setBlock(pos, BlockRegistry.DESTROYING_GUNPOWDER.get().defaultBlockState(), 0);
+                    level.destroyBlock(pos, true, player, 1);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
         }
 

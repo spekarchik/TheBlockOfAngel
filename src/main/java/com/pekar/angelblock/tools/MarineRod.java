@@ -34,9 +34,8 @@ public class MarineRod extends AncientRod
         var player = context.getPlayer();
         var level = player.level;
 
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
-
+//        if (level.isClientSide) return InteractionResult.PASS;
+//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
             return super.useOn(context);
 
@@ -53,6 +52,8 @@ public class MarineRod extends AncientRod
 
         if (!isBroken)
         {
+            boolean isClientSide = level.isClientSide();
+
             if (facing == Direction.UP)
             {
                 BlockPos upPos = pos.above();
@@ -61,33 +62,44 @@ public class MarineRod extends AncientRod
                         && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
                         || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
                 {
-                    level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
-                    new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
-                    damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
+                    if (!isClientSide)
+                    {
+                        level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
+                        new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
+                        damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 
-                    updateNeighbors(level, upPos);
+                        updateNeighbors(level, upPos);
+                    }
 
-                    return InteractionResult.CONSUME;
+                    return InteractionResult.sidedSuccess(isClientSide);
                 }
             }
 
             if (block == Blocks.MELON)
             {
-                setBlock(player, pos, Blocks.SLIME_BLOCK);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, Blocks.SLIME_BLOCK);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.POWDER_SNOW)
             {
-                setBlock(player, pos, Blocks.SNOW_BLOCK);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, Blocks.SNOW_BLOCK);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
         }
 
         var result = super.useOn(context);
-        if (result.shouldAwardStats()) return result;
+        if (result != InteractionResult.PASS) return result;
 
         if (!isBroken && facing == Direction.UP)
         {
@@ -105,7 +117,7 @@ public class MarineRod extends AncientRod
                 return plant(player, level, pos, hand, facing, Blocks.BAMBOO);
             }
 
-            if (Utils.isNearWaterHorizontal(level, pos) && block == Blocks.CLAY)
+            if (block == Blocks.CLAY && Utils.isNearWaterHorizontal(level, pos))
             {
                 damageItemIfSurvival(player, level, pos, blockState);
                 return plant(player, level, pos, hand, facing, Blocks.SMALL_DRIPLEAF);

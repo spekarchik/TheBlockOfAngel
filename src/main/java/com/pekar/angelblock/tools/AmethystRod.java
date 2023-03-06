@@ -24,8 +24,8 @@ public class AmethystRod extends FireRod
         var player = context.getPlayer();
         var level = player.level;
 
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
+//        if (level.isClientSide) return InteractionResult.PASS;
+//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         var result = super.useOn(context);
         if (result != InteractionResult.PASS) return result;
@@ -33,10 +33,12 @@ public class AmethystRod extends FireRod
         var itemStack = player.getItemInHand(context.getHand());
         boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
 
+        boolean isClientSide = level.isClientSide();
+
         if (!isBroken)
         {
             var pos = context.getClickedPos();
-            BlockState blockState = level.getBlockState(pos);
+            var blockState = level.getBlockState(pos);
             var block = blockState.getBlock();
 
             var upPos = pos.above();
@@ -44,9 +46,13 @@ public class AmethystRod extends FireRod
 
             if (block == Blocks.OBSIDIAN && upBlock != Blocks.LAVA)
             {
-                damageItemIfSurvival(player, level, pos, blockState);
-                setBlock(player, pos, Blocks.CRYING_OBSIDIAN);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    damageItemIfSurvival(player, level, pos, blockState);
+                    setBlock(player, pos, Blocks.CRYING_OBSIDIAN);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.ANDESITE
@@ -59,16 +65,24 @@ public class AmethystRod extends FireRod
 
             if (block == Blocks.DIAMOND_BLOCK)
             {
-                setBlock(player, pos, Blocks.BUDDING_AMETHYST);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, Blocks.BUDDING_AMETHYST);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.BONE_BLOCK)
             {
-                setBlock(player, pos, Blocks.CALCITE);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, Blocks.CALCITE);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
         }
 
@@ -94,8 +108,13 @@ public class AmethystRod extends FireRod
 
         if (!level.isEmptyBlock(pos)) return InteractionResult.FAIL;
 
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) context.getPlayer());
-        level.setBlock(pos, state, 11);
-        return InteractionResult.CONSUME;
+        var isClientSide = context.getLevel().isClientSide();
+        if (!isClientSide)
+        {
+            new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) context.getPlayer());
+            level.setBlock(pos, state, 11);
+        }
+
+        return InteractionResult.sidedSuccess(isClientSide);
     }
 }

@@ -392,7 +392,7 @@ public class Utils
         return false;
     }
 
-    private static void setBlock(Player player, BlockPos pos, Block block)
+    private void setBlock(Player player, BlockPos pos, Block block)
     {
         player.level.setBlock(pos, block.defaultBlockState(), 11);
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
