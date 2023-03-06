@@ -279,59 +279,75 @@ public class Utils
         return false;
     }
 
-    public static boolean mossyTransforming(Player player, BlockPos pos, Block block)
+    public boolean mossyTransforming(Player player, BlockPos pos, Block block)
     {
+        boolean isClientSide = player.getLevel().isClientSide();
+
         // stones
         if (block == Blocks.STONE || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE
                 || block == Blocks.DEEPSLATE)
         {
-            setBlock(player, pos, Blocks.MOSSY_COBBLESTONE);
+            if (!isClientSide)
+                setBlock(player, pos, Blocks.MOSSY_COBBLESTONE);
             return true;
         }
 
         if (block == Blocks.MOSSY_COBBLESTONE)
         {
-            var resultBlock = pos.getY() > 4 ? Blocks.COBBLESTONE : Blocks.COBBLED_DEEPSLATE;
-            setBlock(player, pos, resultBlock);
+            if (!isClientSide)
+            {
+                var resultBlock = pos.getY() > 4 ? Blocks.COBBLESTONE : Blocks.COBBLED_DEEPSLATE;
+                setBlock(player, pos, resultBlock);
+            }
             return true;
         }
 
         if (block == Blocks.COBBLESTONE_SLAB || block == Blocks.STONE_SLAB)
         {
-            setBlock(player, pos, Blocks.MOSSY_COBBLESTONE_SLAB);
+            if (!isClientSide)
+                setBlock(player, pos, Blocks.MOSSY_COBBLESTONE_SLAB);
             return true;
         }
 
         if (block == Blocks.MOSSY_COBBLESTONE_SLAB)
         {
-            setBlock(player, pos, Blocks.COBBLESTONE_SLAB);
+            if (!isClientSide)
+                setBlock(player, pos, Blocks.COBBLESTONE_SLAB);
             return true;
         }
 
         // bricks
         if (block == Blocks.STONE_BRICKS || block == Blocks.DEEPSLATE_BRICKS)
         {
-            setBlock(player, pos, Blocks.MOSSY_STONE_BRICKS);
+            if (!isClientSide)
+                setBlock(player, pos, Blocks.MOSSY_STONE_BRICKS);
             return true;
         }
 
         if (block == Blocks.MOSSY_STONE_BRICKS)
         {
-            var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICKS : Blocks.DEEPSLATE_BRICKS;
-            setBlock(player, pos, resultBlock);
+            if (!isClientSide)
+            {
+                var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICKS : Blocks.DEEPSLATE_BRICKS;
+                setBlock(player, pos, resultBlock);
+            }
             return true;
         }
 
         if (block == Blocks.STONE_BRICK_SLAB || block == Blocks.DEEPSLATE_BRICK_SLAB)
         {
-            setBlock(player, pos, Blocks.MOSSY_STONE_BRICK_SLAB);
+            if (!isClientSide)
+                setBlock(player, pos, Blocks.MOSSY_STONE_BRICK_SLAB);
             return true;
         }
 
         if (block == Blocks.MOSSY_STONE_BRICK_SLAB)
         {
-            var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICK_SLAB : Blocks.DEEPSLATE_BRICK_SLAB;
-            setBlock(player, pos, resultBlock);
+            if (!isClientSide)
+            {
+                var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICK_SLAB : Blocks.DEEPSLATE_BRICK_SLAB;
+                setBlock(player, pos, resultBlock);
+            }
             return true;
         }
 

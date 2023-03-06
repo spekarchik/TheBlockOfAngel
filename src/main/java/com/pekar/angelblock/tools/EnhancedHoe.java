@@ -37,21 +37,18 @@ public class EnhancedHoe extends ModHoe
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var result = super.useOn(context);
+        if (result == InteractionResult.FAIL) return result;
+
         var player = context.getPlayer();
         var level = player.level;
 
-        var result = super.useOn(context);
-        if (result != InteractionResult.PASS && result != InteractionResult.CONSUME_PARTIAL) return result;
-
-        if (level.isClientSide) return result;
-        if (!canUseToolEffect(player)) return result;
+//        if (level.isClientSide) return result;
 
         var pos = context.getClickedPos();
-        BlockState blockState = level.getBlockState(pos);
-        BlockPos upPos = pos.above();
-
-        processAdditionalBlocks(player, level, pos, context.getClickedFace());
-        return InteractionResult.CONSUME;
+        return processAdditionalBlocks(player, level, pos, context.getClickedFace())
+                ? InteractionResult.sidedSuccess(level.isClientSide)
+                : result;
     }
 
     @Override
@@ -63,16 +60,16 @@ public class EnhancedHoe extends ModHoe
 
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
+        if (!isToolEffective(entityLiving, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        float originHardness = blockState.getBlock().defaultDestroyTime();
+        if (blockState.hasBlockEntity() || blockState != blockState.getBlock().defaultBlockState()) return;
 
-        if (originHardness == 0.0F)
-            return;
+        float originHardness = blockState.getBlock().defaultDestroyTime();
+        if (originHardness == 0.0F) return;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
@@ -85,18 +82,12 @@ public class EnhancedHoe extends ModHoe
                 }
     }
 
-    protected final void processAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
+    protected boolean processAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
     {
-        if (level.isClientSide || !isEnhancedTool() || facing != Direction.UP) return;
+        if (facing != Direction.UP) return false;
 
         if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
-            return;
-
-        BlockState blockState = level.getBlockState(pos);
-        if (blockState.hasBlockEntity() || blockState != blockState.getBlock().defaultBlockState()) return;
-
-        float initialHardness = blockState.getBlock().defaultDestroyTime();
-        if (initialHardness == 0.0F) return;
+            return false;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
@@ -119,17 +110,23 @@ public class EnhancedHoe extends ModHoe
                 a1 = 1; a2 = 1; b1 = 1; b2 = 1; break;
         }
 
+        boolean haveAnyTransformed = false;
+
         for (int x = posX - a1; x <= posX + a2; x++)
             for (int z = posZ - b1; z <= posZ + b2; z++)
             {
                 if (x == posX && z == posZ) continue;
-                onBlockProcessing(player, level, pos, new BlockPos(x, posY, z), facing);
+                boolean hasTransformed = onBlockProcessing(player, level, pos, new BlockPos(x, posY, z), facing);
+                if (hasTransformed) haveAnyTransformed = true;
             }
+
+        return haveAnyTransformed;
     }
 
-    protected void onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
+    protected boolean onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
     {
         // nothing by default
+        return false;
     }
 
     protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)

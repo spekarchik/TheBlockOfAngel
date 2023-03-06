@@ -20,28 +20,35 @@ public class LapisHoe extends EnhancedHoe
     }
 
     @Override
-    protected void onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
+    protected boolean onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
     {
+        if (!level.isEmptyBlock(pos.above())) return false;
+
         var blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
 
-        if (level.isEmptyBlock(pos.above()))
+        if (canBeFarmland(block))
         {
-            if (canBeFarmland(block))
+            if (!level.isClientSide())
             {
                 level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 11);
                 new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
                 damageItemIfSurvival(player, level, pos, blockState);
             }
-            else if (block == Blocks.COARSE_DIRT)
+            return true;
+        }
+        else if (block == Blocks.COARSE_DIRT)
+        {
+            if (!level.isClientSide())
             {
                 setBlock(player, pos, Blocks.DIRT);
                 damageItemIfSurvival(player, level, pos, blockState);
             }
-            else
-            {
-                changePodzolToDirt(player, level, pos);
-            }
+            return true;
+        }
+        else
+        {
+            return changePodzolToDirt(player, level, pos);
         }
     }
 }

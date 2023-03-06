@@ -7,25 +7,17 @@ import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ModHoe extends HoeItem implements IModTool
+public class ModHoe extends ModTool
 {
     protected final IMaterialProperties materialProperties;
-    protected final Utils utils = new Utils();
 
     public static ModHoe createPrimary(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
@@ -41,14 +33,13 @@ public class ModHoe extends HoeItem implements IModTool
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
-        var player = context.getPlayer();
-        var level = player.level;
-
         var result = super.useOn(context);
         if (result == InteractionResult.FAIL) return result;
 
-        if (level.isClientSide) return result;
-        if (!canUseToolEffect(player)) return result;
+        var player = context.getPlayer();
+        var level = player.level;
+
+//        if (level.isClientSide) return result;
 
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);
@@ -58,98 +49,46 @@ public class ModHoe extends HoeItem implements IModTool
                 && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
                 || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
         {
-            level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
-            new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
-
-            damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
-
-            if (!updateNeighbors(level, upPos))
+            if (!level.isClientSide)
             {
-                return InteractionResult.FAIL;
+                level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
+                new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
+
+                damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
+
+                if (!updateNeighbors(level, upPos))
+                {
+                    return InteractionResult.FAIL;
+                }
             }
 
-            return InteractionResult.CONSUME;
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
         else
         {
             if (level.isEmptyBlock(upPos) && context.getClickedFace() == Direction.UP)
-                changePodzolToDirt(player, level, pos);
-
-            return isEnhancedTool() ? InteractionResult.CONSUME_PARTIAL : InteractionResult.CONSUME;
-        }
-    }
-
-    protected boolean updateNeighbors(Level level, BlockPos pos)
-    {
-        BlockState waterBlockState = level.getBlockState(pos);
-        if (waterBlockState.getBlock() instanceof LiquidBlock liquidBlock)
-        {
-            liquidBlock.neighborChanged(waterBlockState, level, pos, liquidBlock, pos, false /* ignored */);
-            return true;
+                return changePodzolToDirt(player, level, pos) ? InteractionResult.sidedSuccess(level.isClientSide) : result;
         }
 
-        return false;
+        return result;
     }
 
-    protected final boolean canUseToolEffect(Player player)
-    {
-        ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
-        return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
-    }
-
-    protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
-    {
-        if (blockState.getDestroySpeed(level, pos) != 0.0F)
-        {
-            damageItem(1, player);
-        }
-    }
-
-    protected boolean canBeFarmland(Block block)
-    {
-        return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH || block == Blocks.DIRT;
-    }
-
-    protected final boolean isFarmTypeBlock(Level level, BlockPos pos)
-    {
-        var block = level.getBlockState(pos).getBlock();
-        return block == Blocks.FARMLAND || canBeFarmland(block) || block instanceof SandBlock
-                || block == Blocks.GRAVEL || level.isWaterAt(pos);
-    }
-
-    protected void changePodzolToDirt(Player player, Level level, BlockPos pos)
+    protected boolean changePodzolToDirt(Player player, Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
         if (block == Blocks.PODZOL)
         {
-            setBlock(player, pos, Blocks.DIRT);
-            damageItemIfSurvival(player, level, pos, blockState);
+            if (!level.isClientSide)
+            {
+                setBlock(player, pos, Blocks.DIRT);
+                damageItemIfSurvival(player, level, pos, blockState);
+            }
+            return true;
         }
-    }
 
-    @Override
-    public boolean isEnhancedTool()
-    {
         return false;
     }
 
-    @Override
-    public boolean isEnhancedWeapon()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isEnhancedRod()
-    {
-        return false;
-    }
-
-    protected void setBlock(Player player, BlockPos pos, Block block)
-    {
-        player.level.setBlock(pos, block.defaultBlockState(), 11);
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
-    }
 }

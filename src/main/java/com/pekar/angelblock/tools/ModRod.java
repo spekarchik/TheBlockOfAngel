@@ -1,27 +1,18 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.common.ToolAction;
 
-public class ModRod extends ModHoe
+public class ModRod extends ModTool implements IModTool
 {
     private final boolean isMagnetic;
 
     public ModRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
+        super(material, attackDamage, attackSpeed, properties);
         this.isMagnetic = isMagnetic;
-    }
-
-    @Override
-    public InteractionResult useOn(UseOnContext context)
-    {
-        return InteractionResult.PASS;
     }
 
     @Override

@@ -38,15 +38,16 @@ public class AncientRod extends MagneticRod
     public InteractionResult useOn(UseOnContext context)
     {
         var result = super.useOn(context);
-        if (result != InteractionResult.PASS) return result;
+        if (result == InteractionResult.FAIL) return result;
 
         var player = context.getPlayer();
         var level = player.level;
+        boolean isClientSide = level.isClientSide();
 
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
+//        if (level.isClientSide) return InteractionResult.PASS;
+//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
-            return super.useOn(context);
+            return InteractionResult.sidedSuccess(isClientSide);
 
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);
@@ -54,9 +55,9 @@ public class AncientRod extends MagneticRod
 
         if (block != Blocks.STONE || context.getClickedFace() == Direction.UP)
         {
-            if (Utils.mossyTransforming(player, pos, block))
+            if (utils.mossyTransforming(player, pos, block))
             {
-                return InteractionResult.CONSUME;
+                return InteractionResult.sidedSuccess(isClientSide);
             }
         }
 
@@ -67,29 +68,40 @@ public class AncientRod extends MagneticRod
         {
             if (block instanceof InfestedBlock infestedBlock)
             {
-                setBlock(player, pos, infestedBlock.getHostBlock());
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, infestedBlock.getHostBlock());
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
             {
-                setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             if (block instanceof LeavesBlock)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
+
                 return setOnBlockSide(context, this::setVine);
             }
 
             if (block == Blocks.COBWEB)
             {
-                destroyWebBlocks(level, pos);
-                damageItemIfSurvival(player, level, pos, blockState);
-                return InteractionResult.CONSUME;
+                if (!isClientSide)
+                {
+                    destroyWebBlocks(level, pos);
+                    damageItemIfSurvival(player, level, pos, blockState);
+                }
+
+                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             var hand = context.getHand();
@@ -153,9 +165,12 @@ public class AncientRod extends MagneticRod
 
                 if (block == Blocks.DIRT_PATH)
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
-                    setBlock(player, pos, Blocks.GRASS_BLOCK);
-                    return InteractionResult.CONSUME;
+                    if (!isClientSide)
+                    {
+                        damageItemIfSurvival(player, level, pos, blockState);
+                        setBlock(player, pos, Blocks.GRASS_BLOCK);
+                    }
+                    return InteractionResult.sidedSuccess(isClientSide);
                 }
             }
         }
@@ -195,9 +210,12 @@ public class AncientRod extends MagneticRod
 
         if (!level.isEmptyBlock(pos)) return InteractionResult.FAIL;
 
-        level.setBlock(pos, state, 11);
-        new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) context.getPlayer());
-        return InteractionResult.CONSUME;
+        if (!level.isClientSide())
+        {
+            level.setBlock(pos, state, 11);
+            new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) context.getPlayer());
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     protected InteractionResult setOnBlockSide(UseOnContext useOnContext, BiFunction<BlockPlaceContext, BlockPos, InteractionResult> setBlock)
@@ -237,15 +255,19 @@ public class AncientRod extends MagneticRod
 
         if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
         {
-            level.setBlock(pos.above(), plantBlock.defaultBlockState(), 11);
-
-            if (player instanceof ServerPlayer serverPlayer)
+            boolean isClientSide = player.level.isClientSide();
+            if (!isClientSide)
             {
-                new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
-                CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
+                level.setBlock(pos.above(), plantBlock.defaultBlockState(), 11);
+
+                if (player instanceof ServerPlayer serverPlayer)
+                {
+                    new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
+                    CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
+                }
             }
 
-            return InteractionResult.CONSUME;
+            return InteractionResult.sidedSuccess(isClientSide);
         }
         else
         {
