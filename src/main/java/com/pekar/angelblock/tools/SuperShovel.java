@@ -18,22 +18,25 @@ public class SuperShovel extends EnhancedShovel
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var result = super.useOn(context);
+
+        if (result == InteractionResult.FAIL) return result;
+
         var player = context.getPlayer();
         var level = player.level;
+
         var pos = context.getClickedPos();
+        BlockState blockState = level.getBlockState(pos);
+        var block = blockState.getBlock();
 
-        if (!level.isClientSide && canUseToolEffect(player))
+        if (block == Blocks.END_STONE)
         {
-            BlockState blockState = level.getBlockState(pos);
-            var block = blockState.getBlock();
-
-            if (block == Blocks.END_STONE)
-            {
+            if (!level.isClientSide)
                 setBlock(player, pos, BlockRegistry.CRACKED_ENDSTONE.get());
-                return InteractionResult.CONSUME;
-            }
+
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        return super.useOn(context);
+        return result;
     }
 }

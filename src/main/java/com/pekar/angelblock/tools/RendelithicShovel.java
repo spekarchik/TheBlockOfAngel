@@ -5,11 +5,10 @@ import com.pekar.angelblock.tools.properties.RendelithicMaterialProperties;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class RendelithicShovel extends EnhancedShovel
+public final class RendelithicShovel extends EnhancedShovel
 {
 
     public RendelithicShovel(Tier material, float attackDamage, float attackSpeed, Properties properties)
@@ -20,22 +19,25 @@ public class RendelithicShovel extends EnhancedShovel
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var result = super.useOn(context);
+
+        if (result == InteractionResult.FAIL) return result;
+
         var player = context.getPlayer();
         var level = player.level;
+
         var pos = context.getClickedPos();
+        BlockState blockState = level.getBlockState(pos);
+        var block = blockState.getBlock();
 
-        if (!level.isClientSide && canUseToolEffect(player))
+        if (block == Blocks.END_STONE)
         {
-            BlockState blockState = level.getBlockState(pos);
-            Block block = blockState.getBlock();
-
-            if (block == Blocks.END_STONE)
-            {
+            if (!level.isClientSide)
                 setBlock(player, pos, BlockRegistry.CRACKED_ENDSTONE.get());
-                return InteractionResult.CONSUME;
-            }
+
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        return super.useOn(context);
+        return result;
     }
 }

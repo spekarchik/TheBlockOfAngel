@@ -34,19 +34,18 @@ public class EnhancedShovel extends ModShovel
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var result = super.useOn(context);
+        if (result == InteractionResult.FAIL) return result;
+
         var player = context.getPlayer();
         var level = player.level;
+
+//        if (level.isClientSide) return result;
+
         var pos = context.getClickedPos();
-
-        InteractionResult result = super.useOn(context);
-
-        if (result != InteractionResult.FAIL)
-        {
-            processAdditionalBlocks(player, level, pos, context.getClickedFace());
-            return InteractionResult.CONSUME;
-        }
-
-        return result;
+        return processAdditionalBlocks(player, level, pos, context.getClickedFace())
+                ? InteractionResult.sidedSuccess(level.isClientSide)
+                : result;
     }
 
     @Override
@@ -64,9 +63,9 @@ public class EnhancedShovel extends ModShovel
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
-    protected final void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
+    protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
+        if (!isToolEffective(entityLiving, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -104,12 +103,12 @@ public class EnhancedShovel extends ModShovel
                 }
     }
 
-    protected final void processAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
+    protected boolean processAdditionalBlocks(Player player, Level level, BlockPos pos, Direction facing)
     {
-        if (level.isClientSide || !isEnhancedTool() || facing != Direction.UP) return;
+        if (facing != Direction.UP) return false;
 
         if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
-            return;
+            return false;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
@@ -132,30 +131,41 @@ public class EnhancedShovel extends ModShovel
                 a1 = 1; a2 = 1; b1 = 1; b2 = 1; break;
         }
 
+        boolean haveAnyTransformed = false;
+
         for (int x = posX - a1; x <= posX + a2; x++)
             for (int z = posZ - b1; z <= posZ + b2; z++)
             {
                 if (x == posX && z == posZ) continue;
-                onBlockTransforming(player, level, pos, new BlockPos(x, posY, z), facing);
+                boolean hasTransformed = onBlockProcessing(player, level, pos, new BlockPos(x, posY, z), facing);
+                if (hasTransformed) haveAnyTransformed = true;
             }
+
+        return haveAnyTransformed;
     }
 
-    protected void onBlockTransforming(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
+    protected boolean onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
     {
+        if (!level.isEmptyBlock(pos.above())) return false;
+
         var blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
 
-        if (!level.isEmptyBlock(pos.above())) return;
-
-        if (block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL
-                || block == Blocks.MYCELIUM || block == Blocks.ROOTED_DIRT || block == Blocks.FARMLAND)
+        if (FLATTENABLES.containsKey(block))
         {
-            BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
-            level.setBlock(pos, newBlockState, 11);
-            new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
+            if (!level.isClientSide)
+            {
+                BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
+                level.setBlock(pos, newBlockState, 11);
+                new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
 
-            damageItemIfSurvival(player, level, pos, blockState);
+                damageItemIfSurvival(player, level, pos, blockState);
+            }
+
+            return true;
         }
+
+        return false;
     }
 
     protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)

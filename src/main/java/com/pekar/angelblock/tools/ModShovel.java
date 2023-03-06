@@ -2,24 +2,19 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
-import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ModShovel extends ShovelItem implements IModTool
@@ -36,6 +31,7 @@ public class ModShovel extends ShovelItem implements IModTool
     {
         super(material, attackDamage, attackSpeed, properties);
         this.materialProperties = materialProperties;
+        FLATTENABLES.put(Blocks.FARMLAND, Blocks.DIRT_PATH.defaultBlockState());
     }
 
     @Override
@@ -44,23 +40,16 @@ public class ModShovel extends ShovelItem implements IModTool
         var player = context.getPlayer();
         var level = player.level;
 
-        var result = super.useOn(context);
-        if (result == InteractionResult.FAIL) return result;
-
-        if (level.isClientSide) return result;
-        if (!canUseToolEffect(player)) return result;
-
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
-        if (block == Blocks.FARMLAND && context.getClickedFace() == Direction.UP)
+        if (FLATTENABLES.containsKey(block) || (block instanceof CampfireBlock && blockState.getValue(CampfireBlock.LIT)))
         {
-            setBlock(player, pos, Blocks.DIRT_PATH);
-            return InteractionResult.CONSUME;
+            return super.useOn(context); // to prevent putting a block it needs both: return SUCCESS on client side AND return CONSUME on server side
         }
 
-        return result;
+        return InteractionResult.PASS;
     }
 
     protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
@@ -69,12 +58,6 @@ public class ModShovel extends ShovelItem implements IModTool
         {
             damageItem(1, player);
         }
-    }
-
-    protected final boolean canUseToolEffect(Player player)
-    {
-        ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
-        return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
     }
 
     @Override
