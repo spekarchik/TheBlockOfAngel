@@ -19,11 +19,14 @@ public class RendelithicPickaxe extends EnhancedPickaxe
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var result = super.useOn(context);
+        if (result == InteractionResult.FAIL) return result;
+
         var player = context.getPlayer();
         var level = player.level;
 
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
+//        if (level.isClientSide) return result;
+//        if (!canUseToolEffect(player)) return result;
 
         var pos = context.getClickedPos();
 
@@ -32,10 +35,12 @@ public class RendelithicPickaxe extends EnhancedPickaxe
 
         if (block == Blocks.OBSIDIAN)
         {
-            setBlock(player, pos, BlockRegistry.CRACKED_OBSIDIAN.get());
-            return InteractionResult.CONSUME;
+            if (!level.isClientSide())
+                setBlock(player, pos, BlockRegistry.CRACKED_OBSIDIAN.get());
+
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        return super.useOn(context);
+        return result;
     }
 }

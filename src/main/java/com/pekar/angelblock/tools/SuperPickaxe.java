@@ -1,7 +1,10 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tools.properties.SuperMaterialProperties;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
@@ -20,11 +23,14 @@ public class SuperPickaxe extends EnhancedPickaxe
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var result = super.useOn(context);
+        if (result == InteractionResult.FAIL) return result;
+
         var player = context.getPlayer();
         var level = player.level;
 
-        if (level.isClientSide) return InteractionResult.PASS;
-        if (!canUseToolEffect(player)) return InteractionResult.PASS;
+//        if (level.isClientSide) return result;
+//        if (!canUseToolEffect(player)) return result;
 
         var pos = context.getClickedPos();
 
@@ -33,21 +39,25 @@ public class SuperPickaxe extends EnhancedPickaxe
 
         if (block == Blocks.OBSIDIAN)
         {
-            level.setBlock(pos, BlockRegistry.CRACKED_OBSIDIAN.get().defaultBlockState(), 11);
-            return InteractionResult.CONSUME;
+            if (!level.isClientSide())
+            {
+                level.setBlock(pos, BlockRegistry.CRACKED_OBSIDIAN.get().defaultBlockState(), 11);
+            }
+
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
         if (block instanceof InfestedBlock infestedBlock)
         {
-            setBlock(player, pos, infestedBlock.getHostBlock());
-            return InteractionResult.CONSUME;
+            if (!level.isClientSide())
+            {
+                level.setBlock(pos, infestedBlock.getHostBlock().defaultBlockState(), 11);
+                new PlaySoundPacket(SoundType.INFESTED_BLOCK).sendToPlayer((ServerPlayer) player);
+            }
+
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        if (Utils.mossyTransforming(player, pos, block))
-        {
-            return InteractionResult.CONSUME;
-        }
-
-        return super.useOn(context);
+        return result;
     }
 }

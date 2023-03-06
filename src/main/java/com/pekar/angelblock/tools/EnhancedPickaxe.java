@@ -4,14 +4,11 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -45,7 +42,7 @@ public class EnhancedPickaxe extends ModPickaxe
 
     protected final void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
+        if (!isToolEffective(entityLiving, pos)) return;
 
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
@@ -114,11 +111,5 @@ public class EnhancedPickaxe extends ModPickaxe
     {
         BlockState blockState = entityLiving.level.getBlockState(pos);
         return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
-    }
-
-    protected final boolean canUseToolEffect(Player player)
-    {
-        ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
-        return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
     }
 }
