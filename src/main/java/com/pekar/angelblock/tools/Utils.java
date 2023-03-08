@@ -13,10 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.RedStoneOreBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 
@@ -132,21 +129,23 @@ public class Utils
 
     public static boolean isFallSafeWide(LivingEntity entityPlayer, BlockPos pos)
     {
-        BlockPos playerPos = entityPlayer.blockPosition();
+        var playerPos = entityPlayer.blockPosition();
 
-        if (playerPos.getY() <= pos.getY()
-                || Math.abs(playerPos.getX() - pos.getX()) >= 2
-                || Math.abs(playerPos.getZ() - pos.getZ()) >= 2)
+        if (playerPos.getY() > pos.getY())
         {
-            return true;
+            return Math.abs(playerPos.getX() - pos.getX()) >= 2
+                    || Math.abs(playerPos.getZ() - pos.getZ()) >= 2
+                    || !isAboveLavaOrWaterOrAir(entityPlayer.level, pos);
         }
-
-        return !isAboveLavaOrWaterOrAir(entityPlayer.level, pos);
+        else
+        {
+            return !isStandingUnderFallingBlock(entityPlayer, pos);
+        }
     }
 
     public static boolean isFallSafeExact(LivingEntity entityPlayer, BlockPos pos)
     {
-        if (!isStandingOnBreakingBlock(entityPlayer, pos))
+        if (!isAboveBreakingBlock(entityPlayer, pos))
         {
             return true;
         }
@@ -158,6 +157,22 @@ public class Utils
     {
         BlockPos playerPos = entityPlayer.blockPosition();
         return playerPos.getX() == pos.getX() && playerPos.getZ() == pos.getZ() && playerPos.getY() == pos.getY() + 1;
+    }
+
+    public static boolean isAboveBreakingBlock(LivingEntity entityPlayer, BlockPos pos)
+    {
+        BlockPos playerPos = entityPlayer.blockPosition();
+        return playerPos.getX() == pos.getX() && playerPos.getZ() == pos.getZ() && playerPos.getY() > pos.getY();
+    }
+
+    public static boolean isStandingUnderFallingBlock(LivingEntity entity, BlockPos pos)
+    {
+        var entityPos = entity.blockPosition();
+        if (Math.abs(entityPos.getX() - pos.getX()) > 1 || Math.abs(entityPos.getZ() - pos.getZ()) > 1 || entityPos.getY() >= pos.getY())
+            return false;
+
+        var blockAboveBreaking = entity.level.getBlockState(pos.above()).getBlock();
+        return blockAboveBreaking instanceof FallingBlock;
     }
 
     public static boolean isNearLavaOrWaterOrUnsafe(LivingEntity entityPlayer, BlockPos pos)
@@ -247,10 +262,8 @@ public class Utils
 
     private static boolean isAboveLavaOrWaterOrAir(Level level, BlockPos pos)
     {
-        Block block = level.getBlockState(pos.below()).getBlock();
         return level.isEmptyBlock(pos.below())
-                || block == Blocks.LAVA
-                || block == Blocks.WATER;
+                || level.getBlockState(pos.below()).getBlock() instanceof LiquidBlock;
     }
 
     public static boolean isNearLavaOrWater(Level level, BlockPos pos)
