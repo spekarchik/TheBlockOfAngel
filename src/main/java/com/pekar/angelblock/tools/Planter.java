@@ -36,10 +36,7 @@ public class Planter extends ModRod
     {
         if (facing != Direction.UP) return false;
 
-        var toolHand = InteractionHand.MAIN_HAND;
-        var seedHand = InteractionHand.OFF_HAND;
-
-        var seedInHand = player.getItemInHand(seedHand);
+        var seedInHand = player.getItemInHand(InteractionHand.OFF_HAND);
         if (!(seedInHand.getItem() instanceof BlockItem blockItem)) return false;
 
         var plantableBlock = blockItem.getBlock();
@@ -68,7 +65,7 @@ public class Planter extends ModRod
         }
 
         boolean haveAnyTransformed = false;
-        var toolItemStack = player.getItemInHand(toolHand);
+        var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
         var originBlock = level.getBlockState(pos).getBlock();
 
         for (int x = posX; x != posX + shiftX; x += increment)
@@ -101,8 +98,6 @@ public class Planter extends ModRod
         Block block = blockState.getBlock();
 
         if (block != originBlock) return false;
-//        if (plantBlock != Blocks.NETHER_WART && block != Blocks.FARMLAND) return false;
-//        if (plantBlock == Blocks.NETHER_WART && block != Blocks.SOUL_SAND) return false;
 
         var itemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int itemCount = itemStack.getCount();
