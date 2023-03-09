@@ -36,8 +36,8 @@ public class Planter extends ModRod
     {
         if (facing != Direction.UP) return false;
 
-        var toolHand = player.getUsedItemHand();
-        var seedHand = toolHand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        var toolHand = InteractionHand.MAIN_HAND;
+        var seedHand = InteractionHand.OFF_HAND;
 
         var seedInHand = player.getItemInHand(seedHand);
         if (!(seedInHand.getItem() instanceof BlockItem blockItem)) return false;
@@ -88,7 +88,8 @@ public class Planter extends ModRod
     {
         return block instanceof BushBlock
                 || block == Blocks.CACTUS
-                || block == Blocks.BAMBOO;
+                || block == Blocks.BAMBOO
+                || block == Blocks.SUGAR_CANE;
     }
 
     private boolean onBlockProcessing(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack, Block plantBlock)
