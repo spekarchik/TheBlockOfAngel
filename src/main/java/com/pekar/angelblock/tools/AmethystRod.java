@@ -24,9 +24,6 @@ public class AmethystRod extends FireRod
         var player = context.getPlayer();
         var level = player.level;
 
-//        if (level.isClientSide) return InteractionResult.PASS;
-//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
-
         var result = super.useOn(context);
         if (result != InteractionResult.PASS) return result;
 

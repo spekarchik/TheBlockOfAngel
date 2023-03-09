@@ -11,7 +11,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 
 import java.util.ArrayList;
@@ -27,9 +26,6 @@ public class EndRod extends AmethystRod
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-
-//        if (level.isClientSide) return InteractionResult.PASS;
-//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
             return super.useOn(context);

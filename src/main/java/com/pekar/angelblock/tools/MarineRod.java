@@ -34,8 +34,6 @@ public class MarineRod extends AncientRod
         var player = context.getPlayer();
         var level = player.level;
 
-//        if (level.isClientSide) return InteractionResult.PASS;
-//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
             return super.useOn(context);
 

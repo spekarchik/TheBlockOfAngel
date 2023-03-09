@@ -17,7 +17,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
@@ -36,9 +35,6 @@ public class FireRod extends MarineRod
     {
         var player = context.getPlayer();
         var level = player.level;
-
-//        if (level.isClientSide) return InteractionResult.PASS;
-//        if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
             return super.useOn(context);

@@ -4,11 +4,8 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -36,12 +33,6 @@ public abstract class ModTool extends HoeItem implements IModTool
         }
 
         return false;
-    }
-
-    protected final boolean canUseToolEffect(Player player)
-    {
-        ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
-        return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
     }
 
     protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
