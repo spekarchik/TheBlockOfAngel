@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "angelblock:ancient_rod"
+    },
+    "addition": {
+        "item": "minecraft:dispenser"
+    },
+    "result": {
+        "item": "angelblock:planter"
+    }
+}
