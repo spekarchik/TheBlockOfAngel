@@ -1,8 +1,19 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ToolAction;
 
 public class ModRod extends ModTool implements IModTool
@@ -43,5 +54,31 @@ public class ModRod extends ModTool implements IModTool
     public boolean isEnhancedRod()
     {
         return isMagnetic;
+    }
+
+    protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
+    {
+        var itemStack = player.getItemInHand(hand);
+
+        if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
+        {
+            boolean isClientSide = level.isClientSide();
+            if (!isClientSide)
+            {
+                level.setBlock(pos.above(), plantBlock.defaultBlockState(), 11);
+
+                if (player instanceof ServerPlayer serverPlayer)
+                {
+                    new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
+                    CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
+                }
+            }
+
+            return InteractionResult.sidedSuccess(isClientSide);
+        }
+        else
+        {
+            return InteractionResult.FAIL;
+        }
     }
 }

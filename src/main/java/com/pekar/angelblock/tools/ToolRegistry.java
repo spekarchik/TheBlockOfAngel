@@ -149,6 +149,10 @@ public class ToolRegistry
             () -> new EndRod(ToolMaterials.ROD_MATERIAL5, 0, -3F, true,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
+    public static final RegistryObject<ModRod> PLANTER = Main.ITEMS.register("planter",
+            () -> new Planter(ToolMaterials.ROD_MATERIAL4, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
+
     // Swords
     public static final RegistryObject<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",
             () -> new DiamithicPrimarySword(ToolMaterials.DIAMITHIC, 3, -2.4F,

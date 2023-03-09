@@ -5,14 +5,11 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.ChatFormatting;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
@@ -248,32 +245,6 @@ public class AncientRod extends MagneticRod
         }
 
         return InteractionResult.PASS;
-    }
-
-    protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
-    {
-        var itemStack = player.getItemInHand(hand);
-
-        if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
-        {
-            boolean isClientSide = player.level.isClientSide();
-            if (!isClientSide)
-            {
-                level.setBlock(pos.above(), plantBlock.defaultBlockState(), 11);
-
-                if (player instanceof ServerPlayer serverPlayer)
-                {
-                    new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
-                    CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
-                }
-            }
-
-            return InteractionResult.sidedSuccess(isClientSide);
-        }
-        else
-        {
-            return InteractionResult.FAIL;
-        }
     }
 
     private Block chooseFlowerByValue(int value)
