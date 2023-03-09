@@ -37,7 +37,7 @@ public abstract class ModTool extends HoeItem implements IModTool
 
     protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
     {
-        if (!level.isClientSide()) return;
+        if (level.isClientSide()) return;
 
         if (blockState.getDestroySpeed(level, pos) != 0.0F)
         {
