@@ -64,7 +64,7 @@ public class Planter extends ModRod
                 shiftX = seedCount; shiftZ = 1; increment = 1; break;
 
             case WEST:
-                shiftX = seedCount; shiftZ = -1; increment = -1; break;
+                shiftX = -seedCount; shiftZ = -1; increment = -1; break;
         }
 
         boolean haveAnyTransformed = false;
