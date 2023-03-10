@@ -57,6 +57,7 @@ public class PlaySoundPacket extends ServerToClientPacket
             case ORE_FOUND -> SoundEvents.GRAVEL_PLACE;
             case SCULK_FOUND -> SoundEvents.SCULK_SHRIEKER_SHRIEK;
             case INFESTED_BLOCK -> SoundEvents.SILVERFISH_DEATH;
+            case BONEMEAL -> SoundEvents.BONE_MEAL_USE;
             case UNDEFINED -> null;
         };
     }

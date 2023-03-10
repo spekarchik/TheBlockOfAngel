@@ -12,7 +12,8 @@ public enum SoundType
     DIAMOND_FOUND,
     SCULK_FOUND,
     ORE_FOUND,
-    INFESTED_BLOCK;
+    INFESTED_BLOCK,
+    BONEMEAL;
 
     public static int getIndex(SoundType soundType)
     {
@@ -29,6 +30,7 @@ public enum SoundType
                     case ORE_FOUND -> 8;
                     case SCULK_FOUND -> 9;
                     case INFESTED_BLOCK -> 10;
+                    case BONEMEAL -> 11;
                 };
     }
 
@@ -46,6 +48,7 @@ public enum SoundType
                     case 8 -> ORE_FOUND;
                     case 9 -> SCULK_FOUND;
                     case 10 -> INFESTED_BLOCK;
+                    case 11 -> BONEMEAL;
                     default -> UNDEFINED;
                 };
     }
