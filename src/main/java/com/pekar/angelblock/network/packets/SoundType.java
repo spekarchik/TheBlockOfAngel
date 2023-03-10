@@ -13,7 +13,10 @@ public enum SoundType
     SCULK_FOUND,
     ORE_FOUND,
     INFESTED_BLOCK,
-    BONEMEAL;
+    BONEMEAL,
+    RAIL_PLACED,
+    REDSTONE_WIRE_PLACED,
+    WOOD_PLACED;
 
     public static int getIndex(SoundType soundType)
     {
@@ -31,6 +34,9 @@ public enum SoundType
                     case SCULK_FOUND -> 9;
                     case INFESTED_BLOCK -> 10;
                     case BONEMEAL -> 11;
+                    case RAIL_PLACED -> 12;
+                    case REDSTONE_WIRE_PLACED -> 13;
+                    case WOOD_PLACED -> 14;
                 };
     }
 
@@ -49,6 +55,9 @@ public enum SoundType
                     case 9 -> SCULK_FOUND;
                     case 10 -> INFESTED_BLOCK;
                     case 11 -> BONEMEAL;
+                    case 12 -> RAIL_PLACED;
+                    case 13 -> REDSTONE_WIRE_PLACED;
+                    case 14 -> WOOD_PLACED;
                     default -> UNDEFINED;
                 };
     }

@@ -153,6 +153,10 @@ public class ToolRegistry
             () -> new Planter(ToolMaterials.ROD_MATERIAL5, 0, -3F, false,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
+    public static final RegistryObject<ModRod> TRACK_LAYER = Main.ITEMS.register("track_layer",
+            () -> new TrackLayer(ToolMaterials.ROD_MATERIAL5, 0, -3F, false,
+                    new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
+
     // Swords
     public static final RegistryObject<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",
             () -> new DiamithicPrimarySword(ToolMaterials.DIAMITHIC, 3, -2.4F,
