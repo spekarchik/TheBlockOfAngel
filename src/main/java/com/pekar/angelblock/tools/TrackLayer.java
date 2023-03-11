@@ -179,7 +179,9 @@ public class TrackLayer extends ModRod
         var originBlock = originBlockState.getBlock();
 
         boolean areBothFence = originBlock instanceof FenceBlock && placingBlock instanceof FenceBlock;
-        if (areBothFence) return originPos; // we can place fence on lower fence
+        boolean areBothWall = originBlock instanceof WallBlock && placingBlock instanceof WallBlock;
+        boolean areBothFenceOrWall = areBothWall || areBothFence;
+        if (areBothFenceOrWall) return originPos; // we can place fence on lower fence
         if (areSimilar(originBlock, placingBlock)) return originPos.below();
 
         if (originBlockState.isAir() || originBlock instanceof BushBlock)
@@ -226,6 +228,7 @@ public class TrackLayer extends ModRod
     {
         return block instanceof BaseRailBlock
                 || block instanceof FenceBlock
+                || block instanceof WallBlock
                 || block == Blocks.REDSTONE_WIRE;
     }
 
@@ -262,10 +265,12 @@ public class TrackLayer extends ModRod
         var block = blockState.getBlock();
 
         boolean areBothFence = block instanceof FenceBlock && placingBlock instanceof FenceBlock;
-        if (!areBothFence && areSimilar(placingBlock, block)) return true;
+        boolean areBothWall = block instanceof WallBlock && placingBlock instanceof WallBlock;
+        boolean areBothFenceOrWall = areBothWall || areBothFence;
+        if (!areBothFenceOrWall && areSimilar(placingBlock, block)) return true;
 
         boolean isBlockSolid = blockState.isSolidRender(level, pos);
-        if (block instanceof LiquidBlock || blockState.isAir() || (!isBlockSolid && !areBothFence)) return false;
+        if (block instanceof LiquidBlock || blockState.isAir() || (!isBlockSolid && !areBothFenceOrWall)) return false;
 
         var upPos = pos.above();
         var upperBlockState = level.getBlockState(upPos);
@@ -299,11 +304,12 @@ public class TrackLayer extends ModRod
         return true;
     }
 
-    private boolean areSimilar(Block offHandBlock, Block upperBlock)
+    private boolean areSimilar(Block block1, Block block2)
     {
-        return offHandBlock == upperBlock
-                || (offHandBlock instanceof BaseRailBlock && upperBlock instanceof BaseRailBlock)
-                || (offHandBlock instanceof FenceBlock && upperBlock instanceof FenceBlock);
+        return block1 == block2
+                || (block1 instanceof BaseRailBlock && block2 instanceof BaseRailBlock)
+                || (block1 instanceof FenceBlock && block2 instanceof FenceBlock)
+                || (block1 instanceof WallBlock && block2 instanceof WallBlock);
     }
 
     @NotNull
@@ -318,6 +324,10 @@ public class TrackLayer extends ModRod
         else if (placingBlock instanceof FenceBlock)
         {
             soundType = SoundType.WOOD_PLACED;
+        }
+        else if (placingBlock instanceof WallBlock)
+        {
+            soundType = SoundType.STONE_PLACED;
         }
         else
         {
