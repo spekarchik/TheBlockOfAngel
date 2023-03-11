@@ -102,8 +102,8 @@ public class TrackLayer extends ModRod
         }
 
         boolean haveAnyDone = false;
-        var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-        var originBlock = level.getBlockState(pos).getBlock();
+        final var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+        final var originBlock = level.getBlockState(pos).getBlock();
 
         int y = posY;
         for (int x = posX - a1; x <= posX + a2; x++)
@@ -168,11 +168,11 @@ public class TrackLayer extends ModRod
         var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
         var originBlock = level.getBlockState(pos).getBlock();
 
-        int y = posY;
+        int y = originBlock instanceof BaseRailBlock ? posY - 1 : posY;
         for (int x = posX; x != posX + shiftX; x += increment)
             for (int z = posZ; z != posZ + shiftZ; z += increment)
             {
-                var updatedPos = checkNextPosToPlace(level, new BlockPos(x, y, z), placingBlock);
+                var updatedPos = checkNextPosToPlaceOn(level, new BlockPos(x, y, z), placingBlock);
                 y = updatedPos.getY();
                 boolean hasPlaced = placeBlock(player, level, originBlock, updatedPos, facing, toolItemStack, placingBlock);
                 if (hasPlaced)
@@ -184,11 +184,13 @@ public class TrackLayer extends ModRod
         return haveAnyPlaced;
     }
 
-    private BlockPos checkNextPosToPlace(Level level, BlockPos originPos, Block placingBlock)
+    private BlockPos checkNextPosToPlaceOn(Level level, BlockPos originPos, Block placingBlock)
     {
         var originBlockState = level.getBlockState(originPos);
         var originBlock = originBlockState.getBlock();
 
+        boolean areBothFence = originBlock instanceof FenceBlock && placingBlock instanceof FenceBlock;
+        if (areBothFence) return originPos; // we can place fence on lower fence
         if (areSimilar(originBlock, placingBlock)) return originPos.below();
 
         if (originBlockState.isAir() || originBlock instanceof BushBlock)
@@ -267,21 +269,20 @@ public class TrackLayer extends ModRod
         int itemCount = offHandItemStack.getCount();
         if (itemCount < 1) return false;
 
-        var offHandBlock = ((BlockItem)offHandItemStack.getItem()).getBlock();
-
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
-        if (areSimilar(offHandBlock, block)) return true;
+        boolean areBothFence = block instanceof FenceBlock && placingBlock instanceof FenceBlock;
+        if (!areBothFence && areSimilar(placingBlock, block)) return true;
 
         boolean isBlockSolid = blockState.isSolidRender(level, pos);
-        if (block instanceof LiquidBlock || blockState.isAir() || !isBlockSolid) return false;
+        if (block instanceof LiquidBlock || blockState.isAir() || (!isBlockSolid && !areBothFence)) return false;
 
         var upPos = pos.above();
         var upperBlockState = level.getBlockState(upPos);
         var upperBlock = upperBlockState.getBlock();
         boolean isUpperBushBlock = upperBlock instanceof BushBlock;
-        boolean canSkip = areSimilar(offHandBlock, upperBlock);
+        boolean canSkip = upperBlock != Blocks.REDSTONE_WIRE && areSimilar(placingBlock, upperBlock);
 
         if (canSkip) return true;
 
@@ -295,7 +296,6 @@ public class TrackLayer extends ModRod
             }
 
             level.setBlock(upPos, placingBlock.defaultBlockState(), 11);
-            level.updateNeighborsAt(upPos, placingBlock);
 
             if (player instanceof ServerPlayer serverPlayer)
             {
