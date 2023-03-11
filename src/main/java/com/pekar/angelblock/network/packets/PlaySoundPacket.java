@@ -61,6 +61,7 @@ public class PlaySoundPacket extends ServerToClientPacket
             case RAIL_PLACED -> SoundEvents.METAL_PLACE;
             case REDSTONE_WIRE_PLACED -> SoundEvents.STONE_PLACE;
             case WOOD_PLACED -> SoundEvents.WOOD_PLACE;
+            case STONE_PLACED -> SoundEvents.STONE_PLACE;
             case UNDEFINED -> null;
         };
     }
