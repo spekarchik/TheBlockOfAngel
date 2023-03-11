@@ -72,20 +72,22 @@ public class Planter extends ModRod
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
-        int a1 = 0, a2 = 0, b1 = 0, b2 = 0;
+        int x1 = 0, x2 = 0, z1 = 0, z2 = 0, incX = 1, incZ = 1;
         switch (player.getDirection())
         {
             case NORTH:
-                a1 = GRAB_HALF_WIDTH; a2 = GRAB_HALF_WIDTH; b1 = GRAB_LENGTH - 1; b2 = 0; break;
+                x1 = GRAB_HALF_WIDTH; x2 = GRAB_HALF_WIDTH + 1; z1 = 0; z2 = -GRAB_LENGTH; incZ = -1; break;
 
             case SOUTH:
-                a1 = GRAB_HALF_WIDTH; a2 = GRAB_HALF_WIDTH; b1 = 0; b2 = GRAB_LENGTH - 1; break;
+                x1 = GRAB_HALF_WIDTH; x2 = GRAB_HALF_WIDTH + 1; z1 = 0; z2 = GRAB_LENGTH; break;
 
             case EAST:
-                a1 = 0; a2 = GRAB_LENGTH - 1; b1 = GRAB_HALF_WIDTH; b2 = GRAB_HALF_WIDTH; break;
+                x1 = 0; x2 = GRAB_LENGTH; z1 = GRAB_HALF_WIDTH; z2 = GRAB_HALF_WIDTH + 1; break;
 
-            case WEST:
-                a1 = GRAB_LENGTH - 1; a2 = 0; b1 = GRAB_HALF_WIDTH; b2 = GRAB_HALF_WIDTH; break;
+
+            case WEST: // towards negative X
+                x1 = 0; x2 = -GRAB_LENGTH; incX = -1; z1 = GRAB_HALF_WIDTH; z2 = GRAB_HALF_WIDTH + 1; break;
+
         }
 
         boolean haveAnyTransformed = false;
@@ -93,8 +95,8 @@ public class Planter extends ModRod
         var originBlock = level.getBlockState(pos).getBlock();
 
         int y = originBlock instanceof BushBlock ? posY : pos.above().getY();
-        for (int x = posX - a1; x <= posX + a2; x++)
-            for (int z = posZ - b1; z <= posZ + b2; z++)
+        for (int x = posX - x1; x != posX + x2; x += incX)
+            for (int z = posZ - z1; z != posZ + z2; z += incZ)
             {
                 boolean hasTransformed = grabPlant(player, level, originBlock, new BlockPos(x, y, z), toolItemStack, shouldDrop);
                 if (hasTransformed)
