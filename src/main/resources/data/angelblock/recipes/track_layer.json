@@ -2,22 +2,22 @@
     "type": "minecraft:crafting_shaped",
     "pattern": [
         "#",
-        "@",
+        "/",
         "?"
     ],
     "key": {
         "#": {
-            "item": "minecraft:dispenser"
+            "item": "minecraft:piston"
         },
-        "@": {
-            "item": "minecraft:nautilus_shell"
+        "/": {
+            "item": "minecraft:fishing_rod"
         },
         "?": {
-            "item": "angelblock:ancient_rod"
+            "item": "angelblock:amethyst_rod"
         }
     },
     "result": {
-        "item": "angelblock:planter",
+        "item": "angelblock:track_layer",
         "count": 1
     }
 }
