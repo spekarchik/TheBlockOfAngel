@@ -23,14 +23,6 @@ public class TrackLayer extends ModRod
         super(material, attackDamage, attackSpeed, isMagnetic, properties);
     }
 
-    // 1. наклоны
-    // +2. удаляет растения на пути
-    // +3. быстро дропает рельсы по левой кнопке мыши
-    // +4. пропускает уже уложенные рельсы
-    // +5. дальность - всегда 64 или пока есть рельсы
-    // 6. останавливается если разница в высоте > 2 блоков
-    // +7. прокладывает также красную пыль
-
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
@@ -57,43 +49,69 @@ public class TrackLayer extends ModRod
         if (isTrackLayerCompatible(block) && livingEntity instanceof Player player && !level.isClientSide())
         {
             damageItemIfSurvival(player, level, pos.below(), level.getBlockState(pos.below()));
-            dropBlocks(player, level, pos, 1, true);
+            dropBlocks(player, level, pos);
         }
 
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
-    protected boolean dropBlocks(Player player, Level level, BlockPos pos, int grabWidth, boolean shouldDrop)
+    @Override
+    public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
+    {
+        return isTrackLayerCompatible(blockState.getBlock()) ? 10F : 1F;
+    }
+
+    protected boolean dropBlocks(Player player, Level level, BlockPos pos)
     {
         final int DROP_LENGTH = 8;
-        final int DROP_HALF_WIDTH = grabWidth / 2;
+        final int DROP_HALF_WIDTH = 0;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
         int a1 = 0, a2 = 0, b1 = 0, b2 = 0;
         switch (player.getDirection())
         {
-            case NORTH:
-                a1 = DROP_HALF_WIDTH; a2 = DROP_HALF_WIDTH; b1 = DROP_LENGTH - 1; b2 = 0; break;
-
-            case SOUTH:
-                a1 = DROP_HALF_WIDTH; a2 = DROP_HALF_WIDTH; b1 = 0; b2 = DROP_LENGTH - 1; break;
-
-            case EAST:
-                a1 = 0; a2 = DROP_LENGTH - 1; b1 = DROP_HALF_WIDTH; b2 = DROP_HALF_WIDTH; break;
-
-            case WEST:
-                a1 = DROP_LENGTH - 1; a2 = 0; b1 = DROP_HALF_WIDTH; b2 = DROP_HALF_WIDTH; break;
+            case NORTH ->
+            {
+                a1 = DROP_HALF_WIDTH;
+                a2 = DROP_HALF_WIDTH;
+                b1 = DROP_LENGTH - 1;
+                b2 = 0;
+            }
+            case SOUTH ->
+            {
+                a1 = DROP_HALF_WIDTH;
+                a2 = DROP_HALF_WIDTH;
+                b1 = 0;
+                b2 = DROP_LENGTH - 1;
+            }
+            case EAST ->
+            {
+                a1 = 0;
+                a2 = DROP_LENGTH - 1;
+                b1 = DROP_HALF_WIDTH;
+                b2 = DROP_HALF_WIDTH;
+            }
+            case WEST ->
+            {
+                a1 = DROP_LENGTH - 1;
+                a2 = 0;
+                b1 = DROP_HALF_WIDTH;
+                b2 = DROP_HALF_WIDTH;
+            }
         }
 
         boolean haveAnyDone = false;
         var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
         var originBlock = level.getBlockState(pos).getBlock();
 
+        int y = posY;
         for (int x = posX - a1; x <= posX + a2; x++)
             for (int z = posZ - b1; z <= posZ + b2; z++)
             {
-                boolean hasDone = dropBlock(player, level, originBlock, new BlockPos(x, posY, z), toolItemStack, shouldDrop);
+                var updatedPos = checkNextPosToDrop(level, new BlockPos(x, y, z), originBlock);
+                y = updatedPos.getY();
+                boolean hasDone = dropBlock(player, level, originBlock, new BlockPos(x, y, z), toolItemStack, true);
                 if (hasDone)
                     haveAnyDone = true;
             }
@@ -120,27 +138,43 @@ public class TrackLayer extends ModRod
 
         switch (player.getDirection())
         {
-            case NORTH:
-                shiftX = -1; shiftZ = -MAX_PLACEMENT_LENGTH; increment = -1; break;
-
-            case SOUTH:
-                shiftX = 1; shiftZ = MAX_PLACEMENT_LENGTH; increment = 1; break;
-
-            case EAST:
-                shiftX = MAX_PLACEMENT_LENGTH; shiftZ = 1; increment = 1; break;
-
-            case WEST:
-                shiftX = -MAX_PLACEMENT_LENGTH; shiftZ = -1; increment = -1; break;
+            case NORTH ->
+            {
+                shiftX = -1;
+                shiftZ = -MAX_PLACEMENT_LENGTH;
+                increment = -1;
+            }
+            case SOUTH ->
+            {
+                shiftX = 1;
+                shiftZ = MAX_PLACEMENT_LENGTH;
+                increment = 1;
+            }
+            case EAST ->
+            {
+                shiftX = MAX_PLACEMENT_LENGTH;
+                shiftZ = 1;
+                increment = 1;
+            }
+            case WEST ->
+            {
+                shiftX = -MAX_PLACEMENT_LENGTH;
+                shiftZ = -1;
+                increment = -1;
+            }
         }
 
         boolean haveAnyPlaced = false;
         var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
         var originBlock = level.getBlockState(pos).getBlock();
 
+        int y = posY;
         for (int x = posX; x != posX + shiftX; x += increment)
             for (int z = posZ; z != posZ + shiftZ; z += increment)
             {
-                boolean hasPlaced = placeBlock(player, level, originBlock, new BlockPos(x, posY, z), facing, toolItemStack, placingBlock);
+                var updatedPos = checkNextPosToPlace(level, new BlockPos(x, y, z), placingBlock);
+                y = updatedPos.getY();
+                boolean hasPlaced = placeBlock(player, level, originBlock, updatedPos, facing, toolItemStack, placingBlock);
                 if (hasPlaced)
                     haveAnyPlaced = true;
                 else
@@ -148,6 +182,53 @@ public class TrackLayer extends ModRod
             }
 
         return haveAnyPlaced;
+    }
+
+    private BlockPos checkNextPosToPlace(Level level, BlockPos originPos, Block placingBlock)
+    {
+        var originBlockState = level.getBlockState(originPos);
+        var originBlock = originBlockState.getBlock();
+
+        if (areSimilar(originBlock, placingBlock)) return originPos.below();
+
+        if (originBlockState.isAir() || originBlock instanceof BushBlock)
+        {
+            var updatedPos = originPos.below();
+            boolean isBelowBlockSolid = level.getBlockState(updatedPos).isSolidRender(level, updatedPos);
+            return isBelowBlockSolid ? updatedPos : originPos;
+        }
+
+        var upPos = originPos.above();
+        var upperBlockState = level.getBlockState(upPos);
+        boolean isUpperBlockSolid = upperBlockState.isSolidRender(level, upPos);
+
+        if (isUpperBlockSolid)
+        {
+            var theBlockStateAboveUpper = level.getBlockState(upPos.above());
+            var theBlockAboveUpper = theBlockStateAboveUpper.getBlock();
+            boolean canGoUp = theBlockStateAboveUpper.isAir() || theBlockAboveUpper instanceof BushBlock
+                    || areSimilar(theBlockAboveUpper, placingBlock);
+
+            return canGoUp ? upPos : originPos;
+        }
+
+        return originPos;
+    }
+
+    private BlockPos checkNextPosToDrop(Level level, BlockPos originPos, Block firstDroppedBlock)
+    {
+        var blockState = level.getBlockState(originPos);
+        var block = blockState.getBlock();
+
+        if (areSimilar(block, firstDroppedBlock)) return originPos;
+
+        if (areSimilar(level.getBlockState(originPos.below()).getBlock(), firstDroppedBlock))
+            return originPos.below();
+
+        if (areSimilar(level.getBlockState(originPos.above()).getBlock(), firstDroppedBlock))
+            return originPos.above();
+
+        return originPos;
     }
 
     private boolean isTrackLayerCompatible(Block block)
@@ -193,26 +274,28 @@ public class TrackLayer extends ModRod
 
         if (areSimilar(offHandBlock, block)) return true;
 
-        if (block instanceof LiquidBlock || blockState.isAir() || !blockState.isSolidRender(level, pos)) return false;
+        boolean isBlockSolid = blockState.isSolidRender(level, pos);
+        if (block instanceof LiquidBlock || blockState.isAir() || !isBlockSolid) return false;
 
-        var upperBlockState = level.getBlockState(pos.above());
+        var upPos = pos.above();
+        var upperBlockState = level.getBlockState(upPos);
         var upperBlock = upperBlockState.getBlock();
-        boolean isBushBlock = upperBlock instanceof BushBlock;
+        boolean isUpperBushBlock = upperBlock instanceof BushBlock;
         boolean canSkip = areSimilar(offHandBlock, upperBlock);
 
         if (canSkip) return true;
 
-        if (!upperBlockState.isAir() && !isBushBlock) return false;
+        if (!upperBlockState.isAir() && !isUpperBushBlock) return false;
 
         if (!level.isClientSide())
         {
-            if (isBushBlock)
+            if (isUpperBushBlock)
             {
-                level.destroyBlock(pos.above(), false);
+                level.destroyBlock(upPos, false);
             }
 
-            level.setBlock(pos.above(), placingBlock.defaultBlockState(), 11);
-            level.updateNeighborsAt(pos.above(), placingBlock);
+            level.setBlock(upPos, placingBlock.defaultBlockState(), 11);
+            level.updateNeighborsAt(upPos, placingBlock);
 
             if (player instanceof ServerPlayer serverPlayer)
             {
