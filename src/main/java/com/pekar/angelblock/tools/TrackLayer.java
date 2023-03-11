@@ -64,40 +64,29 @@ public class TrackLayer extends ModRod
     protected boolean dropBlocks(Player player, Level level, BlockPos pos)
     {
         final int DROP_LENGTH = 8;
-        final int DROP_HALF_WIDTH = 0;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
-        int a1 = 0, a2 = 0, b1 = 0, b2 = 0;
+        int shiftX = 1, shiftZ = 1, incX = 1, incZ = 1;
         switch (player.getDirection())
         {
-            case NORTH ->
+            case NORTH -> // towards negative Z ??
             {
-                a1 = DROP_HALF_WIDTH;
-                a2 = DROP_HALF_WIDTH;
-                b1 = DROP_LENGTH - 1;
-                b2 = 0;
+                shiftZ = -DROP_LENGTH;
+                incZ = -1;
             }
             case SOUTH ->
             {
-                a1 = DROP_HALF_WIDTH;
-                a2 = DROP_HALF_WIDTH;
-                b1 = 0;
-                b2 = DROP_LENGTH - 1;
+                shiftZ = DROP_LENGTH;
             }
             case EAST ->
             {
-                a1 = 0;
-                a2 = DROP_LENGTH - 1;
-                b1 = DROP_HALF_WIDTH;
-                b2 = DROP_HALF_WIDTH;
+                shiftX = DROP_LENGTH;
             }
-            case WEST ->
+            case WEST -> // towards negative X
             {
-                a1 = DROP_LENGTH - 1;
-                a2 = 0;
-                b1 = DROP_HALF_WIDTH;
-                b2 = DROP_HALF_WIDTH;
+                shiftX = -DROP_LENGTH;
+                incX = -1;
             }
         }
 
@@ -106,8 +95,8 @@ public class TrackLayer extends ModRod
         final var originBlock = level.getBlockState(pos).getBlock();
 
         int y = posY;
-        for (int x = posX - a1; x <= posX + a2; x++)
-            for (int z = posZ - b1; z <= posZ + b2; z++)
+        for (int x = posX; x != posX + shiftX; x += incX)
+            for (int z = posZ; z != posZ + shiftZ; z += incZ)
             {
                 var updatedPos = checkNextPosToDrop(level, new BlockPos(x, y, z), originBlock);
                 y = updatedPos.getY();
