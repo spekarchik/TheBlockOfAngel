@@ -12,10 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.GrowingPlantBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 
@@ -166,6 +163,7 @@ public class Builder extends ModRod
 
     boolean isBlockCompatible(Level level, BlockState blockState, BlockPos pos)
     {
-        return !blockState.hasBlockEntity() && !(blockState.getBlock() instanceof FallingBlock) && blockState.isSolidRender(level, pos);
+        return !blockState.hasBlockEntity() && !(blockState.getBlock() instanceof FallingBlock)
+                && (blockState.isSolidRender(level, pos) || blockState.getBlock() instanceof AbstractGlassBlock);
     }
 }
