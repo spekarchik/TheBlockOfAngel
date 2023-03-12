@@ -120,7 +120,7 @@ public class TrackLayer extends ModRod
         if (!isTrackLayerCompatible(placingBlock))
             return false;
 
-        final int MAX_PLACEMENT_LENGTH = 64;
+        final int MAX_PLACEMENT_LENGTH = 65;
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
         int shiftX = 0, shiftZ = 0, increment = 0;

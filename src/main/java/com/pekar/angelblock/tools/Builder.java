@@ -62,7 +62,7 @@ public class Builder extends ModRod
         var updatedPos = clickedBlock != placingBlock ? pos.relative(facing) : pos;
         final int posX = updatedPos.getX(), posY = updatedPos.getY(), posZ = updatedPos.getZ();
 
-        final int MAX_PLACEMENT_LENGTH = 64;
+        final int MAX_PLACEMENT_LENGTH = 65; // one more - first block can be skipped
         int shiftX = 0, shiftZ = 0, shiftY = 0, increment = 0;
 
         switch (player.getDirection())
