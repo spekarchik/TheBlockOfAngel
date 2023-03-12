@@ -9,11 +9,23 @@ import net.minecraft.sounds.SoundEvents;
 
 public class PlaySoundPacket extends ServerToClientPacket
 {
-    private SoundType soundType;
+    private final SoundType soundType;
+    private final SoundEvent soundEvent;
 
     public PlaySoundPacket(SoundType soundType)
     {
+        this(soundType, SoundEvents.NOTE_BLOCK_XYLOPHONE);
+    }
+
+    public PlaySoundPacket(SoundEvent soundEvent)
+    {
+        this(SoundType.MINECRAFT, soundEvent);
+    }
+
+    private PlaySoundPacket(SoundType soundType, SoundEvent soundEvent)
+    {
         this.soundType = soundType;
+        this.soundEvent = soundEvent;
     }
 
     @Override
@@ -25,13 +37,16 @@ public class PlaySoundPacket extends ServerToClientPacket
     @Override
     protected Packet create(FriendlyByteBuf buffer)
     {
-        return new PlaySoundPacket(SoundType.getByIndex(buffer.readInt()));
+        var soundType = SoundType.getByIndex(buffer.readInt());
+        var soundEvent = new SoundEvent(buffer.readResourceLocation());
+        return new PlaySoundPacket(soundType, soundEvent);
     }
 
     @Override
     protected void encode(FriendlyByteBuf buffer)
     {
         buffer.writeInt(SoundType.getIndex(soundType));
+        buffer.writeResourceLocation(soundEvent.getLocation());
     }
 
     @Override
@@ -59,9 +74,9 @@ public class PlaySoundPacket extends ServerToClientPacket
             case INFESTED_BLOCK -> SoundEvents.SILVERFISH_DEATH;
             case BONEMEAL -> SoundEvents.BONE_MEAL_USE;
             case RAIL_PLACED -> SoundEvents.METAL_PLACE;
-            case REDSTONE_WIRE_PLACED -> SoundEvents.STONE_PLACE;
+            case REDSTONE_WIRE_PLACED, STONE_PLACED -> SoundEvents.STONE_PLACE;
             case WOOD_PLACED -> SoundEvents.WOOD_PLACE;
-            case STONE_PLACED -> SoundEvents.STONE_PLACE;
+            case MINECRAFT -> soundEvent;
             case UNDEFINED -> null;
         };
     }

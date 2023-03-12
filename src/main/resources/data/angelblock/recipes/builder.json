@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "/",
+        "?"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:piston"
+        },
+        "/": {
+            "item": "angelblock:strength_pearl"
+        },
+        "?": {
+            "item": "angelblock:amethyst_rod"
+        }
+    },
+    "result": {
+        "item": "angelblock:builder",
+        "count": 1
+    }
+}
