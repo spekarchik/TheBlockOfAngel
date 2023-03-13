@@ -150,7 +150,7 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.RARE)));
 
     public static final RegistryObject<ModRod> PLANTER = Main.ITEMS.register("planter",
-            () -> new Planter(ToolMaterials.ROD_MATERIAL5, 0, -3F, false,
+            () -> new Planter(ToolMaterials.ROD_MATERIAL6, 0, -3F, false,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModRod> TRACK_LAYER = Main.ITEMS.register("track_layer",
@@ -158,7 +158,7 @@ public class ToolRegistry
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<ModRod> BUILDER = Main.ITEMS.register("builder",
-            () -> new Builder(ToolMaterials.ROD_MATERIAL5, 0, -3F, false,
+            () -> new Builder(ToolMaterials.ROD_MATERIAL6, 0, -3F, false,
                     new Item.Properties().tab(ModTab.MOD_TAB).rarity(Rarity.UNCOMMON)));
 
     // Swords
