@@ -27,27 +27,30 @@ public class SuperAxe extends EnhancedAxe
     @Override
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (level.isClientSide || !isEnhancedTool() || !isToolEffective(entityLiving, pos)) return;
-
-        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+        if (!isEnhancedTool() || !entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        float initialHardness = blockState.getBlock().defaultDestroyTime();
+        var block = blockState.getBlock();
 
-        if (initialHardness == 0.0F)
+        if (!isToolEffective(entityLiving, pos) /*&& !isCompatiblePlant(block)*/)
             return;
 
-        int increment = 1;
-        while (canProceed(entityLiving, pos.above(increment)))
-        {
-            onBlockMining(level, blockState, initialHardness, pos.above(increment++), entityLiving);
-        }
+        float initialHardness = block.defaultDestroyTime();
 
-        increment = 1;
-        while (canProceed(entityLiving, pos.below(increment)))
+        if (initialHardness != 0.0F && !isCompatiblePlant(block))
         {
-            onBlockMining(level, blockState, initialHardness, pos.below(increment++), entityLiving);
+            int increment = 1;
+            while (canProceed(entityLiving, pos.above(increment)))
+            {
+                onBlockMining(level, blockState, initialHardness, pos.above(increment++), entityLiving);
+            }
+
+            increment = 1;
+            while (canProceed(entityLiving, pos.below(increment)))
+            {
+                onBlockMining(level, blockState, initialHardness, pos.below(increment++), entityLiving);
+            }
         }
 
         super.mineAdditionalBlocks(level, pos, entityLiving);

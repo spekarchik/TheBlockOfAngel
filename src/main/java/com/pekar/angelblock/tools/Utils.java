@@ -391,14 +391,19 @@ public class Utils
     public boolean destroyBlockByMainHandTool(Level level, BlockPos pos, LivingEntity entityLiving, BlockState blockState, Block block)
     {
         var mainHandItemStack = entityLiving.getMainHandItem();
-        block.playerDestroy(level, (Player) entityLiving, pos, blockState, null, mainHandItemStack);
+        if (!level.isClientSide())
+            block.playerDestroy(level, (Player) entityLiving, pos, blockState, null, mainHandItemStack);
+
         if (mainHandItemStack.getItem() instanceof DiggerItem tool)
         {
-            int fortuneLevel = tool.getEnchantmentLevel(mainHandItemStack, Enchantments.BLOCK_FORTUNE);
-            int silkTouchLevel = tool.getEnchantmentLevel(mainHandItemStack, Enchantments.SILK_TOUCH);
-            int exp = blockState.getExpDrop(level, level.random, pos, fortuneLevel, silkTouchLevel);
-            block.popExperience((ServerLevel) level, pos, exp);
-            level.removeBlock(pos, true);
+            if (!level.isClientSide())
+            {
+                int fortuneLevel = tool.getEnchantmentLevel(mainHandItemStack, Enchantments.BLOCK_FORTUNE);
+                int silkTouchLevel = tool.getEnchantmentLevel(mainHandItemStack, Enchantments.SILK_TOUCH);
+                int exp = blockState.getExpDrop(level, level.random, pos, fortuneLevel, silkTouchLevel);
+                block.popExperience((ServerLevel) level, pos, exp);
+                level.removeBlock(pos, true);
+            }
             return true;
         }
 

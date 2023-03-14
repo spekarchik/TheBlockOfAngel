@@ -3,13 +3,13 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class EnhancedAxe extends ModAxe
@@ -28,8 +28,7 @@ public class EnhancedAxe extends ModAxe
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        if (!level.isClientSide)
-            mineAdditionalBlocks(level, pos, livingEntity);
+        mineAdditionalBlocks(level, pos, livingEntity);
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
@@ -42,16 +41,16 @@ public class EnhancedAxe extends ModAxe
 
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (!isToolEffective(entityLiving, pos)) return;
-
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        if (blockState.hasBlockEntity() || blockState != blockState.getBlock().defaultBlockState()) return;
+        var block = blockState.getBlock();
+        if (!isToolEffective(entityLiving, pos)) return;
 
-        float originHardness = blockState.getBlock().defaultDestroyTime();
-        if (originHardness == 0.0F) return;
+        if (blockState.hasBlockEntity() || (blockState != block.defaultBlockState() && !isCompatiblePlant(block))) return;
+
+        float originHardness = block.defaultDestroyTime();
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
@@ -64,6 +63,11 @@ public class EnhancedAxe extends ModAxe
                 }
     }
 
+    protected boolean isCompatiblePlant(Block block)
+    {
+        return block instanceof BushBlock;
+    }
+
     protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
     {
         BlockState blockState = entityLiving.level.getBlockState(pos);
@@ -73,9 +77,9 @@ public class EnhancedAxe extends ModAxe
     protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
-
         var block = blockState.getBlock();
-        if (blockState.hasBlockEntity() || blockState != block.defaultBlockState()) return;
+
+        if (blockState.hasBlockEntity() || (blockState != block.defaultBlockState() && !isCompatiblePlant(block))) return;
 
         float hardness = block.defaultDestroyTime();
 
@@ -85,12 +89,6 @@ public class EnhancedAxe extends ModAxe
             if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
                 damageItem(1, entityLiving);
         }
-    }
-
-    protected final boolean canUseToolEffect(Player player)
-    {
-        ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
-        return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
     }
 
     protected boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
