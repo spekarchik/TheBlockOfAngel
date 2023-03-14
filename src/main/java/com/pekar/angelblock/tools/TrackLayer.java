@@ -14,6 +14,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.NotNull;
 
 public class TrackLayer extends ModRod
@@ -184,23 +185,22 @@ public class TrackLayer extends ModRod
         if (areBothFenceOrWall) return originPos; // we can place fence on lower fence
         if (areSimilar(originBlock, placingBlock)) return originPos.below();
 
-        if (originBlockState.isAir() || originBlock instanceof BushBlock)
+        if (originBlockState.isAir() || originBlock instanceof BushBlock || isAllowedReplaceWater(originBlockState, placingBlock))
         {
             var updatedPos = originPos.below();
-            boolean isBelowBlockSolid = level.getBlockState(updatedPos).isSolidRender(level, updatedPos);
+            boolean isBelowBlockSolid = isBlockSolidOrGlass(level, updatedPos);
             return isBelowBlockSolid ? updatedPos : originPos;
         }
 
         var upPos = originPos.above();
-        var upperBlockState = level.getBlockState(upPos);
-        boolean isUpperBlockSolid = upperBlockState.isSolidRender(level, upPos);
+        boolean isUpperBlockSolid = isBlockSolidOrGlass(level, upPos);
 
         if (isUpperBlockSolid)
         {
             var theBlockStateAboveUpper = level.getBlockState(upPos.above());
             var theBlockAboveUpper = theBlockStateAboveUpper.getBlock();
             boolean canGoUp = theBlockStateAboveUpper.isAir() || theBlockAboveUpper instanceof BushBlock
-                    || areSimilar(theBlockAboveUpper, placingBlock);
+                    || isAllowedReplaceWater(theBlockStateAboveUpper, placingBlock) || areSimilar(theBlockAboveUpper, placingBlock);
 
             return canGoUp ? upPos : originPos;
         }
@@ -269,7 +269,7 @@ public class TrackLayer extends ModRod
         boolean areBothFenceOrWall = areBothWall || areBothFence;
         if (!areBothFenceOrWall && areSimilar(placingBlock, block)) return true;
 
-        boolean isBlockSolid = blockState.isSolidRender(level, pos);
+        boolean isBlockSolid = isBlockSolidOrGlass(level, pos);
         if (block instanceof LiquidBlock || blockState.isAir() || (!isBlockSolid && !areBothFenceOrWall)) return false;
 
         var upPos = pos.above();
@@ -277,10 +277,11 @@ public class TrackLayer extends ModRod
         var upperBlock = upperBlockState.getBlock();
         boolean isUpperBushBlock = upperBlock instanceof BushBlock;
         boolean canSkip = upperBlock != Blocks.REDSTONE_WIRE && areSimilar(placingBlock, upperBlock);
+        boolean isUpperWaterReplacingByRails = isAllowedReplaceWater(upperBlockState, placingBlock);
 
         if (canSkip) return true;
 
-        if (!upperBlockState.isAir() && !isUpperBushBlock) return false;
+        if (!upperBlockState.isAir() && !isUpperWaterReplacingByRails && !isUpperBushBlock) return false;
 
         if (!level.isClientSide())
         {
@@ -310,6 +311,19 @@ public class TrackLayer extends ModRod
                 || (block1 instanceof BaseRailBlock && block2 instanceof BaseRailBlock)
                 || (block1 instanceof FenceBlock && block2 instanceof FenceBlock)
                 || (block1 instanceof WallBlock && block2 instanceof WallBlock);
+    }
+
+    private boolean isAllowedReplaceWater(BlockState replacingBlockState, Block placingBlock)
+    {
+        return replacingBlockState.getBlock() instanceof LiquidBlock
+                && replacingBlockState.getMaterial() == Material.WATER
+                && placingBlock instanceof BaseRailBlock;
+    }
+
+    private boolean isBlockSolidOrGlass(Level level, BlockPos pos)
+    {
+        var blockState = level.getBlockState(pos);
+        return blockState.isSolidRender(level, pos) || blockState.getBlock() instanceof AbstractGlassBlock;
     }
 
     @NotNull
