@@ -31,9 +31,8 @@ public class EndRod extends AmethystRod
             return super.useOn(context);
 
         var itemStack = player.getItemInHand(context.getHand());
-        boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
 
-        if (!isBroken)
+        if (!isBroken(itemStack))
         {
             var pos = context.getClickedPos();
             var level = player.level;

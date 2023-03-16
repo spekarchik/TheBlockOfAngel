@@ -58,7 +58,7 @@ public class Planter extends ModRod
     {
         if (!level.isClientSide() && blockState.getBlock() instanceof BushBlock && livingEntity instanceof Player player)
         {
-            grabPlants(player, level, pos, 3, true);
+            grabPlants(player, level, pos, 3, true); // no tool damage
         }
 
         return true;

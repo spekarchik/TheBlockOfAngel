@@ -42,7 +42,7 @@ public class MarineRod extends AncientRod
         var block = blockState.getBlock();
 
         var itemStack = player.getItemInHand(context.getHand());
-        boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
+        boolean isBroken = isBroken(itemStack);
 
         var hand = context.getHand();
         var facing = context.getClickedFace();

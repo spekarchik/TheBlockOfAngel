@@ -58,9 +58,8 @@ public class AncientRod extends MagneticRod
         }
 
         var itemStack = player.getItemInHand(context.getHand());
-        boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
 
-        if (!isBroken)
+        if (!isBroken(itemStack))
         {
             if (block instanceof InfestedBlock infestedBlock)
             {

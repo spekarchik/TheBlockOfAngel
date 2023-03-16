@@ -71,14 +71,6 @@ public class ModRod extends ModTool implements IModTool
         return false;
     }
 
-    @Override
-    protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
-    {
-        var itemStack = player.getMainHandItem();
-        if (isCorrectToolForDrops(itemStack, blockState));
-            super.damageItemIfSurvival(player, level, pos, blockState);
-    }
-
     protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
     {
         if (!(plantBlock instanceof IPlantable plantable)) return InteractionResult.FAIL;

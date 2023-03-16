@@ -40,7 +40,7 @@ public class FireRod extends MarineRod
             return super.useOn(context);
 
         var itemStack = player.getItemInHand(context.getHand());
-        boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
+        boolean isBroken = isBroken(itemStack);
 
         boolean isClientSide = level.isClientSide();
 
