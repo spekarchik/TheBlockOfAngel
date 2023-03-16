@@ -8,12 +8,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.ToolAction;
 
@@ -25,6 +27,12 @@ public class ModRod extends ModTool implements IModTool
     {
         super(material, attackDamage, attackSpeed, properties);
         this.isMagnetic = isMagnetic;
+    }
+
+    @Override
+    public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
+    {
+        return true;
     }
 
     @Override
@@ -57,6 +65,20 @@ public class ModRod extends ModTool implements IModTool
         return isMagnetic;
     }
 
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        return false;
+    }
+
+    @Override
+    protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
+    {
+        var itemStack = player.getMainHandItem();
+        if (isCorrectToolForDrops(itemStack, blockState));
+            super.damageItemIfSurvival(player, level, pos, blockState);
+    }
+
     protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
     {
         if (!(plantBlock instanceof IPlantable plantable)) return InteractionResult.FAIL;
@@ -87,5 +109,10 @@ public class ModRod extends ModTool implements IModTool
         {
             return InteractionResult.FAIL;
         }
+    }
+
+    protected boolean isBroken(ItemStack itemStack)
+    {
+        return itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
     }
 }

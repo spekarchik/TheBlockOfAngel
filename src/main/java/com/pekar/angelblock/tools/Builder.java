@@ -16,12 +16,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 
-import java.util.logging.Logger;
-
 public class Builder extends ModRod
 {
-    private static final Logger logger = Logger.getLogger("");
-
     public Builder(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {
         super(material, attackDamage, attackSpeed, isMagnetic, properties);
@@ -111,8 +107,7 @@ public class Builder extends ModRod
 
     private boolean placeBlock(Player player, Level level, Block clickedBlock, BlockPos clickedPos, BlockPos pos, Direction facing, ItemStack toolItemStack, Block placingBlock)
     {
-        boolean isBroken = toolItemStack.getMaxDamage() - toolItemStack.getDamageValue() <= 1;
-        if (isBroken) return false;
+        if (isBroken(toolItemStack)) return false;
 
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int itemCount = offHandItemStack.getCount();

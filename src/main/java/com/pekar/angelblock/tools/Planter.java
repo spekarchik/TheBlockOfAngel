@@ -56,13 +56,18 @@ public class Planter extends ModRod
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        if (blockState.getBlock() instanceof BushBlock && livingEntity instanceof Player player && !level.isClientSide())
+        if (!level.isClientSide() && blockState.getBlock() instanceof BushBlock && livingEntity instanceof Player player)
         {
-            damageItemIfSurvival(player, level, pos.below(), level.getBlockState(pos.below()));
             grabPlants(player, level, pos, 3, true);
         }
 
-        return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
+        return true;
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        return isPlanterCompatible(state.getBlock());
     }
 
     protected boolean grabPlants(Player player, Level level, BlockPos pos, int grabWidth, boolean shouldDrop)
@@ -204,9 +209,6 @@ public class Planter extends ModRod
 
     private boolean grabPlant(Player player, Level level, Block originBlock, BlockPos pos, ItemStack toolItemStack, boolean shouldDrop)
     {
-        boolean isBroken = toolItemStack.getMaxDamage() - toolItemStack.getDamageValue() <= 1;
-        if (isBroken) return false;
-
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
@@ -215,7 +217,6 @@ public class Planter extends ModRod
         if (!level.isClientSide())
         {
             level.destroyBlock(pos, shouldDrop);
-            damageItemIfSurvival(player, level, pos.below(), level.getBlockState(pos.below()));
         }
 
         return true;
@@ -223,8 +224,7 @@ public class Planter extends ModRod
 
     private boolean plantOffHandItem(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack, Block plantBlock)
     {
-        boolean isBroken = toolItemStack.getMaxDamage() - toolItemStack.getDamageValue() <= 1;
-        if (isBroken) return false;
+        if (isBroken(toolItemStack)) return false;
 
         var blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
@@ -247,8 +247,7 @@ public class Planter extends ModRod
 
     private boolean bonemealPlant(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack)
     {
-        boolean isBroken = toolItemStack.getMaxDamage() - toolItemStack.getDamageValue() <= 1;
-        if (isBroken) return false;
+        if (isBroken(toolItemStack)) return false;
 
         var blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();

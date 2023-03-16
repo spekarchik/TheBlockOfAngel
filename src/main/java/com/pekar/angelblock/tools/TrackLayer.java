@@ -46,20 +46,28 @@ public class TrackLayer extends ModRod
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
+        if (isBroken(itemStack)) return false;
+
         var block = blockState.getBlock();
-        if (isTrackLayerCompatible(block) && livingEntity instanceof Player player && !level.isClientSide())
+        if (!level.isClientSide() && isTrackLayerCompatible(block) && livingEntity instanceof Player player)
         {
-            damageItemIfSurvival(player, level, pos.below(), level.getBlockState(pos.below()));
             dropBlocks(player, level, pos);
+            damageItemIfSurvival(player, level, pos, blockState);
         }
 
-        return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
+        return true;
     }
 
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
     {
         return isTrackLayerCompatible(blockState.getBlock()) ? 10F : 1F;
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        return isTrackLayerCompatible(state.getBlock());
     }
 
     protected boolean dropBlocks(Player player, Level level, BlockPos pos)
@@ -234,8 +242,7 @@ public class TrackLayer extends ModRod
 
     private boolean dropBlock(Player player, Level level, Block originBlock, BlockPos pos, ItemStack toolItemStack, boolean shouldDrop)
     {
-        boolean isBroken = toolItemStack.getMaxDamage() - toolItemStack.getDamageValue() <= 1;
-        if (isBroken) return false;
+        if (isBroken(toolItemStack)) return false;
 
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
@@ -254,8 +261,7 @@ public class TrackLayer extends ModRod
 
     private boolean placeBlock(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack, Block placingBlock)
     {
-        boolean isBroken = toolItemStack.getMaxDamage() - toolItemStack.getDamageValue() <= 1;
-        if (isBroken) return false;
+        if (isBroken(toolItemStack)) return false;
 
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int itemCount = offHandItemStack.getCount();
