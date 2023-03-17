@@ -105,7 +105,7 @@ public class Builder extends ModRod
         return haveAnyPlaced;
     }
 
-    private boolean placeBlock(Player player, Level level, Block clickedBlock, BlockPos clickedPos, BlockPos pos, Direction facing, ItemStack toolItemStack, Block placingBlock)
+    protected boolean placeBlock(Player player, Level level, Block clickedBlock, BlockPos clickedPos, BlockPos pos, Direction facing, ItemStack toolItemStack, Block placingBlock)
     {
         if (isBroken(toolItemStack)) return false;
 
@@ -146,17 +146,17 @@ public class Builder extends ModRod
         return true;
     }
 
-    boolean isPlant(Block block)
+    protected boolean isPlant(Block block)
     {
         return block instanceof BushBlock || block instanceof GrowingPlantBlock;
     }
 
-    boolean isAirOrWater(BlockState blockState)
+    protected boolean isAirOrWater(BlockState blockState)
     {
         return blockState.isAir() || blockState.getMaterial() == Material.WATER;
     }
 
-    boolean isBlockCompatible(Level level, BlockState blockState, BlockPos pos)
+    protected boolean isBlockCompatible(Level level, BlockState blockState, BlockPos pos)
     {
         return !blockState.hasBlockEntity() && !(blockState.getBlock() instanceof FallingBlock)
                 && (blockState.isSolidRender(level, pos) || blockState.getBlock() instanceof AbstractGlassBlock);
