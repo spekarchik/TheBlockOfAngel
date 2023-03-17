@@ -253,7 +253,7 @@ public class TrackLayer extends ModRod
         if (!level.isClientSide())
         {
             level.destroyBlock(pos, shouldDrop);
-            damageItemIfSurvival(player, level, pos.below(), level.getBlockState(pos.below()));
+            damageItemIfSurvival(player, level, pos, level.getBlockState(pos));
         }
 
         return true;
