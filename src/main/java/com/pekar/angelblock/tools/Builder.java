@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,7 +37,10 @@ public class Builder extends ModRod
 
         if (offHandItem instanceof BlockItem)
         {
-            success = placeBlocks(player, level, pos, context.getClickedFace());
+            boolean isMagneticMode = isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get());
+            success = isMagneticMode
+                    ? placeBlocksMagnetic(player, level, pos, context.getClickedFace())
+                    : placeBlocks(player, level, pos, context.getClickedFace());
         }
 
         return success ? InteractionResult.sidedSuccess(level.isClientSide()) : InteractionResult.PASS;
@@ -105,6 +109,41 @@ public class Builder extends ModRod
         return haveAnyPlaced;
     }
 
+    protected boolean placeBlocksMagnetic(Player player, Level level, BlockPos pos, Direction facing)
+    {
+        var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
+        if (!(offHandItemStack.getItem() instanceof BlockItem blockItem)) return false;
+
+        var placingBlock = blockItem.getBlock();
+        boolean isPlacingBlockCompatible = isBlockCompatible(level, placingBlock.defaultBlockState(), pos);
+
+        var clickedBlockState = level.getBlockState(pos);
+        var clickedBlock = clickedBlockState.getBlock();
+
+        if (!isPlacingBlockCompatible) return false;
+
+        var updatedPos = pos.relative(player.getDirection(), 2);
+        final int posX = updatedPos.getX(), posY = updatedPos.getY(), posZ = updatedPos.getZ();
+
+        boolean haveAnyPlaced = false;
+        var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+
+        for (int y = posY + 1; y <= posY + 3; y++)
+            for (int x = posX - 1; x <= posX + 1; x++)
+                for (int z = posZ - 1; z <= posZ + 1; z++)
+                {
+                    if (y == posY + 2 && x == posX && z == posZ) continue;
+                    var posToPlace = new BlockPos(x, y, z);
+                    if (posToPlace.equals(pos.relative(player.getDirection()).above(2))) continue;
+
+                    boolean hasPlaced = placeBlock(player, level, clickedBlock, pos, posToPlace, facing, toolItemStack, placingBlock);
+                    if (hasPlaced)
+                        haveAnyPlaced = true;
+                }
+
+        return haveAnyPlaced;
+    }
+
     protected boolean placeBlock(Player player, Level level, Block clickedBlock, BlockPos clickedPos, BlockPos pos, Direction facing, ItemStack toolItemStack, Block placingBlock)
     {
         if (isBroken(toolItemStack)) return false;
@@ -139,7 +178,7 @@ public class Builder extends ModRod
                 new PlaySoundPacket(soundEvent).sendToPlayer(serverPlayer);
             }
 
-            damageItemIfSurvival(player, level, pos, clickedBlock.defaultBlockState());
+            damageItemIfSurvival(player, level, pos, placingBlock.defaultBlockState());
             offHandItemStack.setCount(itemCount - 1);
         }
 
@@ -160,5 +199,11 @@ public class Builder extends ModRod
     {
         return !blockState.hasBlockEntity() && !(blockState.getBlock() instanceof FallingBlock)
                 && (blockState.isSolidRender(level, pos) || blockState.getBlock() instanceof AbstractGlassBlock);
+    }
+
+    @Override
+    public boolean isEnhancedRod()
+    {
+        return true;
     }
 }
