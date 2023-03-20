@@ -166,11 +166,11 @@ public class TrackLayer extends ModRod
         var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
         var originBlock = level.getBlockState(pos).getBlock();
 
-        int y = originBlock instanceof BaseRailBlock ? posY - 1 : posY;
+        int y = originBlock instanceof BaseRailBlock ? posY - 1 : posY; // only rails can be continued when click on it
         for (int x = posX; x != posX + shiftX; x += increment)
             for (int z = posZ; z != posZ + shiftZ; z += increment)
             {
-                var updatedPos = checkNextPosToPlaceOn(level, new BlockPos(x, y, z), placingBlock);
+                var updatedPos = checkPosToPlaceOn(level, new BlockPos(x, y, z), placingBlock);
                 y = updatedPos.getY();
                 boolean hasPlaced = placeBlock(player, level, originBlock, updatedPos, facing, toolItemStack, placingBlock);
                 if (hasPlaced)
@@ -182,10 +182,10 @@ public class TrackLayer extends ModRod
         return haveAnyPlaced;
     }
 
-    private BlockPos checkNextPosToPlaceOn(Level level, BlockPos originPos, Block placingBlock)
+    private BlockPos checkPosToPlaceOn(Level level, BlockPos originPos, Block placingBlock)
     {
         var originBlockState = level.getBlockState(originPos);
-        var originBlock = originBlockState.getBlock();
+        var originBlock = originBlockState.getBlock(); // the block to place on
 
         boolean areBothFence = originBlock instanceof FenceBlock && placingBlock instanceof FenceBlock;
         boolean areBothWall = originBlock instanceof WallBlock && placingBlock instanceof WallBlock;
@@ -193,13 +193,7 @@ public class TrackLayer extends ModRod
         if (areBothFenceOrWall) return originPos; // we can place fence on lower fence
         if (areSimilar(originBlock, placingBlock)) return originPos.below();
 
-        if (originBlockState.isAir() || originBlock instanceof BushBlock || isAllowedReplaceWater(originBlockState, placingBlock))
-        {
-            var updatedPos = originPos.below();
-            boolean isBelowBlockSolid = isBlockSolidOrGlass(level, updatedPos);
-            return isBelowBlockSolid ? updatedPos : originPos;
-        }
-
+        // check to go up
         var upPos = originPos.above();
         boolean isUpperBlockSolid = isBlockSolidOrGlass(level, upPos);
 
@@ -211,6 +205,14 @@ public class TrackLayer extends ModRod
                     || isAllowedReplaceWater(theBlockStateAboveUpper, placingBlock) || areSimilar(theBlockAboveUpper, placingBlock);
 
             return canGoUp ? upPos : originPos;
+        }
+
+        // check to go down
+        if (originBlockState.isAir() || originBlock instanceof BushBlock || isAllowedReplaceWater(originBlockState, placingBlock))
+        {
+            var updatedPos = originPos.below();
+            boolean isBlockBelowSolid = isBlockSolidOrGlass(level, updatedPos);
+            return isBlockBelowSolid ? updatedPos : originPos;
         }
 
         return originPos;
