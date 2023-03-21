@@ -41,7 +41,7 @@ public class ItemRegistry
     public static final RegistryObject<Item> MARINE_CRYSTAL = Main.ITEMS.register("marine_crystal", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> STRENGTH_PEARL = Main.ITEMS.register("strength_pearl", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> SUPER_CRYSTAL = Main.ITEMS.register("super_crystal", ModItem::new);
-    public static final RegistryObject<Item> GUARDIAN_EYE = Main.ITEMS.register("guardian_eye", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> GUARDIAN_EYE = Main.ITEMS.register("guardian_eye", GuardianEye::new);
     public static final RegistryObject<Item> MINER_FIGURE = Main.ITEMS.register("miner_figure", ModItemWithHoverText::new);
     public static final RegistryObject<Item> ANCIENT_CANINE = Main.ITEMS.register("ancient_canine", ModItemWithHoverText::new);
     public static final RegistryObject<Item> EVOKER_AMULET = Main.ITEMS.register("evoker_amulet", ModItemWithHoverText::new);

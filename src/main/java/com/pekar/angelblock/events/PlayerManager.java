@@ -5,6 +5,8 @@ import com.pekar.angelblock.events.armor.IArmorEvents;
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
+import com.pekar.angelblock.items.ItemRegistry;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
@@ -110,6 +112,17 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 //            // IT'S UPDATED IN onPlayerClone()
 ////            player.updateEntity((net.minecraft.world.entity.player.Player) event.getEntityLiving());
 //        }
+
+        var playerEntity = player.getEntity();
+        var oldSlotItem = event.getFrom();
+        var offHandItemStack = playerEntity.getOffhandItem();
+
+        if (playerEntity.hasEffect(MobEffects.NIGHT_VISION))
+            if ((!oldSlotItem.isEmpty() && oldSlotItem.getItem() == ItemRegistry.GUARDIAN_EYE.get())
+                || (!offHandItemStack.isEmpty() && offHandItemStack.getItem() == ItemRegistry.GUARDIAN_EYE.get()))
+            {
+                player.getEntity().removeEffect(MobEffects.NIGHT_VISION);
+            }
 
         Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
         Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);
