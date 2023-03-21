@@ -5,6 +5,7 @@ import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,6 +20,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.storage.LevelData;
+import net.minecraft.world.level.storage.PrimaryLevelData;
+import net.minecraft.world.level.storage.ServerLevelData;
 
 import java.util.ArrayList;
 
@@ -133,33 +137,68 @@ public class EndRod extends AmethystRod
 
         if (offHandItem == ItemRegistry.BIOS_DIAMOND.get())
         {
-            if (!level.isClientSide())
+            if (level.getLevelData() instanceof ServerLevelData levelData)
             {
-                level.getLevelData().setRaining(false);
+                levelData.setRainTime(0);
+                levelData.setThunderTime(0);
+                levelData.setRaining(false);
+                levelData.setThundering(false);
                 damageItem(1, player);
+            }
+            else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
+            {
+                levelData.setRaining(false);
             }
 
             return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
         }
         else if (offHandItem == ItemRegistry.MARINE_CRYSTAL.get())
         {
-            if (!level.isClientSide())
+            if (level.getLevelData() instanceof ServerLevelData levelData)
             {
-                level.getLevelData().setRaining(true);
+                levelData.setRaining(true);
+                levelData.setThundering(false);
                 level.setRainLevel(0.3F);
                 level.setThunderLevel(0);
+                if (levelData.getRainTime() == 0)
+                {
+                    var weatherLasts = level.random.nextIntBetweenInclusive(1200, 24000);
+                    levelData.setRainTime(weatherLasts);
+                }
+                levelData.setThunderTime(0);
                 damageItem(1, player);
+            }
+            else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
+            {
+                levelData.setRaining(true);
+                level.setRainLevel(0.3F);
+                level.setThunderLevel(0);
             }
 
             return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
         }
         else if (offHandItem == ItemRegistry.STRENGTH_PEARL.get())
         {
-            if (!level.isClientSide())
+            if (level.getLevelData() instanceof ServerLevelData levelData)
             {
-                level.getLevelData().setRaining(true);
+                levelData.setClearWeatherTime(0);
+                levelData.setRaining(true);
+                levelData.setThundering(true);
                 level.setThunderLevel(1.0F);
+                level.setRainLevel(1.0F);
+                if (levelData.getRainTime() == 0 || levelData.getThunderTime() == 0)
+                {
+                    var weatherLasts = level.random.nextIntBetweenInclusive(1200, 24000);
+                    levelData.setRainTime(weatherLasts);
+                    levelData.setThunderTime(weatherLasts);
+                }
                 damageItem(1, player);
+            }
+            else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
+            {
+                levelData.setRaining(true);
+                level.setThunderLevel(1.0F);
+                level.setRainLevel(1.0F);
             }
 
             return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
