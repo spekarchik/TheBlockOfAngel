@@ -6,8 +6,11 @@ import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.items.ItemRegistry;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -117,12 +120,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         var oldSlotItem = event.getFrom();
         var offHandItemStack = playerEntity.getOffhandItem();
 
-        if (playerEntity.hasEffect(MobEffects.NIGHT_VISION))
-            if ((!oldSlotItem.isEmpty() && oldSlotItem.getItem() == ItemRegistry.GUARDIAN_EYE.get())
-                || (!offHandItemStack.isEmpty() && offHandItemStack.getItem() == ItemRegistry.GUARDIAN_EYE.get()))
-            {
-                player.getEntity().removeEffect(MobEffects.NIGHT_VISION);
-            }
+        removeEffectIfHoldItem(playerEntity, MobEffects.NIGHT_VISION, oldSlotItem, offHandItemStack, ItemRegistry.GUARDIAN_EYE.get());
+        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, offHandItemStack, ItemRegistry.END_SAPPHIRE.get());
 
         Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
         Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);
@@ -161,6 +160,17 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         for (IPlayer player : players.values())
         {
             player.sendMessage(message);
+        }
+    }
+
+    private void removeEffectIfHoldItem(net.minecraft.world.entity.player.Player player, MobEffect effect, ItemStack slotItemStack, ItemStack offHandItemStack, Item holdItemToCheck)
+    {
+        if (!player.hasEffect(effect)) return;
+
+        if ((!slotItemStack.isEmpty() && slotItemStack.getItem() == holdItemToCheck)
+                || (!offHandItemStack.isEmpty() && offHandItemStack.getItem() == holdItemToCheck))
+        {
+            player.removeEffect(effect);
         }
     }
 }
