@@ -55,7 +55,8 @@
   "item.angelblock.flying_helmet": "Aerite Helmet",
 
   "item.angelblock.obsidian_powder": "Obsidian Powder",
-  "item.angelblock.obsidian_powder.desc": "Can be got from Cracked Obsidian",
+  "item.angelblock.obsidian_powder.desc1": "Can be got from Cracked Obsidian",
+  "item.angelblock.obsidian_powder.desc2": "Transforms Flow Lava to Endstone",
   "item.angelblock.endstone_powder": "Endstone Powder",
   "item.angelblock.endstone_powder.desc": "Can be got from Cracked Endstone",
   "item.angelblock.rendelithic_powder": "Rendelithic Mixture",

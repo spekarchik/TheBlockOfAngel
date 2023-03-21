@@ -55,7 +55,8 @@
   "item.angelblock.flying_helmet": "Аэритовый шлем",
 
   "item.angelblock.obsidian_powder": "Обсидиановая пыль",
-  "item.angelblock.obsidian_powder.desc": "Добывается из Потрескавшегося Обсидиана",
+  "item.angelblock.obsidian_powder.desc1": "Добывается из Потрескавшегося Обсидиана",
+  "item.angelblock.obsidian_powder.desc2": "Превращает Текущую Лаву в Эндерняк",
   "item.angelblock.endstone_powder": "Эндерняковая пыль",
   "item.angelblock.endstone_powder.desc": "Добывается из Потрескавшегося Эндерняка",
   "item.angelblock.rendelithic_powder": "Ренделитовая смесь",

@@ -6,7 +6,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ItemRegistry
 {
-    public static final RegistryObject<Item> OBSIDIAN_POWDER = Main.ITEMS.register("obsidian_powder", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> OBSIDIAN_POWDER = Main.ITEMS.register("obsidian_powder", ObsidianPowder::new);
     public static final RegistryObject<Item> ENDSTONE_POWDER = Main.ITEMS.register("endstone_powder", ModItemWithHoverText::new);
     public static final RegistryObject<Item> DIAMOND_POWDER = Main.ITEMS.register("diamond_powder", ModItemWithHoverText::new);
     public static final RegistryObject<Item> RENDELITHIC_POWDER = Main.ITEMS.register("rendelithic_powder", ModItem::new);
