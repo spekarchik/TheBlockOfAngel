@@ -20,8 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.storage.LevelData;
-import net.minecraft.world.level.storage.PrimaryLevelData;
 import net.minecraft.world.level.storage.ServerLevelData;
 
 import java.util.ArrayList;
@@ -204,7 +202,7 @@ public class EndRod extends AmethystRod
             return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
         }
 
-        return InteractionResultHolder.pass(mainHandItemStack);
+        return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
     }
 
     @Override
