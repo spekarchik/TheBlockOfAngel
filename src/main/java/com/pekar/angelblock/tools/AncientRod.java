@@ -10,6 +10,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
@@ -29,6 +31,32 @@ public class AncientRod extends MagneticRod
     public AncientRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {
         super(material, attackDamage, attackSpeed, isMagnetic, properties);
+    }
+
+    @Override
+    public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
+    {
+        if (blockState.getBlock() == Blocks.COBWEB)
+        {
+            if (!level.isClientSide() && entity instanceof Player player)
+            {
+                destroyWebBlocks(level, pos);
+                damageItemIfSurvival(player, level, pos, blockState);
+            }
+
+            return true;
+        }
+
+        return super.mineBlock(itemStack, level, blockState, pos, entity);
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
+    {
+        if (blockState.getBlock() == Blocks.COBWEB)
+            return 18.0F;
+
+        return super.getDestroySpeed(itemStack, blockState);
     }
 
     @Override
@@ -86,17 +114,6 @@ public class AncientRod extends MagneticRod
                 damageItemIfSurvival(player, level, pos, blockState);
 
                 return setOnBlockSide(context, this::setVine);
-            }
-
-            if (block == Blocks.COBWEB)
-            {
-                if (!isClientSide)
-                {
-                    destroyWebBlocks(level, pos);
-                    damageItemIfSurvival(player, level, pos, blockState);
-                }
-
-                return InteractionResult.sidedSuccess(isClientSide);
             }
 
             var hand = context.getHand();
