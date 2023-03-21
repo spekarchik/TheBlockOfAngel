@@ -174,6 +174,24 @@ public class AncientRod extends MagneticRod
     }
 
     @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        var block = state.getBlock();
+
+        return block == Blocks.STONE || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE
+                || block == Blocks.DEEPSLATE || block == Blocks.MOSSY_COBBLESTONE || block == Blocks.COBBLESTONE_SLAB || block == Blocks.STONE_SLAB
+                || block == Blocks.MOSSY_COBBLESTONE_SLAB || block == Blocks.STONE_BRICKS || block == Blocks.DEEPSLATE_BRICKS
+                || block == Blocks.MOSSY_STONE_BRICKS || block == Blocks.STONE_BRICK_SLAB || block == Blocks.DEEPSLATE_BRICK_SLAB
+                || block == Blocks.MOSSY_STONE_BRICK_SLAB
+                || (!isBroken(stack) && (block instanceof InfestedBlock || block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE
+                || block instanceof LeavesBlock || block == Blocks.COBWEB
+                || block == Blocks.DIRT || block == Blocks.COARSE_DIRT
+                || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || block instanceof SandBlock
+                || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM || block == Blocks.FARMLAND
+                || block == Blocks.DIRT_PATH));
+    }
+
+    @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
         if (!isEnhancedRod()) return;

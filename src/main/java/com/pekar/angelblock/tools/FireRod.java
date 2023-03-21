@@ -17,6 +17,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
@@ -264,6 +265,17 @@ public class FireRod extends MarineRod
         }
 
         return result;
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        var block = state.getBlock();
+
+        return super.isCorrectToolForDrops(stack, state)
+                || (!isBroken(stack) && (block == Blocks.SOUL_SAND || block == Blocks.LAVA || block == Blocks.END_STONE
+                || state.getMaterial() == Material.WOOL || block == Blocks.MAGMA_BLOCK || block == Blocks.GLOWSTONE
+                || block == Blocks.BASALT || block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM || block == Blocks.SHROOMLIGHT));
     }
 
     @Override

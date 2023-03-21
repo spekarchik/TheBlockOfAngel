@@ -126,6 +126,17 @@ public class MarineRod extends AncientRod
     }
 
     @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        var block = state.getBlock();
+        boolean isBroken = isBroken(stack);
+
+        return super.isCorrectToolForDrops(stack, state) || (!isBroken &&
+                (block == Blocks.MELON || block == Blocks.POWDER_SNOW || block == Blocks.GRAVEL || block == Blocks.CLAY
+                || block == Blocks.WATER));
+    }
+
+    @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
         if (!isEnhancedRod()) return;

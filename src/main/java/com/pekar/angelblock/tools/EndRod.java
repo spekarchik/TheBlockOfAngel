@@ -8,9 +8,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 
 import java.util.ArrayList;
@@ -111,6 +113,15 @@ public class EndRod extends AmethystRod
         }
 
         return super.useOn(context);
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        var block = state.getBlock();
+
+        return super.isCorrectToolForDrops(stack, state)
+                || (!isBroken(stack) && (block == Blocks.TUFF));
     }
 
     @Override

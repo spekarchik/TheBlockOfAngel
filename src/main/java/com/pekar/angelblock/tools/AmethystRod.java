@@ -5,6 +5,7 @@ import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
@@ -52,7 +53,7 @@ public class AmethystRod extends FireRod
             }
 
             if (block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.ANDESITE
-                    || block == Blocks.DIORITE || block == Blocks.CALCITE || block == Blocks.TUFF
+                    || block == Blocks.DIORITE || block == Blocks.CALCITE
                     || block == Blocks.DRIPSTONE_BLOCK)
             {
                 damageItemIfSurvival(player, level, pos, blockState);
@@ -83,6 +84,17 @@ public class AmethystRod extends FireRod
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        var block = state.getBlock();
+
+        return super.isCorrectToolForDrops(stack, state)
+                || (!isBroken(stack) && (block == Blocks.OBSIDIAN || block == Blocks.GRANITE || block == Blocks.ANDESITE
+                || block == Blocks.DIORITE || block == Blocks.CALCITE
+                || block == Blocks.DRIPSTONE_BLOCK || block == Blocks.DIAMOND_BLOCK || block == Blocks.BONE_BLOCK));
     }
 
     @Override
