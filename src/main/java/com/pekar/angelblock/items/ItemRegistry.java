@@ -44,7 +44,7 @@ public class ItemRegistry
     public static final RegistryObject<Item> GUARDIAN_EYE = Main.ITEMS.register("guardian_eye", GuardianEye::new);
     public static final RegistryObject<Item> MINER_FIGURE = Main.ITEMS.register("miner_figure", ModItemWithHoverText::new);
     public static final RegistryObject<Item> ANCIENT_CANINE = Main.ITEMS.register("ancient_canine", ModItemWithHoverText::new);
-    public static final RegistryObject<Item> EVOKER_AMULET = Main.ITEMS.register("evoker_amulet", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> EVOKER_AMULET = Main.ITEMS.register("evoker_amulet", EvokerAmulet::new);
     public static final RegistryObject<Item> NETHER_BARS = Main.ITEMS.register("nether_bars", ModItemWithHoverText::new);
     public static final RegistryObject<Item> ANCIENT_SCROLL = Main.ITEMS.register("ancient_scroll", ModItemWithHoverText::new);
 
