@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.FluidState;
 
 import java.util.ArrayList;
 
-public class ObsidianPowder extends ModItemWithDoubleHoverText
+public class EndstonePowder extends ModItemWithDoubleHoverText
 {
     @Override
     public InteractionResult useOn(UseOnContext context)
