@@ -35,9 +35,9 @@ public class ItemRegistry
     public static final RegistryObject<Item> ENERGY_CRYSTAL = Main.ITEMS.register("energy_crystal", ModItem::new);
     public static final RegistryObject<Item> ARMOR_FIBER = Main.ITEMS.register("armor_fiber", ModItem::new);
     public static final RegistryObject<Item> ENERGY_FIBER = Main.ITEMS.register("energy_fiber", ModItem::new);
-    public static final RegistryObject<Item> BIOS_DIAMOND = Main.ITEMS.register("bios_diamond", ModItemWithDoubleHoverText::new);
+    public static final RegistryObject<Item> BIOS_DIAMOND = Main.ITEMS.register("bios_diamond", BiosDiamond::new);
     public static final RegistryObject<Item> END_SAPPHIRE = Main.ITEMS.register("end_sapphire", EndSapphire::new);
-    public static final RegistryObject<Item> FLAME_STONE = Main.ITEMS.register("flame_stone", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> FLAME_STONE = Main.ITEMS.register("flame_stone", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> MARINE_CRYSTAL = Main.ITEMS.register("marine_crystal", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> STRENGTH_PEARL = Main.ITEMS.register("strength_pearl", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> SUPER_CRYSTAL = Main.ITEMS.register("super_crystal", ModItem::new);

@@ -89,7 +89,7 @@ public class EndRod extends AmethystRod
 
         var offHandItem = offHandItemStack.getItem();
 
-        if (offHandItem == ItemRegistry.BIOS_DIAMOND.get())
+        if (offHandItem == ItemRegistry.FLAME_STONE.get())
         {
             if (level.getLevelData() instanceof ServerLevelData levelData)
             {
