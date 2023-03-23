@@ -26,7 +26,6 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
     {
         super(EntityRegistry.ANGEL_BLOCK_ENTITY.get(), blockPos, blockState);
 
-        byte id = 0;
         addToMonsterMap(Monsters.Skeleton);
         addToMonsterMap(Monsters.Zombie);
         addToMonsterMap(Monsters.Creeper);
