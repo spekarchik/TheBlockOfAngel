@@ -22,7 +22,7 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
     private static final double EFFECTIVE_RADIUS = 70.0;
     private int counter;
     private final Set<IMonster> monstersToIgnore = new HashSet<>();
-    private final Map<Item, IMonster> monsterMap = new HashMap<>();
+    private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
     private final Map<Byte, IMonster> monstersById = new HashMap<>();
 
     public AngelBlockEntity(BlockPos blockPos, BlockState blockState)
@@ -36,9 +36,9 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
 
     public void addMonsterToFilter(Item item)
     {
-        if (!monsterMap.containsKey(item)) return;
+        if (!monstersByActionItem.containsKey(item)) return;
 
-        var monster = monsterMap.get(item);
+        var monster = monstersByActionItem.get(item);
         monstersToIgnore.add(monster);
 
         setChanged();
@@ -119,7 +119,7 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
 
     private void addToMonsterMap(IMonster monster)
     {
-        monsterMap.put(monster.getActionItem(), monster);
+        monstersByActionItem.put(monster.getActionItem(), monster);
         monstersById.put(monster.getId(), monster);
     }
 }
