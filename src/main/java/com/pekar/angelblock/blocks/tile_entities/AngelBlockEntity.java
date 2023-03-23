@@ -27,28 +27,28 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         super(EntityRegistry.ANGEL_BLOCK_ENTITY.get(), blockPos, blockState);
 
         byte id = 0;
-        addToMonsterMap(new Skeleton(id++));
-        addToMonsterMap(new Zombie(id++));
-        addToMonsterMap(new Creeper(id++));
-        addToMonsterMap(new Enderman(id++));
-        addToMonsterMap(new Witch(id++));
-        addToMonsterMap(new Spider(id++));
-        addToMonsterMap(new Pillager(id++));
-        addToMonsterMap(new Slime(id++));
-        addToMonsterMap(new MagmaCube(id++));
-        addToMonsterMap(new WitherSkeleton(id++));
-        addToMonsterMap(new Guardian(id++));
-        addToMonsterMap(new ElderGuardian(id++));
-        addToMonsterMap(new Shulker(id++));
-        addToMonsterMap(new EnderDragon(id++));
-        addToMonsterMap(new Wither(id++));
-        addToMonsterMap(new Blaze(id++));
-        addToMonsterMap(new Ghast(id++));
-        addToMonsterMap(new Hoglin(id++));
-        addToMonsterMap(new Phantom(id++));
-        addToMonsterMap(new Piglin(id++));
-        addToMonsterMap(new Warden(id++));
-        addToMonsterMap(new ZombieVillager(id++));
+        addToMonsterMap(Monsters.Skeleton);
+        addToMonsterMap(Monsters.Zombie);
+        addToMonsterMap(Monsters.Creeper);
+        addToMonsterMap(Monsters.Enderman);
+        addToMonsterMap(Monsters.Witch);
+        addToMonsterMap(Monsters.Spider);
+        addToMonsterMap(Monsters.Pillager);
+        addToMonsterMap(Monsters.Slime);
+        addToMonsterMap(Monsters.MagmaCube);
+        addToMonsterMap(Monsters.WitherSkeleton);
+        addToMonsterMap(Monsters.Guardian);
+        addToMonsterMap(Monsters.ElderGuardian);
+        addToMonsterMap(Monsters.Shulker);
+        addToMonsterMap(Monsters.EnderDragon);
+        addToMonsterMap(Monsters.Wither);
+        addToMonsterMap(Monsters.Blaze);
+        addToMonsterMap(Monsters.Ghast);
+        addToMonsterMap(Monsters.Hoglin);
+        addToMonsterMap(Monsters.Phantom);
+        addToMonsterMap(Monsters.Piglin);
+        addToMonsterMap(Monsters.Warden);
+        addToMonsterMap(Monsters.ZombieVillager);
     }
 
     public void addMonsterToFilter(Item item)
