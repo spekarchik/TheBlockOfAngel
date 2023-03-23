@@ -1,5 +1,8 @@
 package com.pekar.angelblock.events;
 
+import com.pekar.angelblock.blocks.AngelBlock;
+import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.blocks.tile_entities.AngelBlockEntity;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.BlockPos;
@@ -7,10 +10,13 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Map;
@@ -160,6 +166,44 @@ public class PlayerInteractionEvents implements IEventHandler
 //            }
 //        }
 
+    }
+
+    @SubscribeEvent
+    public void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+    {
+        var player = event.getEntity();
+
+        var pos = event.getPos();
+        var level = player.getLevel();
+        var block = level.getBlockState(pos).getBlock();
+
+        if (block == BlockRegistry.ANGEL_BLOCK.get())
+        {
+            var blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AngelBlockEntity angelBlockEntity)
+            {
+                var interactionItemStack = player.getItemInHand(event.getHand());
+                if (interactionItemStack.isEmpty()) return;
+
+                var isClientSide = level.isClientSide();
+
+                var interactionItem = interactionItemStack.getItem();
+                if (interactionItem == Items.FLINT)
+                {
+                    if (!isClientSide)
+                        angelBlockEntity.resetFilter();
+
+                    event.setUseItem(Event.Result.ALLOW);
+                }
+                else
+                {
+                    if (!isClientSide)
+                        angelBlockEntity.addMonsterToFilter(interactionItem);
+
+                    event.setUseItem(Event.Result.ALLOW);
+                }
+            }
+        }
     }
 
     @SubscribeEvent
