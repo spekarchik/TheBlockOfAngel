@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockRegistry
@@ -73,6 +74,13 @@ public class BlockRegistry
     {
         var blockObject = Main.BLOCKS.register(name, supplier);
         Main.ITEMS.register(name, () -> new ModBlockItem(blockObject.get(), true));
+        return blockObject;
+    }
+
+    private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, Function<Block, ? extends ModBlockItem> blockItemSupplier)
+    {
+        var blockObject = Main.BLOCKS.register(name, blockSupplier);
+        Main.ITEMS.register(name, () -> blockItemSupplier.apply(blockObject.get()));
         return blockObject;
     }
 
