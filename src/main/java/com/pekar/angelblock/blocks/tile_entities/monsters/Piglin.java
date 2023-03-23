@@ -1,13 +1,13 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class Skeleton extends Monster
+public class Piglin extends Monster
 {
-    public Skeleton(byte id)
+    public Piglin(byte id)
     {
         super(id);
     }
@@ -15,13 +15,12 @@ public class Skeleton extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.AbstractSkeleton
-                && !(livingEntity instanceof WitherSkeleton);
+        return livingEntity instanceof AbstractPiglin;
     }
 
     @Override
     public Item getActionItem()
     {
-        return Items.BONE;
+        return Items.GOLD_NUGGET;
     }
 }

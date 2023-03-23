@@ -1,13 +1,12 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class Skeleton extends Monster
+public class MagmaCube extends Monster
 {
-    public Skeleton(byte id)
+    public MagmaCube(byte id)
     {
         super(id);
     }
@@ -15,13 +14,12 @@ public class Skeleton extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.AbstractSkeleton
-                && !(livingEntity instanceof WitherSkeleton);
+        return livingEntity instanceof net.minecraft.world.entity.monster.MagmaCube;
     }
 
     @Override
     public Item getActionItem()
     {
-        return Items.BONE;
+        return Items.MAGMA_CREAM;
     }
 }

@@ -1,9 +1,6 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
-import com.pekar.angelblock.blocks.tile_entities.monsters.Creeper;
-import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
-import com.pekar.angelblock.blocks.tile_entities.monsters.Skeleton;
-import com.pekar.angelblock.blocks.tile_entities.monsters.Zombie;
+import com.pekar.angelblock.blocks.tile_entities.monsters.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
@@ -29,9 +26,28 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
     {
         super(EntityRegistry.ANGEL_BLOCK_ENTITY.get(), blockPos, blockState);
 
-        addToMonsterMap(new Skeleton((byte) 0));
-        addToMonsterMap(new Zombie((byte) 1));
-        addToMonsterMap(new Creeper((byte) 2));
+        byte id = 0;
+        addToMonsterMap(new Skeleton(id++));
+        addToMonsterMap(new Zombie(id++));
+        addToMonsterMap(new Creeper(id++));
+        addToMonsterMap(new Enderman(id++));
+        addToMonsterMap(new Witch(id++));
+        addToMonsterMap(new Spider(id++));
+        addToMonsterMap(new Pillager(id++));
+        addToMonsterMap(new Slime(id++));
+        addToMonsterMap(new MagmaCube(id++));
+        addToMonsterMap(new WitherSkeleton(id++));
+        addToMonsterMap(new Guardian(id++));
+        addToMonsterMap(new ElderGuardian(id++));
+        addToMonsterMap(new Shulker(id++));
+        addToMonsterMap(new EnderDragon(id++));
+        addToMonsterMap(new Wither(id++));
+        addToMonsterMap(new Blaze(id++));
+        addToMonsterMap(new Ghast(id++));
+        addToMonsterMap(new Hoglin(id++));
+        addToMonsterMap(new Phantom(id++));
+        addToMonsterMap(new Piglin(id++));
+        addToMonsterMap(new Warden(id++));
     }
 
     public void addMonsterToFilter(Item item)
