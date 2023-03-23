@@ -1,13 +1,12 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class Zombie extends Monster
+public class ZombieVillager extends Monster
 {
-    public Zombie(byte id)
+    public ZombieVillager(byte id)
     {
         super(id);
     }
@@ -15,13 +14,12 @@ public class Zombie extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.Zombie
-                && !(livingEntity instanceof ZombieVillager);
+        return livingEntity instanceof net.minecraft.world.entity.monster.ZombieVillager;
     }
 
     @Override
     public Item getActionItem()
     {
-        return Items.ROTTEN_FLESH;
+        return Items.WHEAT;
     }
 }

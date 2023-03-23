@@ -48,6 +48,7 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         addToMonsterMap(new Phantom(id++));
         addToMonsterMap(new Piglin(id++));
         addToMonsterMap(new Warden(id++));
+        addToMonsterMap(new ZombieVillager(id++));
     }
 
     public void addMonsterToFilter(Item item)
