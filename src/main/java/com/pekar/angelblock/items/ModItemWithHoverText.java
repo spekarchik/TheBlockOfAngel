@@ -19,7 +19,8 @@ public class ModItemWithHoverText extends ModItem
         components.add(getDisplayName().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
     }
 
-    protected MutableComponent getDisplayName() {
+    protected MutableComponent getDisplayName()
+    {
         return Component.translatable(this.getDescriptionId() + ".desc");
     }
 }

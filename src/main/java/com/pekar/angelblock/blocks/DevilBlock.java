@@ -14,7 +14,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
-public class DevilBlock extends ModBlockWithHoverText implements EntityBlock
+public class DevilBlock extends ModBlockWithDoubleHoverText implements EntityBlock
 {
     public DevilBlock()
     {
