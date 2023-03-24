@@ -1,11 +1,16 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
 import com.pekar.angelblock.blocks.tile_entities.monsters.*;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -50,12 +55,16 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         addToMonsterMap(Monsters.ZombieVillager);
     }
 
-    public void addMonsterToFilter(Item item)
+    public void addMonsterToFilter(Item item, Player player)
     {
         if (!monstersByActionItem.containsKey(item)) return;
 
         var monster = monstersByActionItem.get(item);
         monstersToIgnore.add(monster);
+        if (!getLevel().isClientSide() && player instanceof ServerPlayer serverPlayer)
+        {
+            new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
+        }
 
         setChanged();
     }

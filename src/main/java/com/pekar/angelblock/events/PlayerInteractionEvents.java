@@ -198,7 +198,7 @@ public class PlayerInteractionEvents implements IEventHandler
                 else
                 {
                     if (!isClientSide)
-                        angelBlockEntity.addMonsterToFilter(interactionItem);
+                        angelBlockEntity.addMonsterToFilter(interactionItem, player);
 
                     event.setUseItem(Event.Result.ALLOW);
                 }

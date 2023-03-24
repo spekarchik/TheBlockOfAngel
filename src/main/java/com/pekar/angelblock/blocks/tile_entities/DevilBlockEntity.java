@@ -4,8 +4,11 @@ import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
 import com.pekar.angelblock.events.ILivingDeathEventHandler;
 import com.pekar.angelblock.events.PlayerInteractionEvents;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Enemy;
@@ -90,6 +93,11 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
             if (level.isClientSide() || !(getLevel() instanceof ServerLevel serverLevel))
                 return true;
+
+            if (player instanceof ServerPlayer serverPlayer)
+            {
+                new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
+            }
 
             interactionHandItemStack.setCount(interactionHandItemStack.getCount() - 1);
 
