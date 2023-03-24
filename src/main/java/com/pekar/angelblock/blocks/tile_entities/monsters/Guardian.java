@@ -1,5 +1,7 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ElderGuardian;
 import net.minecraft.world.item.Item;
@@ -23,5 +25,11 @@ public class Guardian extends Monster
     public Item getActionItem()
     {
         return Items.PRISMARINE_SHARD;
+    }
+
+    @Override
+    public EntityType<? extends Entity> getEntityType()
+    {
+        return EntityType.GUARDIAN;
     }
 }

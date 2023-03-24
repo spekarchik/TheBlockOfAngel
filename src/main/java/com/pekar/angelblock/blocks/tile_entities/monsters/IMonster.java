@@ -1,5 +1,7 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 
@@ -8,4 +10,5 @@ public interface IMonster
     byte getId();
     boolean belongs(LivingEntity livingEntity);
     Item getActionItem();
+    EntityType<? extends Entity> getEntityType();
 }

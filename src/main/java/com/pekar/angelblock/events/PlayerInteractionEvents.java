@@ -1,8 +1,8 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.blocks.AngelBlock;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.AngelBlockEntity;
+import com.pekar.angelblock.blocks.tile_entities.DevilBlockEntity;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.BlockPos;
@@ -202,6 +202,22 @@ public class PlayerInteractionEvents implements IEventHandler
 
                     event.setUseItem(Event.Result.ALLOW);
                 }
+            }
+        }
+
+        if (block == BlockRegistry.DEVIL_BLOCK.get())
+        {
+            var blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof DevilBlockEntity devilBlockEntity)
+            {
+                var interactionItemStack = player.getItemInHand(event.getHand());
+                if (interactionItemStack.isEmpty()) return;
+
+                var interactionItem = interactionItemStack.getItem();
+
+                var success = devilBlockEntity.spawnMonster(interactionItem, player, interactionItemStack);
+
+                event.setUseItem(success ? Event.Result.ALLOW : Event.Result.DEFAULT);
             }
         }
     }

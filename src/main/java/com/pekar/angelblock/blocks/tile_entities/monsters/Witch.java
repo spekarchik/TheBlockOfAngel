@@ -1,5 +1,7 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -21,5 +23,11 @@ public class Witch extends Monster
     public Item getActionItem()
     {
         return Items.GLASS_BOTTLE;
+    }
+
+    @Override
+    public EntityType<? extends Entity> getEntityType()
+    {
+        return EntityType.WITCH;
     }
 }
