@@ -9,6 +9,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -91,8 +92,9 @@ public class EndRod extends AmethystRod
 
         if (offHandItem == ItemRegistry.FLAME_STONE.get())
         {
-            if (level.getLevelData() instanceof ServerLevelData levelData)
+            if (level.getLevelData() instanceof ServerLevelData levelData && player instanceof ServerPlayer serverPlayer)
             {
+                playWeatherSound(serverPlayer);
                 levelData.setRainTime(0);
                 levelData.setThunderTime(0);
                 levelData.setRaining(false);
@@ -108,8 +110,9 @@ public class EndRod extends AmethystRod
         }
         else if (offHandItem == ItemRegistry.MARINE_CRYSTAL.get())
         {
-            if (level.getLevelData() instanceof ServerLevelData levelData)
+            if (level.getLevelData() instanceof ServerLevelData levelData && player instanceof ServerPlayer serverPlayer)
             {
+                playWeatherSound(serverPlayer);
                 levelData.setRaining(true);
                 levelData.setThundering(false);
                 level.setRainLevel(0.3F);
@@ -133,8 +136,9 @@ public class EndRod extends AmethystRod
         }
         else if (offHandItem == ItemRegistry.STRENGTH_PEARL.get())
         {
-            if (level.getLevelData() instanceof ServerLevelData levelData)
+            if (level.getLevelData() instanceof ServerLevelData levelData && player instanceof ServerPlayer serverPlayer)
             {
+                playWeatherSound(serverPlayer);
                 levelData.setClearWeatherTime(0);
                 levelData.setRaining(true);
                 levelData.setThundering(true);
@@ -159,6 +163,11 @@ public class EndRod extends AmethystRod
         }
 
         return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
+    }
+
+    private void playWeatherSound(ServerPlayer serverPlayer)
+    {
+        new PlaySoundPacket(SoundEvents.EXPERIENCE_ORB_PICKUP).sendToPlayer(serverPlayer);
     }
 
     @Override

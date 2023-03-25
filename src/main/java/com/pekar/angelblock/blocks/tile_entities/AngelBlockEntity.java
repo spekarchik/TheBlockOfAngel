@@ -7,6 +7,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
@@ -63,15 +64,19 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         monstersToIgnore.add(monster);
         if (!getLevel().isClientSide() && player instanceof ServerPlayer serverPlayer)
         {
-            new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
+            new PlaySoundPacket(SoundEvents.DRIPSTONE_BLOCK_PLACE).sendToPlayer(serverPlayer);
         }
 
         setChanged();
     }
 
-    public void resetFilter()
+    public void resetFilter(Player player)
     {
         monstersToIgnore.clear();
+        if (!getLevel().isClientSide() && player instanceof ServerPlayer serverPlayer)
+        {
+            new PlaySoundPacket(SoundEvents.MAGMA_CUBE_DEATH_SMALL).sendToPlayer(serverPlayer);
+        }
 
         setChanged();
     }

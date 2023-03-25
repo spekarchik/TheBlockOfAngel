@@ -191,7 +191,7 @@ public class PlayerInteractionEvents implements IEventHandler
                 if (interactionItem == Items.FLINT)
                 {
                     if (!isClientSide)
-                        angelBlockEntity.resetFilter();
+                        angelBlockEntity.resetFilter(player);
 
                     event.setUseItem(Event.Result.ALLOW);
                 }
