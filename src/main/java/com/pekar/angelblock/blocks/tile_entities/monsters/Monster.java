@@ -1,8 +1,11 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
+import com.pekar.angelblock.blocks.tile_entities.spawn.ISpawnStrategy;
+
 abstract class Monster implements IMonster
 {
     private final byte id;
+    private ISpawnStrategy spawnStrategy;
 
     protected Monster(byte id)
     {
@@ -27,4 +30,12 @@ abstract class Monster implements IMonster
         if (!(obj instanceof Monster other)) return false;
         return hashCode() == other.hashCode();
     }
+
+    @Override
+    public final ISpawnStrategy getSpawnStrategy()
+    {
+        return spawnStrategy == null ? (spawnStrategy = getSpawnStrategyInternal()) : spawnStrategy;
+    }
+
+    protected abstract ISpawnStrategy getSpawnStrategyInternal();
 }

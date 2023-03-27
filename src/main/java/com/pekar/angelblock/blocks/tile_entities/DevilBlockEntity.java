@@ -49,6 +49,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
         addToMonsterMap(Monsters.Ghast);
         addToMonsterMap(Monsters.Hoglin);
         addToMonsterMap(Monsters.Piglin);
+        addToMonsterMap(Monsters.WitherSkeleton);
     }
 
     public void activate()
@@ -77,14 +78,11 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
             BlockPos pos = null;
             final int minY = getBlockPos().getY() - MONSTER_SPAWN_RADIUS;
+            var monster = monstersByActionItem.get(item);
 
             for (var p = startPos.above(MONSTER_SPAWN_RADIUS); p.getY() > minY; p = p.below())
             {
-                if (!level.getBlockState(p).isSolidRender(level, p))
-                    continue;
-
-                boolean isEmptyAbove = level.getBlockState(p.above()).isAir() && level.getBlockState(p.above(2)).isAir() && level.getBlockState(p.above(3)).isAir();
-                if (!isEmptyAbove) continue;
+                if (!monster.getSpawnStrategy().canSpawnAtPos(level, p, player)) continue;
 
                 pos = p;
                 break;
@@ -103,7 +101,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
             interactionHandItemStack.setCount(interactionHandItemStack.getCount() - 1);
 
             var chunk = level.getChunk(pos);
-            var entityType = monstersByActionItem.get(item).getEntityType();
+            var entityType = monster.getEntityType();
             var entity = entityType.spawn(serverLevel, interactionHandItemStack, player, pos, MobSpawnType.SPAWNER, true, true);
             if (entity != null)
                 chunk.addEntity(entity);

@@ -1,5 +1,7 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
+import com.pekar.angelblock.blocks.tile_entities.spawn.BigFlyingMonsterSpawnStrategy;
+import com.pekar.angelblock.blocks.tile_entities.spawn.ISpawnStrategy;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,5 +31,11 @@ public class Ghast extends Monster
     public EntityType<? extends Entity> getEntityType()
     {
         return EntityType.GHAST;
+    }
+
+    @Override
+    protected ISpawnStrategy getSpawnStrategyInternal()
+    {
+        return new BigFlyingMonsterSpawnStrategy();
     }
 }

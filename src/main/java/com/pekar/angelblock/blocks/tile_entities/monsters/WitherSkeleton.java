@@ -1,5 +1,7 @@
 package com.pekar.angelblock.blocks.tile_entities.monsters;
 
+import com.pekar.angelblock.blocks.tile_entities.spawn.ISpawnStrategy;
+import com.pekar.angelblock.blocks.tile_entities.spawn.OnGroundMonsterSpawnStrategy;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,6 +30,12 @@ public class WitherSkeleton extends Monster
     @Override
     public EntityType<? extends Entity> getEntityType()
     {
-        throw new UnsupportedOperationException();
+        return EntityType.WITHER_SKELETON;
+    }
+
+    @Override
+    protected ISpawnStrategy getSpawnStrategyInternal()
+    {
+        return new OnGroundMonsterSpawnStrategy();
     }
 }
