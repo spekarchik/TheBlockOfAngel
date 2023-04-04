@@ -26,7 +26,15 @@ public class ModArmorMaterial implements ArmorMaterial
             21, new int[] { 3, 6, 8, 3 }, 17, SoundEvents.ARMOR_EQUIP_DIAMOND,
             0F, 0F, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
 
+    protected static final ArmorMaterial RENDELITHIC2 = new ModArmorMaterial("angelblock:rendelithic_armor2",
+            21, new int[] { 3, 6, 8, 3 }, 17, SoundEvents.ARMOR_EQUIP_DIAMOND,
+            0F, 0F, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
+
     protected static final ArmorMaterial LIMONITE = new ModArmorMaterial("angelblock:limonite_armor",
+            28, new int[] { 3, 5, 8, 3 }, 30, SoundEvents.ARMOR_EQUIP_LEATHER,
+            1F, 0F, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
+
+    protected static final ArmorMaterial LIMONITE2 = new ModArmorMaterial("angelblock:limonite_armor2",
             28, new int[] { 3, 5, 8, 3 }, 30, SoundEvents.ARMOR_EQUIP_LEATHER,
             1F, 0F, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
 
@@ -34,11 +42,23 @@ public class ModArmorMaterial implements ArmorMaterial
             41, new int[] { 3, 6, 9, 3 }, 14, SoundEvents.ARMOR_EQUIP_DIAMOND,
             3F, 0.1F, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
 
+    protected static final ArmorMaterial DIAMITHIC2 = new ModArmorMaterial("angelblock:diamithic_armor2",
+            41, new int[] { 3, 6, 9, 3 }, 14, SoundEvents.ARMOR_EQUIP_DIAMOND,
+            3F, 0.1F, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
+
     protected static final ArmorMaterial LAPIS = new ModArmorMaterial("angelblock:lapis_armor",
             37, new int[] { 3, 6, 8, 3 }, 12, SoundEvents.ARMOR_EQUIP_DIAMOND,
             2F, 0F, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
 
+    protected static final ArmorMaterial LAPIS2 = new ModArmorMaterial("angelblock:lapis_armor2",
+            37, new int[] { 3, 6, 8, 3 }, 12, SoundEvents.ARMOR_EQUIP_DIAMOND,
+            2F, 0F, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
+
     protected static final ArmorMaterial SUPER = new ModArmorMaterial("angelblock:super_armor",
+            43, new int[] { 3, 6, 9, 3 }, 25, SoundEvents.ARMOR_EQUIP_DIAMOND,
+            4F, 0.2F, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
+
+    protected static final ArmorMaterial SUPER2 = new ModArmorMaterial("angelblock:super_armor2",
             43, new int[] { 3, 6, 9, 3 }, 25, SoundEvents.ARMOR_EQUIP_DIAMOND,
             4F, 0.2F, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
 

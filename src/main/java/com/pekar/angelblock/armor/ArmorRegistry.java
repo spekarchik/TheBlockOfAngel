@@ -79,23 +79,23 @@ public class ArmorRegistry
     public static final RegistryObject<ModArmor> SUPER_HELMET = Main.ITEMS.register("super_helmet", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.HEAD, "super"));
     public static final RegistryObject<ModArmor> SUPER_HELMET_WITH_DETECTOR = Main.ITEMS.register("super_helmet_with_detector", () ->
-            new SuperArmorWithDetector(ModArmorMaterial.SUPER, EquipmentSlot.HEAD, "super"));
+            new SuperArmorWithDetector(ModArmorMaterial.SUPER2, EquipmentSlot.HEAD, "super"));
     public static final RegistryObject<ModArmor> SUPER_CHESTPLATE = Main.ITEMS.register("super_chestplate", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.CHEST, "super"));
     public static final RegistryObject<ModArmor> SUPER_CHESTPLATE_FLYING = Main.ITEMS.register("super_chestplate_flying", () ->
-            new SuperArmorFlying(ModArmorMaterial.SUPER, EquipmentSlot.CHEST, "super"));
+            new SuperArmorFlying(ModArmorMaterial.SUPER2, EquipmentSlot.CHEST, "super"));
     public static final RegistryObject<ModArmor> SUPER_LEGGINGS = Main.ITEMS.register("super_leggings", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.LEGS, "super"));
-    public static final RegistryObject<ModArmor> SUPER_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("super_leggings_with_regenerator", () ->
-            new SuperArmorWithRegenerator(ModArmorMaterial.SUPER, EquipmentSlot.LEGS, "super"));
+    public static final RegistryObject<ModArmor> SUPER_LEGGINGS_WITH_REGENERATOR2 = Main.ITEMS.register("super_leggings_with_regenerator", () ->
+            new SuperArmorWithRegenerator(ModArmorMaterial.SUPER2, EquipmentSlot.LEGS, "super"));
     public static final RegistryObject<ModArmor> SUPER_BOOTS = Main.ITEMS.register("super_boots", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
     public static final RegistryObject<ModArmor> SUPER_BOOTS_WITH_STRENGTH = Main.ITEMS.register("super_boots_with_strength", () ->
-            new SuperArmorWithStrengthBoost(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
+            new SuperArmorWithStrengthBoost(ModArmorMaterial.SUPER2, EquipmentSlot.FEET, "super"));
     public static final RegistryObject<ModArmor> SUPER_BOOTS_WITH_SEA_POWER = Main.ITEMS.register("super_boots_with_sea_power", () ->
-            new SuperArmorWithSeaPower(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
+            new SuperArmorWithSeaPower(ModArmorMaterial.SUPER2, EquipmentSlot.FEET, "super"));
     public static final RegistryObject<ModArmor> SUPER_BOOTS_WITH_STRENGTH_AND_SEA_POWER = Main.ITEMS.register("super_boots_with_strength_and_sea_power", () ->
-            new SuperArmorWithStrengthBoostAndSeaPower(ModArmorMaterial.SUPER, EquipmentSlot.FEET, "super"));
+            new SuperArmorWithStrengthBoostAndSeaPower(ModArmorMaterial.SUPER2, EquipmentSlot.FEET, "super"));
 
     public static final RegistryObject<ModArmor> FLYING_HELMET = Main.ITEMS.register("flying_helmet", () ->
             new FlyingArmor(ModArmorMaterial.FLYING, EquipmentSlot.HEAD, "flying"));
