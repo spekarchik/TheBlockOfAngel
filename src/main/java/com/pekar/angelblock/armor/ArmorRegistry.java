@@ -11,70 +11,70 @@ public class ArmorRegistry
     public static final RegistryObject<ModArmor> RENDELITHIC_CHESTPLATE = Main.ITEMS.register("rendelithic_chestplate", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.CHEST, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("rendelithic_chestplate_with_levitation", () ->
-            new RendelithicArmorWithLevitation(ModArmorMaterial.RENDELITHIC, EquipmentSlot.CHEST, "rendelithic"));
+            new RendelithicArmorWithLevitation(ModArmorMaterial.RENDELITHIC2, EquipmentSlot.CHEST, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_LEGGINGS = Main.ITEMS.register("rendelithic_leggings", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.LEGS, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_LEGGINGS_WITH_HEALTH_REGENERATOR = Main.ITEMS.register("rendelithic_leggings_with_regenerator", () ->
-            new RendelithicArmorWithHealthRegenerator(ModArmorMaterial.RENDELITHIC, EquipmentSlot.LEGS, "rendelithic"));
+            new RendelithicArmorWithHealthRegenerator(ModArmorMaterial.RENDELITHIC2, EquipmentSlot.LEGS, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_BOOTS = Main.ITEMS.register("rendelithic_boots", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, EquipmentSlot.FEET, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_BOOTS_WITH_STRENGTH_BOOST = Main.ITEMS.register("rendelithic_boots_with_strength_boost", () ->
-            new RendelithicArmorWithStrengthBoost(ModArmorMaterial.RENDELITHIC, EquipmentSlot.FEET, "rendelithic"));
+            new RendelithicArmorWithStrengthBoost(ModArmorMaterial.RENDELITHIC2, EquipmentSlot.FEET, "rendelithic"));
 
     public static final RegistryObject<ModArmor> LAPIS_HELMET = Main.ITEMS.register("lapis_helmet", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.HEAD, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_HELMET_WITH_DETECTOR = Main.ITEMS.register("lapis_helmet_with_detector", () ->
-            new LapisArmorWithDetector(ModArmorMaterial.LAPIS, EquipmentSlot.HEAD, "lapis"));
+            new LapisArmorWithDetector(ModArmorMaterial.LAPIS2, EquipmentSlot.HEAD, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_CHESTPLATE = Main.ITEMS.register("lapis_chestplate", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.CHEST, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_CHESTPLATE_WITH_STRENGTH = Main.ITEMS.register("lapis_chestplate_with_strength", () ->
-            new LapisArmorWithStrengthBoost(ModArmorMaterial.LAPIS, EquipmentSlot.CHEST, "lapis"));
+            new LapisArmorWithStrengthBoost(ModArmorMaterial.LAPIS2, EquipmentSlot.CHEST, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_LEGGINGS = Main.ITEMS.register("lapis_leggings", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.LEGS, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("lapis_leggings_with_regenerator", () ->
-            new LapisArmorWithRegenerator(ModArmorMaterial.LAPIS, EquipmentSlot.LEGS, "lapis"));
+            new LapisArmorWithRegenerator(ModArmorMaterial.LAPIS2, EquipmentSlot.LEGS, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_BOOTS = Main.ITEMS.register("lapis_boots", () ->
             new ModArmor(ModArmorMaterial.LAPIS, EquipmentSlot.FEET, "lapis"));
     public static final RegistryObject<ModArmor> LAPIS_BOOTS_WITH_SEA_POWER = Main.ITEMS.register("lapis_boots_with_sea_power", () ->
-            new LapisArmorWithSeaPower(ModArmorMaterial.LAPIS, EquipmentSlot.FEET, "lapis"));
+            new LapisArmorWithSeaPower(ModArmorMaterial.LAPIS2, EquipmentSlot.FEET, "lapis"));
 
     public static final RegistryObject<ModArmor> LIMONITE_HELMET = Main.ITEMS.register("limonite_helmet", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.HEAD, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_HELMET_WITH_DETECTOR = Main.ITEMS.register("limonite_helmet_with_detector", () ->
-            new LimoniteArmorWithDetector(ModArmorMaterial.LIMONITE, EquipmentSlot.HEAD, "limonite"));
+            new LimoniteArmorWithDetector(ModArmorMaterial.LIMONITE2, EquipmentSlot.HEAD, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_CHESTPLATE = Main.ITEMS.register("limonite_chestplate", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.CHEST, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_CHESTPLATE_WITH_SEA_POWER = Main.ITEMS.register("limonite_chestplate_with_sea_power", () ->
-            new LimoniteArmorWithSeaPower(ModArmorMaterial.LIMONITE, EquipmentSlot.CHEST, "limonite"));
+            new LimoniteArmorWithSeaPower(ModArmorMaterial.LIMONITE2, EquipmentSlot.CHEST, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS = Main.ITEMS.register("limonite_leggings", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.LEGS, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("limonite_leggings_with_regenerator", () ->
-            new LimoniteArmorWithRegenerator(ModArmorMaterial.LIMONITE, EquipmentSlot.LEGS, "limonite"));
+            new LimoniteArmorWithRegenerator(ModArmorMaterial.LIMONITE2, EquipmentSlot.LEGS, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_BOOTS = Main.ITEMS.register("limonite_boots", () ->
             new ModArmor(ModArmorMaterial.LIMONITE, EquipmentSlot.FEET, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_BOOTS_WITH_STRENGTH = Main.ITEMS.register("limonite_boots_with_strength", () ->
-            new LimoniteArmorWithStrengthBoost(ModArmorMaterial.LIMONITE, EquipmentSlot.FEET, "limonite"));
+            new LimoniteArmorWithStrengthBoost(ModArmorMaterial.LIMONITE2, EquipmentSlot.FEET, "limonite"));
 
     public static final RegistryObject<ModArmor> DIAMITHIC_HELMET = Main.ITEMS.register("diamithic_helmet", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.HEAD, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_HELMET_WITH_DETECTOR = Main.ITEMS.register("diamithic_helmet_with_detector", () ->
-            new DiamithicArmorWithDetector(ModArmorMaterial.DIAMITHIC, EquipmentSlot.HEAD, "diamithic"));
+            new DiamithicArmorWithDetector(ModArmorMaterial.DIAMITHIC2, EquipmentSlot.HEAD, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE = Main.ITEMS.register("diamithic_chestplate", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH = Main.ITEMS.register("diamithic_chestplate_with_strength", () ->
-            new DiamithicArmorWithStrengthBoost(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
+            new DiamithicArmorWithStrengthBoost(ModArmorMaterial.DIAMITHIC2, EquipmentSlot.CHEST, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("diamithic_chestplate_with_levitation", () ->
-            new DiamithicArmorWithLevitation(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
+            new DiamithicArmorWithLevitation(ModArmorMaterial.DIAMITHIC2, EquipmentSlot.CHEST, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH_AND_LEVITATION = Main.ITEMS.register("diamithic_chestplate_with_strength_and_levitation", () ->
-            new DiamithicArmorWithStrengthBoostAndLevitation(ModArmorMaterial.DIAMITHIC, EquipmentSlot.CHEST, "diamithic"));
+            new DiamithicArmorWithStrengthBoostAndLevitation(ModArmorMaterial.DIAMITHIC2, EquipmentSlot.CHEST, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_LEGGINGS = Main.ITEMS.register("diamithic_leggings", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.LEGS, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("diamithic_leggings_with_regenerator", () ->
-            new DiamithicArmorWithHealthRegenerator(ModArmorMaterial.DIAMITHIC, EquipmentSlot.LEGS, "diamithic"));
+            new DiamithicArmorWithHealthRegenerator(ModArmorMaterial.DIAMITHIC2, EquipmentSlot.LEGS, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_BOOTS = Main.ITEMS.register("diamithic_boots", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, EquipmentSlot.FEET, "diamithic"));
     public static final RegistryObject<ModArmor> DIAMITHIC_BOOTS_WITH_STRENGTH = Main.ITEMS.register("diamithic_boots_with_strength", () ->
-            new DiamithicArmorWithStrengthBoost(ModArmorMaterial.DIAMITHIC, EquipmentSlot.FEET, "diamithic"));
+            new DiamithicArmorWithStrengthBoost(ModArmorMaterial.DIAMITHIC2, EquipmentSlot.FEET, "diamithic"));
 
     public static final RegistryObject<ModArmor> SUPER_HELMET = Main.ITEMS.register("super_helmet", () ->
             new SuperArmor(ModArmorMaterial.SUPER, EquipmentSlot.HEAD, "super"));
