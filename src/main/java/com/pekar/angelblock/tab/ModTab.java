@@ -1,22 +1,37 @@
 package com.pekar.angelblock.tab;
 
-import com.pekar.angelblock.Main;
-import com.pekar.angelblock.blocks.BlockRegistry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.RegistryObject;
 
-public class ModTab extends CreativeModeTab
+import java.util.Collection;
+
+import static com.pekar.angelblock.Main.CREATIVE_MODE_TABS;
+
+public abstract class ModTab
 {
-    public static CreativeModeTab MOD_TAB = new ModTab(Main.MODID);
+    protected abstract String getTabName();
 
-    public ModTab(String tabName)
+    protected abstract RegistryObject<Item> getIconItem();
+
+    protected abstract Collection<RegistryObject<Item>> getTabItems();
+
+    protected abstract ResourceKey<CreativeModeTab>[] getTabsBefore();
+
+    public final RegistryObject<CreativeModeTab> createTab()
     {
-        super(tabName);
+        return CREATIVE_MODE_TABS.register(getTabName(), () -> CreativeModeTab.builder()
+                .withTabsBefore(getTabsBefore())
+                .icon(() -> getIconItem().get().getDefaultInstance())
+                .displayItems(this::addItems).build());
     }
 
-    @Override
-    public ItemStack makeIcon()
+    private void addItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output)
     {
-        return new ItemStack(BlockRegistry.ANGEL_BLOCK.get());
+        for (var item : getTabItems())
+        {
+            output.accept(item.get());
+        }
     }
 }
