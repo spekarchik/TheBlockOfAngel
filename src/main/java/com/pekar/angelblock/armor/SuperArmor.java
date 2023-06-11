@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class SuperArmor extends ModArmor
 {
-    protected SuperArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
+    protected SuperArmor(ArmorMaterial material, Type equipmentSlot, String armorItemName)
     {
         super(material, equipmentSlot, armorItemName);
     }

@@ -1,11 +1,10 @@
 package com.pekar.angelblock.armor;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class LimoniteArmorWithRegenerator extends ModArmor
 {
-    protected LimoniteArmorWithRegenerator(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorModelName)
+    protected LimoniteArmorWithRegenerator(ArmorMaterial material, Type equipmentSlot, String armorModelName)
     {
         super(material, equipmentSlot, armorModelName);
     }

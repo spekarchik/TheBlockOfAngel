@@ -54,7 +54,6 @@ public class Main
 
     public Main()
     {
-
         initializeRegistry();
 
         // Register ourselves for server and other game events we are interested in

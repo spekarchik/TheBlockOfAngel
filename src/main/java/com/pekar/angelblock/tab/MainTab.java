@@ -1,8 +1,12 @@
 package com.pekar.angelblock.tab;
 
 import com.pekar.angelblock.Main;
+import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -29,8 +33,13 @@ public class MainTab extends ModTab
     @Override
     protected Collection<RegistryObject<Item>> getTabItems()
     {
-        ItemRegistry.initStatic();
         BlockRegistry.initStatic();
+        ItemRegistry.initStatic();
+        EntityRegistry.initStatic();
+        ArmorRegistry.initStatic();
+        ToolRegistry.initStatic();
+        PotionRegistry.initStatic();
+
         return Main.ITEMS.getEntries(); // block items are also included
     }
 

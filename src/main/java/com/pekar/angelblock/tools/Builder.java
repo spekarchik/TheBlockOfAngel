@@ -15,7 +15,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class Builder extends ModRod
 {
@@ -28,7 +27,7 @@ public class Builder extends ModRod
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         var pos = context.getClickedPos();
 
@@ -192,7 +191,7 @@ public class Builder extends ModRod
 
     protected boolean isAirOrWater(BlockState blockState)
     {
-        return blockState.isAir() || blockState.getMaterial() == Material.WATER;
+        return blockState.isAir() || blockState.is(Blocks.WATER);
     }
 
     protected boolean isBlockCompatible(Level level, BlockState blockState, BlockPos pos)

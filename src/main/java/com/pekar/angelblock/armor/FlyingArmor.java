@@ -7,10 +7,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.NotNull;
 
 public class FlyingArmor extends ModArmor
 {
-    protected FlyingArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
+    protected FlyingArmor(ArmorMaterial material, Type equipmentSlot, String armorItemName)
     {
         super(material, equipmentSlot, armorItemName);
     }
@@ -30,8 +31,8 @@ public class FlyingArmor extends ModArmor
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
-        if (slot != EquipmentSlot.CHEST) return false;
-        if (Utils.isNether(entity.level.dimension()) || entity.isInWaterRainOrBubble()) return false;
+        if (type != Type.CHESTPLATE) return false;
+        if (Utils.isNether(entity.level().dimension()) || entity.isInWaterRainOrBubble()) return false;
 
         var mainHandItemStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
         var mainHandItem = mainHandItemStack.getItem();

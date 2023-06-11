@@ -1,7 +1,5 @@
 package com.pekar.angelblock.armor;
 
-import com.pekar.angelblock.tab.ModTab;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
@@ -9,9 +7,9 @@ public class ModArmor extends ArmorItem
 {
     protected final String armorModelName;
 
-    protected ModArmor(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorModelName)
+    protected ModArmor(ArmorMaterial material, Type equipmentSlot, String armorModelName)
     {
-        super(material, equipmentSlot, new Properties().tab(ModTab.MOD_TAB));
+        super(material, equipmentSlot, new Properties());
         this.armorModelName = armorModelName;
     }
 

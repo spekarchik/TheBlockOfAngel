@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class SuperArmorFlying extends SuperArmor
 {
-    protected SuperArmorFlying(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorItemName)
+    protected SuperArmorFlying(ArmorMaterial material, Type equipmentSlot, String armorItemName)
     {
         super(material, equipmentSlot, armorItemName);
     }
@@ -15,7 +15,7 @@ public class SuperArmorFlying extends SuperArmor
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
-        if (slot != EquipmentSlot.CHEST) return false;
+        if (type != Type.CHESTPLATE) return false;
 
         boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
                 .equals(ArmorRegistry.SUPER_HELMET.get().getArmorModelName());

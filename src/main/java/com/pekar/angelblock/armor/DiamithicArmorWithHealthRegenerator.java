@@ -1,11 +1,10 @@
 package com.pekar.angelblock.armor;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class DiamithicArmorWithHealthRegenerator extends ModArmor
 {
-    protected DiamithicArmorWithHealthRegenerator(ArmorMaterial material, EquipmentSlot equipmentSlot, String armorModelName)
+    protected DiamithicArmorWithHealthRegenerator(ArmorMaterial material, Type equipmentSlot, String armorModelName)
     {
         super(material, equipmentSlot, armorModelName);
     }

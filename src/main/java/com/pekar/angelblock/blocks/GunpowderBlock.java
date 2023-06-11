@@ -9,19 +9,18 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
 public class GunpowderBlock extends FallingBlock
 {
     public GunpowderBlock()
     {
-        super(BlockBehaviour.Properties.of(Material.SAND).sound(SoundType.SNOW).strength(0.2F));
+        super(BlockBehaviour.Properties.copy(Blocks.SAND).sound(SoundType.SNOW).strength(0.2F));
     }
 
     @Override
@@ -58,7 +57,7 @@ public class GunpowderBlock extends FallingBlock
     private void explodeBlock(Level level, BlockPos pos)
     {
         level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                1.8f, /* fire */ true, Explosion.BlockInteraction.DESTROY);
+                1.8f, /* fire */ true, Level.ExplosionInteraction.BLOCK);
     }
 
     @Override

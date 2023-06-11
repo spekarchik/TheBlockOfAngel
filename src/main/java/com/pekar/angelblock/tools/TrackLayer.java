@@ -14,7 +14,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.NotNull;
 
 public class TrackLayer extends ModRod
@@ -28,7 +27,7 @@ public class TrackLayer extends ModRod
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         var pos = context.getClickedPos();
 
@@ -323,8 +322,7 @@ public class TrackLayer extends ModRod
 
     private boolean isAllowedReplaceWater(BlockState replacingBlockState, Block placingBlock)
     {
-        return replacingBlockState.getBlock() instanceof LiquidBlock
-                && replacingBlockState.getMaterial() == Material.WATER
+        return replacingBlockState.getBlock() == Blocks.WATER
                 && placingBlock instanceof BaseRailBlock;
     }
 
