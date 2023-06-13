@@ -44,7 +44,7 @@ public class BlockBreakerMobEffect extends MobEffect
 
     private void applyPotionToBlock(@NotNull Entity source, BlockPos pos)
     {
-        var level = source.level;
+        var level = source.level();
         Block block = level.getBlockState(pos).getBlock();
 
         if (block == Blocks.DIAMOND_BLOCK)

@@ -277,7 +277,7 @@ public class WorldEvents implements IEventHandler
     private void repairVanillaArmor(ItemStack itemToRepare)
     {
         ArmorItem armor = (ArmorItem) itemToRepare.getItem();
-        int repairAmount = armor.getMaterial().getDurabilityForSlot(armor.getSlot()) / 6;
+        int repairAmount = armor.getMaterial().getDurabilityForType(armor.getType()) / 6;
         repairItem(itemToRepare, repairAmount);
     }
 

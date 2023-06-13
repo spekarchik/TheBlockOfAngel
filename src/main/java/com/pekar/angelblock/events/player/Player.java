@@ -214,19 +214,19 @@ public class Player implements IPlayer
     @Override
     public boolean isOverworld()
     {
-        return entity.level.dimension().location().equals(Level.OVERWORLD.location());
+        return entity.level().dimension().location().equals(Level.OVERWORLD.location());
     }
 
     @Override
     public boolean isNether()
     {
-        return entity.level.dimension().location().equals(Level.NETHER.location());
+        return entity.level().dimension().location().equals(Level.NETHER.location());
     }
 
     @Override
     public boolean isEnd()
     {
-        return entity.level.dimension().location().equals(Level.END.location());
+        return entity.level().dimension().location().equals(Level.END.location());
     }
 
     @Override

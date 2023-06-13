@@ -135,7 +135,7 @@ public class Utils
         {
             return Math.abs(playerPos.getX() - pos.getX()) >= 2
                     || Math.abs(playerPos.getZ() - pos.getZ()) >= 2
-                    || !isAboveLavaOrWaterOrAir(entityPlayer.level, pos);
+                    || !isAboveLavaOrWaterOrAir(entityPlayer.level(), pos);
         }
         else
         {
@@ -150,7 +150,7 @@ public class Utils
             return true;
         }
 
-        return !isAboveLavaOrWaterOrAir(entityPlayer.level, pos);
+        return !isAboveLavaOrWaterOrAir(entityPlayer.level(), pos);
     }
 
     public static boolean isStandingOnBreakingBlock(LivingEntity entityPlayer, BlockPos pos)
@@ -171,18 +171,18 @@ public class Utils
         if (Math.abs(entityPos.getX() - pos.getX()) > 1 || Math.abs(entityPos.getZ() - pos.getZ()) > 1 || entityPos.getY() >= pos.getY())
             return false;
 
-        var blockAboveBreaking = entity.level.getBlockState(pos.above()).getBlock();
+        var blockAboveBreaking = entity.level().getBlockState(pos.above()).getBlock();
         return blockAboveBreaking instanceof FallingBlock;
     }
 
     public static boolean isNearLavaOrWaterOrUnsafe(LivingEntity entityPlayer, BlockPos pos)
     {
-        return isNearLavaOrWater(entityPlayer.level, pos) || !isFallSafeWide(entityPlayer, pos);
+        return isNearLavaOrWater(entityPlayer.level(), pos) || !isFallSafeWide(entityPlayer, pos);
     }
 
     public static boolean isNearLavaOrWaterOrUnsafeOrStandingOnBreakingBlock(LivingEntity entityPlayer, BlockPos pos)
     {
-        return isNearLavaOrWater(entityPlayer.level, pos) || !isFallSafeWide(entityPlayer, pos) || isStandingOnBreakingBlock(entityPlayer, pos);
+        return isNearLavaOrWater(entityPlayer.level(), pos) || !isFallSafeWide(entityPlayer, pos) || isStandingOnBreakingBlock(entityPlayer, pos);
     }
 
     public static boolean isNearMushroomOrMycelium(Level level, BlockPos pos)
@@ -294,7 +294,7 @@ public class Utils
 
     public boolean mossyTransforming(Player player, BlockPos pos, Block block)
     {
-        boolean isClientSide = player.getLevel().isClientSide();
+        boolean isClientSide = player.level().isClientSide();
 
         // stones
         if (block == Blocks.STONE || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE
@@ -412,7 +412,7 @@ public class Utils
 
     private void setBlock(Player player, BlockPos pos, Block block)
     {
-        player.level.setBlock(pos, block.defaultBlockState(), 11);
+        player.level().setBlock(pos, block.defaultBlockState(), 11);
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 }

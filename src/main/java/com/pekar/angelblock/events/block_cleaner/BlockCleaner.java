@@ -34,7 +34,7 @@ public class BlockCleaner
 
             if (blockInfo.canBeRemoved() || distance > DistanceToRemoveImmediately)
             {
-                var level = blockInfo.getPlayer().level;
+                var level = blockInfo.getPlayer().level();
                 blockToRemove.add(blockInfo);
                 if (level.isEmptyBlock(pos)) continue;
 
@@ -66,7 +66,7 @@ public class BlockCleaner
             if (blockInfo.getPlayer().getName().equals(player.getName()))
             {
                 BlockPos pos = blockInfo.getPos();
-                var level = blockInfo.getPlayer().level;
+                var level = blockInfo.getPlayer().level();
 
                 blockToRemove.add(blockInfo);
 

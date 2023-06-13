@@ -174,7 +174,7 @@ public class PlayerInteractionEvents implements IEventHandler
         var player = event.getEntity();
 
         var pos = event.getPos();
-        var level = player.getLevel();
+        var level = player.level();
         var block = level.getBlockState(pos).getBlock();
 
         if (block == BlockRegistry.ANGEL_BLOCK.get())
@@ -227,7 +227,7 @@ public class PlayerInteractionEvents implements IEventHandler
     {
         LivingEntity entity = event.getEntity();
 
-        if (!entity.level.isClientSide())
+        if (!entity.level().isClientSide())
         {
             for (var handler : livingDeathEventListeners.values())
             {
