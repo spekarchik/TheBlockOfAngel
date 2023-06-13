@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "angelblock:items/marine_magnetic_rod"
+        "layer0": "angelblock:item/marine_magnetic_rod"
     }
 }

@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "angelblock:items/ancient_canine"
+    "layer0": "angelblock:item/ancient_canine"
   }
 }

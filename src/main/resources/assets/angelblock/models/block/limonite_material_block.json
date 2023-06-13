@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "textures":
   {
-    "all": "angelblock:blocks/limonite_material_block"
+    "all": "angelblock:block/limonite_material_block"
   }
 }

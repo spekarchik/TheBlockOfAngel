@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "angelblock:items/track_layer"
+        "layer0": "angelblock:item/track_layer"
     }
 }

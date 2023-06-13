@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
+    "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "angelblock:items/rendelithic_chestplate"
+        "layer0": "angelblock:item/rendelithic_chestplate"
     }
 }

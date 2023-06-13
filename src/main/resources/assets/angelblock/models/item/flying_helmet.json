@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
+    "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "angelblock:items/flying_helmet"
+        "layer0": "angelblock:item/flying_helmet"
     }
 }

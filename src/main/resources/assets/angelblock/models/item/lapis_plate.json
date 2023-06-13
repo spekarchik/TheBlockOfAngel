@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "angelblock:items/lapis_plate"
+    "layer0": "angelblock:item/lapis_plate"
   }
 }

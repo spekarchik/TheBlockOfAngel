@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "angelblock:items/armor_fiber"
+    "layer0": "angelblock:item/armor_fiber"
   }
 }

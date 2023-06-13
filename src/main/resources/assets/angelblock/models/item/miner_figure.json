@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "angelblock:items/miner_figure"
+    "layer0": "angelblock:item/miner_figure"
   }
 }

@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "textures":
   {
-    "all": "angelblock:blocks/cracked_endstone"
+    "all": "angelblock:block/cracked_endstone"
   }
 }

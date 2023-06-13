@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "textures":
   {
-    "all": "angelblock:blocks/endstone_powder_block"
+    "all": "angelblock:block/endstone_powder_block"
   }
 }

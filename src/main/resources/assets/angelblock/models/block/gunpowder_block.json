@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "textures":
   {
-    "all": "angelblock:blocks/gunpowder_block"
+    "all": "angelblock:block/gunpowder_block"
   }
 }
