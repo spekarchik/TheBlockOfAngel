@@ -5,6 +5,7 @@ import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -185,14 +186,14 @@ public class LapisArmor extends Armor
 
     private boolean isFireOrMagmaDamage(DamageSource damageSource)
     {
-        boolean isDamagedByInFire = damageSource == DamageSource.IN_FIRE;
-        boolean isDamagedByOnFire = damageSource == DamageSource.ON_FIRE;
-        boolean isDamagedByMagma = damageSource == DamageSource.HOT_FLOOR;
+        boolean isDamagedByInFire = damageSource.is(DamageTypes.IN_FIRE);
+        boolean isDamagedByOnFire = damageSource.is(DamageTypes.ON_FIRE);
+        boolean isDamagedByMagma = damageSource.is(DamageTypes.HOT_FLOOR);
         return isDamagedByInFire || isDamagedByOnFire || isDamagedByMagma;
     }
 
     private boolean isLavaDamage(DamageSource damageSource)
     {
-        return damageSource == DamageSource.LAVA;
+        return damageSource.is(DamageTypes.LAVA);
     }
 }

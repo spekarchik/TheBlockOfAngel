@@ -5,6 +5,7 @@ import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -66,7 +67,7 @@ public class RendelithicArmor extends Armor
         else
         {
             boolean hasHealthRegeneration = player.isArmorModifiedWithHealthRegenerator(this);
-            if (hasHealthRegeneration && damageSource == DamageSource.WITHER)
+            if (hasHealthRegeneration && damageSource.is(DamageTypes.WITHER))
             {
                 event.setCanceled(true);
                 player.getEntity().removeEffect(MobEffects.WITHER);
@@ -235,14 +236,6 @@ public class RendelithicArmor extends Armor
         float leggingsProtection = player.isArmorElementPutOn(this, EquipmentSlot.LEGS) ? initialDamageAmount * 0.3f : 0;
         float realDamage = initialDamageAmount - helmetProtection - bootsProtection - chestplateProtection - leggingsProtection;
         return realDamage > 0 ? realDamage : 0;
-    }
-
-    private boolean isFireDamage(DamageSource damageSource)
-    {
-        boolean isDamagedByInFire = damageSource == DamageSource.IN_FIRE;
-        boolean isDamagedByOnFire = damageSource == DamageSource.ON_FIRE;
-        boolean isDamagedByLava = damageSource == DamageSource.LAVA;
-        return isDamagedByInFire || isDamagedByLava || isDamagedByOnFire;
     }
 
     private boolean isSlowFallingAvailable(IPlayer player, IArmor armor)

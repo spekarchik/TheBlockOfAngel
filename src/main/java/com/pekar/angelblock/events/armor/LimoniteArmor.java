@@ -7,12 +7,12 @@ import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
@@ -81,12 +81,8 @@ public class LimoniteArmor extends Armor
     {
         var damageSource = event.getSource();
         var attacker = damageSource.getEntity();
-        boolean isSilverfish = attacker instanceof Silverfish;
-        boolean isEndermite = attacker instanceof Endermite;
-        boolean isSpider = attacker instanceof Spider;
-        boolean isBee = attacker instanceof Bee;
 
-        if (isSilverfish || isEndermite || isSpider || isBee)
+        if (isPoisoned(attacker))
         {
             if (player.isFullArmorSetPutOn(this))
             {
@@ -94,7 +90,7 @@ public class LimoniteArmor extends Armor
                 event.setAmount(damageAmount * 0.2F);
             }
         }
-        else if (damageSource.isFire() || damageSource.isExplosion())
+        else if (isFireOrHotFloorDamage(damageSource) || damageSource.is(DamageTypes.EXPLOSION))
         {
             event.setAmount(event.getAmount() * 2F);
         }
@@ -114,7 +110,7 @@ public class LimoniteArmor extends Armor
         }
         else
         {
-            event.setCanceled(isFullArmorSet && hasEffectImmunity(damageSource));
+            event.setCanceled(isFullArmorSet && isThornOrMagicDamage(damageSource));
         }
 
         if (!isFullArmorSet) return;
@@ -124,13 +120,9 @@ public class LimoniteArmor extends Armor
 
         if (entityAttackedBy != null)
         {
-            boolean isZombie = entityAttackedBy instanceof Zombie;
-            boolean isSkeleton = entityAttackedBy instanceof Skeleton;
-            boolean isWitch = entityAttackedBy instanceof Witch;
-            boolean isIllager = entityAttackedBy instanceof AbstractIllager;
-
-            if (isZombie || isSkeleton || isIllager || isWitch)
+            if (isSlowMovementAffected(entityAttackedBy))
             {
+                boolean isWitch = entityAttackedBy instanceof Witch;
                 float distance = player.getEntity().distanceTo(entityAttackedBy);
                 if (!isWitch && distance > 2f)
                 {
@@ -184,7 +176,7 @@ public class LimoniteArmor extends Armor
         if (!isHelmetModifiedWithDetector) return;
 
         Player entityPlayer = player.getEntity();
-        var level = entityPlayer.level;
+        var level = entityPlayer.level();
         if (level.isClientSide()) return;
 
         var monsters = level.getEntities((Entity)null, entityPlayer.getBoundingBox().inflate(CREEPER_NOTIFY_DISTANCE),
@@ -315,21 +307,6 @@ public class LimoniteArmor extends Armor
     private int getJumpEffectAmplifier()
     {
         return player.areBootsModifiedWithStrengthBooster(this) ? JUMP_EFFECT_AMPLIFIER_BOOSTED : JUMP_EFFECT_AMPLIFIER_DEFAULT;
-    }
-
-    private boolean isFreezeDamage(DamageSource damageSource)
-    {
-        return damageSource == DamageSource.FREEZE;
-    }
-
-    private boolean hasEffectImmunity(DamageSource damageSource)
-    {
-        boolean isCactus = damageSource == DamageSource.CACTUS;
-        boolean isSweetBerryBush = damageSource == DamageSource.SWEET_BERRY_BUSH;
-        boolean isLightning = damageSource == DamageSource.LIGHTNING_BOLT;
-        boolean isPufferFish = damageSource.getEntity() instanceof Pufferfish;
-
-        return isCactus || isSweetBerryBush || isLightning || damageSource.isMagic() || isPufferFish;
     }
 
     private boolean isLuckEffectAvailable(IPlayer player, IArmor armor)

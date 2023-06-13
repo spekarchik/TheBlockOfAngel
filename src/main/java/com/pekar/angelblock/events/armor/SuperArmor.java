@@ -7,13 +7,12 @@ import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Bee;
-import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
@@ -93,7 +92,7 @@ public class SuperArmor extends Armor
     {
         DamageSource damageSource = event.getSource();
 
-        if (isFireDamage(damageSource))
+        if (isFireOrHotFloorDamage(damageSource))
         {
             float realDamage = getRealDamage(event.getAmount());
             event.setAmount(realDamage);
@@ -104,19 +103,15 @@ public class SuperArmor extends Armor
             boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
             if (isFullArmorSet)
             {
-                if (damageSource.isExplosion())
+                if (isExplosionDamage(damageSource))
                 {
                     event.setAmount(event.getAmount() * 0.5f);
                 }
                 else
                 {
                     var attacker = damageSource.getEntity();
-                    boolean isSilverfish = attacker instanceof Silverfish;
-                    boolean isEndermite = attacker instanceof Endermite;
-                    boolean isSpider = attacker instanceof Spider;
-                    boolean isBee = attacker instanceof Bee;
 
-                    if (isSilverfish || isEndermite || isSpider || isBee)
+                    if (isPoisoned(attacker))
                     {
                         float damageAmount = event.getAmount();
                         event.setAmount(damageAmount * 0.2F);
@@ -132,7 +127,7 @@ public class SuperArmor extends Armor
         DamageSource damageSource = event.getSource();
         boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
 
-        if (isFireDamage(damageSource))
+        if (isFireOrHotFloorDamage(damageSource))
         {
             float realDamage = getRealDamage(event.getAmount());
             event.setCanceled(realDamage <= 0);
@@ -144,27 +139,23 @@ public class SuperArmor extends Armor
         }
         else if (isFullArmorSet)
         {
-            if (damageSource == DamageSource.WITHER)
+            if (damageSource.is(DamageTypes.WITHER))
             {
                 event.setCanceled(true);
                 player.getEntity().removeEffect(MobEffects.WITHER);
             }
             else
             {
-                event.setCanceled(hasEffectImmunity(damageSource));
+                event.setCanceled(hasImmunity(damageSource));
             }
         }
 
         if (!isFullArmorSet) return;
         if (!(damageSource.getEntity() instanceof LivingEntity entityAttackedBy)) return;
 
-        boolean isZombie = entityAttackedBy instanceof Zombie;
-        boolean isSkeleton = entityAttackedBy instanceof Skeleton;
-        boolean isWitch = entityAttackedBy instanceof Witch;
-        boolean isIllager = entityAttackedBy instanceof AbstractIllager;
-
-        if (isZombie || isSkeleton || isIllager || isWitch)
+        if (isSlowMovementAffected(entityAttackedBy))
         {
+            boolean isWitch = entityAttackedBy instanceof Witch;
             float distance = player.getEntity().distanceTo(entityAttackedBy);
             if (!isWitch && distance > 2f)
             {
@@ -242,7 +233,7 @@ public class SuperArmor extends Armor
         if (!isHelmetModifiedWithDetector) return;
 
         Player entityPlayer = player.getEntity();
-        var level = entityPlayer.level;
+        var level = entityPlayer.level();
         if (level.isClientSide()) return;
 
         var monsters = level.getEntities((Entity)null, entityPlayer.getBoundingBox().inflate(CREEPER_NOTIFY_DISTANCE),
@@ -400,25 +391,9 @@ public class SuperArmor extends Armor
         }
     }
 
-    private boolean isFireDamage(DamageSource damageSource)
+    private boolean hasImmunity(DamageSource damageSource)
     {
-        return damageSource.isFire();
-    }
-
-    private boolean isFreezeDamage(DamageSource damageSource)
-    {
-        return damageSource == DamageSource.FREEZE;
-    }
-
-    private boolean hasEffectImmunity(DamageSource damageSource)
-    {
-        boolean isCactus = damageSource == DamageSource.CACTUS;
-        boolean isSweetBerryBush = damageSource == DamageSource.SWEET_BERRY_BUSH;
-        boolean isDragonBreath = damageSource == DamageSource.DRAGON_BREATH;
-        boolean isLightning = damageSource == DamageSource.LIGHTNING_BOLT;
-        boolean isPufferFish = damageSource.getEntity() instanceof Pufferfish;
-
-        return isCactus || isSweetBerryBush || isDragonBreath || isLightning || damageSource.isMagic() || isPufferFish;
+        return isThornOrMagicDamage(damageSource) || isLightningBoltDamage(damageSource) || damageSource.is(DamageTypes.DRAGON_BREATH);
     }
 
     private int getLevitationAmplifier()
