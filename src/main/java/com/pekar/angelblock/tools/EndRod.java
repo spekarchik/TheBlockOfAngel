@@ -45,7 +45,7 @@ public class EndRod extends AmethystRod
         if (!isBroken(itemStack))
         {
             var pos = context.getClickedPos();
-            var level = player.level;
+            var level = player.level();
             var blockState = level.getBlockState(pos);
             var block = blockState.getBlock();
 

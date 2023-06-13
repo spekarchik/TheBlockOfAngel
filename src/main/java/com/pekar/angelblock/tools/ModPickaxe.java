@@ -47,7 +47,7 @@ public class ModPickaxe extends PickaxeItem implements IModTool
 
     protected void setBlock(Player player, BlockPos pos, Block block)
     {
-        player.level.setBlock(pos, block.defaultBlockState(), 11);
+        player.level().setBlock(pos, block.defaultBlockState(), 11);
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 }

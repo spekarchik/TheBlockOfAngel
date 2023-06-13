@@ -32,7 +32,7 @@ public class MarineRod extends AncientRod
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
         if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
             return super.useOn(context);

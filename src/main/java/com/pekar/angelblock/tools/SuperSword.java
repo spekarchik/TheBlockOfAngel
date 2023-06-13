@@ -29,7 +29,7 @@ public class SuperSword extends ModSword
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
         if (level.isClientSide) return InteractionResult.PASS;
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
@@ -85,7 +85,7 @@ public class SuperSword extends ModSword
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get()))
         {
-            attacker.level.explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.8f, false, Explosion.BlockInteraction.NONE);
+            attacker.level().explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.8f, false, Level.ExplosionInteraction.NONE);
         }
 
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));

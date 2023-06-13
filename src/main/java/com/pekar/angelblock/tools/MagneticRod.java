@@ -38,7 +38,7 @@ public class MagneticRod extends ModRod
             return super.useOn(context);
         }
 
-        var level = player.level;
+        var level = player.level();
         boolean isClientSide = level.isClientSide();
         if (isClientSide) return InteractionResult.SUCCESS;
 
@@ -48,7 +48,7 @@ public class MagneticRod extends ModRod
 
         var pos = context.getClickedPos();
         var blockState = level.getBlockState(pos);
-        if (blockState.isAir() || blockState.getMaterial().isLiquid())
+        if (blockState.isAir() || utils.isLiquid(blockState.getBlock()))
         {
             return InteractionResult.CONSUME;
         }
@@ -170,7 +170,7 @@ public class MagneticRod extends ModRod
                     for (replacedPos = currentPos.relative(clickedFace); !Objects.equals(getDepthCoord.apply(replacedPos), getDepthCoord.apply(pos.relative(clickedFace))); replacedPos = replacedPos.relative(clickedFace))
                     {
                         var blockState = level.getBlockState(replacedPos);
-                        if (!blockState.isAir() && !blockState.getMaterial().isLiquid())
+                        if (!blockState.isAir() && !utils.isLiquid(blockState.getBlock()))
                         {
                             solidBlockFound = true;
                             break;

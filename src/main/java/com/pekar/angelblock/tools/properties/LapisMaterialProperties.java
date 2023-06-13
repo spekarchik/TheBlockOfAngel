@@ -9,6 +9,6 @@ public class LapisMaterialProperties implements IMaterialProperties
     @Override
     public boolean isSafeToBreak(LivingEntity entity, BlockPos pos)
     {
-        return !Utils.isNearWater(entity.level, pos);
+        return !Utils.isNearWater(entity.level(), pos);
     }
 }

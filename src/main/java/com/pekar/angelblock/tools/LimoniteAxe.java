@@ -58,6 +58,6 @@ public class LimoniteAxe extends EnhancedAxe
 
     private boolean canProceed(LivingEntity entityLiving, BlockPos pos)
     {
-        return !entityLiving.level.isEmptyBlock(pos) && isToolEffective(entityLiving, pos);
+        return !entityLiving.level().isEmptyBlock(pos) && isToolEffective(entityLiving, pos);
     }
 }

@@ -70,7 +70,7 @@ public class EnhancedAxe extends ModAxe
 
     protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
     {
-        BlockState blockState = entityLiving.level.getBlockState(pos);
+        BlockState blockState = entityLiving.level().getBlockState(pos);
         return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 

@@ -23,7 +23,7 @@ public class SuperShovel extends EnhancedShovel
         if (result == InteractionResult.FAIL) return result;
 
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);

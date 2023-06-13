@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
 
 public class DiamithicPrimarySword extends ModSword
 {
@@ -18,7 +19,7 @@ public class DiamithicPrimarySword extends ModSword
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get()))
         {
-            attacker.level.explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.0f, false, Explosion.BlockInteraction.NONE);
+            attacker.level().explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.0f, false, Level.ExplosionInteraction.NONE);
         }
 
         return super.hurtEnemy(stack, target, attacker);

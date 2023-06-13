@@ -37,7 +37,7 @@ public class ModHoe extends ModTool
         if (result == InteractionResult.FAIL) return result;
 
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
 //        if (level.isClientSide) return result;
 

@@ -41,7 +41,7 @@ public class EnhancedHoe extends ModHoe
         if (result == InteractionResult.FAIL) return result;
 
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
 //        if (level.isClientSide) return result;
 
@@ -131,7 +131,7 @@ public class EnhancedHoe extends ModHoe
 
     protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
     {
-        BlockState blockState = entityLiving.level.getBlockState(pos);
+        BlockState blockState = entityLiving.level().getBlockState(pos);
         return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 

@@ -30,7 +30,7 @@ public class Planter extends ModRod
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         var pos = context.getClickedPos();
 

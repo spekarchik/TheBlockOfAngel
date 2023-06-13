@@ -38,7 +38,7 @@ public class ModShovel extends ShovelItem implements IModTool
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);
@@ -80,7 +80,7 @@ public class ModShovel extends ShovelItem implements IModTool
 
     protected void setBlock(Player player, BlockPos pos, Block block)
     {
-        player.level.setBlock(pos, block.defaultBlockState(), 11);
+        player.level().setBlock(pos, block.defaultBlockState(), 11);
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -22,7 +23,7 @@ public class SuperPrimarySword extends ModSword
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get()))
         {
-            attacker.level.explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.0f, false, Explosion.BlockInteraction.NONE);
+            attacker.level().explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.0f, false, Level.ExplosionInteraction.NONE);
         }
 
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0, true, true));

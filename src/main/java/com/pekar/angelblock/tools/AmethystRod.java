@@ -23,7 +23,7 @@ public class AmethystRod extends FireRod
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
         var result = super.useOn(context);
         if (result != InteractionResult.PASS) return result;

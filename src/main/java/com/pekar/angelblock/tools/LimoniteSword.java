@@ -28,7 +28,7 @@ public class LimoniteSword extends ModSword
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
         if (level.isClientSide) return InteractionResult.PASS;
         if (!canUseToolEffect(player)) return InteractionResult.PASS;

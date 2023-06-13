@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
 
 public class DiamithicSword extends ModSword
 {
@@ -19,7 +20,7 @@ public class DiamithicSword extends ModSword
     public InteractionResult useOn(UseOnContext context)
     {
         var player = context.getPlayer();
-        var level = player.level;
+        var level = player.level();
 
         if (level.isClientSide) return InteractionResult.PASS;
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
@@ -40,7 +41,7 @@ public class DiamithicSword extends ModSword
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get()))
         {
-            attacker.level.explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.8f, false, Explosion.BlockInteraction.NONE);
+            attacker.level().explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.8f, false, Level.ExplosionInteraction.NONE);
         }
 
         return super.hurtEnemy(stack, target, attacker);

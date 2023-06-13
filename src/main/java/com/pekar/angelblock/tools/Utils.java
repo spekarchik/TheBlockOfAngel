@@ -410,6 +410,11 @@ public class Utils
         return false;
     }
 
+    public boolean isLiquid(Block block)
+    {
+        return block instanceof LiquidBlock;
+    }
+
     private void setBlock(Player player, BlockPos pos, Block block)
     {
         player.level().setBlock(pos, block.defaultBlockState(), 11);
