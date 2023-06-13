@@ -14,7 +14,7 @@ public class PlaySoundPacket extends ServerToClientPacket
 
     public PlaySoundPacket(SoundType soundType)
     {
-        this(soundType, SoundEvents.NOTE_BLOCK_XYLOPHONE);
+        this(soundType, SoundEvents.NOTE_BLOCK_XYLOPHONE.value());
     }
 
     public PlaySoundPacket(SoundEvent soundEvent)
@@ -38,7 +38,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     protected Packet create(FriendlyByteBuf buffer)
     {
         var soundType = SoundType.getByIndex(buffer.readInt());
-        var soundEvent = new SoundEvent(buffer.readResourceLocation());
+        var soundEvent = SoundEvent.createVariableRangeEvent(buffer.readResourceLocation());
         return new PlaySoundPacket(soundType, soundEvent);
     }
 
@@ -67,8 +67,8 @@ public class PlaySoundPacket extends ServerToClientPacket
             case WATER_PLACED -> SoundEvents.PLAYER_SPLASH_HIGH_SPEED;
             case LAVA_PLACED -> SoundEvents.LAVA_POP;
             case STEAM -> SoundEvents.LAVA_EXTINGUISH;
-            case AMETHYST_FOUND -> SoundEvents.NOTE_BLOCK_XYLOPHONE;
-            case DIAMOND_FOUND -> SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE;
+            case AMETHYST_FOUND -> SoundEvents.NOTE_BLOCK_XYLOPHONE.value();
+            case DIAMOND_FOUND -> SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value();
             case ORE_FOUND -> SoundEvents.GRAVEL_PLACE;
             case SCULK_FOUND -> SoundEvents.SCULK_SHRIEKER_SHRIEK;
             case INFESTED_BLOCK -> SoundEvents.SILVERFISH_DEATH;

@@ -11,7 +11,7 @@ public class CreeperDetectedPacket extends ServerToClientPacket
     @Override
     protected void onReceive()
     {
-        Minecraft.getInstance().player.playSound(SoundEvents.NOTE_BLOCK_BELL, 1.0F, 5.0F);
+        Minecraft.getInstance().player.playSound(SoundEvents.NOTE_BLOCK_BELL.value(), 1.0F, 5.0F);
     }
 
     @Override
