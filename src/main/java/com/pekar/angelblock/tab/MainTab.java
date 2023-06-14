@@ -20,7 +20,7 @@ public class MainTab extends ModTab
     @Override
     protected String getTabName()
     {
-        return "angel_block";
+        return Main.MODID;
     }
 
     @Override
@@ -46,6 +46,6 @@ public class MainTab extends ModTab
     @Override
     protected ResourceKey<CreativeModeTab>[] getTabsBefore()
     {
-        return new ResourceKey[] { CreativeModeTabs.COMBAT };
+        return new ResourceKey[] { CreativeModeTabs.COLORED_BLOCKS };
     }
 }
