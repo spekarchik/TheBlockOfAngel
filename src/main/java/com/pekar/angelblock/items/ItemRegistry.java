@@ -30,6 +30,12 @@ public class ItemRegistry
     public static final RegistryObject<Item> SUPER_PLATE = Main.ITEMS.register("super_plate", ModItem::new);
     public static final RegistryObject<Item> FLYING_PLATE = Main.ITEMS.register("flying_plate", ModItem::new);
 
+    public static final RegistryObject<Item> RENDELITHIC_UPGRADE_SMITHING_TEMPLATE = Main.ITEMS.register("rendelithic_upgrade_smithing_template", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> DIAMITHIC_UPGRADE_SMITHING_TEMPLATE = Main.ITEMS.register("diamithic_upgrade_smithing_template", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> LAPIS_UPGRADE_SMITHING_TEMPLATE = Main.ITEMS.register("lapis_upgrade_smithing_template", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> LIMONITE_UPGRADE_SMITHING_TEMPLATE = Main.ITEMS.register("limonite_upgrade_smithing_template", ModItemWithHoverText::new);
+    public static final RegistryObject<Item> SUPER_UPGRADE_SMITHING_TEMPLATE = Main.ITEMS.register("super_upgrade_smithing_template", ModItemWithHoverText::new);
+
     public static final RegistryObject<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", ModItemWithHoverText::new);
     public static final RegistryObject<Item> FLAX_FIBRE = Main.ITEMS.register("flax_fibre", ModItemWithHoverText::new);
     public static final RegistryObject<Item> ENERGY_CRYSTAL = Main.ITEMS.register("energy_crystal", ModItem::new);
