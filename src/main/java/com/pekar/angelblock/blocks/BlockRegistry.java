@@ -73,7 +73,7 @@ public class BlockRegistry
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier)
     {
         var blockObject = Main.BLOCKS.register(name, supplier);
-        Main.ITEMS.register(name, () -> new ModBlockItem(blockObject.get() /*, true */));
+        Main.ITEMS.register(name, () -> new ModBlockItem(blockObject.get()));
         return blockObject;
     }
 
@@ -86,8 +86,6 @@ public class BlockRegistry
 
     private static <T extends Block> RegistryObject<T> registerSkipTab(String name, Supplier<T> supplier)
     {
-        var blockObject = Main.BLOCKS.register(name, supplier);
-        //Main.ITEMS.register(name, () -> new ModBlockItem(blockObject.get(), false));  TODO: check if we can not to register item to avoid adding it to creative tab
-        return blockObject;
+        return Main.BLOCKS.register(name, supplier);
     }
 }

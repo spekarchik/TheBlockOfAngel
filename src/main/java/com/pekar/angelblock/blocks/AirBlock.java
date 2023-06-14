@@ -7,6 +7,6 @@ public class AirBlock extends Block
 {
     AirBlock()
     {
-        super(Properties.copy(Blocks.AIR));
+        super(Properties.of());
     }
 }
