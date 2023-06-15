@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:smithing",
+    "type": "minecraft:smithing_transform",
     "base": {
         "item": "angelblock:lapis_chestplate"
     },
@@ -8,5 +8,8 @@
     },
     "result": {
         "item": "angelblock:lapis_chestplate_with_strength"
+    },
+    "template": {
+        "item": "angelblock:lapis_upgrade_kit"
     }
 }

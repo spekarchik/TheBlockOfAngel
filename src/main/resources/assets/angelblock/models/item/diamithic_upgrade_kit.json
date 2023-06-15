@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "angelblock:item/rod_upgrade_smithing_template"
+    "layer0": "angelblock:item/diamithic_upgrade_kit"
   }
 }

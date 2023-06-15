@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:smithing",
+    "type": "minecraft:smithing_transform",
     "base": {
         "item": "minecraft:chainmail_chestplate"
     },
@@ -8,5 +8,8 @@
     },
     "result": {
         "item": "angelblock:limonite_chestplate"
+    },
+    "template": {
+        "item": "angelblock:limonite_upgrade_kit"
     }
 }

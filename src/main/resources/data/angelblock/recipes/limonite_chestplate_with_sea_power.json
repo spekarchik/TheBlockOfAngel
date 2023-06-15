@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:smithing",
+    "type": "minecraft:smithing_transform",
     "base": {
         "item": "angelblock:limonite_chestplate"
     },
@@ -8,5 +8,8 @@
     },
     "result": {
         "item": "angelblock:limonite_chestplate_with_sea_power"
+    },
+    "template": {
+        "item": "angelblock:limonite_upgrade_kit"
     }
 }

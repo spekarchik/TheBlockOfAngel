@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:smithing",
+  "type": "minecraft:smithing_transform",
   "base": {
     "item": "angelblock:diamithic_pickaxe"
   },
@@ -8,5 +8,8 @@
   },
   "result": {
     "item": "angelblock:super_primary_pickaxe"
+  },
+  "template": {
+    "item": "angelblock:super_upgrade_kit"
   }
 }

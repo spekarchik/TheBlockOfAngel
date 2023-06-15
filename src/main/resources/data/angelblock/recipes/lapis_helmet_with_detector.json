@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:smithing",
+    "type": "minecraft:smithing_transform",
     "base": {
         "item": "angelblock:lapis_helmet"
     },
@@ -8,5 +8,8 @@
     },
     "result": {
         "item": "angelblock:lapis_helmet_with_detector"
+    },
+    "template": {
+        "item": "angelblock:lapis_upgrade_kit"
     }
 }
