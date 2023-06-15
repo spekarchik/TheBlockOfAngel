@@ -86,6 +86,8 @@
   "item.angelblock.flying_powder": "Аэритовая смесь",
   "item.angelblock.flying_ingot": "Аэритовый слиток",
   "item.angelblock.flying_plate": "Аэритовая пластина",
+  "item.angelblock.rod_upgrade_smithing_template": "Кузнечный шаблон",
+  "item.angelblock.rod_upgrade_smithing_template.desc": "Улучшение посоха",
   "item.angelblock.rendelithic_upgrade_smithing_template": "Кузнечный шаблон",
   "item.angelblock.rendelithic_upgrade_smithing_template.desc": "Ренделитовое улучшение",
   "item.angelblock.diamithic_upgrade_smithing_template": "Кузнечный шаблон",
