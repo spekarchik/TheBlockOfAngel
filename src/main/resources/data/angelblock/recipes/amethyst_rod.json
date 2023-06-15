@@ -10,6 +10,6 @@
         "item": "angelblock:amethyst_rod"
     },
     "template": {
-        "item": "angelblock:rod_upgrade_smithing_template"
+        "item": "angelblock:rod_upgrade_kit"
     }
 }
