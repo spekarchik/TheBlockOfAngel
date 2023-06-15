@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:smithing",
+    "type": "minecraft:smithing_transform",
     "base": {
         "item": "angelblock:marine_magnetic_rod"
     },
@@ -8,5 +8,8 @@
     },
     "result": {
         "item": "angelblock:fire_magnetic_rod"
+    },
+    "template": {
+        "item": "angelblock:rod_upgrade_smithing_template"
     }
 }
