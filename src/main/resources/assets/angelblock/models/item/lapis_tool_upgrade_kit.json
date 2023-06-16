@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "angelblock:item/limonite_upgrade_kit"
+    "layer0": "angelblock:item/lapis_tool_upgrade_kit"
   }
 }

@@ -10,6 +10,6 @@
         "item": "angelblock:lapis_pickaxe"
     },
     "template": {
-        "item": "angelblock:lapis_upgrade_kit"
+        "item": "angelblock:lapis_tool_upgrade_kit"
     }
 }

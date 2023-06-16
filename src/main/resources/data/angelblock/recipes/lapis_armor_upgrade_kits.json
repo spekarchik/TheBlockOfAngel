@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "D@D",
+    "D#D",
+    "DDD"
+  ],
+  "key": {
+    "@": {
+      "item": "angelblock:lapis_armor_upgrade_kit"
+    },
+    "#": {
+      "item": "angelblock:lapis_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "angelblock:lapis_armor_upgrade_kit",
+    "count": 2
+  }
+}
