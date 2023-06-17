@@ -7,17 +7,17 @@
   ],
   "key": {
     "@": {
-      "item": "angelblock:super_tool_upgrade_kit"
+      "item": "angelblock:rod_upgrade_kit"
     },
     "#": {
-      "item": "angelblock:super_ingot"
+      "item": "minecraft:crying_obsidian"
     },
     "D": {
-      "item": "minecraft:copper_ingot"
+      "item": "minecraft:diamond"
     }
   },
   "result": {
-    "item": "angelblock:super_tool_upgrade_kit",
+    "item": "angelblock:rod_upgrade_kit",
     "count": 2
   }
 }

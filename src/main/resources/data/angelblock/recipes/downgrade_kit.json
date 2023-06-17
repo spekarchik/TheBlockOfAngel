@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "D@D",
+    "AAA",
     "D#D",
     "DDD"
   ],
   "key": {
-    "@": {
-      "item": "angelblock:super_tool_upgrade_kit"
-    },
     "#": {
-      "item": "angelblock:super_ingot"
+      "item": "minecraft:crying_obsidian"
+    },
+    "A": {
+      "item": "minecraft:flint"
     },
     "D": {
       "item": "minecraft:copper_ingot"
     }
   },
   "result": {
-    "item": "angelblock:super_tool_upgrade_kit",
-    "count": 2
+    "item": "angelblock:downgrade_kit",
+    "count": 1
   }
 }
