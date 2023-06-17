@@ -4,6 +4,41 @@
     {
       "rolls": {
         "type": "minecraft:uniform",
+        "min": 0.0,
+        "max": 2.0
+      },
+      "bonus_rolls": 0.0,
+      "entries":
+      [
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:rendelithic_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:diamithic_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:lapis_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:limonite_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:super_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
         "min": 1.0,
         "max": 2.0
       },
