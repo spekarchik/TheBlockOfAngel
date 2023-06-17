@@ -18,7 +18,8 @@
               "add": false
             }
           ],
-          "name": "minecraft:fire_coral"
+          "name": "minecraft:fire_coral",
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -33,7 +34,8 @@
               "add": false
             }
           ],
-          "name": "minecraft:dead_fire_coral"
+          "name": "minecraft:dead_fire_coral",
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -48,7 +50,8 @@
               "add": false
             }
           ],
-          "name": "minecraft:horn_coral"
+          "name": "minecraft:horn_coral",
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -63,7 +66,12 @@
               "add": false
             }
           ],
-          "name": "minecraft:dead_horn_coral"
+          "name": "minecraft:dead_horn_coral",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 2
         }
       ]
 	},
