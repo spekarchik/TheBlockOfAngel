@@ -27,10 +27,6 @@
           "name": "angelblock:limonite_armor_upgrade_kit"
         },
         {
-          "type": "minecraft:item",
-          "name": "angelblock:super_armor_upgrade_kit"
-        },
-        {
           "type": "minecraft:empty",
           "weight": 1
         }
