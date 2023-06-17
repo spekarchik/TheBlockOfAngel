@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "D@D",
-    "D#D",
+    "A@A",
+    "A#A",
     "DDD"
   ],
   "key": {
@@ -11,6 +11,9 @@
     },
     "#": {
       "item": "angelblock:lapis_ingot"
+    },
+    "A": {
+      "item": "minecraft:copper_ingot"
     },
     "D": {
       "item": "minecraft:diamond"
