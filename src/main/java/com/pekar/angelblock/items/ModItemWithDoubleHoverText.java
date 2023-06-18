@@ -19,7 +19,7 @@ public class ModItemWithDoubleHoverText extends ModItem
         for (int i = 1; i <= 2; i++)
         {
             var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
-            if (i == 1)
+            if (i > 1)
                 component.withStyle(ChatFormatting.ITALIC);
             components.add(component);
         }

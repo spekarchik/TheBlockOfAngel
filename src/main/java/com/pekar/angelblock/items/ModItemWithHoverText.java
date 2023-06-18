@@ -16,7 +16,7 @@ public class ModItemWithHoverText extends ModItem
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
-        components.add(getDisplayName().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+        components.add(getDisplayName().withStyle(ChatFormatting.GRAY));
     }
 
     protected MutableComponent getDisplayName()
