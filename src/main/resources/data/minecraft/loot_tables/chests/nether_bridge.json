@@ -34,22 +34,16 @@
 	  [
 	    {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly"
-            }
-          ],
-          "name": "angelblock:rendelithic_primary_pickaxe"
+          "name": "angelblock:rendelithic_powder"
 		},
-	    {
+        {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly"
-            }
-          ],
-          "name": "angelblock:rendelithic_pickaxe"
-		},
+          "name": "angelblock:rendelithic_armor_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:rendelithic_tool_upgrade_kit"
+        },
 	    {
           "type": "minecraft:item",
           "functions": [

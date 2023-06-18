@@ -4,6 +4,52 @@
     {
       "rolls": {
         "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 0.0
+      },
+      "bonus_rolls": 0.0,
+      "entries":
+	  [
+	    {
+          "type": "minecraft:item",
+          "weight": 2,
+		  "name": "angelblock:diamithic_armor_upgrade_kit"
+		},
+	    {
+          "type": "minecraft:item",
+          "weight": 2,
+		  "name": "angelblock:diamithic_tool_upgrade_kit"
+		},
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:sculk_sensor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:ancient_debris"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 5
+        }
+	  ]
+	},
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
         "min": 0.0,
         "max": 1.0
       },
@@ -114,8 +160,8 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 8.0,
-                "min": 1.0
+                "max": 5.0,
+                "min": 2.0
               },
               "function": "minecraft:set_count"
             }

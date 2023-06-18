@@ -6,24 +6,19 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "angelblock:rendelithic_armor_upgrade_kit"
+          "name": "angelblock:marine_crystal",
+          "weight": 1
         },
-        {
+		{
           "type": "minecraft:item",
-          "name": "angelblock:diamithic_armor_upgrade_kit"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "angelblock:lapis_armor_upgrade_kit"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "angelblock:limonite_armor_upgrade_kit"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "angelblock:super_armor_upgrade_kit"
-        },
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:turtle_helmet"
+		}
         {
           "type": "minecraft:item",
           "name": "minecraft:angler_pottery_sherd"
@@ -47,27 +42,22 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:emerald",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:wheat",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:wooden_hoe",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:coal",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:gold_nugget",
-          "weight": 1
+          "weight": 2
         }
       ],
       "rolls": 1.0
