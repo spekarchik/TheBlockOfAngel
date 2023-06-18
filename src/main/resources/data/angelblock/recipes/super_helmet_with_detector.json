@@ -4,7 +4,7 @@
         "item": "angelblock:super_helmet"
     },
     "addition": {
-        "item": "minecraft:sculk_sensor"
+        "item": "minecraft:calibrated_sculk_sensor"
     },
     "result": {
         "item": "angelblock:super_helmet_with_detector"
