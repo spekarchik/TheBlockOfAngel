@@ -10,6 +10,6 @@
     "item": "minecraft:diamond_hoe"
   },
   "template": {
-    "item": "angelblock:lapis_tool_upgrade_kit"
+    "item": "angelblock:downgrade_kit"
   }
 }

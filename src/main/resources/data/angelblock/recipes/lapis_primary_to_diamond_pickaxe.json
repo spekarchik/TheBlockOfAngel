@@ -10,6 +10,6 @@
     "item": "minecraft:diamond_pickaxe"
   },
   "template": {
-    "item": "angelblock:lapis_tool_upgrade_kit"
+    "item": "angelblock:downgrade_kit"
   }
 }
