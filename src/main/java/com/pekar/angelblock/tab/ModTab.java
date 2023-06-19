@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tab;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -19,10 +20,16 @@ public abstract class ModTab
 
     protected abstract ResourceKey<CreativeModeTab>[] getTabsBefore();
 
+    protected String getTitle()
+    {
+        return "itemGroup." + getTabName();
+    }
+
     public final RegistryObject<CreativeModeTab> createTab()
     {
         return CREATIVE_MODE_TABS.register(getTabName(), () -> CreativeModeTab.builder()
-                .withTabsBefore(getTabsBefore())
+                //.withTabsBefore(getTabsBefore())
+                .title(Component.translatable(getTitle()))
                 .icon(() -> getIconItem().get().getDefaultInstance())
                 .displayItems(this::addItems).build());
     }

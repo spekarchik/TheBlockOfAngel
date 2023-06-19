@@ -20,7 +20,7 @@ public class MainTab extends ModTab
     @Override
     protected String getTabName()
     {
-        return Main.MODID;
+        return "angelblock_tab";
     }
 
     @Override
