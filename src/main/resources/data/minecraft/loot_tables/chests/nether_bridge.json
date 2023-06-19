@@ -48,6 +48,15 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.8,
+                "min": 0.15
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
               "function": "minecraft:enchant_randomly"
             }
           ],
@@ -56,6 +65,15 @@
 	    {
           "type": "minecraft:item",
           "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.8,
+                "min": 0.15
+              },
+              "function": "minecraft:set_damage"
+            },
             {
               "function": "minecraft:enchant_randomly"
             }
