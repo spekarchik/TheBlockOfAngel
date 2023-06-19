@@ -46,6 +46,9 @@ public class MainTab extends ModTab
     @Override
     protected ResourceKey<CreativeModeTab>[] getTabsBefore()
     {
-        return new ResourceKey[] { CreativeModeTabs.COLORED_BLOCKS };
+        return new ResourceKey[]
+                {
+                        CreativeModeTabs.SPAWN_EGGS
+                };
     }
 }

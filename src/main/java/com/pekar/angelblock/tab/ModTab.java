@@ -28,7 +28,7 @@ public abstract class ModTab
     public final RegistryObject<CreativeModeTab> createTab()
     {
         return CREATIVE_MODE_TABS.register(getTabName(), () -> CreativeModeTab.builder()
-                //.withTabsBefore(getTabsBefore())
+                .withTabsBefore(getTabsBefore())
                 .title(Component.translatable(getTitle()))
                 .icon(() -> getIconItem().get().getDefaultInstance())
                 .displayItems(this::addItems).build());
