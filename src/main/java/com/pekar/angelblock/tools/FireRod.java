@@ -291,11 +291,9 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    protected int getLineNumber()
     {
-        if (!isEnhancedRod()) return;
-        for (int i = 1; i <= 6; i++)
-            components.add(getDisplayName(i).withStyle(ChatFormatting.GRAY));
+        return isEnhancedRod() ? 7 : 11;
     }
 
     @Override

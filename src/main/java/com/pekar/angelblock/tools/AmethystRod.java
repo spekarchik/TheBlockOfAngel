@@ -2,15 +2,22 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class AmethystRod extends FireRod
 {
@@ -95,6 +102,12 @@ public class AmethystRod extends FireRod
                 || (!isBroken(stack) && (block == Blocks.OBSIDIAN || block == Blocks.GRANITE || block == Blocks.ANDESITE
                 || block == Blocks.DIORITE || block == Blocks.CALCITE
                 || block == Blocks.DRIPSTONE_BLOCK || block == Blocks.DIAMOND_BLOCK || block == Blocks.BONE_BLOCK));
+    }
+
+    @Override
+    protected int getLineNumber()
+    {
+        return isEnhancedRod() ? 7 : 10;
     }
 
     @Override

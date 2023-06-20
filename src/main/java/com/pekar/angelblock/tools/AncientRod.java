@@ -211,9 +211,20 @@ public class AncientRod extends MagneticRod
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
-        if (!isEnhancedRod()) return;
-        for (int i = 1; i <= 4; i++)
-            components.add(getDisplayName(i).withStyle(ChatFormatting.GRAY));
+        int lines = getLineNumber();
+        for (int i = 1; i <= lines; i++)
+        {
+            var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
+            if (i == 1 && isEnhancedRod())
+                component = component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.WHITE);
+
+            components.add(component);
+        }
+    }
+
+    protected int getLineNumber()
+    {
+        return isEnhancedRod() ? 5 : 9;
     }
 
     private void destroyWebBlocks(Level level, BlockPos pos)
