@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class TrackLayer extends ModRod
+public class TrackLayer extends WorkRod
 {
     public TrackLayer(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {

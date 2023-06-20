@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class Planter extends ModRod
+public class Planter extends WorkRod
 {
     public Planter(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {

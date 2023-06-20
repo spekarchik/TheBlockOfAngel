@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class Builder extends ModRod
+public class Builder extends WorkRod
 {
     public Builder(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
     {
