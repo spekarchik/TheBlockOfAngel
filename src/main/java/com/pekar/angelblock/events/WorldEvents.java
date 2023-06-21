@@ -1,13 +1,8 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.Main;
-import com.pekar.angelblock.armor.ArmorRegistry;
-import com.pekar.angelblock.armor.ModArmor;
-import com.pekar.angelblock.items.ItemRegistry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
