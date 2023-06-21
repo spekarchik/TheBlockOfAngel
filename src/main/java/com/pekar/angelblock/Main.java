@@ -12,9 +12,9 @@ import com.pekar.angelblock.tab.MainTab;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
@@ -69,7 +69,7 @@ public class Main
         CREATIVE_MODE_TABS.register(modEventBus);
 
         // Register the item to a creative tab
-        //modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::addCreative);
 
         // Register the setup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -126,7 +126,7 @@ public class Main
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-//        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-//            event.accept(ItemRegistry.INK_BOTTLE);
+        if (event.getTabKey() == ANGEL_BLOCK_TAB.getKey())
+            event.accept(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), PotionRegistry.BLOCK_BREAKER_POTION.get()));
     }
 }
