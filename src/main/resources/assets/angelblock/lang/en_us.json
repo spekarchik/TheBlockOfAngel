@@ -216,7 +216,7 @@
   "item.angelblock.track_layer.desc3": "Second hand: any rails, redstone wire, fences, walls",
   "item.angelblock.builder": "Builder",
   "item.angelblock.builder.desc1": "Places blocks a player holds in second hand towards the player direction",
-  "item.angelblock.builder.desc2": "If Magnetic Mode is on, blocks are placed to a cube 3x3 with an empty space in the center to use a destroying potion",
+  "item.angelblock.builder.desc2": "If Magnetic Mode is on, blocks are placed to a cube 3x3x3 with an empty space in the center to use a destroying potion",
   "item.angelblock.builder.desc3": "Second hand: any non-falling solid blocks that are not entities",
   "item.angelblock.ancient_magnetic_rod": "Ancient Magnetic Rod",
   "item.angelblock.ancient_magnetic_rod.desc1": "Does the same as Ancient Rod + has Magnetic Mode",
