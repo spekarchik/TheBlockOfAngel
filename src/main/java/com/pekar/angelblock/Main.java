@@ -3,10 +3,7 @@ package com.pekar.angelblock;
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
-import com.pekar.angelblock.events.ClientSetupEvents;
-import com.pekar.angelblock.events.ClientTickEvents;
-import com.pekar.angelblock.events.EventRegistry;
-import com.pekar.angelblock.events.KeyboardMouseEvents;
+import com.pekar.angelblock.events.*;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.PacketRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -92,6 +89,7 @@ public class Main
         ClientSetupEvents.initStatic();
         KeyboardMouseEvents.initStatic();
         ClientTickEvents.initStatic();
+        GuiEvents.initStatic();
 
         PacketRegistry.init();
     }
