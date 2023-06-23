@@ -3,9 +3,12 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -252,6 +255,45 @@ public class ModSword extends SwordItem implements IModTool
     public boolean hasWebMode()
     {
         return false;
+    }
+
+    protected MutableComponent getDisplayName(int lineNumber)
+    {
+        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
+    }
+
+    private MutableComponent getDescription(int lineNumber, TextStyle textStyle)
+    {
+        var component = getDisplayName(lineNumber);
+        return switch (textStyle)
+        {
+            case Header -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);
+            case Subheader -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GRAY);
+            case Notice -> component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
+            default -> component.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
+        };
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)
+    {
+        TextStyle textStyle;
+
+        if (isHeader) textStyle = TextStyle.Header;
+        else if (isSubHeader) textStyle = TextStyle.Subheader;
+        else if (isNotice) textStyle = TextStyle.Notice;
+        else textStyle = TextStyle.Regular;
+
+        return getDescription(lineNumber, textStyle);
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader)
+    {
+        return getDescription(lineNumber, isHeader, isSubHeader, false);
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader)
+    {
+        return getDescription(lineNumber, isHeader, false, false);
     }
 
     protected void setBlock(Player player, BlockPos pos, Block block)

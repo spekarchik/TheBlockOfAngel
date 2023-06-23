@@ -57,10 +57,6 @@ public class MagneticRod extends ModRod
         return InteractionResult.CONSUME;
     }
 
-    protected MutableComponent getDisplayName(int lineNumber) {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
-    }
-
     private InteractionResult shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
     {
         int depth = Math.max(getSculkDetectionDepth(), Math.max(getAmethystDetectionDepth(), getShiftDepth()));

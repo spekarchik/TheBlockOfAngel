@@ -1,11 +1,16 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class DiamithicPrimarySword extends ModSword
 {
@@ -23,6 +28,15 @@ public class DiamithicPrimarySword extends ModSword
         }
 
         return super.hurtEnemy(stack, target, attacker);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    {
+        for (int i = 1; i <= 2; i++)
+        {
+            components.add(getDescription(i, i == 1));
+        }
     }
 
     @Override

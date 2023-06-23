@@ -3,12 +3,17 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.LimoniteAxeProperties;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class LimoniteAxe extends EnhancedAxe
 {
@@ -22,6 +27,15 @@ public class LimoniteAxe extends EnhancedAxe
     {
         if (blockState.getBlock() == Blocks.CACTUS) return 12.0F;
         return super.getDestroySpeed(itemStack, blockState);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            components.add(getDescription(i, i == 1, false, i == 3));
+        }
     }
 
     @Override

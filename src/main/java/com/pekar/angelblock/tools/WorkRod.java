@@ -2,7 +2,6 @@ package com.pekar.angelblock.tools;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
@@ -28,10 +27,5 @@ public class WorkRod extends ModRod
                 component.withStyle(ChatFormatting.ITALIC);
             components.add(component);
         }
-    }
-
-    protected MutableComponent getDisplayName(int lineNumber)
-    {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
     }
 }

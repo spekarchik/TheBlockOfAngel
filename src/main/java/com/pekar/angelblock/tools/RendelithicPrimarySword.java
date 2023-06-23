@@ -1,10 +1,16 @@
 package com.pekar.angelblock.tools;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class RendelithicPrimarySword extends ModSword
 {
@@ -18,5 +24,14 @@ public class RendelithicPrimarySword extends ModSword
     {
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0, true, true));
         return super.hurtEnemy(stack, target, attacker);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    {
+        for (int i = 1; i <= 2; i++)
+        {
+            components.add(getDescription(i, i == 1));
+        }
     }
 }

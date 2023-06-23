@@ -1,12 +1,28 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class LapisShovel extends EnhancedShovel
 {
     public LapisShovel(Tier material, float attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties, new LapisMaterialProperties());
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    {
+        for (int i = 1; i <= 4; i++)
+        {
+            components.add(getDescription(i, i == 1, false, i == 3));
+        }
     }
 }

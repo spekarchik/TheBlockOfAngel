@@ -44,7 +44,7 @@ public class GuiEvents
         var id = PotionRegistry.BLOCK_BREAKER_EFFECT.get().getDescriptionId() + ".desc" + lineNumber;
         var component = Component.translatable(id).withStyle(ChatFormatting.GRAY);
         if (isSubtitleFormatting)
-            component = component.withStyle(ChatFormatting.BOLD);
+            component = component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);
         return component;
     }
 }

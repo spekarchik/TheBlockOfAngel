@@ -4,8 +4,10 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -91,4 +93,37 @@ public class ModHoe extends ModTool
         return false;
     }
 
+    private MutableComponent getDescription(int lineNumber, TextStyle textStyle)
+    {
+        var component = getDisplayName(lineNumber);
+        return switch (textStyle)
+                {
+                    case Header -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);
+                    case Subheader -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GRAY);
+                    case Notice -> component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
+                    default -> component.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
+                };
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)
+    {
+        TextStyle textStyle;
+
+        if (isHeader) textStyle = TextStyle.Header;
+        else if (isSubHeader) textStyle = TextStyle.Subheader;
+        else if (isNotice) textStyle = TextStyle.Notice;
+        else textStyle = TextStyle.Regular;
+
+        return getDescription(lineNumber, textStyle);
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader)
+    {
+        return getDescription(lineNumber, isHeader, isSubHeader, false);
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader)
+    {
+        return getDescription(lineNumber, isHeader, false, false);
+    }
 }

@@ -3,6 +3,8 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
@@ -73,6 +75,11 @@ public abstract class ModTool extends HoeItem implements IModTool
     public boolean isEnhancedRod()
     {
         return false;
+    }
+
+    protected MutableComponent getDisplayName(int lineNumber)
+    {
+        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
     }
 
     protected void setBlock(Player player, BlockPos pos, Block block)
