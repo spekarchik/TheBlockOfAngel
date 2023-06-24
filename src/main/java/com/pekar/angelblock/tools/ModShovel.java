@@ -1,5 +1,7 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.TextStyle;
+import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;

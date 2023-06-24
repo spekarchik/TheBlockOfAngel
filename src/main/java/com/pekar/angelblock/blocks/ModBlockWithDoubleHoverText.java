@@ -25,7 +25,7 @@ public class ModBlockWithDoubleHoverText extends Block
         {
             var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
             if (i == 1)
-                component.withStyle(ChatFormatting.ITALIC);
+                component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.WHITE);
             components.add(component);
         }
     }

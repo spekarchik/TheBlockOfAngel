@@ -1,5 +1,6 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.TextStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -12,11 +13,24 @@ import java.util.List;
 
 public class ModItemWithHoverText extends ModItem
 {
+    private final TextStyle descriptionStyle;
+
+    public ModItemWithHoverText()
+    {
+        this(TextStyle.Regular);
+    }
+
+    public ModItemWithHoverText(TextStyle descriptionStyle)
+    {
+        this.descriptionStyle = descriptionStyle;
+    }
+
 
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
-        components.add(getDisplayName().withStyle(ChatFormatting.GRAY));
+        var component = utils.getDescription(getDisplayName(), descriptionStyle);
+        components.add(component);
     }
 
     protected MutableComponent getDisplayName()

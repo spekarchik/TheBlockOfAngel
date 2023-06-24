@@ -1,4 +1,4 @@
-package com.pekar.angelblock.tools;
+package com.pekar.angelblock;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class Utils
 {
-    Utils()
+    public Utils()
     {}
 
     public static Random random = new Random();
@@ -430,7 +430,7 @@ public class Utils
         return getDescription(initialComponent, textStyle);
     }
 
-    private MutableComponent getDescription(MutableComponent initialComponent, TextStyle textStyle)
+    public MutableComponent getDescription(MutableComponent initialComponent, TextStyle textStyle)
     {
         return switch (textStyle)
                 {

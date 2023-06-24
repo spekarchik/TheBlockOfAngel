@@ -1,5 +1,7 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.TextStyle;
+import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.ChatFormatting;

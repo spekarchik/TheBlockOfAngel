@@ -1,7 +1,7 @@
 package com.pekar.angelblock.potions;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.tools.Utils;
+import com.pekar.angelblock.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
