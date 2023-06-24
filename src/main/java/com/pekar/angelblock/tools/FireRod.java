@@ -293,7 +293,7 @@ public class FireRod extends MarineRod
     {
         if (isEnhancedRod())
         {
-            for (int i = 1; i <= 7; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 components.add(getDescription(i, false, false, false, i == 1));
             }
@@ -332,7 +332,7 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    protected int getShiftDepth()
+    protected int getOreDepth()
     {
         return 9;
     }

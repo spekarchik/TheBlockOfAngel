@@ -109,7 +109,7 @@ public class AmethystRod extends FireRod
     {
         if (isEnhancedRod())
         {
-            for (int i = 1; i <= 7; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 components.add(getDescription(i, false, false, false, i == 1));
             }
@@ -124,7 +124,40 @@ public class AmethystRod extends FireRod
     }
 
     @Override
-    protected int getShiftDepth()
+    protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
+    {
+        SoundType soundType;
+
+        if (detectorFlags.isSculkVeinFound())
+        {
+            soundType = SoundType.SCULK_FOUND;
+        }
+        else if (detectorFlags.isDiamondOreFound())
+        {
+            soundType = SoundType.DIAMOND_FOUND;
+        }
+        else if (detectorFlags.isAmethystFound())
+        {
+            soundType = SoundType.AMETHYST_FOUND;
+        }
+        else if (detectorFlags.isRailsFound())
+        {
+            soundType = SoundType.RAILS_FOUND;
+        }
+        else if (detectorFlags.isShiftingOreFound())
+        {
+            soundType = SoundType.ORE_FOUND;
+        }
+        else
+        {
+            return;
+        }
+
+        new PlaySoundPacket(soundType).sendToPlayer(player);
+    }
+
+    @Override
+    protected int getOreDepth()
     {
         return 12;
     }

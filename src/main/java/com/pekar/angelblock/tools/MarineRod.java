@@ -141,7 +141,7 @@ public class MarineRod extends AncientRod
     {
         if (isEnhancedRod())
         {
-            for (int i = 1; i <= 6; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 components.add(getDescription(i, false, false, false, i == 1));
             }
@@ -156,7 +156,7 @@ public class MarineRod extends AncientRod
     }
 
     @Override
-    protected int getShiftDepth()
+    protected int getOreDepth()
     {
         return 7;
     }

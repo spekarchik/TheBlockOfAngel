@@ -70,12 +70,13 @@ public class PlaySoundPacket extends ServerToClientPacket
             case AMETHYST_FOUND -> SoundEvents.NOTE_BLOCK_XYLOPHONE.value();
             case DIAMOND_FOUND -> SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value();
             case ORE_FOUND -> SoundEvents.GRAVEL_PLACE;
-            case SCULK_FOUND -> SoundEvents.SCULK_SHRIEKER_SHRIEK;
+            case SCULK_FOUND -> SoundEvents.SCULK_CLICKING;
             case INFESTED_BLOCK -> SoundEvents.SILVERFISH_DEATH;
             case BONEMEAL -> SoundEvents.BONE_MEAL_USE;
             case RAIL_PLACED -> SoundEvents.METAL_PLACE;
             case REDSTONE_WIRE_PLACED, STONE_PLACED -> SoundEvents.STONE_PLACE;
             case WOOD_PLACED -> SoundEvents.WOOD_PLACE;
+            case RAILS_FOUND -> SoundEvents.ANVIL_LAND;
             case MINECRAFT -> soundEvent;
             case UNDEFINED -> null;
         };

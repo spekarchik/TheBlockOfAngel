@@ -18,7 +18,8 @@ public enum SoundType
     REDSTONE_WIRE_PLACED,
     WOOD_PLACED,
     STONE_PLACED,
-    MINECRAFT;
+    MINECRAFT,
+    RAILS_FOUND;
 
     public static int getIndex(SoundType soundType)
     {
@@ -41,6 +42,7 @@ public enum SoundType
                     case WOOD_PLACED -> 14;
                     case STONE_PLACED -> 15;
                     case MINECRAFT -> 16;
+                    case RAILS_FOUND -> 17;
                 };
     }
 
@@ -64,6 +66,7 @@ public enum SoundType
                     case 14 -> WOOD_PLACED;
                     case 15 -> STONE_PLACED;
                     case 16 -> MINECRAFT;
+                    case 17 -> RAILS_FOUND;
                     default -> UNDEFINED;
                 };
     }

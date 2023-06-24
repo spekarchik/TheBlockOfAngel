@@ -189,7 +189,7 @@ public class EndRod extends AmethystRod
     {
         if (isEnhancedRod())
         {
-            for (int i = 1; i <= 7; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 components.add(getDescription(i, false, false, false, i == 1));
             }
@@ -204,7 +204,7 @@ public class EndRod extends AmethystRod
     }
 
     @Override
-    protected int getShiftDepth()
+    protected int getOreDepth()
     {
         return 15;
     }
@@ -213,6 +213,12 @@ public class EndRod extends AmethystRod
     protected int getShiftingRadius()
     {
         return 3;
+    }
+
+    @Override
+    protected int getRailsDetectionDepth()
+    {
+        return 128;
     }
 
     @Override

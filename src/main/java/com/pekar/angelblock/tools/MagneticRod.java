@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.function.TriFunction;
@@ -58,7 +59,7 @@ public class MagneticRod extends ModRod
 
     private InteractionResult shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
     {
-        int depth = Math.max(getSculkDetectionDepth(), Math.max(getAmethystDetectionDepth(), getShiftDepth()));
+        int depth = Math.max(getSculkDetectionDepth(), Math.max(getAmethystDetectionDepth(), getOreDepth()));
 
         int initialDepth;
         Function<BlockPos, Integer> getDepthCoord, getRadiusCoord1, getRadiusCoord2;
@@ -102,10 +103,12 @@ public class MagneticRod extends ModRod
         boolean isDiamondOreFound = false;
         boolean isShiftingOreFound = false;
         boolean isAmethystFound = false;
+        boolean areRailsFound = false;
         boolean isSculkVeinFound = false;
         int maxDepthCoord = getDepthCoord.apply(pos) - initialDepth;
-        int oreDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getShiftDepth() : -getShiftDepth());
+        int oreDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getOreDepth() : -getOreDepth());
         int amethystDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getAmethystDetectionDepth() : -getAmethystDetectionDepth());
+        int railDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getRailsDetectionDepth() : -getRailsDetectionDepth());
         int sculkDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getSculkDetectionDepth() : -getSculkDetectionDepth());
 
         for (int x1 = getRadiusCoord1.apply(pos) - radius; x1 <= getRadiusCoord1.apply(pos) + radius; x1++)
@@ -116,19 +119,23 @@ public class MagneticRod extends ModRod
                 {
                     boolean doCurrentDepthAllowShiftOres;
                     boolean doCurrentDepthAllowDetectAmethyst;
+                    boolean doCurrentDepthAllowDetectRails;
                     boolean doCurrentDepthAllowDetectSculk;
+                    var currentDepth = getDepthCoord.apply(currentPos);
 
                     if (initialDepth >= 0)
                     {
-                        doCurrentDepthAllowShiftOres = getDepthCoord.apply(currentPos) >= oreDepthCoord;
-                        doCurrentDepthAllowDetectAmethyst = getDepthCoord.apply(currentPos) >= amethystDepthCoord;
-                        doCurrentDepthAllowDetectSculk = getDepthCoord.apply(currentPos) >= sculkDepthCoord;
+                        doCurrentDepthAllowShiftOres = currentDepth >= oreDepthCoord;
+                        doCurrentDepthAllowDetectAmethyst = currentDepth >= amethystDepthCoord;
+                        doCurrentDepthAllowDetectRails = currentDepth >= railDepthCoord;
+                        doCurrentDepthAllowDetectSculk = currentDepth >= sculkDepthCoord;
                     }
                     else
                     {
-                        doCurrentDepthAllowShiftOres = getDepthCoord.apply(currentPos) <= oreDepthCoord;
-                        doCurrentDepthAllowDetectAmethyst = getDepthCoord.apply(currentPos) <= amethystDepthCoord;
-                        doCurrentDepthAllowDetectSculk = getDepthCoord.apply(currentPos) <= sculkDepthCoord;
+                        doCurrentDepthAllowShiftOres = currentDepth <= oreDepthCoord;
+                        doCurrentDepthAllowDetectAmethyst = currentDepth <= amethystDepthCoord;
+                        doCurrentDepthAllowDetectRails = currentDepth <= railDepthCoord;
+                        doCurrentDepthAllowDetectSculk = currentDepth <= sculkDepthCoord;
                     }
 
                     // check current block: ore? diamond?
@@ -136,9 +143,12 @@ public class MagneticRod extends ModRod
                     boolean isDiamondOre = isDiamondOre(currentBlock);
                     boolean isShiftingOre = isShiftingOre(currentBlock);
                     boolean isAmethystGeode = isAmethystGeode(currentBlock);
+                    boolean isRail = isRail(currentBlock);
                     boolean isSculkVein = isSculk(currentBlock);
 
                     if (doCurrentDepthAllowDetectAmethyst && isAmethystGeode) isAmethystFound = true;
+
+                    if (doCurrentDepthAllowDetectRails && isRail) areRailsFound = true;
 
                     if (doCurrentDepthAllowDetectSculk && isSculkVein) isSculkVeinFound = true;
 
@@ -179,8 +189,8 @@ public class MagneticRod extends ModRod
                 }
             }
 
-        if (isShiftingOreFound || isDiamondOreFound || isAmethystFound || isSculkVeinFound)
-            oreFoundEvent(player, new DetectorFlags(isShiftingOreFound, isDiamondOreFound, isAmethystFound, isSculkVeinFound));
+        if (isShiftingOreFound || isDiamondOreFound || isAmethystFound || areRailsFound || isSculkVeinFound)
+            oreFoundEvent(player, new DetectorFlags(isShiftingOreFound, isDiamondOreFound, isAmethystFound, areRailsFound, isSculkVeinFound));
     }
 
     protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
@@ -201,7 +211,7 @@ public class MagneticRod extends ModRod
         return 1;
     }
 
-    protected int getShiftDepth()
+    protected int getOreDepth()
     {
         return 5;
     }
@@ -209,6 +219,11 @@ public class MagneticRod extends ModRod
     protected int getAmethystDetectionDepth()
     {
         return 20;
+    }
+
+    protected int getRailsDetectionDepth()
+    {
+        return 64;
     }
 
     protected int getSculkDetectionDepth()
@@ -248,6 +263,11 @@ public class MagneticRod extends ModRod
     private boolean isAmethystGeode(Block block)
     {
         return block == Blocks.SMOOTH_BASALT || block == Blocks.CALCITE;
+    }
+
+    private boolean isRail(Block block)
+    {
+        return block instanceof BaseRailBlock;
     }
 
     private boolean isDiamondOre(Block block)

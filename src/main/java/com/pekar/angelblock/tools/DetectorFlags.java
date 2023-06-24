@@ -5,13 +5,15 @@ class DetectorFlags
     private final boolean isShiftingOreFound;
     private final boolean isDiamondOreFound;
     private final boolean isAmethystFound;
+    private final boolean isRailsFound;
     private final boolean isSculkVeinFound;
 
-    DetectorFlags(boolean isShiftingOreFound, boolean isDiamondOreFound, boolean isAmethystFound, boolean isSculkVeinFound)
+    DetectorFlags(boolean isShiftingOreFound, boolean isDiamondOreFound, boolean isAmethystFound, boolean isRailsFound, boolean isSculkVeinFound)
     {
         this.isShiftingOreFound = isShiftingOreFound;
         this.isDiamondOreFound = isDiamondOreFound;
         this.isAmethystFound = isAmethystFound;
+        this.isRailsFound = isRailsFound;
         this.isSculkVeinFound = isSculkVeinFound;
     }
 
@@ -33,5 +35,10 @@ class DetectorFlags
     public boolean isSculkVeinFound()
     {
         return isSculkVeinFound;
+    }
+
+    public boolean isRailsFound()
+    {
+        return isRailsFound;
     }
 }
