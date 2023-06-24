@@ -2,6 +2,7 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -57,6 +58,27 @@ public abstract class ModTool extends HoeItem implements IModTool
     protected boolean canBeFarmland(Block block)
     {
         return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH || block == Blocks.DIRT;
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
+    {
+        var component = getDisplayName(lineNumber);
+        return utils.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)
+    {
+        return getDescription(lineNumber, isHeader, isSubHeader, isNotice, false);
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader)
+    {
+        return getDescription(lineNumber, isHeader, isSubHeader, false);
+    }
+
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader)
+    {
+        return getDescription(lineNumber, isHeader, false);
     }
 
     @Override

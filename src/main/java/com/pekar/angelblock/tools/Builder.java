@@ -4,6 +4,7 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -11,10 +12,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Builder extends WorkRod
 {
@@ -182,6 +187,15 @@ public class Builder extends WorkRod
         }
 
         return true;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    {
+        for (int i = 1; i <= 6; i++)
+        {
+            components.add(getDescription(i, i == 1,  i == 4 || i == 2, false, i == 6));
+        }
     }
 
     protected boolean isPlant(Block block)

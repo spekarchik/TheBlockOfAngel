@@ -139,21 +139,20 @@ public class MarineRod extends AncientRod
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
-        int lines = getLineNumber();
-        for (int i = 1; i <= lines; i++)
+        if (isEnhancedRod())
         {
-            var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
-            if ((i == 1 && isEnhancedRod()) || (i == lines && !isEnhancedRod()))
-                component = component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.WHITE);
-
-            components.add(component);
+            for (int i = 1; i <= 6; i++)
+            {
+                components.add(getDescription(i, false, false, false, i == 1));
+            }
         }
-    }
-
-    @Override
-    protected int getLineNumber()
-    {
-        return isEnhancedRod() ? 6 : 10;
+        else
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                components.add(getDescription(i, i == 1 || i == 8, false, false, i == 12));
+            }
+        }
     }
 
     @Override

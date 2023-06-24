@@ -185,9 +185,22 @@ public class EndRod extends AmethystRod
     }
 
     @Override
-    protected int getLineNumber()
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
-        return isEnhancedRod() ? 7 : 5;
+        if (isEnhancedRod())
+        {
+            for (int i = 1; i <= 7; i++)
+            {
+                components.add(getDescription(i, false, false, false, i == 1));
+            }
+        }
+        else
+        {
+            for (int i = 1; i <= 8; i++)
+            {
+                components.add(getDescription(i, i == 1 || i == 4 || i == 6, false, false, i == 8));
+            }
+        }
     }
 
     @Override

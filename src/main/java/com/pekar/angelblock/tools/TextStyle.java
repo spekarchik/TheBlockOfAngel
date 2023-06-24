@@ -5,5 +5,6 @@ public enum TextStyle
     Regular,
     Header,
     Subheader,
-    Notice
+    Notice,
+    ImportantNotice
 }

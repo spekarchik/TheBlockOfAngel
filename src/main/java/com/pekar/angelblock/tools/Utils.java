@@ -3,8 +3,10 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -413,6 +415,31 @@ public class Utils
     public boolean isLiquid(Block block)
     {
         return block instanceof LiquidBlock;
+    }
+
+    public MutableComponent getFormattedTextComponent(MutableComponent initialComponent, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
+    {
+        TextStyle textStyle;
+
+        if (isHeader) textStyle = TextStyle.Header;
+        else if (isSubHeader) textStyle = TextStyle.Subheader;
+        else if (isNotice) textStyle = TextStyle.Notice;
+        else if (isImportantNotice) textStyle = TextStyle.ImportantNotice;
+        else textStyle = TextStyle.Regular;
+
+        return getDescription(initialComponent, textStyle);
+    }
+
+    private MutableComponent getDescription(MutableComponent initialComponent, TextStyle textStyle)
+    {
+        return switch (textStyle)
+                {
+                    case Header -> initialComponent.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);
+                    case Subheader -> initialComponent.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GRAY);
+                    case Notice -> initialComponent.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
+                    case ImportantNotice -> initialComponent.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.WHITE);
+                    default -> initialComponent.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
+                };
     }
 
     private void setBlock(Player player, BlockPos pos, Block block)
