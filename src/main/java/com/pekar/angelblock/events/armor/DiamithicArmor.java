@@ -6,9 +6,6 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -60,9 +57,14 @@ public class DiamithicArmor extends Armor
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
         boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
-        if (isFullArmorSet && isExplosionDamage(event.getSource()) && player.isChestPlateModifiedWithStrengthBooster(this))
+        var damageSource = event.getSource();
+        if (isFullArmorSet && isExplosionDamage(damageSource) && player.isChestPlateModifiedWithStrengthBooster(this))
         {
             event.setAmount(event.getAmount() * 0.5f);
+        }
+        else if (isPoisoned(damageSource.getEntity()))
+        {
+            event.setAmount(event.getAmount() * 2f);
         }
     }
 
