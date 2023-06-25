@@ -213,7 +213,7 @@ public class AncientRod extends MagneticRod
     {
         if (isEnhancedRod())
         {
-            for (int i = 1; i <= 5; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 components.add(getDescription(i, false, false, false, i == 1));
             }
