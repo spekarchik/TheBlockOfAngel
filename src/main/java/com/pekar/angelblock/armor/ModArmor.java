@@ -63,7 +63,7 @@ public class ModArmor extends ArmorItem
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)
         {
-//            components.add(getSpecificDescription(i, i == 1, false, false, false));
+            components.add(getSpecificDescription(i, i == 1, false, false, false));
         }
     }
 
