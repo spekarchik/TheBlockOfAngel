@@ -4,8 +4,6 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -56,15 +54,16 @@ public class FlyingArmor extends Armor
     @Override
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
-        if (event.getSource().is(DamageTypes.FALL))
-        {
-            event.setAmount(event.getAmount() * 0.1F);
-        }
     }
 
     @Override
     public void onLivingAttackEvent(LivingAttackEvent event)
     {
+        if (isFreezeDamage(event.getSource()))
+        {
+            boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
+            event.setCanceled(areBootsWorn);
+        }
     }
 
     @Override
@@ -85,6 +84,10 @@ public class FlyingArmor extends Armor
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
+        if (player.isArmorElementPutOn(this, EquipmentSlot.FEET))
+        {
+            event.setDamageMultiplier(0.1F);
+        }
     }
 
     @Override

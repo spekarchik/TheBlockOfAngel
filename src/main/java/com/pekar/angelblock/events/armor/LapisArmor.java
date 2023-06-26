@@ -49,14 +49,19 @@ public class LapisArmor extends Armor
     @Override
     public void onLivingHurtEvent(LivingHurtEvent event)
     {
-        if (isFireOrMagmaDamage(event.getSource()) && !witherEffect.isActive())
+        var damageSource = event.getSource();
+
+        if (isFireOrMagmaDamage(damageSource) && !witherEffect.isActive())
         {
             witherEffect.trySwitch();
         }
-        else if (isLavaDamage(event.getSource()))
+        else if (isLavaDamage(damageSource))
         {
-            float amount = event.getAmount();
-            event.setAmount(amount * 1.2f);
+            event.setAmount(event.getAmount() * 1.2f);
+        }
+        else if (isFreezeDamage(damageSource))
+        {
+            event.setAmount(event.getAmount() * 2f);
         }
     }
 

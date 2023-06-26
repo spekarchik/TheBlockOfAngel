@@ -13,8 +13,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Pufferfish;
-import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Witch;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -99,8 +99,6 @@ public class LimoniteArmor extends Armor
     @Override
     public void onLivingAttackEvent(LivingAttackEvent event)
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
-
         DamageSource damageSource = event.getSource();
 
         if (isFreezeDamage(damageSource))
@@ -110,33 +108,30 @@ public class LimoniteArmor extends Armor
         }
         else
         {
-            event.setCanceled(isFullArmorSet && isThornOrMagicDamage(damageSource));
+            event.setCanceled(isThornOrMagicDamage(damageSource) && player.isArmorModifiedWithHealthRegenerator(this));
         }
+
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
 
         if (!isFullArmorSet) return;
-        if (!(damageSource.getEntity() instanceof LivingEntity)) return;
+        if (!(damageSource.getEntity() instanceof LivingEntity entityAttackedBy)) return;
 
-        LivingEntity entityAttackedBy = (LivingEntity) damageSource.getEntity();
-
-        if (entityAttackedBy != null)
+        if (isSlowMovementAffected(entityAttackedBy))
         {
-            if (isSlowMovementAffected(entityAttackedBy))
+            boolean isWitch = entityAttackedBy instanceof Witch;
+            float distance = player.getEntity().distanceTo(entityAttackedBy);
+            if (!isWitch && distance > 2f)
             {
-                boolean isWitch = entityAttackedBy instanceof Witch;
-                float distance = player.getEntity().distanceTo(entityAttackedBy);
-                if (!isWitch && distance > 2f)
-                {
-                    entityAttackedBy.setSecondsOnFire(5);
-                }
-                else
-                {
-                    entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
-                }
+                entityAttackedBy.setSecondsOnFire(5);
             }
-
-            var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
-            entityAttackedBy.addEffect(effect);
+            else
+            {
+                entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
+            }
         }
+
+        var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
+        entityAttackedBy.addEffect(effect);
     }
 
     @Override

@@ -137,17 +137,18 @@ public class SuperArmor extends Armor
             boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
             event.setCanceled(areBootsWorn);
         }
-        else if (isFullArmorSet)
+        else if (hasImmunity(damageSource) && player.isArmorModifiedWithHealthRegenerator(this))
         {
-            if (damageSource.is(DamageTypes.WITHER))
-            {
-                event.setCanceled(true);
-                player.getEntity().removeEffect(MobEffects.WITHER);
-            }
-            else
-            {
-                event.setCanceled(hasImmunity(damageSource));
-            }
+            event.setCanceled(true);
+        }
+        else if (damageSource.is(DamageTypes.WITHER) && player.isArmorModifiedWithHealthRegenerator(this))
+        {
+            event.setCanceled(true);
+            player.getEntity().removeEffect(MobEffects.WITHER);
+        }
+        else if (isFullArmorSet && isLightningBoltDamage(damageSource))
+        {
+            event.setCanceled(true);
         }
 
         if (!isFullArmorSet) return;
@@ -193,6 +194,7 @@ public class SuperArmor extends Armor
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
         if (!player.isArmorElementPutOn(this, EquipmentSlot.LEGS)) return;
+
         if (jumpEffect.isActive() || slownessEffect.isActive()) return;
 
         if (levitationEffect.isEffectOn() && levitationEffect.isActive())
@@ -208,6 +210,8 @@ public class SuperArmor extends Armor
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
+        if (!player.isArmorElementPutOn(this, EquipmentSlot.FEET)) return;
+
         if (levitationEffect.isEffectOn() && levitationEffect.isActive())
         {
             event.setDamageMultiplier(0);
@@ -393,7 +397,7 @@ public class SuperArmor extends Armor
 
     private boolean hasImmunity(DamageSource damageSource)
     {
-        return isThornOrMagicDamage(damageSource) || isLightningBoltDamage(damageSource) || damageSource.is(DamageTypes.DRAGON_BREATH);
+        return isThornOrMagicDamage(damageSource) || damageSource.is(DamageTypes.DRAGON_BREATH);
     }
 
     private int getLevitationAmplifier()
