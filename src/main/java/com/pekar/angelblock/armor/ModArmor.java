@@ -3,6 +3,7 @@ package com.pekar.angelblock.armor;
 import com.pekar.angelblock.Utils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
@@ -63,7 +64,7 @@ public class ModArmor extends ArmorItem
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)
         {
-            components.add(getSpecificDescription(i, i == 1, false, false, false));
+            components.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 7, false));
         }
     }
 
@@ -74,7 +75,7 @@ public class ModArmor extends ArmorItem
             case HEAD -> 4;
             case CHEST -> 7;
             case LEGS -> 5;
-            case FEET -> 6;
+            case FEET -> 7;
             default -> 0;
         };
     }
