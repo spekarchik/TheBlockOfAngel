@@ -82,7 +82,7 @@ public class LimoniteArmor extends Armor
         var damageSource = event.getSource();
         var attacker = damageSource.getEntity();
 
-        if (isPoisoned(attacker))
+        if (isBiting(attacker))
         {
             if (player.isFullArmorSetPutOn(this))
             {

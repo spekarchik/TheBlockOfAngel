@@ -62,7 +62,7 @@ public class DiamithicArmor extends Armor
         {
             event.setAmount(event.getAmount() * 0.5f);
         }
-        else if (isPoisoned(damageSource.getEntity()))
+        else if (isBiting(damageSource.getEntity()))
         {
             event.setAmount(event.getAmount() * 2f);
         }

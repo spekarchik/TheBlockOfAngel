@@ -111,7 +111,7 @@ public class SuperArmor extends Armor
                 {
                     var attacker = damageSource.getEntity();
 
-                    if (isPoisoned(attacker))
+                    if (isBiting(attacker))
                     {
                         float damageAmount = event.getAmount();
                         event.setAmount(damageAmount * 0.2F);

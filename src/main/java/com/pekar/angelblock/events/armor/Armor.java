@@ -97,7 +97,7 @@ abstract class Armor implements IArmor
         return damageSource.is(DamageTypes.EXPLOSION);
     }
 
-    protected boolean isPoisoned(Entity entity)
+    protected boolean isBiting(Entity entity)
     {
         boolean isSilverfish = entity instanceof Silverfish;
         boolean isEndermite = entity instanceof Endermite;
