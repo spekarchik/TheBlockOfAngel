@@ -39,19 +39,19 @@ public class ArmorRegistry
             new LapisArmorWithSeaPower(ModArmorMaterial.LAPIS2, ArmorItem.Type.BOOTS, "lapis"));
 
     public static final RegistryObject<ModArmor> LIMONITE_HELMET = Main.ITEMS.register("limonite_helmet", () ->
-            new ModArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.HELMET, "limonite"));
+            new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.HELMET, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_HELMET_WITH_DETECTOR = Main.ITEMS.register("limonite_helmet_with_detector", () ->
             new LimoniteArmorWithDetector(ModArmorMaterial.LIMONITE2, ArmorItem.Type.HELMET, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_CHESTPLATE = Main.ITEMS.register("limonite_chestplate", () ->
-            new ModArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.CHESTPLATE, "limonite"));
+            new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.CHESTPLATE, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_CHESTPLATE_WITH_SEA_POWER = Main.ITEMS.register("limonite_chestplate_with_sea_power", () ->
             new LimoniteArmorWithSeaPower(ModArmorMaterial.LIMONITE2, ArmorItem.Type.CHESTPLATE, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS = Main.ITEMS.register("limonite_leggings", () ->
-            new ModArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.LEGGINGS, "limonite"));
+            new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.LEGGINGS, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("limonite_leggings_with_regenerator", () ->
             new LimoniteArmorWithRegenerator(ModArmorMaterial.LIMONITE2, ArmorItem.Type.LEGGINGS, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_BOOTS = Main.ITEMS.register("limonite_boots", () ->
-            new ModArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.BOOTS, "limonite"));
+            new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.BOOTS, "limonite"));
     public static final RegistryObject<ModArmor> LIMONITE_BOOTS_WITH_STRENGTH = Main.ITEMS.register("limonite_boots_with_strength", () ->
             new LimoniteArmorWithStrengthBoost(ModArmorMaterial.LIMONITE2, ArmorItem.Type.BOOTS, "limonite"));
 

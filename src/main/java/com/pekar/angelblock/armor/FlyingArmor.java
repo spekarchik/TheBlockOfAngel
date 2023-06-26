@@ -59,6 +59,14 @@ public class FlyingArmor extends ModArmor
         return canElytraFly(stack, entity);
     }
 
+    @Override
+    public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
+    {
+        return getModelName(wearer, EquipmentSlot.FEET)
+            .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorModelName());
+
+    }
+
     private String getModelName(LivingEntity entity, EquipmentSlot slot)
     {
         var item = entity.getItemBySlot(slot).getItem();

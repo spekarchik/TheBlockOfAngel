@@ -2,7 +2,7 @@ package com.pekar.angelblock.armor;
 
 import net.minecraft.world.item.ArmorMaterial;
 
-public class LimoniteArmorWithStrengthBoost extends ModArmor
+public class LimoniteArmorWithStrengthBoost extends LimoniteArmor
 {
     protected LimoniteArmorWithStrengthBoost(ArmorMaterial material, Type equipmentSlot, String armorModelName)
     {

@@ -31,4 +31,13 @@ public class SuperArmor extends ModArmor
         if (!(helmetItem instanceof ModArmor helmet)) return false;
         return helmet.getArmorModelName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorModelName());
     }
+
+    @Override
+    public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
+    {
+        var itemStack = wearer.getItemBySlot(EquipmentSlot.FEET);
+        var bootsItem = itemStack.getItem();
+        if (!(bootsItem instanceof ModArmor boots)) return false;
+        return boots.getArmorModelName().equals(ArmorRegistry.SUPER_BOOTS.get().getArmorModelName());
+    }
 }

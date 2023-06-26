@@ -2,7 +2,7 @@ package com.pekar.angelblock.armor;
 
 import net.minecraft.world.item.ArmorMaterial;
 
-public class LimoniteArmorWithRegenerator extends ModArmor
+public class LimoniteArmorWithRegenerator extends LimoniteArmor
 {
     protected LimoniteArmorWithRegenerator(ArmorMaterial material, Type equipmentSlot, String armorModelName)
     {
