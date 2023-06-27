@@ -8,7 +8,7 @@ public class KeyRegistry
 {
     private static final String category = Main.MODNAME;
     public static final KeyMapping NIGHT_VISION = createKeyMapping("night_vision", category, InputConstants.KEY_V);
-    public static final KeyMapping JUMP_BOOST = createKeyMapping("jump_boost", category, InputConstants.KEY_C);
+    public static final KeyMapping JUMP_BOOST = createKeyMapping("jump_boost", category, InputConstants.KEY_J);
     public static final KeyMapping SUPER_JUMP = createKeyMapping("super_jump", category, InputConstants.KEY_X);
     public static final KeyMapping GLOWING = createKeyMapping("glowing", category, InputConstants.KEY_G);
     public static final KeyMapping REGENERATION = createKeyMapping("regen", category, InputConstants.KEY_H);
