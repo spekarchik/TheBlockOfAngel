@@ -63,9 +63,9 @@ public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityB
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter blockGetter, List<Component> components, TooltipFlag tooltipFlag)
     {
-        for (int i = 1; i <= 12; i++)
+        for (int i = 1; i <= 15; i++)
         {
-            components.add(getDescription(i, false, i == 3, false, false));
+            components.add(getDescription(i, i == 3, false, false, false));
         }
     }
 }

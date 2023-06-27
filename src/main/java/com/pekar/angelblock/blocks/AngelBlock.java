@@ -47,9 +47,9 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter blockGetter, List<Component> components, TooltipFlag tooltipFlag)
     {
-        for (int i = 1; i <= 16; i++)
+        for (int i = 1; i <= 17; i++)
         {
-            components.add(getDescription(i, false, i == 3, false, i == 16));
+            components.add(getDescription(i, i == 3, false, false, i == 17));
         }
     }
 }

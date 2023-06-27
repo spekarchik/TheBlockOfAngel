@@ -8,9 +8,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class PiglinBrute extends Monster
+public class Vindicator extends Monster
 {
-    public PiglinBrute(byte id)
+    public Vindicator(byte id)
     {
         super(id);
     }
@@ -18,19 +18,19 @@ public class PiglinBrute extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.piglin.PiglinBrute;
+        return livingEntity instanceof net.minecraft.world.entity.monster.AbstractIllager;
     }
 
     @Override
     public Item getActionItem()
     {
-        return Items.GOLD_INGOT;
+        return Items.EMERALD;
     }
 
     @Override
     public EntityType<? extends Entity> getEntityType()
     {
-        return EntityType.PIGLIN_BRUTE;
+        return EntityType.VINDICATOR;
     }
 
     @Override

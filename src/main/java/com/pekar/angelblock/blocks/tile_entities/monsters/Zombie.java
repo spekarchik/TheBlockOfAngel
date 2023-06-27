@@ -5,7 +5,6 @@ import com.pekar.angelblock.blocks.tile_entities.spawn.OnGroundMonsterSpawnStrat
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -19,8 +18,7 @@ public class Zombie extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.Zombie
-                && !(livingEntity instanceof ZombieVillager);
+        return livingEntity instanceof net.minecraft.world.entity.monster.Zombie;
     }
 
     @Override

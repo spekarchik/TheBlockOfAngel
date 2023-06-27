@@ -52,6 +52,13 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
         addToMonsterMap(Monsters.ZombieVillager);
         addToMonsterMap(Monsters.CaveSpider);
         addToMonsterMap(Monsters.Phantom);
+        addToMonsterMap(Monsters.Shulker);
+        addToMonsterMap(Monsters.Vindicator);
+        addToMonsterMap(Monsters.Evoker);
+        addToMonsterMap(Monsters.Ravager);
+        addToMonsterMap(Monsters.Piglin);
+        addToMonsterMap(Monsters.Husk);
+        addToMonsterMap(Monsters.Pillager);
     }
 
     public void activate()

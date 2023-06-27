@@ -24,7 +24,7 @@ public class CaveSpider extends Monster
     @Override
     public Item getActionItem()
     {
-        return Items.FERMENTED_SPIDER_EYE;
+        return Items.SPIDER_EYE;
     }
 
     @Override

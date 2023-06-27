@@ -30,7 +30,7 @@ public class Shulker extends Monster
     @Override
     public EntityType<? extends Entity> getEntityType()
     {
-        throw new UnsupportedOperationException();
+        return EntityType.SHULKER;
     }
 
     @Override

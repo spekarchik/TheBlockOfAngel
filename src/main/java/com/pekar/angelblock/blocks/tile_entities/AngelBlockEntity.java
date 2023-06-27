@@ -41,7 +41,7 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         addToMonsterMap(Monsters.Witch);
         addToMonsterMap(Monsters.Spider);
         addToMonsterMap(Monsters.CaveSpider);
-        addToMonsterMap(Monsters.Pillager);
+        addToMonsterMap(Monsters.Vindicator);
         addToMonsterMap(Monsters.Slime);
         addToMonsterMap(Monsters.MagmaCube);
         addToMonsterMap(Monsters.WitherSkeleton);
@@ -57,6 +57,11 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         addToMonsterMap(Monsters.PiglinBrute);
         addToMonsterMap(Monsters.Warden);
         addToMonsterMap(Monsters.ZombieVillager);
+        addToMonsterMap(Monsters.Evoker);
+        addToMonsterMap(Monsters.Ravager);
+        addToMonsterMap(Monsters.Piglin);
+        //addToMonsterMap(Monsters.Husk);
+        //addToMonsterMap(Monsters.Pillager);
     }
 
     public void addMonsterToFilter(Item item, Player player)

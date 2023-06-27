@@ -18,19 +18,19 @@ public class Pillager extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.AbstractIllager;
+        return livingEntity instanceof net.minecraft.world.entity.monster.Pillager;
     }
 
     @Override
     public Item getActionItem()
     {
-        return Items.EMERALD;
+        return Items.CROSSBOW;
     }
 
     @Override
     public EntityType<? extends Entity> getEntityType()
     {
-        throw new UnsupportedOperationException();
+        return EntityType.PILLAGER;
     }
 
     @Override
