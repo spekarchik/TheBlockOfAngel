@@ -14,7 +14,7 @@ public class Monsters
     public static final IMonster Hoglin = new Hoglin(id++);
     public static final IMonster MagmaCube = new MagmaCube(id++);
     public static final IMonster Phantom = new Phantom(id++);
-    public static final IMonster Piglin = new Piglin(id++);
+    public static final IMonster PiglinBrute = new PiglinBrute(id++);
     public static final IMonster Pillager = new Pillager(id++);
     public static final IMonster Shulker = new Shulker(id++);
     public static final IMonster Skeleton = new Skeleton(id++);
@@ -26,4 +26,5 @@ public class Monsters
     public static final IMonster WitherSkeleton = new WitherSkeleton(id++);
     public static final IMonster Zombie = new Zombie(id++);
     public static final IMonster ZombieVillager = new ZombieVillager(id++);
+    public static final IMonster CaveSpider = new Spider(id++);
 }

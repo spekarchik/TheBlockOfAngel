@@ -5,7 +5,6 @@ import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
 import com.pekar.angelblock.events.ILivingDeathEventHandler;
 import com.pekar.angelblock.events.PlayerInteractionEvents;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -48,8 +47,11 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
         addToMonsterMap(Monsters.Blaze);
         addToMonsterMap(Monsters.Ghast);
         addToMonsterMap(Monsters.Hoglin);
-        addToMonsterMap(Monsters.Piglin);
+        addToMonsterMap(Monsters.PiglinBrute);
         addToMonsterMap(Monsters.WitherSkeleton);
+        addToMonsterMap(Monsters.ZombieVillager);
+        addToMonsterMap(Monsters.CaveSpider);
+        addToMonsterMap(Monsters.Phantom);
     }
 
     public void activate()

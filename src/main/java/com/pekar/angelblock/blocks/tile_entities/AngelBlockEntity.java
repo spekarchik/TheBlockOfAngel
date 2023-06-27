@@ -1,9 +1,8 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
-import com.pekar.angelblock.blocks.tile_entities.monsters.*;
+import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
+import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,7 +17,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<AngelBlockEntity>
 {
@@ -38,6 +40,7 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         addToMonsterMap(Monsters.Enderman);
         addToMonsterMap(Monsters.Witch);
         addToMonsterMap(Monsters.Spider);
+        addToMonsterMap(Monsters.CaveSpider);
         addToMonsterMap(Monsters.Pillager);
         addToMonsterMap(Monsters.Slime);
         addToMonsterMap(Monsters.MagmaCube);
@@ -51,7 +54,7 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         addToMonsterMap(Monsters.Ghast);
         addToMonsterMap(Monsters.Hoglin);
         addToMonsterMap(Monsters.Phantom);
-        addToMonsterMap(Monsters.Piglin);
+        addToMonsterMap(Monsters.PiglinBrute);
         addToMonsterMap(Monsters.Warden);
         addToMonsterMap(Monsters.ZombieVillager);
     }

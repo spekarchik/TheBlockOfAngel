@@ -9,9 +9,9 @@ import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class Piglin extends Monster
+public class PiglinBrute extends Monster
 {
-    public Piglin(byte id)
+    public PiglinBrute(byte id)
     {
         super(id);
     }

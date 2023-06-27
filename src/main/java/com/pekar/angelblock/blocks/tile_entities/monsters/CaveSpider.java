@@ -5,13 +5,12 @@ import com.pekar.angelblock.blocks.tile_entities.spawn.OnGroundMonsterSpawnStrat
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.CaveSpider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class Spider extends Monster
+public class CaveSpider extends Monster
 {
-    public Spider(byte id)
+    public CaveSpider(byte id)
     {
         super(id);
     }
@@ -19,20 +18,19 @@ public class Spider extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.Spider
-                && !(livingEntity instanceof CaveSpider);
+        return livingEntity instanceof net.minecraft.world.entity.monster.CaveSpider;
     }
 
     @Override
     public Item getActionItem()
     {
-        return Items.STRING;
+        return Items.FERMENTED_SPIDER_EYE;
     }
 
     @Override
     public EntityType<? extends Entity> getEntityType()
     {
-        return EntityType.SPIDER;
+        return EntityType.CAVE_SPIDER;
     }
 
     @Override
