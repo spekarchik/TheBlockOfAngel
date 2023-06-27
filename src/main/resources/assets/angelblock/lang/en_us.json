@@ -9,7 +9,7 @@
 
   "angelblock.rendelithic_armor.desc1": "Purpose: Nether World",
   "angelblock.rendelithic_armor.desc2": "Weakness: water, rain",
-  "angelblock.rendelithic_armor.desc3": "Wearing the full rendelithic set provides full protection against fire and lava",
+  "angelblock.rendelithic_armor.desc3": "Wearing the full rendelithic set provides 100% protection against fire and lava",
   "angelblock.rendelithic_armor.desc4": "Common armor capabilities",
   "angelblock.rendelithic_armor.desc5": " Fire and lava protection: +",
   "angelblock.rendelithic_armor.desc6": " Magma protection: -",
@@ -39,7 +39,7 @@
 
   "angelblock.limonite_armor.desc1": "Purpose: Forests, jungle",
   "angelblock.limonite_armor.desc2": "Weakness: fire, lava, magma, explosions",
-  "angelblock.limonite_armor.desc3": "Regenerating during rain. Bite immunity (80%): spiders, silverfish, bees",
+  "angelblock.limonite_armor.desc3": "Regenerating under rain. Bite immunity (80%): spiders, silverfish, bees",
   "angelblock.limonite_armor.desc4": "Common armor capabilities",
   "angelblock.limonite_armor.desc5": " Fire and lava protection: -",
   "angelblock.limonite_armor.desc6": " Magma protection: -",
@@ -59,7 +59,7 @@
 
   "angelblock.flying_armor.desc1": "Purpose: Flying, fast moving",
   "angelblock.flying_armor.desc2": "Weakness: extremely low protection. Effects don't work in Nether",
-  "angelblock.flying_armor.desc3": "Can't fly during rain or if chestplate damage > 50%. Can't use fireworks to speed up",
+  "angelblock.flying_armor.desc3": "Can't fly under rain or if chestplate damage > 50%. Can't use fireworks to speed up",
   "angelblock.flying_armor.desc4": "Common armor capabilities",
   "angelblock.flying_armor.desc5": " Fire and lava protection: -",
   "angelblock.flying_armor.desc6": " Magma protection: -",
@@ -830,7 +830,7 @@
   "key.angelblock.glowing": "Glowing Mode",
   "key.angelblock.regen": "Regeneration",
   "key.angelblock.levitation": "Levitation Mode",
-  "key.angelblock.sword_effects": "Sword/Tool Effects",
+  "key.angelblock.sword_effects": "Sword/Tool Modes",
   "key.angelblock.super_jump": "Super Jump Mode",
 
   "item.minecraft.potion.effect.block_breaker_potion": "Splash Destroying Potion",
@@ -855,7 +855,7 @@
   "effect.angelblock.block_breaker_effect.desc15": " Glass: destroys and drops 0-4 Prismarine Shards",
   "effect.angelblock.block_breaker_effect.desc16": " Sand near water: destroys and drops 4 Clays",
   "effect.angelblock.block_breaker_effect.desc17": " Prismarine: destroys and drops 0-4 Prismarine Crystals",
-  "effect.angelblock.tool_advanced_mode_effect": "Enhanced Mode On",
+  "effect.angelblock.tool_advanced_mode_effect": "Enhanced Mode",
   "effect.angelblock.sword_explosion_mode_effect": "Sword Explosion Mode",
   "effect.angelblock.sword_fire_mode_effect": "Sword Fire Mode",
   "effect.angelblock.sword_web_mode_effect": "Sword Cobweb Mode",

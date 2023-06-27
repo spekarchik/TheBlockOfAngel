@@ -9,7 +9,7 @@
 
   "angelblock.rendelithic_armor.desc1": "Предназначение: Незер",
   "angelblock.rendelithic_armor.desc2": "Уязвимости: вода, дождь",
-  "angelblock.rendelithic_armor.desc3": "Полный комплект брони обеспечивает полную защиту от огня и лавы",
+  "angelblock.rendelithic_armor.desc3": "Полный комплект брони обеспечивает 100% защиту от огня и лавы",
   "angelblock.rendelithic_armor.desc4": "Общие характеристики брони",
   "angelblock.rendelithic_armor.desc5": " Защита от огня и лавы: +",
   "angelblock.rendelithic_armor.desc6": " Защита от магмы: -",
@@ -39,7 +39,7 @@
 
   "angelblock.limonite_armor.desc1": "Предназначение: Лес, джунгли",
   "angelblock.limonite_armor.desc2": "Уязвимости: огонь, лава, магма, взрывы",
-  "angelblock.limonite_armor.desc3": "Регенерирует во время дождя. Защита 80% от укусов пауков, чешуйниц, пчел",
+  "angelblock.limonite_armor.desc3": "Под дождём восстанавливает здоровье. Защита 80% от укусов пауков, чешуйниц, пчел",
   "angelblock.limonite_armor.desc4": "Общие характеристики брони",
   "angelblock.limonite_armor.desc5": " Защита от огня и лавы: -",
   "angelblock.limonite_armor.desc6": " Защита от магмы: -",
@@ -59,7 +59,7 @@
 
   "angelblock.flying_armor.desc1": "Предназначение: Полеты, быстрое перемещение",
   "angelblock.flying_armor.desc2": "Уязвимости: Очень маленькая защита. Эффекты не работают в Незере",
-  "angelblock.flying_armor.desc3": "Не летает во время дождя или если повреждение нагрудника > 50%. Нельзя использовать феерверки для ускорения",
+  "angelblock.flying_armor.desc3": "Не летает под дождём или если повреждение нагрудника > 50%. Нельзя использовать феерверки для ускорения",
   "angelblock.flying_armor.desc4": "Общие характеристики брони",
   "angelblock.flying_armor.desc5": " Защита от огня и лавы: -",
   "angelblock.flying_armor.desc6": " Защита от магмы: -",
@@ -827,10 +827,10 @@
 
   "key.angelblock.night_vision": "Режим ночного зрения",
   "key.angelblock.jump_boost": "Режим прыгучести",
-  "key.angelblock.glowing": "Режим сияния",
+  "key.angelblock.glowing": "Режим подсветки",
   "key.angelblock.regen": "Восстановление здоровья",
   "key.angelblock.levitation": "Режим левитации",
-  "key.angelblock.sword_effects": "Эффекты оружия/инструментов",
+  "key.angelblock.sword_effects": "Режимы оружия/инструментов",
   "key.angelblock.super_jump": "Режим суперпрыжка",
 
   "item.minecraft.potion.effect.block_breaker_potion": "Разрушающее зелье",
