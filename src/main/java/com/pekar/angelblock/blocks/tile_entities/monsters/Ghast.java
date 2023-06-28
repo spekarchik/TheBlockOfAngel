@@ -24,7 +24,7 @@ public class Ghast extends Monster
     @Override
     public Item getActionItem()
     {
-        return Items.GHAST_TEAR;
+        return Items.FIRE_CHARGE;
     }
 
     @Override
