@@ -13,14 +13,19 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ModShovel extends ShovelItem implements IModTool
 {
@@ -81,6 +86,15 @@ public class ModShovel extends ShovelItem implements IModTool
     public boolean isEnhancedRod()
     {
         return false;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    {
+        for (int i = 0; i <= 0; i++)
+        {
+            components.add(getDescription(i, false));
+        }
     }
 
     protected MutableComponent getDisplayName(int lineNumber)

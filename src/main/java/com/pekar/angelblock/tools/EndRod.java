@@ -3,11 +3,8 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,11 +20,9 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.ServerLevelData;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EndRod extends AmethystRod
@@ -189,14 +184,14 @@ public class EndRod extends AmethystRod
     {
         if (isEnhancedRod())
         {
-            for (int i = 1; i <= 8; i++)
+            for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, false, false, false, i == 1));
+                components.add(getDescription(i, false, false, false, i == 0));
             }
         }
         else
         {
-            for (int i = 1; i <= 8; i++)
+            for (int i = 0; i <= 8; i++)
             {
                 components.add(getDescription(i, i == 1 || i == 4 || i == 6, false, false, i == 8));
             }

@@ -2,7 +2,6 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -109,14 +108,14 @@ public class AmethystRod extends FireRod
     {
         if (isEnhancedRod())
         {
-            for (int i = 1; i <= 8; i++)
+            for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, false, false, false, i == 1));
+                components.add(getDescription(i, false, false, false, i == 0));
             }
         }
         else
         {
-            for (int i = 1; i <= 12; i++)
+            for (int i = 0; i <= 12; i++)
             {
                 components.add(getDescription(i, i == 1 || i == 8, false, false, i == 12));
             }

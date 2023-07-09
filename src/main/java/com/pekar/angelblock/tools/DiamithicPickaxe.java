@@ -20,7 +20,7 @@ public class DiamithicPickaxe extends EnhancedPickaxe
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
-        for (int i = 1; i <= 5; i++)
+        for (int i = 0; i <= 5; i++)
         {
             components.add(getDescription(i, i == 1, false, i == 4));
         }

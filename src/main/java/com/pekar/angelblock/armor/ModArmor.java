@@ -57,9 +57,9 @@ public class ModArmor extends ArmorItem
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <= 10; i++)
         {
-            components.add(getCommonDescription(i, i == 4, false, i == 3, false));
+            components.add(getCommonDescription(i, i == 5, false, i == 4, false));
         }
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)

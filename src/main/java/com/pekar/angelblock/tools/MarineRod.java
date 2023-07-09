@@ -141,14 +141,14 @@ public class MarineRod extends AncientRod
     {
         if (isEnhancedRod())
         {
-            for (int i = 1; i <= 8; i++)
+            for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, false, false, false, i == 1));
+                components.add(getDescription(i, false, false, false, i == 0));
             }
         }
         else
         {
-            for (int i = 1; i <= 12; i++)
+            for (int i = 0; i <= 12; i++)
             {
                 components.add(getDescription(i, i == 1 || i == 8, false, false, i == 12));
             }

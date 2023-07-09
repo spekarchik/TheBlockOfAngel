@@ -8,7 +8,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ModAxe extends AxeItem implements IModTool
 {
@@ -42,6 +48,15 @@ public class ModAxe extends AxeItem implements IModTool
     public boolean isEnhancedRod()
     {
         return false;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    {
+        for (int i = 0; i <= 0; i++)
+        {
+            components.add(getDescription(i, false));
+        }
     }
 
     private MutableComponent getDescription(int lineNumber, TextStyle textStyle)

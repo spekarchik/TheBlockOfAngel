@@ -15,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -118,7 +117,7 @@ public class SuperSword extends ModSword
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
-        for (int i = 1; i <= 14; i++)
+        for (int i = 0; i <= 14; i++)
         {
             components.add(getDescription(i, i == 1 || i == 6, i == 7 || i == 9 || i == 13, i == 12));
         }
