@@ -912,5 +912,7 @@
   "effect.angelblock.sword_fire_mode_effect": "Sword Fire Mode",
   "effect.angelblock.sword_web_mode_effect": "Sword Cobweb Mode",
   "effect.angelblock.rod_magnetic_mode_effect": "Rod Magnetic Mode",
-  "effect.angelblock.armor_super_jump_mode_effect": "Super Jump Mode"
+  "effect.angelblock.armor_super_jump_mode_effect": "Super Jump Mode",
+
+  "trim_material.angelblock.green_diamond": "Green Diamond Material"
 }

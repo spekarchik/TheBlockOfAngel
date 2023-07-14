@@ -912,5 +912,7 @@
   "effect.angelblock.sword_fire_mode_effect": "Режим огня",
   "effect.angelblock.sword_web_mode_effect": "Режим паутины",
   "effect.angelblock.rod_magnetic_mode_effect": "Магнитный посох",
-  "effect.angelblock.armor_super_jump_mode_effect": "Супер прыжки"
+  "effect.angelblock.armor_super_jump_mode_effect": "Супер прыжки",
+
+  "trim_material.angelblock.green_diamond": "Зеленый алмаз"
 }
