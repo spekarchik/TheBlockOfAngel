@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "angelblock:item/rendelithic_chestplate2",
+    "layer1": "minecraft:trims/items/chestplate_trim_amethyst"
+  }
+}
