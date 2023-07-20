@@ -13,7 +13,7 @@ public class EndSapphire extends ModItemWithDoubleHoverText
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
     {
-        if (!player.hasEffect(MobEffects.LEVITATION))
+        if (!level.isClientSide() && !player.hasEffect(MobEffects.LEVITATION))
         {
             player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 200, 2, false, true));
             return InteractionResultHolder.consume(player.getItemInHand(interactionHand));

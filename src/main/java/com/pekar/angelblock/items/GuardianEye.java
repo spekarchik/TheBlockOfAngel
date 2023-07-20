@@ -13,7 +13,7 @@ public class GuardianEye extends ModItemWithDoubleHoverText
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
     {
-        if (!player.hasEffect(MobEffects.NIGHT_VISION))
+        if (!level.isClientSide() && !player.hasEffect(MobEffects.NIGHT_VISION))
         {
             player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0, false, true));
             return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
