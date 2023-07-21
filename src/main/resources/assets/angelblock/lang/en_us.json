@@ -463,6 +463,7 @@
   "item.angelblock.rod_upgrade_kit": "Smithing Kit",
   "item.angelblock.rod_upgrade_kit.desc1": "Rod Upgrade",
   "item.angelblock.rod_upgrade_kit.desc2": "Can be found in suspicious blocks at Desert Pyramids and Desert Wells",
+  "item.angelblock.rod_upgrade_kit.desc3": "Can be given by a cleric as a gift (1/11 chance) when player has the 'Hero of the Village' status",
   "item.angelblock.downgrade_kit": "Smithing Kit",
   "item.angelblock.downgrade_kit.desc": "Armor, tools and weapon downgrade",
 
@@ -728,6 +729,7 @@
   "item.angelblock.planter.desc3": "Using:",
   "item.angelblock.planter.desc4": " Plants or fertilizes the most of plants towards the player direction",
   "item.angelblock.planter.desc5": "Second hand: seeds, planting stocks, bone meal (to fertilize), shears (to clear grass)",
+  "item.angelblock.planter.desc6": "Can be crafted or given by a farmer as a gift (1/10 chance) when player has the 'Hero of the Village' status",
   "item.angelblock.track_layer": "Track Layer",
   "item.angelblock.track_layer.desc0": "Repair: bamboo",
   "item.angelblock.track_layer.desc1": "Mining:",

@@ -463,6 +463,7 @@
   "item.angelblock.rod_upgrade_kit": "Кузнечный набор",
   "item.angelblock.rod_upgrade_kit.desc1": "Улучшение посоха",
   "item.angelblock.rod_upgrade_kit.desc2": "Встречается в Подозрительных Блоках около Пирамид и Колодцев в Пустыне",
+  "item.angelblock.rod_upgrade_kit.desc3": "Может быть подарен священником (вероятность 1/11) когда игрок имеет статус 'Герой Деревни'",
   "item.angelblock.downgrade_kit": "Кузнечный набор",
   "item.angelblock.downgrade_kit.desc": "Снятие улучшений с брони, инструментов, оружия",
 
@@ -728,6 +729,7 @@
   "item.angelblock.planter.desc3": "Использование:",
   "item.angelblock.planter.desc4": " Сажает или удобряет растения вдоль направления игрока",
   "item.angelblock.planter.desc5": "Вторая рука: семена, саженцы, костная мука (для удобрения), ножницы (для очистки области от травы)",
+  "item.angelblock.planter.desc6": "Может быть создан или подарен фермером (вероятность 1/10) когда игрок имеет статус 'Герой Деревни'",
   "item.angelblock.track_layer": "Укладчик",
   "item.angelblock.track_layer.desc0": "Ремонт: бамбук",
   "item.angelblock.track_layer.desc1": "Разрушение:",

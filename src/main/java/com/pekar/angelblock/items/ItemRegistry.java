@@ -43,7 +43,7 @@ public class ItemRegistry
     public static final RegistryObject<Item> LIMONITE_TOOL_UPGRADE_KIT = Main.ITEMS.register("limonite_tool_upgrade_kit", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> SUPER_TOOL_UPGRADE_KIT = Main.ITEMS.register("super_tool_upgrade_kit", ModItemWithDoubleHoverText::new);
 
-    public static final RegistryObject<Item> ROD_UPGRADE_KIT = Main.ITEMS.register("rod_upgrade_kit", ModItemWithDoubleHoverText::new);
+    public static final RegistryObject<Item> ROD_UPGRADE_KIT = Main.ITEMS.register("rod_upgrade_kit", RodUpgradeKit::new);
     public static final RegistryObject<Item> DOWNGRADE_KIT = Main.ITEMS.register("downgrade_kit", ModItemWithHoverText::new);
 
     public static final RegistryObject<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", () -> new ModItemWithHoverText(TextStyle.Notice));
