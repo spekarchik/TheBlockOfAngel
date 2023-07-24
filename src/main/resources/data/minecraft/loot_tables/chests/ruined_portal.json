@@ -7,18 +7,23 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "weight": 1,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 0.0,
+                "min": 1.0,
                 "max": 2.0
               },
               "add": false
             }
           ],
           "name": "minecraft:slime_block"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 10
         }
 	  ]
 	},
