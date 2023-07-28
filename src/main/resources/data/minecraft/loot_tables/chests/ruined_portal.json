@@ -19,7 +19,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:slime_block"
+          "name": "minecraft:slime_ball"
         },
         {
           "type": "minecraft:empty",
