@@ -16,7 +16,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.ToolAction;
 
 public class ModRod extends ModTool implements IModTool
@@ -73,11 +72,11 @@ public class ModRod extends ModTool implements IModTool
 
     protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
     {
-        if (!(plantBlock instanceof IPlantable plantable)) return InteractionResult.FAIL;
+        //if (!(plantBlock instanceof IPlantable plantable)) return InteractionResult.FAIL;
 
-        var blockState = level.getBlockState(pos);
-        boolean canSustainPlant = blockState.getBlock().canSustainPlant(blockState, level, pos, facing, plantable);
-        if (!canSustainPlant) return InteractionResult.FAIL;
+        //var blockState = level.getBlockState(pos);
+        //boolean canSustainPlant = blockState.getBlock().canSustainPlant(blockState, level, pos, facing, plantable);
+        //if (!canSustainPlant) return InteractionResult.FAIL;  DOESN'T WORK WITH CHORUS!!!
 
         var itemStack = player.getItemInHand(hand);
 
