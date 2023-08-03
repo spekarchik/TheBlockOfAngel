@@ -26,7 +26,7 @@ public class ToolMaterials
     static final Tier LAPIS = new ModToolMaterial(2000, 8.7F, 3.5F, 3, 12,
             Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
 
-    static final Tier LIMONITE = new ModToolMaterial(900, 6.8F, 2.8F, 2, 30,
+    static final Tier LIMONITE = new ModToolMaterial(900, 6.8F, 2.8F, 3, 30,
             Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
 
     static final Tier SUPER = new ModToolMaterial(3000, 11.0F, 5.8F, 4, 25,
