@@ -22,8 +22,18 @@
           "name": "minecraft:slime_ball"
         },
         {
+          "type": "minecraft:item",
+          "name": "angelblock:diamond_tool_upgrade_kit",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:diamond_armor_upgrade_kit",
+          "weight": 4
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 10
+          "weight": 3
         }
 	  ]
 	},

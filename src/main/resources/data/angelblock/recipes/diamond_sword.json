@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "minecraft:iron_sword"
+    },
+    "addition": {
+        "item": "minecraft:diamond_sword"
+    },
+    "result": {
+        "item": "minecraft:diamond_sword"
+    },
+    "template": {
+        "item": "angelblock:diamond_tool_upgrade_kit"
+    }
+}

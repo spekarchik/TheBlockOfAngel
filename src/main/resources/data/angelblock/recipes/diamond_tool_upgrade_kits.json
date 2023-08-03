@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A@A",
+    "A#A",
+    "DDD"
+  ],
+  "key": {
+    "@": {
+      "item": "angelblock:diamond_tool_upgrade_kit"
+    },
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "A": {
+      "item": "minecraft:copper_ingot"
+    },
+    "D": {
+      "item": "minecraft:andesite"
+    }
+  },
+  "result": {
+    "item": "angelblock:diamond_tool_upgrade_kit",
+    "count": 2
+  }
+}

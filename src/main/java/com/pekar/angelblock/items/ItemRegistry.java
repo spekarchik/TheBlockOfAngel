@@ -36,12 +36,14 @@ public class ItemRegistry
     public static final RegistryObject<Item> LAPIS_ARMOR_UPGRADE_KIT = Main.ITEMS.register("lapis_armor_upgrade_kit", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> LIMONITE_ARMOR_UPGRADE_KIT = Main.ITEMS.register("limonite_armor_upgrade_kit", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> SUPER_ARMOR_UPGRADE_KIT = Main.ITEMS.register("super_armor_upgrade_kit", ModItemWithDoubleHoverText::new);
+    public static final RegistryObject<Item> DIAMOND_ARMOR_UPGRADE_KIT = Main.ITEMS.register("diamond_armor_upgrade_kit", ModItemWithHoverText::new);
 
     public static final RegistryObject<Item> RENDELITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.register("rendelithic_tool_upgrade_kit", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> DIAMITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.register("diamithic_tool_upgrade_kit", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> LAPIS_TOOL_UPGRADE_KIT = Main.ITEMS.register("lapis_tool_upgrade_kit", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> LIMONITE_TOOL_UPGRADE_KIT = Main.ITEMS.register("limonite_tool_upgrade_kit", ModItemWithDoubleHoverText::new);
     public static final RegistryObject<Item> SUPER_TOOL_UPGRADE_KIT = Main.ITEMS.register("super_tool_upgrade_kit", ModItemWithDoubleHoverText::new);
+    public static final RegistryObject<Item> DIAMOND_TOOL_UPGRADE_KIT = Main.ITEMS.register("diamond_tool_upgrade_kit", ModItemWithHoverText::new);
 
     public static final RegistryObject<Item> ROD_UPGRADE_KIT = Main.ITEMS.register("rod_upgrade_kit", RodUpgradeKit::new);
     public static final RegistryObject<Item> DOWNGRADE_KIT = Main.ITEMS.register("downgrade_kit", ModItemWithHoverText::new);
