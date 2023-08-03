@@ -9,6 +9,6 @@ public class LimoniteMaterialProperties implements IMaterialProperties
     @Override
     public boolean isSafeToBreak(LivingEntity entity, BlockPos pos)
     {
-        return Utils.isFallSafeExact(entity, pos);
+        return !Utils.isStandingOnBreakingBlock(entity, pos);
     }
 }

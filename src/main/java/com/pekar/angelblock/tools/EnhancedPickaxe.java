@@ -41,7 +41,7 @@ public class EnhancedPickaxe extends ModPickaxe
         return super.onBlockStartBreak(itemstack, pos, player);
     }
 
-    protected final void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
+    protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (!isToolEffective(entityLiving, pos)) return;
 

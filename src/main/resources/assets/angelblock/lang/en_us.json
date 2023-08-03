@@ -564,7 +564,7 @@
   "item.angelblock.limonite_pickaxe.desc1": "Mining:",
   "item.angelblock.limonite_pickaxe.desc2": " Doesn't drop block under player",
   "item.angelblock.limonite_pickaxe.desc3": "  (drops any blocks if player is sitting)",
-  "item.angelblock.limonite_pickaxe.desc4": " Enhanced Mode ON: drops up to 9 blocks per time",
+  "item.angelblock.limonite_pickaxe.desc4": " Enhanced Mode ON: drops whole a sequence of compatible blocks below and above per time",
   "item.angelblock.limonite_pickaxe.desc5": "Transformations:",
   "item.angelblock.limonite_pickaxe.desc6": " Infested block -> Uninfested block",
   "item.angelblock.diamithic_primary_pickaxe": "Diamithic Primary Pickaxe",

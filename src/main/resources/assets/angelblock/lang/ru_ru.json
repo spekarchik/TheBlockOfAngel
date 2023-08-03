@@ -564,7 +564,7 @@
   "item.angelblock.limonite_pickaxe.desc1": "Добыча:",
   "item.angelblock.limonite_pickaxe.desc2": " Не разрушает блоки под игроком",
   "item.angelblock.limonite_pickaxe.desc3": "  (разрушает любые блоки если игрок приседает)",
-  "item.angelblock.limonite_pickaxe.desc4": " Улучшенный Режим ВКЛ: разрушает до 9 блоков за раз",
+  "item.angelblock.limonite_pickaxe.desc4": " Улучшенный Режим ВКЛ: разрушает всю последовательность совместимых блоков ниже и выше",
   "item.angelblock.limonite_pickaxe.desc5": "Трансформации:",
   "item.angelblock.limonite_pickaxe.desc6": " Зараженный блок -> Незараженный блок",
   "item.angelblock.diamithic_primary_pickaxe": "Диамитовая кирка начального уровня",
