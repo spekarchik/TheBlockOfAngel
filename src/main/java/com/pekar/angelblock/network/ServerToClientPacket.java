@@ -3,11 +3,9 @@ package com.pekar.angelblock.network;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
-
-import java.util.function.Supplier;
 
 public abstract class ServerToClientPacket extends Packet
 {
@@ -16,17 +14,17 @@ public abstract class ServerToClientPacket extends Packet
 
     public final void sendToPlayer(ServerPlayer player)
     {
-        PacketRegistry.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), this);
+        PacketRegistry.INSTANCE.send(this, PacketDistributor.PLAYER.with(player));
     }
 
     public final void sendToEntity(Entity entity)
     {
-        PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), this);
+        PacketRegistry.INSTANCE.send(this, PacketDistributor.TRACKING_ENTITY.with(entity));
     }
 
     public final void sendToChunk(LevelChunk chunk)
     {
-        PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), this);
+        PacketRegistry.INSTANCE.send(this, PacketDistributor.TRACKING_CHUNK.with(chunk));
     }
 
     @Override
@@ -36,7 +34,7 @@ public abstract class ServerToClientPacket extends Packet
     }
 
     @Override
-    protected final void onReceive(Supplier<NetworkEvent.Context> ctx)
+    protected final void onReceive(CustomPayloadEvent.Context ctx)
     {
         onReceive();
     }

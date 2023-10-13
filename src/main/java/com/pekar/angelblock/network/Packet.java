@@ -1,11 +1,9 @@
 package com.pekar.angelblock.network;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
 
 public abstract class Packet
 {
@@ -17,14 +15,13 @@ public abstract class Packet
     {
     }
 
-    final void handlePacket(@NotNull Supplier<NetworkEvent.Context> ctx)
+    final void handlePacket(@NotNull CustomPayloadEvent.Context context)
     {
-        var context = ctx.get();
-        context.enqueueWork(() -> onReceive(ctx));
+        context.enqueueWork(() -> onReceive(context));
         context.setPacketHandled(true);
     }
 
-    protected abstract void onReceive(Supplier<NetworkEvent.Context> ctx);
+    protected abstract void onReceive(CustomPayloadEvent.Context ctx);
 
     protected abstract int getPacketId();
 

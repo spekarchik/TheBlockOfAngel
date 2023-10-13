@@ -1,11 +1,10 @@
 package com.pekar.angelblock.network;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
 
 public abstract class ClientToServerPacket extends Packet
 {
@@ -14,7 +13,7 @@ public abstract class ClientToServerPacket extends Packet
 
     public void sendToServer()
     {
-        PacketRegistry.INSTANCE.sendToServer(this);
+        PacketRegistry.INSTANCE.send(this, PacketDistributor.SERVER.noArg());
     }
 
     @Override
@@ -24,9 +23,8 @@ public abstract class ClientToServerPacket extends Packet
     }
 
     @Override
-    protected final void onReceive(@NotNull Supplier<NetworkEvent.Context> ctx)
+    protected final void onReceive(@NotNull CustomPayloadEvent.Context context)
     {
-        var context = ctx.get();
         onReceive(context.getSender());
     }
 

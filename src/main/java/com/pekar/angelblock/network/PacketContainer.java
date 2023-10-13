@@ -1,12 +1,11 @@
 package com.pekar.angelblock.network;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 class PacketContainer<T extends Packet>
 {
@@ -42,7 +41,7 @@ class PacketContainer<T extends Packet>
         return buffer -> (T)packet.create(buffer);
     }
 
-    public BiConsumer<T, Supplier<NetworkEvent.Context>> getPacketHandler()
+    public BiConsumer<T, CustomPayloadEvent.Context> getPacketHandler()
     {
         return Packet::handlePacket;
     }
