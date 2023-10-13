@@ -271,7 +271,7 @@ public class Planter extends WorkRod
         int itemCount = itemStack.getCount();
         if (itemCount < 1) return false;
 
-        if (bonemealableBlock.isValidBonemealTarget(level, pos, blockState, true))
+        if (bonemealableBlock.isValidBonemealTarget(level, pos, blockState))
         {
             if (!level.isClientSide())
             {
