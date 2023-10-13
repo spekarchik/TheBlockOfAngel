@@ -10,12 +10,15 @@ class BlockInfo
     private int ticksBeforeRemoving;
     private final boolean setToAir;
 
-    BlockInfo(Player player, BlockPos blockPos, int ticks, boolean setToAir)
+    private final boolean removeWhenClosely;
+
+    BlockInfo(Player player, BlockPos blockPos, int ticks, boolean setToAir, boolean removeWhenClosely)
     {
         pos = blockPos;
         this.player = player;
         ticksBeforeRemoving = ticks;
         this.setToAir = setToAir;
+        this.removeWhenClosely = removeWhenClosely;
     }
 
     public void decrease()
@@ -41,6 +44,11 @@ class BlockInfo
     public boolean setToAir()
     {
         return setToAir;
+    }
+
+    public boolean removeWhenClosely()
+    {
+        return removeWhenClosely;
     }
 
     @Override

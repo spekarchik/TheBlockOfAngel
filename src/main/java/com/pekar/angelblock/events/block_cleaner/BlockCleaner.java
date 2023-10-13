@@ -10,10 +10,11 @@ public class BlockCleaner
     private static final Set<BlockInfo> blocks = new HashSet<>();
     private static final double DistanceToDecrease = 100.0;
     private static final double DistanceToRemoveImmediately = 3600.0;
+    private static final double CloseDistanceToRemoveImmediately = 4.0;
 
-    public synchronized static void add(Player player, BlockPos blockPos, int ticks, boolean setToAir)
+    public synchronized static void add(Player player, BlockPos blockPos, int ticks, boolean setToAir, boolean removeWhenClosely)
     {
-        blocks.add(new BlockInfo(player, blockPos, ticks, setToAir));
+        blocks.add(new BlockInfo(player, blockPos, ticks, setToAir, removeWhenClosely));
     }
 
     public synchronized static void decrementOrRemove()
@@ -32,7 +33,8 @@ public class BlockCleaner
                 blockInfo.decrease();
             }
 
-            if (blockInfo.canBeRemoved() || distance > DistanceToRemoveImmediately)
+            if (blockInfo.canBeRemoved() || distance > DistanceToRemoveImmediately ||
+                (blockInfo.removeWhenClosely() && distance <= CloseDistanceToRemoveImmediately))
             {
                 var level = blockInfo.getPlayer().level();
                 blockToRemove.add(blockInfo);

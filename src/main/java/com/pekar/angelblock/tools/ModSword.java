@@ -144,7 +144,7 @@ public class ModSword extends SwordItem implements IModTool
 
         level.setBlock(pos, Blocks.COBWEB.defaultBlockState(), 11);
         int increment = Utils.random.nextInt(TimeThreshold);
-        BlockCleaner.add(player, pos, WebLifeTime + increment, false);
+        BlockCleaner.add(player, pos, WebLifeTime + increment, false, true);
     }
 
     protected void explode(Player player, Level level, BlockPos pos)
@@ -189,9 +189,9 @@ public class ModSword extends SwordItem implements IModTool
 
         int increment = Utils.random.nextInt(TimeThreshold);
 
-        BlockCleaner.add(player, pos.above(3), CactusLifeTime + increment, false);
-        BlockCleaner.add(player, pos.above(2), CactusLifeTime + increment + 1, false);
-        BlockCleaner.add(player, pos.above(), CactusLifeTime + increment + 2, false);
+        BlockCleaner.add(player, pos.above(3), CactusLifeTime + increment, false, false);
+        BlockCleaner.add(player, pos.above(2), CactusLifeTime + increment + 1, false, false);
+        BlockCleaner.add(player, pos.above(), CactusLifeTime + increment + 2, false, false);
 
         return true;
     }
