@@ -808,7 +808,7 @@
   "item.angelblock.bios_diamond.desc2": "Can be found in Jungle Temples or drop from Green Diamond Ore blocks",
   "item.angelblock.bios_diamond.desc3": "Can be used as an armor trim material",
   "item.angelblock.end_sapphire": "§eEnd Sapphire",
-  "item.angelblock.end_sapphire.desc1": "Using it sets Levitation effect for 10 seconds",
+  "item.angelblock.end_sapphire.desc1": "Using it sets a random Levitation effect within [-6..6] level for 2-15 seconds",
   "item.angelblock.end_sapphire.desc2": "Can be found in End Cities",
   "item.angelblock.flame_stone": "§eFlame Stone",
   "item.angelblock.flame_stone.desc1": "If in offhand use End Rod for clear weather",

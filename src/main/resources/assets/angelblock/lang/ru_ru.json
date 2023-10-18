@@ -808,7 +808,7 @@
   "item.angelblock.bios_diamond.desc2": "Встречается в Храмах в Джунглях, добывается из блока Зелено-Алмазной Руды",
   "item.angelblock.bios_diamond.desc3": "Является материалом для отделки брони",
   "item.angelblock.end_sapphire": "§eСапфир Края",
-  "item.angelblock.end_sapphire.desc1": "Использование накладывает на игрока эффект Левитация на 10 секунд",
+  "item.angelblock.end_sapphire.desc1": "Использование накладывает на игрока случайный эффект Левитация уровня [-6..6] на 2-15 секунд",
   "item.angelblock.end_sapphire.desc2": "Встречается в Городах Края",
   "item.angelblock.flame_stone": "§eОгненный камень",
   "item.angelblock.flame_stone.desc1": "Когда во второй руке, использование Посоха Края вызывает ясную погоду",
