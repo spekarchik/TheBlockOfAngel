@@ -5,6 +5,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Function;
@@ -21,17 +23,17 @@ public class BlockRegistry
     public static final RegistryObject<Block> ENDSTONE_POWDER_BLOCK = register("endstone_powder_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
     public static final RegistryObject<Block> DIAMITHIC_MATERIAL_BLOCK = register("diamithic_material_block", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(0.7f, 9f)));
+            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final RegistryObject<Block> RENDELITHIC_MATERIAL_BLOCK = register("rendelithic_material_block", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(0.7f, 9f)));
+            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final RegistryObject<Block> LIMONITE_MATERIAL_BLOCK = register("limonite_material_block", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(0.7f, 9f)));
+            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final RegistryObject<Block> LAPIS_MATERIAL_BLOCK = register("lapis_material_block", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(0.7f, 9f)));
+            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final RegistryObject<Block> SUPER_MATERIAL_BLOCK = register("super_material_block", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(0.7f, 9f)));
+            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final RegistryObject<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(0.7f, 9f)));
+            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
 
     public static final RegistryObject<Block> ANGEL_BLOCK = register("angel_block", AngelBlock::new);
     public static final RegistryObject<Block> DEVIL_BLOCK = register("devil_block", DevilBlock::new);
@@ -41,7 +43,7 @@ public class BlockRegistry
     public static final RegistryObject<Block> GUNPOWDER_BLOCK = register("gunpowder_block", GunpowderBlock::new);
 
     // Internal blocks (not added to Creative Tab)
-    public static final RegistryObject<Block> DESTROYING_DIAMOND_BLOCK = registerSkipTab("destroying_diamond_block", AirBlock::new);
+    //public static final RegistryObject<Block> DESTROYING_DIAMOND_BLOCK = registerSkipTab("destroying_diamond_block", AirBlock::new);
     public static final RegistryObject<Block> DESTROYING_DIAMOND_POWDER_BLOCK = registerSkipTab("destroying_diamond_powder_block", AirBlock::new);
     public static final RegistryObject<Block> DESTROYING_PRISMARINE_SHARD_BLOCK = registerSkipTab("destroying_prismarine_shard_block", AirBlock::new);
     public static final RegistryObject<Block> DESTROYING_PRISMARINE_CRYSTALS = registerSkipTab("destroying_prismarine_crystals", AirBlock::new);
@@ -63,7 +65,7 @@ public class BlockRegistry
     public static final RegistryObject<Block> DESTROYING_GREEN_WOOL = registerSkipTab("destroying_green_wool", AirBlock::new);
     public static final RegistryObject<Block> DESTROYING_RED_WOOL = registerSkipTab("destroying_red_wool", AirBlock::new);
     public static final RegistryObject<Block> DESTROYING_BLACK_WOOL = registerSkipTab("destroying_black_wool", AirBlock::new);
-    public static final RegistryObject<Block> DESTROYING_RAW_IRON = registerSkipTab("destroying_raw_iron", AirBlock::new);
+    //public static final RegistryObject<Block> DESTROYING_RAW_IRON = registerSkipTab("destroying_raw_iron", AirBlock::new);
     public static final RegistryObject<Block> DESTROYING_GUNPOWDER = registerSkipTab("destroying_gunpowder", AirBlock::new);
 
     public static void initStatic()

@@ -62,14 +62,6 @@ public class ModShovel extends ShovelItem implements IModTool
         return InteractionResult.PASS;
     }
 
-    protected void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
-    {
-        if (blockState.getDestroySpeed(level, pos) != 0.0F)
-        {
-            damageItem(1, player);
-        }
-    }
-
     @Override
     public boolean isEnhancedTool()
     {
