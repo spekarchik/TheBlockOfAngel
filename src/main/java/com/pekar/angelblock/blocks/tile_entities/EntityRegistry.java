@@ -15,6 +15,10 @@ public class EntityRegistry
             Main.BLOCK_ENTITIES.register("devil_block_entity", () ->
                     BlockEntityType.Builder.of(DevilBlockEntity::new, BlockRegistry.DEVIL_BLOCK.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<AngelRodBlockEntity>> ANGEL_ROD_BLOCK_ENTITY =
+            Main.BLOCK_ENTITIES.register("angel_rod_block_entity", () ->
+                    BlockEntityType.Builder.of(AngelRodBlockEntity::new, BlockRegistry.ANGEL_ROD_BLOCK.get()).build(null));
+
     public static void initStatic()
     {
         // just to initialize static members

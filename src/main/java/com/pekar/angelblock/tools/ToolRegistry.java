@@ -1,7 +1,6 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.tab.ModTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.RegistryObject;
@@ -149,6 +148,10 @@ public class ToolRegistry
             () -> new EndRod(ToolMaterials.ROD_MATERIAL5, 0, -3F, true,
                     new Item.Properties().rarity(Rarity.RARE)));
 
+    public static final RegistryObject<ModRod> ANGEL_ROD = Main.ITEMS.register("angel_rod",
+            () -> new AngelRod(ToolMaterials.ROD_MATERIAL5, 0, -3F, true,
+                    new Item.Properties().rarity(Rarity.RARE)));
+
     public static final RegistryObject<ModRod> PLANTER = Main.ITEMS.register("planter",
             () -> new Planter(ToolMaterials.ROD_MATERIAL6, 0, -3F, false,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
@@ -193,6 +196,7 @@ public class ToolRegistry
     public static final RegistryObject<ModSword> SUPER_SWORD = Main.ITEMS.register("super_sword",
             () -> new SuperSword(ToolMaterials.SUPER, 3, -1.9F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
+
 
     // + морской кристалл - Marine Crystal - древний страж 50%
     // + огненный камень - Flame Stone - сундуки крепости 10%

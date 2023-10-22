@@ -12,9 +12,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.HashMap;
@@ -22,10 +19,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<AngelBlockEntity>
+public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity>
 {
-    private static final double EFFECTIVE_RADIUS = 70.0;
-    private int counter;
     private final Set<IMonster> monstersToIgnore = new HashSet<>();
     private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
     private final Map<Byte, IMonster> monstersById = new HashMap<>();
@@ -90,13 +85,15 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
     }
 
     @Override
-    public void tick(Level level, BlockPos pos, BlockState blockState, AngelBlockEntity entity)
+    protected double getEffectiveRadius()
     {
-        if (++counter > 40)
-        {
-            onUpdate(level, entity);
-            counter = 0;
-        }
+        return 70.0;
+    }
+
+    @Override
+    protected boolean needToDespawnEntity(Entity entity)
+    {
+        return entity instanceof Enemy && monstersToIgnore.stream().noneMatch(m -> m.belongs((LivingEntity) entity));
     }
 
     @Override
@@ -139,20 +136,6 @@ public class AngelBlockEntity extends BlockEntity implements BlockEntityTicker<A
         }
 
         compoundTag.putByteArray("MonsterFilter", array);
-    }
-
-    private void onUpdate(Level level, AngelBlockEntity blockEntity)
-    {
-        if (level.isClientSide()) return;
-
-        var monsters = level.getEntities((LivingEntity)null,
-                blockEntity.getRenderBoundingBox().inflate(EFFECTIVE_RADIUS),
-                entity -> entity instanceof Enemy && monstersToIgnore.stream().noneMatch(m -> m.belongs((LivingEntity) entity)));
-
-        for (Entity entity : monsters)
-        {
-            entity.discard();
-        }
     }
 
     private void addToMonsterMap(IMonster monster)

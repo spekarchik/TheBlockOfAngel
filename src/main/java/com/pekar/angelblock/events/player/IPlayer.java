@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 
-public interface IPlayer
+public interface IPlayer extends IPlayerEvents
 {
     Iterable<IArmor> getArmorTypesUsed();
 

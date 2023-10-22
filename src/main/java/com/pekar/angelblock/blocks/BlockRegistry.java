@@ -35,6 +35,7 @@ public class BlockRegistry
 
     public static final RegistryObject<Block> ANGEL_BLOCK = register("angel_block", AngelBlock::new);
     public static final RegistryObject<Block> DEVIL_BLOCK = register("devil_block", DevilBlock::new);
+    public static final RegistryObject<Block> ANGEL_ROD_BLOCK = registerSkipTab("angel_rod_block", AngelRodBlock::new);
 
     public static final RegistryObject<Block> GREEN_DIAMOND_ORE = register("green_diamond_ore", GreenDiamondBlock::new);
     public static final RegistryObject<Block> GUNPOWDER_BLOCK = register("gunpowder_block", GunpowderBlock::new);

@@ -2,14 +2,19 @@ package com.pekar.angelblock.events.player;
 
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
+import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.potions.PotionUtils;
+import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Player implements IPlayer
 {
@@ -242,6 +247,13 @@ public class Player implements IPlayer
         //entity.asChatSender().write(new FriendlyByteBuf(new EmptyByteBuf()));
     }
 
+    @Override
+    public void onClientTick()
+    {
+        if (generatePacketIfHoldsAngel(entity.getMainHandItem())) return;
+        generatePacketIfHoldsAngel(entity.getOffhandItem());
+    }
+
     private Collection<String> getSlotArmorNames()
     {
         Iterable<ItemStack> itemStacks = entity.getArmorSlots();
@@ -314,5 +326,16 @@ public class Player implements IPlayer
         {
             return null;
         }
+    }
+
+    private boolean generatePacketIfHoldsAngel(ItemStack handItemStack)
+    {
+        if (handItemStack.isEmpty()) return false;
+
+        var item = handItemStack.getItem();
+        if (item != ToolRegistry.ANGEL_ROD.get()) return false;
+
+        new HoldingAngelRodPacket().sendToServer();
+        return true;
     }
 }

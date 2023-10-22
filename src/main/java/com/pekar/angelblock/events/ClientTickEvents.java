@@ -37,6 +37,12 @@ public class ClientTickEvents
         }
         else if (tickCounter.get(playerName) > 10)
         {
+            var player = PlayerManager.instance().getPlayerByEntityName(playerName);
+            if (player != null)
+            {
+                player.onClientTick();
+            }
+
             new ClientTickPacket().sendToServer();
             tickCounter.put(playerName, 0);
         }

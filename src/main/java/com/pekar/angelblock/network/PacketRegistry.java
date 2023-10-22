@@ -23,6 +23,7 @@ public final class PacketRegistry
         registerPacket(new KeyPressedPacket());
         registerPacket(new ToolsModeChangePacket());
         registerPacket(new PlaySoundPacket(SoundType.UNDEFINED));
+        registerPacket(new HoldingAngelRodPacket());
     }
 
     private static <T extends Packet> void registerPacket(T packet)

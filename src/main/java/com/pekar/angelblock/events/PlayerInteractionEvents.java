@@ -2,17 +2,16 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.AngelBlockEntity;
+import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.DevilBlockEntity;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -76,19 +75,43 @@ public class PlayerInteractionEvents implements IEventHandler
         }
     }
 
-    // TODO: Remove?
+    @SubscribeEvent
     public void onBreakEvent(BlockEvent.BreakEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getPlayer().getName().getString());
-        if (player == null) return;
+        var pos = event.getPos();
+        var player = event.getPlayer();
+        var level = player.level();
 
-        ItemStack tool = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
-        if (tool == null) return;
-        Item item = tool.getItem();
-        if (item == null) return;
+        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.isCreative())
+        {
+            var blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
+            {
+                if (player.isSteppingCarefully())
+                {
+                    var itemStack1 = new ItemStack(ToolRegistry.END_MAGNETIC_ROD.get());
+                    itemStack1.setDamageValue(angelRodBlockEntity.getDamage());
+                    var itemStack2 = new ItemStack(BlockRegistry.ANGEL_BLOCK.get());
+                    var itemStack3 = new ItemStack(Items.TOTEM_OF_UNDYING);
 
-        BlockState blockState = event.getState();
-        Block block = blockState.getBlock();
+                    player.drop(itemStack1, false);
+                    player.drop(itemStack2, false);
+                    player.drop(itemStack3, false);
+
+                    event.setResult(Event.Result.ALLOW);
+                    return;
+                }
+                else
+                {
+                    var itemStack = new ItemStack(ToolRegistry.ANGEL_ROD.get());
+                    itemStack.setDamageValue(angelRodBlockEntity.getDamage());
+                    player.drop(itemStack, true);
+
+                    event.setResult(Event.Result.ALLOW);
+                    return;
+                }
+            }
+        }
 
 //        if (item instanceof ModShovel)
 //        {
