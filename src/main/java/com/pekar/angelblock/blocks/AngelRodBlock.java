@@ -3,7 +3,9 @@ package com.pekar.angelblock.blocks;
 import com.google.common.collect.ImmutableMap;
 import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
+import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -58,5 +60,11 @@ public class AngelRodBlock extends ModBlockWithDoubleHoverText implements Entity
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext)
     {
         return Shapes.create(0.328125, 0.0, 0.46875, 0.671875, 1.21875, 0.53125);
+    }
+
+    @Override
+    public Item asItem()
+    {
+        return ToolRegistry.ANGEL_ROD.get();
     }
 }
