@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
-public class AngelRodBlock extends ModBlockWithHoverText implements EntityBlock
+public class AngelRodBlock extends ModBlockWithDoubleHoverText implements EntityBlock
 {
     public AngelRodBlock()
     {
