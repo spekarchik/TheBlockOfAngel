@@ -82,11 +82,10 @@ public class EndRod extends AmethystRod
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
     {
-        var mainHandItemStack = player.getMainHandItem();
         var offHandItemStack = player.getOffhandItem();
 
         if (offHandItemStack.isEmpty() || (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get())))
-            return InteractionResultHolder.pass(mainHandItemStack);
+            return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
 
         var offHandItem = offHandItemStack.getItem();
 
