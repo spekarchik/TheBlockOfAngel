@@ -7,7 +7,7 @@
     "item": "minecraft:flint"
   },
   "result": {
-    "item": "angelblock:lapis_helmet"
+    "id": "angelblock:lapis_helmet"
   },
   "template": {
     "item": "angelblock:downgrade_kit"

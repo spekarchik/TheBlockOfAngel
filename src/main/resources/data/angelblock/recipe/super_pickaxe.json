@@ -7,7 +7,7 @@
         "item": "angelblock:super_crystal"
     },
     "result": {
-        "item": "angelblock:super_pickaxe"
+        "id": "angelblock:super_pickaxe"
     },
     "template": {
         "item": "angelblock:super_tool_upgrade_kit"

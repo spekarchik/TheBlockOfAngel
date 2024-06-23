@@ -7,7 +7,7 @@
     "item": "minecraft:flint"
   },
   "result": {
-    "item": "minecraft:diamond_sword"
+    "id": "minecraft:diamond_sword"
   },
   "template": {
     "item": "angelblock:downgrade_kit"

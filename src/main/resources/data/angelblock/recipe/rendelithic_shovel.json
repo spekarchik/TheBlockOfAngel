@@ -7,7 +7,7 @@
         "item": "angelblock:flame_stone"
     },
     "result": {
-        "item": "angelblock:rendelithic_shovel"
+        "id": "angelblock:rendelithic_shovel"
     },
     "template": {
         "item": "angelblock:rendelithic_tool_upgrade_kit"

@@ -7,7 +7,7 @@
     "item": "angelblock:rendelithic_ingot"
   },
   "result": {
-    "item": "angelblock:rendelithic_primary_shovel"
+    "id": "angelblock:rendelithic_primary_shovel"
   },
   "template": {
     "item": "angelblock:rendelithic_tool_upgrade_kit"

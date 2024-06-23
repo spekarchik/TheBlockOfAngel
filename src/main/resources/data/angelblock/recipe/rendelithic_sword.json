@@ -7,7 +7,7 @@
         "item": "angelblock:flame_stone"
     },
     "result": {
-        "item": "angelblock:rendelithic_sword"
+        "id": "angelblock:rendelithic_sword"
     },
     "template": {
         "item": "angelblock:rendelithic_tool_upgrade_kit"

@@ -7,7 +7,7 @@
     "item": "angelblock:lapis_ingot"
   },
   "result": {
-    "item": "angelblock:lapis_primary_shovel"
+    "id": "angelblock:lapis_primary_shovel"
   },
   "template": {
     "item": "angelblock:lapis_tool_upgrade_kit"

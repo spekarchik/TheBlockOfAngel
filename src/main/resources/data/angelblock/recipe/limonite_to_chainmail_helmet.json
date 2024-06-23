@@ -7,7 +7,7 @@
     "item": "minecraft:flint"
   },
   "result": {
-    "item": "minecraft:chainmail_helmet"
+    "id": "minecraft:chainmail_helmet"
   },
   "template": {
     "item": "angelblock:downgrade_kit"

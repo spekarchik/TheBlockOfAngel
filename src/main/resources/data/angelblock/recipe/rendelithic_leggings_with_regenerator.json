@@ -7,7 +7,7 @@
         "item": "angelblock:bios_diamond"
     },
     "result": {
-        "item": "angelblock:rendelithic_leggings_with_regenerator"
+        "id": "angelblock:rendelithic_leggings_with_regenerator"
     },
     "template": {
         "item": "angelblock:rendelithic_armor_upgrade_kit"

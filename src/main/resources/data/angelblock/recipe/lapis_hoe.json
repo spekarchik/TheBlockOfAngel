@@ -7,7 +7,7 @@
         "item": "angelblock:marine_crystal"
     },
     "result": {
-        "item": "angelblock:lapis_hoe"
+        "id": "angelblock:lapis_hoe"
     },
     "template": {
         "item": "angelblock:lapis_tool_upgrade_kit"

@@ -7,7 +7,7 @@
     "item": "minecraft:flint"
   },
   "result": {
-    "item": "minecraft:diamond_axe"
+    "id": "minecraft:diamond_axe"
   },
   "template": {
     "item": "angelblock:downgrade_kit"

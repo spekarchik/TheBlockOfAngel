@@ -12,7 +12,7 @@
     }
   },
   "result": {
-    "item": "angelblock:gunpowder_block",
+    "id": "angelblock:gunpowder_block",
     "count": 1
   }
 }

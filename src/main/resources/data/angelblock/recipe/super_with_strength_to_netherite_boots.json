@@ -7,7 +7,7 @@
     "item": "minecraft:flint"
   },
   "result": {
-    "item": "angelblock:limonite_boots_with_strength"
+    "id": "angelblock:limonite_boots_with_strength"
   },
   "template": {
     "item": "angelblock:downgrade_kit"

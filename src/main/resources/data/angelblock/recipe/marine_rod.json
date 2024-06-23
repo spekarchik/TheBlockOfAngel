@@ -7,7 +7,7 @@
         "item": "angelblock:marine_crystal"
     },
     "result": {
-        "item": "angelblock:marine_rod"
+        "id": "angelblock:marine_rod"
     },
     "template": {
         "item": "angelblock:rod_upgrade_kit"

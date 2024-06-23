@@ -7,7 +7,7 @@
         "item": "minecraft:diamond_sword"
     },
     "result": {
-        "item": "minecraft:diamond_sword"
+        "id": "minecraft:diamond_sword"
     },
     "template": {
         "item": "angelblock:diamond_tool_upgrade_kit"

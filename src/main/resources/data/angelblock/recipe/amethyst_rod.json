@@ -7,7 +7,7 @@
         "item": "minecraft:amethyst_shard"
     },
     "result": {
-        "item": "angelblock:amethyst_rod"
+        "id": "angelblock:amethyst_rod"
     },
     "template": {
         "item": "angelblock:rod_upgrade_kit"

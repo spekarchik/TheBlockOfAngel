@@ -7,7 +7,7 @@
         "item": "angelblock:lapis_plate"
     },
     "result": {
-        "item": "angelblock:lapis_leggings"
+        "id": "angelblock:lapis_leggings"
     },
     "template": {
         "item": "angelblock:lapis_armor_upgrade_kit"

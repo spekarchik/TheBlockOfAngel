@@ -7,7 +7,7 @@
         "item": "angelblock:super_plate"
     },
     "result": {
-        "item": "angelblock:super_chestplate"
+        "id": "angelblock:super_chestplate"
     },
     "template": {
         "item": "angelblock:super_armor_upgrade_kit"

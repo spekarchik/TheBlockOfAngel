@@ -7,7 +7,7 @@
     "item": "angelblock:limonite_ingot"
   },
   "result": {
-    "item": "angelblock:limonite_primary_axe"
+    "id": "angelblock:limonite_primary_axe"
   },
   "template": {
     "item": "angelblock:limonite_tool_upgrade_kit"

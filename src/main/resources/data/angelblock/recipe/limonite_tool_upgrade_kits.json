@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "item": "angelblock:limonite_tool_upgrade_kit",
+    "id": "angelblock:limonite_tool_upgrade_kit",
     "count": 2
   }
 }

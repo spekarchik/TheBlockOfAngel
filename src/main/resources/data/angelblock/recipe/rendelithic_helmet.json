@@ -7,7 +7,7 @@
         "item": "angelblock:rendelithic_plate"
     },
     "result": {
-        "item": "angelblock:rendelithic_helmet"
+        "id": "angelblock:rendelithic_helmet"
     },
     "template": {
         "item": "angelblock:rendelithic_armor_upgrade_kit"

@@ -7,7 +7,7 @@
         "item": "angelblock:flame_stone"
     },
     "result": {
-        "item": "angelblock:fire_rod"
+        "id": "angelblock:fire_rod"
     },
     "template": {
         "item": "angelblock:rod_upgrade_kit"

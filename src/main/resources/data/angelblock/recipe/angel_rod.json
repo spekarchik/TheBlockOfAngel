@@ -7,7 +7,7 @@
         "item": "angelblock:angel_block"
     },
     "result": {
-        "item": "angelblock:angel_rod"
+        "id": "angelblock:angel_rod"
     },
     "template": {
         "item": "minecraft:totem_of_undying"

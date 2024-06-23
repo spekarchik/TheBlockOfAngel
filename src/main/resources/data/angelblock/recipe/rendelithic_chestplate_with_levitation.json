@@ -7,7 +7,7 @@
         "item": "minecraft:pearlescent_froglight"
     },
     "result": {
-        "item": "angelblock:rendelithic_chestplate_with_levitation"
+        "id": "angelblock:rendelithic_chestplate_with_levitation"
     },
     "template": {
         "item": "angelblock:rendelithic_armor_upgrade_kit"

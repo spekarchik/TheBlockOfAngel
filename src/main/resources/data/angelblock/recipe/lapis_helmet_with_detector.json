@@ -7,7 +7,7 @@
         "item": "minecraft:sculk_sensor"
     },
     "result": {
-        "item": "angelblock:lapis_helmet_with_detector"
+        "id": "angelblock:lapis_helmet_with_detector"
     },
     "template": {
         "item": "angelblock:lapis_armor_upgrade_kit"

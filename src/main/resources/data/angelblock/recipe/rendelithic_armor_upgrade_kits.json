@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "item": "angelblock:rendelithic_armor_upgrade_kit",
+    "id": "angelblock:rendelithic_armor_upgrade_kit",
     "count": 2
   }
 }

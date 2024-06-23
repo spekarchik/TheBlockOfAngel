@@ -12,7 +12,7 @@
     }
   },
   "result": {
-    "item": "angelblock:flying_material_block",
+    "id": "angelblock:flying_material_block",
     "count": 1
   }
 }

@@ -7,7 +7,7 @@
         "item": "angelblock:limonite_plate"
     },
     "result": {
-        "item": "angelblock:limonite_boots"
+        "id": "angelblock:limonite_boots"
     },
     "template": {
         "item": "angelblock:limonite_armor_upgrade_kit"
