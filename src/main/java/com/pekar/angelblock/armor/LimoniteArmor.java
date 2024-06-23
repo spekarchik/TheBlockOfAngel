@@ -1,5 +1,6 @@
 package com.pekar.angelblock.armor;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
@@ -7,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class LimoniteArmor extends ModArmor
 {
-    protected LimoniteArmor(ArmorMaterial material, Type equipmentSlot, String armorModelName)
+    protected LimoniteArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName)
     {
         super(material, equipmentSlot, armorModelName);
     }

@@ -1,6 +1,7 @@
 package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Utils;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -18,7 +19,7 @@ public class ModArmor extends ArmorItem
     protected final String armorModelName;
     protected final Utils utils = new Utils();
 
-    protected ModArmor(ArmorMaterial material, Type equipmentSlot, String armorModelName)
+    protected ModArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName)
     {
         super(material, equipmentSlot, new Properties());
         this.armorModelName = armorModelName;

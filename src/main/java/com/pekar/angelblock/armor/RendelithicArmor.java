@@ -1,5 +1,6 @@
 package com.pekar.angelblock.armor;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
@@ -7,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class RendelithicArmor extends ModArmor
 {
-    protected RendelithicArmor(ArmorMaterial material, Type equipmentSlot, String armorItemName)
+    protected RendelithicArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName)
     {
         super(material, equipmentSlot, armorItemName);
     }

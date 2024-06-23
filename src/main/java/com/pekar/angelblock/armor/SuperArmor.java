@@ -1,5 +1,6 @@
 package com.pekar.angelblock.armor;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
@@ -9,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class SuperArmor extends ModArmor
 {
-    protected SuperArmor(ArmorMaterial material, Type equipmentSlot, String armorItemName)
+    protected SuperArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName)
     {
         super(material, equipmentSlot, armorItemName);
     }
