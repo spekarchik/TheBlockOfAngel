@@ -1,7 +1,9 @@
 package com.pekar.angelblock.armor;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.items.ItemRegistry;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -17,7 +19,7 @@ import java.util.function.Supplier;
 
 import static net.minecraft.world.item.ArmorItem.Type.*;
 
-public class ModArmorMaterial extends ArmorMaterial
+public class ModArmorMaterial
 {
     private final String name;
     private final int[] slotProtections;
@@ -29,7 +31,7 @@ public class ModArmorMaterial extends ArmorMaterial
 
     private static final Map<ArmorItem.Type, Integer> DEFENSE = new HashMap<>();
 
-    private static final List<Layer> RendelithicLayers = 
+    private static final List<ArmorMaterial.Layer> RendelithicLayers = getNonDyeableArmorLayers("rendelithic");
 
     static
     {
@@ -96,45 +98,11 @@ public class ModArmorMaterial extends ArmorMaterial
         this.repairIngredient = repairIngredient;
     }
 
-    @Override
-    public int getDefenseForType(ArmorItem.Type armorType)
-    {
-        return this.slotProtections[armorType.getSlot().getIndex()];
-    }
 
-    @Override
-    public int getEnchantmentValue()
+    private static List<ArmorMaterial.Layer> getNonDyeableArmorLayers(String materialName)
     {
-        return enchantmentValue;
-    }
-
-    @Override
-    public SoundEvent getEquipSound()
-    {
-        return sound;
-    }
-
-    @Override
-    public Ingredient getRepairIngredient()
-    {
-        return repairIngredient.get();
-    }
-
-    @Override
-    public String getName()
-    {
-        return name;
-    }
-
-    @Override
-    public float getToughness()
-    {
-        return toughness;
-    }
-
-    @Override
-    public float getKnockbackResistance()
-    {
-        return knockbackResistance;
+        var fullMaterialName = Main.MODID + ":" + materialName;
+        var resourceLocation = new ResourceLocation(fullMaterialName);
+        return List.of(new ArmorMaterial.Layer(resourceLocation));
     }
 }
