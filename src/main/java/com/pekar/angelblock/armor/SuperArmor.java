@@ -10,9 +10,9 @@ import net.minecraft.world.item.ItemStack;
 
 public class SuperArmor extends ModArmor
 {
-    protected SuperArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName)
+    protected SuperArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName, int durabilityMultiplier)
     {
-        super(material, equipmentSlot, armorItemName);
+        super(material, equipmentSlot, armorItemName, durabilityMultiplier);
     }
 
     @Override

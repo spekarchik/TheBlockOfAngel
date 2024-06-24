@@ -2,12 +2,16 @@ package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Main;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ArmorRegistry
 {
+    // See: Items.DIAMOND_HELMET
+    //Items.DIAMOND_CHESTPLATE
+
     public static final RegistryObject<ModArmor> RENDELITHIC_HELMET = Main.ITEMS.register("rendelithic_helmet", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.HELMET, "rendelithic"));
+            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.HELMET, "rendelithic", 21));
     public static final RegistryObject<ModArmor> RENDELITHIC_CHESTPLATE = Main.ITEMS.register("rendelithic_chestplate", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.CHESTPLATE, "rendelithic"));
     public static final RegistryObject<ModArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("rendelithic_chestplate_with_levitation", () ->

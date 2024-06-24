@@ -5,9 +5,9 @@ import net.minecraft.world.item.ArmorMaterial;
 
 public class RendelithicArmorWithLevitation extends RendelithicArmor
 {
-    protected RendelithicArmorWithLevitation(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName)
+    protected RendelithicArmorWithLevitation(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName, int durabilityMultiplier)
     {
-        super(material, equipmentSlot, armorItemName);
+        super(material, equipmentSlot, armorItemName, durabilityMultiplier);
     }
 
     @Override

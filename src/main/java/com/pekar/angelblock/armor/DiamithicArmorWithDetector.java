@@ -5,9 +5,9 @@ import net.minecraft.world.item.ArmorMaterial;
 
 public class DiamithicArmorWithDetector extends ModArmor
 {
-    protected DiamithicArmorWithDetector(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName)
+    protected DiamithicArmorWithDetector(ModArmorMaterial material, Type equipmentSlot)
     {
-        super(material, equipmentSlot, armorModelName);
+        super(material, equipmentSlot);
     }
 
     @Override

@@ -1,17 +1,23 @@
 package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Main;
+import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.items.ItemRegistry;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,30 +27,18 @@ import static net.minecraft.world.item.ArmorItem.Type.*;
 
 public class ModArmorMaterial
 {
-    private final String name;
-    private final int[] slotProtections;
-    private final int enchantmentValue;
-    private final SoundEvent sound;
-    private final float toughness;
-    private final float knockbackResistance;
-    private final Supplier<Ingredient> repairIngredient;
+    private final Holder<ArmorMaterial> material;
+    private final String armorModelName;
+    private final int durabilityMultiplier;
 
-    private static final Map<ArmorItem.Type, Integer> DEFENSE = new HashMap<>();
-
-    private static final List<ArmorMaterial.Layer> RendelithicLayers = getNonDyeableArmorLayers("rendelithic");
-
-    static
-    {
-        DEFENSE.put(HELMET, 11);
-        DEFENSE.put(CHESTPLATE, 16);
-        DEFENSE.put(LEGGINGS, 15);
-        DEFENSE.put(BOOTS, 13);
-        DEFENSE.put(BODY, 16);
-    }
-
-    protected static final Holder<ArmorMaterial> RENDELITHIC = Holder.direct(new ArmorMaterial("angelblock:rendelithic_armor",
-            21, new int[] { 3, 6, 8, 3 }, 17, SoundEvents.ARMOR_EQUIP_DIAMOND.get(),
-            0F, 0F, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get())));
+    private static final Holder<ArmorMaterial> Rendelithic = register(
+            "rendelithic",
+            createArmorTypeMap(3, 6, 8, 3),
+            17,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            0F,
+            0F,
+            () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get())); // durabilityMultiplier: 21
 
     protected static final Holder<ArmorMaterial> RENDELITHIC2 = Holder.direct(new ModArmorMaterial("angelblock:rendelithic_armor2",
             21, new int[] { 3, 6, 8, 3 }, 17, SoundEvents.ARMOR_EQUIP_DIAMOND.get(),
@@ -86,23 +80,71 @@ public class ModArmorMaterial
             3, new int[] { 1, 1, 1, 1 }, 30, SoundEvents.ARMOR_EQUIP_ELYTRA.get(),
             0F, 0F, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)));
 
-    public ModArmorMaterial(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue,
-                            SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient)
+
+    protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial(Rendelithic, "rendelithic", 21);
+
+
+    public ModArmorMaterial(Holder<ArmorMaterial> material, String armorModelName, int durabilityMultiplier)
     {
-        this.name = name;
-        this.slotProtections = slotProtections;
-        this.enchantmentValue = enchantmentValue;
-        this.sound = sound;
-        this.toughness = toughness;
-        this.knockbackResistance = knockbackResistance;
-        this.repairIngredient = repairIngredient;
+        this.material = material;
+        this.armorModelName = armorModelName;
+        this.durabilityMultiplier = durabilityMultiplier;
     }
 
+    public Holder<ArmorMaterial> getMaterial()
+    {
+        return material;
+    }
+
+    public String getArmorModelName()
+    {
+        return armorModelName;
+    }
+
+    public int getDurabilityMultiplier()
+    {
+        return durabilityMultiplier;
+    }
+
+    // copied from ArmorMaterials and modified
+    private static Holder<ArmorMaterial> register(
+            String materialName,
+            EnumMap<ArmorItem.Type, Integer> map,
+            int enchantmentValue,
+            Holder<SoundEvent> equipSound,
+            float toughness,
+            float knockbackResistance,
+            Supplier<Ingredient> ingredient)
+    {
+        var armorLayers = getNonDyeableArmorLayers(materialName);
+        EnumMap<ArmorItem.Type, Integer> enummap = new EnumMap<>(ArmorItem.Type.class);
+
+        for (ArmorItem.Type armoritem$type : ArmorItem.Type.values()) {
+            enummap.put(armoritem$type, map.get(armoritem$type));
+        }
+
+        return Registry.registerForHolder(
+                BuiltInRegistries.f_315942_, //was in 1.20.6: BuiltInRegistries.ARMOR_MATERIAL
+                Utils.createResourceLocation(materialName),
+                new ArmorMaterial(enummap, enchantmentValue, equipSound, ingredient, armorLayers, toughness, knockbackResistance)
+        );
+    }
+
+    private static EnumMap<ArmorItem.Type, Integer> createArmorTypeMap(int bootsResistance, int leggingsResistance, int chestplateResistance, int helmetResistance)
+    {
+        return Util.make(new EnumMap<>(ArmorItem.Type.class), armorTypeMap -> {
+            armorTypeMap.put(ArmorItem.Type.BOOTS, 3);
+            armorTypeMap.put(ArmorItem.Type.LEGGINGS, 6);
+            armorTypeMap.put(ArmorItem.Type.CHESTPLATE, 8);
+            armorTypeMap.put(ArmorItem.Type.HELMET, 3);
+            armorTypeMap.put(ArmorItem.Type.BODY, 11);
+        });
+    }
 
     private static List<ArmorMaterial.Layer> getNonDyeableArmorLayers(String materialName)
     {
         var fullMaterialName = Main.MODID + ":" + materialName;
-        var resourceLocation = new ResourceLocation(fullMaterialName);
+        var resourceLocation = Utils.createResourceLocation(fullMaterialName);
         return List.of(new ArmorMaterial.Layer(resourceLocation));
     }
 }

@@ -19,10 +19,10 @@ public class ModArmor extends ArmorItem
     protected final String armorModelName;
     protected final Utils utils = new Utils();
 
-    protected ModArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName)
+    protected ModArmor(ModArmorMaterial material, Type equipmentSlot)
     {
-        super(material, equipmentSlot, new Properties());
-        this.armorModelName = armorModelName;
+        super(material.getMaterial(), equipmentSlot, new Properties().durability(equipmentSlot.m_321370_(material.getDurabilityMultiplier())));
+        this.armorModelName = material.getArmorModelName();
     }
 
     public String getArmorModelName()

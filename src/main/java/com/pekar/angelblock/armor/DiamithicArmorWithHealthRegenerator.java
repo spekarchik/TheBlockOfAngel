@@ -5,9 +5,9 @@ import net.minecraft.world.item.ArmorMaterial;
 
 public class DiamithicArmorWithHealthRegenerator extends ModArmor
 {
-    protected DiamithicArmorWithHealthRegenerator(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName)
+    protected DiamithicArmorWithHealthRegenerator(ModArmorMaterial material, Type equipmentSlot)
     {
-        super(material, equipmentSlot, armorModelName);
+        super(material, equipmentSlot);
     }
 
     @Override

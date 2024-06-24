@@ -5,9 +5,9 @@ import net.minecraft.world.item.ArmorMaterial;
 
 public class DiamithicArmorWithLevitation extends ModArmor
 {
-    protected DiamithicArmorWithLevitation(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName)
+    protected DiamithicArmorWithLevitation(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName, int durabilityMultiplier)
     {
-        super(material, equipmentSlot, armorModelName);
+        super(material, equipmentSlot, armorModelName, durabilityMultiplier);
     }
 
     @Override

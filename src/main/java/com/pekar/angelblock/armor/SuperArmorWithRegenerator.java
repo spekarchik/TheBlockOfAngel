@@ -5,9 +5,9 @@ import net.minecraft.world.item.ArmorMaterial;
 
 public class SuperArmorWithRegenerator extends SuperArmor
 {
-    protected SuperArmorWithRegenerator(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName)
+    protected SuperArmorWithRegenerator(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName, int durabilityMultiplier)
     {
-        super(material, equipmentSlot, armorItemName);
+        super(material, equipmentSlot, armorItemName, durabilityMultiplier);
     }
 
     @Override

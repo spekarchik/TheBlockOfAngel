@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -292,6 +293,11 @@ public class Utils
         }
 
         return false;
+    }
+
+    public static ResourceLocation createResourceLocation(String name)
+    {
+        return ResourceLocation.m_340282_(name); //was: new ResourceLocation(name),
     }
 
     public boolean mossyTransforming(Player player, BlockPos pos, Block block)

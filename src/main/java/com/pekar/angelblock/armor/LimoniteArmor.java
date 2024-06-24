@@ -8,9 +8,9 @@ import net.minecraft.world.item.ItemStack;
 
 public class LimoniteArmor extends ModArmor
 {
-    protected LimoniteArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName)
+    protected LimoniteArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName, int durabilityMultiplier)
     {
-        super(material, equipmentSlot, armorModelName);
+        super(material, equipmentSlot, armorModelName, durabilityMultiplier);
     }
 
     @Override
