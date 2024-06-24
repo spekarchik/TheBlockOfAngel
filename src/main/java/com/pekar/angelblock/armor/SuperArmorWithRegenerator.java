@@ -1,13 +1,10 @@
 package com.pekar.angelblock.armor;
 
-import net.minecraft.core.Holder;
-import net.minecraft.world.item.ArmorMaterial;
-
 public class SuperArmorWithRegenerator extends SuperArmor
 {
-    protected SuperArmorWithRegenerator(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName, int durabilityMultiplier)
+    protected SuperArmorWithRegenerator(ModArmorMaterial material, Type equipmentSlot)
     {
-        super(material, equipmentSlot, armorItemName, durabilityMultiplier);
+        super(material, equipmentSlot);
     }
 
     @Override

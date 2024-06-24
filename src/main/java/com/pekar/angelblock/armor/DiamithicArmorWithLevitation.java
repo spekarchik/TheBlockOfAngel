@@ -1,13 +1,10 @@
 package com.pekar.angelblock.armor;
 
-import net.minecraft.core.Holder;
-import net.minecraft.world.item.ArmorMaterial;
-
 public class DiamithicArmorWithLevitation extends ModArmor
 {
-    protected DiamithicArmorWithLevitation(Holder<ArmorMaterial> material, Type equipmentSlot, String armorModelName, int durabilityMultiplier)
+    protected DiamithicArmorWithLevitation(ModArmorMaterial material, Type equipmentSlot)
     {
-        super(material, equipmentSlot, armorModelName, durabilityMultiplier);
+        super(material, equipmentSlot);
     }
 
     @Override

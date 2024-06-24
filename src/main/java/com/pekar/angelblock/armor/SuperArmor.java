@@ -1,18 +1,16 @@
 package com.pekar.angelblock.armor;
 
-import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 
 public class SuperArmor extends ModArmor
 {
-    protected SuperArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName, int durabilityMultiplier)
+    protected SuperArmor(ModArmorMaterial material, Type equipmentSlot)
     {
-        super(material, equipmentSlot, armorItemName, durabilityMultiplier);
+        super(material, equipmentSlot);
     }
 
     @Override

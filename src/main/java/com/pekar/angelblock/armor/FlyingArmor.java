@@ -1,19 +1,17 @@
 package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Utils;
-import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public class FlyingArmor extends ModArmor
 {
-    protected FlyingArmor(Holder<ArmorMaterial> material, Type equipmentSlot, String armorItemName, int durabilityMultiplier)
+    protected FlyingArmor(ModArmorMaterial material, Type equipmentSlot)
     {
-        super(material, equipmentSlot, armorItemName, durabilityMultiplier);
+        super(material, equipmentSlot);
     }
 
     @Override
