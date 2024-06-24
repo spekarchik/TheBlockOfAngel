@@ -98,6 +98,6 @@ public class ModArmor extends ArmorItem
 
     private MutableComponent getCommonDisplayName(int lineNumber)
     {
-        return Component.translatable(material.getName().replace(':', '.').replaceAll("[0-9]", "") + ".desc" + lineNumber);
+        return Component.translatable(material.get().getName().replace(':', '.').replaceAll("[0-9]", "") + ".desc" + lineNumber);
     }
 }
