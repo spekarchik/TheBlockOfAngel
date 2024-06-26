@@ -1,6 +1,7 @@
 package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Utils;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -14,18 +15,22 @@ import java.util.List;
 
 public class ModArmor extends ArmorItem
 {
-    protected final String armorModelName;
+    protected final String materialName;
+    protected final ArmorItem.Type armorItemType;
+    protected final int maxDamage;
     protected final Utils utils = new Utils();
 
-    protected ModArmor(ModArmorMaterial material, Type equipmentSlot)
+    protected ModArmor(ModArmorMaterial material, Type armorItemType)
     {
-        super(material.getMaterial(), equipmentSlot, new Properties().durability(equipmentSlot.m_321370_(material.getDurabilityMultiplier())));
-        this.armorModelName = material.getArmorModelName();
+        super(material.getMaterial(), armorItemType, new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
+        this.armorItemType = armorItemType;
+        this.materialName = material.getMaterialName();
+        this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
     }
 
-    public String getArmorModelName()
+    public String getMaterialName()
     {
-        return armorModelName;
+        return materialName;
     }
 
     public boolean isModifiedWithDetector()
@@ -51,6 +56,16 @@ public class ModArmor extends ArmorItem
     public boolean isModifiedWithSeaPower()
     {
         return false;
+    }
+
+    public int getMaxDamage()
+    {
+        return components().getOrDefault(DataComponents.MAX_DAMAGE, maxDamage);
+    }
+
+    public int getDamage()
+    {
+        return components().getOrDefault(DataComponents.DAMAGE, 0);
     }
 
     @Override

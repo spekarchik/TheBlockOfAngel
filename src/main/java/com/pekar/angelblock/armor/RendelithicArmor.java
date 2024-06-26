@@ -17,6 +17,6 @@ public class RendelithicArmor extends ModArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.LEGS);
         var leggingsItem = itemStack.getItem();
         if (!(leggingsItem instanceof ModArmor leggings)) return false;
-        return leggings.getArmorModelName().equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getArmorModelName());
+        return leggings.getMaterialName().equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getMaterialName());
     }
 }

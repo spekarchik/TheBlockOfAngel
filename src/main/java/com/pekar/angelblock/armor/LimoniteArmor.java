@@ -17,6 +17,6 @@ public class LimoniteArmor extends ModArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.FEET);
         var bootsItem = itemStack.getItem();
         if (!(bootsItem instanceof ModArmor boots)) return false;
-        return boots.getArmorModelName().equals(ArmorRegistry.LIMONITE_BOOTS.get().getArmorModelName());
+        return boots.getMaterialName().equals(ArmorRegistry.LIMONITE_BOOTS.get().getMaterialName());
     }
 }

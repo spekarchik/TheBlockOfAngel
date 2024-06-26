@@ -52,7 +52,7 @@ public class Player implements IPlayer
         var item = itemStack.getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
 
-        return armor.getModelName().equals(armorItem.getArmorModelName());
+        return armor.getModelName().equals(armorItem.getMaterialName());
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Player implements IPlayer
             var item = itemStack.getItem();
             if (!(item instanceof ModArmor armorItem)) return false;
 
-            if (!armor.getModelName().equals(armorItem.getArmorModelName())) return false;
+            if (!armor.getModelName().equals(armorItem.getMaterialName())) return false;
         }
 
         return true;
@@ -88,7 +88,7 @@ public class Player implements IPlayer
             var item = itemStack.getItem();
             if (!(item instanceof ModArmor armorItem)) continue;
 
-            if (armor.getModelName().equals(armorItem.getArmorModelName())) return true;
+            if (armor.getModelName().equals(armorItem.getMaterialName())) return true;
         }
 
         return false;
@@ -99,7 +99,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.HEAD).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
         return armorItem.isModifiedWithDetector();
     }
 
@@ -108,7 +108,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.LEGS).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
         return armorItem.isModifiedWithHealthRegenerator();
     }
 
@@ -117,7 +117,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
         return armorItem.isModifiedWithStrengthBooster();
     }
 
@@ -126,7 +126,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
         return armorItem.isModifiedWithStrengthBooster();
     }
 
@@ -135,7 +135,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
         return armorItem.isModifiedWithLevitation();
     }
 
@@ -144,7 +144,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
         return armorItem.isModifiedWithSeaPower();
     }
 
@@ -153,7 +153,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getArmorModelName().equals(armor.getModelName())) return false;
+        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
         return armorItem.isModifiedWithSeaPower();
     }
 
@@ -265,7 +265,7 @@ public class Player implements IPlayer
 
             if (item instanceof ModArmor armorItem)
             {
-                String name = armorItem.getArmorModelName();
+                String name = armorItem.getMaterialName();
                 armorNames.add(name);
             }
             else
@@ -296,7 +296,7 @@ public class Player implements IPlayer
 
     private IArmor getArmorModel(ModArmor modArmor)
     {
-        var modelName = modArmor.getArmorModelName();
+        var modelName = modArmor.getMaterialName();
 
         if (modelName.equals(rendelithicArmorModel.getModelName()))
         {

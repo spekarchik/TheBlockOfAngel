@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 public class ModArmorMaterial
 {
     private final Holder<ArmorMaterial> material;
-    private final String armorModelName;
+    private final String materialName;
     private final int durabilityMultiplier;
 
     private static final Holder<ArmorMaterial> Rendelithic = register(
@@ -136,10 +136,10 @@ public class ModArmorMaterial
     protected static final ModArmorMaterial FLYING = new ModArmorMaterial(Flying, "flying", 3);
 
 
-    public ModArmorMaterial(Holder<ArmorMaterial> material, String armorModelName, int durabilityMultiplier)
+    public ModArmorMaterial(Holder<ArmorMaterial> material, String materialName, int durabilityMultiplier)
     {
         this.material = material;
-        this.armorModelName = armorModelName;
+        this.materialName = materialName;
         this.durabilityMultiplier = durabilityMultiplier;
     }
 
@@ -148,9 +148,9 @@ public class ModArmorMaterial
         return material;
     }
 
-    public String getArmorModelName()
+    public String getMaterialName()
     {
-        return armorModelName;
+        return materialName;
     }
 
     public int getDurabilityMultiplier()
@@ -176,7 +176,7 @@ public class ModArmorMaterial
         }
 
         return Registry.registerForHolder(
-                BuiltInRegistries.f_315942_, //was in 1.20.6: BuiltInRegistries.ARMOR_MATERIAL
+                BuiltInRegistries.ARMOR_MATERIAL,
                 Utils.createResourceLocation(armorName),
                 new ArmorMaterial(enummap, enchantmentValue, equipSound, ingredient, armorLayers, toughness, knockbackResistance)
         );

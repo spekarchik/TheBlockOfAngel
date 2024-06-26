@@ -19,7 +19,7 @@ public class SuperArmor extends ModArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.LEGS);
         var leggingsItem = itemStack.getItem();
         if (!(leggingsItem instanceof ModArmor leggings)) return false;
-        return leggings.getArmorModelName().equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorModelName());
+        return leggings.getMaterialName().equals(ArmorRegistry.SUPER_LEGGINGS.get().getMaterialName());
     }
 
     @Override
@@ -28,7 +28,7 @@ public class SuperArmor extends ModArmor
         var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
         var helmetItem = itemStack.getItem();
         if (!(helmetItem instanceof ModArmor helmet)) return false;
-        return helmet.getArmorModelName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorModelName());
+        return helmet.getMaterialName().equals(ArmorRegistry.SUPER_HELMET.get().getMaterialName());
     }
 
     @Override
@@ -37,6 +37,6 @@ public class SuperArmor extends ModArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.FEET);
         var bootsItem = itemStack.getItem();
         if (!(bootsItem instanceof ModArmor boots)) return false;
-        return boots.getArmorModelName().equals(ArmorRegistry.SUPER_BOOTS.get().getArmorModelName());
+        return boots.getMaterialName().equals(ArmorRegistry.SUPER_BOOTS.get().getMaterialName());
     }
 }

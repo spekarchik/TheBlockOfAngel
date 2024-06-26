@@ -167,7 +167,7 @@ public class LapisArmor extends Armor
     @Override
     public String getModelName()
     {
-        return ArmorRegistry.LAPIS_BOOTS.get().getArmorModelName();
+        return ArmorRegistry.LAPIS_BOOTS.get().getMaterialName();
     }
 
     @Override
