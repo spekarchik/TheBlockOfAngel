@@ -4,10 +4,12 @@ import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
@@ -23,7 +25,7 @@ public abstract class ModTool extends HoeItem implements IModTool
 
     public ModTool(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, properties.attributes(DiggerItem.createAttributes(material, attackDamage, attackSpeed)));
     }
 
     protected boolean updateNeighbors(Level level, BlockPos pos)
@@ -69,6 +71,11 @@ public abstract class ModTool extends HoeItem implements IModTool
     protected MutableComponent getDescription(int lineNumber, boolean isHeader)
     {
         return getDescription(lineNumber, isHeader, false);
+    }
+
+    protected int getDamage()
+    {
+        return components().getOrDefault(DataComponents.DAMAGE, 0);
     }
 
     @Override

@@ -64,7 +64,7 @@ public class AngelRod extends EndRod
                     var blockEntity = level.getBlockEntity(pos.above());
                     if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
                     {
-                        angelRodBlockEntity.setDamage(getDamage(itemStack));
+                        angelRodBlockEntity.setDamage(getDamage());
                     }
 
                     if (player instanceof ServerPlayer serverPlayer)
