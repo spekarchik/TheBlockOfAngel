@@ -7,7 +7,7 @@
         "item": "angelblock:bios_diamond"
     },
     "result": {
-        "item": "angelblock:limonite_axe"
+        "id": "angelblock:limonite_axe"
     },
     "template": {
         "item": "angelblock:limonite_tool_upgrade_kit"

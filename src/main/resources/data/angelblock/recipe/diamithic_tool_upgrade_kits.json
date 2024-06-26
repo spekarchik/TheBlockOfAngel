@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "item": "angelblock:diamithic_tool_upgrade_kit",
+    "id": "angelblock:diamithic_tool_upgrade_kit",
     "count": 2
   }
 }

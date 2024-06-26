@@ -7,7 +7,7 @@
         "item": "angelblock:super_plate"
     },
     "result": {
-        "item": "angelblock:super_boots"
+        "id": "angelblock:super_boots"
     },
     "template": {
         "item": "angelblock:super_armor_upgrade_kit"

@@ -7,7 +7,7 @@
     "item": "angelblock:limonite_ingot"
   },
   "result": {
-    "item": "angelblock:limonite_primary_sword"
+    "id": "angelblock:limonite_primary_sword"
   },
   "template": {
     "item": "angelblock:limonite_tool_upgrade_kit"

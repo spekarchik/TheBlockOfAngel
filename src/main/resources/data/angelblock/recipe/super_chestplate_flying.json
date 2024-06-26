@@ -7,7 +7,7 @@
         "item": "minecraft:elytra"
     },
     "result": {
-        "item": "angelblock:super_chestplate_flying"
+        "id": "angelblock:super_chestplate_flying"
     },
     "template": {
         "item": "angelblock:super_armor_upgrade_kit"

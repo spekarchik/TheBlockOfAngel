@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "item": "angelblock:super_armor_upgrade_kit",
+    "id": "angelblock:super_armor_upgrade_kit",
     "count": 2
   }
 }

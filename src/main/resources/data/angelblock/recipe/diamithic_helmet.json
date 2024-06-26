@@ -7,7 +7,7 @@
         "item": "angelblock:diamithic_plate"
     },
     "result": {
-        "item": "angelblock:diamithic_helmet"
+        "id": "angelblock:diamithic_helmet"
     },
     "template": {
         "item": "angelblock:diamithic_armor_upgrade_kit"

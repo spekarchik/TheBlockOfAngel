@@ -7,7 +7,7 @@
         "item": "angelblock:bios_diamond"
     },
     "result": {
-        "item": "angelblock:super_leggings_with_regenerator"
+        "id": "angelblock:super_leggings_with_regenerator"
     },
     "template": {
         "item": "angelblock:super_armor_upgrade_kit"

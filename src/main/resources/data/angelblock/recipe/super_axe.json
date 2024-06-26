@@ -7,7 +7,7 @@
         "item": "angelblock:super_crystal"
     },
     "result": {
-        "item": "angelblock:super_axe"
+        "id": "angelblock:super_axe"
     },
     "template": {
         "item": "angelblock:super_tool_upgrade_kit"

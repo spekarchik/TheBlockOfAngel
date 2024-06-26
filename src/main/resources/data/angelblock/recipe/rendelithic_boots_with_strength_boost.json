@@ -7,7 +7,7 @@
         "item": "angelblock:strength_pearl"
     },
     "result": {
-        "item": "angelblock:rendelithic_boots_with_strength_boost"
+        "id": "angelblock:rendelithic_boots_with_strength_boost"
     },
     "template": {
         "item": "angelblock:rendelithic_armor_upgrade_kit"

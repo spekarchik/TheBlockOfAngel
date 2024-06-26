@@ -7,7 +7,7 @@
         "item": "angelblock:marine_crystal"
     },
     "result": {
-        "item": "angelblock:lapis_pickaxe"
+        "id": "angelblock:lapis_pickaxe"
     },
     "template": {
         "item": "angelblock:lapis_tool_upgrade_kit"

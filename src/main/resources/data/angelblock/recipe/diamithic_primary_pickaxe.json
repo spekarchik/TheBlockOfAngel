@@ -7,7 +7,7 @@
     "item": "angelblock:diamithic_ingot"
   },
   "result": {
-    "item": "angelblock:diamithic_primary_pickaxe"
+    "id": "angelblock:diamithic_primary_pickaxe"
   },
   "template": {
     "item": "angelblock:diamithic_tool_upgrade_kit"

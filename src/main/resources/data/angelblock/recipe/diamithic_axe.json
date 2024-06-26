@@ -7,7 +7,7 @@
         "item": "angelblock:strength_pearl"
     },
     "result": {
-        "item": "angelblock:diamithic_axe"
+        "id": "angelblock:diamithic_axe"
     },
     "template": {
         "item": "angelblock:diamithic_tool_upgrade_kit"

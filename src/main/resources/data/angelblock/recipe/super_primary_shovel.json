@@ -7,7 +7,7 @@
     "item": "angelblock:super_ingot"
   },
   "result": {
-    "item": "angelblock:super_primary_shovel"
+    "id": "angelblock:super_primary_shovel"
   },
   "template": {
     "item": "angelblock:super_tool_upgrade_kit"

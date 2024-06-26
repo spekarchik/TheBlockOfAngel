@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "item": "angelblock:energy_fiber",
+    "id": "angelblock:energy_fiber",
     "count": 2
   }
 }

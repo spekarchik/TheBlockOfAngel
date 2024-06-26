@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "item": "angelblock:lapis_tool_upgrade_kit",
+    "id": "angelblock:lapis_tool_upgrade_kit",
     "count": 2
   }
 }

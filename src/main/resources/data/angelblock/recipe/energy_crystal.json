@@ -16,7 +16,7 @@
     }
   },
   "result": {
-    "item": "angelblock:energy_crystal",
+    "id": "angelblock:energy_crystal",
     "count": 4
   }
 }

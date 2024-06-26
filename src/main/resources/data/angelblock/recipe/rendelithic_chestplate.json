@@ -7,7 +7,7 @@
         "item": "angelblock:rendelithic_plate"
     },
     "result": {
-        "item": "angelblock:rendelithic_chestplate"
+        "id": "angelblock:rendelithic_chestplate"
     },
     "template": {
         "item": "angelblock:rendelithic_armor_upgrade_kit"

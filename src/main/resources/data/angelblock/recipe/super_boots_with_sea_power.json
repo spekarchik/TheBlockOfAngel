@@ -7,7 +7,7 @@
         "item": "minecraft:heart_of_the_sea"
     },
     "result": {
-        "item": "angelblock:super_boots_with_sea_power"
+        "id": "angelblock:super_boots_with_sea_power"
     },
     "template": {
         "item": "angelblock:super_armor_upgrade_kit"

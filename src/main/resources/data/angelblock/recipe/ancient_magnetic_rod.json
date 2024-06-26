@@ -7,7 +7,7 @@
         "item": "minecraft:lodestone"
     },
     "result": {
-        "item": "angelblock:ancient_magnetic_rod"
+        "id": "angelblock:ancient_magnetic_rod"
     },
     "template": {
         "item": "angelblock:rod_upgrade_kit"

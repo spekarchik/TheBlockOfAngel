@@ -7,7 +7,7 @@
     "item": "angelblock:rendelithic_ingot"
   },
   "result": {
-    "item": "angelblock:rendelithic_primary_sword"
+    "id": "angelblock:rendelithic_primary_sword"
   },
   "template": {
     "item": "angelblock:rendelithic_tool_upgrade_kit"

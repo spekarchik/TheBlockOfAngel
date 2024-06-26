@@ -7,7 +7,7 @@
         "item": "minecraft:pearlescent_froglight"
     },
     "result": {
-        "item": "angelblock:diamithic_chestplate_with_strength_and_levitation"
+        "id": "angelblock:diamithic_chestplate_with_strength_and_levitation"
     },
     "template": {
         "item": "angelblock:diamithic_armor_upgrade_kit"

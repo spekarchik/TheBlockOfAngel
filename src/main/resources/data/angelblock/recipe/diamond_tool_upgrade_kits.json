@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "item": "angelblock:diamond_tool_upgrade_kit",
+    "id": "angelblock:diamond_tool_upgrade_kit",
     "count": 2
   }
 }

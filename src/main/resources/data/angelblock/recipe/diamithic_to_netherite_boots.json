@@ -7,7 +7,7 @@
     "item": "minecraft:flint"
   },
   "result": {
-    "item": "minecraft:netherite_boots"
+    "id": "minecraft:netherite_boots"
   },
   "template": {
     "item": "angelblock:downgrade_kit"

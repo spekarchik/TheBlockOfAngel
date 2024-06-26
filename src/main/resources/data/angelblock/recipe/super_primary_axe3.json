@@ -7,7 +7,7 @@
     "item": "angelblock:super_ingot"
   },
   "result": {
-    "item": "angelblock:super_primary_axe"
+    "id": "angelblock:super_primary_axe"
   },
   "template": {
     "item": "angelblock:super_tool_upgrade_kit"

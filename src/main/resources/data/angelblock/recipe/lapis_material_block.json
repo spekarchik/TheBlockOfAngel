@@ -12,7 +12,7 @@
     }
   },
   "result": {
-    "item": "angelblock:lapis_material_block",
+    "id": "angelblock:lapis_material_block",
     "count": 1
   }
 }
