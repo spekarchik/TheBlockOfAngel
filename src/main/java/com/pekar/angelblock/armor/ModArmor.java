@@ -18,14 +18,21 @@ public class ModArmor extends ArmorItem
     protected final String materialName;
     protected final ArmorItem.Type armorItemType;
     protected final int maxDamage;
+    protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
 
     protected ModArmor(ModArmorMaterial material, Type armorItemType)
     {
         super(material.getMaterial(), armorItemType, new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
+        this.material = material;
         this.armorItemType = armorItemType;
         this.materialName = material.getMaterialName();
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
+    }
+
+    public ModArmorMaterial getArmorMaterial()
+    {
+        return material;
     }
 
     public String getMaterialName()
@@ -113,6 +120,6 @@ public class ModArmor extends ArmorItem
 
     private MutableComponent getCommonDisplayName(int lineNumber)
     {
-        return Component.translatable(material.get().getName().replace(':', '.').replaceAll("[0-9]", "") + ".desc" + lineNumber);
+        return Component.translatable(material.getFullArmorModelName().replace(':', '.').replaceAll("[0-9]", "") + ".desc" + lineNumber);
     }
 }

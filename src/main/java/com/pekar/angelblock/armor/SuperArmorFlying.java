@@ -26,8 +26,8 @@ public class SuperArmorFlying extends SuperArmor
                 .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getMaterialName());
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
-        int maxDamageToFly = getMaxDamage(stack) / 2;
-        int chestDamage = getDamage(stack);
+        int maxDamageToFly = getMaxDamage() / 2;
+        int chestDamage = getDamage();
 
         return isFullArmorSet && chestDamage < maxDamageToFly;
     }
