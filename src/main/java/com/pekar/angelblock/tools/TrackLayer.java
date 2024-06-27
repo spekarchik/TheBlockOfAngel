@@ -207,7 +207,7 @@ public class TrackLayer extends WorkRod
 
         // check to go up
         var upPos = originPos.above();
-        boolean isUpperBlockSolid = isBlockSolidOrGlass(level, upPos);
+        boolean isUpperBlockSolid = isBlockSolidOrTransparent(level, upPos);
 
         if (isUpperBlockSolid)
         {
@@ -223,7 +223,7 @@ public class TrackLayer extends WorkRod
         if (originBlockState.isAir() || originBlock instanceof BushBlock || isAllowedReplaceWater(originBlockState, placingBlock))
         {
             var updatedPos = originPos.below();
-            boolean isBlockBelowSolid = isBlockSolidOrGlass(level, updatedPos);
+            boolean isBlockBelowSolid = isBlockSolidOrTransparent(level, updatedPos);
             return isBlockBelowSolid ? updatedPos : originPos;
         }
 
@@ -289,7 +289,7 @@ public class TrackLayer extends WorkRod
         boolean areBothFenceOrWall = areBothWall || areBothFence;
         if (!areBothFenceOrWall && areSimilar(placingBlock, block)) return true;
 
-        boolean isBlockSolid = isBlockSolidOrGlass(level, pos);
+        boolean isBlockSolid = isBlockSolidOrTransparent(level, pos);
         if (block instanceof LiquidBlock || blockState.isAir() || (!isBlockSolid && !areBothFenceOrWall)) return false;
 
         var upPos = pos.above();
@@ -339,10 +339,11 @@ public class TrackLayer extends WorkRod
                 && placingBlock instanceof BaseRailBlock;
     }
 
-    private boolean isBlockSolidOrGlass(Level level, BlockPos pos)
+    private boolean isBlockSolidOrTransparent(Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
-        return blockState.isSolidRender(level, pos) || blockState.getBlock() instanceof AbstractGlassBlock;
+        var block = blockState.getBlock();
+        return blockState.isSolidRender(level, pos) || block instanceof TransparentBlock;
     }
 
     @NotNull

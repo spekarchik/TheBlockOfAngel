@@ -5,6 +5,9 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import org.apache.commons.lang3.NotImplementedException;
+
+import java.util.List;
 
 public class ModToolMaterial implements Tier
 {
@@ -14,7 +17,6 @@ public class ModToolMaterial implements Tier
     private final int level;
     private final int enchantability;
     private final Ingredient repairIngredient;
-    private final TagKey<Block> incorrectBlocksForDrops;
 
     protected ModToolMaterial(int uses, float speed, float attackDamageBonus, int level, int enchantability, Ingredient repairIngredient)
     {
@@ -59,13 +61,13 @@ public class ModToolMaterial implements Tier
     @Override
     public Tool createToolProperties(TagKey<Block> tagKey)
     {
-        return Tier.super.createToolProperties(tagKey);
+        return new Tool(List.of(Tool.Rule.minesAndDrops(tagKey, this.getSpeed())), getSpeed(), 1);
     }
 
     @Override
     public TagKey<Block> getIncorrectBlocksForDrops()
     {
-        return incorrectBlocksForDrops;
+        throw new NotImplementedException("Not implemented [AngelBlock].ModToolMaterial.getIncorrectBlocksForDrops().");
     }
 
     public int getLevel()
