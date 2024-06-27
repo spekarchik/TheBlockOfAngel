@@ -2,6 +2,7 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.potions.PotionUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
@@ -39,6 +40,7 @@ public class GuiEvents
         }
     }
 
+    // See: ItemStack.getTooltipLines() method
     private static Component createTextComponent(int lineNumber, boolean isSubtitleFormatting)
     {
         var id = PotionRegistry.BLOCK_BREAKER_EFFECT.get().getDescriptionId() + ".desc" + lineNumber;

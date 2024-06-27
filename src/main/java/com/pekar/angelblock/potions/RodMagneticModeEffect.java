@@ -24,8 +24,8 @@ public class RodMagneticModeEffect extends MobEffect
     }
 
     @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier)
+    public boolean applyEffectTick(LivingEntity entity, int amplifier)
     {
-        // do nothing
+        return true;
     }
 }
