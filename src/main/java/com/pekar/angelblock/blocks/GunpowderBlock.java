@@ -1,5 +1,6 @@
 package com.pekar.angelblock.blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,12 +9,14 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -22,12 +25,21 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Properties;
 
 public class GunpowderBlock extends FallingBlock
 {
+    // TODO: Check this block
+    private static final MapCodec<GunpowderBlock> CODEC = simpleCodec(GunpowderBlock::new);
+
     public GunpowderBlock()
     {
-        super(BlockBehaviour.Properties.copy(Blocks.SAND).sound(SoundType.SNOW).strength(0.2F));
+        this(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).sound(SoundType.SNOW).strength(0.2F));
+    }
+
+    public GunpowderBlock(BlockBehaviour.Properties properties)
+    {
+        super(properties);
     }
 
     @Override
@@ -92,7 +104,7 @@ public class GunpowderBlock extends FallingBlock
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter blockGetter, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
     {
         components.add(getDisplayName().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
     }
@@ -100,5 +112,11 @@ public class GunpowderBlock extends FallingBlock
     private MutableComponent getDisplayName()
     {
         return Component.translatable(this.getDescriptionId() + ".desc");
+    }
+
+    @Override
+    protected MapCodec<? extends FallingBlock> codec()
+    {
+        return CODEC;
     }
 }

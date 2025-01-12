@@ -4,9 +4,9 @@ import com.pekar.angelblock.blocks.tile_entities.AngelBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -47,7 +47,7 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable BlockGetter blockGetter, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag)
     {
         for (int i = 1; i <= 17; i++)
         {

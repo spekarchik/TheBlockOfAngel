@@ -28,7 +28,7 @@ public class AngelRodBlock extends ModBlockWithDoubleHoverText implements Entity
 {
     public AngelRodBlock()
     {
-        super(BlockBehaviour.Properties.copy(Blocks.LIGHTNING_ROD) // LIGHTNING_ROD doesn't drop by hand
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHTNING_ROD) // LIGHTNING_ROD doesn't drop by hand
                 .strength(0.1F, 1200F).sound(SoundType.COPPER)
                 .lightLevel(state -> 15));
     }
