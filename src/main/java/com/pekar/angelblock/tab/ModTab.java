@@ -4,7 +4,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.Collection;
 
@@ -14,9 +16,9 @@ public abstract class ModTab
 {
     protected abstract String getTabName();
 
-    protected abstract RegistryObject<Item> getIconItem();
+    protected abstract ItemStack getIconItem();
 
-    protected abstract Collection<RegistryObject<Item>> getTabItems();
+    protected abstract Collection<Item> getTabItems();
 
     protected abstract ResourceKey<CreativeModeTab>[] getTabsBefore();
 
@@ -25,20 +27,22 @@ public abstract class ModTab
         return "itemGroup." + getTabName();
     }
 
-    public final RegistryObject<CreativeModeTab> createTab()
+    public final DeferredHolder<CreativeModeTab, CreativeModeTab> createTab()
     {
+
         return CREATIVE_MODE_TABS.register(getTabName(), () -> CreativeModeTab.builder()
-                .withTabsBefore(getTabsBefore())
                 .title(Component.translatable(getTitle()))
-                .icon(() -> getIconItem().get().getDefaultInstance())
-                .displayItems(this::addItems).build());
+                .withTabsBefore(getTabsBefore())
+                .icon(() -> getIconItem())
+                .displayItems(this::addItems)
+                .build());
     }
 
     private void addItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output)
     {
         for (var item : getTabItems())
         {
-            output.accept(item.get());
+            output.accept(item);
         }
     }
 }

@@ -11,9 +11,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class MainTab extends ModTab
 {
@@ -24,14 +25,13 @@ public class MainTab extends ModTab
     }
 
     @Override
-    protected RegistryObject<Item> getIconItem()
+    protected ItemStack getIconItem()
     {
-        var iconItem = Main.ITEMS.getEntries().stream().filter(i -> i.getId().getPath().equals(BlockRegistry.ANGEL_BLOCK.getId().getPath())).findFirst();
-        return iconItem.orElse(null);
+        return BlockRegistry.ANGEL_BLOCK.asItem().getDefaultInstance();
     }
 
     @Override
-    protected Collection<RegistryObject<Item>> getTabItems()
+    protected Collection<Item> getTabItems()
     {
         BlockRegistry.initStatic();
         ItemRegistry.initStatic();
@@ -40,7 +40,7 @@ public class MainTab extends ModTab
         ToolRegistry.initStatic();
         PotionRegistry.initStatic();
 
-        return Main.ITEMS.getEntries(); // block items are also included
+        return Main.ITEMS.getEntries().stream().map(x -> x.get()).collect(Collectors.toList()); // block items are also included
     }
 
     @Override

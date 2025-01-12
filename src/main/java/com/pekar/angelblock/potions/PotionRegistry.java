@@ -10,6 +10,8 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
 
+import java.util.Objects;
+
 public class PotionRegistry
 {
     // Mob Effects
@@ -30,7 +32,7 @@ public class PotionRegistry
 
 
     // Potions
-    public static final Holder<Potion> BLOCK_BREAKER_POTION = register("block_breaker_potion", new Potion(new MobEffectInstance(BLOCK_BREAKER_EFFECT)));
+    public static final Holder<Potion> BLOCK_BREAKER_POTION = register("block_breaker_potion", new Potion(new MobEffectInstance[]{new MobEffectInstance(BLOCK_BREAKER_EFFECT)}));
 
 
     public static void initStatic()
@@ -40,12 +42,12 @@ public class PotionRegistry
 
     private static Holder<Potion> register(String name, Potion potion)
     {
-        return Registry.registerForHolder(BuiltInRegistries.POTION, ResourceLocation.tryBuild(Main.MODID, name), potion);
+        return Registry.registerForHolder(BuiltInRegistries.POTION, Objects.requireNonNull(ResourceLocation.tryBuild(Main.MODID, name)), potion);
     }
 
     private static Holder<MobEffect> register(String name, MobEffect mobEffect)
     {
-        return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, ResourceLocation.tryBuild(Main.MODID, name), mobEffect);
+        return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Objects.requireNonNull(ResourceLocation.tryBuild(Main.MODID, name)), mobEffect);
     }
 
 }
