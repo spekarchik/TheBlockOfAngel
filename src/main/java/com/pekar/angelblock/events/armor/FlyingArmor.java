@@ -5,9 +5,12 @@ import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class FlyingArmor extends Armor
 {
@@ -52,12 +55,7 @@ public class FlyingArmor extends Armor
     }
 
     @Override
-    public void onLivingHurtEvent(LivingHurtEvent event)
-    {
-    }
-
-    @Override
-    public void onLivingAttackEvent(LivingAttackEvent event)
+    public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         if (isFreezeDamage(event.getSource()))
         {

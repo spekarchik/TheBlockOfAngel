@@ -15,9 +15,12 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class SuperArmor extends Armor
 {
@@ -88,7 +91,7 @@ public class SuperArmor extends Armor
     }
 
     @Override
-    public void onLivingHurtEvent(LivingHurtEvent event)
+    public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         DamageSource damageSource = event.getSource();
 
@@ -96,40 +99,6 @@ public class SuperArmor extends Armor
         {
             float realDamage = getRealDamage(event.getAmount());
             event.setAmount(realDamage);
-            event.setCanceled(realDamage <= 0);
-        }
-        else
-        {
-            boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
-            if (isFullArmorSet)
-            {
-                if (isExplosionDamage(damageSource))
-                {
-                    event.setAmount(event.getAmount() * 0.5f);
-                }
-                else
-                {
-                    var attacker = damageSource.getEntity();
-
-                    if (isBiting(attacker))
-                    {
-                        float damageAmount = event.getAmount();
-                        event.setAmount(damageAmount * 0.2F);
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onLivingAttackEvent(LivingAttackEvent event)
-    {
-        DamageSource damageSource = event.getSource();
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
-
-        if (isFireOrHotFloorDamage(damageSource))
-        {
-            float realDamage = getRealDamage(event.getAmount());
             event.setCanceled(realDamage <= 0);
         }
         else if (isFreezeDamage(damageSource))
@@ -146,30 +115,51 @@ public class SuperArmor extends Armor
             event.setCanceled(true);
             player.getEntity().removeEffect(MobEffects.WITHER);
         }
-        else if (isFullArmorSet && isLightningBoltDamage(damageSource))
+        else
         {
-            event.setCanceled(true);
-        }
-
-        if (!isFullArmorSet) return;
-        if (!(damageSource.getEntity() instanceof LivingEntity entityAttackedBy)) return;
-
-        if (isSlowMovementAffected(entityAttackedBy))
-        {
-            boolean isWitch = entityAttackedBy instanceof Witch;
-            float distance = player.getEntity().distanceTo(entityAttackedBy);
-            if (!isWitch && distance > 2f)
+            boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
+            if (isFullArmorSet)
             {
-                entityAttackedBy.setSecondsOnFire(5);
-            }
-            else
-            {
-                entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
-            }
-        }
+                if (isExplosionDamage(damageSource))
+                {
+                    event.setAmount(event.getAmount() * 0.5f);
+                }
+                else if (isLightningBoltDamage(damageSource))
+                {
+                    event.setCanceled(true);
+                }
+                else
+                {
+                    var attacker = damageSource.getEntity();
 
-        var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
-        entityAttackedBy.addEffect(effect);
+                    if (isBiting(attacker))
+                    {
+                        float damageAmount = event.getAmount();
+                        event.setAmount(damageAmount * 0.2F);
+                    }
+                }
+
+                if (!(damageSource.getEntity() instanceof LivingEntity entityAttackedBy)) return;
+
+                if (isSlowMovementAffected(entityAttackedBy))
+                {
+                    boolean isWitch = entityAttackedBy instanceof Witch;
+                    float distance = player.getEntity().distanceTo(entityAttackedBy);
+                    if (!isWitch && distance > 2f)
+                    {
+                        entityAttackedBy.setSecondsOnFire(5);
+                    }
+                    else
+                    {
+                        entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
+                    }
+                }
+
+                var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
+                entityAttackedBy.addEffect(effect);
+            }
+
+        }
     }
 
     @Override
@@ -324,7 +314,7 @@ public class SuperArmor extends Armor
     }
 
     @Override
-    public void onBreakSpeed(net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed event)
+    public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
         if (jumpEffect.isEffectOn())
         {

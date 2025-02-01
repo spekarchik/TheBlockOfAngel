@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
+import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
@@ -7,6 +8,7 @@ import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -16,9 +18,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Witch;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+
+import static net.minecraft.core.registries.Registries.DAMAGE_TYPE;
 
 public class LimoniteArmor extends Armor
 {
@@ -77,7 +84,7 @@ public class LimoniteArmor extends Armor
     }
 
     @Override
-    public void onLivingHurtEvent(LivingHurtEvent event)
+    public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         var damageSource = event.getSource();
         var attacker = damageSource.getEntity();
@@ -94,12 +101,6 @@ public class LimoniteArmor extends Armor
         {
             event.setAmount(event.getAmount() * 2F);
         }
-    }
-
-    @Override
-    public void onLivingAttackEvent(LivingAttackEvent event)
-    {
-        DamageSource damageSource = event.getSource();
 
         if (isFreezeDamage(damageSource))
         {
@@ -122,7 +123,8 @@ public class LimoniteArmor extends Armor
             float distance = player.getEntity().distanceTo(entityAttackedBy);
             if (!isWitch && distance > 2f)
             {
-                entityAttackedBy.setSecondsOnFire(5);
+                entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND); // TODO: Test if an attacker is firing after attacking you
+                //entityAttackedBy.setSecondsOnFire(5);
             }
             else
             {
@@ -242,7 +244,7 @@ public class LimoniteArmor extends Armor
     }
 
     @Override
-    public void onBreakSpeed(net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed event)
+    public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
         if (jumpEffect.isEffectOn())
         {

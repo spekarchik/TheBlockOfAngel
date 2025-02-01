@@ -4,14 +4,16 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class RendelithicArmor extends Armor
 {
@@ -45,23 +47,14 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
-    public void onLivingHurtEvent(LivingHurtEvent event)
+    public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
-        if (isFireDamage(event.getSource()))
-        {
-            float realDamage = getRealDamage(event.getAmount());
-            event.setAmount(realDamage);
-            event.setCanceled(realDamage <= 0);
-        }
-    }
+        var damageSource = event.getSource();
 
-    @Override
-    public void onLivingAttackEvent(LivingAttackEvent event)
-    {
-        DamageSource damageSource = event.getSource();
         if (isFireDamage(damageSource))
         {
             float realDamage = getRealDamage(event.getAmount());
+            event.setAmount(realDamage);
             event.setCanceled(realDamage <= 0);
         }
         else
@@ -143,7 +136,7 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
-    public void onBreakSpeed(net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed event)
+    public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
         if (player.getEntity().isInWater())
         {
