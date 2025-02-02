@@ -2,6 +2,7 @@ package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EquipmentSlot;
 
@@ -11,7 +12,7 @@ abstract class ArmorEffect implements IArmorEffect
 {
     protected IPlayer player;
     protected IArmor armor;
-    protected MobEffect effectType;
+    protected Holder<MobEffect> effectType;
     protected boolean isOn;
     protected boolean wasAvailable;
     protected boolean isAvailable;
@@ -19,7 +20,7 @@ abstract class ArmorEffect implements IArmorEffect
     protected boolean showIcon;
     private BiPredicate<IPlayer, IArmor> availabilityPredicate = (p, a) -> false;
 
-    protected ArmorEffect(IPlayer player, IArmor armor, MobEffect effectType, int defaultAmplifier)
+    protected ArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
         this.player = player;
         this.armor = armor;
@@ -143,7 +144,7 @@ abstract class ArmorEffect implements IArmorEffect
     }
 
     @Override
-    public final MobEffect getEffect()
+    public final Holder<MobEffect> getEffect()
     {
         return effectType;
     }

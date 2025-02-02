@@ -2,6 +2,7 @@ package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EquipmentSlot;
 
@@ -35,5 +36,5 @@ public interface IArmorEffect
     IArmorEffect availableIfSlotsSet(EquipmentSlot ...slot);
     IArmorEffect showIcon();
 
-    MobEffect getEffect();
+    Holder<MobEffect> getEffect();
 }

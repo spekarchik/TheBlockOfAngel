@@ -2,11 +2,12 @@ package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 
 abstract class PermanentArmorEffect extends ArmorEffect
 {
-    public PermanentArmorEffect(IPlayer player, IArmor armor, MobEffect effectType, int defaultAmplifier)
+    public PermanentArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
         super(player, armor, effectType, defaultAmplifier);
     }

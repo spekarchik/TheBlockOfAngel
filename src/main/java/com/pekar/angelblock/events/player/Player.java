@@ -5,6 +5,7 @@ import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.potions.PotionUtils;
 import com.pekar.angelblock.tools.ToolRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -169,37 +170,37 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean isEffectActive(MobEffect effect)
+    public boolean isEffectActive(Holder<MobEffect> effect)
     {
         return entity.hasEffect(effect);
     }
 
     @Override
-    public void setEffect(MobEffect effect, int amplifier)
+    public void setEffect(Holder<MobEffect> effect, int amplifier)
     {
         setEffect(effect, PotionUtils.DURATION_UNLIMITED, amplifier);
     }
 
     @Override
-    public void setEffect(MobEffect effect, int amplifier, boolean showIcon)
+    public void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon)
     {
         setEffect(effect, PotionUtils.DURATION_UNLIMITED, amplifier, showIcon);
     }
 
     @Override
-    public void setEffect(MobEffect effect, int duration, int amplifier)
+    public void setEffect(Holder<MobEffect> effect, int duration, int amplifier)
     {
         entity.addEffect(new MobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, false /*showIcon*/));
     }
 
     @Override
-    public void setEffect(MobEffect effect, int duration, int amplifier, boolean showIcon)
+    public void setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
     {
         entity.addEffect(new MobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/));
     }
 
     @Override
-    public void clearEffect(MobEffect effect)
+    public void clearEffect(Holder<MobEffect> effect)
     {
         entity.removeEffect(effect);
     }

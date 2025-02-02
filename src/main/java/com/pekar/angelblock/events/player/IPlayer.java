@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.player;
 
 import com.pekar.angelblock.events.armor.IArmor;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -22,12 +23,13 @@ public interface IPlayer extends IPlayerEvents
     boolean areBootsModifiedWithSeaPower(IArmor armor);
     void updateArmorUsed();
 
-    boolean isEffectActive(MobEffect effect);
-    void setEffect(MobEffect effect, int amplifier);
-    void setEffect(MobEffect effect, int amplifier, boolean showIcon);
-    void setEffect(MobEffect effect, int duration, int amplifier);
-    void setEffect(MobEffect effect, int duration, int amplifier, boolean showIcon);
-    void clearEffect(MobEffect effect);
+    boolean isEffectActive(Holder<MobEffect> effect);
+
+    void setEffect(Holder<MobEffect> effect, int amplifier);
+    void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon);
+    void setEffect(Holder<MobEffect> effect, int duration, int amplifier);
+    void setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon);
+    void clearEffect(Holder<MobEffect> effect);
 
     String getPlayerName();
     Player getEntity();
