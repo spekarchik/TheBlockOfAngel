@@ -1,5 +1,6 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
+import com.pekar.angelblock.Main;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
@@ -8,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlockEntity>
 {
-    private static final String DamageTagName = "AngelRodDamage";
+    private static final String DamageTagName = Main.MODID + ":AngelRodDamage";
     private int damage;
 
     public AngelRodBlockEntity(BlockPos blockPos, BlockState blockState)
@@ -28,40 +29,27 @@ public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlock
         return entity instanceof Enemy;
     }
 
-    @Override
-    public void load(CompoundTag compoundTag)
+    protected void loadModTag(CompoundTag tag)
     {
-        super.load(compoundTag);
-        damage = compoundTag.getInt(DamageTagName);
+        damage = tag.getInt(DamageTagName);
     }
 
-    @Override
-    protected void saveAdditional(CompoundTag compoundTag)
+    protected void saveModTag(CompoundTag tag)
     {
-        super.saveAdditional(compoundTag);
-        compoundTag.putInt(DamageTagName, damage);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag()
-    {
-        var tag = new CompoundTag();
         tag.putInt(DamageTagName, damage);
-        return tag;
     }
 
     public void setDamage(int damage)
     {
         this.damage = damage;
-        var tag = getUpdateTag();
-        tag.putInt(DamageTagName, damage);
-        saveAdditional(tag);
+        var tag = new CompoundTag();
+        saveModTag(tag);
     }
 
     public int getDamage()
     {
-        var tag = getUpdateTag();
-        load(tag);
-        return tag.getInt(DamageTagName);
+        //var tag = new CompoundTag();
+        //saveModTag(tag);
+        return damage; // TODO: Check if we need to save damage to tag
     }
 }

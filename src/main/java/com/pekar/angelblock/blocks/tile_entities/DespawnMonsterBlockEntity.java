@@ -1,6 +1,9 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
+import com.pekar.angelblock.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -12,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends BlockEntity implements BlockEntityTicker<T>
 {
     private int counter;
+    private final Utils utils = new Utils();
 
     public DespawnMonsterBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState)
     {
@@ -28,6 +32,32 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
         }
     }
 
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    {
+        super.loadAdditional(tag, registries);
+        loadModTag(tag);
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    {
+        super.saveAdditional(tag, registries);
+        saveModTag(tag);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
+    {
+        var tag = new CompoundTag();
+        saveModTag(tag);
+        return tag;
+    }
+
+    protected abstract void loadModTag(CompoundTag tag);
+
+    protected abstract void saveModTag(CompoundTag tag);
+
     protected abstract double getEffectiveRadius();
 
     protected abstract boolean needToDespawnEntity(Entity entity);
@@ -36,8 +66,9 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
     {
         if (level.isClientSide()) return;
 
+
         var monsters = level.getEntities((LivingEntity)null,
-                blockEntity.getRenderBoundingBox().inflate(getEffectiveRadius()),
+                utils.getRenderBoundingBox(blockEntity.getBlockPos()).inflate(getEffectiveRadius()),
                 this::needToDespawnEntity);
 
         for (Entity entity : monsters)

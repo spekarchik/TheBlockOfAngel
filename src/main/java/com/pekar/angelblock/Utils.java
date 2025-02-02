@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.AABB;
 
 import java.util.Random;
 
@@ -446,6 +447,11 @@ public class Utils
                     case ImportantNotice -> initialComponent.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.WHITE);
                     default -> initialComponent.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
                 };
+    }
+
+    public AABB getRenderBoundingBox(BlockPos pos)
+    {
+        return new AABB(pos);
     }
 
     private void setBlock(Player player, BlockPos pos, Block block)

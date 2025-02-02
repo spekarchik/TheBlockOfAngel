@@ -1,5 +1,6 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
@@ -21,6 +22,8 @@ import java.util.Set;
 
 public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity>
 {
+    private static final String MonsterFilterTagName = Main.MODID + ":MonsterFilter";
+
     private final Set<IMonster> monstersToIgnore = new HashSet<>();
     private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
     private final Map<Byte, IMonster> monstersById = new HashMap<>();
@@ -97,12 +100,11 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     }
 
     @Override
-    public void load(CompoundTag compoundTag)
+    protected void loadModTag(CompoundTag tag)
     {
-        super.load(compoundTag);
         monstersToIgnore.clear();
 
-        byte[] array = compoundTag.getByteArray("MonsterFilter");
+        byte[] array = tag.getByteArray(MonsterFilterTagName);
         for (var monsterId : array)
         {
             monstersToIgnore.add(monstersById.get(monsterId));
@@ -110,22 +112,7 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compoundTag)
-    {
-        super.saveAdditional(compoundTag);
-
-        saveMonsterFilter(compoundTag);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag()
-    {
-        var compoundTag = new CompoundTag();
-        saveMonsterFilter(compoundTag);
-        return compoundTag;
-    }
-
-    private void saveMonsterFilter(CompoundTag compoundTag)
+    protected void saveModTag(CompoundTag tag)
     {
         byte[] array = new byte[monstersToIgnore.size()];
 
@@ -135,7 +122,7 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
             array[i++] = monster.getId();
         }
 
-        compoundTag.putByteArray("MonsterFilter", array);
+        tag.putByteArray(MonsterFilterTagName, array);
     }
 
     private void addToMonsterMap(IMonster monster)
