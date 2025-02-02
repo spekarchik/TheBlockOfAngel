@@ -28,6 +28,8 @@ public class Utils
     public Utils()
     {}
 
+    public static final int TICKS_PER_SECOND = 20;
+
     public static Random random = new Random();
 
     public static Direction getDirection(LivingEntity entityLiving, BlockPos pos)
