@@ -21,7 +21,7 @@ public class KeyPressedPacket extends ClientToServerPacket
     }
 
     @Override
-    protected void onReceive(ServerPlayer serverPlayer)
+    public void onReceive(ServerPlayer serverPlayer)
     {
         for (IArmor armor : PlayerManager.instance().getPlayerByEntityName(serverPlayer.getName().getString()).getArmorTypesUsed())
         {
@@ -30,19 +30,19 @@ public class KeyPressedPacket extends ClientToServerPacket
     }
 
     @Override
-    protected int getPacketId()
+    public int getPacketId()
     {
         return Packets.KeyPressedPacketId;
     }
 
     @Override
-    protected Packet create(FriendlyByteBuf buffer)
+    public Packet decode(FriendlyByteBuf buffer)
     {
         return new KeyPressedPacket(buffer.readUtf());
     }
 
     @Override
-    protected void encode(FriendlyByteBuf buffer)
+    public void encode(FriendlyByteBuf buffer)
     {
         buffer.writeUtf(pressedKeyName);
     }

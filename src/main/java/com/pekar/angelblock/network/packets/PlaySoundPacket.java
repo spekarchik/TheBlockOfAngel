@@ -29,13 +29,13 @@ public class PlaySoundPacket extends ServerToClientPacket
     }
 
     @Override
-    protected int getPacketId()
+    public int getPacketId()
     {
         return Packets.PlaySoundPacketId;
     }
 
     @Override
-    protected Packet create(FriendlyByteBuf buffer)
+    public Packet decode(FriendlyByteBuf buffer)
     {
         var soundType = SoundType.getByIndex(buffer.readInt());
         var soundEvent = SoundEvent.createVariableRangeEvent(buffer.readResourceLocation());
@@ -43,14 +43,14 @@ public class PlaySoundPacket extends ServerToClientPacket
     }
 
     @Override
-    protected void encode(FriendlyByteBuf buffer)
+    public void encode(FriendlyByteBuf buffer)
     {
         buffer.writeInt(SoundType.getIndex(soundType));
         buffer.writeResourceLocation(soundEvent.getLocation());
     }
 
     @Override
-    protected void onReceive()
+    public void onReceive()
     {
         var sound = getSound(soundType);
         if (sound == null) return;

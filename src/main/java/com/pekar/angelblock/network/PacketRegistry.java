@@ -3,7 +3,6 @@ package com.pekar.angelblock.network;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.network.packets.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.ChannelBuilder;
 import net.minecraftforge.network.SimpleChannel;
 
 public final class PacketRegistry
@@ -28,7 +27,7 @@ public final class PacketRegistry
 
     private static <T extends Packet> void registerPacket(T packet)
     {
-        var packetContainer = new PacketContainer<>(packet);
+        var packetContainer = new PacketInfoProvider<>(packet);
         INSTANCE.messageBuilder(packetContainer.getType(), packetContainer.getPacketId(), packetContainer.getDirection())
                 .encoder(packetContainer.getEncoder()).decoder(packetContainer.getDecoder())
                 .consumerNetworkThread(packetContainer.getPacketHandler()).add();

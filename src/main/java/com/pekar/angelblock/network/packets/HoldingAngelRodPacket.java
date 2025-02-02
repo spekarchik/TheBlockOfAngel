@@ -15,7 +15,7 @@ public class HoldingAngelRodPacket extends ClientToServerPacket
     private static final double EFFECTIVE_RADIUS = 20.0;
 
     @Override
-    protected void onReceive(ServerPlayer serverPlayer)
+    public void onReceive(ServerPlayer serverPlayer)
     {
         String playerName = serverPlayer.getName().getString();
         IPlayer player = PlayerManager.instance().getPlayerByEntityName(playerName);
@@ -32,13 +32,13 @@ public class HoldingAngelRodPacket extends ClientToServerPacket
     }
 
     @Override
-    protected int getPacketId()
+    public int getPacketId()
     {
         return Packets.HoldAngelPacketId;
     }
 
     @Override
-    protected Packet create(FriendlyByteBuf buffer)
+    public Packet decode(FriendlyByteBuf buffer)
     {
         return new HoldingAngelRodPacket();
     }

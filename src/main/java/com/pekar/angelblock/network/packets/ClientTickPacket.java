@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 public class ClientTickPacket extends ClientToServerPacket
 {
     @Override
-    protected void onReceive(ServerPlayer serverPlayer)
+    public void onReceive(ServerPlayer serverPlayer)
     {
         String playerName = serverPlayer.getName().getString();
         IPlayer player = PlayerManager.instance().getPlayerByEntityName(playerName);
@@ -32,13 +32,13 @@ public class ClientTickPacket extends ClientToServerPacket
     }
 
     @Override
-    protected int getPacketId()
+    public int getPacketId()
     {
         return Packets.ClientTickPacketId;
     }
 
     @Override
-    protected Packet create(FriendlyByteBuf buffer)
+    public Packet decode(FriendlyByteBuf buffer)
     {
         return new ClientTickPacket();
     }

@@ -6,27 +6,25 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ClientToServerPacket extends Packet
+public abstract class ClientToServerPacket extends Packet implements IClientToServerPacket
 {
     protected ClientToServerPacket()
     {}
 
-    public void sendToServer()
+    public final void sendToServer()
     {
         PacketRegistry.INSTANCE.send(this, PacketDistributor.SERVER.noArg());
     }
 
     @Override
-    protected final NetworkDirection getDirection()
+    public final boolean isServerToClient()
     {
-        return NetworkDirection.PLAY_TO_SERVER;
+        return false;
     }
 
     @Override
-    protected final void onReceive(@NotNull CustomPayloadEvent.Context context)
+    protected final <TCtx> void onReceive(@NotNull ContextContainer<TCtx> contextContainer)
     {
-        onReceive(context.getSender());
+        onReceive(contextContainer.getContext().getSender());
     }
-
-    protected abstract void onReceive(ServerPlayer serverPlayer);
 }

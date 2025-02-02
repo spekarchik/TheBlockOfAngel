@@ -7,7 +7,7 @@ import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 
-public abstract class ServerToClientPacket extends Packet
+public abstract class ServerToClientPacket extends Packet implements IServerToClientPacket
 {
     protected ServerToClientPacket()
     {}
@@ -28,16 +28,14 @@ public abstract class ServerToClientPacket extends Packet
     }
 
     @Override
-    protected final NetworkDirection getDirection()
+    public final boolean isServerToClient()
     {
-        return NetworkDirection.PLAY_TO_CLIENT;
+        return true;
     }
 
     @Override
-    protected final void onReceive(CustomPayloadEvent.Context ctx)
+    protected final <TCtx> void onReceive(ContextContainer<TCtx> contextContainer)
     {
         onReceive();
     }
-
-    protected abstract void onReceive();
 }

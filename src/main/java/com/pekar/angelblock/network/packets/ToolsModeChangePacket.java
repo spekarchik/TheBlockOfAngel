@@ -13,13 +13,13 @@ import net.minecraft.world.effect.MobEffectInstance;
 public class ToolsModeChangePacket extends ClientToServerPacket
 {
     @Override
-    protected void onReceive(ServerPlayer player)
+    public void onReceive(ServerPlayer player)
     {
-        boolean isAdvancedModeActive = player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get());
-        boolean isSwordExplosionModeActive = player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get());
-        boolean isSwordFireModeActive = player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get());
-        boolean isSwordWebModeActive = player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT.get());
-        boolean isRodMagneticModeActive = player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get());
+        boolean isAdvancedModeActive = player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT);
+        boolean isSwordExplosionModeActive = player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT);
+        boolean isSwordFireModeActive = player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT);
+        boolean isSwordWebModeActive = player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT);
+        boolean isRodMagneticModeActive = player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT);
 
         var heldItem = player.getMainHandItem().getItem();
 
@@ -29,13 +29,13 @@ public class ToolsModeChangePacket extends ClientToServerPacket
             {
                 if (!isAdvancedModeActive)
                 {
-                    var effect = new MobEffectInstance(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get(),
+                    var effect = new MobEffectInstance(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT,
                             PotionUtils.DURATION_UNLIMITED, 0, false, true);
                     player.addEffect(effect);
                 }
                 else
                 {
-                    player.removeEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get());
+                    player.removeEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT);
                 }
                 return;
             }
@@ -45,45 +45,45 @@ public class ToolsModeChangePacket extends ClientToServerPacket
 
                 if (isSwordWebModeActive)
                 {
-                    player.removeEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT.get());
+                    player.removeEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT);
 
                     if (sword.hasExplosionMode())
                     {
-                        var effect = new MobEffectInstance(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get(),
+                        var effect = new MobEffectInstance(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT,
                                 PotionUtils.DURATION_UNLIMITED, 0, false, true);
                         player.addEffect(effect);
                     }
                 }
                 else if (isSwordExplosionModeActive)
                 {
-                    player.removeEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get());
+                    player.removeEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT);
 
                     if (sword.hasFireMode())
                     {
-                        var effect = new MobEffectInstance(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get(),
+                        var effect = new MobEffectInstance(PotionRegistry.SWORD_FIRE_MODE_EFFECT,
                                 PotionUtils.DURATION_UNLIMITED, 0, false, true);
                         player.addEffect(effect);
                     }
                 }
                 else if (isSwordFireModeActive)
                 {
-                    player.removeEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get());
+                    player.removeEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT);
                 }
                 else if (sword.hasWebMode())
                 {
-                    var effect = new MobEffectInstance(PotionRegistry.SWORD_WEB_MODE_EFFECT.get(),
+                    var effect = new MobEffectInstance(PotionRegistry.SWORD_WEB_MODE_EFFECT,
                             PotionUtils.DURATION_UNLIMITED, 0, false, true);
                     player.addEffect(effect);
                 }
                 else if (sword.hasExplosionMode())
                 {
-                    var effect = new MobEffectInstance(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get(),
+                    var effect = new MobEffectInstance(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT,
                             PotionUtils.DURATION_UNLIMITED, 0, false, true);
                     player.addEffect(effect);
                 }
                 else if (sword.hasFireMode())
                 {
-                    var effect = new MobEffectInstance(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get(),
+                    var effect = new MobEffectInstance(PotionRegistry.SWORD_FIRE_MODE_EFFECT,
                             PotionUtils.DURATION_UNLIMITED, 0, false, true);
                     player.addEffect(effect);
                 }
@@ -94,42 +94,42 @@ public class ToolsModeChangePacket extends ClientToServerPacket
             {
                 if (!isRodMagneticModeActive)
                 {
-                    var effect = new MobEffectInstance(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get(),
+                    var effect = new MobEffectInstance(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT,
                             PotionUtils.DURATION_UNLIMITED, 0, false, true);
                     player.addEffect(effect);
                 }
                 else
                 {
-                    player.removeEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get());
+                    player.removeEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT);
                 }
                 return;
             }
         }
 
         if (isAdvancedModeActive)
-            player.removeEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get());
+            player.removeEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT);
 
         if (isSwordExplosionModeActive)
-            player.removeEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get());
+            player.removeEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT);
 
         if (isSwordFireModeActive)
-            player.removeEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get());
+            player.removeEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT);
 
         if (isSwordWebModeActive)
-            player.removeEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT.get());
+            player.removeEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT);
 
         if (isRodMagneticModeActive)
-            player.removeEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get());
+            player.removeEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT);
     }
 
     @Override
-    protected int getPacketId()
+    public int getPacketId()
     {
         return Packets.ToolsModeChangePacketId;
     }
 
     @Override
-    protected Packet create(FriendlyByteBuf buffer)
+    public Packet decode(FriendlyByteBuf buffer)
     {
         return new ToolsModeChangePacket();
     }

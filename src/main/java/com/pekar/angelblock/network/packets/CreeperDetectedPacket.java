@@ -9,19 +9,19 @@ import net.minecraft.sounds.SoundEvents;
 public class CreeperDetectedPacket extends ServerToClientPacket
 {
     @Override
-    protected void onReceive()
+    public void onReceive()
     {
         Minecraft.getInstance().player.playSound(SoundEvents.NOTE_BLOCK_BELL.value(), 1.0F, 5.0F);
     }
 
     @Override
-    protected int getPacketId()
+    public int getPacketId()
     {
         return Packets.CreeperDetectedPacketId;
     }
 
     @Override
-    protected Packet create(FriendlyByteBuf buffer)
+    public Packet decode(FriendlyByteBuf buffer)
     {
         return new CreeperDetectedPacket();
     }

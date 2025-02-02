@@ -7,11 +7,11 @@ import net.minecraftforge.network.NetworkDirection;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-class PacketContainer<T extends Packet>
+class PacketInfoProvider<T extends Packet>
 {
     private final T packet;
 
-    PacketContainer(T packet)
+    PacketInfoProvider(T packet)
     {
         this.packet = packet;
     }
@@ -28,7 +28,7 @@ class PacketContainer<T extends Packet>
 
     public NetworkDirection getDirection()
     {
-        return packet.getDirection();
+        return packet.isServerToClient() ? NetworkDirection.PLAY_TO_CLIENT : NetworkDirection.PLAY_TO_SERVER;
     }
 
     public BiConsumer<T, FriendlyByteBuf> getEncoder()
@@ -38,11 +38,11 @@ class PacketContainer<T extends Packet>
 
     public Function<FriendlyByteBuf, T> getDecoder()
     {
-        return buffer -> (T)packet.create(buffer);
+        return buffer -> (T)packet.decode(buffer);
     }
 
     public BiConsumer<T, CustomPayloadEvent.Context> getPacketHandler()
     {
-        return Packet::handlePacket;
+        return (packet, ctx) -> packet.handlePacket(new ContextContainer<>(ctx));
     }
 }
