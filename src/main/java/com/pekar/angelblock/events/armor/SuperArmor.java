@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
+import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
@@ -147,7 +148,8 @@ public class SuperArmor extends Armor
                     float distance = player.getEntity().distanceTo(entityAttackedBy);
                     if (!isWitch && distance > 2f)
                     {
-                        entityAttackedBy.setSecondsOnFire(5);
+                        entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND); // TODO: Test if an attacker is firing after attacking you
+                        //entityAttackedBy.setSecondsOnFire(5);
                     }
                     else
                     {
