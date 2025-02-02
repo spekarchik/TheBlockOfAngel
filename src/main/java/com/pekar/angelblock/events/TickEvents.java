@@ -1,17 +1,15 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 public class TickEvents implements IEventHandler
 {
     @SubscribeEvent
-    public void onWorldTickEvent(TickEvent.LevelTickEvent event)
+    public void onWorldTickEvent(LevelTickEvent event)
     {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (event.side != LogicalSide.SERVER) return;
+        if (event.getLevel().isClientSide) return;
 
         BlockCleaner.decrementOrRemove();
     }

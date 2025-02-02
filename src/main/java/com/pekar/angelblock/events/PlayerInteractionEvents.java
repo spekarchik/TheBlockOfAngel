@@ -12,11 +12,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.util.TriState;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,7 +30,7 @@ public class PlayerInteractionEvents implements IEventHandler
     private static final Map<BlockPos, ILivingDeathEventHandler> livingDeathEventListeners = new ConcurrentHashMap<>();
 
     @SubscribeEvent
-    public void onLivingHurtEvent(LivingHurtEvent event)
+    public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         LivingEntity entity = event.getEntity();
         IPlayer player = playerBasic.getPlayerByEntityName(entity.getName().getString());
@@ -36,18 +39,6 @@ public class PlayerInteractionEvents implements IEventHandler
         for (IArmor armor : player.getArmorTypesUsed())
         {
             armor.onLivingHurtEvent(event);
-        }
-    }
-
-    @SubscribeEvent
-    public void onLivingAttackEvent(LivingAttackEvent event)
-    {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getString());
-        if (player == null) return;
-
-        for (IArmor armor : player.getArmorTypesUsed())
-        {
-            armor.onLivingAttackEvent(event);
         }
     }
 
@@ -98,7 +89,6 @@ public class PlayerInteractionEvents implements IEventHandler
                     player.drop(itemStack2, false);
                     player.drop(itemStack3, false);
 
-                    event.setResult(Event.Result.ALLOW);
                     return;
                 }
                 else
@@ -107,7 +97,6 @@ public class PlayerInteractionEvents implements IEventHandler
                     itemStack.setDamageValue(angelRodBlockEntity.getDamage());
                     player.drop(itemStack, true);
 
-                    event.setResult(Event.Result.ALLOW);
                     return;
                 }
             }
@@ -216,14 +205,14 @@ public class PlayerInteractionEvents implements IEventHandler
                     if (!isClientSide)
                         angelBlockEntity.resetFilter(player);
 
-                    event.setUseItem(Event.Result.ALLOW);
+                    event.setUseItem(TriState.TRUE);
                 }
                 else
                 {
                     if (!isClientSide)
                         angelBlockEntity.addMonsterToFilter(interactionItem, player);
 
-                    event.setUseItem(Event.Result.ALLOW);
+                    event.setUseItem(TriState.TRUE);
                 }
             }
         }
@@ -240,7 +229,7 @@ public class PlayerInteractionEvents implements IEventHandler
 
                 var success = devilBlockEntity.spawnMonster(interactionItem, player, interactionItemStack);
 
-                event.setUseItem(success ? Event.Result.ALLOW : Event.Result.DEFAULT);
+                event.setUseItem(success ? TriState.TRUE : TriState.DEFAULT);
             }
         }
     }

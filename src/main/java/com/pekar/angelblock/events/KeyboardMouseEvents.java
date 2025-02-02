@@ -5,16 +5,16 @@ import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.packets.KeyPressedPacket;
 import com.pekar.angelblock.network.packets.ToolsModeChangePacket;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.InputEvent;
 
 import java.time.Clock;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class KeyboardMouseEvents
 {
     private static final Map<String, Long> lastTime = new HashMap<>();

@@ -2,17 +2,16 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.potions.PotionRegistry;
-import com.pekar.angelblock.potions.PotionUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
-@Mod.EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
 public class GuiEvents
 {
     public static void initStatic()
@@ -24,12 +23,12 @@ public class GuiEvents
     public static void onItemTooltipEvent(ItemTooltipEvent event)
     {
         var itemStack = event.getItemStack();
-        if (itemStack.getItem() == Items.SPLASH_POTION)
+        var item = itemStack.getItem();
+        if (item == Items.SPLASH_POTION)
         {
-            var potion = PotionUtils.getPotion(itemStack);
-            var effects = potion.getEffects();
-            if (!effects.isEmpty() &&
-                    effects.stream().anyMatch(x -> x.getEffect().getDescriptionId().equals(PotionRegistry.BLOCK_BREAKER_EFFECT.get().getDescriptionId())))
+            var potionContents = itemStack.get(DataComponents.POTION_CONTENTS); // see PotionItem.appendHoverText()
+
+            if (potionContents != null && potionContents.is(PotionRegistry.BLOCK_BREAKER_POTION))
             {
                 var tooltip = event.getToolTip();
                 for (int i = 1; i <= 17; i++)
@@ -43,7 +42,7 @@ public class GuiEvents
     // See: ItemStack.getTooltipLines() method
     private static Component createTextComponent(int lineNumber, boolean isSubtitleFormatting)
     {
-        var id = PotionRegistry.BLOCK_BREAKER_EFFECT.get().getDescriptionId() + ".desc" + lineNumber;
+        var id = PotionRegistry.BLOCK_BREAKER_EFFECT.getRegisteredName() + ".desc" + lineNumber; // TODO: Check if it corresponds to lang key
         var component = Component.translatable(id).withStyle(ChatFormatting.GRAY);
         if (isSubtitleFormatting)
             component = component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);

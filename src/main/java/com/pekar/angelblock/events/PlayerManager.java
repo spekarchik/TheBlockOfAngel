@@ -6,15 +6,15 @@ import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.items.ItemRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
-import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -87,7 +87,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     }
 
     @SubscribeEvent
-    public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event)
+    public void onPlayerClone(PlayerEvent.Clone event)
     {
         var entity = event.getEntity();
         IPlayer player = players.get(entity.getName().getString());
@@ -164,7 +164,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         }
     }
 
-    private void removeEffectIfHoldItem(net.minecraft.world.entity.player.Player player, MobEffect effect, ItemStack slotItemStack, ItemStack offHandItemStack, Item holdItemToCheck)
+    private void removeEffectIfHoldItem(net.minecraft.world.entity.player.Player player, Holder<MobEffect> effect, ItemStack slotItemStack, ItemStack offHandItemStack, Item holdItemToCheck)
     {
         if (!player.hasEffect(effect)) return;
 

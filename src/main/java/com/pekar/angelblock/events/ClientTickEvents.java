@@ -4,15 +4,15 @@ import com.pekar.angelblock.Main;
 import com.pekar.angelblock.network.packets.ClientTickPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Mod.EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
 public class ClientTickEvents
 {
     private static final Map<String, Integer> tickCounter = new ConcurrentHashMap<>();
@@ -23,10 +23,8 @@ public class ClientTickEvents
     }
 
     @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event)
+    public static void onClientTick(ClientTickEvent event)
     {
-        if (event.phase != TickEvent.Phase.END) return;
-
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
 

@@ -1,7 +1,7 @@
 package com.pekar.angelblock.events;
 
 import net.minecraft.core.BlockPos;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 public interface ILivingDeathEventHandler
 {

@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events;
 
-import net.minecraftforge.common.MinecraftForge;
+import static net.neoforged.neoforge.common.NeoForge.EVENT_BUS;
 
 public class EventRegistry
 {
@@ -15,6 +15,6 @@ public class EventRegistry
 
     private static void register(IEventHandler eventHandler)
     {
-        MinecraftForge.EVENT_BUS.register(eventHandler);
+        EVENT_BUS.register(eventHandler);
     }
 }
