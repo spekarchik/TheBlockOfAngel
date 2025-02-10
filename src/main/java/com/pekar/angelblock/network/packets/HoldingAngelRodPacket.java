@@ -32,7 +32,7 @@ public class HoldingAngelRodPacket extends ClientToServerPacket
     }
 
     @Override
-    public int getPacketId()
+    public String getPacketId()
     {
         return Packets.HoldAngelPacketId;
     }

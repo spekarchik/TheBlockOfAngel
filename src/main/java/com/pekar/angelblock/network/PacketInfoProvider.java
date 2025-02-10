@@ -1,13 +1,13 @@
 package com.pekar.angelblock.network;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.event.network.CustomPayloadEvent;
-import net.minecraftforge.network.NetworkDirection;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.codec.StreamDecoder;
+import net.minecraft.network.codec.StreamEncoder;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-
-class PacketInfoProvider<T extends Packet>
+class PacketInfoProvider<T extends Packet> implements IPacketInfoProvider<T>
 {
     private final T packet;
 
@@ -16,33 +16,36 @@ class PacketInfoProvider<T extends Packet>
         this.packet = packet;
     }
 
-    public Class<T> getType()
+    @Override
+    public CustomPacketPayload.Type<T> getType()
     {
-        return (Class<T>)packet.getClass();
+        return (CustomPacketPayload.Type<T>) packet.type();
     }
 
-    public int getPacketId()
+    @Override
+    public StreamCodec<FriendlyByteBuf, T> getStreamCodec()
     {
-        return packet.getPacketId();
+        return StreamCodec.of(getEncoder(), getDecoder());
     }
 
-    public NetworkDirection getDirection()
+    @Override
+    public IPayloadHandler<T> getHandler()
     {
-        return packet.isServerToClient() ? NetworkDirection.PLAY_TO_CLIENT : NetworkDirection.PLAY_TO_SERVER;
+        return getPacketHandler();
     }
 
-    public BiConsumer<T, FriendlyByteBuf> getEncoder()
+    private StreamEncoder<FriendlyByteBuf, T> getEncoder()
     {
-        return Packet::encode;
+        return (buffer, packet) -> packet.encode(buffer);
     }
 
-    public Function<FriendlyByteBuf, T> getDecoder()
+    private StreamDecoder<FriendlyByteBuf, T> getDecoder()
     {
         return buffer -> (T)packet.decode(buffer);
     }
 
-    public BiConsumer<T, CustomPayloadEvent.Context> getPacketHandler()
+    private IPayloadHandler<T> getPacketHandler()
     {
-        return (packet, ctx) -> packet.handlePacket(new ContextContainer<>(ctx));
+        return (packet, context) -> packet.handlePacket(context);
     }
 }

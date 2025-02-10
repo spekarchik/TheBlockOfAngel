@@ -1,10 +1,8 @@
 package com.pekar.angelblock.network;
 
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.network.CustomPayloadEvent;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.PacketDistributor;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.ServerPayloadContext;
 
 public abstract class ClientToServerPacket extends Packet implements IClientToServerPacket
 {
@@ -13,7 +11,7 @@ public abstract class ClientToServerPacket extends Packet implements IClientToSe
 
     public final void sendToServer()
     {
-        PacketRegistry.INSTANCE.send(this, PacketDistributor.SERVER.noArg());
+        PacketDistributor.sendToServer(this);
     }
 
     @Override
@@ -23,8 +21,9 @@ public abstract class ClientToServerPacket extends Packet implements IClientToSe
     }
 
     @Override
-    protected final <TCtx> void onReceive(@NotNull ContextContainer<TCtx> contextContainer)
+    protected final void onReceive(IPayloadContext context)
     {
-        onReceive(contextContainer.getContext().getSender());
+        var serverContext = (ServerPayloadContext)context;
+        onReceive(serverContext.player());
     }
 }

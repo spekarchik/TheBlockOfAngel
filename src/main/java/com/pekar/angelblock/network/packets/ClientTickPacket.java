@@ -32,7 +32,7 @@ public class ClientTickPacket extends ClientToServerPacket
     }
 
     @Override
-    public int getPacketId()
+    public String getPacketId()
     {
         return Packets.ClientTickPacketId;
     }

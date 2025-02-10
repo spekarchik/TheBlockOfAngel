@@ -1,24 +1,36 @@
 package com.pekar.angelblock.network;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.event.network.CustomPayloadEvent;
-import net.minecraftforge.network.NetworkDirection;
-import org.jetbrains.annotations.NotNull;
+import com.pekar.angelblock.Main;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public abstract class Packet implements IPacket
+public abstract class Packet implements IPacket, CustomPacketPayload
 {
+    private final Type<Packet> type = new Type<>(ResourceLocation.fromNamespaceAndPath(Main.MODID, getPacketId()));
+
     protected Packet()
     {
     }
 
-    final <TCtx> void handlePacket(@NotNull ContextContainer<TCtx> contextContainer)
+    final void handlePacket(final IPayloadContext context)
     {
-        var context = contextContainer.getContext();
-        context.enqueueWork(() -> onReceive(contextContainer));
-        context.setPacketHandled(true);
+        context.enqueueWork(() -> onReceive(context))
+                        .exceptionally(e ->
+                        {
+                            context.disconnect(Component.translatable(Main.MODID + " networking failed: ", e.getMessage()));
+                            return null;
+                        });
+    }
+
+    @Override
+    public final Type<Packet> type()
+    {
+        return type;
     }
 
     protected abstract boolean isServerToClient();
 
-    protected abstract <TCtx> void onReceive(ContextContainer<TCtx> contextContainer);
+    protected abstract void onReceive(IPayloadContext contextContainer);
 }

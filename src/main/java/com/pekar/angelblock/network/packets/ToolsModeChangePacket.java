@@ -123,7 +123,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
     }
 
     @Override
-    public int getPacketId()
+    public String getPacketId()
     {
         return Packets.ToolsModeChangePacketId;
     }

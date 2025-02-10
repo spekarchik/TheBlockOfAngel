@@ -30,7 +30,7 @@ public class KeyPressedPacket extends ClientToServerPacket
     }
 
     @Override
-    public int getPacketId()
+    public String getPacketId()
     {
         return Packets.KeyPressedPacketId;
     }

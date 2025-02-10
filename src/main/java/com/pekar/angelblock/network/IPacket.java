@@ -4,7 +4,7 @@ import net.minecraft.network.FriendlyByteBuf;
 
 public interface IPacket
 {
-    int getPacketId();
+    String getPacketId();
     default void encode(FriendlyByteBuf buffer) {}
     IPacket decode(FriendlyByteBuf buffer);
 }

@@ -1,11 +1,11 @@
 package com.pekar.angelblock.network;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.event.network.CustomPayloadEvent;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public abstract class ServerToClientPacket extends Packet implements IServerToClientPacket
 {
@@ -14,17 +14,17 @@ public abstract class ServerToClientPacket extends Packet implements IServerToCl
 
     public final void sendToPlayer(ServerPlayer player)
     {
-        PacketRegistry.INSTANCE.send(this, PacketDistributor.PLAYER.with(player));
+        PacketDistributor.sendToPlayer(player, this);
     }
 
     public final void sendToEntity(Entity entity)
     {
-        PacketRegistry.INSTANCE.send(this, PacketDistributor.TRACKING_ENTITY.with(entity));
+        PacketDistributor.sendToPlayersTrackingEntity(entity, this);
     }
 
     public final void sendToChunk(LevelChunk chunk)
     {
-        PacketRegistry.INSTANCE.send(this, PacketDistributor.TRACKING_CHUNK.with(chunk));
+        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) chunk.getLevel(), chunk.getPos(), this);
     }
 
     @Override
@@ -34,7 +34,7 @@ public abstract class ServerToClientPacket extends Packet implements IServerToCl
     }
 
     @Override
-    protected final <TCtx> void onReceive(ContextContainer<TCtx> contextContainer)
+    protected final void onReceive(IPayloadContext context)
     {
         onReceive();
     }

@@ -29,7 +29,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     }
 
     @Override
-    public int getPacketId()
+    public String getPacketId()
     {
         return Packets.PlaySoundPacketId;
     }

@@ -15,7 +15,7 @@ public class CreeperDetectedPacket extends ServerToClientPacket
     }
 
     @Override
-    public int getPacketId()
+    public String getPacketId()
     {
         return Packets.CreeperDetectedPacketId;
     }
