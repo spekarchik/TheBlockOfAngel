@@ -54,7 +54,7 @@ public class EndstonePowder extends ModItemWithDoubleHoverText
             for (var ps : blocksToTransform)
             {
                 level.setBlock(ps, Blocks.END_STONE.defaultBlockState(), 11);
-                updateNeighbors(level, ps);
+                updateNeighbors(level, ps); // TODO: check it
             }
 
             if (!blocksToTransform.isEmpty())

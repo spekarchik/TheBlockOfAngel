@@ -1,7 +1,7 @@
 package com.pekar.angelblock.potions;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.Utils;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -14,6 +14,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlockBreakerMobEffect extends MobEffect
 {
+    private final Utils utils = new Utils();
+
     protected BlockBreakerMobEffect(MobEffectCategory category, int color)
     {
         super(category, color);
@@ -74,7 +76,7 @@ public class BlockBreakerMobEffect extends MobEffect
         {
             level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);
         }
-        else if (block == Blocks.WATER && Utils.isAboveWaterBlock(level, pos))
+        else if (block == Blocks.WATER && utils.blocks.conditions.isAboveWaterBlock(level, pos))
         {
             level.setBlock(pos, Blocks.ICE.defaultBlockState(), 11);
         }
@@ -110,7 +112,7 @@ public class BlockBreakerMobEffect extends MobEffect
         {
             level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 11);
         }
-        else if (block == Blocks.SAND && Utils.isNearWaterHorizontal(level, pos))
+        else if (block == Blocks.SAND && utils.blocks.conditions.isNearWaterHorizontal(level, pos))
         {
             level.setBlock(pos, Blocks.CLAY.defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);

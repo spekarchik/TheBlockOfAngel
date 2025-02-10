@@ -1,6 +1,6 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
-import com.pekar.angelblock.Utils;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

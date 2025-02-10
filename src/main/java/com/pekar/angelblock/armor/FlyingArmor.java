@@ -1,6 +1,6 @@
 package com.pekar.angelblock.armor;
 
-import com.pekar.angelblock.Utils;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;

@@ -1,6 +1,6 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.Utils;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -19,9 +19,9 @@ public class ModItem extends Item
     protected boolean updateNeighbors(Level level, BlockPos pos)
     {
         BlockState waterBlockState = level.getBlockState(pos);
-        if (waterBlockState.getBlock() instanceof LiquidBlock liquidBlock)
+        if (waterBlockState.getBlock() instanceof LiquidBlock)
         {
-            liquidBlock.neighborChanged(waterBlockState, level, pos, liquidBlock, pos, false /* ignored */);
+            utils.notifyNeighbourChanged(waterBlockState, level, pos);
             return true;
         }
 

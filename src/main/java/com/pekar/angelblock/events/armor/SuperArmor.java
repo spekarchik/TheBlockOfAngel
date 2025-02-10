@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
-import com.pekar.angelblock.Utils;
+import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
