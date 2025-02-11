@@ -56,7 +56,7 @@ public class BlockTypes
                 || block == Blocks.SCULK_SENSOR || block == Blocks.SCULK_SHRIEKER;
     }
 
-    private boolean canBeFarmland(Block block)
+    public boolean canBeFarmland(Block block)
     {
         return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH || block == Blocks.DIRT;
     }
