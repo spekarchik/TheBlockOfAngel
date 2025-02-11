@@ -13,7 +13,6 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class RendelithicSword extends ModSword
 
         var pos = context.getClickedPos();
 
-        if (player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT.get()))
+        if (player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
         {
             if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
                     && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
@@ -60,11 +59,11 @@ public class RendelithicSword extends ModSword
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 4; i++)
         {
-            components.add(getDescription(i, i == 1 || i == 3));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 3));
         }
     }
 

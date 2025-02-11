@@ -11,18 +11,16 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class AmethystRod extends FireRod
 {
-    public AmethystRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public AmethystRod(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -104,20 +102,20 @@ public class AmethystRod extends FireRod
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         if (isEnhancedRod())
         {
             for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, false, false, false, i == 0));
+                tooltipComponents.add(getDescription(i, false, false, false, i == 0));
             }
         }
         else
         {
             for (int i = 0; i <= 12; i++)
             {
-                components.add(getDescription(i, i == 1 || i == 8, false, false, i == 12));
+                tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, false, i == 12));
             }
         }
     }

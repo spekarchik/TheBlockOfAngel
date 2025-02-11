@@ -1,76 +1,17 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Utils;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
-import net.minecraft.core.BlockPos;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.SandBlock;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.TieredItem;
 
-public abstract class ModTool extends HoeItem implements IModTool
+public abstract class ModTool extends TieredItem implements IModTool
 {
     protected final Utils utils = new Utils();
 
-    public ModTool(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public ModTool(Tier material, Properties properties)
     {
-        super(material, properties.attributes(DiggerItem.createAttributes(material, attackDamage, attackSpeed)));
-    }
-
-    protected boolean updateNeighbors(Level level, BlockPos pos)
-    {
-        BlockState waterBlockState = level.getBlockState(pos);
-        if (waterBlockState.getBlock() instanceof LiquidBlock liquidBlock)
-        {
-            liquidBlock.neighborChanged(waterBlockState, level, pos, liquidBlock, pos, false /* ignored */);
-            return true;
-        }
-
-        return false;
-    }
-
-    protected final boolean isFarmTypeBlock(Level level, BlockPos pos)
-    {
-        var block = level.getBlockState(pos).getBlock();
-        return block == Blocks.FARMLAND || canBeFarmland(block) || block instanceof SandBlock
-                || block == Blocks.GRAVEL || level.isWaterAt(pos);
-    }
-
-    protected boolean canBeFarmland(Block block)
-    {
-        return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH || block == Blocks.DIRT;
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
-    {
-        var component = getDisplayName(lineNumber);
-        return utils.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)
-    {
-        return getDescription(lineNumber, isHeader, isSubHeader, isNotice, false);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader)
-    {
-        return getDescription(lineNumber, isHeader, isSubHeader, false);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader)
-    {
-        return getDescription(lineNumber, isHeader, false);
+        super(material, properties);
     }
 
     protected int getDamage()
@@ -96,14 +37,9 @@ public abstract class ModTool extends HoeItem implements IModTool
         return false;
     }
 
-    protected MutableComponent getDisplayName(int lineNumber)
+    @Override
+    public TieredItem getTool()
     {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
-    }
-
-    protected void setBlock(Player player, BlockPos pos, Block block)
-    {
-        player.level().setBlock(pos, block.defaultBlockState(), 11);
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+        return this;
     }
 }

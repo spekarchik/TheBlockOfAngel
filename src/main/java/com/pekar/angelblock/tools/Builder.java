@@ -17,15 +17,14 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class Builder extends WorkRod
 {
-    public Builder(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public Builder(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class Builder extends WorkRod
 
         if (offHandItem instanceof BlockItem)
         {
-            boolean isMagneticMode = isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get());
+            boolean isMagneticMode = isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT);
             success = isMagneticMode
                     ? placeBlocksMagnetic(player, level, pos, context.getClickedFace())
                     : placeBlocks(player, level, pos, context.getClickedFace());
@@ -190,11 +189,11 @@ public class Builder extends WorkRod
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 6; i++)
         {
-            components.add(getDescription(i, i == 1,  i == 4 || i == 2, false, i == 6));
+            tooltipComponents.add(getDescription(i, i == 1,  i == 4 || i == 2, false, i == 6));
         }
     }
 
@@ -210,8 +209,9 @@ public class Builder extends WorkRod
 
     protected boolean isBlockCompatible(Level level, BlockState blockState, BlockPos pos)
     {
-        return !blockState.hasBlockEntity() && !(blockState.getBlock() instanceof FallingBlock)
-                && (blockState.isSolidRender(level, pos) || blockState.getBlock() instanceof AbstractGlassBlock);
+        var block = blockState.getBlock();
+        return !blockState.hasBlockEntity() && !(block instanceof FallingBlock)
+                && (blockState.isSolidRender(level, pos) || utils.blocks.types.isGlassBlock(block));
     }
 
     @Override

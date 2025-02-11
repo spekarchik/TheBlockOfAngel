@@ -14,7 +14,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class LapisHoe extends EnhancedHoe
         var blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
 
-        if (canBeFarmland(block))
+        if (utils.blocks.types.canBeFarmland(block))
         {
             if (!level.isClientSide())
             {
@@ -59,11 +58,11 @@ public class LapisHoe extends EnhancedHoe
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 12; i++)
         {
-            components.add(getDescription(i, i == 1 || i == 5 || i == 7, false, i == 3));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 5 || i == 7, false, i == 3));
         }
     }
 }

@@ -8,10 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -49,11 +47,11 @@ public final class RendelithicShovel extends EnhancedShovel
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 6; i++)
         {
-            components.add(getDescription(i, i == 1 || i == 5, false, i == 3));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 5, false, i == 3));
         }
     }
 }

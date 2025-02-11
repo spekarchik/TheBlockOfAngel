@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
@@ -19,15 +18,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class FireRod extends MarineRod
 {
-    public FireRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public FireRod(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -36,7 +34,7 @@ public class FireRod extends MarineRod
         var player = context.getPlayer();
         var level = player.level();
 
-        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
+        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
             return super.useOn(context);
 
         var itemStack = player.getItemInHand(context.getHand());
@@ -68,7 +66,7 @@ public class FireRod extends MarineRod
                     if (!isClientSide)
                     {
                         level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
-                        updateNeighbors(level, upPos);
+                        utils.blocks.transformations.updateNeighbors(level, upPos); // TODO: Check if it works
                         damageItemIfSurvival(player, level, pos, blockState);
                         new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
                     }
@@ -289,20 +287,20 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         if (isEnhancedRod())
         {
             for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, false, false, false, i == 0));
+                tooltipComponents.add(getDescription(i, false, false, false, i == 0));
             }
         }
         else
         {
             for (int i = 0; i <= 13; i++)
             {
-                components.add(getDescription(i, i == 1 || i == 6, false, false, i == 13));
+                tooltipComponents.add(getDescription(i, i == 1 || i == 6, false, false, i == 13));
             }
         }
     }
@@ -310,7 +308,7 @@ public class FireRod extends MarineRod
     @Override
     protected boolean canBeReplaced(Level level, BlockPos pos)
     {
-        if (Utils.isNether(level.dimension()))
+        if (utils.dimension.isNether(level.dimension()))
         {
             var block = level.getBlockState(pos).getBlock();
             return block == Blocks.NETHERRACK || block == Blocks.BASALT || block == Blocks.BLACKSTONE || block == Blocks.MAGMA_BLOCK;

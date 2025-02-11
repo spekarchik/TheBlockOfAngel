@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
@@ -20,7 +19,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;
@@ -28,9 +26,9 @@ import java.util.function.BiFunction;
 
 public class AncientRod extends MagneticRod
 {
-    public AncientRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public AncientRod(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class AncientRod extends MagneticRod
 
         var player = context.getPlayer();
 
-        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
+        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
             return result;
 
         var level = player.level();
@@ -79,7 +77,7 @@ public class AncientRod extends MagneticRod
 
         if (block != Blocks.STONE || context.getClickedFace() == Direction.UP)
         {
-            if (utils.mossyTransforming(player, pos, block))
+            if (utils.blocks.transformations.mossyTransforming(player, pos, block))
             {
                 return InteractionResult.sidedSuccess(isClientSide);
             }
@@ -122,8 +120,8 @@ public class AncientRod extends MagneticRod
 
             if (facing == Direction.UP)
             {
-                if (Utils.isNearWaterHorizontal(level, pos) && (block == Blocks.DIRT || block == Blocks.COARSE_DIRT
-                        || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || block instanceof SandBlock
+                if (utils.blocks.conditions.isNearWaterHorizontal(level, pos) && (block == Blocks.DIRT || block == Blocks.COARSE_DIRT
+                        || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || utils.blocks.types.isSandBlock(block)
                         || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM))
                 {
                     damageItemIfSurvival(player, level, pos, blockState);
@@ -203,26 +201,26 @@ public class AncientRod extends MagneticRod
                 || (!isBroken(stack) && (block instanceof InfestedBlock || block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE
                 || block instanceof LeavesBlock || block == Blocks.COBWEB
                 || block == Blocks.DIRT || block == Blocks.COARSE_DIRT
-                || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || block instanceof SandBlock
+                || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || utils.blocks.types.isSandBlock(block)
                 || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM || block == Blocks.FARMLAND
                 || block == Blocks.DIRT_PATH));
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         if (isEnhancedRod())
         {
             for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, false, false, false, i == 0));
+                tooltipComponents.add(getDescription(i, false, false, false, i == 0));
             }
         }
         else
         {
             for (int i = 0; i <= 12; i++)
             {
-                components.add(getDescription(i, i == 1 || i == 3 || i == 9));
+                tooltipComponents.add(getDescription(i, i == 1 || i == 3 || i == 9));
             }
         }
     }

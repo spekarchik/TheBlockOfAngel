@@ -9,7 +9,6 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class DiamithicSword extends ModSword
 
         var pos = context.getClickedPos();
 
-        if (player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get()))
+        if (player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT))
         {
             explode(player, level, pos);
             return InteractionResult.CONSUME;
@@ -43,7 +42,7 @@ public class DiamithicSword extends ModSword
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
-        if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT.get()))
+        if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT))
         {
             attacker.level().explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.8f, false, Level.ExplosionInteraction.NONE);
         }
@@ -52,11 +51,11 @@ public class DiamithicSword extends ModSword
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 4; i++)
         {
-            components.add(getDescription(i, i == 1 || i == 3));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 3));
         }
     }
 

@@ -1,33 +1,19 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.TextStyle;
-import com.pekar.angelblock.Utils;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ModShovel extends ShovelItem implements IModTool
+public class ModShovel extends ShovelItem implements IModToolEnhanced
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
@@ -39,7 +25,7 @@ public class ModShovel extends ShovelItem implements IModTool
 
     public ModShovel(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, properties.attributes(ShovelItem.createAttributes(material, attackDamage, attackSpeed)));
         this.materialProperties = materialProperties;
         FLATTENABLES.put(Blocks.FARMLAND, Blocks.DIRT_PATH.defaultBlockState());
     }
@@ -81,56 +67,23 @@ public class ModShovel extends ShovelItem implements IModTool
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public final TieredItem getTool()
+    {
+        return this;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 0; i++)
         {
-            components.add(getDescription(i, false));
+            tooltipComponents.add(getDescription(i, false));
         }
     }
 
-    protected MutableComponent getDisplayName(int lineNumber)
+    @Override
+    public final IMaterialProperties getMaterialProperties()
     {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
-    }
-
-    private MutableComponent getDescription(int lineNumber, TextStyle textStyle)
-    {
-        var component = getDisplayName(lineNumber);
-        return switch (textStyle)
-                {
-                    case Header -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);
-                    case Subheader -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GRAY);
-                    case Notice -> component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
-                    default -> component.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
-                };
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)
-    {
-        TextStyle textStyle;
-
-        if (isHeader) textStyle = TextStyle.Header;
-        else if (isSubHeader) textStyle = TextStyle.Subheader;
-        else if (isNotice) textStyle = TextStyle.Notice;
-        else textStyle = TextStyle.Regular;
-
-        return getDescription(lineNumber, textStyle);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader)
-    {
-        return getDescription(lineNumber, isHeader, isSubHeader, false);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader)
-    {
-        return getDescription(lineNumber, isHeader, false, false);
-    }
-
-    protected void setBlock(Player player, BlockPos pos, Block block)
-    {
-        player.level().setBlock(pos, block.defaultBlockState(), 11);
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+        return materialProperties;
     }
 }

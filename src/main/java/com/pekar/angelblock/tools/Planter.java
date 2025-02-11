@@ -19,15 +19,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class Planter extends WorkRod
 {
-    public Planter(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public Planter(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -75,11 +74,11 @@ public class Planter extends WorkRod
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 6; i++)
         {
-            components.add(getDescription(i, i == 1 || i == 3,  false, i == 6, i == 5));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 3,  false, i == 6, i == 5));
         }
     }
 
@@ -255,7 +254,7 @@ public class Planter extends WorkRod
             itemStack.setCount(itemCount - 1);
         }
 
-        return result.shouldAwardStats();
+        return result.indicateItemUse(); // TODO: Check
     }
 
     private boolean bonemealPlant(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack)

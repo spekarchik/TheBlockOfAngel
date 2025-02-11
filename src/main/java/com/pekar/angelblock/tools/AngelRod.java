@@ -14,24 +14,22 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class AngelRod extends EndRod
 {
-    public AngelRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public AngelRod(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 1; i <= 5; i++)
         {
-            components.add(getDescription(i, false, false, i == 4 || i == 5, i <= 2));
+            tooltipComponents.add(getDescription(i, false, false, i == 4 || i == 5, i <= 2));
         }
     }
 

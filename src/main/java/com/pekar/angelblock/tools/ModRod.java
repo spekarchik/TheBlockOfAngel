@@ -5,6 +5,7 @@ import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,15 +17,15 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ToolAction;
+import net.neoforged.neoforge.common.ItemAbility;
 
 public class ModRod extends ModTool implements IModTool
 {
     private final boolean isMagnetic;
 
-    public ModRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public ModRod(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, properties);
         this.isMagnetic = isMagnetic;
     }
 
@@ -35,13 +36,13 @@ public class ModRod extends ModTool implements IModTool
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ToolAction toolAction)
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
         return false;
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment)
     {
         return false;
     }

@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -57,18 +56,11 @@ public class EnhancedShovel extends ModShovel
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
-    @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
-    {
-        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
-        return super.onBlockStartBreak(itemstack, pos, player);
-    }
-
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (!isToolEffective(entityLiving, pos)) return;
 
-        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
 
         BlockState blockState = level.getBlockState(pos);
@@ -77,7 +69,7 @@ public class EnhancedShovel extends ModShovel
         float originHardness = blockState.getBlock().defaultDestroyTime();
         if (originHardness == 0.0F) return;
 
-        var facing = Utils.getDirectionForShovel(entityLiving, pos);
+        var facing = utils.player.getDirectionForShovel(entityLiving, pos);
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
         int a, b, c;
@@ -108,7 +100,7 @@ public class EnhancedShovel extends ModShovel
     {
         if (facing != Direction.UP) return false;
 
-        if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+        if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return false;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
@@ -169,12 +161,6 @@ public class EnhancedShovel extends ModShovel
         return false;
     }
 
-    protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
-    {
-        BlockState blockState = entityLiving.level().getBlockState(pos);
-        return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
-    }
-
     protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
@@ -187,13 +173,8 @@ public class EnhancedShovel extends ModShovel
         if (hardness <= originHardness && isToolEffective(entityLiving, pos)
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
-            if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+            if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
                 damageItem(1, entityLiving);
         }
-    }
-
-    protected boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
-    {
-        return isToolEffective(entity, pos) && !entity.isShiftKeyDown();
     }
 }

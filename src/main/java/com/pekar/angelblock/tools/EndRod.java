@@ -21,15 +21,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ServerLevelData;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class EndRod extends AmethystRod
 {
-    public EndRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public EndRod(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -37,7 +36,7 @@ public class EndRod extends AmethystRod
     {
         var player = context.getPlayer();
 
-        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
+        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
             return super.useOn(context);
 
         var itemStack = player.getItemInHand(context.getHand());
@@ -84,7 +83,7 @@ public class EndRod extends AmethystRod
     {
         var offHandItemStack = player.getOffhandItem();
 
-        if (offHandItemStack.isEmpty() || (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get())))
+        if (offHandItemStack.isEmpty() || (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
             return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
 
         var offHandItem = offHandItemStack.getItem();
@@ -179,20 +178,20 @@ public class EndRod extends AmethystRod
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         if (isEnhancedRod())
         {
             for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, false, false, false, i == 0));
+                tooltipComponents.add(getDescription(i, false, false, false, i == 0));
             }
         }
         else
         {
             for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, i == 1 || i == 4 || i == 6, false, false, i == 8));
+                tooltipComponents.add(getDescription(i, i == 1 || i == 4 || i == 6, false, false, i == 8));
             }
         }
     }

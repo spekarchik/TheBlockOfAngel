@@ -16,15 +16,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class TrackLayer extends WorkRod
 {
-    public TrackLayer(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public TrackLayer(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -74,11 +73,11 @@ public class TrackLayer extends WorkRod
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 5; i++)
         {
-            components.add(getDescription(i, i == 1 || i == 3,  false, false, i == 5));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 3,  false, false, i == 5));
         }
     }
 

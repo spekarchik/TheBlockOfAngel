@@ -1,12 +1,10 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
@@ -34,18 +32,11 @@ public class EnhancedPickaxe extends ModPickaxe
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
-    @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
-    {
-        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
-        return super.onBlockStartBreak(itemstack, pos, player);
-    }
-
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (!isToolEffective(entityLiving, pos)) return;
 
-        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
 
         BlockState blockState = level.getBlockState(pos);
@@ -55,7 +46,7 @@ public class EnhancedPickaxe extends ModPickaxe
         float originHardness = blockState.getBlock().defaultDestroyTime();
         if (originHardness == 0.0F) return;
 
-        Direction facing = Utils.getDirection(entityLiving, pos);
+        Direction facing = utils.player.getDirection(entityLiving, pos);
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
         int a, b, c;
@@ -95,22 +86,11 @@ public class EnhancedPickaxe extends ModPickaxe
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
             var originBlock = originBlockState.getBlock();
-            if (!Utils.isOre(originBlock) || originBlock == block)
+            if (!utils.blocks.types.isOre(originBlock) || originBlock == block)
             {
-                if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+                if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
                     damageItem(1, entityLiving);
             }
         }
-    }
-
-    protected boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
-    {
-        return isToolEffective(entity, pos) && !entity.isShiftKeyDown();
-    }
-
-    protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
-    {
-        BlockState blockState = entityLiving.level().getBlockState(pos);
-        return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 }

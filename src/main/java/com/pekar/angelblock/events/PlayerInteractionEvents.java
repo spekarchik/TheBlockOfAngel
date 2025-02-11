@@ -6,6 +6,8 @@ import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.DevilBlockEntity;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.tools.IModTool;
+import com.pekar.angelblock.tools.IModToolEnhanced;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -72,10 +74,10 @@ public class PlayerInteractionEvents implements IEventHandler
         var pos = event.getPos();
         var player = event.getPlayer();
         var level = player.level();
+        var blockEntity = level.getBlockEntity(pos);
 
         if (player instanceof ServerPlayer serverPlayer && !serverPlayer.isCreative())
         {
-            var blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
             {
                 if (player.isSteppingCarefully())
@@ -100,6 +102,12 @@ public class PlayerInteractionEvents implements IEventHandler
                     return;
                 }
             }
+        }
+
+        var tool = player.getMainHandItem();
+        if (!tool.isEmpty() && tool.getItem() instanceof IModToolEnhanced modTool)
+        {
+            event.setCanceled(modTool.preventBlockBreak(player, level, pos));
         }
 
 //        if (item instanceof ModShovel)

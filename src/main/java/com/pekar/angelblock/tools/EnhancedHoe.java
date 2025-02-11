@@ -13,7 +13,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class EnhancedHoe extends ModHoe
+public class EnhancedHoe extends ModHoe implements IModToolEnhanced
 {
     public EnhancedHoe(Tier material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
@@ -51,18 +51,11 @@ public class EnhancedHoe extends ModHoe
                 : result;
     }
 
-    @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
-    {
-        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
-        return super.onBlockStartBreak(itemstack, pos, player);
-    }
-
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (!isToolEffective(entityLiving, pos)) return;
 
-        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
 
         BlockState blockState = level.getBlockState(pos);
@@ -86,7 +79,7 @@ public class EnhancedHoe extends ModHoe
     {
         if (facing != Direction.UP) return false;
 
-        if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+        if (!player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return false;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
@@ -129,12 +122,6 @@ public class EnhancedHoe extends ModHoe
         return false;
     }
 
-    protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
-    {
-        BlockState blockState = entityLiving.level().getBlockState(pos);
-        return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
-    }
-
     protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
@@ -147,13 +134,8 @@ public class EnhancedHoe extends ModHoe
         if (hardness <= originHardness && isToolEffective(entityLiving, pos)
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
-            if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+            if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
                 damageItem(1, entityLiving);
         }
-    }
-
-    protected boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
-    {
-        return isToolEffective(entity, pos) && !entity.isShiftKeyDown();
     }
 }

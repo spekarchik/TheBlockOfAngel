@@ -1,22 +1,14 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.TextStyle;
-import com.pekar.angelblock.Utils;
+import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.item.*;
 
 import java.util.List;
 
-public class ModAxe extends AxeItem implements IModTool
+public class ModAxe extends AxeItem implements IModToolEnhanced
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
@@ -28,7 +20,7 @@ public class ModAxe extends AxeItem implements IModTool
 
     public ModAxe(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, properties.attributes(AxeItem.createAttributes(material, attackDamage, attackSpeed)));
         this.materialProperties = materialProperties;
     }
 
@@ -51,50 +43,23 @@ public class ModAxe extends AxeItem implements IModTool
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public TieredItem getTool()
+    {
+        return this;
+    }
+
+    @Override
+    public IMaterialProperties getMaterialProperties()
+    {
+        return materialProperties;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 0; i++)
         {
-            components.add(getDescription(i, false));
+            tooltipComponents.add(getDescription(i, false));
         }
-    }
-
-    private MutableComponent getDescription(int lineNumber, TextStyle textStyle)
-    {
-        var component = getDisplayName(lineNumber);
-        return switch (textStyle)
-                {
-                    case Header -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);
-                    case Subheader -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GRAY);
-                    case Notice -> component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
-                    default -> component.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
-                };
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)
-    {
-        TextStyle textStyle;
-
-        if (isHeader) textStyle = TextStyle.Header;
-        else if (isSubHeader) textStyle = TextStyle.Subheader;
-        else if (isNotice) textStyle = TextStyle.Notice;
-        else textStyle = TextStyle.Regular;
-
-        return getDescription(lineNumber, textStyle);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader)
-    {
-        return getDescription(lineNumber, isHeader, isSubHeader, false);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader)
-    {
-        return getDescription(lineNumber, isHeader, false, false);
-    }
-
-    protected MutableComponent getDisplayName(int lineNumber)
-    {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
     }
 }

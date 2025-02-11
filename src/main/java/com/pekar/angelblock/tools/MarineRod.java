@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Utils;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -13,19 +12,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;
 
 public class MarineRod extends AncientRod
 {
-    public MarineRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public MarineRod(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -34,7 +31,7 @@ public class MarineRod extends AncientRod
         var player = context.getPlayer();
         var level = player.level();
 
-        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
+        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
             return super.useOn(context);
 
         var pos = context.getClickedPos();
@@ -57,8 +54,8 @@ public class MarineRod extends AncientRod
                 BlockPos upPos = pos.above();
 
                 if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
-                        && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
-                        || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
+                        && ((utils.blocks.types.isFarmTypeBlock(level, upPos.north()) && utils.blocks.types.isFarmTypeBlock(level, upPos.south()))
+                        || (utils.blocks.types.isFarmTypeBlock(level, upPos.east()) && utils.blocks.types.isFarmTypeBlock(level, upPos.west())))))
                 {
                     if (!isClientSide)
                     {
@@ -66,7 +63,7 @@ public class MarineRod extends AncientRod
                         new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
                         damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 
-                        updateNeighbors(level, upPos);
+                        utils.blocks.transformations.updateNeighbors(level, upPos); // TODO: check
                     }
 
                     return InteractionResult.sidedSuccess(isClientSide);
@@ -115,7 +112,7 @@ public class MarineRod extends AncientRod
                 return plant(player, level, pos, hand, facing, Blocks.BAMBOO);
             }
 
-            if (block == Blocks.CLAY && Utils.isNearWaterHorizontal(level, pos))
+            if (block == Blocks.CLAY && utils.blocks.conditions.isNearWaterHorizontal(level, pos))
             {
                 damageItemIfSurvival(player, level, pos, blockState);
                 return plant(player, level, pos, hand, facing, Blocks.SMALL_DRIPLEAF);
@@ -137,20 +134,20 @@ public class MarineRod extends AncientRod
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         if (isEnhancedRod())
         {
             for (int i = 0; i <= 8; i++)
             {
-                components.add(getDescription(i, false, false, false, i == 0));
+                tooltipComponents.add(getDescription(i, false, false, false, i == 0));
             }
         }
         else
         {
             for (int i = 0; i <= 12; i++)
             {
-                components.add(getDescription(i, i == 1 || i == 8, false, false, i == 12));
+                tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, false, i == 12));
             }
         }
     }

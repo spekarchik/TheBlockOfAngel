@@ -4,26 +4,25 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ModHoe extends ModTool
+public class ModHoe extends HoeItem implements IModToolEnhanced
 {
     protected final IMaterialProperties materialProperties;
+    protected final Utils utils = new Utils();
 
     public static ModHoe createPrimary(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
@@ -32,7 +31,7 @@ public class ModHoe extends ModTool
 
     public ModHoe(Tier material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, properties.attributes(HoeItem.createAttributes(material, attackDamage, attackSpeed)));
         this.materialProperties = materialProperties;
     }
 
@@ -52,8 +51,8 @@ public class ModHoe extends ModTool
         BlockPos upPos = pos.above();
 
         if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
-                && ((isFarmTypeBlock(level, upPos.north()) && isFarmTypeBlock(level, upPos.south()))
-                || (isFarmTypeBlock(level, upPos.east()) && isFarmTypeBlock(level, upPos.west())))))
+                && ((utils.blocks.types.isFarmTypeBlock(level, upPos.north()) && utils.blocks.types.isFarmTypeBlock(level, upPos.south()))
+                || (utils.blocks.types.isFarmTypeBlock(level, upPos.east()) && utils.blocks.types.isFarmTypeBlock(level, upPos.west())))))
         {
             if (!level.isClientSide)
             {
@@ -62,7 +61,7 @@ public class ModHoe extends ModTool
 
                 damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 
-                if (!updateNeighbors(level, upPos))
+                if (!utils.blocks.transformations.updateNeighbors(level, upPos)) // TODO: check it
                 {
                     return InteractionResult.FAIL;
                 }
@@ -80,11 +79,11 @@ public class ModHoe extends ModTool
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         for (int i = 0; i <= 0; i++)
         {
-            components.add(getDescription(i, false));
+            tooltipComponents.add(getDescription(i, false));
         }
     }
 
@@ -104,5 +103,35 @@ public class ModHoe extends ModTool
         }
 
         return false;
+    }
+
+    @Override
+    public boolean isEnhancedTool()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isEnhancedWeapon()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isEnhancedRod()
+    {
+        return false;
+    }
+
+    @Override
+    public TieredItem getTool()
+    {
+        return this;
+    }
+
+    @Override
+    public IMaterialProperties getMaterialProperties()
+    {
+        return materialProperties;
     }
 }

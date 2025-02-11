@@ -1,7 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Utils;
-import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -13,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.function.TriFunction;
@@ -23,9 +20,9 @@ import java.util.function.Function;
 
 public class MagneticRod extends ModRod
 {
-    public MagneticRod(Tier material, int attackDamage, float attackSpeed, boolean isMagnetic, Properties properties)
+    public MagneticRod(Tier material, boolean isMagnetic, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, isMagnetic, properties);
+        super(material, isMagnetic, properties);
     }
 
     @Override
@@ -33,7 +30,7 @@ public class MagneticRod extends ModRod
     {
         var player = context.getPlayer();
 
-        if (!isEnhancedRod() || !player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT.get()))
+        if (!isEnhancedRod() || !player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
         {
             return super.useOn(context);
         }
@@ -48,7 +45,7 @@ public class MagneticRod extends ModRod
 
         var pos = context.getClickedPos();
         var blockState = level.getBlockState(pos);
-        if (blockState.isAir() || utils.isLiquid(blockState.getBlock()))
+        if (blockState.isAir() || utils.blocks.types.isLiquid(blockState.getBlock()))
         {
             return InteractionResult.CONSUME;
         }
@@ -140,11 +137,11 @@ public class MagneticRod extends ModRod
 
                     // check current block: ore? diamond?
                     var currentBlock = level.getBlockState(currentPos).getBlock();
-                    boolean isDiamondOre = isDiamondOre(currentBlock);
+                    boolean isDiamondOre = utils.blocks.types.isDiamondOre(currentBlock);
                     boolean isShiftingOre = isShiftingOre(currentBlock);
                     boolean isAmethystGeode = isAmethystGeode(currentBlock);
-                    boolean isRail = isRail(currentBlock);
-                    boolean isSculkVein = isSculk(currentBlock);
+                    boolean isRail = utils.blocks.types.isRail(currentBlock);
+                    boolean isSculkVein = utils.blocks.types.isSculk(currentBlock);
 
                     if (doCurrentDepthAllowDetectAmethyst && isAmethystGeode) isAmethystFound = true;
 
@@ -175,7 +172,7 @@ public class MagneticRod extends ModRod
                     for (replacedPos = currentPos.relative(clickedFace); !Objects.equals(getDepthCoord.apply(replacedPos), getDepthCoord.apply(pos.relative(clickedFace))); replacedPos = replacedPos.relative(clickedFace))
                     {
                         var blockState = level.getBlockState(replacedPos);
-                        if (!blockState.isAir() && !utils.isLiquid(blockState.getBlock()))
+                        if (!blockState.isAir() && !utils.blocks.types.isLiquid(blockState.getBlock()))
                         {
                             solidBlockFound = true;
                             break;
@@ -241,7 +238,7 @@ public class MagneticRod extends ModRod
 
     protected boolean canBeReplaced(Level level, BlockPos pos)
     {
-        if (!Utils.isOverworld(level.dimension())) return false;
+        if (!utils.dimension.isOverworld(level.dimension())) return false;
 
         var block = level.getBlockState(pos).getBlock();
 
@@ -251,7 +248,7 @@ public class MagneticRod extends ModRod
 
     protected boolean isShiftingOre(Block block)
     {
-        return Utils.isOre(block) && !isDiamondOre(block) && !isSculk(block);
+        return utils.blocks.types.isOre(block) && !utils.blocks.types.isDiamondOre(block) && !utils.blocks.types.isSculk(block);
     }
 
     private boolean isShiftingOre(Level level, BlockPos pos)
@@ -263,21 +260,5 @@ public class MagneticRod extends ModRod
     private boolean isAmethystGeode(Block block)
     {
         return block == Blocks.SMOOTH_BASALT || block == Blocks.CALCITE;
-    }
-
-    private boolean isRail(Block block)
-    {
-        return block instanceof BaseRailBlock;
-    }
-
-    private boolean isDiamondOre(Block block)
-    {
-        return block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE || block == BlockRegistry.GREEN_DIAMOND_ORE.get();
-    }
-
-    private boolean isSculk(Block block)
-    {
-        return block == Blocks.SCULK || block == Blocks.SCULK_VEIN || block == Blocks.SCULK_CATALYST
-                || block == Blocks.SCULK_SENSOR || block == Blocks.SCULK_SHRIEKER;
     }
 }

@@ -1,16 +1,10 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.TextStyle;
-import com.pekar.angelblock.Utils;
+import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
-import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.IPlantable;
 
 public class ModSword extends SwordItem implements IModTool
 {
@@ -32,7 +25,7 @@ public class ModSword extends SwordItem implements IModTool
 
     public ModSword(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, attackDamage, attackSpeed, properties);
+        super(material, properties.attributes(SwordItem.createAttributes(material, attackDamage, attackSpeed)));
     }
 
     protected final void setEffectAround(Player player, Level level, BlockPos pos)
@@ -208,7 +201,10 @@ public class ModSword extends SwordItem implements IModTool
     {
         ItemStack itemstack = player.getItemInHand(hand);
         BlockState state = level.getBlockState(pos);
-        if (facing == Direction.UP && state.getBlock().canSustainPlant(state, level, pos, Direction.UP, (IPlantable) Blocks.CACTUS) && level.isEmptyBlock(pos.above()))
+        if (facing == Direction.UP
+                && level.isEmptyBlock(pos.above())
+                && state.getBlock().canSustainPlant(state, level, pos, Direction.UP, Blocks.CACTUS.defaultBlockState()).isTrue() // Blocks.CACTUS.defaultBlockState() -> age == 0
+                ) // TODO: Check
         {
             level.setBlock(pos.above(), Blocks.CACTUS.defaultBlockState(), 11);
 
@@ -243,6 +239,12 @@ public class ModSword extends SwordItem implements IModTool
         return false;
     }
 
+    @Override
+    public TieredItem getTool()
+    {
+        return this;
+    }
+
     public boolean hasExplosionMode()
     {
         return false;
@@ -256,50 +258,5 @@ public class ModSword extends SwordItem implements IModTool
     public boolean hasWebMode()
     {
         return false;
-    }
-
-    protected MutableComponent getDisplayName(int lineNumber)
-    {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
-    }
-
-    private MutableComponent getDescription(int lineNumber, TextStyle textStyle)
-    {
-        var component = getDisplayName(lineNumber);
-        return switch (textStyle)
-        {
-            case Header -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);
-            case Subheader -> component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GRAY);
-            case Notice -> component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
-            default -> component.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
-        };
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)
-    {
-        TextStyle textStyle;
-
-        if (isHeader) textStyle = TextStyle.Header;
-        else if (isSubHeader) textStyle = TextStyle.Subheader;
-        else if (isNotice) textStyle = TextStyle.Notice;
-        else textStyle = TextStyle.Regular;
-
-        return getDescription(lineNumber, textStyle);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader)
-    {
-        return getDescription(lineNumber, isHeader, isSubHeader, false);
-    }
-
-    protected MutableComponent getDescription(int lineNumber, boolean isHeader)
-    {
-        return getDescription(lineNumber, isHeader, false, false);
-    }
-
-    protected void setBlock(Player player, BlockPos pos, Block block)
-    {
-        player.level().setBlock(pos, block.defaultBlockState(), 11);
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 }

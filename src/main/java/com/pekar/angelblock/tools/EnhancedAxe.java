@@ -4,7 +4,6 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
@@ -32,16 +31,9 @@ public class EnhancedAxe extends ModAxe
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
-    @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
-    {
-        if (canPreventBlockDestroying(player, pos) && !materialProperties.isSafeToBreak(player, pos)) return true;
-        return super.onBlockStartBreak(itemstack, pos, player);
-    }
-
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT.get()))
+        if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
 
         BlockState blockState = level.getBlockState(pos);
@@ -68,12 +60,6 @@ public class EnhancedAxe extends ModAxe
         return block instanceof BushBlock;
     }
 
-    protected final boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
-    {
-        BlockState blockState = entityLiving.level().getBlockState(pos);
-        return isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
-    }
-
     protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
@@ -86,13 +72,8 @@ public class EnhancedAxe extends ModAxe
         if (hardness <= originHardness && isToolEffective(entityLiving, pos)
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
-            if (utils.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+            if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
                 damageItem(1, entityLiving);
         }
-    }
-
-    protected boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
-    {
-        return isToolEffective(entity, pos) && !entity.isShiftKeyDown();
     }
 }
