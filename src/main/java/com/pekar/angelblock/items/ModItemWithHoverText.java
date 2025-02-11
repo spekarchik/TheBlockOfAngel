@@ -26,7 +26,7 @@ public class ModItemWithHoverText extends ModItem
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
     {
-        var component = utils.getDescription(getDisplayName(), descriptionStyle);
+        var component = utils.text.getDescription(getDisplayName(), descriptionStyle);
         components.add(component);
     }
 
