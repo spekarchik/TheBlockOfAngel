@@ -46,7 +46,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> DIAMOND_TOOL_UPGRADE_KIT = Main.ITEMS.register("diamond_tool_upgrade_kit", ModItemWithDoubleHoverText::new);
 
     public static final DeferredItem<Item> ROD_UPGRADE_KIT = Main.ITEMS.register("rod_upgrade_kit", RodUpgradeKit::new);
-    public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.register("downgrade_kit", ModItemWithHoverText::new);
+    public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.register("downgrade_kit", () -> new ModItemWithHoverText());
 
     public static final DeferredItem<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> FLAX_FIBRE = Main.ITEMS.register("flax_fibre", () -> new ModItemWithHoverText(TextStyle.Notice));

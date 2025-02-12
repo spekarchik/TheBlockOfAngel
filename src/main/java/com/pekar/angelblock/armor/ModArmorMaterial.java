@@ -119,7 +119,7 @@ public class ModArmorMaterial
 
         return Registry.registerForHolder(
                 BuiltInRegistries.ARMOR_MATERIAL,
-                Utils.createResourceLocation(Main.MODID, armorName),
+                Utils.instance.resources.createResourceLocation(Main.MODID, armorName),
                 new ArmorMaterial(enummap, enchantmentValue, equipSound, repairIngredient, armorLayers, toughness, knockbackResistance)
         );
     }
@@ -137,7 +137,7 @@ public class ModArmorMaterial
 
     private static List<ArmorMaterial.Layer> getNonDyeableArmorLayers(String armorName)
     {
-        var resourceLocation = Utils.createResourceLocation(Main.MODID, armorName);
+        var resourceLocation = Utils.instance.resources.createResourceLocation(Main.MODID, armorName);
         return List.of(new ArmorMaterial.Layer(resourceLocation));
     }
 }

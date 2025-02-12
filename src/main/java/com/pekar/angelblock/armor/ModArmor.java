@@ -102,13 +102,13 @@ public class ModArmor extends ArmorItem
     private MutableComponent getCommonDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
     {
         var component = getCommonDisplayName(lineNumber);
-        return utils.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
     }
 
     private MutableComponent getSpecificDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
     {
         var component = getSpecificDisplayName(lineNumber);
-        return utils.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
     }
 
     private MutableComponent getSpecificDisplayName(int lineNumber)

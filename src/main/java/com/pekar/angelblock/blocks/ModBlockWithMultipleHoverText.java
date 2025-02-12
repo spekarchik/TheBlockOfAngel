@@ -17,7 +17,7 @@ public class ModBlockWithMultipleHoverText extends Block
     protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
     {
         var component = getDisplayName(lineNumber);
-        return utils.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
     }
 
     protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)
