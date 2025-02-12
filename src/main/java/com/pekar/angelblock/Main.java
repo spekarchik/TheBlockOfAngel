@@ -10,13 +10,12 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.recipe.RecipeRegistry;
 import com.pekar.angelblock.tab.MainTab;
 import com.pekar.angelblock.tools.ToolRegistry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -124,6 +123,11 @@ public class Main
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == ANGEL_BLOCK_TAB.getKey())
-            event.accept(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), PotionRegistry.BLOCK_BREAKER_POTION.get()));
+        {
+            var potionItemStack = new ItemStack(Items.SPLASH_POTION);
+            potionItemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(PotionRegistry.BLOCK_BREAKER_POTION));
+            event.accept(potionItemStack); // TODO: Check if the potion is displayed on AngelBlock tab
+            //event.accept(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), PotionRegistry.BLOCK_BREAKER_POTION));
+        }
     }
 }
