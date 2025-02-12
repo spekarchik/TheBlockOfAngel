@@ -102,13 +102,14 @@ public class Main
         ClientTickEvents.initStatic();
         GuiEvents.initStatic();
 
+        RecipeRegistry.init();
+
         PacketRegistry.init();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // some preinit code
-        RecipeRegistry.init();
 //        LOGGER.info("*********************HELLO FROM PREINIT**********************");
 //        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
