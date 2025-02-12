@@ -18,6 +18,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -112,7 +113,7 @@ public class Main
 //        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
     // You can use SubscribeEvent and let the Event Bus discover methods to call
-    //@SubscribeEvent
+    @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
         // do something when the server starts

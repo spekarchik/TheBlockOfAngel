@@ -7,7 +7,7 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent;
 public class TickEvents implements IEventHandler
 {
     @SubscribeEvent
-    public void onWorldTickEvent(LevelTickEvent event)
+    public void onWorldTickEvent(LevelTickEvent.Post event)
     {
         if (event.getLevel().isClientSide) return;
 

@@ -23,7 +23,7 @@ public class ClientTickEvents
     }
 
     @SubscribeEvent
-    public static void onClientTick(ClientTickEvent event)
+    public static void onClientTick(ClientTickEvent.Post event)
     {
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
