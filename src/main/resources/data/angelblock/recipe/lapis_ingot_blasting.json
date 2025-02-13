@@ -3,7 +3,9 @@
     "ingredient": {
         "item": "angelblock:lapis_powder"
     },
-    "result": "angelblock:lapis_ingot",
+    "result": {
+        "id": "angelblock:lapis_ingot"
+    },
     "experience": 1.2,
     "cookingtime": 100
 }

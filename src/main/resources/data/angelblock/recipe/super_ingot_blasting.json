@@ -3,7 +3,9 @@
     "ingredient": {
         "item": "angelblock:super_powder"
     },
-    "result": "angelblock:super_ingot",
+    "result": {
+        "id": "angelblock:super_ingot"
+    },
     "experience": 1.2,
     "cookingtime": 100
 }

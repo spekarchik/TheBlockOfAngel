@@ -3,7 +3,9 @@
     "ingredient": {
         "item": "angelblock:diamond_powder_block"
     },
-    "result": "minecraft:diamond_block",
+    "result": {
+        "id": "minecraft:diamond_block"
+    },
     "experience": 0.2,
     "cookingtime": 100
 }
