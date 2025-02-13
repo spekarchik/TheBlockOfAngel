@@ -3,7 +3,9 @@
     "ingredient": {
         "item": "angelblock:diamithic_axe"
     },
-    "result": "angelblock:strength_pearl",
-    "group": "tools",
-    "count": 1
+    "result": {
+        "id": "angelblock:strength_pearl",
+        "count": 1
+    },
+    "group": "tools"
 }

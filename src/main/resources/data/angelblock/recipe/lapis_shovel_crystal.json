@@ -3,7 +3,9 @@
     "ingredient": {
         "item": "angelblock:lapis_shovel"
     },
-    "result": "angelblock:marine_crystal",
-    "group": "tools",
-    "count": 1
+    "result": {
+        "id": "angelblock:marine_crystal",
+        "count": 1
+    },
+    "group": "tools"
 }

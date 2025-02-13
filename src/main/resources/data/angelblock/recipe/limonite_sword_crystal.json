@@ -3,7 +3,9 @@
     "ingredient": {
         "item": "angelblock:limonite_sword"
     },
-    "result": "angelblock:bios_diamond",
-    "group": "tools",
-    "count": 1
+    "result": {
+        "id": "angelblock:bios_diamond",
+        "count": 1
+    },
+    "group": "tools"
 }

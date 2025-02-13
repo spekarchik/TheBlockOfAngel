@@ -3,7 +3,9 @@
     "ingredient": {
         "item": "angelblock:super_axe"
     },
-    "result": "angelblock:super_crystal",
-    "group": "tools",
-    "count": 1
+    "result": {
+        "id": "angelblock:super_crystal",
+        "count": 1
+    },
+    "group": "tools"
 }

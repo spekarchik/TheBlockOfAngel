@@ -3,7 +3,9 @@
     "ingredient": {
         "item": "angelblock:rendelithic_sword"
     },
-    "result": "angelblock:flame_stone",
-    "group": "tools",
-    "count": 1
+    "result": {
+        "id": "angelblock:flame_stone",
+        "count": 1
+    },
+    "group": "tools"
 }
