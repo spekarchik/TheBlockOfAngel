@@ -69,5 +69,6 @@
         }
       ]
     }
-  ]
+  ],
+  "random_sequence": "angelblock:blocks/cracked_obsidian_block"
 }

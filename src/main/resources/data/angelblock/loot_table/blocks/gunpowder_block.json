@@ -56,5 +56,6 @@
         }
       ]
     }
-  ]
+  ],
+  "random_sequence": "angelblock:blocks/gunpowder_block"
 }

@@ -36,5 +36,6 @@
         }
       ]
     }
-  ]
+  ],
+	"random_sequence": "angelblock:blocks/destroying_white_wool_by_potion"
 }

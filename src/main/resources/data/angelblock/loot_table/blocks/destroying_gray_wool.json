@@ -78,5 +78,6 @@
 				}
 			]
 		}
-	]
+	],
+	"random_sequence": "angelblock:blocks/destroying_gray_wool"
 }
