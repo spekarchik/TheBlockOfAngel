@@ -137,7 +137,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:book",
@@ -155,7 +156,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:fishing_rod",
@@ -165,7 +167,7 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "decoration": "red_x",
+              "decoration": "minecraft:red_x",
               "function": "minecraft:exploration_map",
               "skip_existing_chunks": false,
               "zoom": 1
@@ -174,7 +176,8 @@
               "function": "minecraft:set_name",
               "name": {
                 "translate": "filled_map.buried_treasure"
-              }
+              },
+              "target": "item_name"
             }
           ],
           "name": "minecraft:map",
