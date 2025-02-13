@@ -19,20 +19,23 @@
                   "condition": "minecraft:match_tool",
                   "predicate":
                   {
-                    "enchantments":
-                    [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels":
+                    "predicates":
+                    {
+                      "minecraft:enchantments":
+                      [
                         {
-                          "min": 1
+                          "enchantments": "minecraft:silk_touch",
+                          "levels":
+                          {
+                            "min": 1
+                          }
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 }
               ],
-              "name": "angelblock:green_diamond_ore"
+              "name": "angelblock:cracked_obsidian_block"
             },
             {
               "type": "minecraft:item",
@@ -40,7 +43,12 @@
               [
                 {
                   "function": "minecraft:set_count",
-                  "count": 1.0,
+                  "count":
+				  {
+                    "type": "minecraft:uniform",
+                    "min": 0.0,
+                    "max": 2.0
+                  },
                   "add": false
                 },
                 {
@@ -48,11 +56,14 @@
                   "enchantment": "minecraft:fortune",
                   "formula": "minecraft:uniform_bonus_count",
                   "parameters": {
-                    "bonusMultiplier": 1.0
+                    "bonusMultiplier": 1.7
                   }
+                },
+                {
+                  "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "angelblock:bios_diamond"
+              "name": "angelblock:obsidian_powder"
             }
           ]
         }

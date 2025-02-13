@@ -19,20 +19,23 @@
                   "condition": "minecraft:match_tool",
                   "predicate":
                   {
-                    "enchantments":
-                    [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels":
+                    "predicates":
+                    {
+                      "minecraft:enchantments":
+                      [
                         {
-                          "min": 1
+                          "enchantments": "minecraft:silk_touch",
+                          "levels":
+                          {
+                            "min": 1
+                          }
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 }
               ],
-              "name": "angelblock:cracked_obsidian_block"
+              "name": "angelblock:cracked_endstone_block"
             },
             {
               "type": "minecraft:item",
@@ -60,7 +63,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "angelblock:obsidian_powder"
+              "name": "angelblock:endstone_powder"
             }
           ]
         }

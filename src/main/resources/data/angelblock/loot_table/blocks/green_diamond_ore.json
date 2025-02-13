@@ -19,20 +19,23 @@
                   "condition": "minecraft:match_tool",
                   "predicate":
                   {
-                    "enchantments":
-                    [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels":
+                    "predicates":
+                    {
+                      "minecraft:enchantments":
+                      [
                         {
-                          "min": 1
+                          "enchantments": "minecraft:silk_touch",
+                          "levels":
+                          {
+                            "min": 1
+                          }
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 }
               ],
-              "name": "angelblock:gunpowder_block"
+              "name": "angelblock:green_diamond_ore"
             },
             {
               "type": "minecraft:item",
@@ -40,14 +43,19 @@
               [
                 {
                   "function": "minecraft:set_count",
-                  "count": 9.0,
+                  "count": 1.0,
                   "add": false
                 },
                 {
-                  "function": "minecraft:explosion_decay"
+                  "function": "minecraft:apply_bonus",
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:uniform_bonus_count",
+                  "parameters": {
+                    "bonusMultiplier": 1.0
+                  }
                 }
               ],
-              "name": "minecraft:gunpowder"
+              "name": "angelblock:bios_diamond"
             }
           ]
         }
