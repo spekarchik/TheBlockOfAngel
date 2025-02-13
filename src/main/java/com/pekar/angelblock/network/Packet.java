@@ -8,7 +8,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public abstract class Packet implements IPacket, CustomPacketPayload
 {
-    private final Type<Packet> type = new Type<>(ResourceLocation.fromNamespaceAndPath(Main.MODID, getPacketId()));
+    private Type<Packet> type;
 
     protected Packet()
     {
@@ -27,7 +27,9 @@ public abstract class Packet implements IPacket, CustomPacketPayload
     @Override
     public final Type<Packet> type()
     {
-        return type;
+        return type == null
+                ? (type = new Type<>(ResourceLocation.fromNamespaceAndPath(Main.MODID, getPacketId())))
+                : type;
     }
 
     protected abstract boolean isServerToClient();
