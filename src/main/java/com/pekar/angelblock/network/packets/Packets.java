@@ -5,10 +5,10 @@ class Packets
     private Packets()
     {}
 
-    static final String CreeperDetectedPacketId = "CreeperDetected";
-    static final String KeyPressedPacketId = "KeyPressed";
-    static final String ClientTickPacketId = "ClientTick";
-    static final String ToolsModeChangePacketId = "ToolsModeChange";
-    static final String PlaySoundPacketId = "PlaySound";
-    static final String HoldAngelPacketId = "HoldAngel";
+    static final String CreeperDetectedPacketId = "creeper_detected";
+    static final String KeyPressedPacketId = "key_pressed";
+    static final String ClientTickPacketId = "client_tick";
+    static final String ToolsModeChangePacketId = "tools_mode_change";
+    static final String PlaySoundPacketId = "play_sound";
+    static final String HoldAngelPacketId = "hold_angel";
 }
