@@ -9,5 +9,6 @@ public class SlowFallingSwitchingEffect extends SwitchingArmorEffect
     public SlowFallingSwitchingEffect(IPlayer player, IArmor armor)
     {
         super(player, armor, MobEffects.SLOW_FALLING, 0);
+        showIcon = true;
     }
 }

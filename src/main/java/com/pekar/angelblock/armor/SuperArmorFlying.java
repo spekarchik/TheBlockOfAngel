@@ -1,5 +1,6 @@
 package com.pekar.angelblock.armor;
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +16,7 @@ public class SuperArmorFlying extends SuperArmor
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
         if (type != Type.CHESTPLATE) return false;
+        if (entity.hasEffect(MobEffects.SLOW_FALLING)) return false;
 
         boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
                 .equals(ArmorRegistry.SUPER_HELMET.get().getMaterialName());

@@ -34,6 +34,7 @@ public class SuperArmor extends Armor
     private final IArmorEffect slownessEffect;
     private final IArmorEffect jumpNegativeEffect;
     private final IArmorEffect levitationEffect;
+    private final IArmorEffect slowFallingEffect;
     private final IArmorEffect superJumpEffect;
     private final IArmorEffect dolphinsGraceEffect;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
@@ -44,6 +45,8 @@ public class SuperArmor extends Armor
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
+
+    private static final int LEVITATION_UP_AMPLIFIER = 3;
 
     public SuperArmor(IPlayer player)
     {
@@ -56,7 +59,8 @@ public class SuperArmor extends Armor
         slownessEffect = new SlownessArmorEffect(player, this, 2, REGENERATION_EFFECT_DURATION).availableOnAnyArmorElement();
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
-        levitationEffect = new LevitationSwitchingEffect(player, this, 3).availableOnFullArmorSet();
+        levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableOnFullArmorSet();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnFullArmorSet();
         superJumpEffect = new SuperJumpSwitchingEffect(player, this).setupAvailability(this::isSuperJumpEffectAvailable);
         dolphinsGraceEffect = new DolphinsGraceEffect(player, this);
 
@@ -86,6 +90,7 @@ public class SuperArmor extends Armor
         {
             jumpEffect.updateSwitchState();
             levitationEffect.updateSwitchState();
+            slowFallingEffect.updateSwitchState();
             superJumpEffect.updateSwitchState();
             dolphinsGraceEffect.updateSwitchState();
         }
@@ -176,6 +181,7 @@ public class SuperArmor extends Armor
         slownessEffect.updateEffectAvailability();
         jumpNegativeEffect.updateEffectAvailability();
         levitationEffect.updateEffectAvailability();
+        slowFallingEffect.updateEffectAvailability();
         superJumpEffect.updateEffectAvailability();
         dolphinsGraceEffect.updateEffectAvailability();
 
@@ -189,7 +195,7 @@ public class SuperArmor extends Armor
 
         if (jumpEffect.isActive() || slownessEffect.isActive()) return;
 
-        if (levitationEffect.isEffectOn() && levitationEffect.isActive())
+        if (slowFallingEffect.isEffectOn() && slowFallingEffect.isActive())
         {
             player.setEffect(MobEffects.JUMP, 30, 6);
         }
@@ -204,11 +210,7 @@ public class SuperArmor extends Armor
     {
         if (!player.isArmorElementPutOn(this, EquipmentSlot.FEET)) return;
 
-        if (levitationEffect.isEffectOn() && levitationEffect.isActive())
-        {
-            event.setDamageMultiplier(0);
-        }
-        else if (superJumpEffect.isEffectOn() && superJumpEffect.isActive())
+        if (superJumpEffect.isEffectOn() && superJumpEffect.isActive())
         {
             event.setDamageMultiplier(0.3f);
         }
@@ -275,6 +277,7 @@ public class SuperArmor extends Armor
                 slownessEffect.trySwitch();
                 jumpEffect.trySwitchOff();
                 levitationEffect.trySwitchOff();
+                slowFallingEffect.trySwitchOff();
                 jumpNegativeEffect.trySwitch();
             }
         }
@@ -284,15 +287,29 @@ public class SuperArmor extends Armor
             if (!slownessEffect.isActive() && jumpEffect.isEffectAvailable())
             {
                 jumpEffect.trySwitch();
-                levitationEffect.updateEffectActivity(getLevitationAmplifier());
             }
+
+            slowFallingEffect.trySwitchOff();
+            levitationEffect.trySwitchOff();
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
             if (!slownessEffect.isActive())
             {
-                levitationEffect.trySwitch(getLevitationAmplifier());
+                if (jumpEffect.isEffectAvailable() && jumpEffect.isEffectOn())
+                {
+                    levitationEffect.trySwitch(getLevitationAmplifier());
+                }
+                else
+                {
+                    slowFallingEffect.trySwitch();
+                }
+            }
+
+            if (slowFallingEffect.isActive())
+            {
+                player.getEntity().stopFallFlying();
             }
         }
 
@@ -300,6 +317,16 @@ public class SuperArmor extends Armor
         {
             superJumpEffect.trySwitch();
             dolphinsGraceEffect.trySwitch();
+        }
+
+        if (levitationEffect.isEffectOn())
+        {
+            slowFallingEffect.trySwitchOff();
+        }
+
+        if (slowFallingEffect.isEffectOn())
+        {
+            levitationEffect.trySwitchOff();
         }
     }
 
@@ -376,6 +403,7 @@ public class SuperArmor extends Armor
         dolphinsGraceEffect.updateEffectActivity();
 
         levitationEffect.updateEffectActivity(getLevitationAmplifier());
+        slowFallingEffect.updateEffectActivity();
 
         if (!slownessEffect.isActive())
         {
@@ -394,7 +422,7 @@ public class SuperArmor extends Armor
 
     private int getLevitationAmplifier()
     {
-        return jumpEffect.isEffectOn() && jumpEffect.isActive() ? 3 : 250;
+        return LEVITATION_UP_AMPLIFIER;
     }
 
     private boolean isSuperJumpEffectAvailable(IPlayer player, IArmor armor)

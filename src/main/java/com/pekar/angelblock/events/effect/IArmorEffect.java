@@ -35,6 +35,7 @@ public interface IArmorEffect
     IArmorEffect availableIfSlotSet(EquipmentSlot slot);
     IArmorEffect availableIfSlotsSet(EquipmentSlot ...slot);
     IArmorEffect showIcon();
+    IArmorEffect hideIcon();
 
     Holder<MobEffect> getEffect();
 }

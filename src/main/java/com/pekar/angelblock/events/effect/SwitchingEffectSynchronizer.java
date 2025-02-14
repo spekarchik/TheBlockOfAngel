@@ -172,12 +172,14 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
     public void addDependentEffect(SwitchingArmorEffect effect)
     {
         dependentEffects.add(effect);
+        effect.setupAvailability((player, armor) -> masterEffect.isEffectAvailable());
         effect.setSwitchState(masterEffect.isOn);
     }
 
     public void addDependentInvertedEffect(SwitchingArmorEffect effect)
     {
         dependentInvertedEffects.add(effect);
+        effect.setupAvailability((player, armor) -> masterEffect.isEffectAvailable());
         effect.setSwitchState(!masterEffect.isOn);
     }
 
@@ -243,6 +245,12 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
 
     @Override
     public IArmorEffect showIcon()
+    {
+        return this;
+    }
+
+    @Override
+    public IArmorEffect hideIcon()
     {
         return this;
     }

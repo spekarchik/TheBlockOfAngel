@@ -1,0 +1,19 @@
+{
+    "replace": false,
+    "values": [
+        "angelblock:flying_boots",
+        "angelblock:flying_leggings",
+        "angelblock:flying_chestplate",
+        "angelblock:flying_helmet",
+        "angelblock:super_chestplate",
+        "angelblock:super_chestplate_flying",
+        "angelblock:limonite_helmet",
+        "angelblock:limonite_helmet_with_detector",
+        "angelblock:limonite_chestplate",
+        "angelblock:limonite_chestplate_with_sea_power",
+        "angelblock:limonite_leggings",
+        "angelblock:limonite_leggings_with_regenerator",
+        "angelblock:limonite_boots",
+        "angelblock:limonite_boots_with_strength"
+    ]
+}

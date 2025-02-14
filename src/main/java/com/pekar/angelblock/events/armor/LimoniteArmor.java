@@ -42,8 +42,8 @@ public class LimoniteArmor extends Armor
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
-    private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 7;
-    private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 16;
+    private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 2;
+    private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 6;
 
     public LimoniteArmor(IPlayer player)
     {
@@ -60,11 +60,11 @@ public class LimoniteArmor extends Armor
         var jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
-        var levitationEffect = new LevitationSwitchingEffect(player, this, 250);
+        var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
-        this.jumpEffect.addDependentEffect(levitationEffect);
+        this.jumpEffect.addDependentEffect(slowFallingEffect);
     }
 
     @Override

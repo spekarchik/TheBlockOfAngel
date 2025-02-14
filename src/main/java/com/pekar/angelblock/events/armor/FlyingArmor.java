@@ -15,20 +15,24 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 public class FlyingArmor extends Armor
 {
     private final SwitchingEffectSynchronizer jumpBoostEffect;
-    private final IArmorEffect levitationSwitchingEffect;
+    private final IArmorEffect slowFallingSwitchingEffect;
+    private static final int JUMP_BOOST_AMPLIFIER = 24;
 
     public FlyingArmor(IPlayer player)
     {
         super(player);
 
-        levitationSwitchingEffect = new LevitationSwitchingEffect(player, this, 250).setupAvailability(this::isLevitationSwitchingEffectAvailable);
+        slowFallingSwitchingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isLevitationSwitchingEffectAvailable);
 
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
         speedEffect.setupAvailability(this::isJumpEffectAvailable);
-        var jumpBoostEffect = new JumpBoostArmorEffect(player, this, 24);
-        jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable);
+        var jumpBoostEffect = new JumpBoostArmorEffect(player, this, JUMP_BOOST_AMPLIFIER);
+        jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable).hideIcon();
+        var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
+        superJumpEffect.setupAvailability(this::isJumpEffectAvailable);
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
         this.jumpBoostEffect.addDependentEffect(speedEffect);
+        this.jumpBoostEffect.addDependentEffect(superJumpEffect);
     }
 
     @Override
@@ -50,7 +54,7 @@ public class FlyingArmor extends Armor
 
         if (!player.isNether())
         {
-            levitationSwitchingEffect.updateSwitchState();
+            slowFallingSwitchingEffect.updateSwitchState();
         }
     }
 
@@ -68,9 +72,9 @@ public class FlyingArmor extends Armor
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
         jumpBoostEffect.updateEffectAvailability();
-        levitationSwitchingEffect.updateEffectAvailability();
+        slowFallingSwitchingEffect.updateEffectAvailability();
 
-        levitationSwitchingEffect.updateSwitchState();
+        slowFallingSwitchingEffect.updateSwitchState();
         updatePotionEffects();
     }
 
@@ -91,7 +95,7 @@ public class FlyingArmor extends Armor
     @Override
     public void onKeyInputEvent(String pressedKeyDescription)
     {
-        if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
+        if (pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
         {
             if (!player.isNether())
             {
@@ -103,7 +107,10 @@ public class FlyingArmor extends Armor
         {
             if (!player.isNether())
             {
-                levitationSwitchingEffect.trySwitch();
+                slowFallingSwitchingEffect.trySwitch();
+
+                if (slowFallingSwitchingEffect.isActive())
+                    player.getEntity().stopFallFlying();
             }
         }
     }
@@ -117,7 +124,7 @@ public class FlyingArmor extends Armor
     public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
     {
         jumpBoostEffect.updateEffectAvailability();
-        levitationSwitchingEffect.updateEffectAvailability();
+        slowFallingSwitchingEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -149,7 +156,7 @@ public class FlyingArmor extends Armor
     private void updatePotionEffects()
     {
         jumpBoostEffect.updateEffectActivity();
-        levitationSwitchingEffect.updateEffectActivity();
+        slowFallingSwitchingEffect.updateEffectActivity();
     }
 
     private boolean isLevitationSwitchingEffectAvailable(IPlayer player, IArmor armor)

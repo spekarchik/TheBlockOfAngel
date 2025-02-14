@@ -226,6 +226,13 @@ abstract class ArmorEffect implements IArmorEffect
         return this;
     }
 
+    @Override
+    public IArmorEffect hideIcon()
+    {
+        showIcon = false;
+        return this;
+    }
+
     protected boolean canClearEffect()
     {
         return true;

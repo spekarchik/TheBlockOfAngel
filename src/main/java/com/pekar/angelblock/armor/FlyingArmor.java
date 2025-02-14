@@ -2,6 +2,7 @@ package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +31,7 @@ public class FlyingArmor extends ModArmor
     public boolean canElytraFly(ItemStack stack, LivingEntity entity)
     {
         if (type != Type.CHESTPLATE) return false;
+        if (entity.hasEffect(MobEffects.SLOW_FALLING)) return false;
         if (Utils.instance.dimension.isNether(entity.level().dimension()) || entity.isInWaterRainOrBubble()) return false;
 
         var mainHandItemStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
