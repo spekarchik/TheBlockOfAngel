@@ -6,15 +6,8 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions":
-          [
-            {
-                "function": "minecraft:set_nbt",
-                "tag": "{ Variant: 4 }"
-            }
-          ],
           "weight": 1,
-          "name": "minecraft:axolotl_bucket"
+          "name": "angelblock:blue_axolotl_bucket"
         },
         {
           "type": "minecraft:item",
