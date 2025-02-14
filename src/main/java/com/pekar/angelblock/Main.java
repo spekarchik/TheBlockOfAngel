@@ -5,7 +5,6 @@ import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.events.*;
 import com.pekar.angelblock.items.ItemRegistry;
-import com.pekar.angelblock.network.PacketRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.recipe.RecipeRegistry;
 import com.pekar.angelblock.tab.MainTab;
@@ -27,13 +26,15 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Main.MODID)
 public class Main
 {
     // Directly reference a log4j logger.
-//    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "angelblock";
     public static final String MODNAME = "Angel Block Mod";
 
@@ -78,6 +79,7 @@ public class Main
         NeoForge.EVENT_BUS.register(this);
 
         EventRegistry.registerEvents();
+        EventRegistry.registerEventsOnModBus(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -103,8 +105,6 @@ public class Main
         GuiEvents.initStatic();
 
         RecipeRegistry.init();
-
-        PacketRegistry.init();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

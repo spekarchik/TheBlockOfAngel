@@ -1,23 +1,20 @@
 package com.pekar.angelblock.network;
 
+import com.pekar.angelblock.events.IEventHandler;
 import com.pekar.angelblock.network.packets.*;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.HandlerThread;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-public final class PacketRegistry
+public final class PacketRegistry implements IEventHandler
 {
-    private PacketRegistry()
-    {
-    }
-
-    public static void init()
+    public PacketRegistry()
     {
     }
 
     @SubscribeEvent
-    public static void register(final RegisterPayloadHandlersEvent event)
+    public void register(final RegisterPayloadHandlersEvent event)
     {
         final PayloadRegistrar registrar = event.registrar("1")
                 .executesOn(HandlerThread.NETWORK);
@@ -30,7 +27,7 @@ public final class PacketRegistry
         registerPacket(registrar, new HoldingAngelRodPacket());
     }
 
-    private static <T extends Packet> void registerPacket(PayloadRegistrar registrar, T packet)
+    private <T extends Packet> void registerPacket(PayloadRegistrar registrar, T packet)
     {
         var packetInfoProvider = new PacketInfoProvider<>(packet);
 
