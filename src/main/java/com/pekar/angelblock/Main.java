@@ -128,7 +128,7 @@ public class Main
         {
             var potionItemStack = new ItemStack(Items.SPLASH_POTION);
             potionItemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(PotionRegistry.BLOCK_BREAKER_POTION));
-            event.accept(potionItemStack); // TODO: Check if the potion is displayed on AngelBlock tab
+            event.accept(potionItemStack);
             //event.accept(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), PotionRegistry.BLOCK_BREAKER_POTION));
         }
     }

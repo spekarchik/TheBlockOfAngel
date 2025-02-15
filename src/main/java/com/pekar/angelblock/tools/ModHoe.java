@@ -61,7 +61,7 @@ public class ModHoe extends HoeItem implements IModToolEnhanced
 
                 damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
 
-                if (!utils.blocks.transformations.updateNeighbors(level, upPos)) // TODO: check it
+                if (!utils.blocks.transformations.updateNeighbors(level, upPos))
                 {
                     return InteractionResult.FAIL;
                 }

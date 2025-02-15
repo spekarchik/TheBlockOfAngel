@@ -36,7 +36,7 @@ public class BlockTransformations
         BlockState waterBlockState = level.getBlockState(pos);
         if (waterBlockState.getBlock() instanceof LiquidBlock)
         {
-            notifyNeighbourChanged(waterBlockState, level, pos); // TODO: Check
+            notifyNeighbourChanged(waterBlockState, level, pos);
             //liquidBlock.neighborChanged(waterBlockState, level, pos, liquidBlock, pos, false /* ignored */);
             return true;
         }
