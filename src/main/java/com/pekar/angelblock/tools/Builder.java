@@ -177,11 +177,11 @@ public class Builder extends WorkRod
 
             if (player instanceof ServerPlayer serverPlayer)
             {
-                var soundEvent = placingBlock.defaultBlockState().getSoundType().getPlaceSound();
+                var soundEvent = placingBlock.defaultBlockState().getSoundType(level, pos, player).getPlaceSound();
                 new PlaySoundPacket(soundEvent).sendToPlayer(serverPlayer);
             }
 
-            damageItemIfSurvival(player, level, pos, placingBlock.defaultBlockState());
+            damageMainHandItemIfSurvivalIgnoreClient(player, level);
             offHandItemStack.setCount(itemCount - 1);
         }
 

@@ -38,7 +38,7 @@ public class LapisHoe extends EnhancedHoe
             {
                 level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 11);
                 new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
             return true;
         }
@@ -47,7 +47,7 @@ public class LapisHoe extends EnhancedHoe
             if (!level.isClientSide())
             {
                 setBlock(player, pos, Blocks.DIRT);
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
             return true;
         }

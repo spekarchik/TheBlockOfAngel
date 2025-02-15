@@ -61,7 +61,7 @@ public class MarineRod extends AncientRod
                     {
                         level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
                         new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
-                        damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
+                        damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
 
                         utils.blocks.transformations.updateNeighbors(level, upPos);
                     }
@@ -75,7 +75,7 @@ public class MarineRod extends AncientRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, Blocks.SLIME_BLOCK);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
@@ -86,7 +86,7 @@ public class MarineRod extends AncientRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, Blocks.SNOW_BLOCK);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
@@ -100,7 +100,7 @@ public class MarineRod extends AncientRod
         {
             if (block == Blocks.PODZOL || block == Blocks.MYCELIUM)
             {
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 int randomValue = itemRand.nextInt() & 1;
                 var plantBlock = randomValue == 0 ? Blocks.BROWN_MUSHROOM : Blocks.RED_MUSHROOM;
                 return plant(player, level, pos, hand, facing, plantBlock);
@@ -108,13 +108,13 @@ public class MarineRod extends AncientRod
 
             if (block == Blocks.RED_SAND || block == Blocks.GRAVEL)
             {
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return plant(player, level, pos, hand, facing, Blocks.BAMBOO);
             }
 
             if (block == Blocks.CLAY && utils.blocks.conditions.isNearWaterHorizontal(level, pos))
             {
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return plant(player, level, pos, hand, facing, Blocks.SMALL_DRIPLEAF);
             }
         }

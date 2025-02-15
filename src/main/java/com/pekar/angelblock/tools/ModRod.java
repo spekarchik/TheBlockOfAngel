@@ -71,6 +71,26 @@ public class ModRod extends ModTool implements IModTool
         return false;
     }
 
+    @Override
+    public void damageMainHandItem(int amount, LivingEntity livingEntity)
+    {
+        var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
+        var durability = itemStack.getMaxDamage() - itemStack.getDamageValue();
+        if (durability <= amount) return;
+
+        super.damageMainHandItem(amount, livingEntity);
+    }
+
+    @Override
+    public void damageOffHandItem(int amount, LivingEntity livingEntity)
+    {
+        var itemStack = livingEntity.getItemInHand(InteractionHand.OFF_HAND);
+        var durability = itemStack.getMaxDamage() - itemStack.getDamageValue();
+        if (durability <= amount) return;
+
+        super.damageOffHandItem(amount, livingEntity);
+    }
+
     protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
     {
         //if (!(plantBlock instanceof IPlantable plantable)) return InteractionResult.FAIL;

@@ -55,7 +55,7 @@ public class FireRod extends MarineRod
             {
                 if (block == Blocks.SOUL_SAND)
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, hand, facing, Blocks.NETHER_WART);
                 }
 
@@ -67,7 +67,7 @@ public class FireRod extends MarineRod
                     {
                         level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
                         utils.blocks.transformations.updateNeighbors(level, upPos);
-                        damageItemIfSurvival(player, level, pos, blockState);
+                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
                         new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
                     }
 
@@ -81,7 +81,7 @@ public class FireRod extends MarineRod
                     if (!isClientSide)
                     {
                         setBlock(player, pos, Blocks.NETHERRACK);
-                        damageItemIfSurvival(player, level, pos, blockState);
+                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     }
 
                     return getToolInteractionResult(true, isClientSide);
@@ -104,7 +104,7 @@ public class FireRod extends MarineRod
                 {
                     level.setBlock(pos, woolBlock.defaultBlockState(), 0);
                     level.destroyBlock(pos, true, player, 1);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
             }
 
@@ -118,7 +118,7 @@ public class FireRod extends MarineRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, Blocks.GLOWSTONE);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
@@ -130,7 +130,7 @@ public class FireRod extends MarineRod
                 {
                     level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
                     level.destroyBlock(pos, true, player, 1);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
@@ -141,7 +141,7 @@ public class FireRod extends MarineRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, Blocks.BLACKSTONE);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
                 return getToolInteractionResult(true, isClientSide);
             }
@@ -151,7 +151,7 @@ public class FireRod extends MarineRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, Blocks.SHROOMLIGHT);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
@@ -162,7 +162,7 @@ public class FireRod extends MarineRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, Blocks.TERRACOTTA);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
@@ -183,7 +183,7 @@ public class FireRod extends MarineRod
                                 if (!isClientSide)
                                 {
                                     setBlock(player, pos, Blocks.CRIMSON_STEM);
-                                    damageItemIfSurvival(player, level, pos, blockState);
+                                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                                 }
                                 return getToolInteractionResult(true, isClientSide);
                             }
@@ -194,7 +194,7 @@ public class FireRod extends MarineRod
                                 if (!isClientSide)
                                 {
                                     setBlock(player, pos, Blocks.WARPED_STEM);
-                                    damageItemIfSurvival(player, level, pos, blockState);
+                                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                                 }
                                 return getToolInteractionResult(true, isClientSide);
                             }

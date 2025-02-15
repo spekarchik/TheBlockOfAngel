@@ -73,7 +73,7 @@ public class EnhancedAxe extends ModAxe
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
             if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
-                damageItem(1, entityLiving);
+                damageMainHandItem(1, entityLiving);
         }
     }
 }

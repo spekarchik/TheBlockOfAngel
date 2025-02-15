@@ -89,7 +89,7 @@ public class EnhancedPickaxe extends ModPickaxe
             if (!utils.blocks.types.isOre(originBlock) || originBlock == block)
             {
                 if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
-                    damageItem(1, entityLiving);
+                    damageMainHandItem(1, entityLiving);
             }
         }
     }

@@ -59,7 +59,7 @@ public class ModHoe extends HoeItem implements IModToolEnhanced
                 level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
                 new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
 
-                damageItemIfSurvival(player, level, pos, blockState); // pos, not upPos
+                damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
 
                 if (!utils.blocks.transformations.updateNeighbors(level, upPos))
                 {
@@ -97,7 +97,7 @@ public class ModHoe extends HoeItem implements IModToolEnhanced
             if (!level.isClientSide)
             {
                 setBlock(player, pos, Blocks.DIRT);
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
             return true;
         }

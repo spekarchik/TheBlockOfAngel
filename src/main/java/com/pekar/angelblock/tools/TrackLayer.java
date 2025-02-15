@@ -54,7 +54,7 @@ public class TrackLayer extends WorkRod
         if (!level.isClientSide() && isTrackLayerCompatible(block) && livingEntity instanceof Player player)
         {
             dropBlocks(player, level, pos);
-            damageItemIfSurvival(player, level, pos, blockState);
+            damageMainHandItemIfSurvivalIgnoreClient(player, level);
         }
 
         return true;
@@ -266,7 +266,7 @@ public class TrackLayer extends WorkRod
         if (!level.isClientSide())
         {
             level.destroyBlock(pos, shouldDrop);
-            damageItemIfSurvival(player, level, pos, level.getBlockState(pos));
+            damageMainHandItemIfSurvivalIgnoreClient(player, level);
         }
 
         return true;
@@ -317,7 +317,7 @@ public class TrackLayer extends WorkRod
                 new PlaySoundPacket(soundType).sendToPlayer(serverPlayer);
             }
 
-            damageItemIfSurvival(player, level, pos, blockState);
+            damageMainHandItemIfSurvivalIgnoreClient(player, level);
             offHandItemStack.setCount(itemCount - 1);
         }
 

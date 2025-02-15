@@ -57,7 +57,7 @@ public class EndRod extends AmethystRod
             {
                 if (block == Blocks.END_STONE)
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, hand, facing, Blocks.CHORUS_FLOWER);
                 }
             }
@@ -68,7 +68,7 @@ public class EndRod extends AmethystRod
                 {
                     level.setBlock(pos, BlockRegistry.DESTROYING_GUNPOWDER.get().defaultBlockState(), 0);
                     level.destroyBlock(pos, true, player, 1);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
@@ -97,7 +97,7 @@ public class EndRod extends AmethystRod
                 levelData.setThunderTime(0);
                 levelData.setRaining(false);
                 levelData.setThundering(false);
-                damageItem(1, player);
+                damageMainHandItem(1, player);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
@@ -122,7 +122,7 @@ public class EndRod extends AmethystRod
                     levelData.setRainTime(weatherLasts);
                 }
                 levelData.setThunderTime(0);
-                damageItem(1, player);
+                damageMainHandItem(1, player);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
@@ -150,7 +150,7 @@ public class EndRod extends AmethystRod
                     levelData.setRainTime(weatherLasts);
                     levelData.setThunderTime(weatherLasts);
                 }
-                damageItem(1, player);
+                damageMainHandItem(1, player);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {

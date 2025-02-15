@@ -26,20 +26,37 @@ public interface IModTool extends IModDescriptionItem
 
     TieredItem getTool();
 
-    default void damageItem(int amount, LivingEntity livingEntity)
+    default void damageMainHandItem(int amount, LivingEntity livingEntity)
     {
         var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
         if (itemStack.getItem().equals(this))
             itemStack.hurtAndBreak(amount, livingEntity, EquipmentSlot.MAINHAND);
     }
 
-    default void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
+    default void damageOffHandItem(int amount, LivingEntity livingEntity)
+    {
+        var itemStack = livingEntity.getItemInHand(InteractionHand.OFF_HAND);
+        if (itemStack.getItem().equals(this))
+            itemStack.hurtAndBreak(amount, livingEntity, EquipmentSlot.OFFHAND);
+    }
+
+    default void damageMainHandItemIfSurvivalIgnoreClient(Player player, Level level)
     {
         if (level.isClientSide()) return;
 
         if (player instanceof ServerPlayer serverPlayer && !serverPlayer.isCreative())
         {
-            damageItem(1, player);
+            damageMainHandItem(1, player);
+        }
+    }
+
+    default void damageOffHandItemIfSurvivalIgnoreClient(Player player, Level level)
+    {
+        if (level.isClientSide()) return;
+
+        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.isCreative())
+        {
+            damageOffHandItem(1, player);
         }
     }
 

@@ -51,6 +51,10 @@ public class Planter extends WorkRod
         else if (offHandItem instanceof ShearsItem)
         {
             success = grabPlants(player, level, pos, 5, false);
+            if (success)
+            {
+                damageOffHandItemIfSurvivalIgnoreClient(player, level);
+            }
         }
 
         return getToolInteractionResult(success, level.isClientSide());
@@ -248,9 +252,9 @@ public class Planter extends WorkRod
         if (itemCount < 1) return false;
 
         var result = plant(player, level, pos, InteractionHand.OFF_HAND, facing, plantBlock);
-        if (result.shouldSwing())
+        if (result.consumesAction())
         {
-            damageItemIfSurvival(player, level, pos, blockState);
+            damageMainHandItemIfSurvivalIgnoreClient(player, level);
             itemStack.setCount(itemCount - 1);
         }
 
@@ -283,7 +287,7 @@ public class Planter extends WorkRod
                         new PlaySoundPacket(SoundType.BONEMEAL).sendToPlayer(serverPlayer);
                     }
 
-                    damageItemIfSurvival(player, level, pos.below(), level.getBlockState(pos.below()));
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     itemStack.setCount(itemCount - 1);
                 }
             }

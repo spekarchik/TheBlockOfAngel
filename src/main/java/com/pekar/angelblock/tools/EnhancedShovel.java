@@ -152,7 +152,7 @@ public class EnhancedShovel extends ModShovel
                 level.setBlock(pos, newBlockState, 11);
                 new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
 
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
 
             return true;
@@ -174,7 +174,7 @@ public class EnhancedShovel extends ModShovel
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
             if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
-                damageItem(1, entityLiving);
+                damageMainHandItem(1, entityLiving);
         }
     }
 }

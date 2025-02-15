@@ -135,7 +135,7 @@ public class EnhancedHoe extends ModHoe implements IModToolEnhanced
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
             if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
-                damageItem(1, entityLiving);
+                damageMainHandItem(1, entityLiving);
         }
     }
 }

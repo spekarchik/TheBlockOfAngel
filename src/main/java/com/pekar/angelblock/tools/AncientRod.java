@@ -39,7 +39,7 @@ public class AncientRod extends MagneticRod
             if (!level.isClientSide() && entity instanceof Player player)
             {
                 destroyWebBlocks(level, pos);
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
 
             return true;
@@ -92,7 +92,7 @@ public class AncientRod extends MagneticRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, infestedBlock.getHostBlock());
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
                 return getToolInteractionResult(true, isClientSide);
             }
@@ -102,14 +102,14 @@ public class AncientRod extends MagneticRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block instanceof LeavesBlock)
             {
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
 
                 return setOnBlockSide(context, this::setVine);
             }
@@ -124,13 +124,13 @@ public class AncientRod extends MagneticRod
                         || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || utils.blocks.types.isSandBlock(block)
                         || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM))
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, hand, facing, Blocks.SUGAR_CANE);
                 }
 
                 if (block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.MOSS_BLOCK)
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     int randomValue = itemRand.nextInt() & 1;
 
                     switch (randomValue)
@@ -144,20 +144,20 @@ public class AncientRod extends MagneticRod
 
                 if (block == Blocks.GRASS_BLOCK)
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     int randomValue = itemRand.nextInt() % 16;
                     return plant(player, level, pos, hand, facing, chooseFlowerByValue(randomValue));
                 }
 
                 if (block == Blocks.SAND)
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, hand, facing, Blocks.CACTUS);
                 }
 
                 if (block == Blocks.FARMLAND)
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     int randomValue = itemRand.nextInt() % 4;
 
                     switch (randomValue)
@@ -177,7 +177,7 @@ public class AncientRod extends MagneticRod
                 {
                     if (!isClientSide)
                     {
-                        damageItemIfSurvival(player, level, pos, blockState);
+                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
                         setBlock(player, pos, Blocks.GRASS_BLOCK);
                     }
                     return getToolInteractionResult(true, isClientSide);

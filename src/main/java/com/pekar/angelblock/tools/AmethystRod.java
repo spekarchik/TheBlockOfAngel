@@ -49,7 +49,7 @@ public class AmethystRod extends FireRod
             {
                 if (!isClientSide)
                 {
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     setBlock(player, pos, Blocks.CRYING_OBSIDIAN);
                 }
 
@@ -60,7 +60,7 @@ public class AmethystRod extends FireRod
                     || block == Blocks.DIORITE || block == Blocks.CALCITE
                     || block == Blocks.DRIPSTONE_BLOCK)
             {
-                damageItemIfSurvival(player, level, pos, blockState);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return setOnBlockSide(context, this::setGlowLichen);
             }
 
@@ -69,7 +69,7 @@ public class AmethystRod extends FireRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, Blocks.BUDDING_AMETHYST);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
@@ -80,7 +80,7 @@ public class AmethystRod extends FireRod
                 if (!isClientSide)
                 {
                     setBlock(player, pos, Blocks.CALCITE);
-                    damageItemIfSurvival(player, level, pos, blockState);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
 
                 return getToolInteractionResult(true, isClientSide);
