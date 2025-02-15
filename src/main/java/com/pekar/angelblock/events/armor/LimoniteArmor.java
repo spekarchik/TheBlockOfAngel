@@ -100,8 +100,7 @@ public class LimoniteArmor extends Armor
 
         if (isFreezeDamage(damageSource))
         {
-            boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
-            event.setCanceled(areBootsWorn);
+            event.setCanceled(true);
         }
         else
         {
