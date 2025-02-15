@@ -53,7 +53,7 @@ public class Planter extends WorkRod
             success = grabPlants(player, level, pos, 5, false);
         }
 
-        return success ? InteractionResult.sidedSuccess(level.isClientSide()) : InteractionResult.PASS;
+        return getToolInteractionResult(success, level.isClientSide());
     }
 
     @Override
@@ -248,13 +248,13 @@ public class Planter extends WorkRod
         if (itemCount < 1) return false;
 
         var result = plant(player, level, pos, InteractionHand.OFF_HAND, facing, plantBlock);
-        if (result == InteractionResult.CONSUME)
+        if (result.shouldSwing())
         {
             damageItemIfSurvival(player, level, pos, blockState);
             itemStack.setCount(itemCount - 1);
         }
 
-        return result.indicateItemUse(); // TODO: Check
+        return result.consumesAction(); // TODO: Check
     }
 
     private boolean bonemealPlant(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack)

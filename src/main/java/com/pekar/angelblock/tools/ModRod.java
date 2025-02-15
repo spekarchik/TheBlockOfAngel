@@ -95,7 +95,7 @@ public class ModRod extends ModTool implements IModTool
                 }
             }
 
-            return InteractionResult.sidedSuccess(isClientSide);
+            return getToolInteractionResult(true, isClientSide);
         }
         else
         {

@@ -34,30 +34,32 @@ public class LimoniteSword extends ModSword
         var player = context.getPlayer();
         var level = player.level();
 
-        if (level.isClientSide) return InteractionResult.PASS;
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
 
         if (player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
         {
-            if (level.getBlockState(pos).getBlock() == Blocks.SAND)
+            if (level.isClientSide())
             {
-                plantCacti(player, level, pos, context.getHand(), context.getClickedFace());
-                new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
+                if (level.getBlockState(pos).getBlock() == Blocks.SAND)
+                {
+                    plantCacti(player, level, pos, context.getHand(), context.getClickedFace());
+                    new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
+                }
+                else if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
+                        && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
+                {
+                    setEffectAround(player, level, pos);
+                    new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+                }
+                else
+                {
+                    setEffectAhead(player, level, pos);
+                    new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+                }
             }
-            else if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
-                    && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
-            {
-                setEffectAround(player, level, pos);
-                new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
-            }
-            else
-            {
-                setEffectAhead(player, level, pos);
-                new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
-            }
-            return InteractionResult.CONSUME;
+            return getToolInteractionResult(true, level.isClientSide());
         }
 
         return InteractionResult.PASS;

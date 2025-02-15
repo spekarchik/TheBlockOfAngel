@@ -25,15 +25,16 @@ public class DiamithicSword extends ModSword
         var player = context.getPlayer();
         var level = player.level();
 
-        if (level.isClientSide) return InteractionResult.PASS;
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
 
         if (player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT))
         {
-            explode(player, level, pos);
-            return InteractionResult.CONSUME;
+            if (!level.isClientSide())
+                explode(player, level, pos);
+
+            return getToolInteractionResult(true, level.isClientSide());
         }
 
         return InteractionResult.PASS;

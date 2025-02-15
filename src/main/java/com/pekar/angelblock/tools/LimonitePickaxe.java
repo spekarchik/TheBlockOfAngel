@@ -52,7 +52,7 @@ public class LimonitePickaxe extends EnhancedPickaxe
                 new PlaySoundPacket(SoundType.INFESTED_BLOCK).sendToPlayer((ServerPlayer) player);
             }
 
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return getToolInteractionResult(true, level.isClientSide());
         }
 
         return result;

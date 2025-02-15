@@ -71,7 +71,7 @@ public class FireRod extends MarineRod
                         new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
                     }
 
-                    return InteractionResult.sidedSuccess(isClientSide);
+                    return getToolInteractionResult(true, isClientSide);
                 }
             }
             else
@@ -84,7 +84,7 @@ public class FireRod extends MarineRod
                         damageItemIfSurvival(player, level, pos, blockState);
                     }
 
-                    return InteractionResult.sidedSuccess(isClientSide);
+                    return getToolInteractionResult(true, isClientSide);
                 }
             }
         }
@@ -110,7 +110,7 @@ public class FireRod extends MarineRod
 
             if (woolBlock != null)
             {
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.MAGMA_BLOCK)
@@ -121,7 +121,7 @@ public class FireRod extends MarineRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.GLOWSTONE)
@@ -133,7 +133,7 @@ public class FireRod extends MarineRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.BASALT)
@@ -143,7 +143,7 @@ public class FireRod extends MarineRod
                     setBlock(player, pos, Blocks.BLACKSTONE);
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM)
@@ -154,7 +154,7 @@ public class FireRod extends MarineRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.CLAY) // it's important to check CLAY near WATER (MarineRod) earlier
@@ -165,7 +165,7 @@ public class FireRod extends MarineRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.SHROOMLIGHT)
@@ -185,7 +185,7 @@ public class FireRod extends MarineRod
                                     setBlock(player, pos, Blocks.CRIMSON_STEM);
                                     damageItemIfSurvival(player, level, pos, blockState);
                                 }
-                                return InteractionResult.sidedSuccess(isClientSide);
+                                return getToolInteractionResult(true, isClientSide);
                             }
 
                             if (block1 == Blocks.WARPED_STEM || block1 == Blocks.WARPED_NYLIUM || block1 == Blocks.WARPED_WART_BLOCK
@@ -196,7 +196,7 @@ public class FireRod extends MarineRod
                                     setBlock(player, pos, Blocks.WARPED_STEM);
                                     damageItemIfSurvival(player, level, pos, blockState);
                                 }
-                                return InteractionResult.sidedSuccess(isClientSide);
+                                return getToolInteractionResult(true, isClientSide);
                             }
                         }
             }

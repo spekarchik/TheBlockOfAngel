@@ -37,21 +37,22 @@ public class MagneticRod extends ModRod
 
         var level = player.level();
         boolean isClientSide = level.isClientSide();
-        if (isClientSide) return InteractionResult.SUCCESS;
 
         var itemStack = player.getItemInHand(context.getHand());
         boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
-        if (isBroken) return InteractionResult.CONSUME; // Magnetic mode should always prevent replacing blocks (always return CONSUME)
+        if (isBroken) return InteractionResult.sidedSuccess(isClientSide); // Magnetic mode should always prevent replacing blocks (always return CONSUME)
 
         var pos = context.getClickedPos();
         var blockState = level.getBlockState(pos);
         if (blockState.isAir() || utils.blocks.types.isLiquid(blockState.getBlock()))
         {
-            return InteractionResult.CONSUME;
+            return getToolInteractionResult(true, isClientSide);
         }
 
+        if (isClientSide) return getToolInteractionResult(true, isClientSide);
+
         shiftOres(player, level, pos, context.getClickedFace());
-        return InteractionResult.CONSUME;
+        return getToolInteractionResult(true, isClientSide);
     }
 
     private InteractionResult shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
@@ -91,7 +92,7 @@ public class MagneticRod extends ModRod
 
         shiftOreBlocks((ServerPlayer) player, level, pos, clickedFace, initialDepth, getDepthCoord, getRadiusCoord1, getRadiusCoord2, createPos);
 
-        return InteractionResult.CONSUME;
+        return getToolInteractionResult(true, level.isClientSide());
     }
 
     private void shiftOreBlocks(ServerPlayer player, Level level, BlockPos pos, Direction clickedFace, int initialDepth, Function<BlockPos, Integer> getDepthCoord, Function<BlockPos, Integer> getRadiusCoord1, Function<BlockPos, Integer> getRadiusCoord2, TriFunction<Integer, Integer, Integer, BlockPos> createPos)

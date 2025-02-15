@@ -49,7 +49,7 @@ public class SuperPickaxe extends EnhancedPickaxe
                 level.setBlock(pos, BlockRegistry.CRACKED_OBSIDIAN.get().defaultBlockState(), 11);
             }
 
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return getToolInteractionResult(true, level.isClientSide());
         }
 
         if (block instanceof InfestedBlock infestedBlock)
@@ -60,7 +60,7 @@ public class SuperPickaxe extends EnhancedPickaxe
                 new PlaySoundPacket(SoundType.INFESTED_BLOCK).sendToPlayer((ServerPlayer) player);
             }
 
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return getToolInteractionResult(true, level.isClientSide());
         }
 
         return result;

@@ -71,7 +71,7 @@ public class EndRod extends AmethystRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
         }
 
@@ -101,6 +101,7 @@ public class EndRod extends AmethystRod
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
+                player.swing(interactionHand);
                 levelData.setRaining(false);
             }
 
@@ -125,6 +126,7 @@ public class EndRod extends AmethystRod
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
+                player.swing(interactionHand);
                 levelData.setRaining(true);
                 level.setRainLevel(0.3F);
                 level.setThunderLevel(0);
@@ -152,6 +154,7 @@ public class EndRod extends AmethystRod
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
+                player.swing(interactionHand);
                 levelData.setRaining(true);
                 level.setThunderLevel(1.0F);
                 level.setRainLevel(1.0F);

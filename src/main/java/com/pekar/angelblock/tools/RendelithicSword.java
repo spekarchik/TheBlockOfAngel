@@ -29,23 +29,25 @@ public class RendelithicSword extends ModSword
         var player = context.getPlayer();
         var level = player.level();
 
-        if (level.isClientSide) return InteractionResult.PASS;
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
 
         if (player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
         {
-            if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
-                    && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
+            if (!level.isClientSide())
             {
-                setEffectAround(player, level, pos);
+                if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
+                        && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
+                {
+                    setEffectAround(player, level, pos);
+                }
+                else
+                {
+                    setEffectAhead(player, level, pos);
+                }
             }
-            else
-            {
-                setEffectAhead(player, level, pos);
-            }
-            return InteractionResult.CONSUME;
+            return getToolInteractionResult(true, level.isClientSide());
         }
 
         return InteractionResult.PASS;

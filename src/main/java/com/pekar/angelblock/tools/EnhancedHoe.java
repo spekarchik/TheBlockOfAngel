@@ -47,7 +47,7 @@ public class EnhancedHoe extends ModHoe implements IModToolEnhanced
 
         var pos = context.getClickedPos();
         return processAdditionalBlocks(player, level, pos, context.getClickedFace())
-                ? InteractionResult.sidedSuccess(level.isClientSide)
+                ? getToolInteractionResult(true, level.isClientSide())
                 : result;
     }
 

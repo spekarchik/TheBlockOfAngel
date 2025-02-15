@@ -46,7 +46,7 @@ public class Builder extends WorkRod
                     : placeBlocks(player, level, pos, context.getClickedFace());
         }
 
-        return success ? InteractionResult.sidedSuccess(level.isClientSide()) : InteractionResult.PASS;
+        return getToolInteractionResult(success, level.isClientSide());
     }
 
     protected boolean placeBlocks(Player player, Level level, BlockPos pos, Direction facing)

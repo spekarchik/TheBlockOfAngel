@@ -79,7 +79,7 @@ public class AncientRod extends MagneticRod
         {
             if (utils.blocks.transformations.mossyTransforming(player, pos, block))
             {
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
         }
 
@@ -94,7 +94,7 @@ public class AncientRod extends MagneticRod
                     setBlock(player, pos, infestedBlock.getHostBlock());
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
@@ -104,7 +104,7 @@ public class AncientRod extends MagneticRod
                     setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block instanceof LeavesBlock)
@@ -180,7 +180,7 @@ public class AncientRod extends MagneticRod
                         damageItemIfSurvival(player, level, pos, blockState);
                         setBlock(player, pos, Blocks.GRASS_BLOCK);
                     }
-                    return InteractionResult.sidedSuccess(isClientSide);
+                    return getToolInteractionResult(true, isClientSide);
                 }
             }
         }
@@ -254,7 +254,7 @@ public class AncientRod extends MagneticRod
             level.setBlock(pos, state, 11);
             new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) context.getPlayer());
         }
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return getToolInteractionResult(true, level.isClientSide());
     }
 
     protected InteractionResult setOnBlockSide(UseOnContext useOnContext, BiFunction<BlockPlaceContext, BlockPos, InteractionResult> setBlock)

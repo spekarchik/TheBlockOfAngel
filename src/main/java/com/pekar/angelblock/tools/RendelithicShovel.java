@@ -40,7 +40,7 @@ public final class RendelithicShovel extends EnhancedShovel
             if (!level.isClientSide)
                 setBlock(player, pos, BlockRegistry.CRACKED_ENDSTONE.get());
 
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return getToolInteractionResult(true, level.isClientSide());
         }
 
         return result;

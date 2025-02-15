@@ -35,7 +35,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
                 piglin.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
             }
 
-            if (monsters.size() > 0) return InteractionResult.sidedSuccess(level.isClientSide());
+            if (!monsters.isEmpty()) return getToolInteractionResult(level.isClientSide());
         }
 
         return super.useOn(context);
@@ -61,11 +61,16 @@ public class MinerFigure extends ModItemWithDoubleHoverText
                     piglin.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
                 }
 
-                if (monsters.size() > 0)
+                if (!monsters.isEmpty())
                     return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
             }
         }
 
         return super.use(level, player, interactionHand);
+    }
+
+    private InteractionResult getToolInteractionResult(boolean isClientSide)
+    {
+        return isClientSide ? InteractionResult.SUCCESS_NO_ITEM_USED: InteractionResult.CONSUME_PARTIAL;
     }
 }

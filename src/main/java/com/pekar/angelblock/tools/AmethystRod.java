@@ -53,7 +53,7 @@ public class AmethystRod extends FireRod
                     setBlock(player, pos, Blocks.CRYING_OBSIDIAN);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.ANDESITE
@@ -72,7 +72,7 @@ public class AmethystRod extends FireRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.BONE_BLOCK)
@@ -83,7 +83,7 @@ public class AmethystRod extends FireRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
         }
 
@@ -179,6 +179,6 @@ public class AmethystRod extends FireRod
             level.setBlock(pos, state, 11);
         }
 
-        return InteractionResult.sidedSuccess(isClientSide);
+        return getToolInteractionResult(true, isClientSide);
     }
 }

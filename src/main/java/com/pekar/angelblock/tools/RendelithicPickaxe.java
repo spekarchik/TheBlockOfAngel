@@ -43,7 +43,7 @@ public class RendelithicPickaxe extends EnhancedPickaxe
             if (!level.isClientSide())
                 setBlock(player, pos, BlockRegistry.CRACKED_OBSIDIAN.get());
 
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return getToolInteractionResult(true, level.isClientSide());
         }
 
         return result;

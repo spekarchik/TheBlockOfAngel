@@ -176,7 +176,7 @@ public class ModSword extends SwordItem implements IModTool
             return false;
         }
 
-        if (plantCactus(player, level, pos, hand, facing) != InteractionResult.SUCCESS) return false;
+        if (!plantCactus(player, level, pos, hand, facing)) return false;
         setBlock(level, pos.above(2), Blocks.CACTUS.defaultBlockState());
         setBlock(level, pos.above(3), Blocks.CACTUS.defaultBlockState());
 
@@ -197,7 +197,7 @@ public class ModSword extends SwordItem implements IModTool
         }
     }
 
-    private InteractionResult plantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
+    private boolean plantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
     {
         ItemStack itemstack = player.getItemInHand(hand);
         BlockState state = level.getBlockState(pos);
@@ -213,11 +213,11 @@ public class ModSword extends SwordItem implements IModTool
                 CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos.above(), itemstack);
             }
 
-            return InteractionResult.SUCCESS;
+            return true;
         }
         else
         {
-            return InteractionResult.FAIL;
+            return false;
         }
     }
 

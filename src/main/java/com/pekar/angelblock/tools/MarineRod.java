@@ -66,7 +66,7 @@ public class MarineRod extends AncientRod
                         utils.blocks.transformations.updateNeighbors(level, upPos);
                     }
 
-                    return InteractionResult.sidedSuccess(isClientSide);
+                    return getToolInteractionResult(true, isClientSide);
                 }
             }
 
@@ -78,7 +78,7 @@ public class MarineRod extends AncientRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.POWDER_SNOW)
@@ -89,7 +89,7 @@ public class MarineRod extends AncientRod
                     damageItemIfSurvival(player, level, pos, blockState);
                 }
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
         }
 

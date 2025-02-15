@@ -42,7 +42,7 @@ public class TrackLayer extends WorkRod
             success = placeBlocks(player, level, pos, context.getClickedFace());
         }
 
-        return success ? InteractionResult.sidedSuccess(level.isClientSide()) : InteractionResult.PASS;
+        return getToolInteractionResult(success, level.isClientSide());
     }
 
     @Override

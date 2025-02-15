@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -58,5 +59,11 @@ public interface IModTool extends IModDescriptionItem
     default MutableComponent getDisplayName(int lineNumber)
     {
         return Component.translatable(getTool().getDescriptionId() + ".desc" + lineNumber);
+    }
+
+    default InteractionResult getToolInteractionResult(boolean applied, boolean isClientSide)
+    {
+        if (!applied) return InteractionResult.PASS;
+        return isClientSide ? InteractionResult.SUCCESS_NO_ITEM_USED: InteractionResult.CONSUME_PARTIAL;
     }
 }

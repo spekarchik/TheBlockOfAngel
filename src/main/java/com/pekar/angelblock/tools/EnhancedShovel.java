@@ -44,7 +44,7 @@ public class EnhancedShovel extends ModShovel
 
         var pos = context.getClickedPos();
         return processAdditionalBlocks(player, level, pos, context.getClickedFace())
-                ? InteractionResult.sidedSuccess(level.isClientSide)
+                ? getToolInteractionResult(true, level.isClientSide())
                 : result;
     }
 

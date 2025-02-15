@@ -67,12 +67,12 @@ public class ModHoe extends HoeItem implements IModToolEnhanced
                 }
             }
 
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return getToolInteractionResult(true, level.isClientSide());
         }
         else
         {
             if (level.isEmptyBlock(upPos) && context.getClickedFace() == Direction.UP)
-                return changePodzolToDirt(player, level, pos) ? InteractionResult.sidedSuccess(level.isClientSide) : result;
+                return changePodzolToDirt(player, level, pos) ? getToolInteractionResult(true, level.isClientSide()) : result;
         }
 
         return result;
