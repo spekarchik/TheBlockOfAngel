@@ -50,6 +50,6 @@ public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlock
     {
         //var tag = new CompoundTag();
         //saveModTag(tag);
-        return damage; // TODO: Check if we need to save damage to tag
+        return damage;
     }
 }

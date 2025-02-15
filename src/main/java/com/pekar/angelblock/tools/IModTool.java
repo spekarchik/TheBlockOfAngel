@@ -29,7 +29,7 @@ public interface IModTool extends IModDescriptionItem
     {
         var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
         if (itemStack.getItem().equals(this))
-            itemStack.hurtAndBreak(amount, livingEntity, EquipmentSlot.MAINHAND); // TODO: Check
+            itemStack.hurtAndBreak(amount, livingEntity, EquipmentSlot.MAINHAND);
     }
 
     default void damageItemIfSurvival(Player player, Level level, BlockPos pos, BlockState blockState)
