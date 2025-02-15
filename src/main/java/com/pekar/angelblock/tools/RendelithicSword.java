@@ -47,6 +47,7 @@ public class RendelithicSword extends ModSword
                     setEffectAhead(player, level, pos);
                 }
             }
+
             return getToolInteractionResult(true, level.isClientSide());
         }
 

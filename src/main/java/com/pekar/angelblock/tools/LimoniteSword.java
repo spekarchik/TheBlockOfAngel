@@ -40,7 +40,7 @@ public class LimoniteSword extends ModSword
 
         if (player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
         {
-            if (level.isClientSide())
+            if (!level.isClientSide())
             {
                 if (level.getBlockState(pos).getBlock() == Blocks.SAND)
                 {
@@ -59,6 +59,7 @@ public class LimoniteSword extends ModSword
                     new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
                 }
             }
+
             return getToolInteractionResult(true, level.isClientSide());
         }
 

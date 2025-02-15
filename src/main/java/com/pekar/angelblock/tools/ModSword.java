@@ -162,6 +162,7 @@ public class ModSword extends SwordItem implements IModTool
 
     protected final boolean canUseToolEffect(Player player)
     {
+        // We need it to prevent to fire a house when you are holding a sword with fire effect and a torch and trying to set the torch on a wall
         ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
         return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
     }
