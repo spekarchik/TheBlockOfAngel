@@ -1,31 +1,37 @@
 package com.pekar.angelblock.recipe;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.brewing.BrewingRecipe;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
-import static net.neoforged.neoforge.common.NeoForge.EVENT_BUS;
-
+@EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
 public class RecipeRegistry
 {
-    public static void init()
+    public static void initStatic()
     {
-        registerBrewing();
+
     }
 
-    private static void registerBrewing()
+    @SubscribeEvent
+    public static void onRegisterBrewingRecipes(RegisterBrewingRecipesEvent event)
     {
-        var builder = new PotionBrewing.Builder(FeatureFlags.DEFAULT_FLAGS);
+        registerBlockBreakerBrewing(event.getBuilder(), event.getRegistryAccess());
+    }
 
+    private static void registerBlockBreakerBrewing(PotionBrewing.Builder builder, RegistryAccess registryAccess)
+    {
         var input = new ItemStack(Items.SPLASH_POTION);
         var output = new ItemStack(Items.SPLASH_POTION);
         input.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.AWKWARD)); // see PotionItem.getDefaultInstance()
@@ -33,11 +39,5 @@ public class RecipeRegistry
         var recipe = new BrewingRecipe(Ingredient.of(input), Ingredient.of(Items.PRISMARINE_SHARD), output);
 
         builder.addRecipe(recipe);
-        EVENT_BUS.post(new RegisterBrewingRecipesEvent(builder, RegistryAccess.EMPTY)); // TODO: Check the recipe
-        var potionBrewing = builder.build();
-
-//        ItemStack inputPotion = PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), Potions.AWKWARD);
-//        ItemStack outputPotion = PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), PotionRegistry.BLOCK_BREAKER_POTION);
-//        BrewingRecipeRegistry.addRecipe(Ingredient.of(inputPotion), Ingredient.of(new ItemStack(Items.PRISMARINE_SHARD)), outputPotion);
     }
 }

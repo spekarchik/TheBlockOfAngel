@@ -104,7 +104,7 @@ public class Main
         ClientTickEvents.initStatic();
         GuiEvents.initStatic();
 
-        RecipeRegistry.init();
+        RecipeRegistry.initStatic();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
