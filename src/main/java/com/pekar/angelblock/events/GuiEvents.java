@@ -42,7 +42,7 @@ public class GuiEvents
     // See: ItemStack.getTooltipLines() method
     private static Component createTextComponent(int lineNumber, boolean isSubtitleFormatting)
     {
-        var id = PotionRegistry.BLOCK_BREAKER_EFFECT.getRegisteredName() + ".desc" + lineNumber; // TODO: Check if it corresponds to lang key
+        var id = "effect." + Main.MODID + "." + PotionRegistry.BLOCK_BREAKER_EFFECT.getKey().location().getPath() + ".desc" + lineNumber;
         var component = Component.translatable(id).withStyle(ChatFormatting.GRAY);
         if (isSubtitleFormatting)
             component = component.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.WHITE);
