@@ -9,6 +9,7 @@ import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Blocks;
 
 public class BlueAxolotlBucket extends ModItem
 {
@@ -32,6 +33,7 @@ public class BlueAxolotlBucket extends ModItem
 
                 if (result)
                 {
+                    level.setBlock(pos, Blocks.WATER.defaultBlockState(), 11);
                     player.setItemInHand(context.getHand(), new ItemStack(Items.BUCKET));
                 }
             }
