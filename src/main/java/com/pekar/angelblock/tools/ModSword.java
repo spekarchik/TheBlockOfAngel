@@ -203,8 +203,8 @@ public class ModSword extends SwordItem implements IModTool
         BlockState state = level.getBlockState(pos);
         if (facing == Direction.UP
                 && level.isEmptyBlock(pos.above())
-                && state.getBlock().canSustainPlant(state, level, pos, Direction.UP, Blocks.CACTUS.defaultBlockState()).isTrue() // Blocks.CACTUS.defaultBlockState() -> age == 0
-                ) // TODO: Check
+                && !state.getBlock().canSustainPlant(state, level, pos, Direction.UP, Blocks.CACTUS.defaultBlockState()).isFalse() // Blocks.CACTUS.defaultBlockState() -> age == 0
+                )
         {
             level.setBlock(pos.above(), Blocks.CACTUS.defaultBlockState(), 11);
 
