@@ -258,7 +258,7 @@ public class Planter extends WorkRod
             itemStack.setCount(itemCount - 1);
         }
 
-        return result.consumesAction(); // TODO: Check
+        return result.consumesAction();
     }
 
     private boolean bonemealPlant(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack)
