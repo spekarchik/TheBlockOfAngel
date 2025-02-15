@@ -153,8 +153,7 @@ public class SuperArmor extends Armor
                     float distance = player.getEntity().distanceTo(entityAttackedBy);
                     if (!isWitch && distance > 2f)
                     {
-                        entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND); // TODO: Test if an attacker is firing after attacking you
-                        //entityAttackedBy.setSecondsOnFire(5);
+                        entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
                     }
                     else
                     {
