@@ -30,6 +30,6 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
                         EntityType.ALLAY.spawn(serverLevel, itemStack, player, player.getOnPos().above(5), MobSpawnType.NATURAL, true, true));
         }
 
-        return InteractionResultHolder.consume(itemStack);
+        return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
     }
 }

@@ -38,7 +38,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
             if (!monsters.isEmpty()) return getToolInteractionResult(level.isClientSide());
         }
 
-        return super.useOn(context);
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
             }
         }
 
-        return super.use(level, player, interactionHand);
+        return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
     }
 
     private InteractionResult getToolInteractionResult(boolean isClientSide)

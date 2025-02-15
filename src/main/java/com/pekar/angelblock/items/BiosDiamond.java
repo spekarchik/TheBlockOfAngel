@@ -18,10 +18,16 @@ public class BiosDiamond extends ModItemWithDoubleHoverText
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
     {
-        if (!level.isClientSide() && !player.hasEffect(MobEffects.ABSORPTION))
+        if (!player.hasEffect(MobEffects.ABSORPTION))
         {
-            player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 2, false, true));
-            return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
+            if (!level.isClientSide())
+            {
+                int duration = level.getRandom().nextIntBetweenInclusive(40, 200);
+                int effectLevel = level.getRandom().nextIntBetweenInclusive(0, 4);
+                player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, effectLevel, false, true));
+            }
+
+            return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
         }
 
         return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
