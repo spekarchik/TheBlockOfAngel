@@ -36,8 +36,7 @@ public interface IModTool extends IModDescriptionItem
     default void damageOffHandItem(int amount, LivingEntity livingEntity)
     {
         var itemStack = livingEntity.getItemInHand(InteractionHand.OFF_HAND);
-        if (itemStack.getItem().equals(this))
-            itemStack.hurtAndBreak(amount, livingEntity, EquipmentSlot.OFFHAND);
+        itemStack.hurtAndBreak(amount, livingEntity, EquipmentSlot.OFFHAND);
     }
 
     default void damageMainHandItemIfSurvivalIgnoreClient(Player player, Level level)
