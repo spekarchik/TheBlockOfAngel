@@ -1,6 +1,8 @@
 package com.pekar.angelblock.armor;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.utils.Utils;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -48,7 +50,7 @@ public class FlyingArmor extends ModArmor
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = getMaxDamage() / 2;
-        int chestDamage = getDamage();
+        int chestDamage = stack.getDamageValue();
 
         return isFullArmorSet && chestDamage < maxDamageToFly
                 && !mainHandItem.getName(mainHandItemStack).equals(Items.FIREWORK_ROCKET.getName(mainHandItemStack));

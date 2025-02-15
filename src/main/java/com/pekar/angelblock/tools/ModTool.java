@@ -1,7 +1,6 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.utils.Utils;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TieredItem;
 
@@ -12,11 +11,6 @@ public abstract class ModTool extends TieredItem implements IModTool
     public ModTool(Tier material, Properties properties)
     {
         super(material, properties);
-    }
-
-    protected int getDamage()
-    {
-        return components().getOrDefault(DataComponents.DAMAGE, 0);
     }
 
     @Override

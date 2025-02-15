@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
@@ -62,7 +63,7 @@ public class AngelRod extends EndRod
                     var blockEntity = level.getBlockEntity(pos.above());
                     if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
                     {
-                        angelRodBlockEntity.setDamage(getDamage());
+                        angelRodBlockEntity.setDamage(getDamage(itemStack));
                     }
 
                     if (player instanceof ServerPlayer serverPlayer)

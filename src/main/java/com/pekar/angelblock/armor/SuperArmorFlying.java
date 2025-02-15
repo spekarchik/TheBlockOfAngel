@@ -29,7 +29,7 @@ public class SuperArmorFlying extends SuperArmor
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = getMaxDamage() / 2;
-        int chestDamage = getDamage();
+        int chestDamage = stack.getDamageValue();
 
         return isFullArmorSet && chestDamage < maxDamageToFly;
     }

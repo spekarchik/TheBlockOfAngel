@@ -68,11 +68,6 @@ public class ModArmor extends ArmorItem
         return components().getOrDefault(DataComponents.MAX_DAMAGE, maxDamage);
     }
 
-    public int getDamage()
-    {
-        return components().getOrDefault(DataComponents.DAMAGE, 0);
-    }
-
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
     {
