@@ -16,21 +16,30 @@ public class ToolMaterials
 
     // pickaxe - efficiency (speed) only
     // sword - damage only
+    // all swords attackSpeed = 4 - 2.4 = 1.6
+    // all axes: 4 - 3.0 = 1.0
+    // (damagePerSecond = 4 + attackDamageBonus) * (4 - attackSpeed)
+    // iron sword: 9.6, singleDamage = 6.0
+    // diamond sword: 11.2, singleDamage = 7.0
+    // netherite sword: 12.8, singleDamage = 8.0
+    // iron axe: 8.0, singleDamage = 8.0
+    // diamond axe: 9.0, singleDamage = 9.0
+    // netherite axe: 10.0, singleDamage = 10.0
 
-    static final Tier RENDELITHIC = new ModToolMaterial(1300, 7.4F, 4.4F, 3, 17,
-            Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
+    static final Tier RENDELITHIC = new ModToolMaterial(800, 8F, 4.8F, 3, 25,
+            Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get())); // damagePerSecond = 15, singleDamage = 8.8; Axe: damagePerSecond = 12, singleDamage = 10.8
 
-    static final Tier DIAMITHIC = new ModToolMaterial(2600, 10.5F, 5.5F, 4, 14,
-            Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
+    static final Tier DIAMITHIC = new ModToolMaterial(2600, 7F, 8.3F, 4, 14,
+            Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get())); // damagePerSecond = 16, singleDamage = 12.3;  Axe: damagePerSecond = 11.4, singleDamage = 14.3
 
-    static final Tier LAPIS = new ModToolMaterial(2000, 8.7F, 3.5F, 3, 12,
-            Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
+    static final Tier LAPIS = new ModToolMaterial(1500, 8.7F, 3F, 3, 10,
+            Ingredient.of(ItemRegistry.LAPIS_INGOT.get())); // the same as Diamond (no weapon uses this material)
 
-    static final Tier LIMONITE = new ModToolMaterial(900, 6.8F, 2.8F, 3, 30,
-            Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
+    static final Tier LIMONITE = new ModToolMaterial(1200, 6.8F, 3.1F, 3, 30,
+            Ingredient.of(ItemRegistry.LIMONITE_INGOT.get())); // damagePerSecond = 14.9, singleDamage = 7.1;  Axe: damagePerSecond = 10, singleDamage = 9.1
 
-    static final Tier SUPER = new ModToolMaterial(3000, 11.0F, 5.8F, 4, 25,
-            Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
+    static final Tier SUPER = new ModToolMaterial(2600, 11.0F, 8.5F, 4, 1,
+            Ingredient.of(ItemRegistry.SUPER_INGOT.get())); // damagePerSecond = 25, singleDamage = 12.5;  Axe: damagePerSecond = 20.3, singleDamage = 14.5
 
     static final Tier ROD_MATERIAL1 = new ModToolMaterial(60, 2.0F, 0F, 0, 0,
             Ingredient.of(Items.BAMBOO));

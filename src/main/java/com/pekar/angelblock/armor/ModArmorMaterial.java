@@ -32,22 +32,22 @@ public class ModArmorMaterial
 
     protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial("rendelithic", "rendelithic_armor",
             createArmorTypeMap(3, 6, 8, 3, 7),
-            17, 0F, 0F, 21, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
+            25, 0F, 0F, 10, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
     protected static final ModArmorMaterial LIMONITE = new ModArmorMaterial("limonite", "limonite_armor",
-            createArmorTypeMap(3, 5, 8, 3, 3),
+            createArmorTypeMap(3, 5, 7, 3, 3),
             30, 1F, 0F, 28, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
     protected static final ModArmorMaterial DIAMITHIC = new ModArmorMaterial("diamithic", "diamithic_armor",
             createArmorTypeMap(3, 6, 9, 3, 11),
-            14, 3F, 0.1F, 41, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
+            14, 3F, 0.2F, 41, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
     protected static final ModArmorMaterial LAPIS = new ModArmorMaterial("lapis", "lapis_armor",
             createArmorTypeMap(3, 6, 8, 3, 11),
-            12, 2F, 0F,37, SoundEvents.ARMOR_EQUIP_DIAMOND, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
+            10, 2F, 0F,30, SoundEvents.ARMOR_EQUIP_DIAMOND, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
     protected static final ModArmorMaterial SUPER = new ModArmorMaterial("super", "super_armor",
             createArmorTypeMap(3, 6, 9, 3, 15),
-            25, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
+            1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
     protected static final ModArmorMaterial FLYING = new ModArmorMaterial("flying", "flying_armor",
             createArmorTypeMap(1, 1, 1, 1, 1),
-            30, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, () -> Ingredient.of(Items.PHANTOM_MEMBRANE));
+            0, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, () -> Ingredient.of(Items.PHANTOM_MEMBRANE));
 
     // other armor models (other textures)
     protected static final ModArmorMaterial RENDELITHIC2 = copyOf(RENDELITHIC, "rendelithic_armor2");

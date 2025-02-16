@@ -8,11 +8,11 @@ public class ToolRegistry
 {
     // Shovels
     public static final DeferredItem<ModShovel> RENDELITHIC_PRIMARY_SHOVEL = Main.ITEMS.register("rendelithic_primary_shovel",
-            () -> ModShovel.createPrimary(ToolMaterials.RENDELITHIC, 1.5F, -2.8F,
+            () -> ModShovel.createPrimary(ToolMaterials.RENDELITHIC, 1.5F, -2.9F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModShovel> RENDELITHIC_SHOVEL = Main.ITEMS.register("rendelithic_shovel",
-            () -> new RendelithicShovel(ToolMaterials.RENDELITHIC, 1.5F, -2.8F,
+            () -> new RendelithicShovel(ToolMaterials.RENDELITHIC, 1.5F, -2.9F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModShovel> LAPIS_PRIMARY_SHOVEL = Main.ITEMS.register("lapis_primary_shovel",
@@ -33,11 +33,11 @@ public class ToolRegistry
 
     // Pickaxes
     public static final DeferredItem<ModPickaxe> RENDELITHIC_PRIMARY_PICKAXE = Main.ITEMS.register("rendelithic_primary_pickaxe",
-            () -> ModPickaxe.createPrimary(ToolMaterials.RENDELITHIC, 1, -2.4F,
+            () -> ModPickaxe.createPrimary(ToolMaterials.RENDELITHIC, 1, -2.7F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModPickaxe> RENDELITHIC_PICKAXE = Main.ITEMS.register("rendelithic_pickaxe",
-            () -> new RendelithicPickaxe(ToolMaterials.RENDELITHIC, 1, -2.4F,
+            () -> new RendelithicPickaxe(ToolMaterials.RENDELITHIC, 1, -2.7F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModPickaxe> LAPIS_PRIMARY_PICKAXE = Main.ITEMS.register("lapis_primary_pickaxe",
@@ -49,52 +49,52 @@ public class ToolRegistry
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModPickaxe> DIAMITHIC_PRIMARY_PICKAXE = Main.ITEMS.register("diamithic_primary_pickaxe",
-            () -> ModPickaxe.createPrimary(ToolMaterials.DIAMITHIC, 1, -2.8F,
+            () -> ModPickaxe.createPrimary(ToolMaterials.DIAMITHIC, 1, -3.0F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModPickaxe> DIAMITHIC_PICKAXE = Main.ITEMS.register("diamithic_pickaxe",
-            () -> new DiamithicPickaxe(ToolMaterials.DIAMITHIC, 1, -2.8F,
+            () -> new DiamithicPickaxe(ToolMaterials.DIAMITHIC, 1, -3.0F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModPickaxe> LIMONITE_PRIMARY_PICKAXE = Main.ITEMS.register("limonite_primary_pickaxe",
-            () -> ModPickaxe.createPrimary(ToolMaterials.LIMONITE, 1, -2.2F,
+            () -> ModPickaxe.createPrimary(ToolMaterials.LIMONITE, 1, -2.6F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModPickaxe> LIMONITE_PICKAXE = Main.ITEMS.register("limonite_pickaxe",
-            () -> new LimonitePickaxe(ToolMaterials.LIMONITE, 1, -2.2F,
+            () -> new LimonitePickaxe(ToolMaterials.LIMONITE, 1, -2.6F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModPickaxe> SUPER_PRIMARY_PICKAXE = Main.ITEMS.register("super_primary_pickaxe",
-            () -> ModPickaxe.createPrimary(ToolMaterials.SUPER, 1, -2.2F,
+            () -> ModPickaxe.createPrimary(ToolMaterials.SUPER, 1, -2.4F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModPickaxe> SUPER_PICKAXE = Main.ITEMS.register("super_pickaxe",
-            () -> new SuperPickaxe(ToolMaterials.SUPER, 1, -2.2F,
+            () -> new SuperPickaxe(ToolMaterials.SUPER, 1, -2.4F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     // Axes
     public static final DeferredItem<ModAxe> DIAMITHIC_PRIMARY_AXE = Main.ITEMS.register("diamithic_primary_axe",
-            () -> ModAxe.createPrimary(ToolMaterials.DIAMITHIC, 5.0F, -3.0F,
+            () -> ModAxe.createPrimary(ToolMaterials.DIAMITHIC, 5.0F, -3.2F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModAxe> DIAMITHIC_AXE = Main.ITEMS.register("diamithic_axe",
-            () -> new DiamithicAxe(ToolMaterials.DIAMITHIC, 5.0F, -3.0F,
+            () -> new DiamithicAxe(ToolMaterials.DIAMITHIC, 5.0F, -3.2F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModAxe> LIMONITE_PRIMARY_AXE = Main.ITEMS.register("limonite_primary_axe",
-            () -> ModAxe.createPrimary(ToolMaterials.LIMONITE, 5.0F, -2.5F,
+            () -> ModAxe.createPrimary(ToolMaterials.LIMONITE, 5.0F, -2.9F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModAxe> LIMONITE_AXE = Main.ITEMS.register("limonite_axe",
-            () -> new LimoniteAxe(ToolMaterials.LIMONITE, 5.0F, -2.5F,
+            () -> new LimoniteAxe(ToolMaterials.LIMONITE, 5.0F, -2.9F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModAxe> SUPER_PRIMARY_AXE = Main.ITEMS.register("super_primary_axe",
-            () -> ModAxe.createPrimary(ToolMaterials.SUPER, 5.0F, -2.5F,
+            () -> ModAxe.createPrimary(ToolMaterials.SUPER, 5.0F, -2.6F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModAxe> SUPER_AXE = Main.ITEMS.register("super_axe",
-            () -> new SuperAxe(ToolMaterials.SUPER, 5.0F, -2.5F,
+            () -> new SuperAxe(ToolMaterials.SUPER, 5.0F, -2.6F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     // Hoes
@@ -165,19 +165,19 @@ public class ToolRegistry
 
     // Swords
     public static final DeferredItem<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",
-            () -> new DiamithicPrimarySword(ToolMaterials.DIAMITHIC, 3, -2.4F,
+            () -> new DiamithicPrimarySword(ToolMaterials.DIAMITHIC, 3, -2.7F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModSword> DIAMITHIC_SWORD = Main.ITEMS.register("diamithic_sword",
-            () -> new DiamithicSword(ToolMaterials.DIAMITHIC, 3, -2.4F,
+            () -> new DiamithicSword(ToolMaterials.DIAMITHIC, 3, -2.7F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModSword> RENDELITHIC_PRIMARY_SWORD = Main.ITEMS.register("rendelithic_primary_sword",
-            () -> new RendelithicPrimarySword(ToolMaterials.RENDELITHIC, 3, -2.2F,
+            () -> new RendelithicPrimarySword(ToolMaterials.RENDELITHIC, 3, -2.3F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModSword> RENDELITHIC_SWORD = Main.ITEMS.register("rendelithic_sword",
-            () -> new RendelithicSword(ToolMaterials.RENDELITHIC, 3, -2.2F,
+            () -> new RendelithicSword(ToolMaterials.RENDELITHIC, 3, -2.3F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModSword> LIMONITE_PRIMARY_SWORD = Main.ITEMS.register("limonite_primary_sword",
@@ -189,11 +189,11 @@ public class ToolRegistry
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModSword> SUPER_PRIMARY_SWORD = Main.ITEMS.register("super_primary_sword",
-            () -> new SuperPrimarySword(ToolMaterials.SUPER, 3, -1.9F,
+            () -> new SuperPrimarySword(ToolMaterials.SUPER, 3, -2.0F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModSword> SUPER_SWORD = Main.ITEMS.register("super_sword",
-            () -> new SuperSword(ToolMaterials.SUPER, 3, -1.9F,
+            () -> new SuperSword(ToolMaterials.SUPER, 3, -2.0F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
 
