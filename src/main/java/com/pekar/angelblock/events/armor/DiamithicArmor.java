@@ -20,7 +20,8 @@ public class DiamithicArmor extends Armor
 {
     private final IArmorEffect strengthEffect;
     private final IArmorEffect nightVisionEffect;
-    private final SwitchingEffectSynchronizer jumpBoostEffect;
+    private final IArmorEffect jumpBoostEffect;
+    private final IArmorEffect slowFallingEffect;
     private final IArmorEffect healthBoostEffect;
     private final IArmorEffect hasteEffect;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
@@ -39,11 +40,9 @@ public class DiamithicArmor extends Armor
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         hasteEffect = new HasteArmorEffect(player, this);
 
-        var jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
-        var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
+        jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
         slowFallingEffect.setupAvailability(this::isSlowFallingEffectAvailable);
-        this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
-        this.jumpBoostEffect.addDependentEffect(slowFallingEffect);
     }
 
     @Override
@@ -51,6 +50,7 @@ public class DiamithicArmor extends Armor
     {
         nightVisionEffect.updateSwitchState();
         jumpBoostEffect.updateSwitchState();
+        slowFallingEffect.updateSwitchState();
     }
 
     @Override
@@ -76,6 +76,7 @@ public class DiamithicArmor extends Armor
         nightVisionEffect.updateEffectAvailability();
         strengthEffect.updateEffectAvailability();
         jumpBoostEffect.updateEffectAvailability();
+        slowFallingEffect.updateEffectAvailability();
         healthBoostEffect.updateEffectAvailability();
         hasteEffect.updateEffectAvailability();
 
@@ -142,6 +143,13 @@ public class DiamithicArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
             jumpBoostEffect.trySwitch();
+            slowFallingEffect.trySwitch();
+
+            if (jumpBoostEffect.isEffectAvailable() && slowFallingEffect.isEffectAvailable() && jumpBoostEffect.isEffectOn() != slowFallingEffect.isEffectOn())
+            {
+                slowFallingEffect.trySwitchOff();
+                jumpBoostEffect.trySwitchOff();
+            }
         }
     }
 
@@ -195,6 +203,7 @@ public class DiamithicArmor extends Armor
         nightVisionEffect.updateEffectActivity();
         strengthEffect.updateEffectActivity(getStrengthEffectAmplifier());
         jumpBoostEffect.updateEffectActivity();
+        slowFallingEffect.updateEffectActivity();
         healthBoostEffect.updateEffectActivity();
         hasteEffect.updateEffectActivity();
     }
