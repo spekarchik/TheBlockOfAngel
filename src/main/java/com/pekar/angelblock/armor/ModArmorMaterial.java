@@ -30,22 +30,29 @@ public class ModArmorMaterial
     private final Holder<SoundEvent> equipmentSound;
     private final Supplier<Ingredient> repairIngredient;
 
-    protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial("rendelithic", "rendelithic_armor",
+    public static final String RENDELITHIC_MATERIAL_NAME = "rendelithic";
+    public static final String LIMONITE_MATERIAL_NAME = "limonite";
+    public static final String DIAMITHIC_MATERIAL_NAME = "diamithic";
+    public static final String LAPIS_MATERIAL_NAME = "lapis";
+    public static final String SUPER_MATERIAL_NAME = "super";
+    public static final String FLYING_MATERIAL_NAME = "flying";
+
+    protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial(RENDELITHIC_MATERIAL_NAME, "rendelithic_armor",
             createArmorTypeMap(3, 6, 8, 3, 7),
             25, 0F, 0F, 10, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
-    protected static final ModArmorMaterial LIMONITE = new ModArmorMaterial("limonite", "limonite_armor",
+    protected static final ModArmorMaterial LIMONITE = new ModArmorMaterial(LIMONITE_MATERIAL_NAME, "limonite_armor",
             createArmorTypeMap(3, 5, 7, 3, 3),
             30, 1F, 0F, 28, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
-    protected static final ModArmorMaterial DIAMITHIC = new ModArmorMaterial("diamithic", "diamithic_armor",
+    protected static final ModArmorMaterial DIAMITHIC = new ModArmorMaterial(DIAMITHIC_MATERIAL_NAME, "diamithic_armor",
             createArmorTypeMap(3, 6, 9, 3, 11),
             14, 3F, 0.2F, 41, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
-    protected static final ModArmorMaterial LAPIS = new ModArmorMaterial("lapis", "lapis_armor",
+    protected static final ModArmorMaterial LAPIS = new ModArmorMaterial(LAPIS_MATERIAL_NAME, "lapis_armor",
             createArmorTypeMap(3, 6, 8, 3, 11),
             10, 2F, 0F,30, SoundEvents.ARMOR_EQUIP_DIAMOND, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
-    protected static final ModArmorMaterial SUPER = new ModArmorMaterial("super", "super_armor",
+    protected static final ModArmorMaterial SUPER = new ModArmorMaterial(SUPER_MATERIAL_NAME, "super_armor",
             createArmorTypeMap(3, 6, 9, 3, 15),
             1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
-    protected static final ModArmorMaterial FLYING = new ModArmorMaterial("flying", "flying_armor",
+    protected static final ModArmorMaterial FLYING = new ModArmorMaterial(FLYING_MATERIAL_NAME, "flying_armor",
             createArmorTypeMap(1, 1, 1, 1, 1),
             0, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, () -> Ingredient.of(Items.PHANTOM_MEMBRANE));
 
@@ -86,6 +93,19 @@ public class ModArmorMaterial
     public int getDurabilityMultiplier()
     {
         return durabilityMultiplier;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof ModArmorMaterial another)) return false;
+        return materialName.equals(another.materialName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return materialName.hashCode();
     }
 
     // copied from ArmorMaterials and modified
