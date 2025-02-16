@@ -265,9 +265,9 @@ public class LimoniteArmor extends Armor
     }
 
     @Override
-    public String getModelName()
+    public String getFamilyName()
     {
-        return ArmorRegistry.LIMONITE_BOOTS.get().getMaterialName();
+        return ArmorRegistry.LIMONITE_BOOTS.get().getArmorFamilyName();
     }
 
     @Override

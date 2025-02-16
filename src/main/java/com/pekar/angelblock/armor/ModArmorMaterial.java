@@ -22,42 +22,39 @@ public class ModArmorMaterial
 {
     private final Holder<ArmorMaterial> material;
     private final String materialName;
-    private final String armorModelName;
     private final int durabilityMultiplier;
+    private final EnumMap<ArmorItem.Type, Integer> armorResistanceMap;
+    private final int enchantmentValue;
+    private final float toughness;
+    private final float knockbackResistance;
+    private final Holder<SoundEvent> equipmentSound;
+    private final Supplier<Ingredient> repairIngredient;
 
     protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial("rendelithic", "rendelithic_armor",
-            createArmorTypeMap(3, 6, 8, 3, 7),
-            17, 0F, 0F, 21, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
-    protected static final ModArmorMaterial RENDELITHIC2 = new ModArmorMaterial("rendelithic", "rendelithic_armor2",
             createArmorTypeMap(3, 6, 8, 3, 7),
             17, 0F, 0F, 21, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
     protected static final ModArmorMaterial LIMONITE = new ModArmorMaterial("limonite", "limonite_armor",
             createArmorTypeMap(3, 5, 8, 3, 3),
             30, 1F, 0F, 28, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
-    protected static final ModArmorMaterial LIMONITE2 = new ModArmorMaterial("limonite", "limonite_armor2",
-            createArmorTypeMap(3, 5, 8, 3, 3),
-            30, 1F, 0F, 28, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
     protected static final ModArmorMaterial DIAMITHIC = new ModArmorMaterial("diamithic", "diamithic_armor",
-            createArmorTypeMap(3, 6, 9, 3, 11),
-            14, 3F, 0.1F, 41, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
-    protected static final ModArmorMaterial DIAMITHIC2 = new ModArmorMaterial("diamithic", "diamithic_armor2",
             createArmorTypeMap(3, 6, 9, 3, 11),
             14, 3F, 0.1F, 41, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
     protected static final ModArmorMaterial LAPIS = new ModArmorMaterial("lapis", "lapis_armor",
             createArmorTypeMap(3, 6, 8, 3, 11),
             12, 2F, 0F,37, SoundEvents.ARMOR_EQUIP_DIAMOND, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
-    protected static final ModArmorMaterial LAPIS2 = new ModArmorMaterial("lapis", "lapis_armor2",
-            createArmorTypeMap(3, 6, 8, 3, 11),
-            12, 2F, 0F,37, SoundEvents.ARMOR_EQUIP_DIAMOND, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
     protected static final ModArmorMaterial SUPER = new ModArmorMaterial("super", "super_armor",
-            createArmorTypeMap(3, 6, 9, 3, 15),
-            25, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
-    protected static final ModArmorMaterial SUPER2 = new ModArmorMaterial("super", "super_armor2",
             createArmorTypeMap(3, 6, 9, 3, 15),
             25, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
     protected static final ModArmorMaterial FLYING = new ModArmorMaterial("flying", "flying_armor",
             createArmorTypeMap(1, 1, 1, 1, 1),
             30, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, () -> Ingredient.of(Items.PHANTOM_MEMBRANE));
+
+    // other armor models (other textures)
+    protected static final ModArmorMaterial RENDELITHIC2 = copyOf(RENDELITHIC, "rendelithic_armor2");
+    protected static final ModArmorMaterial LIMONITE2 = copyOf(LIMONITE, "limonite_armor2");
+    protected static final ModArmorMaterial DIAMITHIC2 = copyOf(DIAMITHIC, "diamithic_armor2");
+    protected static final ModArmorMaterial LAPIS2 = copyOf(LAPIS, "lapis_armor2");
+    protected static final ModArmorMaterial SUPER2 = copyOf(SUPER, "super_armor2");
 
 
     public ModArmorMaterial(String materialName, String armorModelName, EnumMap<ArmorItem.Type, Integer> armorResistanceMap,
@@ -66,8 +63,14 @@ public class ModArmorMaterial
     {
         this.material = register(armorModelName, armorResistanceMap, enchantmentValue, equipmentSound, toughness, knockbackResistance, repairIngredient);
         this.materialName = materialName;
-        this.armorModelName = armorModelName;
+        this.armorResistanceMap = armorResistanceMap;
+        this.enchantmentValue = enchantmentValue;
+        this.toughness = toughness;
+        this.knockbackResistance = knockbackResistance;
         this.durabilityMultiplier = durabilityMultiplier;
+        this.equipmentSound = equipmentSound;
+        this.repairIngredient = repairIngredient;
+
     }
 
     public Holder<ArmorMaterial> getMaterial()
@@ -80,24 +83,9 @@ public class ModArmorMaterial
         return materialName;
     }
 
-    public String getArmorModelName()
-    {
-        return armorModelName;
-    }
-
     public int getDurabilityMultiplier()
     {
         return durabilityMultiplier;
-    }
-
-    public String getFullArmorModelName()
-    {
-        return getFullArmorModelName(getArmorModelName());
-    }
-
-    private static String getFullArmorModelName(String armorModelName)
-    {
-        return Main.MODID + ":" + armorModelName;
     }
 
     // copied from ArmorMaterials and modified
@@ -139,5 +127,19 @@ public class ModArmorMaterial
     {
         var resourceLocation = Utils.instance.resources.createResourceLocation(Main.MODID, armorName);
         return List.of(new ArmorMaterial.Layer(resourceLocation));
+    }
+
+    private static ModArmorMaterial copyOf(ModArmorMaterial armorMaterial, String armorModelName)
+    {
+        return new ModArmorMaterial(
+                armorMaterial.materialName,
+                armorModelName,
+                armorMaterial.armorResistanceMap,
+                armorMaterial.enchantmentValue,
+                armorMaterial.toughness,
+                armorMaterial.knockbackResistance,
+                armorMaterial.durabilityMultiplier,
+                armorMaterial.equipmentSound,
+                armorMaterial.repairIngredient);
     }
 }

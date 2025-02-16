@@ -53,14 +53,14 @@ public class Player implements IPlayer
         var item = itemStack.getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
 
-        return armor.getModelName().equals(armorItem.getMaterialName());
+        return armor.getFamilyName().equals(armorItem.getArmorFamilyName());
     }
 
     @Override
     public boolean isFullArmorSetPutOn(IArmor armor)
     {
         var armorNamesPutOn = getSlotArmorNames();
-        return armorNamesPutOn.stream().allMatch(x -> x.equals(armor.getModelName()));
+        return armorNamesPutOn.stream().allMatch(x -> x.equals(armor.getFamilyName()));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Player implements IPlayer
             var item = itemStack.getItem();
             if (!(item instanceof ModArmor armorItem)) return false;
 
-            if (!armor.getModelName().equals(armorItem.getMaterialName())) return false;
+            if (!armor.getFamilyName().equals(armorItem.getArmorFamilyName())) return false;
         }
 
         return true;
@@ -89,7 +89,7 @@ public class Player implements IPlayer
             var item = itemStack.getItem();
             if (!(item instanceof ModArmor armorItem)) continue;
 
-            if (armor.getModelName().equals(armorItem.getMaterialName())) return true;
+            if (armor.getFamilyName().equals(armorItem.getArmorFamilyName())) return true;
         }
 
         return false;
@@ -100,7 +100,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.HEAD).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
+        if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithDetector();
     }
 
@@ -109,7 +109,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.LEGS).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
+        if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithHealthRegenerator();
     }
 
@@ -118,7 +118,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
+        if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithStrengthBooster();
     }
 
@@ -127,7 +127,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
+        if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithStrengthBooster();
     }
 
@@ -136,7 +136,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
+        if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithLevitation();
     }
 
@@ -145,7 +145,7 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
+        if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithSeaPower();
     }
 
@@ -154,8 +154,13 @@ public class Player implements IPlayer
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
-        if (!armorItem.getMaterialName().equals(armor.getModelName())) return false;
+        if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithSeaPower();
+    }
+
+    private boolean areTheSameFamily(IArmor armor, ModArmor model)
+    {
+        return model.getArmorFamilyName().equals(armor.getFamilyName());
     }
 
     @Override
@@ -266,7 +271,7 @@ public class Player implements IPlayer
 
             if (item instanceof ModArmor armorItem)
             {
-                String name = armorItem.getMaterialName();
+                String name = armorItem.getArmorFamilyName();
                 armorNames.add(name);
             }
             else
@@ -297,29 +302,29 @@ public class Player implements IPlayer
 
     private IArmor getArmorModel(ModArmor modArmor)
     {
-        var modelName = modArmor.getMaterialName();
+        var modelName = modArmor.getArmorFamilyName();
 
-        if (modelName.equals(rendelithicArmorModel.getModelName()))
+        if (modelName.equals(rendelithicArmorModel.getFamilyName()))
         {
             return rendelithicArmorModel;
         }
-        else if (modelName.equals(diamithicArmorModel.getModelName()))
+        else if (modelName.equals(diamithicArmorModel.getFamilyName()))
         {
             return diamithicArmorModel;
         }
-        else if (modelName.equals(lapisArmorModel.getModelName()))
+        else if (modelName.equals(lapisArmorModel.getFamilyName()))
         {
             return lapisArmorModel;
         }
-        else if (modelName.equals(superArmorModel.getModelName()))
+        else if (modelName.equals(superArmorModel.getFamilyName()))
         {
             return superArmorModel;
         }
-        else if (modelName.equals(limoniteArmorModel.getModelName()))
+        else if (modelName.equals(limoniteArmorModel.getFamilyName()))
         {
             return limoniteArmorModel;
         }
-        else if (modelName.equals(flyingArmorModel.getModelName()))
+        else if (modelName.equals(flyingArmorModel.getFamilyName()))
         {
             return flyingArmorModel;
         }

@@ -187,9 +187,9 @@ public class DiamithicArmor extends Armor
     }
 
     @Override
-    public String getModelName()
+    public String getFamilyName()
     {
-        return ArmorRegistry.DIAMITHIC_BOOTS.get().getMaterialName();
+        return ArmorRegistry.DIAMITHIC_BOOTS.get().getArmorFamilyName();
     }
 
     @Override

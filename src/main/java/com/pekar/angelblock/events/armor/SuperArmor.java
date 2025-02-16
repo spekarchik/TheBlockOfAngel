@@ -368,9 +368,9 @@ public class SuperArmor extends Armor
     }
 
     @Override
-    public String getModelName()
+    public String getFamilyName()
     {
-        return ArmorRegistry.SUPER_BOOTS.get().getMaterialName();
+        return ArmorRegistry.SUPER_BOOTS.get().getArmorFamilyName();
     }
 
     @Override

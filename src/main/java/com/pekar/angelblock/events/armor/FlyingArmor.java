@@ -36,9 +36,9 @@ public class FlyingArmor extends Armor
     }
 
     @Override
-    public String getModelName()
+    public String getFamilyName()
     {
-        return ArmorRegistry.FLYING_BOOTS.get().getMaterialName();
+        return ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName();
     }
 
     @Override

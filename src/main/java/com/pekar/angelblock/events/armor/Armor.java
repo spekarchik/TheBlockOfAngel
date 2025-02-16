@@ -34,13 +34,13 @@ abstract class Armor implements IArmor
     {
         if (!(obj instanceof Armor)) return false;
         Armor armor = (Armor) obj;
-        return getModelName().equals(armor.getModelName());
+        return getFamilyName().equals(armor.getFamilyName());
     }
 
     @Override
     public int hashCode()
     {
-        return getModelName().hashCode();
+        return getFamilyName().hashCode();
     }
 
     protected void synchronizeEffect(IArmorEffect basicEffect, IArmorEffect dependentEffect)

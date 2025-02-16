@@ -1,8 +1,6 @@
 package com.pekar.angelblock.armor;
 
-import com.pekar.angelblock.Main;
 import com.pekar.angelblock.utils.Utils;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -40,13 +38,13 @@ public class FlyingArmor extends ModArmor
         var mainHandItem = mainHandItemStack.getItem();
 
         boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
-                .equals(ArmorRegistry.FLYING_HELMET.get().getMaterialName());
+                .equals(ArmorRegistry.FLYING_HELMET.get().getArmorFamilyName());
         boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
-                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getMaterialName());
+                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getArmorFamilyName());
         boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
-                .equals(ArmorRegistry.FLYING_BOOTS.get().getMaterialName());
+                .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
         boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
-                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getMaterialName());
+                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getArmorFamilyName());
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = getMaxDamage() / 2;
@@ -66,7 +64,7 @@ public class FlyingArmor extends ModArmor
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
     {
         return getModelName(wearer, EquipmentSlot.FEET)
-            .equals(ArmorRegistry.FLYING_BOOTS.get().getMaterialName());
+            .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
 
     }
 
@@ -74,6 +72,6 @@ public class FlyingArmor extends ModArmor
     {
         var item = entity.getItemBySlot(slot).getItem();
         if (!(item instanceof ModArmor armorItem)) return "";
-        return armorItem.getMaterialName();
+        return armorItem.getArmorFamilyName();
     }
 }

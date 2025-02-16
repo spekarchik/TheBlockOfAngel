@@ -1,5 +1,6 @@
 package com.pekar.angelblock.armor;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -17,7 +18,6 @@ import java.util.function.Consumer;
 
 public class ModArmor extends ArmorItem
 {
-    protected final String materialName;
     protected final ArmorItem.Type armorItemType;
     protected final int maxDamage;
     protected final ModArmorMaterial material;
@@ -28,7 +28,6 @@ public class ModArmor extends ArmorItem
         super(material.getMaterial(), armorItemType, new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
         this.material = material;
         this.armorItemType = armorItemType;
-        this.materialName = material.getMaterialName();
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
     }
 
@@ -37,9 +36,9 @@ public class ModArmor extends ArmorItem
         return material;
     }
 
-    public String getMaterialName()
+    public String getArmorFamilyName()
     {
-        return materialName;
+        return material.getMaterialName() + "_armor";
     }
 
     @Override
@@ -129,6 +128,11 @@ public class ModArmor extends ArmorItem
 
     private MutableComponent getCommonDisplayName(int lineNumber)
     {
-        return Component.translatable(material.getFullArmorModelName().replace(':', '.').replaceAll("[0-9]", "") + ".desc" + lineNumber);
+        return Component.translatable(getFullArmorModelName(getArmorFamilyName()).replace(':', '.').replaceAll("[0-9]", "") + ".desc" + lineNumber);
+    }
+
+    private String getFullArmorModelName(String armorModelName)
+    {
+        return Main.MODID + ":" + armorModelName;
     }
 }

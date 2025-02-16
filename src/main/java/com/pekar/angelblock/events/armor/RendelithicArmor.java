@@ -161,9 +161,9 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
-    public String getModelName()
+    public String getFamilyName()
     {
-        return ArmorRegistry.RENDELITHIC_BOOTS.get().getMaterialName();
+        return ArmorRegistry.RENDELITHIC_BOOTS.get().getArmorFamilyName();
     }
 
     @Override

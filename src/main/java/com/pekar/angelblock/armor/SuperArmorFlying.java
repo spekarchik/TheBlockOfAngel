@@ -19,13 +19,13 @@ public class SuperArmorFlying extends SuperArmor
         if (entity.hasEffect(MobEffects.SLOW_FALLING)) return false;
 
         boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
-                .equals(ArmorRegistry.SUPER_HELMET.get().getMaterialName());
+                .equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
         boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
-                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getMaterialName());
+                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorFamilyName());
         boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
-                .equals(ArmorRegistry.SUPER_BOOTS.get().getMaterialName());
+                .equals(ArmorRegistry.SUPER_BOOTS.get().getArmorFamilyName());
         boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
-                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getMaterialName());
+                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getArmorFamilyName());
         boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = getMaxDamage() / 2;
@@ -44,6 +44,6 @@ public class SuperArmorFlying extends SuperArmor
     {
         var item = entity.getItemBySlot(slot).getItem();
         if (!(item instanceof ModArmor armorItem)) return "";
-        return armorItem.getMaterialName();
+        return armorItem.getArmorFamilyName();
     }
 }
