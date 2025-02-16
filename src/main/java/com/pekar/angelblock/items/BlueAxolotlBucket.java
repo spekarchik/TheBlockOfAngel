@@ -1,5 +1,6 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
@@ -11,8 +12,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 
-public class BlueAxolotlBucket extends ModItem
+public class BlueAxolotlBucket extends ModItemWithHoverText
 {
+    public BlueAxolotlBucket()
+    {
+        super(TextStyle.Notice);
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
