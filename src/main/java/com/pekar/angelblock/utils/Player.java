@@ -2,6 +2,8 @@ package com.pekar.angelblock.utils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -77,14 +79,14 @@ public class Player
 //                exp = applyFortuneBonus(exp, fortuneLevel, 1.7);
 //                block.popExperience((ServerLevel) level, pos, exp);
         final int recursionLeft = 512;
-        return destroyBlock(pos, true, entityLiving, level, entityLiving.getMainHandItem(), recursionLeft);
+        return destroyBlock(pos, true, entityLiving, level, entityLiving.getMainHandItem(), blockState, recursionLeft);
     }
 
     // See Level.destroyBlock()
-    private boolean destroyBlock(BlockPos pos, boolean dropBlock, @NotNull Entity entity, Level level, ItemStack tool, int recursionLeft)
+    private boolean destroyBlock(BlockPos pos, boolean dropBlock, @NotNull Entity entity, Level level, ItemStack tool, BlockState blockState, int recursionLeft)
     {
         BlockState blockstate = level.getBlockState(pos);
-        
+
         if (blockstate.isAir())
         {
             return false;
@@ -97,15 +99,24 @@ public class Player
                 level.levelEvent(2001, pos, Block.getId(blockstate));
             }
 
+            BlockEntity blockEntity = blockstate.hasBlockEntity() ? level.getBlockEntity(pos) : null;
             if (dropBlock)
             {
-                BlockEntity blockentity = blockstate.hasBlockEntity() ? level.getBlockEntity(pos) : null;
-                Block.dropResources(blockstate, level, pos, blockentity, entity, tool);
+                Block.dropResources(blockstate, level, pos, blockEntity, entity, tool);
             }
 
             boolean flag = level.setBlock(pos, fluidstate.createLegacyBlock(), 3, recursionLeft);
             if (flag)
             {
+                if (entity instanceof ServerPlayer)
+                {
+                    int exp = blockState.getExpDrop(level, pos, blockEntity, entity, tool);
+                    if (exp > 0)
+                    {
+                        blockState.getBlock().popExperience((ServerLevel) level, pos, exp);
+                    }
+                }
+
                 level.gameEvent(GameEvent.BLOCK_DESTROY, pos, GameEvent.Context.of(entity, blockstate));
             }
 
