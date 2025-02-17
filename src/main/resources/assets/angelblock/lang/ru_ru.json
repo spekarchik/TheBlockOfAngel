@@ -840,7 +840,7 @@
   "item.angelblock.nether_bars.desc": "Встречается в Развалинах Бастиона",
   "item.angelblock.ancient_scroll": "§eСтаринный свиток",
   "item.angelblock.ancient_scroll.desc": "Встречается в библиотеках Крепостей",
-  "item.angelblock.blue_axolotl_bucket": "§eСиний аксолотль в ведре",
+  "item.angelblock.blue_axolotl_bucket": "§dСиний аксолотль в ведре",
   "item.angelblock.blue_axolotl_bucket.desc": "Может быть подарен рыбаком (вероятность 1/21) когда игрок имеет статус 'Герой Деревни'",
 
   "block.angelblock.green_diamond_ore": "Зелёно-алмазная руда",
