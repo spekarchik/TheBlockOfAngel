@@ -57,8 +57,7 @@
               "function": "minecraft:set_damage"
             },
             {
-              "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:enchantments"
+              "function": "minecraft:enchant_randomly"
             }
           ],
           "name": "angelblock:rendelithic_primary_shovel"
@@ -76,8 +75,7 @@
               "function": "minecraft:set_damage"
             },
             {
-              "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:enchantments"
+              "function": "minecraft:enchant_randomly"
             }
           ],
           "name": "angelblock:rendelithic_shovel"

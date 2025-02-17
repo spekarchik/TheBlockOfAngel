@@ -40,8 +40,7 @@
               "function": "minecraft:set_damage"
             },
             {
-              "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_random_loot"
+              "function": "minecraft:enchant_randomly"
             }
           ],
           "name": "minecraft:diamond_shovel",
@@ -65,8 +64,7 @@
               "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_random_loot"
+              "function": "minecraft:enchant_randomly"
             }
           ],
           "name": "minecraft:diamond_pickaxe",
@@ -179,8 +177,7 @@
               "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_random_loot"
+              "function": "minecraft:enchant_randomly"
             }
           ],
           "name": "minecraft:golden_axe"
