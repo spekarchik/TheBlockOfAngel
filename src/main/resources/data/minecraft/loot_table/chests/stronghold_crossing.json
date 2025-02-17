@@ -67,7 +67,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:diamond_pickaxe"
@@ -83,7 +83,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": false
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:netherite_pickaxe"
@@ -99,7 +99,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:diamond_axe"
@@ -115,7 +115,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": false
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:netherite_axe"
@@ -131,7 +131,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:diamond_sword"
@@ -147,7 +147,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": false
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:netherite_sword"
@@ -190,7 +190,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:diamond_boots"
@@ -206,7 +206,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": false
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:netherite_boots"
@@ -222,7 +222,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:diamond_chestplate"
@@ -238,7 +238,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": false
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:netherite_chestplate"
@@ -254,7 +254,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:diamond_leggings"
@@ -270,7 +270,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:diamond_helmet"
@@ -391,7 +391,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_pickaxe"
@@ -401,8 +401,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30.0,
-              "treasure": true
+              "levels": 30.0
             }
           ],
           "name": "minecraft:book"
