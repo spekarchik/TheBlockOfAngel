@@ -97,7 +97,6 @@ public class CustomSmithingMenu extends SmithingMenu
 
                 if (tool instanceof ModRod rod)
                 {
-                    // TODO: Add recipes to downgrade rods
                     boolean isResultModRod = result.getItem() instanceof ModRod;
                     var resultAsModRod = isResultModRod ? (ModRod)result.getItem() : null;
 
