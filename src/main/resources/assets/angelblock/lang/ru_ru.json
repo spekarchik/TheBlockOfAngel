@@ -935,5 +935,6 @@
   "effect.angelblock.rod_magnetic_mode_effect": "Магнитный посох",
   "effect.angelblock.armor_super_jump_mode_effect": "Супер прыжки",
 
-  "trim_material.angelblock.green_diamond": "Зеленый алмаз"
+  "trim_material.angelblock.green_diamond": "Зеленый алмаз",
+  "container.custom_smithing": "Улучшить/разобрать снаряжение"
 }

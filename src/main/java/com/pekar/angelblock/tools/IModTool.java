@@ -26,6 +26,16 @@ public interface IModTool extends IModDescriptionItem
 
     TieredItem getTool();
 
+    default String getMaterialName()
+    {
+        if (getTool().getTier() instanceof ModToolMaterial toolMaterial)
+        {
+            return toolMaterial.getName();
+        }
+
+        return "";
+    }
+
     default void damageMainHandItem(int amount, LivingEntity livingEntity)
     {
         var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);

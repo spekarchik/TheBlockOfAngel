@@ -935,5 +935,6 @@
   "effect.angelblock.rod_magnetic_mode_effect": "Rod Magnetic Mode",
   "effect.angelblock.armor_super_jump_mode_effect": "Super Jump Mode",
 
-  "trim_material.angelblock.green_diamond": "Green Diamond Material"
+  "trim_material.angelblock.green_diamond": "Green Diamond Material",
+  "container.custom_smithing": "Upgrade/Downgrade Gear"
 }

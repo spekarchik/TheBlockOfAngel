@@ -26,34 +26,45 @@ public class ToolMaterials
     // diamond axe: 9.0, singleDamage = 9.0
     // netherite axe: 10.0, singleDamage = 10.0
 
-    static final Tier RENDELITHIC = new ModToolMaterial(800, 8F, 4.8F, 3, 25,
+    public static final String RENDELITHIC_MATERIAL_NAME = "rendelithic";
+    public static final String LIMONITE_MATERIAL_NAME = "limonite";
+    public static final String DIAMITHIC_MATERIAL_NAME = "diamithic";
+    public static final String LAPIS_MATERIAL_NAME = "lapis";
+    public static final String SUPER_MATERIAL_NAME = "super";
+    public static final String ROD_MATERIAL1_NAME = "rod1";
+    public static final String ROD_MATERIAL3_NAME = "rod3";
+    public static final String ROD_MATERIAL4_NAME = "rod4";
+    public static final String ROD_MATERIAL5_NAME = "rod5";
+    public static final String ROD_MATERIAL6_NAME = "rod6";
+
+    static final Tier RENDELITHIC = new ModToolMaterial(RENDELITHIC_MATERIAL_NAME, 800, 8F, 4.8F, 3, 25,
             Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get())); // damagePerSecond = 15, singleDamage = 8.8; Axe: damagePerSecond = 12, singleDamage = 10.8
 
-    static final Tier DIAMITHIC = new ModToolMaterial(2600, 7F, 8.3F, 4, 14,
+    static final Tier DIAMITHIC = new ModToolMaterial(DIAMITHIC_MATERIAL_NAME, 2600, 7F, 8.3F, 4, 14,
             Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get())); // damagePerSecond = 16, singleDamage = 12.3;  Axe: damagePerSecond = 11.4, singleDamage = 14.3
 
-    static final Tier LAPIS = new ModToolMaterial(1500, 8.7F, 3F, 3, 10,
+    static final Tier LAPIS = new ModToolMaterial(LAPIS_MATERIAL_NAME, 1500, 8.7F, 3F, 3, 10,
             Ingredient.of(ItemRegistry.LAPIS_INGOT.get())); // the same as Diamond (no weapon uses this material)
 
-    static final Tier LIMONITE = new ModToolMaterial(1200, 6.8F, 3.1F, 3, 30,
+    static final Tier LIMONITE = new ModToolMaterial(LIMONITE_MATERIAL_NAME, 1200, 6.8F, 3.1F, 3, 30,
             Ingredient.of(ItemRegistry.LIMONITE_INGOT.get())); // damagePerSecond = 14.9, singleDamage = 7.1;  Axe: damagePerSecond = 10, singleDamage = 9.1
 
-    static final Tier SUPER = new ModToolMaterial(2600, 11.0F, 8.5F, 4, 1,
+    static final Tier SUPER = new ModToolMaterial(SUPER_MATERIAL_NAME, 2600, 11.0F, 8.5F, 4, 1,
             Ingredient.of(ItemRegistry.SUPER_INGOT.get())); // damagePerSecond = 25, singleDamage = 12.5;  Axe: damagePerSecond = 20.3, singleDamage = 14.5
 
-    static final Tier ROD_MATERIAL1 = new ModToolMaterial(60, 2.0F, 0F, 0, 0,
+    static final Tier ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, 60, 2.0F, 0F, 0, 0,
             Ingredient.of(Items.BAMBOO));
 
-    static final Tier ROD_MATERIAL3 = new ModToolMaterial(200, 2.0F, 0F, 0, 0,
+    static final Tier ROD_MATERIAL3 = new ModToolMaterial(ROD_MATERIAL3_NAME, 200, 2.0F, 0F, 0, 0,
             Ingredient.of(Items.BAMBOO));
 
-    static final Tier ROD_MATERIAL4 = new ModToolMaterial(500, 2.0F, 0F, 0, 0,
+    static final Tier ROD_MATERIAL4 = new ModToolMaterial(ROD_MATERIAL4_NAME, 500, 2.0F, 0F, 0, 0,
             Ingredient.of(Items.BAMBOO));
 
-    static final Tier ROD_MATERIAL5 = new ModToolMaterial(2000, 2.0F, 0F, 0, 0,
+    static final Tier ROD_MATERIAL5 = new ModToolMaterial(ROD_MATERIAL5_NAME, 2000, 2.0F, 0F, 0, 0,
             Ingredient.of(Items.BAMBOO));
 
-    static final Tier ROD_MATERIAL6 = new ModToolMaterial(5000, 2.0F, 0F, 0, 0,
+    static final Tier ROD_MATERIAL6 = new ModToolMaterial(ROD_MATERIAL6_NAME, 5000, 2.0F, 0F, 0, 0,
             Ingredient.of(Items.BAMBOO));
 
 //    static final Tier RENDELITHIC = EnumHelper

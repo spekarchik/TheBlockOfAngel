@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ModToolMaterial implements Tier
 {
+    private final String name;
     private final int uses;
     private final float speed;
     private final float attackDamageBonus;
@@ -18,14 +19,20 @@ public class ModToolMaterial implements Tier
     private final int enchantability;
     private final Ingredient repairIngredient;
 
-    protected ModToolMaterial(int uses, float speed, float attackDamageBonus, int level, int enchantability, Ingredient repairIngredient)
+    protected ModToolMaterial(String name, int uses, float speed, float attackDamageBonus, int level, int enchantability, Ingredient repairIngredient)
     {
+        this.name = name;
         this.uses = uses;
         this.speed = speed;
         this.attackDamageBonus = attackDamageBonus;
         this.level = level;
         this.enchantability = enchantability;
         this.repairIngredient = repairIngredient;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     @Override

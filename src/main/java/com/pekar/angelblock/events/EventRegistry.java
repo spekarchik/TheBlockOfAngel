@@ -13,7 +13,7 @@ public class EventRegistry
         register(new PlayerDataEvents());
         register(new PlayerInteractionEvents());
         register(new TickEvents());
-        //register(new WorldEvents());
+        register(new CustomizationEvents());
     }
 
     public static void registerEventsOnModBus(IEventBus modEventBus)
