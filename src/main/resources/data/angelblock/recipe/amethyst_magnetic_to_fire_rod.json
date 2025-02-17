@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "angelblock:amethyst_magnetic_rod"
+    },
+    "addition": {
+        "item": "minecraft:flint"
+    },
+    "result": {
+        "id": "angelblock:fire_rod"
+    },
+    "template": {
+        "item": "angelblock:downgrade_kit"
+    }
+}

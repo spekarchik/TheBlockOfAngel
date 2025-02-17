@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "angelblock:planter"
+    },
+    "addition": {
+        "item": "minecraft:flint"
+    },
+    "result": {
+        "id": "angelblock:ancient_rod"
+    },
+    "template": {
+        "item": "angelblock:downgrade_kit"
+    }
+}
