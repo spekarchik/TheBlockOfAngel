@@ -13,8 +13,7 @@
                 "type": "minecraft:uniform",
                 "max": 39.0,
                 "min": 20.0
-              },
-              "treasure": false
+              }
             }
           ],
           "name": "minecraft:stone_pickaxe"
@@ -28,8 +27,7 @@
                 "type": "minecraft:uniform",
                 "max": 39.0,
                 "min": 20.0
-              },
-              "treasure": false
+              }
             }
           ],
           "name": "minecraft:stone_hoe"
@@ -43,8 +41,7 @@
                 "type": "minecraft:uniform",
                 "max": 39.0,
                 "min": 20.0
-              },
-              "treasure": false
+              }
             }
           ],
           "name": "minecraft:stone_shovel"

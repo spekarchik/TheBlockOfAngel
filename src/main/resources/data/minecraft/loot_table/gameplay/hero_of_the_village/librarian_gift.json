@@ -13,8 +13,7 @@
                 "type": "minecraft:uniform",
                 "max": 39.0,
                 "min": 30.0
-              },
-              "treasure": false
+              }
             }
           ],
           "name": "minecraft:book"
