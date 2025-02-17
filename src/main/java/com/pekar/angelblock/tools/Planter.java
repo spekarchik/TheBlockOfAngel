@@ -24,9 +24,9 @@ import java.util.List;
 
 public class Planter extends WorkRod
 {
-    public Planter(Tier material, boolean isMagnetic, Properties properties)
+    public Planter(Tier material, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, properties);
     }
 
     @Override

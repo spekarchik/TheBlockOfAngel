@@ -22,9 +22,9 @@ import java.util.List;
 
 public class Builder extends WorkRod
 {
-    public Builder(Tier material, boolean isMagnetic, Properties properties)
+    public Builder(Tier material, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, properties);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Builder extends WorkRod
 
         if (offHandItem instanceof BlockItem)
         {
-            boolean isMagneticMode = isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT);
+            boolean isMagneticMode = this.isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT);
             success = isMagneticMode
                     ? placeBlocksMagnetic(player, level, pos, context.getClickedFace())
                     : placeBlocks(player, level, pos, context.getClickedFace());
@@ -215,7 +215,7 @@ public class Builder extends WorkRod
     }
 
     @Override
-    public boolean isEnhancedRod()
+    public boolean isEnhanced()
     {
         return true;
     }

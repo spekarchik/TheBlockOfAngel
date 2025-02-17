@@ -36,7 +36,7 @@ public class EndRod extends AmethystRod
     {
         var player = context.getPlayer();
 
-        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
+        if (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
             return super.useOn(context);
 
         var itemStack = player.getItemInHand(context.getHand());
@@ -83,7 +83,7 @@ public class EndRod extends AmethystRod
     {
         var offHandItemStack = player.getOffhandItem();
 
-        if (offHandItemStack.isEmpty() || (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
+        if (offHandItemStack.isEmpty() || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
             return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
 
         var offHandItem = offHandItemStack.getItem();
@@ -183,7 +183,7 @@ public class EndRod extends AmethystRod
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (isEnhancedRod())
+        if (isEnhanced())
         {
             for (int i = 0; i <= 8; i++)
             {

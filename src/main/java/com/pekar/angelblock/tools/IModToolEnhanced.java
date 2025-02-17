@@ -21,6 +21,6 @@ public interface IModToolEnhanced extends IModTool
 
     default boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
     {
-        return isEnhancedTool() && isToolEffective(entity, pos) && !entity.isShiftKeyDown();
+        return isTool() && isEnhanced() && isToolEffective(entity, pos) && !entity.isShiftKeyDown();
     }
 }

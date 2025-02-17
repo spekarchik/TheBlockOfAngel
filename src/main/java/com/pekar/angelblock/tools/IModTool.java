@@ -18,11 +18,25 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public interface IModTool extends IModDescriptionItem
 {
-    boolean isEnhancedTool();
+    default boolean isTool()
+    {
+        return false;
+    }
 
-    boolean isEnhancedWeapon();
+    default boolean isWeapon()
+    {
+        return false;
+    }
 
-    boolean isEnhancedRod();
+    default boolean isRod()
+    {
+        return false;
+    }
+
+    default boolean isEnhanced()
+    {
+        return false;
+    }
 
     TieredItem getTool();
 

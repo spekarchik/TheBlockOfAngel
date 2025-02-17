@@ -105,7 +105,7 @@ public class LimoniteSword extends ModSword
     }
 
     @Override
-    public boolean isEnhancedWeapon()
+    public boolean isEnhanced()
     {
         return true;
     }

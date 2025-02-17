@@ -49,21 +49,9 @@ public class ModShovel extends ShovelItem implements IModToolEnhanced
     }
 
     @Override
-    public boolean isEnhancedTool()
+    public boolean isTool()
     {
-        return false;
-    }
-
-    @Override
-    public boolean isEnhancedWeapon()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isEnhancedRod()
-    {
-        return false;
+        return true;
     }
 
     @Override

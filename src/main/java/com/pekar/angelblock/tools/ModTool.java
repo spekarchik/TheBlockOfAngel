@@ -14,24 +14,6 @@ public abstract class ModTool extends TieredItem implements IModTool
     }
 
     @Override
-    public boolean isEnhancedTool()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isEnhancedWeapon()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isEnhancedRod()
-    {
-        return false;
-    }
-
-    @Override
     public TieredItem getTool()
     {
         return this;

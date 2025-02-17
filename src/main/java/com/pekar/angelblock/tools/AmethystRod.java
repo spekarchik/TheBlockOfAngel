@@ -104,7 +104,7 @@ public class AmethystRod extends FireRod
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (isEnhancedRod())
+        if (isEnhanced())
         {
             for (int i = 0; i <= 8; i++)
             {

@@ -60,9 +60,15 @@ public class ModRod extends ModTool implements IModTool
     }
 
     @Override
-    public boolean isEnhancedRod()
+    public boolean isEnhanced()
     {
         return isMagnetic;
+    }
+
+    @Override
+    public boolean isRod()
+    {
+        return true;
     }
 
     @Override

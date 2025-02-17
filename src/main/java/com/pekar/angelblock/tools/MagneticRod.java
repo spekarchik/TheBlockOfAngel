@@ -30,7 +30,7 @@ public class MagneticRod extends ModRod
     {
         var player = context.getPlayer();
 
-        if (!isEnhancedRod() || !player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
+        if (!isEnhanced() || !player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
         {
             return super.useOn(context);
         }

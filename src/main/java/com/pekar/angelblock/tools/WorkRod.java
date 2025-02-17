@@ -10,9 +10,9 @@ import java.util.List;
 
 public class WorkRod extends ModRod
 {
-    public WorkRod(Tier material, boolean isMagnetic, Properties properties)
+    public WorkRod(Tier material, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, false, properties);
     }
 
     @Override

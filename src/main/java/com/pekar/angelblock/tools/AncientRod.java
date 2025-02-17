@@ -65,7 +65,7 @@ public class AncientRod extends MagneticRod
 
         var player = context.getPlayer();
 
-        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
+        if (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
             return result;
 
         var level = player.level();
@@ -209,7 +209,7 @@ public class AncientRod extends MagneticRod
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (isEnhancedRod())
+        if (isEnhanced())
         {
             for (int i = 0; i <= 8; i++)
             {

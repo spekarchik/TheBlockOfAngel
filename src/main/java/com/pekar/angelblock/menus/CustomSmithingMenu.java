@@ -145,7 +145,7 @@ public class CustomSmithingMenu extends SmithingMenu
                         player.getInventory().add(dropItem2);
                     }
 
-                    if (rod.isEnhancedRod() && (!isResultModRod || !resultAsModRod.isEnhancedRod()))
+                    if (rod.isEnhanced() && (!isResultModRod || !resultAsModRod.isEnhanced()))
                     {
                         player.getInventory().add(new ItemStack(Blocks.LODESTONE));
                     }
@@ -186,7 +186,7 @@ public class CustomSmithingMenu extends SmithingMenu
                         player.getInventory().add(new ItemStack(dropItem1));
                     }
 
-                    if (tool.isEnhancedTool() && (!isResultModTool || !resultAsModTool.isEnhancedTool()))
+                    if (tool.isEnhanced() && (!isResultModTool || !resultAsModTool.isEnhanced()))
                     {
                         player.getInventory().add(new ItemStack(dropItem2));
                     }

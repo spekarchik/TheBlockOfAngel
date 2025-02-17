@@ -34,7 +34,7 @@ public class FireRod extends MarineRod
         var player = context.getPlayer();
         var level = player.level();
 
-        if (isEnhancedRod() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
+        if (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
             return super.useOn(context);
 
         var itemStack = player.getItemInHand(context.getHand());
@@ -289,7 +289,7 @@ public class FireRod extends MarineRod
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (isEnhancedRod())
+        if (isEnhanced())
         {
             for (int i = 0; i <= 8; i++)
             {

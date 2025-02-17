@@ -19,7 +19,7 @@ public class EnhancedPickaxe extends ModPickaxe
     }
 
     @Override
-    public boolean isEnhancedTool()
+    public boolean isEnhanced()
     {
         return true;
     }

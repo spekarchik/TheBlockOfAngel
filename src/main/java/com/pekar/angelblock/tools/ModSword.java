@@ -223,21 +223,9 @@ public class ModSword extends SwordItem implements IModTool
     }
 
     @Override
-    public boolean isEnhancedTool()
+    public boolean isWeapon()
     {
-        return false;
-    }
-
-    @Override
-    public boolean isEnhancedWeapon()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isEnhancedRod()
-    {
-        return false;
+        return true;
     }
 
     @Override

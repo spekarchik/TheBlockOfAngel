@@ -61,7 +61,7 @@ public class LimonitePickaxe extends EnhancedPickaxe
     @Override
     protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
     {
-        if (!isEnhancedTool() || !entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
+        if (!isEnhanced() || !entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
 
         BlockState blockState = level.getBlockState(pos);

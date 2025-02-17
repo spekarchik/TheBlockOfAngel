@@ -21,9 +21,9 @@ import java.util.List;
 
 public class TrackLayer extends WorkRod
 {
-    public TrackLayer(Tier material, boolean isMagnetic, Properties properties)
+    public TrackLayer(Tier material, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, properties);
     }
 
     @Override

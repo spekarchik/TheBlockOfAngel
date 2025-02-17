@@ -19,7 +19,7 @@ public class EnhancedAxe extends ModAxe
     }
 
     @Override
-    public boolean isEnhancedTool()
+    public boolean isEnhanced()
     {
         return true;
     }

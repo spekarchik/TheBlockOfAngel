@@ -21,7 +21,7 @@ public class EnhancedHoe extends ModHoe implements IModToolEnhanced
     }
 
     @Override
-    public boolean isEnhancedTool()
+    public boolean isEnhanced()
     {
         return true;
     }

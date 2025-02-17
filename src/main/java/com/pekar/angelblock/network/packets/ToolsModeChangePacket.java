@@ -23,9 +23,9 @@ public class ToolsModeChangePacket extends ClientToServerPacket
 
         var heldItem = player.getMainHandItem().getItem();
 
-        if (heldItem instanceof IModTool tool)
+        if (heldItem instanceof IModTool tool && tool.isEnhanced())
         {
-            if (tool.isEnhancedTool())
+            if (tool.isTool())
             {
                 if (!isAdvancedModeActive)
                 {
@@ -39,7 +39,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
                 }
                 return;
             }
-            else if (tool.isEnhancedWeapon())
+            else if (tool.isWeapon())
             {
                 var sword = (ModSword)tool;
 
@@ -90,7 +90,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
 
                 return;
             }
-            else if (tool.isEnhancedRod())
+            else if (tool.isRod())
             {
                 if (!isRodMagneticModeActive)
                 {

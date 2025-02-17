@@ -145,7 +145,7 @@ public class SuperSword extends ModSword
     }
 
     @Override
-    public boolean isEnhancedWeapon()
+    public boolean isEnhanced()
     {
         return true;
     }
