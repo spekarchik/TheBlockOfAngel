@@ -24,6 +24,7 @@ public class DiamithicArmor extends Armor
     private final IArmorEffect slowFallingEffect;
     private final IArmorEffect healthBoostEffect;
     private final IArmorEffect hasteEffect;
+    private final IArmorEffect slownessEffect;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter;
 
@@ -39,6 +40,7 @@ public class DiamithicArmor extends Armor
         nightVisionEffect = new NightVisionArmorEffect(player, this);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         hasteEffect = new HasteArmorEffect(player, this);
+        slownessEffect = new SlownessPermanentArmorEffect(player, this, 0);
 
         jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
@@ -79,6 +81,7 @@ public class DiamithicArmor extends Armor
         slowFallingEffect.updateEffectAvailability();
         healthBoostEffect.updateEffectAvailability();
         hasteEffect.updateEffectAvailability();
+        slownessEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -206,6 +209,7 @@ public class DiamithicArmor extends Armor
         slowFallingEffect.updateEffectActivity();
         healthBoostEffect.updateEffectActivity();
         hasteEffect.updateEffectActivity();
+        slownessEffect.updateEffectActivity();
     }
 
     private int getStrengthEffectAmplifier()
