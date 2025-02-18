@@ -4,14 +4,6 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
-import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -25,11 +17,7 @@ public class DiamithicArmor extends Armor
     private final IArmorEffect healthBoostEffect;
     private final IArmorEffect hasteEffect;
     private final IArmorEffect slownessEffect;
-    private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
-    private int creeperDetectedCounter;
 
-    private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
-    private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
     private static final int STRENGTH_EFFECT_AMPLIFIER_DEFAULT = 0;
     private static final int STRENGTH_EFFECT_AMPLIFIER_IMPROVED = 1;
 
@@ -109,30 +97,7 @@ public class DiamithicArmor extends Armor
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
         if (!isHelmetModifiedWithDetector) return;
 
-        Player entityPlayer = player.getEntity();
-        var level = entityPlayer.level();
-        if (level.isClientSide()) return;
-
-        var monsters = level.getEntities((Entity)null, entityPlayer.getBoundingBox().inflate(CREEPER_NOTIFY_DISTANCE),
-                entity -> entity instanceof Creeper);
-
-        for (Entity monster : monsters)
-        {
-            var entity = (LivingEntity) monster;
-            if (!entity.hasEffect(MobEffects.GLOWING))
-            {
-                var potionEffect = new MobEffectInstance(MobEffects.GLOWING, CREEPER_GLOWING_EFFECT_DURATION, 0 /*amplifier*/, false /*ambient*/, false /*visible*/, false /*showIcon*/);
-                entity.addEffect(potionEffect);
-            }
-
-            if (++creeperDetectedCounter > 3)
-            {
-                creeperDetectedPacket.sendToPlayer((ServerPlayer) entityPlayer);
-                creeperDetectedCounter = 0;
-            }
-
-            return;
-        }
+        detectCreepers();
     }
 
     @Override
