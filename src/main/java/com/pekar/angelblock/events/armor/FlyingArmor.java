@@ -15,14 +15,15 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 public class FlyingArmor extends Armor
 {
     private final SwitchingEffectSynchronizer jumpBoostEffect;
-    private final IArmorEffect slowFallingSwitchingEffect;
+    private final IArmorEffect slowFallingEffect;
     private static final int JUMP_BOOST_AMPLIFIER = 24;
+    private boolean isSlowFallingActivatedOnGround = true;
 
     public FlyingArmor(IPlayer player)
     {
         super(player);
 
-        slowFallingSwitchingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isLevitationSwitchingEffectAvailable);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isLevitationSwitchingEffectAvailable);
 
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
         speedEffect.setupAvailability(this::isJumpEffectAvailable);
@@ -50,11 +51,13 @@ public class FlyingArmor extends Armor
     @Override
     public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
     {
+        isSlowFallingActivatedOnGround = player.getEntity().onGround();
+
         jumpBoostEffect.updateSwitchState();
 
         if (!player.isNether())
         {
-            slowFallingSwitchingEffect.updateSwitchState();
+            slowFallingEffect.updateSwitchState();
         }
     }
 
@@ -72,15 +75,16 @@ public class FlyingArmor extends Armor
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
         jumpBoostEffect.updateEffectAvailability();
-        slowFallingSwitchingEffect.updateEffectAvailability();
+        slowFallingEffect.updateEffectAvailability();
 
-        slowFallingSwitchingEffect.updateSwitchState();
+        slowFallingEffect.updateSwitchState();
         updatePotionEffects();
     }
 
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
+        updateSlowFallingEffect();
     }
 
     @Override
@@ -107,9 +111,14 @@ public class FlyingArmor extends Armor
         {
             if (!player.isNether())
             {
-                slowFallingSwitchingEffect.trySwitch();
+                slowFallingEffect.trySwitch();
 
-                if (slowFallingSwitchingEffect.isActive())
+                if (slowFallingEffect.isEffectOn())
+                    isSlowFallingActivatedOnGround = player.getEntity().onGround();
+                else
+                    isSlowFallingActivatedOnGround = true;
+
+                if (slowFallingEffect.isActive())
                     player.getEntity().stopFallFlying();
             }
         }
@@ -124,7 +133,7 @@ public class FlyingArmor extends Armor
     public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
     {
         jumpBoostEffect.updateEffectAvailability();
-        slowFallingSwitchingEffect.updateEffectAvailability();
+        slowFallingEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -141,6 +150,8 @@ public class FlyingArmor extends Armor
     @Override
     public void onBeingInWater()
     {
+        if (slowFallingEffect.isEffectOn())
+            slowFallingEffect.trySwitchOff();
     }
 
     @Override
@@ -151,12 +162,13 @@ public class FlyingArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
+        updateSlowFallingEffect();
     }
 
     private void updatePotionEffects()
     {
         jumpBoostEffect.updateEffectActivity();
-        slowFallingSwitchingEffect.updateEffectActivity();
+        slowFallingEffect.updateEffectActivity();
     }
 
     private boolean isLevitationSwitchingEffectAvailable(IPlayer player, IArmor armor)
@@ -176,5 +188,14 @@ public class FlyingArmor extends Armor
 
         return !player.isNether() && player.isFullArmorSetPutOn(this)
                 && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
+    }
+
+    private void updateSlowFallingEffect()
+    {
+        if (!isSlowFallingActivatedOnGround && slowFallingEffect.isEffectOn() && player.getEntity().onGround())
+        {
+            slowFallingEffect.trySwitchOff();
+            isSlowFallingActivatedOnGround = true;
+        }
     }
 }

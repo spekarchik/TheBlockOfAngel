@@ -39,6 +39,7 @@ public class SuperArmor extends Armor
     private final IArmorEffect dolphinsGraceEffect;
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter;
+    private boolean isSlowFallingActivatedOnGround = true;
 
     private static final int REGENERATION_EFFECT_DURATION = 200;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
@@ -83,6 +84,8 @@ public class SuperArmor extends Armor
     @Override
     public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
     {
+        isSlowFallingActivatedOnGround = player.getEntity().onGround();
+
         nightVisionEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
 
@@ -190,6 +193,8 @@ public class SuperArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
+        updateSlowFallingEffect();
+
         if (!player.isArmorElementPutOn(this, EquipmentSlot.LEGS)) return;
 
         if (jumpEffect.isActive() || slownessEffect.isActive()) return;
@@ -226,6 +231,8 @@ public class SuperArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
+        updateSlowFallingEffect();
+
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
         if (!isHelmetModifiedWithDetector) return;
 
@@ -303,6 +310,11 @@ public class SuperArmor extends Armor
                 else
                 {
                     slowFallingEffect.trySwitch();
+
+                    if (slowFallingEffect.isEffectOn())
+                        isSlowFallingActivatedOnGround = player.getEntity().onGround();
+                    else
+                        isSlowFallingActivatedOnGround = true;
                 }
             }
 
@@ -353,7 +365,8 @@ public class SuperArmor extends Armor
     @Override
     public void onBeingInWater()
     {
-        // none
+        if (slowFallingEffect.isEffectOn())
+            slowFallingEffect.trySwitchOff();
     }
 
     @Override
@@ -438,5 +451,14 @@ public class SuperArmor extends Armor
         int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
 
         return bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
+    }
+
+    private void updateSlowFallingEffect()
+    {
+        if (!isSlowFallingActivatedOnGround && slowFallingEffect.isEffectOn() && player.getEntity().onGround())
+        {
+            slowFallingEffect.trySwitchOff();
+            isSlowFallingActivatedOnGround = true;
+        }
     }
 }
