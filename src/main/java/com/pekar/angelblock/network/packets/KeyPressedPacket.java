@@ -23,7 +23,7 @@ public class KeyPressedPacket extends ClientToServerPacket
     @Override
     public void onReceive(ServerPlayer serverPlayer)
     {
-        for (IArmor armor : PlayerManager.instance().getPlayerByEntityName(serverPlayer.getName().getString()).getArmorTypesUsed())
+        for (IArmor armor : PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID()).getArmorTypesUsed())
         {
             armor.onKeyInputEvent(pressedKeyName);
         }

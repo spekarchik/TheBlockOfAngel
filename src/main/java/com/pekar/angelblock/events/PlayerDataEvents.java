@@ -12,7 +12,7 @@ public class PlayerDataEvents implements IEventHandler
     @SubscribeEvent
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getString());
+        IPlayer player = playerBasic.getPlayerByUUID(event.getEntity().getUUID());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())

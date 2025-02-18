@@ -35,7 +35,7 @@ public class PlayerInteractionEvents implements IEventHandler
     public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         LivingEntity entity = event.getEntity();
-        IPlayer player = playerBasic.getPlayerByEntityName(entity.getName().getString());
+        IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -47,7 +47,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getString());
+        IPlayer player = playerBasic.getPlayerByUUID(event.getEntity().getUUID());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())
@@ -59,7 +59,7 @@ public class PlayerInteractionEvents implements IEventHandler
     @SubscribeEvent
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        IPlayer player = playerBasic.getPlayerByEntityName(event.getEntity().getName().getString());
+        IPlayer player = playerBasic.getPlayerByUUID(event.getEntity().getUUID());
         if (player == null) return;
 
         for (IArmor armor : player.getArmorTypesUsed())

@@ -17,8 +17,7 @@ public class HoldingAngelRodPacket extends ClientToServerPacket
     @Override
     public void onReceive(ServerPlayer serverPlayer)
     {
-        String playerName = serverPlayer.getName().getString();
-        IPlayer player = PlayerManager.instance().getPlayerByEntityName(playerName);
+        IPlayer player = PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID());
         var playerEntity = player.getEntity();
 
         var monsters = player.getEntity().level().getEntities((LivingEntity)null,

@@ -10,12 +10,13 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
 public class ClientTickEvents
 {
-    private static final Map<String, Integer> tickCounter = new ConcurrentHashMap<>();
+    private static final Map<UUID, Integer> tickCounter = new ConcurrentHashMap<>();
 
     public static void initStatic()
     {
@@ -28,25 +29,25 @@ public class ClientTickEvents
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
 
-        String playerName = localPlayer.getName().getString();
-        if (!tickCounter.containsKey(playerName))
+        var playerId = localPlayer.getUUID();
+        if (!tickCounter.containsKey(playerId))
         {
-            tickCounter.put(playerName, 0);
+            tickCounter.put(playerId, 0);
         }
-        else if (tickCounter.get(playerName) > 10)
+        else if (tickCounter.get(playerId) > 10)
         {
-            var player = PlayerManager.instance().getPlayerByEntityName(playerName);
+            var player = PlayerManager.instance().getPlayerByUUID(playerId);
             if (player != null)
             {
                 player.onClientTick();
             }
 
             new ClientTickPacket().sendToServer();
-            tickCounter.put(playerName, 0);
+            tickCounter.put(playerId, 0);
         }
         else
         {
-            tickCounter.put(playerName, tickCounter.get(playerName) + 1);
+            tickCounter.put(playerId, tickCounter.get(playerId) + 1);
         }
     }
 }

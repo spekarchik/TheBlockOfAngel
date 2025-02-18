@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerManager implements IEventHandler, IPlayerManager
 {
-    private final Map<String, IPlayer> players = new ConcurrentHashMap<>();
+    private final Map<UUID, IPlayer> players = new ConcurrentHashMap<>();
     private static final IPlayerManager instance;
 
     static
@@ -40,7 +40,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 //        event.player.sendMessage(new TextComponentString("Player appeared: " + event.player.getName()));
 
         IPlayer player = new Player(event.getEntity());
-        players.put(player.getPlayerName(), player);
+        players.put(player.getEntity().getUUID(), player);
 
 //        player.sendMessage("Player joined: " + player.getPlayerName());
 //        player.sendMessage("set initial dimension: " + event.getPlayer().level.dimension().location().getPath());
@@ -57,13 +57,13 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event)
     {
         BlockCleaner.clean(event.getEntity());
-        players.remove(event.getEntity().getName().getString());
+        players.remove(event.getEntity().getUUID());
     }
 
     @SubscribeEvent
     public void onEntityTravelToDimensionEvent(EntityTravelToDimensionEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getName().getString());
+        IPlayer player = players.get(event.getEntity().getUUID());
         if (player == null) return;
 
         BlockCleaner.clean(player.getEntity());
@@ -77,7 +77,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getName().getString());
+        IPlayer player = players.get(event.getEntity().getUUID());
         if (player == null) return;
 
         for (IArmorEvents armor : player.getArmorTypesUsed())
@@ -90,7 +90,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     public void onPlayerClone(PlayerEvent.Clone event)
     {
         var entity = event.getEntity();
-        IPlayer player = players.get(entity.getName().getString());
+        IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
 
 //        player.sendMessage("Player was cloned.");
@@ -101,7 +101,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getName().getString());
+        IPlayer player = players.get(event.getEntity().getUUID());
         if (player == null) return;
 
 //        player.sendMessage("EquipmentChange: " + event.getEntityLiving().getName().getString());
@@ -136,22 +136,16 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     }
 
     @Override
-    public IPlayer getPlayerByEntityName(String entityName)
-    {
-        return players.get(entityName);
-    }
-
-    @Override
     public IPlayer getPlayerByUUID(UUID uuid)
     {
-        return players.values().stream().filter(p -> p.getEntity().getUUID().equals(uuid)).findAny().get();
+        return players.values().stream().filter(p -> p.getEntity().getUUID().equals(uuid)).findAny().orElseThrow();
     }
 
     @Override
     public void addEntityPlayer(net.minecraft.world.entity.player.Player entity)
     {
         IPlayer player = new Player(entity);
-        players.put(player.getPlayerName(), player);
+        players.put(player.getEntity().getUUID(), player);
         player.updateArmorUsed();
     }
 
