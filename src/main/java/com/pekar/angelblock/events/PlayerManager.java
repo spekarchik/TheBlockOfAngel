@@ -121,7 +121,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         var offHandItemStack = playerEntity.getOffhandItem();
 
         removeEffectIfHoldItem(playerEntity, MobEffects.NIGHT_VISION, oldSlotItem, offHandItemStack, ItemRegistry.GUARDIAN_EYE.get());
-        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, offHandItemStack, ItemRegistry.END_SAPPHIRE.get());
+//        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, offHandItemStack, ItemRegistry.END_SAPPHIRE.get());
 //        removeEffectIfHoldItem(playerEntity, MobEffects.ABSORPTION, oldSlotItem, offHandItemStack, ItemRegistry.BIOS_DIAMOND.get());
 
         Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
