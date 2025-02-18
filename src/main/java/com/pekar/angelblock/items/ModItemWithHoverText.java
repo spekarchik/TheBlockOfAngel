@@ -14,11 +14,22 @@ public class ModItemWithHoverText extends ModItem
 
     public ModItemWithHoverText()
     {
-        this(TextStyle.Regular);
+        this(new Properties());
+    }
+
+    public ModItemWithHoverText(Properties properties)
+    {
+        this(TextStyle.Regular, properties);
     }
 
     public ModItemWithHoverText(TextStyle descriptionStyle)
     {
+        this(descriptionStyle, new Properties());
+    }
+
+    public ModItemWithHoverText(TextStyle descriptionStyle, Properties properties)
+    {
+        super(properties);
         this.descriptionStyle = descriptionStyle;
     }
 

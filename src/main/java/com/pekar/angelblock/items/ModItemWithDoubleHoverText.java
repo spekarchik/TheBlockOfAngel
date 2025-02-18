@@ -10,6 +10,16 @@ import java.util.List;
 
 public class ModItemWithDoubleHoverText extends ModItem
 {
+    public ModItemWithDoubleHoverText()
+    {
+        this(new Properties());
+    }
+
+    public ModItemWithDoubleHoverText(Properties properties)
+    {
+        super(properties);
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {

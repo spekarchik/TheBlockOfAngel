@@ -9,6 +9,11 @@ public class ModItem extends Item
 
     public ModItem()
     {
-        super(new Properties());
+        this(new Properties());
+    }
+
+    public ModItem(Properties properties)
+    {
+        super(properties);
     }
 }

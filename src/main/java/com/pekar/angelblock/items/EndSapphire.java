@@ -10,6 +10,11 @@ import net.minecraft.world.level.Level;
 
 public class EndSapphire extends ModItemWithDoubleHoverText
 {
+    public EndSapphire()
+    {
+        super(new Properties());
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
     {
