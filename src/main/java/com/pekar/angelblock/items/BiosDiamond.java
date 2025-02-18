@@ -24,7 +24,7 @@ public class BiosDiamond extends ModItemWithDoubleHoverText
             {
                 int duration = level.getRandom().nextIntBetweenInclusive(40, 200);
                 int effectLevel = level.getRandom().nextIntBetweenInclusive(0, 4);
-                player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, effectLevel, false, true));
+                player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, effectLevel, true, true));
             }
 
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());

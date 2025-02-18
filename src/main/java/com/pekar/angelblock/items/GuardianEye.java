@@ -17,7 +17,7 @@ public class GuardianEye extends ModItemWithDoubleHoverText
         {
             if (!level.isClientSide())
             {
-                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0, false, true));
+                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0, true, true));
             }
 
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
