@@ -1,12 +1,12 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +16,9 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.common.ItemAbility;
 
 public class ModRod extends ModTool implements IModTool
@@ -106,17 +108,23 @@ public class ModRod extends ModTool implements IModTool
         //if (!canSustainPlant) return InteractionResult.FAIL;  DOESN'T WORK WITH CHORUS!!!
 
         var itemStack = player.getItemInHand(hand);
+        var abovePos = pos.above();
 
-        if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
+        if (facing == Direction.UP && level.getBlockState(abovePos).canBeReplaced() && level.getBlockState(abovePos.above()).canBeReplaced())
         {
             boolean isClientSide = level.isClientSide();
             if (!isClientSide)
             {
-                level.setBlock(pos.above(), plantBlock.defaultBlockState(), 11);
+                level.setBlock(abovePos, plantBlock.defaultBlockState(), 11);
+
+                if (plantBlock instanceof DoublePlantBlock doublePlant)
+                {
+                    level.setBlock(abovePos.above(), doublePlant.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER), 11);
+                }
 
                 if (player instanceof ServerPlayer serverPlayer)
                 {
-                    new PlaySoundPacket(SoundType.PLANT).sendToPlayer(serverPlayer);
+                    level.playSound(null, pos.above(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
                 }
             }
