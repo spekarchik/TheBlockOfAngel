@@ -18,7 +18,7 @@
   "angelblock.rendelithic_armor.desc9": " Поджигает и выделяет атакующих: -",
   "angelblock.rendelithic_armor.desc10": " Подсветка игрока: -",
 
-  "angelblock.diamithic_armor.desc1": "Предназначение: Пещеры. Сражения с боссами §o(Эндер Дракон, Иссушитель, Хранитель)",
+  "angelblock.diamithic_armor.desc1": "Предназначение: Край. Сражения с боссами §o(Эндер Дракон, Иссушитель, Хранитель)",
   "angelblock.diamithic_armor.desc2": "Ремонт: диамитовый слиток",
   "angelblock.diamithic_armor.desc3": "Уязвимости: укусы пауков, чешуйниц, пчел §o(двойной урон)",
   "angelblock.diamithic_armor.desc4": "Имеет полную защиту от молнии. Немного замедляет игрока",
@@ -40,7 +40,7 @@
   "angelblock.lapis_armor.desc9": " Поджигает и выделяет атакующих: -",
   "angelblock.lapis_armor.desc10": " Подсветка игрока: +",
 
-  "angelblock.limonite_armor.desc1": "Предназначение: Лес, джунгли",
+  "angelblock.limonite_armor.desc1": "Предназначение: Лес, джунгли, снежные биомы, горы, пещеры",
   "angelblock.limonite_armor.desc2": "Ремонт: лаймонитовый слиток",
   "angelblock.limonite_armor.desc3": "Уязвимости: огонь, лава, магма, взрывы §o(двойной урон)",
   "angelblock.limonite_armor.desc4": "Под дождём восстанавливает здоровье. Защита 80% от укусов пауков, чешуйниц, пчел. Защита 100% от замерзания. Не видим для криперов дальше 3 блоков",
@@ -937,7 +937,7 @@
   "effect.angelblock.sword_web_mode_effect": "Режим паутины",
   "effect.angelblock.rod_magnetic_mode_effect": "Магнитный посох",
   "effect.angelblock.armor_super_jump_mode_effect": "Супер прыжки",
-  "effect.angelblock.armor_heavy_jump_effect": "Тяжёлый прыжок",
+  "effect.angelblock.armor_heavy_jump_effect": "Тяжелый Прыжок",
 
   "trim_material.angelblock.green_diamond": "Зеленый алмаз",
   "container.custom_smithing": "Улучшить/разобрать снаряжение",

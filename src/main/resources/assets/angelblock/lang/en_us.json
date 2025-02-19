@@ -18,7 +18,7 @@
   "angelblock.rendelithic_armor.desc9": " Burns up and glows attackers: -",
   "angelblock.rendelithic_armor.desc10": " Glowing: -",
 
-  "angelblock.diamithic_armor.desc1": "Purpose: Caves. Fighting against bosses §o(Ender Dragon, Wither, Warden)",
+  "angelblock.diamithic_armor.desc1": "Purpose: End World. Fighting against bosses §o(Ender Dragon, Wither, Warden)",
   "angelblock.diamithic_armor.desc2": "Repair: diamithic ingot",
   "angelblock.diamithic_armor.desc3": "Weakness: bites of spiders, silverfish, bees §o(double damage)",
   "angelblock.diamithic_armor.desc4": "Grants full protection against lightning strikes. Slightly slows down the player",
@@ -40,7 +40,7 @@
   "angelblock.lapis_armor.desc9": " Burns up and glows attackers: -",
   "angelblock.lapis_armor.desc10": " Glowing: +",
 
-  "angelblock.limonite_armor.desc1": "Purpose: Forests, jungle",
+  "angelblock.limonite_armor.desc1": "Purpose: Forests, Jungle, Snowy bioms, Mountains, Caves",
   "angelblock.limonite_armor.desc2": "Repair: limonite ingot",
   "angelblock.limonite_armor.desc3": "Weakness: fire, lava, magma, explosions §o(double damage)",
   "angelblock.limonite_armor.desc4": "Regenerating under rain. Bite immunity (80%): spiders, silverfish, bees. Full freezing protection. Invisible to creepers beyond 3 blocks",
