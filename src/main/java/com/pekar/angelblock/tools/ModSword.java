@@ -22,6 +22,7 @@ public class ModSword extends SwordItem implements IModTool
     private static final int CactusLifeTime = 1200;
     private static final int WebLifeTime = 1200;
     private static final int TimeThreshold = 600;
+    protected final Utils utils = new Utils();
 
     public ModSword(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {

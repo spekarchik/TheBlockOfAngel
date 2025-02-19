@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tools.properties.DiamithicMaterialProperties;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -18,6 +19,8 @@ public class DiamithicAxe extends EnhancedAxe
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 0; i <= 5; i++)
         {
             tooltipComponents.add(getDescription(i, i == 1, false, i == 4));

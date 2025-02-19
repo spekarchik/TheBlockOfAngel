@@ -186,7 +186,7 @@ public class FlyingArmor extends Armor
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
         int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
 
-        return !player.isNether() && player.isFullArmorSetPutOn(this)
+        return player.isFullArmorSetPutOn(this)
                 && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
     }
 

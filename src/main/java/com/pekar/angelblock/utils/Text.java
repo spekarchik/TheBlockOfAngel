@@ -2,7 +2,11 @@ package com.pekar.angelblock.utils;
 
 import com.pekar.angelblock.TextStyle;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+
+import java.util.List;
 
 public class Text
 {
@@ -34,5 +38,16 @@ public class Text
             case ImportantNotice -> initialComponent.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.WHITE);
             default -> initialComponent.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
         };
+    }
+
+    public boolean showExtendedDescription(List<Component> tooltipComponents)
+    {
+        if (!Screen.hasShiftDown())
+        {
+            tooltipComponents.add(Component.translatable("description.press_shift"));
+            return false;
+        }
+
+        return true;
     }
 }

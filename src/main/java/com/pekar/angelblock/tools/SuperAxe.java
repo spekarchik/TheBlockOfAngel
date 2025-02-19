@@ -31,6 +31,8 @@ public class SuperAxe extends EnhancedAxe
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 0; i <= 8; i++)
         {
             tooltipComponents.add(getDescription(i, i == 1, false, i == 6));

@@ -4,6 +4,7 @@ import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -183,6 +184,8 @@ public class EndRod extends AmethystRod
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         if (isEnhanced())
         {
             for (int i = 0; i <= 8; i++)

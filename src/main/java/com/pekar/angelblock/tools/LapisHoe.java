@@ -60,6 +60,8 @@ public class LapisHoe extends EnhancedHoe
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 0; i <= 12; i++)
         {
             tooltipComponents.add(getDescription(i, i == 1 || i == 5 || i == 7, false, i == 3));

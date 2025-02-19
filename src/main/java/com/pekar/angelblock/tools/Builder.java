@@ -2,6 +2,7 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -191,6 +192,8 @@ public class Builder extends WorkRod
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 0; i <= 6; i++)
         {
             tooltipComponents.add(getDescription(i, i == 1,  i == 4 || i == 2, false, i == 6));

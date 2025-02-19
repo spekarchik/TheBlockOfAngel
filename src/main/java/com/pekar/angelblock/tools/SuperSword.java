@@ -125,6 +125,8 @@ public class SuperSword extends ModSword
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 0; i <= 14; i++)
         {
             tooltipComponents.add(getDescription(i, i == 1 || i == 6, i == 7 || i == 9 || i == 13, i == 12));

@@ -1,5 +1,6 @@
 package com.pekar.angelblock.blocks;
 
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class ModBlockWithHoverText extends Block
 {
+    protected final Utils utils = new Utils();
+
     public ModBlockWithHoverText(Properties properties)
     {
         super(properties);
@@ -23,7 +26,13 @@ public class ModBlockWithHoverText extends Block
         components.add(getDisplayName().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
     }
 
-    private MutableComponent getDisplayName()
+    protected MutableComponent getDescription(boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
+    {
+        var component = getDisplayName();
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+    }
+
+    protected MutableComponent getDisplayName()
     {
         return Component.translatable(this.getDescriptionId() + ".desc");
     }

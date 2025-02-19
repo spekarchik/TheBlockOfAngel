@@ -2,6 +2,7 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -30,10 +31,12 @@ public class GuiEvents
 
             if (potionContents != null && potionContents.is(PotionRegistry.BLOCK_BREAKER_POTION))
             {
-                var tooltip = event.getToolTip();
+                var tooltipComponents = event.getToolTip();
+                if (!Utils.instance.text.showExtendedDescription(tooltipComponents)) return;
+
                 for (int i = 1; i <= 17; i++)
                 {
-                    tooltip.add(createTextComponent(i, i == 1 || i == 11));
+                    tooltipComponents.add(createTextComponent(i, i == 1 || i == 11));
                 }
             }
         }

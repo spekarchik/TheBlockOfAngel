@@ -22,6 +22,8 @@ public class GuardianEye extends ModItemWithMultipleHoverText
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 1; i <= 3; i++)
         {
             tooltipComponents.add(getDescription(i, false, false, i == 1 || i == 2, false));

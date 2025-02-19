@@ -2,6 +2,7 @@ package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.utils.Utils;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -84,16 +85,18 @@ public class ModArmor extends ArmorItem
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 1; i <= 10; i++)
         {
-            components.add(getCommonDescription(i, i == 5, false, i == 4, false));
+            tooltipComponents.add(getCommonDescription(i, i == 5, false, i == 4, false));
         }
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)
         {
-            components.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 7, false));
+            tooltipComponents.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 7, false));
         }
     }
 

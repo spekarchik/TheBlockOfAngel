@@ -23,6 +23,8 @@ public class ModItemWithDoubleHoverText extends ModItem
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 1; i <= 2; i++)
         {
             var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);

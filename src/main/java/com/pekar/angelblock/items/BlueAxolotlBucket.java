@@ -1,7 +1,9 @@
 package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.TextStyle;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -9,8 +11,11 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
+
+import java.util.List;
 
 public class BlueAxolotlBucket extends ModItemWithHoverText
 {
@@ -58,5 +63,13 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
     public int getDefaultMaxStackSize()
     {
         return 1;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
+    {
+        if (!utils.text.showExtendedDescription(components)) return;
+
+        components.add(getDisplayName().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
     }
 }

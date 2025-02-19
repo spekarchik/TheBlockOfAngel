@@ -1,5 +1,6 @@
 package com.pekar.angelblock.blocks;
 
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -12,20 +13,24 @@ import java.util.List;
 
 public class ModBlockWithDoubleHoverText extends Block
 {
+    protected final Utils utils = new Utils();
+
     public ModBlockWithDoubleHoverText(Properties properties)
     {
         super(properties);
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 1; i <= 2; i++)
         {
             var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
             if (i == 1)
                 component.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.WHITE);
-            components.add(component);
+            tooltipComponents.add(component);
         }
     }
 

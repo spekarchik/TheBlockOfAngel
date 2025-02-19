@@ -54,6 +54,8 @@ public class DiamithicSword extends ModSword
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 0; i <= 4; i++)
         {
             tooltipComponents.add(getDescription(i, i == 1 || i == 3));
