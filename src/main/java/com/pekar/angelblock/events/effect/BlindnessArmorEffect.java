@@ -9,6 +9,7 @@ public class BlindnessArmorEffect extends TemporaryArmorEffect
     public BlindnessArmorEffect(IPlayer player, IArmor armor, int duration)
     {
         super(player, armor, MobEffects.BLINDNESS, 0, duration);
+        showIcon();
     }
 
     @Override

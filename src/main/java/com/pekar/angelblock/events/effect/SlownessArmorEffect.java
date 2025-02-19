@@ -9,6 +9,7 @@ public class SlownessArmorEffect extends TemporaryArmorEffect
     public SlownessArmorEffect(IPlayer player, IArmor armor, int defaultAmplifier, int duration)
     {
         super(player, armor, MobEffects.MOVEMENT_SLOWDOWN, defaultAmplifier, duration);
+        showIcon();
     }
 
     @Override

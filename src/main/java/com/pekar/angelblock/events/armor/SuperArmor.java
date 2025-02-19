@@ -35,7 +35,8 @@ public class SuperArmor extends Armor
     private final IArmorEffect dolphinsGraceEffect;
     private boolean isSlowFallingActivatedOnGround = true;
 
-    private static final int REGENERATION_EFFECT_DURATION = 200;
+    private static final int REGENERATION_EFFECT_DURATION = 300;
+    private static final int SLOWNESS_EFFECT_DURATION = 600;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
 
@@ -49,9 +50,9 @@ public class SuperArmor extends Armor
 
         luckEffect = new LuckArmorEffect(player, this);
         regenerationEffect = new RegenerationArmorEffect(player, this, 1, REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessArmorEffect(player, this, 2, REGENERATION_EFFECT_DURATION).availableOnAnyArmorElement();
+        slownessEffect = new SlownessArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION).availableOnAnyArmorElement();
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_EFFECT_DURATION).availableOnFullArmorSet();
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
         levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableOnFullArmorSet();
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnFullArmorSet();
         superJumpEffect = new SuperJumpSwitchingEffect(player, this).setupAvailability(this::isSuperJumpEffectAvailable);
@@ -247,12 +248,22 @@ public class SuperArmor extends Armor
         {
             if (regenerationEffect.isEffectAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
-                regenerationEffect.trySwitch();
                 slownessEffect.trySwitch();
                 jumpEffect.trySwitchOff();
                 levitationEffect.trySwitchOff();
                 slowFallingEffect.trySwitchOff();
                 jumpNegativeEffect.trySwitch();
+
+                if (!regenerationEffect.isActive())
+                {
+                    regenerationEffect.trySwitch();
+
+                    if (regenerationEffect.isActive() && !player.getEntity().onGround() && slowFallingEffect.isEffectAvailable())
+                    {
+                        slowFallingEffect.trySwitchOn();
+                        isSlowFallingActivatedOnGround = false;
+                    }
+                }
             }
         }
 

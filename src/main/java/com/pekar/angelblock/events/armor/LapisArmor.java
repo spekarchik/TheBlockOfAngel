@@ -26,6 +26,9 @@ public class LapisArmor extends Armor
     private final IArmorEffect strengthEffect;
     private final IArmorEffect dolphinsGrace;
 
+    private static final int REGENERATION_EFFECT_DURATION = 300;
+    private static final int REGENERATION_NEGATIVE_EFFECT_DURATION = 200;
+
     public LapisArmor(IPlayer player)
     {
         super(player);
@@ -34,8 +37,8 @@ public class LapisArmor extends Armor
         waterBreathingEffect = new WaterBreathingEffect(player, this);
         hasteEffect = new HasteArmorEffect(player, this);
         luckEffect = new LuckArmorEffect(player, this);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 1, 200);
-        blindnessEffect = new BlindnessArmorEffect(player, this, 140).availableOnFullArmorSet();
+        regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
+        blindnessEffect = new BlindnessArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet();
         witherEffect = new WitherEffect(player, this, 0, 600).availableOnAnyArmorElement();
         strengthEffect = new StrengthArmorEffect(player, this, 0).availableOnChestPlateWithStrengthBooster();
         dolphinsGrace = new DolphinsGraceEffect(player, this);
@@ -125,8 +128,12 @@ public class LapisArmor extends Armor
         {
             if (regenerationEffect.isEffectAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
-                regenerationEffect.trySwitch();
                 blindnessEffect.trySwitch();
+
+                if (!regenerationEffect.isActive())
+                {
+                    regenerationEffect.trySwitch();
+                }
             }
         }
     }

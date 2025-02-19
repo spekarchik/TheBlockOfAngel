@@ -29,7 +29,7 @@ public class LimoniteArmor extends Armor
     private final IArmorEffect jumpNegativeEffect;
     private final SwitchingEffectSynchronizer jumpEffect;
 
-    private static final int REGENERATION_EFFECT_DURATION = 200;
+    private static final int REGENERATION_EFFECT_DURATION = 300;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
     private static final int REGENERATION_NEGATIVE_EFFECT_DURATION = 1200;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
@@ -168,9 +168,13 @@ public class LimoniteArmor extends Armor
             if (regenerationEffect.isEffectAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
                 jumpEffect.trySwitchOff();
-                regenerationEffect.trySwitch();
                 slownessEffect.trySwitch();
                 jumpNegativeEffect.trySwitch();
+
+                if (!regenerationEffect.isActive())
+                {
+                    regenerationEffect.trySwitch();
+                }
             }
         }
 
