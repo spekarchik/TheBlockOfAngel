@@ -274,8 +274,21 @@ public class SuperArmor extends Armor
                 jumpEffect.trySwitch();
             }
 
-            slowFallingEffect.trySwitchOff();
-            levitationEffect.trySwitchOff();
+            if (jumpEffect.isEffectOn() && jumpEffect.isActive() && slowFallingEffect.isEffectOn() && slowFallingEffect.isActive())
+            {
+                slowFallingEffect.trySwitchOff();
+                levitationEffect.trySwitchOn();
+            }
+            else if (!jumpEffect.isActive() && levitationEffect.isEffectOn() && levitationEffect.isActive())
+            {
+                levitationEffect.trySwitchOff();
+
+                if (slowFallingEffect.isEffectAvailable())
+                {
+                    slowFallingEffect.trySwitchOn();
+                    isSlowFallingActivatedOnGround = player.getEntity().onGround();
+                }
+            }
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
@@ -284,7 +297,26 @@ public class SuperArmor extends Armor
             {
                 if (jumpEffect.isEffectAvailable() && jumpEffect.isEffectOn())
                 {
-                    levitationEffect.trySwitch(getLevitationAmplifier());
+                    if (levitationEffect.isEffectAvailable() && levitationEffect.isEffectOn() && levitationEffect.isActive())
+                    {
+                        jumpEffect.trySwitchOff();
+                        levitationEffect.trySwitchOff();
+
+                        if (slowFallingEffect.isEffectAvailable())
+                        {
+                            slowFallingEffect.trySwitchOn();
+                            isSlowFallingActivatedOnGround = player.getEntity().onGround();
+                        }
+                    }
+                    else if (!player.getEntity().onGround() && slowFallingEffect.isEffectAvailable())
+                    {
+                        slowFallingEffect.trySwitchOn();
+                        isSlowFallingActivatedOnGround = false;
+                    }
+                    else
+                    {
+                        levitationEffect.trySwitch(getLevitationAmplifier());
+                    }
                 }
                 else
                 {
@@ -312,11 +344,6 @@ public class SuperArmor extends Armor
         if (levitationEffect.isEffectOn())
         {
             slowFallingEffect.trySwitchOff();
-        }
-
-        if (slowFallingEffect.isEffectOn())
-        {
-            levitationEffect.trySwitchOff();
         }
     }
 
