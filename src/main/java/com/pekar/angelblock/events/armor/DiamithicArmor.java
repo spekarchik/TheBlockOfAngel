@@ -95,9 +95,8 @@ public class DiamithicArmor extends Armor
     public void onCreeperCheck()
     {
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
-        if (!isHelmetModifiedWithDetector) return;
 
-        detectCreepers();
+        detectCreepers(isHelmetModifiedWithDetector,false);
     }
 
     @Override

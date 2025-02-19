@@ -156,9 +156,8 @@ public class LimoniteArmor extends Armor
     public void onCreeperCheck()
     {
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
-        if (!isHelmetModifiedWithDetector) return;
 
-        detectCreepers();
+        detectCreepers(isHelmetModifiedWithDetector, player.isFullArmorSetPutOn(this));
     }
 
     @Override

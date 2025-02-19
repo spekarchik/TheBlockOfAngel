@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
@@ -27,6 +28,7 @@ abstract class Armor implements IArmor
     private int creeperDetectedCounter = 0;
 
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
+    private static final double CREEPER_AGRY_DISTANCE = 3.0;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
 
     protected Armor(IPlayer player)
@@ -126,36 +128,46 @@ abstract class Armor implements IArmor
         return isZombie || isSkeleton || isIllager || isWitch;
     }
 
-    protected void detectCreepers()
+    protected void detectCreepers(boolean detect, boolean makeNeutral)
     {
+        if (!detect && !makeNeutral) return;
+
         var entityPlayer = player.getEntity();
         var level = entityPlayer.level();
 
         if (level.isClientSide()) return;
 
         var monsters = level.getEntities((Entity)null, entityPlayer.getBoundingBox().inflate(CREEPER_NOTIFY_DISTANCE),
-                entity -> entity instanceof Creeper);
+                        entity -> entity instanceof Creeper)
+                .stream().map(e -> (Mob)e).toList();
 
         if (!monsters.isEmpty())
         {
-            for (Entity monster : monsters)
+            for (var entity : monsters)
             {
-                var entity = (LivingEntity) monster;
-                if (!entity.hasEffect(MobEffects.GLOWING))
+                if (detect && !entity.hasEffect(MobEffects.GLOWING))
                 {
                     var potionEffect = new MobEffectInstance(MobEffects.GLOWING, CREEPER_GLOWING_EFFECT_DURATION, 0 /*amplifier*/, false /*ambient*/, false /*visible*/, false /*showIcon*/);
                     entity.addEffect(potionEffect);
                 }
+                if (makeNeutral && entity.distanceTo(entityPlayer) >= CREEPER_AGRY_DISTANCE && entity.getTarget() == entityPlayer)
+                {
+                    entity.setTarget(null);
+                }
             }
 
-            if (creeperDetectedCounter > 3)
-                creeperDetectedCounter = 0;
-            else if (creeperDetectedCounter++ == 0)
-                creeperDetectedPacket.sendToPlayer((ServerPlayer) entityPlayer);
+            if (detect)
+            {
+                if (creeperDetectedCounter > 3)
+                    creeperDetectedCounter = 0;
+                else if (creeperDetectedCounter++ == 0)
+                    creeperDetectedPacket.sendToPlayer((ServerPlayer) entityPlayer);
+            }
         }
         else
         {
-            creeperDetectedCounter = 0;
+            if (detect)
+                creeperDetectedCounter = 0;
         }
     }
 }

@@ -226,9 +226,8 @@ public class SuperArmor extends Armor
         updateSlowFallingEffect();
 
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
-        if (!isHelmetModifiedWithDetector) return;
 
-        detectCreepers();
+        detectCreepers(isHelmetModifiedWithDetector, false);
     }
 
     @Override
