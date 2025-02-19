@@ -18,6 +18,14 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Supplier;
 
+// Durability:
+// LEATHER: 5
+// GOLDEN: 7
+// CHAINMAIL: 15
+// IRON: 15
+// DIAMOND: 33
+// NETHERITE: 37
+
 public class ModArmorMaterial
 {
     private final Holder<ArmorMaterial> material;
@@ -39,10 +47,10 @@ public class ModArmorMaterial
 
     protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial(RENDELITHIC_MATERIAL_NAME, "rendelithic_armor",
             createArmorTypeMap(3, 6, 8, 3, 7),
-            25, 0F, 0F, 10, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
+            25, 0F, 0F, 11, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
     protected static final ModArmorMaterial LIMONITE = new ModArmorMaterial(LIMONITE_MATERIAL_NAME, "limonite_armor",
-            createArmorTypeMap(3, 5, 7, 3, 3),
-            30, 1F, 0F, 28, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
+            createArmorTypeMap(2, 5, 7, 3, 3),
+            30, 1F, 0F, 23, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
     protected static final ModArmorMaterial DIAMITHIC = new ModArmorMaterial(DIAMITHIC_MATERIAL_NAME, "diamithic_armor",
             createArmorTypeMap(3, 6, 9, 3, 11),
             14, 3F, 0.2F, 41, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
