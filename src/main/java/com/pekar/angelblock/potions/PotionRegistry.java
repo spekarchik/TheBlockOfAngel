@@ -27,6 +27,8 @@ public class PotionRegistry
 
     public static final Holder<MobEffect> ARMOR_SUPER_JUMP_MODE_EFFECT = registerMobEffect("armor_super_jump_mode_effect", SuperJumpModeEffect::new);
 
+    public static final Holder<MobEffect> ARMOR_HEAVY_JUMP_EFFECT = registerMobEffect("armor_heavy_jump_effect", HeavyJumpEffect::new);
+
 
     // Potions
     public static final Holder<Potion> BLOCK_BREAKER_POTION = registerPotion("block_breaker_potion", () -> new Potion(new MobEffectInstance[]{new MobEffectInstance(BLOCK_BREAKER_EFFECT)}));

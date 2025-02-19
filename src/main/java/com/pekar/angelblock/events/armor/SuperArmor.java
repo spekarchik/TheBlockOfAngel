@@ -51,7 +51,7 @@ public class SuperArmor extends Armor
         regenerationEffect = new RegenerationArmorEffect(player, this, 1, REGENERATION_EFFECT_DURATION);
         slownessEffect = new SlownessArmorEffect(player, this, 2, REGENERATION_EFFECT_DURATION).availableOnAnyArmorElement();
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, -2, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_EFFECT_DURATION).availableOnFullArmorSet();
         levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableOnFullArmorSet();
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnFullArmorSet();
         superJumpEffect = new SuperJumpSwitchingEffect(player, this).setupAvailability(this::isSuperJumpEffectAvailable);
