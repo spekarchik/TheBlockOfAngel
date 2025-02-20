@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.network.PacketRegistry;
+import com.pekar.angelblock.network.NetworkingEventHandler;
 import net.neoforged.bus.api.IEventBus;
 
 import static net.neoforged.neoforge.common.NeoForge.EVENT_BUS;
@@ -18,7 +18,7 @@ public class EventRegistry
 
     public static void registerEventsOnModBus(IEventBus modEventBus)
     {
-        register(modEventBus, new PacketRegistry());
+        register(modEventBus, new NetworkingEventHandler());
     }
 
     private static void register(IEventHandler eventHandler)

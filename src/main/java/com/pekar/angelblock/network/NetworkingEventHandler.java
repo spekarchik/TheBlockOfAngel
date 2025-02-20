@@ -7,9 +7,9 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.HandlerThread;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-public final class PacketRegistry implements IEventHandler
+public final class NetworkingEventHandler implements IEventHandler
 {
-    public PacketRegistry()
+    public NetworkingEventHandler()
     {
     }
 
