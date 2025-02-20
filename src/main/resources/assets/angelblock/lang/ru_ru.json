@@ -374,7 +374,7 @@
   "item.angelblock.flying_boots.desc1": "Характеристики ботинок",
   "item.angelblock.flying_boots.desc2": " Защита от падения: 90%",
   "item.angelblock.flying_boots.desc3": " Усиление прыжка: 25 (не работает если износ понож или ботинок > 50%)",
-  "item.angelblock.flying_boots.desc4": " Супер прыжок: -",
+  "item.angelblock.flying_boots.desc4": " Супер прыжок: 25 (то же что Усиление Прыжка)",
   "item.angelblock.flying_boots.desc5": " Быстрое плавание: -",
   "item.angelblock.flying_boots.desc6": " Защита от замерзания: +",
   "item.angelblock.flying_boots.desc7": " (если Усиление прыжка ВКЛ, скорость добычи снижается в 5 раз)",

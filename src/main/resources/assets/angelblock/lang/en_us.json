@@ -374,7 +374,7 @@
   "item.angelblock.flying_boots.desc1": "Boots capabilities",
   "item.angelblock.flying_boots.desc2": " Fall protection: 90%",
   "item.angelblock.flying_boots.desc3": " Jump boost: 25 (does not work if leggings or boots damage > 50%)",
-  "item.angelblock.flying_boots.desc4": " Super jump: -",
+  "item.angelblock.flying_boots.desc4": " Super jump: 25 (this is the same as Jump Boost)",
   "item.angelblock.flying_boots.desc5": " Sweam booster: -",
   "item.angelblock.flying_boots.desc6": " Freeze protection: +",
   "item.angelblock.flying_boots.desc7": " (when Jump boost is ON the mining speed is decreased by 5)",
