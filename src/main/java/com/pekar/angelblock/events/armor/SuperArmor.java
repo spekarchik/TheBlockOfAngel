@@ -104,23 +104,27 @@ public class SuperArmor extends Armor
             event.setAmount(realDamage);
             event.setCanceled(realDamage <= 0);
         }
-        else if (isLavaDamage(damageSource) && player.isFullArmorSetPutOn(this))
+        else if (isLavaDamage(damageSource))
         {
-            event.setCanceled(true);
+            if (player.isFullArmorSetPutOn(this))
+                event.setAmount(0.05f * event.getAmount());
         }
         else if (isHotFloorDamage(damageSource) || isFreezeDamage(damageSource))
         {
             boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
             event.setCanceled(areBootsWorn);
         }
-        else if (hasImmunity(damageSource) && player.isArmorModifiedWithHealthRegenerator(this))
+        else if (hasImmunity(damageSource))
         {
-            event.setCanceled(true);
+            event.setCanceled(player.isArmorModifiedWithHealthRegenerator(this));
         }
-        else if (damageSource.is(DamageTypes.WITHER) && player.isArmorModifiedWithHealthRegenerator(this))
+        else if (damageSource.is(DamageTypes.WITHER))
         {
-            event.setCanceled(true);
-            player.getEntity().removeEffect(MobEffects.WITHER);
+            if (player.isArmorModifiedWithHealthRegenerator(this))
+            {
+                event.setCanceled(true);
+                player.getEntity().removeEffect(MobEffects.WITHER);
+            }
         }
         else
         {
