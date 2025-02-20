@@ -85,7 +85,6 @@ public class ModArmorMaterial
         this.durabilityMultiplier = durabilityMultiplier;
         this.equipmentSound = equipmentSound;
         this.repairIngredient = repairIngredient;
-
     }
 
     public Holder<ArmorMaterial> getMaterial()
