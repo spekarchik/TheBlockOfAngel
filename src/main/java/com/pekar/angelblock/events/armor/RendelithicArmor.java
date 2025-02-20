@@ -28,7 +28,7 @@ public class RendelithicArmor extends Armor
     public RendelithicArmor(IPlayer player)
     {
         super(player);
-        nauseaEffect = new NauseaTemporaryEffect(player, this, 200).availableOnAnyArmorElement();
+        nauseaEffect = new NauseaTemporaryEffect(player, this, 200).availableOnAnyArmorElement().showIcon();
         slownessEffect = new SlownessArmorEffect(player, this, 5, 400).availableOnAnyArmorElement();
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isSlowFallingAvailable).showIcon();
 
