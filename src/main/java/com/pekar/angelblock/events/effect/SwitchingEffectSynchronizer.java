@@ -102,6 +102,12 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
     }
 
     @Override
+    public boolean trySwitchTo(boolean switchOn)
+    {
+        return switchOn ? trySwitchOn() : trySwitchOff();
+    }
+
+    @Override
     public boolean trySwitchOff()
     {
         boolean result = masterEffect.trySwitchOff();

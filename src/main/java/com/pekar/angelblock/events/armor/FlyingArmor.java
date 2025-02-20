@@ -28,7 +28,7 @@ public class FlyingArmor extends Armor
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
         speedEffect.setupAvailability(this::isJumpEffectAvailable);
         var jumpBoostEffect = new JumpBoostArmorEffect(player, this, JUMP_BOOST_AMPLIFIER);
-        jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable).hideIcon();
+        jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable);
         var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
         superJumpEffect.setupAvailability(this::isJumpEffectAvailable);
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
@@ -99,7 +99,7 @@ public class FlyingArmor extends Armor
     @Override
     public void onKeyInputEvent(String pressedKeyDescription)
     {
-        if (pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
+        if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()) || pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
         {
             if (!player.isNether())
             {

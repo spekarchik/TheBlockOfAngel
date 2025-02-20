@@ -69,6 +69,12 @@ abstract class ArmorEffect implements IArmorEffect
     }
 
     @Override
+    public boolean trySwitchTo(boolean switchOn)
+    {
+        return switchOn ? trySwitchOn() : trySwitchOff();
+    }
+
+    @Override
     public final void updateSwitchState()
     {
         isOn = isActive();

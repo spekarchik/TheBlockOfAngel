@@ -17,6 +17,7 @@ public interface IArmorEffect
     void updateEffectActivity();
     void updateEffectActivity(int amplifier);
     boolean trySwitch();
+    boolean trySwitchTo(boolean switchOn);
     boolean trySwitch(int amplifier);
     boolean trySwitchOff();
     boolean trySwitchOn(int amplifier);

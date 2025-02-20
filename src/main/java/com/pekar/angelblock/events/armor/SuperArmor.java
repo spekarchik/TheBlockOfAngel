@@ -41,6 +41,7 @@ public class SuperArmor extends Armor
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
 
     private static final int LEVITATION_UP_AMPLIFIER = 3;
+    private static final int SUPER_JUMP_AMPLIFIER = 30;
 
     public SuperArmor(IPlayer player)
     {
@@ -198,7 +199,7 @@ public class SuperArmor extends Armor
         }
         else if (superJumpEffect.isEffectOn() && superJumpEffect.isActive())
         {
-            player.setEffect(MobEffects.JUMP, 20, 30);
+            player.setEffect(MobEffects.JUMP, 20, SUPER_JUMP_AMPLIFIER);
         }
     }
 
@@ -338,7 +339,7 @@ public class SuperArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
         {
             superJumpEffect.trySwitch();
-            dolphinsGraceEffect.trySwitch();
+            dolphinsGraceEffect.trySwitchTo(superJumpEffect.isEffectOn());
         }
 
         if (levitationEffect.isEffectOn())
