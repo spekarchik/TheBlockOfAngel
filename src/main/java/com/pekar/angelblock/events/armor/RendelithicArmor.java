@@ -51,7 +51,7 @@ public class RendelithicArmor extends Armor
     {
         var damageSource = event.getSource();
 
-        if (isFireDamage(damageSource))
+        if (isFireOrLavaDamage(damageSource))
         {
             float realDamage = getRealDamage(event.getAmount());
             event.setAmount(realDamage);

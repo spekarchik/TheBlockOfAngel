@@ -84,7 +84,7 @@ public class LimoniteArmor extends Armor
                 event.setAmount(damageAmount * 0.2F);
             }
         }
-        else if (isFireOrHotFloorDamage(damageSource) || damageSource.is(DamageTypes.EXPLOSION))
+        else if (isFireOrLavaOrHotFloorDamage(damageSource) || damageSource.is(DamageTypes.EXPLOSION))
         {
             event.setAmount(event.getAmount() * 2F);
         }

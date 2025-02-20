@@ -200,9 +200,4 @@ public class LapisArmor extends Armor
         boolean isDamagedByMagma = damageSource.is(DamageTypes.HOT_FLOOR);
         return isDamagedByInFire || isDamagedByOnFire || isDamagedByMagma;
     }
-
-    private boolean isLavaDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.LAVA);
-    }
 }

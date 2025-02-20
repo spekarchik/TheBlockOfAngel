@@ -15,7 +15,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.entity.player.Player;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -71,22 +70,36 @@ abstract class Armor implements IArmor
         }
     }
 
-    protected boolean isFireDamage(DamageSource damageSource)
-    {
-        boolean isDamagedByInFire = damageSource.is(DamageTypes.IN_FIRE);
-        boolean isDamagedByOnFire = damageSource.is(DamageTypes.ON_FIRE);
-        boolean isDamagedByLava = damageSource.is(DamageTypes.LAVA);
-        return isDamagedByInFire || isDamagedByLava || isDamagedByOnFire;
-    }
-
     protected boolean isFreezeDamage(DamageSource damageSource)
     {
         return damageSource.is(DamageTypes.FREEZE);
     }
 
-    protected boolean isFireOrHotFloorDamage(DamageSource damageSource)
+    protected boolean isFireDamage(DamageSource damageSource)
     {
-        return damageSource.is(DamageTypes.HOT_FLOOR) || isFireDamage(damageSource);
+        boolean isDamagedByInFire = damageSource.is(DamageTypes.IN_FIRE);
+        boolean isDamagedByOnFire = damageSource.is(DamageTypes.ON_FIRE);
+        return isDamagedByInFire || isDamagedByOnFire;
+    }
+
+    protected boolean isLavaDamage(DamageSource damageSource)
+    {
+        return damageSource.is(DamageTypes.LAVA);
+    }
+
+    protected boolean isHotFloorDamage(DamageSource damageSource)
+    {
+        return damageSource.is(DamageTypes.HOT_FLOOR);
+    }
+
+    protected boolean isFireOrLavaDamage(DamageSource damageSource)
+    {
+        return isFireDamage(damageSource) || isLavaDamage(damageSource);
+    }
+
+    protected boolean isFireOrLavaOrHotFloorDamage(DamageSource damageSource)
+    {
+        return isHotFloorDamage(damageSource) || isFireOrLavaDamage(damageSource);
     }
 
     protected boolean isThornOrMagicDamage(DamageSource damageSource)

@@ -98,13 +98,13 @@ public class SuperArmor extends Armor
     {
         DamageSource damageSource = event.getSource();
 
-        if (isFireOrHotFloorDamage(damageSource))
+        if (isFireOrLavaDamage(damageSource))
         {
             float realDamage = getRealDamage(event.getAmount());
             event.setAmount(realDamage);
             event.setCanceled(realDamage <= 0);
         }
-        else if (isFreezeDamage(damageSource))
+        else if (isHotFloorDamage(damageSource) || isFreezeDamage(damageSource))
         {
             boolean areBootsWorn = player.isArmorElementPutOn(this, EquipmentSlot.FEET);
             event.setCanceled(areBootsWorn);
