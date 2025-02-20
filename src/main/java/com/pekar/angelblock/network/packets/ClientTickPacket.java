@@ -14,18 +14,23 @@ public class ClientTickPacket extends ClientToServerPacket
     public void onReceive(ServerPlayer serverPlayer)
     {
         IPlayer player = PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID());
+        var playerEntity = player.getEntity();
 
         for (IArmor armor : player.getArmorTypesUsed())
         {
             armor.onCreeperCheck();
 
-            if (player.getEntity().isInWater())
+            if (playerEntity.isInWater())
             {
                 armor.onBeingInWater();
             }
-            else if (player.getEntity().isInWaterOrRain())
+            else if (playerEntity.isInWaterOrRain())
             {
                 armor.onBeingUnderRain();
+            }
+            else if (playerEntity.isInLava())
+            {
+                armor.onBeingInLava();
             }
         }
     }

@@ -56,6 +56,9 @@ public class RendelithicArmor extends Armor
             float realDamage = getRealDamage(event.getAmount());
             event.setAmount(realDamage);
             event.setCanceled(realDamage <= 0);
+
+            if (player.isFullArmorSetPutOn(this))
+                event.getEntity().clearFire();
         }
         else if (isLavaDamage(damageSource) && player.isFullArmorSetPutOn(this))
         {
@@ -151,6 +154,12 @@ public class RendelithicArmor extends Armor
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
+    }
+
+    @Override
+    public void onBeingInLava()
+    {
+        // none
     }
 
     @Override

@@ -219,6 +219,12 @@ public class LimoniteArmor extends Armor
     }
 
     @Override
+    public void onBeingInLava()
+    {
+        // none
+    }
+
+    @Override
     public void onBeingInWater()
     {
         // none

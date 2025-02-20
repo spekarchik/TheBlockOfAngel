@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.item.ArmorItem;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
@@ -36,6 +37,8 @@ public class SuperArmor extends Armor
     private boolean isSlowFallingActivatedOnGround = true;
 
     private static final int REGENERATION_EFFECT_DURATION = 300;
+    private static final int REGENERATION_EFFECT_UNDER_RAIN_AMPLIFIER = 0;
+    private static final int REGENERATION_EFFECT_HEAL_AMPLIFIER = 1;
     private static final int SLOWNESS_EFFECT_DURATION = 600;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
@@ -50,7 +53,7 @@ public class SuperArmor extends Armor
         glowingEffect = new GlowingArmorEffect(player, this);
 
         luckEffect = new LuckArmorEffect(player, this);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 1, REGENERATION_EFFECT_DURATION);
+        regenerationEffect = new RegenerationArmorEffect(player, this, REGENERATION_EFFECT_HEAL_AMPLIFIER, REGENERATION_EFFECT_DURATION);
         slownessEffect = new SlownessArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION).availableOnAnyArmorElement();
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_EFFECT_DURATION).availableOnFullArmorSet();
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
@@ -103,11 +106,25 @@ public class SuperArmor extends Armor
             float realDamage = getRealDamage(event.getAmount());
             event.setAmount(realDamage);
             event.setCanceled(realDamage <= 0);
+
+            if (player.isFullArmorSetPutOn(this))
+                event.getEntity().clearFire();
         }
         else if (isLavaDamage(damageSource))
         {
             if (player.isFullArmorSetPutOn(this))
-                event.setAmount(0.05f * event.getAmount());
+            {
+                //event.setAmount(0.05f * event.getAmount());
+                event.setCanceled(true);
+
+                event.getEntity().getArmorSlots().forEach(item ->
+                {
+                    if (item.isDamageableItem())
+                    {
+                        item.setDamageValue(item.getDamageValue() + 1);
+                    }
+                });
+            }
         }
         else if (isHotFloorDamage(damageSource) || isFreezeDamage(damageSource))
         {
@@ -243,6 +260,8 @@ public class SuperArmor extends Armor
     @Override
     public void onKeyInputEvent(String pressedKeyDescription)
     {
+        var playerEntity = player.getEntity();
+
         if (pressedKeyDescription.equals(KeyRegistry.NIGHT_VISION.getName()))
         {
             nightVisionEffect.trySwitch();
@@ -255,7 +274,7 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isEffectAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+            if (regenerationEffect.isEffectAvailable() && playerEntity.getHealth() < playerEntity.getMaxHealth())
             {
                 slownessEffect.trySwitch();
                 jumpEffect.trySwitchOff();
@@ -267,7 +286,7 @@ public class SuperArmor extends Armor
                 {
                     regenerationEffect.trySwitch();
 
-                    if (regenerationEffect.isActive() && !player.getEntity().onGround() && slowFallingEffect.isEffectAvailable())
+                    if (regenerationEffect.isActive() && !playerEntity.onGround() && slowFallingEffect.isEffectAvailable())
                     {
                         slowFallingEffect.trySwitchOn();
                         isSlowFallingActivatedOnGround = false;
@@ -295,7 +314,7 @@ public class SuperArmor extends Armor
                 if (slowFallingEffect.isEffectAvailable())
                 {
                     slowFallingEffect.trySwitchOn();
-                    isSlowFallingActivatedOnGround = player.getEntity().onGround();
+                    isSlowFallingActivatedOnGround = playerEntity.onGround();
                 }
             }
         }
@@ -314,15 +333,18 @@ public class SuperArmor extends Armor
                         if (slowFallingEffect.isEffectAvailable())
                         {
                             slowFallingEffect.trySwitchOn();
-                            isSlowFallingActivatedOnGround = player.getEntity().onGround();
+                            isSlowFallingActivatedOnGround = playerEntity.onGround();
                         }
                     }
-                    else if (!player.getEntity().onGround() && slowFallingEffect.isEffectAvailable())
+                    else if (!playerEntity.onGround())
                     {
-                        slowFallingEffect.trySwitchOn();
-                        isSlowFallingActivatedOnGround = false;
+                        if (slowFallingEffect.isEffectAvailable())
+                        {
+                            slowFallingEffect.trySwitchOn();
+                            isSlowFallingActivatedOnGround = false;
+                        }
                     }
-                    else
+                    else if (!playerEntity.isInLava())
                     {
                         levitationEffect.trySwitch(getLevitationAmplifier());
                     }
@@ -332,7 +354,7 @@ public class SuperArmor extends Armor
                     slowFallingEffect.trySwitch();
 
                     if (slowFallingEffect.isEffectOn())
-                        isSlowFallingActivatedOnGround = player.getEntity().onGround();
+                        isSlowFallingActivatedOnGround = playerEntity.onGround();
                     else
                         isSlowFallingActivatedOnGround = true;
                 }
@@ -340,7 +362,7 @@ public class SuperArmor extends Armor
 
             if (slowFallingEffect.isActive())
             {
-                player.getEntity().stopFallFlying();
+                playerEntity.stopFallFlying();
             }
         }
 
@@ -378,10 +400,23 @@ public class SuperArmor extends Armor
     }
 
     @Override
+    public void onBeingInLava()
+    {
+        if (slowFallingEffect.isEffectOn())
+        {
+            slowFallingEffect.trySwitchOff();
+            isSlowFallingActivatedOnGround = true;
+        }
+    }
+
+    @Override
     public void onBeingInWater()
     {
         if (slowFallingEffect.isEffectOn())
+        {
             slowFallingEffect.trySwitchOff();
+            isSlowFallingActivatedOnGround = true;
+        }
     }
 
     @Override
@@ -391,7 +426,7 @@ public class SuperArmor extends Armor
 
         if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
         {
-            regenerationEffect.trySwitch();
+            regenerationEffect.trySwitch(REGENERATION_EFFECT_UNDER_RAIN_AMPLIFIER);
         }
     }
 

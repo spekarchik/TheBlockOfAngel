@@ -18,6 +18,7 @@ public interface IArmorEvents
     void onEntityTravelToDimensionEvent(EntityTravelToDimensionEvent event);
     void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event);
     void onBreakSpeed(PlayerEvent.BreakSpeed event);
+    void onBeingInLava();
     void onBeingInWater();
     void onBeingUnderRain();
     void onCreeperCheck();

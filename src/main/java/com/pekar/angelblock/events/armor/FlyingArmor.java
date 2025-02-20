@@ -148,6 +148,11 @@ public class FlyingArmor extends Armor
     }
 
     @Override
+    public void onBeingInLava()
+    {
+    }
+
+    @Override
     public void onBeingInWater()
     {
         if (slowFallingEffect.isEffectOn())

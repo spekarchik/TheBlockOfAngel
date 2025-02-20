@@ -157,6 +157,12 @@ public class LapisArmor extends Armor
     }
 
     @Override
+    public void onBeingInLava()
+    {
+        // none
+    }
+
+    @Override
     public void onBeingInWater()
     {
         // none
