@@ -54,8 +54,8 @@ public class SuperArmor extends Armor
 
         luckEffect = new LuckArmorEffect(player, this);
         regenerationEffect = new RegenerationArmorEffect(player, this, REGENERATION_EFFECT_HEAL_AMPLIFIER, REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION).availableOnAnyArmorElement();
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_EFFECT_DURATION).availableOnFullArmorSet();
+        slownessEffect = new SlownessArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION);
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_EFFECT_DURATION);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableOnFullArmorSet();
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnFullArmorSet();

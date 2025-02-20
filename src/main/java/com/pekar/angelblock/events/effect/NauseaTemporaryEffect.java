@@ -4,7 +4,7 @@ import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class NauseaTemporaryEffect extends TemporaryArmorEffect
+public class NauseaTemporaryEffect extends NegativeTemporaryArmorEffect
 {
     public NauseaTemporaryEffect(IPlayer player, IArmor armor, int duration)
     {

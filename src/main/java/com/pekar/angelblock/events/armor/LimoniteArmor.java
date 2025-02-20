@@ -45,13 +45,14 @@ public class LimoniteArmor extends Armor
         luckEffect = new LuckArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 1);
         regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnAnyArmorElement();
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet();
+        slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
         var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
+        slowFallingEffect.setupAvailability(jumpEffect);
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);

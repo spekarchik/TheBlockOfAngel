@@ -190,73 +190,85 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
     @Override
     public IArmorEffect setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
+    }
+
+    @Override
+    public IArmorEffect setupAvailability(IArmorEffect copyFrom)
+    {
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
+    }
+
+    @Override
+    public IArmorEffect alwaysAvailable()
+    {
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableOnHelmetWithDetector()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableOnBootsWithStrengthBooster()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableOnBootsWithSeaPower()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableOnChestPlateWithStrengthBooster()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableOnLeggingsWithHealthRegenerator()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableOnFullArmorSet()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableOnAnyArmorElement()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableIfSlotSet(EquipmentSlot slot)
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect availableIfSlotsSet(EquipmentSlot... slot)
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect showIcon()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     @Override
     public IArmorEffect hideIcon()
     {
-        return this;
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
 
     private void switchDependentEffects()

@@ -4,7 +4,7 @@ import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class WitherEffect extends TemporaryArmorEffect
+public class WitherEffect extends NegativeTemporaryArmorEffect
 {
     public WitherEffect(IPlayer player, IArmor armor, int defaultAmplifier, int duration)
     {

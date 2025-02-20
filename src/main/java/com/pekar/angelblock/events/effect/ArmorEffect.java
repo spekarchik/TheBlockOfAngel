@@ -156,6 +156,20 @@ abstract class ArmorEffect implements IArmorEffect
     }
 
     @Override
+    public IArmorEffect alwaysAvailable()
+    {
+        availabilityPredicate = (player, armor) -> true;
+        return this;
+    }
+
+    @Override
+    public IArmorEffect setupAvailability(IArmorEffect copyFrom)
+    {
+        availabilityPredicate = ((ArmorEffect)copyFrom).availabilityPredicate;
+        return this;
+    }
+
+    @Override
     public final IArmorEffect setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
     {
         availabilityPredicate = predicate;

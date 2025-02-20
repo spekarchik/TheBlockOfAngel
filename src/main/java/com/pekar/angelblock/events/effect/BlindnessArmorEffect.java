@@ -4,7 +4,7 @@ import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class BlindnessArmorEffect extends TemporaryArmorEffect
+public class BlindnessArmorEffect extends NegativeTemporaryArmorEffect
 {
     public BlindnessArmorEffect(IPlayer player, IArmor armor, int duration)
     {

@@ -5,7 +5,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.world.effect.MobEffects;
 
-public class JumpNegativeArmorEffect extends TemporaryArmorEffect
+public class JumpNegativeArmorEffect extends NegativeTemporaryArmorEffect
 {
     public JumpNegativeArmorEffect(IPlayer player, IArmor armor, int duration)
     {

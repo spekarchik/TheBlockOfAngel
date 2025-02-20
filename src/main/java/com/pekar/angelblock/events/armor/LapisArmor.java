@@ -38,8 +38,8 @@ public class LapisArmor extends Armor
         hasteEffect = new HasteArmorEffect(player, this);
         luckEffect = new LuckArmorEffect(player, this);
         regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
-        blindnessEffect = new BlindnessArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION).availableOnFullArmorSet().showIcon();
-        witherEffect = new WitherEffect(player, this, 0, 600).availableOnAnyArmorElement().showIcon();
+        blindnessEffect = new BlindnessArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION).showIcon();
+        witherEffect = new WitherEffect(player, this, 0, 600).showIcon();
         strengthEffect = new StrengthArmorEffect(player, this, 0).availableOnChestPlateWithStrengthBooster();
         dolphinsGrace = new DolphinsGraceEffect(player, this);
     }

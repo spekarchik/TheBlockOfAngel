@@ -26,6 +26,8 @@ public interface IArmorEffect
     void updateSwitchState();
 
     IArmorEffect setupAvailability(BiPredicate<IPlayer, IArmor> predicate);
+    IArmorEffect setupAvailability(IArmorEffect copyFrom);
+    IArmorEffect alwaysAvailable();
     IArmorEffect availableOnHelmetWithDetector();
     IArmorEffect availableOnBootsWithStrengthBooster();
     IArmorEffect availableOnBootsWithSeaPower();
