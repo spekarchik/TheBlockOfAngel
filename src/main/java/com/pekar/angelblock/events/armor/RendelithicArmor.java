@@ -186,14 +186,9 @@ public class RendelithicArmor extends Armor
 
     private int getJumpBoostAmplifier()
     {
-        var amplifier = player.areBootsModifiedWithStrengthBooster(this)
+        return player.areBootsModifiedWithStrengthBooster(this)
                 ? JUMP_EFFECT_AMPLIFIER_BOOSTED
                 : JUMP_EFFECT_AMPLIFIER_DEFAULT;
-
-        if (player.isOverworld())
-            return amplifier - 1;
-        else
-            return amplifier;
     }
 
     private void checkForNausea()
