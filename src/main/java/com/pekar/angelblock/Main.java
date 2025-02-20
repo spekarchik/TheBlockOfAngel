@@ -48,22 +48,7 @@ public class Main
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
-
-//    public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-//            .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
-
-    // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ANGEL_BLOCK_TAB = new MainTab().createTab();
-
-    // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
-//    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-//            .title(Component.translatable("itemGroup.examplemod")) //The language key for the title of your CreativeModeTab
-//            .withTabsBefore(CreativeModeTabs.COMBAT)
-//            .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
-//            .displayItems((parameters, output) -> {
-//                output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-//            }).build());
 
     public Main(IEventBus modEventBus, ModContainer modContainer)
     {
@@ -89,8 +74,6 @@ public class Main
 
         // Register the setup method for modloading
         modEventBus.addListener(this::commonSetup);
-
-        //modEventBus.addListener(this::clientSetup);
     }
 
     private void initializeRegistry()
@@ -117,6 +100,7 @@ public class Main
 //        LOGGER.info("*********************HELLO FROM PREINIT**********************");
 //        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
+
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
@@ -125,7 +109,6 @@ public class Main
 //        LOGGER.info("HELLO from server starting");
     }
 
-    // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == ANGEL_BLOCK_TAB.getKey())
@@ -133,7 +116,6 @@ public class Main
             var potionItemStack = new ItemStack(Items.SPLASH_POTION);
             potionItemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(PotionRegistry.BLOCK_BREAKER_POTION));
             event.accept(potionItemStack);
-            //event.accept(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), PotionRegistry.BLOCK_BREAKER_POTION));
         }
     }
 }
