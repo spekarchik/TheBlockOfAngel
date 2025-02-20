@@ -27,16 +27,11 @@ public class Player implements IPlayer
     private final IArmor flyingArmorModel = new FlyingArmor(this);
 
     private net.minecraft.world.entity.player.Player entity;
-    private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
     private final Set<IArmor> armorInUse = new HashSet<>();
 
     public Player(net.minecraft.world.entity.player.Player entity)
     {
         this.entity = entity;
-        equipmentSlots.add(EquipmentSlot.FEET);
-        equipmentSlots.add(EquipmentSlot.LEGS);
-        equipmentSlots.add(EquipmentSlot.CHEST);
-        equipmentSlots.add(EquipmentSlot.HEAD);
     }
 
     @Override
@@ -82,9 +77,8 @@ public class Player implements IPlayer
     @Override
     public boolean isAnyArmorElementPutOn(IArmor armor)
     {
-        for (var slot : equipmentSlots)
+        for (var itemStack : getEntity().getArmorSlots())
         {
-            var itemStack = getEntity().getItemBySlot(slot);
             if (itemStack.isEmpty()) continue;
             var item = itemStack.getItem();
             if (!(item instanceof ModArmor armorItem)) continue;
