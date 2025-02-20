@@ -1,5 +1,6 @@
 package com.pekar.angelblock.armor;
 
+import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
@@ -28,7 +29,7 @@ public class SuperArmor extends ModArmor
         var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
         var helmetItem = itemStack.getItem();
         if (!(helmetItem instanceof ModArmor helmet)) return false;
-        return helmet.getArmorFamilyName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorMaterial());
+        return helmet.getArmorFamilyName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
     }
 
     @Override
@@ -37,6 +38,6 @@ public class SuperArmor extends ModArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.FEET);
         var bootsItem = itemStack.getItem();
         if (!(bootsItem instanceof ModArmor boots)) return false;
-        return boots.getArmorFamilyName().equals(ArmorRegistry.SUPER_BOOTS.get().getArmorMaterial());
+        return boots.getArmorFamilyName().equals(ArmorRegistry.SUPER_BOOTS.get().getArmorFamilyName()) && !wearer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT);
     }
 }
