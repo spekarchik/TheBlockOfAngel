@@ -114,16 +114,7 @@ public class SuperArmor extends Armor
         {
             if (player.isFullArmorSetPutOn(this))
             {
-                //event.setAmount(0.05f * event.getAmount());
-                event.setCanceled(true);
-
-                event.getEntity().getArmorSlots().forEach(item ->
-                {
-                    if (item.isDamageableItem())
-                    {
-                        item.setDamageValue(item.getDamageValue() + 1);
-                    }
-                });
+                event.setAmount(0.05f * event.getAmount());
             }
         }
         else if (isHotFloorDamage(damageSource) || isFreezeDamage(damageSource))
