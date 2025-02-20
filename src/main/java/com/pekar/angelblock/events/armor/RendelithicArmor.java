@@ -92,6 +92,7 @@ public class RendelithicArmor extends Armor
         {
             if (player.areBootsModifiedWithStrengthBooster(this))
             {
+                // Note: the JUMP_BOOST effect provides itself damage protection
                 event.setDamageMultiplier(0.6f);
             }
         }
