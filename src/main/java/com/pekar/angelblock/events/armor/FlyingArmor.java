@@ -101,26 +101,20 @@ public class FlyingArmor extends Armor
     {
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()) || pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
         {
-            if (!player.isNether())
-            {
-                jumpBoostEffect.trySwitch();
-            }
+            jumpBoostEffect.trySwitch();
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            if (!player.isNether())
-            {
-                slowFallingEffect.trySwitch();
+            slowFallingEffect.trySwitch();
 
-                if (slowFallingEffect.isEffectOn())
-                    isSlowFallingActivatedOnGround = player.getEntity().onGround();
-                else
-                    isSlowFallingActivatedOnGround = true;
+            if (slowFallingEffect.isEffectOn())
+                isSlowFallingActivatedOnGround = player.getEntity().onGround();
+            else
+                isSlowFallingActivatedOnGround = true;
 
-                if (slowFallingEffect.isActive())
-                    player.getEntity().stopFallFlying();
-            }
+            if (slowFallingEffect.isActive())
+                player.getEntity().stopFallFlying();
         }
     }
 
@@ -150,6 +144,8 @@ public class FlyingArmor extends Armor
     @Override
     public void onBeingInLava()
     {
+        if (slowFallingEffect.isEffectOn())
+            slowFallingEffect.trySwitchOff();
     }
 
     @Override
@@ -178,7 +174,7 @@ public class FlyingArmor extends Armor
 
     private boolean isLevitationSwitchingEffectAvailable(IPlayer player, IArmor armor)
     {
-        return !player.isNether() && player.isFullArmorSetPutOn(this);
+        return player.isFullArmorSetPutOn(this);
     }
 
     private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)

@@ -293,7 +293,7 @@ public class SuperArmor extends Armor
                 jumpEffect.trySwitch();
             }
 
-            if (jumpEffect.isEffectOn() && jumpEffect.isActive() && slowFallingEffect.isEffectOn() && slowFallingEffect.isActive())
+            if (jumpEffect.isEffectOn() && jumpEffect.isActive() && slowFallingEffect.isEffectOn() && slowFallingEffect.isActive() && player.getEntity().onGround())
             {
                 slowFallingEffect.trySwitchOff();
                 levitationEffect.trySwitchOn();
