@@ -96,6 +96,7 @@ public class SuperArmor extends Armor
     public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         DamageSource damageSource = event.getSource();
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
 
         if (isFireDamage(damageSource))
         {
@@ -130,50 +131,50 @@ public class SuperArmor extends Armor
                 player.getEntity().removeEffect(MobEffects.WITHER);
             }
         }
-        else
+        else if (isExplosionDamage(damageSource))
         {
-            boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
+            if (isFullArmorSet)
+                event.setAmount(event.getAmount() * 0.5f);
+        }
+        else if (isLightningBoltDamage(damageSource))
+        {
+            if (isFullArmorSet)
+                event.setCanceled(true);
+        }
+        else if (isBiting(damageSource.getEntity()))
+        {
             if (isFullArmorSet)
             {
-                if (isExplosionDamage(damageSource))
+                float damageAmount = event.getAmount();
+                event.setAmount(damageAmount * 0.2F);
+            }
+        }
+        else if (player.isEffectActive(MobEffects.POISON) && player.isArmorModifiedWithHealthRegenerator(this))
+        {
+            player.clearEffect(MobEffects.POISON);
+            event.setCanceled(damageSource.getMsgId().equals("magic")); // Bee's poison
+        }
+
+        if (isFullArmorSet)
+        {
+            if (!(damageSource.getEntity() instanceof LivingEntity entityAttackedBy)) return;
+
+            if (isSlowMovementAffected(entityAttackedBy))
+            {
+                boolean isWitch = entityAttackedBy instanceof Witch;
+                float distance = player.getEntity().distanceTo(entityAttackedBy);
+                if (!isWitch && distance > 2f)
                 {
-                    event.setAmount(event.getAmount() * 0.5f);
-                }
-                else if (isLightningBoltDamage(damageSource))
-                {
-                    event.setCanceled(true);
+                    entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
                 }
                 else
                 {
-                    var attacker = damageSource.getEntity();
-
-                    if (isBiting(attacker))
-                    {
-                        float damageAmount = event.getAmount();
-                        event.setAmount(damageAmount * 0.2F);
-                    }
+                    entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
                 }
-
-                if (!(damageSource.getEntity() instanceof LivingEntity entityAttackedBy)) return;
-
-                if (isSlowMovementAffected(entityAttackedBy))
-                {
-                    boolean isWitch = entityAttackedBy instanceof Witch;
-                    float distance = player.getEntity().distanceTo(entityAttackedBy);
-                    if (!isWitch && distance > 2f)
-                    {
-                        entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
-                    }
-                    else
-                    {
-                        entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
-                    }
-                }
-
-                var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
-                entityAttackedBy.addEffect(effect);
             }
 
+            var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
+            entityAttackedBy.addEffect(effect);
         }
     }
 

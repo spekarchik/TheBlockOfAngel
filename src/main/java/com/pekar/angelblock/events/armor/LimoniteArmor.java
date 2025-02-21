@@ -91,9 +91,14 @@ public class LimoniteArmor extends Armor
         {
             event.setCanceled(true);
         }
-        else
+        else if (isThornOrMagicDamage(damageSource))
         {
-            event.setCanceled(isThornOrMagicDamage(damageSource) && player.isArmorModifiedWithHealthRegenerator(this));
+            event.setCanceled(player.isArmorModifiedWithHealthRegenerator(this));
+        }
+        else if (player.isEffectActive(MobEffects.POISON) && player.isArmorModifiedWithHealthRegenerator(this))
+        {
+            player.clearEffect(MobEffects.POISON);
+            event.setCanceled(damageSource.getMsgId().equals("magic")); // Bee's poison
         }
 
         boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
