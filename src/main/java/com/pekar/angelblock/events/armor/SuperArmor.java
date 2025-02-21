@@ -12,12 +12,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.item.ArmorItem;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class SuperArmor extends Armor
@@ -246,6 +242,12 @@ public class SuperArmor extends Armor
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
 
         detectCreepers(isHelmetModifiedWithDetector, false);
+    }
+
+    @Override
+    public void onEffectAddedEvent(MobEffectEvent.Added event)
+    {
+
     }
 
     @Override

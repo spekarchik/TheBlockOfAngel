@@ -1,10 +1,7 @@
 package com.pekar.angelblock.events.armor;
 
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public interface IArmorEvents
@@ -22,4 +19,5 @@ public interface IArmorEvents
     void onBeingInWater();
     void onBeingUnderRain();
     void onCreeperCheck();
+    void onEffectAddedEvent(MobEffectEvent.Added event);
 }

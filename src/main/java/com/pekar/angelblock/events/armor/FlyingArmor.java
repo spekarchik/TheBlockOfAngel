@@ -6,10 +6,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class FlyingArmor extends Armor
@@ -164,6 +161,11 @@ public class FlyingArmor extends Armor
     public void onCreeperCheck()
     {
         updateSlowFallingEffect();
+    }
+
+    @Override
+    public void onEffectAddedEvent(MobEffectEvent.Added event)
+    {
     }
 
     private void updatePotionEffects()

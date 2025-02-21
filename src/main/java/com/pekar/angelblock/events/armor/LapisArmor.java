@@ -7,10 +7,7 @@ import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class LapisArmor extends Armor
@@ -104,6 +101,11 @@ public class LapisArmor extends Armor
     public void onCreeperCheck()
     {
         // none
+    }
+
+    @Override
+    public void onEffectAddedEvent(MobEffectEvent.Added event)
+    {
     }
 
     @Override

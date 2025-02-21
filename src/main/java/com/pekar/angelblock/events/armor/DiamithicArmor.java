@@ -100,6 +100,11 @@ public class DiamithicArmor extends Armor
     }
 
     @Override
+    public void onEffectAddedEvent(MobEffectEvent.Added event)
+    {
+    }
+
+    @Override
     public void onKeyInputEvent(String pressedKeyDescription)
     {
         if (pressedKeyDescription.equals(KeyRegistry.NIGHT_VISION.getName()))

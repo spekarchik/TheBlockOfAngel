@@ -12,10 +12,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Witch;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class LimoniteArmor extends Armor
@@ -159,6 +156,12 @@ public class LimoniteArmor extends Armor
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
 
         detectCreepers(isHelmetModifiedWithDetector, player.isFullArmorSetPutOn(this));
+    }
+
+    @Override
+    public void onEffectAddedEvent(MobEffectEvent.Added event)
+    {
+        // none
     }
 
     @Override

@@ -16,10 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.util.TriState;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
@@ -41,6 +38,19 @@ public class PlayerInteractionEvents implements IEventHandler
         for (IArmor armor : player.getArmorTypesUsed())
         {
             armor.onLivingHurtEvent(event);
+        }
+    }
+
+    @SubscribeEvent
+    public void onEffectAdded(MobEffectEvent.Added event)
+    {
+        var entity = event.getEntity();
+        IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
+        if (player == null) return;
+
+        for (IArmor armor : player.getArmorTypesUsed())
+        {
+            armor.onEffectAddedEvent(event);
         }
     }
 

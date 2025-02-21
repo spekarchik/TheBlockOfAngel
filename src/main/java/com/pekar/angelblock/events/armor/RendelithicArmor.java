@@ -9,10 +9,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class RendelithicArmor extends Armor
@@ -109,6 +106,11 @@ public class RendelithicArmor extends Armor
     public void onCreeperCheck()
     {
         // none
+    }
+
+    @Override
+    public void onEffectAddedEvent(MobEffectEvent.Added event)
+    {
     }
 
     @Override
