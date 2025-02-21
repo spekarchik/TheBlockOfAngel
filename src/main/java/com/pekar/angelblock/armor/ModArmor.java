@@ -2,7 +2,6 @@ package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.utils.Utils;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
