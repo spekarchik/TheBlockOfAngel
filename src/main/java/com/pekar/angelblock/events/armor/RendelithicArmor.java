@@ -131,6 +131,16 @@ public class RendelithicArmor extends Armor
                 }
             }
         }
+
+//        if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))
+//        {
+//            damageArmor(true);
+//        }
+//
+//        if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
+//        {
+//            damageArmor(false);
+//        }
     }
 
     @Override

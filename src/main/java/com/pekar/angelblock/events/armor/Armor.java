@@ -183,4 +183,14 @@ abstract class Armor implements IArmor
                 creeperDetectedCounter = 0;
         }
     }
+
+    // for tests
+    protected void damageArmor(boolean damage)
+    {
+        for (var item : player.getEntity().getArmorSlots())
+        {
+            var damageValue = damage ? item.getMaxDamage() - 1 : 0;
+            item.setDamageValue(damageValue);
+        }
+    }
 }
