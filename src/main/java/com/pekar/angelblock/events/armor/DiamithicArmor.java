@@ -46,18 +46,22 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
+        event.setCanceled(player.isFullArmorSetPutOn(this) && isLightningBoltDamage(event.getSource()));
+    }
+
+    @Override
+    public void onLivingDamageEvent(LivingDamageEvent.Pre event)
+    {
         boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
         var damageSource = event.getSource();
         if (isFullArmorSet && isExplosionDamage(damageSource) && player.isChestPlateModifiedWithStrengthBooster(this))
         {
-            event.setAmount(event.getAmount() * 0.5f);
+            event.setNewDamage(event.getNewDamage() * 0.5f);
         }
         else if (isBiting(damageSource.getEntity()))
         {
-            event.setAmount(event.getAmount() * 2f);
+            event.setNewDamage(event.getNewDamage() * 2f);
         }
-
-        event.setCanceled(player.isFullArmorSetPutOn(this) && isLightningBoltDamage(event.getSource()));
     }
 
     @Override

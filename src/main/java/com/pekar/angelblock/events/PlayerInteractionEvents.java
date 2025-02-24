@@ -42,6 +42,19 @@ public class PlayerInteractionEvents implements IEventHandler
     }
 
     @SubscribeEvent
+    public void onLivingDamageEvent(LivingDamageEvent.Pre event)
+    {
+        LivingEntity entity = event.getEntity();
+        IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
+        if (player == null) return;
+
+        for (IArmor armor : player.getArmorTypesUsed())
+        {
+            armor.onLivingDamageEvent(event);
+        }
+    }
+
+    @SubscribeEvent
     public void onEffectAdded(MobEffectEvent.Added event)
     {
         var entity = event.getEntity();

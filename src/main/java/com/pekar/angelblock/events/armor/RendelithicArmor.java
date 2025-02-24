@@ -51,7 +51,6 @@ public class RendelithicArmor extends Armor
         if (isFireDamage(damageSource))
         {
             float realDamage = getRealDamage(event.getAmount());
-            event.setAmount(realDamage);
             event.setCanceled(realDamage <= 0);
 
             if (player.isFullArmorSetPutOn(this))
@@ -69,6 +68,18 @@ public class RendelithicArmor extends Armor
                 event.setCanceled(true);
                 player.getEntity().removeEffect(MobEffects.WITHER);
             }
+        }
+    }
+
+    @Override
+    public void onLivingDamageEvent(LivingDamageEvent.Pre event)
+    {
+        var damageSource = event.getSource();
+
+        if (isFireDamage(damageSource))
+        {
+            float realDamage = getRealDamage(event.getNewDamage());
+            event.setNewDamage(realDamage);
         }
     }
 

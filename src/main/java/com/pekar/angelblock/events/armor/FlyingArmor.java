@@ -69,6 +69,12 @@ public class FlyingArmor extends Armor
     }
 
     @Override
+    public void onLivingDamageEvent(LivingDamageEvent.Pre event)
+    {
+
+    }
+
+    @Override
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
         jumpBoostEffect.updateEffectAvailability();

@@ -8,6 +8,7 @@ public interface IArmorEvents
 {
     void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event);
     void onLivingHurtEvent(LivingIncomingDamageEvent event);
+    void onLivingDamageEvent(LivingDamageEvent.Pre event);
     void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event);
     void onLivingJumpEvent(LivingEvent.LivingJumpEvent event);
     void onLivingFallEvent(LivingFallEvent event);

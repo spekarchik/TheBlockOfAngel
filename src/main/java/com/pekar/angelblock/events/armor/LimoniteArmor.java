@@ -74,19 +74,6 @@ public class LimoniteArmor extends Armor
         var damageSource = event.getSource();
         var attacker = damageSource.getEntity();
 
-        if (isBiting(attacker))
-        {
-            if (player.isFullArmorSetPutOn(this))
-            {
-                float damageAmount = event.getAmount();
-                event.setAmount(damageAmount * 0.2F);
-            }
-        }
-        else if (isFireOrLavaOrHotFloorDamage(damageSource) || damageSource.is(DamageTypes.EXPLOSION))
-        {
-            event.setAmount(event.getAmount() * 2F);
-        }
-
         if (isFreezeDamage(damageSource))
         {
             event.setCanceled(true);
@@ -113,7 +100,6 @@ public class LimoniteArmor extends Armor
             if (!isWitch && distance > 2f)
             {
                 entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
-                //entityAttackedBy.setSecondsOnFire(5);
             }
             else
             {
@@ -123,6 +109,26 @@ public class LimoniteArmor extends Armor
 
         var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
         entityAttackedBy.addEffect(effect);
+    }
+
+    @Override
+    public void onLivingDamageEvent(LivingDamageEvent.Pre event)
+    {
+        var damageSource = event.getSource();
+        var attacker = damageSource.getEntity();
+
+        if (isBiting(attacker))
+        {
+            if (player.isFullArmorSetPutOn(this))
+            {
+                float damageAmount = event.getNewDamage();
+                event.setNewDamage(damageAmount * 0.2F);
+            }
+        }
+        else if (isFireOrLavaOrHotFloorDamage(damageSource) || damageSource.is(DamageTypes.EXPLOSION))
+        {
+            event.setNewDamage(event.getNewDamage() * 2F);
+        }
     }
 
     @Override

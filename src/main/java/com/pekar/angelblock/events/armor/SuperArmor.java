@@ -101,18 +101,10 @@ public class SuperArmor extends Armor
         if (isFireDamage(damageSource))
         {
             float realDamage = getRealDamage(event.getAmount());
-            event.setAmount(realDamage);
             event.setCanceled(realDamage <= 0);
 
             if (player.isFullArmorSetPutOn(this))
                 event.getEntity().clearFire();
-        }
-        else if (isLavaDamage(damageSource))
-        {
-            if (player.isFullArmorSetPutOn(this))
-            {
-                event.setAmount(0.05f * event.getAmount());
-            }
         }
         else if (isHotFloorDamage(damageSource) || isFreezeDamage(damageSource))
         {
@@ -131,23 +123,10 @@ public class SuperArmor extends Armor
                 player.getEntity().removeEffect(MobEffects.WITHER);
             }
         }
-        else if (isExplosionDamage(damageSource))
-        {
-            if (isFullArmorSet)
-                event.setAmount(event.getAmount() * 0.5f);
-        }
         else if (isLightningBoltDamage(damageSource))
         {
             if (isFullArmorSet)
                 event.setCanceled(true);
-        }
-        else if (isBiting(damageSource.getEntity()))
-        {
-            if (isFullArmorSet)
-            {
-                float damageAmount = event.getAmount();
-                event.setAmount(damageAmount * 0.2F);
-            }
         }
         else if (player.isEffectActive(MobEffects.POISON) && player.isArmorModifiedWithHealthRegenerator(this))
         {
@@ -175,6 +154,39 @@ public class SuperArmor extends Armor
 
             var effect = new MobEffectInstance(MobEffects.GLOWING, ATTACKING_MONSTER_GLOWING_EFFECT_DURATION, 0, false, false, false);
             entityAttackedBy.addEffect(effect);
+        }
+    }
+
+    @Override
+    public void onLivingDamageEvent(LivingDamageEvent.Pre event)
+    {
+        DamageSource damageSource = event.getSource();
+        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
+
+        if (isFireDamage(damageSource))
+        {
+            float realDamage = getRealDamage(event.getNewDamage());
+            event.setNewDamage(realDamage);
+        }
+        else if (isLavaDamage(damageSource))
+        {
+            if (player.isFullArmorSetPutOn(this))
+            {
+                event.setNewDamage(0.05f * event.getNewDamage());
+            }
+        }
+        else if (isExplosionDamage(damageSource))
+        {
+            if (isFullArmorSet)
+                event.setNewDamage(event.getNewDamage() * 0.5f);
+        }
+        else if (isBiting(damageSource.getEntity()))
+        {
+            if (isFullArmorSet)
+            {
+                float damageAmount = event.getNewDamage();
+                event.setNewDamage(damageAmount * 0.2F);
+            }
         }
     }
 
