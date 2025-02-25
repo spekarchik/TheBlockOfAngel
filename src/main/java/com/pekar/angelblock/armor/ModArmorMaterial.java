@@ -46,7 +46,7 @@ public class ModArmorMaterial
     public static final String FLYING_MATERIAL_NAME = "flying";
 
     protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial(RENDELITHIC_MATERIAL_NAME, "rendelithic_armor",
-            createArmorTypeMap(4, 8, 10, 4, 7),
+            createArmorTypeMap(3, 7, 9, 3, 7),
             25, 0F, 0F, 11, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
     protected static final ModArmorMaterial LIMONITE = new ModArmorMaterial(LIMONITE_MATERIAL_NAME, "limonite_armor",
             createArmorTypeMap(2, 5, 7, 3, 3),
