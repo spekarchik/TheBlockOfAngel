@@ -21,6 +21,7 @@ public class Utils
     public final Player player = new Player();
     public final Resources resources = new Resources();
     public final Text text = new Text();
+    public final AttributeModifiers attributeModifiers = new AttributeModifiers();
 
     public AABB getRenderBoundingBox(BlockPos pos)
     {

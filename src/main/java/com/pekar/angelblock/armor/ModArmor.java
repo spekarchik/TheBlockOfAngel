@@ -45,11 +45,16 @@ public class ModArmor extends ArmorItem
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken)
     {
         var durability = stack.getMaxDamage() - stack.getDamageValue();
+
+        if (entity != null)
+            utils.attributeModifiers.updateArmorAttributeModifier(entity);
+
         if (amount >= durability)
         {
             stack.setDamageValue(stack.getMaxDamage() - 1);
             return 0;
         }
+
         return super.damageItem(stack, amount, entity, onBroken);
     }
 
