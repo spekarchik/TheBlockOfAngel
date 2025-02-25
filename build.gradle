@@ -113,6 +113,7 @@ configurations {
 }
 
 dependencies {
+    implementation 'org.spongepowered:mixin:0.8.5'
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
@@ -156,7 +157,14 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
     expand replaceProperties
     from "src/main/templates"
     into "build/generated/sources/modMetadata"
+
+    tasks.processResources {
+        filesMatching("META-INF/neoforge.mods.toml") {
+            expand replaceProperties
+        }
+    }
 }
+
 // Include the output of "generateModMetadata" as an input directory for the build
 // this works with both building through Gradle and the IDE.
 sourceSets.main.resources.srcDir generateModMetadata
