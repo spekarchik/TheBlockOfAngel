@@ -136,7 +136,7 @@ public class Builder extends WorkRod
             for (int x = posX - 1; x <= posX + 1; x++)
                 for (int z = posZ - 1; z <= posZ + 1; z++)
                 {
-                    if (y == posY + 2 && x == posX && z == posZ) continue;
+                    //if (y == posY + 2 && x == posX && z == posZ) continue;
                     var posToPlace = new BlockPos(x, y, z);
                     if (posToPlace.equals(pos.relative(player.getDirection()).above(2))) continue;
 
