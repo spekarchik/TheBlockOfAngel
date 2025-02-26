@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
@@ -128,6 +129,11 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);
         player.updateArmorUsed();
         armorAffected.addAll((Collection<IArmor>) player.getArmorTypesUsed());
+
+        if (armorAffected.isEmpty())
+        {
+            Utils.instance.attributeModifiers.removeArmorAttributeModifier(playerEntity);
+        }
 
         for (IArmor armor : armorAffected.stream().sorted(Comparator.comparing(IArmor::getPriority)).toList())
         {

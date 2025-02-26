@@ -36,6 +36,19 @@ public class AttributeModifiers
         }
     }
 
+    public void removeArmorAttributeModifier(LivingEntity entity)
+    {
+        if (entity == null) return;
+
+        var armorAttribute = entity.getAttribute(Attributes.ARMOR);
+
+        if (armorAttribute != null)
+        {
+            var armorModifierId = ResourceLocation.fromNamespaceAndPath(Main.MODID, getArmorAttributeMofifierId(entity));
+            armorAttribute.removeModifier(armorModifierId);
+        }
+    }
+
     private String getArmorAttributeMofifierId(LivingEntity entity)
     {
         return entity.getStringUUID();
