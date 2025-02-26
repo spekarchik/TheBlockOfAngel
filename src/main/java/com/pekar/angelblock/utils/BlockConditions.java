@@ -72,4 +72,9 @@ public class BlockConditions
         var belowPos = pos.below();
         return level.isWaterAt(belowPos) && level.getFluidState(belowPos).getAmount() == FluidState.AMOUNT_FULL;
     }
+
+    public boolean isUnderAirBlock(Level level, BlockPos pos)
+    {
+        return level.isEmptyBlock(pos.above());
+    }
 }

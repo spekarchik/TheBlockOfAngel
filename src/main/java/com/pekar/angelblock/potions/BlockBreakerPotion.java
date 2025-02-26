@@ -165,11 +165,11 @@ public class BlockBreakerPotion extends ThrownPotion
 //            level.setBlock(pos, BlockRegistry.DESTROYING_RAW_IRON.get().defaultBlockState(), 0);
 //            level.destroyBlock(pos, true, source, 1);
 //        }
-        else if (block == Blocks.LAVA)
+        else if (block == Blocks.LAVA /*&& utils.blocks.conditions.isUnderAirBlock(level, pos)*/)
         {
             level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);
         }
-        else if (block == Blocks.WATER && utils.blocks.conditions.isAboveWaterBlock(level, pos))
+        else if (block == Blocks.WATER && utils.blocks.conditions.isUnderAirBlock(level, pos) /*&& utils.blocks.conditions.isAboveWaterBlock(level, pos)*/)
         {
             level.setBlock(pos, Blocks.ICE.defaultBlockState(), 11);
         }
@@ -213,6 +213,7 @@ public class BlockBreakerPotion extends ThrownPotion
         {
             level.setBlock(pos, Blocks.CLAY.defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
+            level.setBlock(pos, Blocks.WATER.defaultBlockState(), 0);
         }
         else if (block == Blocks.PRISMARINE)
         {
