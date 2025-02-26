@@ -910,7 +910,8 @@
   "key.angelblock.super_jump": "Режим суперпрыжка",
 
   "item.angelblock.block_breaker_potion_item": "Взрывное разрушающее зелье",
-  "item.angelblock.block_breaker_potion_item.desc1": "Трансформации:",
+  "item.angelblock.block_breaker_potion_item.desc0": "Трансформации:",
+  "item.angelblock.block_breaker_potion_item.desc1": " Дёрн или Пашня -> Земля",
   "item.angelblock.block_breaker_potion_item.desc2": " Булыжник -> Гравий",
   "item.angelblock.block_breaker_potion_item.desc3": " Камень -> Песок",
   "item.angelblock.block_breaker_potion_item.desc4": " Гранит -> Красный Песок",

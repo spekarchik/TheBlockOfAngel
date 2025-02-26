@@ -197,6 +197,10 @@ public class BlockBreakerPotion extends ThrownPotion
         {
             level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), 11);
         }
+        else if (block == Blocks.GRASS_BLOCK || block == Blocks.FARMLAND)
+        {
+            level.setBlock(pos, Blocks.DIRT.defaultBlockState(), 11);
+        }
         else if (block == Blocks.ICE || block == Blocks.SNOW_BLOCK)
         {
             level.setBlock(pos, Blocks.POWDER_SNOW.defaultBlockState(), 11);

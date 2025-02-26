@@ -910,7 +910,8 @@
   "key.angelblock.super_jump": "Super Jump Mode",
 
   "item.angelblock.block_breaker_potion_item": "Splash Destroying Potion",
-  "item.angelblock.block_breaker_potion_item.desc1": "Transformations:",
+  "item.angelblock.block_breaker_potion_item.desc0": "Transformations:",
+  "item.angelblock.block_breaker_potion_item.desc1": " Grass block or Farmland -> Dirt",
   "item.angelblock.block_breaker_potion_item.desc2": " CobbleStone -> Gravel",
   "item.angelblock.block_breaker_potion_item.desc3": " Stone -> Sand",
   "item.angelblock.block_breaker_potion_item.desc4": " Granite -> Red Sand",
