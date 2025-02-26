@@ -3,18 +3,17 @@ package com.pekar.angelblock.potions;
 import com.pekar.angelblock.Main;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.alchemy.Potion;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.function.Supplier;
 
 public class PotionRegistry
 {
     // Mob Effects
-    public static final Holder<MobEffect> BLOCK_BREAKER_EFFECT = registerMobEffect("block_breaker_effect",
-            () -> new BlockBreakerMobEffect(MobEffectCategory.NEUTRAL, 0xFF22FF));
-
     public static final Holder<MobEffect> SWORD_FIRE_MODE_EFFECT = registerMobEffect("sword_fire_mode_effect", SwordFireModeMobEffect::new);
 
     public static final Holder<MobEffect> SWORD_EXPLOSION_MODE_EFFECT = registerMobEffect("sword_explosion_mode_effect", SwordExplosionModeMobEffect::new);
@@ -29,9 +28,8 @@ public class PotionRegistry
 
     public static final Holder<MobEffect> ARMOR_HEAVY_JUMP_EFFECT = registerMobEffect("armor_heavy_jump_effect", HeavyJumpEffect::new);
 
-
-    // Potions
-    public static final Holder<Potion> BLOCK_BREAKER_POTION = registerPotion("block_breaker_potion", () -> new Potion(new MobEffectInstance[]{new MobEffectInstance(BLOCK_BREAKER_EFFECT)}));
+    public static final DeferredHolder<EntityType<?>, EntityType<ThrownPotion>> BLOCK_BREAKER_POTION =
+            registerThrownPotion("block_breaker_potion", BlockBreakerPotion::new);
 
 
     public static void initStatic()
@@ -42,13 +40,17 @@ public class PotionRegistry
     private static Holder<Potion> registerPotion(String name, Supplier<Potion> potion)
     {
         return Main.POTIONS.register(name, potion);
-        //return Registry.registerForHolder(BuiltInRegistries.POTION, Objects.requireNonNull(ResourceLocation.tryBuild(Main.MODID, name)), potion);
     }
 
     private static Holder<MobEffect> registerMobEffect(String name, Supplier<MobEffect> mobEffect)
     {
         return Main.MOB_EFFECTS.register(name, mobEffect);
-        //return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Objects.requireNonNull(ResourceLocation.tryBuild(Main.MODID, name)), mobEffect);
     }
 
+    private static DeferredHolder<EntityType<?>, EntityType<ThrownPotion>> registerThrownPotion(String name, EntityType.EntityFactory<ThrownPotion> potionFactory)
+    {
+        return Main.ENTITY_TYPES.register(name, () -> EntityType.Builder.of(potionFactory, MobCategory.MISC)
+                .sized(0.25F, 0.25F) // Entity size
+                .build(name));
+    }
 }

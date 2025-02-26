@@ -10,13 +10,14 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.recipe.RecipeRegistry;
 import com.pekar.angelblock.tab.MainTab;
 import com.pekar.angelblock.tools.ToolRegistry;
-import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -45,6 +46,9 @@ public class Main
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, MODID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(Registries.POTION, MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, MODID);
+    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS = DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, Main.MODID);
+
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
@@ -71,7 +75,7 @@ public class Main
         ModDataComponents.register(modEventBus);
 
         // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
+        //modEventBus.addListener(this::addCreative);
 
         // Register the setup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -89,7 +93,6 @@ public class Main
         ClientSetupEvents.initStatic();
         KeyboardMouseEvents.initStatic();
         ClientTickEvents.initStatic();
-        GuiEvents.initStatic();
 
         RecipeRegistry.initStatic();
         MenuRegistry.initStatic();
@@ -112,11 +115,11 @@ public class Main
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-        if (event.getTabKey() == ANGEL_BLOCK_TAB.getKey())
-        {
-            var potionItemStack = new ItemStack(Items.SPLASH_POTION);
-            potionItemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(PotionRegistry.BLOCK_BREAKER_POTION));
-            event.accept(potionItemStack);
-        }
+//        if (event.getTabKey() == ANGEL_BLOCK_TAB.getKey())
+//        {
+//            var potionItemStack = new ItemStack(Items.SPLASH_POTION);
+//            potionItemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(PotionRegistry.BLOCK_BREAKER_POTION));
+//            event.accept(potionItemStack);
+//        }
     }
 }

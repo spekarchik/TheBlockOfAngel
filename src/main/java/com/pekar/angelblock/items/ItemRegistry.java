@@ -67,6 +67,8 @@ public class ItemRegistry
     public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.register("ancient_scroll", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.register("blue_axolotl_bucket", BlueAxolotlBucket::new);
 
+    public static final DeferredItem<Item> BLOCK_BREAKER_POTION_ITEM = Main.ITEMS.register("block_breaker_potion_item", BlockBreakerPotionItem::new);
+
     public static void initStatic()
     {
         // just to initialize static members
