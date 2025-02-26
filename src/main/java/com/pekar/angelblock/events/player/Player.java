@@ -164,7 +164,9 @@ public class Player implements IPlayer
 
         for (var armor : getSlotArmorItems())
         {
-            armorInUse.add(getArmorModel(armor));
+            var armorModel = getArmorModel(armor);
+            if (armorModel != null)
+                armorInUse.add(armorModel);
         }
     }
 
