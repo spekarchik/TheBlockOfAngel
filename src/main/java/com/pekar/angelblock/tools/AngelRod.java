@@ -1,11 +1,9 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
