@@ -11,4 +11,5 @@ class Packets
     static final String ToolsModeChangePacketId = "tools_mode_change";
     static final String PlaySoundPacketId = "play_sound";
     static final String HoldAngelPacketId = "hold_angel";
+    static final String AngelRodLightPacketId = "angel_light";
 }

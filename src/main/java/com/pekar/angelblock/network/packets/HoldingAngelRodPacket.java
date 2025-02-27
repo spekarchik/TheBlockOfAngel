@@ -1,7 +1,5 @@
 package com.pekar.angelblock.network.packets;
 
-import com.pekar.angelblock.events.PlayerManager;
-import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.Packet;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,11 +15,8 @@ public class HoldingAngelRodPacket extends ClientToServerPacket
     @Override
     public void onReceive(ServerPlayer serverPlayer)
     {
-        IPlayer player = PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID());
-        var playerEntity = player.getEntity();
-
-        var monsters = player.getEntity().level().getEntities((LivingEntity)null,
-                playerEntity.getBoundingBox().inflate(EFFECTIVE_RADIUS),
+        var monsters = serverPlayer.level().getEntities((LivingEntity)null,
+                serverPlayer.getBoundingBox().inflate(EFFECTIVE_RADIUS),
                 entity -> entity instanceof Enemy);
 
         for (Entity entity : monsters)

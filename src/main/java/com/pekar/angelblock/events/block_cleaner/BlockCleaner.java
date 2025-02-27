@@ -4,33 +4,34 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BlockCleaner
 {
-    private static final Set<BlockInfo> blocks = new HashSet<>();
+    private static final Set<BlockInfoExtended> blocks = ConcurrentHashMap.newKeySet();
     private static final double DistanceToDecrease = 100.0;
     private static final double DistanceToRemoveImmediately = 3600.0;
     private static final double CloseDistanceToRemoveImmediately = 4.0;
 
-    public synchronized static void add(Player player, BlockPos blockPos, int ticks, boolean setToAir, boolean removeWhenClosely)
+    public static void add(Player player, BlockPos blockPos, int ticks, boolean setToAir, boolean removeWhenClosely)
     {
-        blocks.add(new BlockInfo(player, blockPos, ticks, setToAir, removeWhenClosely));
+        blocks.add(new BlockInfoExtended(player, blockPos, ticks, setToAir, removeWhenClosely));
     }
 
-    public synchronized static void decrementOrRemove()
+    public static void decrementOrRemove()
     {
         if (blocks.isEmpty()) return;
 
-        Set<BlockInfo> blockToRemove = new HashSet<>();
+        Set<BlockInfoExtended> blockToRemove = new HashSet<>();
 
-        for (BlockInfo blockInfo : blocks)
+        for (BlockInfoExtended blockInfo : blocks)
         {
             BlockPos pos = blockInfo.getPos();
             double distance = blockInfo.getPlayer().distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
 
             if (distance > DistanceToDecrease)
             {
-                blockInfo.decrease();
+                blockInfo.decrement();
             }
 
             if (blockInfo.canBeRemoved() || distance > DistanceToRemoveImmediately ||
@@ -51,21 +52,21 @@ public class BlockCleaner
             }
         }
 
-        for (BlockInfo blockInfo : blockToRemove)
+        for (BlockInfoExtended blockInfo : blockToRemove)
         {
             blocks.remove(blockInfo);
         }
     }
 
-    public synchronized static void clean(Player player)
+    public static void clean(Player player)
     {
         if (blocks.isEmpty()) return;
 
-        Set<BlockInfo> blockToRemove = new HashSet<>();
+        Set<BlockInfoExtended> blockToRemove = new HashSet<>();
 
-        for (BlockInfo blockInfo : blocks)
+        for (BlockInfoExtended blockInfo : blocks)
         {
-            if (blockInfo.getPlayer().getName().equals(player.getName()))
+            if (blockInfo.getPlayer().getUUID().equals(player.getUUID()))
             {
                 BlockPos pos = blockInfo.getPos();
                 var level = blockInfo.getPlayer().level();
@@ -85,7 +86,7 @@ public class BlockCleaner
             }
         }
 
-        for (BlockInfo blockInfo : blockToRemove)
+        for (BlockInfoExtended blockInfo : blockToRemove)
         {
             blocks.remove(blockInfo);
         }

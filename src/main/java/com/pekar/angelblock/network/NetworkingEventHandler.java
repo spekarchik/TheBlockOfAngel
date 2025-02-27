@@ -25,6 +25,7 @@ public final class NetworkingEventHandler implements IEventHandler
         registerPacket(registrar, new ToolsModeChangePacket());
         registerPacket(registrar, new PlaySoundPacket(SoundType.UNDEFINED));
         registerPacket(registrar, new HoldingAngelRodPacket());
+        registerPacket(registrar, new AngelRodLightPacket());
     }
 
     private <T extends Packet> void registerPacket(PayloadRegistrar registrar, T packet)

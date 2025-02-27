@@ -3,25 +3,20 @@ package com.pekar.angelblock.events.block_cleaner;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 
-class BlockInfo
+public class BlockInfo
 {
-    private final BlockPos pos;
-    private final Player player;
-    private int ticksBeforeRemoving;
-    private final boolean setToAir;
+    protected final BlockPos pos;
+    protected final Player player;
+    protected int ticksBeforeRemoving;
 
-    private final boolean removeWhenClosely;
-
-    BlockInfo(Player player, BlockPos blockPos, int ticks, boolean setToAir, boolean removeWhenClosely)
+    BlockInfo(Player player, BlockPos blockPos, int ticks)
     {
         pos = blockPos;
         this.player = player;
         ticksBeforeRemoving = ticks;
-        this.setToAir = setToAir;
-        this.removeWhenClosely = removeWhenClosely;
     }
 
-    public void decrease()
+    public void decrement()
     {
         --ticksBeforeRemoving;
     }
@@ -41,16 +36,6 @@ class BlockInfo
         return player;
     }
 
-    public boolean setToAir()
-    {
-        return setToAir;
-    }
-
-    public boolean removeWhenClosely()
-    {
-        return removeWhenClosely;
-    }
-
     @Override
     public boolean equals(Object obj)
     {
@@ -60,11 +45,13 @@ class BlockInfo
         }
         else
         {
-            if (!(obj instanceof BlockInfo))
+            if (!(obj instanceof BlockInfoExtended))
+            {
                 return false;
+            }
         }
 
-        BlockInfo other = (BlockInfo) obj;
+        BlockInfoExtended other = (BlockInfoExtended) obj;
         return pos.equals(other.pos);
     }
 
