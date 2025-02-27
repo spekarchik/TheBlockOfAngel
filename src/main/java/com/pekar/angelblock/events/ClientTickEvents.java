@@ -1,10 +1,7 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.network.packets.AngelRodLightPacket;
 import com.pekar.angelblock.network.packets.ClientTickPacket;
-import com.pekar.angelblock.potions.PotionRegistry;
-import com.pekar.angelblock.tools.AngelRod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.neoforged.api.distmarker.Dist;
@@ -32,10 +29,10 @@ public class ClientTickEvents
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
 
-        if (localPlayer.getMainHandItem().getItem() instanceof AngelRod && localPlayer.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
-        {
-            new AngelRodLightPacket().sendToServer();
-        }
+//        if (localPlayer.getMainHandItem().getItem() instanceof AngelRod && localPlayer.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
+//        {
+//            new AngelRodLightPacket().sendToServer();
+//        }
 
         var playerId = localPlayer.getUUID();
         if (!tickCounter.containsKey(playerId))

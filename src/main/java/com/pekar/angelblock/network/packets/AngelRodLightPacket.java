@@ -20,7 +20,7 @@ public class AngelRodLightPacket extends ClientToServerPacket
         if (level.getBlockState(pos).isAir())
         {
             level.setBlock(pos, lightBlock, 3);
-            LightCleaner.add(serverPlayer, pos, 5);
+            LightCleaner.add(serverPlayer, pos, 10);
         }
     }
 
