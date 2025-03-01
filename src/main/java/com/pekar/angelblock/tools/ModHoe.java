@@ -7,8 +7,10 @@ import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -16,10 +18,11 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
-public class ModHoe extends HoeItem implements IModToolEnhanced
+public class ModHoe extends HoeItem implements IModToolEnhanceable
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
@@ -76,6 +79,19 @@ public class ModHoe extends HoeItem implements IModToolEnhanced
         }
 
         return result;
+    }
+
+    @Override
+    public void setDamage(ItemStack stack, int damage)
+    {
+        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - 2);
+        stack.set(DataComponents.DAMAGE, modifiedDamage);
+    }
+
+    @Override
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
+    {
+        return !IModTool.hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
     }
 
     @Override

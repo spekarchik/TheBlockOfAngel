@@ -21,9 +21,10 @@ public class ToolsModeChangePacket extends ClientToServerPacket
         boolean isSwordWebModeActive = player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT);
         boolean isRodMagneticModeActive = player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT);
 
-        var heldItem = player.getMainHandItem().getItem();
+        var mainHandItemStack = player.getMainHandItem();
+        var heldItem = mainHandItemStack.getItem();
 
-        if (heldItem instanceof IModTool tool && tool.isEnhanced())
+        if (heldItem instanceof IModTool tool && tool.isEnhanced() && !IModTool.hasCriticalDamage(mainHandItemStack))
         {
             if (tool.isTool())
             {

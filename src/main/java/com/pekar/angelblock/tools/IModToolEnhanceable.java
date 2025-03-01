@@ -4,15 +4,16 @@ import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.item.ItemStack;
 
-public interface IModToolEnhanced extends IModTool
+public interface IModToolEnhanceable extends IModTool
 {
 
     IMaterialProperties getMaterialProperties();
 
-    default boolean preventBlockBreak(Player player, LevelAccessor level, BlockPos pos)
+    default boolean preventBlockBreak(Player player, ItemStack itemStack, BlockPos pos)
     {
+        if (IModTool.hasCriticalDamage(itemStack)) return true;
         if (!canPreventBlockDestroying(player, pos)) return false;
 
         var cancelBreaking = !getMaterialProperties().isSafeToBreak(player, pos);

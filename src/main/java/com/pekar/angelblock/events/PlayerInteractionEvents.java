@@ -6,8 +6,9 @@ import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.DevilBlockEntity;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.IModTool;
-import com.pekar.angelblock.tools.IModToolEnhanced;
+import com.pekar.angelblock.tools.IModToolEnhanceable;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -128,9 +129,15 @@ public class PlayerInteractionEvents implements IEventHandler
         }
 
         var tool = player.getMainHandItem();
-        if (!tool.isEmpty() && tool.getItem() instanceof IModToolEnhanced modTool)
+        if (!tool.isEmpty() && tool.getItem() instanceof IModToolEnhanceable modTool)
         {
-            event.setCanceled(modTool.preventBlockBreak(player, level, pos));
+            if (IModTool.hasCriticalDamage(tool))
+            {
+                if (player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
+                    player.removeEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT);
+            }
+
+            event.setCanceled(modTool.preventBlockBreak(player, tool, pos));
         }
     }
 

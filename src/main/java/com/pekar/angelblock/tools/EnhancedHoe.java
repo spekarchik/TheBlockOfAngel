@@ -13,7 +13,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class EnhancedHoe extends ModHoe implements IModToolEnhanced
+public class EnhancedHoe extends ModHoe implements IModToolEnhanceable
 {
     public EnhancedHoe(Tier material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
