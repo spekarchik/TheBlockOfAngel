@@ -1,7 +1,6 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -23,7 +22,7 @@ public class SuperPrimarySword extends ModSword
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT))
         {
@@ -32,8 +31,6 @@ public class SuperPrimarySword extends ModSword
 
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0, true, true));
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, true, true));
-
-        return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override

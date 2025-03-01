@@ -5,15 +5,18 @@ import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ItemAbility;
 
 public class ModSword extends SwordItem implements IModTool
 {
@@ -27,6 +30,32 @@ public class ModSword extends SwordItem implements IModTool
     public ModSword(Tier material, int attackDamage, float attackSpeed, Properties properties)
     {
         super(material, properties.attributes(SwordItem.createAttributes(material, attackDamage, attackSpeed)));
+    }
+
+    @Override
+    public void setDamage(ItemStack stack, int damage)
+    {
+        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - 2);
+        stack.set(DataComponents.DAMAGE, modifiedDamage);
+    }
+
+    @Override
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
+    {
+        return !IModTool.hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    {
+        if (!IModTool.hasCriticalDamage(stack))
+            additionalActionOnHurtEnemy(stack, target, attacker);
+
+        return super.hurtEnemy(stack, target, attacker);
+    }
+
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    {
     }
 
     protected final void setEffectAround(Player player, Level level, BlockPos pos)
@@ -164,8 +193,11 @@ public class ModSword extends SwordItem implements IModTool
     protected final boolean canUseToolEffect(Player player)
     {
         // We need it to prevent to fire a house when you are holding a sword with fire effect and a torch and trying to set the torch on a wall
-        ItemStack itemstack = player.getItemInHand(InteractionHand.OFF_HAND);
-        return itemstack.isEmpty() || !(itemstack.getItem() instanceof BlockItem);
+        var mainHandItemStack = player.getMainHandItem();
+        if (IModTool.hasCriticalDamage(mainHandItemStack)) return false;
+
+        var offHandItemStack = player.getOffhandItem();
+        return offHandItemStack.isEmpty() || !(offHandItemStack.getItem() instanceof BlockItem);
     }
 
     private boolean tryPlantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)

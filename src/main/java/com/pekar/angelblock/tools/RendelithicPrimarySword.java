@@ -18,10 +18,9 @@ public class RendelithicPrimarySword extends ModSword
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0, true, true));
-        return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override

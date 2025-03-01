@@ -67,10 +67,9 @@ public class LimoniteSword extends ModSword
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 400, 0, true, true));
-        return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override

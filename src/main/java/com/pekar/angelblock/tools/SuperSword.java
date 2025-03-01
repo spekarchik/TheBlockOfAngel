@@ -93,7 +93,7 @@ public class SuperSword extends ModSword
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT))
         {
@@ -102,8 +102,6 @@ public class SuperSword extends ModSword
 
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 400, 0, true, true));
-
-        return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override

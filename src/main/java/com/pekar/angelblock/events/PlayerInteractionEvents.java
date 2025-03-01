@@ -12,6 +12,7 @@ import com.pekar.angelblock.tools.IModToolEnhanceable;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -33,6 +34,19 @@ public class PlayerInteractionEvents implements IEventHandler
     public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         LivingEntity entity = event.getEntity();
+        var damageSource = event.getSource();
+        var attacker = damageSource.getEntity();
+
+        if (attacker != null && (damageSource.is(DamageTypes.PLAYER_ATTACK) || damageSource.is(DamageTypes.MOB_ATTACK)))
+        {
+            var weapon = attacker.getWeaponItem();
+            if (weapon != null && weapon.getItem() instanceof IModTool && IModTool.hasCriticalDamage(weapon))
+            {
+                event.setCanceled(true);
+                return;
+            }
+        }
+
         IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
         if (player == null) return;
 
