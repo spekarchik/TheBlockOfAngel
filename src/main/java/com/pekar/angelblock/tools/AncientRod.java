@@ -32,7 +32,7 @@ public class AncientRod extends MagneticRod
     }
 
     @Override
-    public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
+    protected void additionalActionOnMineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
     {
         if (blockState.getBlock() == Blocks.COBWEB)
         {
@@ -41,11 +41,7 @@ public class AncientRod extends MagneticRod
                 destroyWebBlocks(level, pos);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
-
-            return true;
         }
-
-        return super.mineBlock(itemStack, level, blockState, pos, entity);
     }
 
     @Override
@@ -58,9 +54,9 @@ public class AncientRod extends MagneticRod
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context)
+    protected InteractionResult useOnInternal(UseOnContext context)
     {
-        var result = super.useOn(context);
+        var result = super.useOnInternal(context);
         if (result == InteractionResult.FAIL) return result;
 
         var player = context.getPlayer();

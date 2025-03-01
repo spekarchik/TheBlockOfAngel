@@ -26,13 +26,13 @@ public class MarineRod extends AncientRod
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context)
+    protected InteractionResult useOnInternal(UseOnContext context)
     {
         var player = context.getPlayer();
         var level = player.level();
 
         if (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
-            return super.useOn(context);
+            return super.useOnInternal(context);
 
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);
@@ -93,7 +93,7 @@ public class MarineRod extends AncientRod
             }
         }
 
-        var result = super.useOn(context);
+        var result = super.useOnInternal(context);
         if (result != InteractionResult.PASS) return result;
 
         if (!isBroken && facing == Direction.UP)

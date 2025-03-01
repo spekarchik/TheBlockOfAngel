@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -29,15 +30,16 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context)
+    protected InteractionResult useOnInternal(UseOnContext context)
     {
         var player = context.getPlayer();
         var level = player.level();
 
         if (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
-            return super.useOn(context);
+            return super.useOnInternal(context);
 
-        var itemStack = player.getItemInHand(context.getHand());
+        var interactionHand = context.getHand();
+        var itemStack = player.getItemInHand(interactionHand);
         boolean isBroken = isBroken(itemStack);
 
         boolean isClientSide = level.isClientSide();
@@ -48,7 +50,6 @@ public class FireRod extends MarineRod
 
         if (!isBroken)
         {
-            var hand = context.getHand();
             var facing = context.getClickedFace();
 
             if (facing == Direction.UP)
@@ -56,7 +57,7 @@ public class FireRod extends MarineRod
                 if (block == Blocks.SOUL_SAND)
                 {
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                    return plant(player, level, pos, hand, facing, Blocks.NETHER_WART);
+                    return plant(player, level, pos, interactionHand, facing, Blocks.NETHER_WART);
                 }
 
                 var upPos = pos.above();
@@ -89,7 +90,7 @@ public class FireRod extends MarineRod
             }
         }
 
-        var result = super.useOn(context);
+        var result = super.useOnInternal(context);
         if (result != InteractionResult.PASS) return result;
 
         if (!isBroken)

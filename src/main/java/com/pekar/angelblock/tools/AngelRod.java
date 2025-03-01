@@ -36,7 +36,7 @@ public class AngelRod extends EndRod
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context)
+    protected InteractionResult useOnInternal(UseOnContext context)
     {
         var player = context.getPlayer();
 
@@ -82,7 +82,7 @@ public class AngelRod extends EndRod
             }
         }
 
-        return super.useOn(context);
+        return super.useOnInternal(context);
     }
 
     @Override

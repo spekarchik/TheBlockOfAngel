@@ -34,7 +34,14 @@ public class ModRod extends ModTool implements IModTool
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
     {
+        if (!isBroken(itemStack))
+            additionalActionOnMineBlock(itemStack, level, blockState, pos, entity);
+
         return true;
+    }
+
+    protected void additionalActionOnMineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
+    {
     }
 
     @Override

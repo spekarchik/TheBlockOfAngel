@@ -24,12 +24,12 @@ public class AmethystRod extends FireRod
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context)
+    protected InteractionResult useOnInternal(UseOnContext context)
     {
         var player = context.getPlayer();
         var level = player.level();
 
-        var result = super.useOn(context);
+        var result = super.useOnInternal(context);
         if (result != InteractionResult.PASS) return result;
 
         var itemStack = player.getItemInHand(context.getHand());

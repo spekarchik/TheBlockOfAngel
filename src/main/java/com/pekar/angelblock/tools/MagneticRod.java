@@ -28,7 +28,17 @@ public class MagneticRod extends ModRod
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var result = useOnInternal(context);
+        if (result == InteractionResult.PASS) return InteractionResult.FAIL;
+        return result;
+    }
+
+    protected InteractionResult useOnInternal(UseOnContext context)
+    {
         var player = context.getPlayer();
+        var itemStack = player.getItemInHand(context.getHand());
+
+        if (isBroken(itemStack)) return InteractionResult.FAIL;
 
         if (!isEnhanced() || !player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
         {
@@ -37,10 +47,6 @@ public class MagneticRod extends ModRod
 
         var level = player.level();
         boolean isClientSide = level.isClientSide();
-
-        var itemStack = player.getItemInHand(context.getHand());
-        boolean isBroken = itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
-        if (isBroken) return InteractionResult.sidedSuccess(isClientSide); // Magnetic mode should always prevent replacing blocks (always return CONSUME)
 
         var pos = context.getClickedPos();
         var blockState = level.getBlockState(pos);

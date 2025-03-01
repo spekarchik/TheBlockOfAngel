@@ -32,12 +32,12 @@ public class EndRod extends AmethystRod
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context)
+    protected InteractionResult useOnInternal(UseOnContext context)
     {
         var player = context.getPlayer();
 
         if (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
-            return super.useOn(context);
+            return super.useOnInternal(context);
 
         var itemStack = player.getItemInHand(context.getHand());
 
@@ -75,7 +75,7 @@ public class EndRod extends AmethystRod
             }
         }
 
-        return super.useOn(context);
+        return super.useOnInternal(context);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class EndRod extends AmethystRod
     {
         var offHandItemStack = player.getOffhandItem();
 
-        if (offHandItemStack.isEmpty() || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
+        if (offHandItemStack.isEmpty() || isBroken(player.getMainHandItem()) || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
             return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
 
         var offHandItem = offHandItemStack.getItem();
