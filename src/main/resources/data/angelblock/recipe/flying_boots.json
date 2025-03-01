@@ -1,15 +1,15 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "minecraft:leather_boots"
-        },
-        {
-            "item": "angelblock:flying_plate"
-        }
-    ],
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "minecraft:leather_boots"
+    },
+    "addition": {
+        "item": "angelblock:flying_plate"
+    },
     "result": {
-        "id": "angelblock:flying_boots",
-        "count": 1
+        "id": "angelblock:flying_boots"
+    },
+    "template": {
+        "item": "angelblock:flying_armor_upgrade_kit"
     }
 }

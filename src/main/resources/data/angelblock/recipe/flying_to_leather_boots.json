@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": {
+    "item": "angelblock:flying_boots"
+  },
+  "addition": {
+    "item": "minecraft:flint"
+  },
+  "result": {
+    "id": "minecraft:leather_boots"
+  },
+  "template": {
+    "item": "angelblock:downgrade_kit"
+  }
+}
