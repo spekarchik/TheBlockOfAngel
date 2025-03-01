@@ -1,7 +1,6 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tools.properties.DiamithicMaterialProperties;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
