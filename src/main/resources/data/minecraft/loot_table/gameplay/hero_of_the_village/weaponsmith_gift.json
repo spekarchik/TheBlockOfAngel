@@ -13,7 +13,8 @@
                 "type": "minecraft:uniform",
                 "max": 39.0,
                 "min": 20.0
-              }
+              },
+              "options": "#minecraft:on_good_loot"
             }
           ],
           "name": "minecraft:stone_axe"
@@ -27,7 +28,8 @@
                 "type": "minecraft:uniform",
                 "max": 39.0,
                 "min": 20.0
-              }
+              },
+              "options": "#minecraft:on_good_loot"
             }
           ],
           "name": "minecraft:golden_axe"
@@ -41,7 +43,8 @@
                 "type": "minecraft:uniform",
                 "max": 39.0,
                 "min": 20.0
-              }
+              },
+              "options": "#minecraft:on_good_loot"
             }
           ],
           "name": "minecraft:iron_axe"

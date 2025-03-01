@@ -58,7 +58,7 @@
             },
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:enchantments"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "angelblock:rendelithic_primary_shovel"
@@ -77,7 +77,7 @@
             },
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:enchantments"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "angelblock:rendelithic_shovel"
