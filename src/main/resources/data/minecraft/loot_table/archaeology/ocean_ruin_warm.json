@@ -22,6 +22,11 @@
 		},
         {
           "type": "minecraft:item",
+          "weight": 1,
+          "name": "angelblock:flying_armor_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:angler_pottery_sherd"
         },
         {

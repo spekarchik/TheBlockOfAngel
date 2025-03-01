@@ -37,7 +37,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> LIMONITE_ARMOR_UPGRADE_KIT = Main.ITEMS.register("limonite_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
     public static final DeferredItem<Item> SUPER_ARMOR_UPGRADE_KIT = Main.ITEMS.register("super_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
     public static final DeferredItem<Item> DIAMOND_ARMOR_UPGRADE_KIT = Main.ITEMS.register("diamond_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> FLYING_ARMOR_UPGRADE_KIT = Main.ITEMS.register("flying_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
+    public static final DeferredItem<Item> FLYING_ARMOR_UPGRADE_KIT = Main.ITEMS.register("flying_armor_upgrade_kit", FlyingArmorUpgradeKit::new);
 
     public static final DeferredItem<Item> RENDELITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.register("rendelithic_tool_upgrade_kit", () -> new ModItemWithDoubleHoverText());
     public static final DeferredItem<Item> DIAMITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.register("diamithic_tool_upgrade_kit", () -> new ModItemWithDoubleHoverText());
