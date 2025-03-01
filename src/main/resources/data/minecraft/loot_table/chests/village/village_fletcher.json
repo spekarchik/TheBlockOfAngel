@@ -15,7 +15,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_good_loot"
+              "options": "#minecraft:fletcher_specific"
             }
           ],
           "name": "minecraft:book"
