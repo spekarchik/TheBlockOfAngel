@@ -142,32 +142,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:iron_pickaxe",
+          "name": "minecraft:iron_axe",
           "weight": 5
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_sword",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_chestplate",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_helmet",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_leggings",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_boots",
           "weight": 5
         },
         {
