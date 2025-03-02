@@ -60,6 +60,21 @@ public class PlayerInteractionEvents implements IEventHandler
     public void onLivingDamageEvent(LivingDamageEvent.Pre event)
     {
         LivingEntity entity = event.getEntity();
+        var damageSource = event.getSource();
+        var attacker = damageSource.getEntity();
+
+        if (attacker != null && (damageSource.is(DamageTypes.PLAYER_ATTACK) || damageSource.is(DamageTypes.MOB_ATTACK)))
+        {
+            var weapon = attacker.getWeaponItem();
+            if (weapon != null && weapon.getItem() instanceof IModTool modTool)
+            {
+                if (modTool.hasExtraLowEfficiencyDurability(weapon))
+                    event.setNewDamage(event.getNewDamage() * 0.4F);
+                else if (modTool.hasLowEfficiencyDurability(weapon))
+                    event.setNewDamage(event.getNewDamage() * 0.6F);
+            }
+        }
+
         IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
         if (player == null) return;
 

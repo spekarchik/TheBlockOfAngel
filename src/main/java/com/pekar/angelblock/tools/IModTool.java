@@ -29,6 +29,26 @@ public interface IModTool extends IModDescriptionItem
         return 2;
     }
 
+    default boolean hasLowEfficiencyDurability(ItemStack stack)
+    {
+        return stack.getMaxDamage() - stack.getDamageValue() <= getLowEfficiencyDurability(stack.getMaxDamage());
+    }
+
+    default boolean hasExtraLowEfficiencyDurability(ItemStack stack)
+    {
+        return stack.getMaxDamage() - stack.getDamageValue() <= getExtraLowEfficiencyDurability(stack.getMaxDamage());
+    }
+
+    default int getLowEfficiencyDurability(int maxDurability)
+    {
+        return maxDurability / 3;
+    }
+
+    default int getExtraLowEfficiencyDurability(int maxDurability)
+    {
+        return maxDurability / 5;
+    }
+
     default boolean isTool()
     {
         return false;
