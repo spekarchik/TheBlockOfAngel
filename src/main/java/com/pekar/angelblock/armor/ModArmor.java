@@ -13,7 +13,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class ModArmor extends ArmorItem
@@ -22,6 +24,7 @@ public class ModArmor extends ArmorItem
     protected final int maxDamage;
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
+    private final Set<ArmorModificators> armorModificatorSet = new HashSet<>();
 
     protected ModArmor(ModArmorMaterial material, Type armorItemType)
     {
@@ -58,29 +61,70 @@ public class ModArmor extends ArmorItem
         return super.damageItem(stack, amount, entity, onBroken);
     }
 
-    public boolean isModifiedWithDetector()
+    public final boolean isModifiedWithDetector()
     {
-        return false;
+        return armorModificatorSet.contains(ArmorModificators.Detector);
     }
 
-    public boolean isModifiedWithHealthRegenerator()
+    public final boolean isModifiedWithHealthRegenerator()
     {
-        return false;
+        return armorModificatorSet.contains(ArmorModificators.Regenerator);
     }
 
-    public boolean isModifiedWithStrengthBooster()
+    public final boolean isModifiedWithStrengthBooster()
     {
-        return false;
+        return armorModificatorSet.contains(ArmorModificators.StrengthBooster);
     }
 
-    public boolean isModifiedWithLevitation()
+    public final boolean isModifiedWithLevitation()
     {
-        return false;
+        return armorModificatorSet.contains(ArmorModificators.Levitation);
     }
 
-    public boolean isModifiedWithSeaPower()
+    public final boolean isModifiedWithSeaPower()
     {
-        return false;
+        return armorModificatorSet.contains(ArmorModificators.SeaPower);
+    }
+
+    public final boolean isModifiedWithElytra()
+    {
+        return armorModificatorSet.contains(ArmorModificators.Elytra);
+    }
+
+    public final ModArmor withDetector()
+    {
+        armorModificatorSet.add(ArmorModificators.Detector);
+        return this;
+    }
+
+    public final ModArmor withHealthRegenerator()
+    {
+        armorModificatorSet.add(ArmorModificators.Regenerator);
+        return this;
+    }
+
+    public final ModArmor withStrengthBooster()
+    {
+        armorModificatorSet.add(ArmorModificators.StrengthBooster);
+        return this;
+    }
+
+    public final ModArmor withLevitation()
+    {
+        armorModificatorSet.add(ArmorModificators.Levitation);
+        return this;
+    }
+
+    public final ModArmor withSeaPower()
+    {
+        armorModificatorSet.add(ArmorModificators.SeaPower);
+        return this;
+    }
+
+    public final ModArmor withElytra()
+    {
+        armorModificatorSet.add(ArmorModificators.Elytra);
+        return this;
     }
 
     public int getMaxDamage()

@@ -10,6 +10,7 @@ public class SuperArmorFlying extends SuperArmor
     protected SuperArmorFlying(ModArmorMaterial material, Type equipmentSlot)
     {
         super(material, equipmentSlot);
+        withElytra();
     }
 
     @Override
