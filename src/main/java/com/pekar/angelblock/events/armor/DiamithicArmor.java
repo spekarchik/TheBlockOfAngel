@@ -4,6 +4,7 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -82,8 +83,6 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        if (!(event.getEntity() instanceof Player playerEntity)) return;
-        breakIce(playerEntity, false);
     }
 
     @Override
@@ -92,6 +91,11 @@ public class DiamithicArmor extends Armor
         if (player.areBootsModifiedWithStrengthBooster(this))
         {
             event.setDamageMultiplier(0.3f);
+        }
+
+        if ((event.getEntity() instanceof Player playerEntity) && !playerEntity.hasEffect(MobEffects.SLOW_FALLING))
+        {
+            breakIce(playerEntity, false);
         }
     }
 
