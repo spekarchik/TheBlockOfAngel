@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.common.ItemAbility;
 
-public class ModRod extends ModTool implements IModTool
+public class ModRod extends ModRodTool implements IModTool
 {
     private final boolean isMagnetic;
 

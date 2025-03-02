@@ -4,11 +4,11 @@ import com.pekar.angelblock.utils.Utils;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TieredItem;
 
-public abstract class ModTool extends TieredItem implements IModTool
+public abstract class ModRodTool extends TieredItem implements IModTool
 {
     protected final Utils utils = new Utils();
 
-    public ModTool(Tier material, Properties properties)
+    public ModRodTool(Tier material, Properties properties)
     {
         super(material, properties);
     }
