@@ -4,6 +4,7 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -81,9 +82,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-//        if (!player.isArmorElementPutOn(getLeggingsName())) return;
-
-//        player.setEffect(MobEffects.JUMP, 30, 1);
+        if (!(event.getEntity() instanceof Player playerEntity)) return;
+        breakIce(playerEntity, false);
     }
 
     @Override
@@ -99,8 +99,9 @@ public class DiamithicArmor extends Armor
     public void onCreeperCheck()
     {
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
-
         detectCreepers(isHelmetModifiedWithDetector,false);
+
+        breakIce(player.getEntity(),true);
     }
 
     @Override

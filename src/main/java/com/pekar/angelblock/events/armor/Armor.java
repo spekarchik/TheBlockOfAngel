@@ -1,9 +1,15 @@
 package com.pekar.angelblock.events.armor;
 
+import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.effect.IArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.utils.Utils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,6 +21,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -182,6 +190,46 @@ abstract class Armor implements IArmor
             if (detect)
                 creeperDetectedCounter = 0;
         }
+    }
+
+    protected void breakIce(Player player, boolean doRandomly)
+    {
+        var randomSource = RandomSource.create();
+        int diamithicArmorSlots = 0;
+        for (var slot : player.getArmorSlots())
+        {
+            if (slot.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
+                diamithicArmorSlots++;
+        }
+        int rnd = randomSource.nextInt(32);
+        boolean shouldIceBeBroken = rnd <= diamithicArmorSlots * diamithicArmorSlots;
+        if (doRandomly && !shouldIceBeBroken) return;
+
+        var level = player.level();
+        if (level.isClientSide()) return;
+        var posBelow = BlockPos.containing(player.getX(), player.getY() - 0.5, player.getZ());
+
+        var block1 = level.getBlockState(posBelow).getBlock();
+        var block2State = level.getBlockState(posBelow.below());
+        if (block1 != Blocks.ICE || (!block2State.isAir() && !Utils.instance.blocks.types.isLiquid(block2State.getBlock())))
+        {
+            return;
+        }
+
+        for (int x = posBelow.getX() - 1; x <= posBelow.getX() + 1; x++)
+            for (int z = posBelow.getZ() - 1; z <= posBelow.getZ() + 1; z++)
+            {
+                var currentPos = new BlockPos(x, posBelow.getY(), z);
+                block1 = level.getBlockState(currentPos).getBlock();
+                block2State = level.getBlockState(currentPos.below());
+                if (block1 == Blocks.ICE && (block2State.isAir() || Utils.instance.blocks.types.isLiquid(block2State.getBlock())))
+                {
+                    level.setBlock(currentPos, Blocks.WATER.defaultBlockState(), 11);
+                }
+            }
+
+        new PlaySoundPacket(SoundEvents.GLASS_BREAK).sendToPlayer((ServerPlayer) player);
+        new PlaySoundPacket(SoundEvents.GENERIC_SPLASH).sendToPlayer((ServerPlayer) player);
     }
 
     // for tests

@@ -116,7 +116,7 @@ public class RendelithicArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        // none
+        breakIce(player.getEntity(),true);
     }
 
     @Override
