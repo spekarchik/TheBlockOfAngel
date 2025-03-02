@@ -375,7 +375,10 @@ public class SuperArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
         {
             superJumpEffect.trySwitch();
-            dolphinsGraceEffect.trySwitchTo(superJumpEffect.isEffectOn());
+            if (superJumpEffect.isEffectAvailable())
+                dolphinsGraceEffect.trySwitchTo(superJumpEffect.isEffectOn());
+            else
+                dolphinsGraceEffect.trySwitch();
         }
 
         if (levitationEffect.isEffectOn())
