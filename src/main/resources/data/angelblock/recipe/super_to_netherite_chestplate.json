@@ -7,7 +7,7 @@
     "item": "minecraft:flint"
   },
   "result": {
-    "id": "angelblock:diamithic_chestplate"
+    "id": "angelblock:diamithic_chestplate_with_strength_and_levitation"
   },
   "template": {
     "item": "angelblock:downgrade_kit"
