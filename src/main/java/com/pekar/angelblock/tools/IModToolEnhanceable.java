@@ -13,7 +13,6 @@ public interface IModToolEnhanceable extends IModTool
 
     default boolean preventBlockBreak(Player player, ItemStack itemStack, BlockPos pos)
     {
-        if (IModTool.hasCriticalDamage(itemStack)) return true;
         if (!canPreventBlockDestroying(player, pos)) return false;
 
         var cancelBreaking = !getMaterialProperties().isSafeToBreak(player, pos);

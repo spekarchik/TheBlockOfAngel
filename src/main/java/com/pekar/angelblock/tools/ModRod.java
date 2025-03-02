@@ -87,16 +87,6 @@ public class ModRod extends ModRodTool implements IModTool
     }
 
     @Override
-    public void damageMainHandItem(int amount, LivingEntity livingEntity)
-    {
-        var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
-        var durability = itemStack.getMaxDamage() - itemStack.getDamageValue();
-        if (durability <= amount) return;
-
-        super.damageMainHandItem(amount, livingEntity);
-    }
-
-    @Override
     public void damageOffHandItem(int amount, LivingEntity livingEntity)
     {
         var itemStack = livingEntity.getItemInHand(InteractionHand.OFF_HAND);

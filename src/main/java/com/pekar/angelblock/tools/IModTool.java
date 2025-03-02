@@ -19,9 +19,14 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public interface IModTool extends IModDescriptionItem
 {
-    static boolean hasCriticalDamage(ItemStack stack)
+    default boolean hasCriticalDamage(ItemStack stack)
     {
-        return stack.getMaxDamage() - stack.getDamageValue() <= 2;
+        return stack.getMaxDamage() - stack.getDamageValue() <= getCriticalDurability();
+    }
+
+    default int getCriticalDurability()
+    {
+        return 2;
     }
 
     default boolean isTool()
@@ -59,8 +64,11 @@ public interface IModTool extends IModDescriptionItem
     default void damageMainHandItem(int amount, LivingEntity livingEntity)
     {
         var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
+        var durability = itemStack.getMaxDamage() - itemStack.getDamageValue();
+        var modifiedAmount = durability > amount ? amount : durability - 1;
+
         if (itemStack.getItem().equals(this))
-            itemStack.hurtAndBreak(amount, livingEntity, EquipmentSlot.MAINHAND);
+            itemStack.hurtAndBreak(modifiedAmount, livingEntity, EquipmentSlot.MAINHAND);
     }
 
     default void damageOffHandItem(int amount, LivingEntity livingEntity)

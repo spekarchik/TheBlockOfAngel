@@ -24,7 +24,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
         var mainHandItemStack = player.getMainHandItem();
         var heldItem = mainHandItemStack.getItem();
 
-        if (heldItem instanceof IModTool tool && tool.isEnhanced() && !IModTool.hasCriticalDamage(mainHandItemStack))
+        if (heldItem instanceof IModTool tool && tool.isEnhanced() && !tool.hasCriticalDamage(mainHandItemStack))
         {
             if (tool.isTool())
             {

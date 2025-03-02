@@ -24,6 +24,8 @@ public class LimoniteAxe extends EnhancedAxe
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
     {
+        if (hasCriticalDamage(itemStack)) return 1F;
+
         if (blockState.getBlock() == Blocks.CACTUS) return 12.0F;
         return super.getDestroySpeed(itemStack, blockState);
     }

@@ -35,20 +35,39 @@ public class ModSword extends SwordItem implements IModTool
     @Override
     public void setDamage(ItemStack stack, int damage)
     {
-        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - 2);
+        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - getCriticalDurability());
         stack.set(DataComponents.DAMAGE, modifiedDamage);
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
+    }
+
+    @Override
+    public int getCriticalDurability()
+    {
+        return 3;
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack stack, BlockState state)
+    {
+        if (hasCriticalDamage(stack)) return 1F;
+        return super.getDestroySpeed(stack, state);
     }
 
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
-        return !IModTool.hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
+        return !hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
     }
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
-        if (!IModTool.hasCriticalDamage(stack))
+        if (!hasCriticalDamage(stack))
             additionalActionOnHurtEnemy(stack, target, attacker);
 
         return super.hurtEnemy(stack, target, attacker);
@@ -194,7 +213,7 @@ public class ModSword extends SwordItem implements IModTool
     {
         // We need it to prevent to fire a house when you are holding a sword with fire effect and a torch and trying to set the torch on a wall
         var mainHandItemStack = player.getMainHandItem();
-        if (IModTool.hasCriticalDamage(mainHandItemStack)) return false;
+        if (hasCriticalDamage(mainHandItemStack)) return false;
 
         var offHandItemStack = player.getOffhandItem();
         return offHandItemStack.isEmpty() || !(offHandItemStack.getItem() instanceof BlockItem);

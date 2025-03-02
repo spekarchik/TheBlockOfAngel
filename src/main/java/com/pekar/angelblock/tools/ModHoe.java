@@ -84,14 +84,14 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
     @Override
     public void setDamage(ItemStack stack, int damage)
     {
-        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - 2);
+        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - getCriticalDurability());
         stack.set(DataComponents.DAMAGE, modifiedDamage);
     }
 
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
-        return !IModTool.hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
+        return !hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
     }
 
     @Override
@@ -125,6 +125,19 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
     public boolean isTool()
     {
         return true;
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack stack, BlockState state)
+    {
+        if (hasCriticalDamage(stack)) return 1F;
+        return super.getDestroySpeed(stack, state);
     }
 
     @Override

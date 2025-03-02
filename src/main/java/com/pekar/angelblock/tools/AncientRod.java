@@ -47,6 +47,8 @@ public class AncientRod extends MagneticRod
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
     {
+        if (isBroken(itemStack)) return 1F;
+
         if (blockState.getBlock() == Blocks.COBWEB)
             return 18.0F;
 

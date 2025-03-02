@@ -36,6 +36,8 @@ public class SuperPrimarySword extends ModSword
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
     {
+        if (hasCriticalDamage(itemStack)) return 1F;
+
         var block = blockState.getBlock();
         if (block == Blocks.COBWEB)
         {

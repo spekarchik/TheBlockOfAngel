@@ -40,7 +40,7 @@ public class PlayerInteractionEvents implements IEventHandler
         if (attacker != null && (damageSource.is(DamageTypes.PLAYER_ATTACK) || damageSource.is(DamageTypes.MOB_ATTACK)))
         {
             var weapon = attacker.getWeaponItem();
-            if (weapon != null && weapon.getItem() instanceof IModTool && IModTool.hasCriticalDamage(weapon))
+            if (weapon != null && weapon.getItem() instanceof IModTool modTool && modTool.hasCriticalDamage(weapon))
             {
                 event.setCanceled(true);
                 return;
@@ -145,7 +145,7 @@ public class PlayerInteractionEvents implements IEventHandler
         var tool = player.getMainHandItem();
         if (!tool.isEmpty() && tool.getItem() instanceof IModToolEnhanceable modTool)
         {
-            if (IModTool.hasCriticalDamage(tool))
+            if (modTool.hasCriticalDamage(tool))
             {
                 if (player.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
                     player.removeEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT);

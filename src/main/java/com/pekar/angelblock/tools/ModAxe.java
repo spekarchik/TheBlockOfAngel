@@ -7,6 +7,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
@@ -48,14 +49,27 @@ public class ModAxe extends AxeItem implements IModToolEnhanceable
     @Override
     public void setDamage(ItemStack stack, int damage)
     {
-        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - 2);
+        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - getCriticalDurability());
         stack.set(DataComponents.DAMAGE, modifiedDamage);
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
+    {
+        return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack stack, BlockState state)
+    {
+        if (hasCriticalDamage(stack)) return 1F;
+        return super.getDestroySpeed(stack, state);
     }
 
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
-        return !IModTool.hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
+        return !hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
     }
 
     @Override

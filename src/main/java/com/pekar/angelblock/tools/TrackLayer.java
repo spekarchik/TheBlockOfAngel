@@ -63,6 +63,8 @@ public class TrackLayer extends WorkRod
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
     {
+        if (isBroken(itemStack)) return 1F;
+
         return isTrackLayerCompatible(blockState.getBlock()) ? 10F : 1F;
     }
 
