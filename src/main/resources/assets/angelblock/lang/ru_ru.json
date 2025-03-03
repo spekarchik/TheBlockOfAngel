@@ -832,7 +832,7 @@
   "item.angelblock.guardian_eye": "§eГлаз древнего стража",
   "item.angelblock.guardian_eye.desc1": "Использование накладывает на игрока эффект Ночное Зрение на 1 минуту",
   "item.angelblock.guardian_eye.desc2": "(Эффект пропадает при смене предмета в руке)",
-  "item.angelblock.guardian_eye.desc3": "Может выпасть при убийстве Древнего Стража",
+  "item.angelblock.guardian_eye.desc3": "Может выпасть при убийстве Древнего Стража (вероятность 35%, +15% за каждый уровень чар Добыча)",
   "item.angelblock.miner_figure": "§eЗолотой артефакт",
   "item.angelblock.miner_figure.desc1": "Использование успокаивает пиглинов в радиусе 16 блоков",
   "item.angelblock.miner_figure.desc2": "Встречается в Заброшенных Шахтах или Сокровищницах",

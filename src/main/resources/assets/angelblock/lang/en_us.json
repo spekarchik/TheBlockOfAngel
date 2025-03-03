@@ -832,7 +832,7 @@
   "item.angelblock.guardian_eye": "§eElder Guardian Eye",
   "item.angelblock.guardian_eye.desc1": "Using it sets Night Vision effect for 1 minute",
   "item.angelblock.guardian_eye.desc2": "(The effect disappears when switching an item in hand)",
-  "item.angelblock.guardian_eye.desc3": "Can drop from killed Elder Guardian",
+  "item.angelblock.guardian_eye.desc3": "Can drop from killed Elder Guardian (35% chance, +15% for each level of the Looting enchantment)",
   "item.angelblock.miner_figure": "§eGolden Artefact",
   "item.angelblock.miner_figure.desc1": "Using it near piglins (16 blocks radius) makes them calm",
   "item.angelblock.miner_figure.desc2": "Can be found in Mineshafts and Dangeons",
