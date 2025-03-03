@@ -25,7 +25,7 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
     @Override
     public void tick(Level level, BlockPos pos, BlockState blockState, T entity)
     {
-        if (++counter > 37)
+        if (++counter > 15)
         {
             onUpdate(level, entity);
             counter = 0;
