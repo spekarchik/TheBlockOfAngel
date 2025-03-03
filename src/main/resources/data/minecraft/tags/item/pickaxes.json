@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "angelblock:rendelithic_primary_pickaxe",
+    "angelblock:rendelithic_pickaxe",
+    "angelblock:lapis_primary_pickaxe",
+    "angelblock:lapis_pickaxe",
+    "angelblock:diamithic_primary_pickaxe",
+    "angelblock:diamithic_pickaxe",
+    "angelblock:limonite_primary_pickaxe",
+    "angelblock:limonite_pickaxe",
+    "angelblock:super_primary_pickaxe",
+    "angelblock:super_pickaxe"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "angelblock:rendelithic_helmet",
+    "angelblock:lapis_helmet",
+    "angelblock:lapis_helmet_with_detector",
+    "angelblock:limonite_helmet",
+    "angelblock:limonite_helmet_with_detector",
+    "angelblock:diamithic_helmet",
+    "angelblock:diamithic_helmet_with_detector",
+    "angelblock:super_helmet",
+    "angelblock:super_helmet_with_detector",
+    "angelblock:flying_helmet"
+  ]
+}

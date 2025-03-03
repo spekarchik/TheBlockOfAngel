@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "angelblock:diamithic_primary_sword",
+    "angelblock:diamithic_sword",
+    "angelblock:rendelithic_primary_sword",
+    "angelblock:rendelithic_sword",
+    "angelblock:limonite_primary_sword",
+    "angelblock:limonite_sword",
+    "angelblock:super_primary_sword",
+    "angelblock:super_sword"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "angelblock:rendelithic_leggings",
+    "angelblock:rendelithic_leggings_with_regenerator",
+    "angelblock:lapis_leggings",
+    "angelblock:lapis_leggings_with_regenerator",
+    "angelblock:limonite_leggings",
+    "angelblock:limonite_leggings_with_regenerator",
+    "angelblock:diamithic_leggings",
+    "angelblock:diamithic_leggings_with_regenerator",
+    "angelblock:super_leggings",
+    "angelblock:super_leggings_with_regenerator",
+    "angelblock:flying_leggings"
+  ]
+}

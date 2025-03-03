@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "angelblock:diamithic_primary_axe",
+    "angelblock:diamithic_axe",
+    "angelblock:limonite_primary_axe",
+    "angelblock:limonite_axe",
+    "angelblock:super_primary_axe",
+    "angelblock:super_axe"
+  ]
+}

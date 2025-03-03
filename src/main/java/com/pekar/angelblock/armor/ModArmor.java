@@ -160,6 +160,18 @@ public class ModArmor extends ArmorItem
         };
     }
 
+    @Override
+    public boolean isEnchantable(ItemStack stack)
+    {
+        return !isDamaged(stack);
+    }
+
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book)
+    {
+        return true;
+    }
+
     private MutableComponent getCommonDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
     {
         var component = getCommonDisplayName(lineNumber);
