@@ -87,6 +87,9 @@ public class CustomSmithingMenu extends SmithingMenu
 
                 if (armor.isModifiedWithSeaPower() && (!isResultModArmor || !resultAsModArmor.isModifiedWithSeaPower()))
                     player.getInventory().add(new ItemStack(Items.HEART_OF_THE_SEA));
+
+                if (armor.isModifiedWithElytra() && (!isResultModArmor || !resultAsModArmor.isModifiedWithElytra()))
+                    player.getInventory().add(new ItemStack(Items.ELYTRA));
             }
             else if (mainItem.getItem() instanceof IModTool tool)
             {

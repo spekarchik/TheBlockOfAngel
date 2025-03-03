@@ -7,7 +7,7 @@
         "item": "angelblock:super_plate"
     },
     "result": {
-        "id": "angelblock:super_helmet"
+        "id": "angelblock:super_helmet_with_detector"
     },
     "template": {
         "item": "angelblock:super_armor_upgrade_kit"
