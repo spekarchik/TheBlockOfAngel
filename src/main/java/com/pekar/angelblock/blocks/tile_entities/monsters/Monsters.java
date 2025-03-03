@@ -26,7 +26,7 @@ public class Monsters
     public static final IMonster WitherSkeleton = new WitherSkeleton(id++);
     public static final IMonster Zombie = new Zombie(id++);
     public static final IMonster ZombieVillager = new ZombieVillager(id++);
-    public static final IMonster CaveSpider = new Spider(id++);
+    public static final IMonster CaveSpider = new CaveSpider(id++);
     public static final IMonster Evoker = new Evoker(id++);
     public static final IMonster Ravager = new Ravager(id++);
     public static final IMonster Piglin = new Piglin(id++);
