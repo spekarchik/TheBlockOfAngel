@@ -81,4 +81,9 @@ public class ModToolMaterial implements Tier
     {
         return level;
     }
+
+    public ModToolMaterial clone(String name, int uses)
+    {
+        return new ModToolMaterial(name, uses, getSpeed(), getAttackDamageBonus(), getLevel(), getEnchantmentValue(), getRepairIngredient());
+    }
 }

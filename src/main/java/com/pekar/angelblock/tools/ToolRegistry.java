@@ -111,7 +111,7 @@ public class ToolRegistry
             () -> new AncientRod(ToolMaterials.ROD_MATERIAL1, false, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModRod> MARINE_ROD = Main.ITEMS.register("marine_rod",
-            () -> new MarineRod(ToolMaterials.ROD_MATERIAL1, false, new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new MarineRod(ToolMaterials.ROD_MATERIAL2, false, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModRod> FIRE_ROD = Main.ITEMS.register("fire_rod",
             () -> new FireRod(ToolMaterials.ROD_MATERIAL3, false, new Item.Properties().rarity(Rarity.UNCOMMON)));
@@ -126,7 +126,7 @@ public class ToolRegistry
             () -> new AncientRod(ToolMaterials.ROD_MATERIAL1, true, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final DeferredItem<ModRod> MARINE_MAGNETIC_ROD = Main.ITEMS.register("marine_magnetic_rod",
-            () -> new MarineRod(ToolMaterials.ROD_MATERIAL1, true, new Item.Properties().rarity(Rarity.RARE)));
+            () -> new MarineRod(ToolMaterials.ROD_MATERIAL2, true, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final DeferredItem<ModRod> FIRE_MAGNETIC_ROD = Main.ITEMS.register("fire_magnetic_rod",
             () -> new FireRod(ToolMaterials.ROD_MATERIAL3, true, new Item.Properties().rarity(Rarity.RARE)));
@@ -141,45 +141,45 @@ public class ToolRegistry
             () -> new AngelRod(ToolMaterials.ROD_MATERIAL5, true, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final DeferredItem<ModRod> PLANTER = Main.ITEMS.register("planter",
-            () -> new Planter(ToolMaterials.ROD_MATERIAL6, new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new Planter(ToolMaterials.ROD_MATERIAL7, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModRod> TRACK_LAYER = Main.ITEMS.register("track_layer",
-            () -> new TrackLayer(ToolMaterials.ROD_MATERIAL5, new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new TrackLayer(ToolMaterials.ROD_MATERIAL6, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModRod> BUILDER = Main.ITEMS.register("builder",
-            () -> new Builder(ToolMaterials.ROD_MATERIAL6, new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new Builder(ToolMaterials.ROD_MATERIAL7, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     // Swords
     public static final DeferredItem<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",
-            () -> new DiamithicPrimarySword(ToolMaterials.DIAMITHIC, 3, -2.7F,
+            () -> new DiamithicPrimarySword(ToolMaterials.DIAMITHIC_SWORD, 3, -2.7F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModSword> DIAMITHIC_SWORD = Main.ITEMS.register("diamithic_sword",
-            () -> new DiamithicSword(ToolMaterials.DIAMITHIC, 3, -2.7F,
+            () -> new DiamithicSword(ToolMaterials.DIAMITHIC_SWORD, 3, -2.7F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModSword> RENDELITHIC_PRIMARY_SWORD = Main.ITEMS.register("rendelithic_primary_sword",
-            () -> new RendelithicPrimarySword(ToolMaterials.RENDELITHIC, 3, -2.3F,
+            () -> new RendelithicPrimarySword(ToolMaterials.RENDELITHIC_SWORD, 3, -2.3F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModSword> RENDELITHIC_SWORD = Main.ITEMS.register("rendelithic_sword",
-            () -> new RendelithicSword(ToolMaterials.RENDELITHIC, 3, -2.3F,
+            () -> new RendelithicSword(ToolMaterials.RENDELITHIC_SWORD, 3, -2.3F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModSword> LIMONITE_PRIMARY_SWORD = Main.ITEMS.register("limonite_primary_sword",
-            () -> new LimonitePrimarySword(ToolMaterials.LIMONITE, 3, -1.9F,
+            () -> new LimonitePrimarySword(ToolMaterials.LIMONITE_SWORD, 3, -1.9F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModSword> LIMONITE_SWORD = Main.ITEMS.register("limonite_sword",
-            () -> new LimoniteSword(ToolMaterials.LIMONITE, 3, -1.9F,
+            () -> new LimoniteSword(ToolMaterials.LIMONITE_SWORD, 3, -1.9F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModSword> SUPER_PRIMARY_SWORD = Main.ITEMS.register("super_primary_sword",
-            () -> new SuperPrimarySword(ToolMaterials.SUPER, 3, -2.0F,
+            () -> new SuperPrimarySword(ToolMaterials.SUPER_SWORD, 3, -2.0F,
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModSword> SUPER_SWORD = Main.ITEMS.register("super_sword",
-            () -> new SuperSword(ToolMaterials.SUPER, 3, -2.0F,
+            () -> new SuperSword(ToolMaterials.SUPER_SWORD, 3, -2.0F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
 

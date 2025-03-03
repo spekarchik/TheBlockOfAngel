@@ -3,7 +3,6 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.items.ItemRegistry;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class ToolMaterials
@@ -31,41 +30,58 @@ public class ToolMaterials
     public static final String DIAMITHIC_MATERIAL_NAME = "diamithic";
     public static final String LAPIS_MATERIAL_NAME = "lapis";
     public static final String SUPER_MATERIAL_NAME = "super";
+    public static final String RENDELITHIC_MATERIAL_SWORD_NAME = "rendelithic_sword";
+    public static final String LIMONITE_MATERIAL_SWORD_NAME = "limonite_sword";
+    public static final String DIAMITHIC_MATERIAL_SWORD_NAME = "diamithic_sword";
+    public static final String LAPIS_MATERIAL_SWORD_NAME = "lapis_sword";
+    public static final String SUPER_MATERIAL_SWORD_NAME = "super_sword";
     public static final String ROD_MATERIAL1_NAME = "rod1";
+    public static final String ROD_MATERIAL2_NAME = "rod2";
     public static final String ROD_MATERIAL3_NAME = "rod3";
     public static final String ROD_MATERIAL4_NAME = "rod4";
     public static final String ROD_MATERIAL5_NAME = "rod5";
     public static final String ROD_MATERIAL6_NAME = "rod6";
+    public static final String ROD_MATERIAL7_NAME = "rod7";
 
-    static final Tier RENDELITHIC = new ModToolMaterial(RENDELITHIC_MATERIAL_NAME, 800, 8F, 4.8F, 3, 25,
+    static final ModToolMaterial RENDELITHIC = new ModToolMaterial(RENDELITHIC_MATERIAL_NAME, 600, 8F, 4.8F, 3, 25,
             Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get())); // damagePerSecond = 15, singleDamage = 8.8; Axe: damagePerSecond = 12, singleDamage = 10.8
+    
+    static final ModToolMaterial RENDELITHIC_SWORD = RENDELITHIC.clone(RENDELITHIC_MATERIAL_SWORD_NAME, 150);
 
-    static final Tier DIAMITHIC = new ModToolMaterial(DIAMITHIC_MATERIAL_NAME, 2600, 7F, 8.3F, 4, 14,
+    static final ModToolMaterial DIAMITHIC = new ModToolMaterial(DIAMITHIC_MATERIAL_NAME, 2100, 7F, 8.3F, 4, 14,
             Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get())); // damagePerSecond = 16, singleDamage = 12.3;  Axe: damagePerSecond = 11.4, singleDamage = 14.3
 
-    static final Tier LAPIS = new ModToolMaterial(LAPIS_MATERIAL_NAME, 1500, 8.7F, 3F, 3, 10,
+    static final ModToolMaterial DIAMITHIC_SWORD = DIAMITHIC.clone(DIAMITHIC_MATERIAL_SWORD_NAME, 525);
+
+    static final ModToolMaterial LAPIS = new ModToolMaterial(LAPIS_MATERIAL_NAME, 1500, 8.7F, 3F, 3, 10,
             Ingredient.of(ItemRegistry.LAPIS_INGOT.get())); // the same as Diamond (no weapon uses this material)
 
-    static final Tier LIMONITE = new ModToolMaterial(LIMONITE_MATERIAL_NAME, 1200, 6.8F, 3.1F, 3, 30,
+    static final ModToolMaterial LAPIS_SWORD = LAPIS.clone(LAPIS_MATERIAL_SWORD_NAME, 375);
+
+    static final ModToolMaterial LIMONITE = new ModToolMaterial(LIMONITE_MATERIAL_NAME, 1000, 6.8F, 3.1F, 3, 30,
             Ingredient.of(ItemRegistry.LIMONITE_INGOT.get())); // damagePerSecond = 14.9, singleDamage = 7.1;  Axe: damagePerSecond = 10, singleDamage = 9.1
 
-    static final Tier SUPER = new ModToolMaterial(SUPER_MATERIAL_NAME, 2600, 11.0F, 8.5F, 4, 1,
+    static final ModToolMaterial LIMONITE_SWORD = LIMONITE.clone(LIMONITE_MATERIAL_SWORD_NAME, 250);
+
+    static final ModToolMaterial SUPER = new ModToolMaterial(SUPER_MATERIAL_NAME, 2100, 11.0F, 8.5F, 4, 1,
             Ingredient.of(ItemRegistry.SUPER_INGOT.get())); // damagePerSecond = 25, singleDamage = 12.5;  Axe: damagePerSecond = 20.3, singleDamage = 14.5
 
-    static final Tier ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, 60, 2.0F, 0F, 0, 0,
+    static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_SWORD_NAME, 525);
+
+    static final ModToolMaterial ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, 60, 2.0F, 0F, 0, 0,
             Ingredient.of(Items.BAMBOO));
 
-    static final Tier ROD_MATERIAL3 = new ModToolMaterial(ROD_MATERIAL3_NAME, 200, 2.0F, 0F, 0, 0,
-            Ingredient.of(Items.BAMBOO));
+    static final ModToolMaterial ROD_MATERIAL2 = ROD_MATERIAL1.clone(ROD_MATERIAL2_NAME, 120);
 
-    static final Tier ROD_MATERIAL4 = new ModToolMaterial(ROD_MATERIAL4_NAME, 500, 2.0F, 0F, 0, 0,
-            Ingredient.of(Items.BAMBOO));
+    static final ModToolMaterial ROD_MATERIAL3 = ROD_MATERIAL1.clone(ROD_MATERIAL3_NAME, 200);
 
-    static final Tier ROD_MATERIAL5 = new ModToolMaterial(ROD_MATERIAL5_NAME, 2000, 2.0F, 0F, 0, 0,
-            Ingredient.of(Items.BAMBOO));
+    static final ModToolMaterial ROD_MATERIAL4 = ROD_MATERIAL1.clone(ROD_MATERIAL4_NAME, 500);
 
-    static final Tier ROD_MATERIAL6 = new ModToolMaterial(ROD_MATERIAL6_NAME, 5000, 2.0F, 0F, 0, 0,
-            Ingredient.of(Items.BAMBOO));
+    static final ModToolMaterial ROD_MATERIAL5 = ROD_MATERIAL1.clone(ROD_MATERIAL5_NAME, 1000);
+
+    static final ModToolMaterial ROD_MATERIAL6 = ROD_MATERIAL1.clone(ROD_MATERIAL6_NAME, 2000);
+
+    static final ModToolMaterial ROD_MATERIAL7 = ROD_MATERIAL1.clone(ROD_MATERIAL7_NAME, 5000);
 
 //    static final Tier RENDELITHIC = EnumHelper
 //            .addToolMaterial("materialext:rendelithic_tool", 3, 2200, 7, 3, 15)
