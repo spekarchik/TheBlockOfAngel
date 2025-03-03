@@ -6,6 +6,7 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -37,11 +38,12 @@ public class SuperSword extends ModSword
         if (!canUseToolEffect(player)) return InteractionResult.PASS;
 
         var pos = context.getClickedPos();
+        var hand = context.getHand();
 
         if (player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT))
         {
             if (!level.isClientSide())
-                explode(player, level, pos);
+                explode(player, context.getHand(), level, pos);
 
             return getToolInteractionResult(true, level.isClientSide());
         }
@@ -53,11 +55,11 @@ public class SuperSword extends ModSword
                 if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
                         && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
                 {
-                    setEffectAround(player, level, pos);
+                    setEffectAround(player, hand, level, pos);
                 }
                 else
                 {
-                    setEffectAhead(player, level, pos);
+                    setEffectAhead(player, hand, level, pos);
                 }
             }
 
@@ -76,12 +78,12 @@ public class SuperSword extends ModSword
                 else if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
                         && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
                 {
-                    setEffectAround(player, level, pos);
+                    setEffectAround(player, hand, level, pos);
                     new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
                 }
                 else
                 {
-                    setEffectAhead(player, level, pos);
+                    setEffectAhead(player, hand, level, pos);
                     new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
                 }
             }
@@ -102,6 +104,13 @@ public class SuperSword extends ModSword
 
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 400, 0, true, true));
+
+        if (attacker instanceof Player player)
+        {
+            var mainHandItem = attacker.getMainHandItem();
+            var interactionHand = !mainHandItem.isEmpty() && mainHandItem.getItem().equals(this) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+            damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, attacker.level());
+        }
     }
 
     @Override
@@ -134,7 +143,7 @@ public class SuperSword extends ModSword
     }
 
     @Override
-    protected void processBlock(Player player, Level level, BlockPos pos)
+    protected void processBlock(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         if (player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
         {

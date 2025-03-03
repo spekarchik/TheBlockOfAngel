@@ -77,7 +77,7 @@ public class ModSword extends SwordItem implements IModTool
     {
     }
 
-    protected final void setEffectAround(Player player, Level level, BlockPos pos)
+    protected final void setEffectAround(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
@@ -86,11 +86,13 @@ public class ModSword extends SwordItem implements IModTool
             {
                 if (Math.abs(dx) + Math.abs(dz) < 3) continue;
                 BlockPos blockPos = new BlockPos(posX + dx, posY, posZ + dz);
-                processBlock(player, level, blockPos);
+                processBlock(player, interactionHand, level, blockPos);
             }
+
+        damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
     }
 
-    protected final void setEffectAhead(Player player, Level level, BlockPos pos)
+    protected final void setEffectAhead(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
         final BlockPos playerPos = player.blockPosition();
@@ -157,11 +159,13 @@ public class ModSword extends SwordItem implements IModTool
             for (int dz = b1 + dx * n; dz <= b2 + dx * k; dz++)
             {
                 BlockPos blockPos = new BlockPos(posX + dx, posY, posZ + dz);
-                processBlock(player, level, blockPos);
+                processBlock(player, interactionHand, level, blockPos);
             }
+
+        damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
     }
 
-    protected void processBlock(Player player, Level level, BlockPos pos)
+    protected void processBlock(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         // nothing by default
     }
@@ -187,26 +191,34 @@ public class ModSword extends SwordItem implements IModTool
         level.setBlock(pos, Blocks.COBWEB.defaultBlockState(), 11);
         int increment = Utils.random.nextInt(TimeThreshold);
         BlockCleaner.add(player, pos, WebLifeTime + increment, false, true);
+
+        // no need to call `damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);`
     }
 
-    protected void explode(Player player, Level level, BlockPos pos)
+    protected void explode(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         level.explode(player, pos.getX(), pos.getY() + 0.5, pos.getZ(), 0.8f, false /*fire*/, Level.ExplosionInteraction.NONE /*influences on explosion particles?*/);
         level.explode(player, pos.getX() + 0.8, pos.getY() + 0.2, pos.getZ() + 0.8, 0.8f, Level.ExplosionInteraction.NONE);
         level.explode(player, pos.getX() + 0.8, pos.getY() + 0.7, pos.getZ() - 0.8, 0.8f, Level.ExplosionInteraction.NONE);
         level.explode(player, pos.getX() - 0.8, pos.getY() + 0.4, pos.getZ() + 0.8, 0.8f, Level.ExplosionInteraction.NONE);
         level.explode(player, pos.getX() - 0.8, pos.getY() + 1.5, pos.getZ() - 0.8, 0.8f, Level.ExplosionInteraction.NONE);
+
+        damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
     }
 
-    protected final void plantCacti(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
+    protected final void plantCacti(Player player, Level level, BlockPos pos, InteractionHand interactionHand, Direction facing)
     {
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
+        boolean succeeded = false;
         for (int i = 0; i < dx.length; i++)
         {
             BlockPos blockPos = new BlockPos(posX + dx[i], posY, posZ + dz[i]);
-            tryPlantCactus(player, level, blockPos, hand, facing);
+            if (tryPlantCactus(player, level, blockPos, interactionHand, facing))
+                succeeded = true;
         }
+
+        if (succeeded) damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
     }
 
     protected final boolean canUseToolEffect(Player player)
@@ -272,6 +284,14 @@ public class ModSword extends SwordItem implements IModTool
         {
             return false;
         }
+    }
+
+    protected void damageProperHandItemIfSurvivalIgnoreClient(Player player, InteractionHand interactionHand, Level level)
+    {
+        if (interactionHand == InteractionHand.MAIN_HAND)
+            damageMainHandItemIfSurvivalIgnoreClient(player, level);
+        else
+            damageOffHandItemIfSurvivalIgnoreClient(player, level);
     }
 
     @Override

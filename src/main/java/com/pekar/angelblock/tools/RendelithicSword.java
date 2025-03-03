@@ -3,6 +3,7 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -37,14 +38,15 @@ public class RendelithicSword extends ModSword
         {
             if (!level.isClientSide())
             {
+                var hand = context.getHand();
                 if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
                         && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
                 {
-                    setEffectAround(player, level, pos);
+                    setEffectAround(player, hand, level, pos);
                 }
                 else
                 {
-                    setEffectAhead(player, level, pos);
+                    setEffectAhead(player, hand, level, pos);
                 }
             }
 
@@ -72,7 +74,7 @@ public class RendelithicSword extends ModSword
     }
 
     @Override
-    protected void processBlock(Player player, Level level, BlockPos pos)
+    protected void processBlock(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         trySetFire(level, pos);
     }
