@@ -51,6 +51,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.register("downgrade_kit", () -> new ModItemWithHoverText());
 
     public static final DeferredItem<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", () -> new ModItemWithHoverText(TextStyle.Notice));
+    public static final DeferredItem<Item> BASALT_FIBER = Main.ITEMS.register("basalt_fiber", () -> new ModItem());
     public static final DeferredItem<Item> FLAX_FIBRE = Main.ITEMS.register("flax_fibre", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> ENERGY_CRYSTAL = Main.ITEMS.register("energy_crystal", () -> new ModItem());
     public static final DeferredItem<Item> ARMOR_FIBER = Main.ITEMS.register("armor_fiber", () -> new ModItem());
