@@ -30,7 +30,7 @@ public class DiamithicArmor extends Armor
         nightVisionEffect = new NightVisionArmorEffect(player, this);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         hasteEffect = new HasteArmorEffect(player, this);
-        slownessEffect = new SlownessPermanentArmorEffect(player, this, 0);
+        slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable);
 
         jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
@@ -83,11 +83,16 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
+        slownessEffect.updateEffectAvailability();
+        slownessEffect.updateEffectActivity();
     }
 
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
+        slownessEffect.updateEffectAvailability();
+        slownessEffect.updateEffectActivity();
+
         if (player.areBootsModifiedWithStrengthBooster(this))
         {
             event.setDamageMultiplier(0.3f);
@@ -102,6 +107,9 @@ public class DiamithicArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
+        slownessEffect.updateEffectAvailability();
+        slownessEffect.updateEffectActivity();
+
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
         detectCreepers(isHelmetModifiedWithDetector,false);
 
@@ -164,7 +172,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onBeingInWater()
     {
-        // none
+        slownessEffect.updateEffectAvailability();
+        slownessEffect.updateEffectActivity();
     }
 
     @Override
@@ -206,5 +215,10 @@ public class DiamithicArmor extends Armor
     private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
     {
         return player.isArmorModifiedWithLevitation(armor);
+    }
+
+    private boolean isSlownessAvailable(IPlayer player, IArmor armor)
+    {
+        return !player.getEntity().isInWater();
     }
 }

@@ -9,6 +9,11 @@ public class SlownessPermanentArmorEffect extends PermanentArmorEffect
     public SlownessPermanentArmorEffect(IPlayer player, IArmor armor, int defaultAmplifier)
     {
         super(player, armor, MobEffects.MOVEMENT_SLOWDOWN, defaultAmplifier);
-        availableOnAnyArmorElement();
+    }
+
+    @Override
+    public boolean trySwitch(int amplifier)
+    {
+        return isEffectAvailable();
     }
 }
