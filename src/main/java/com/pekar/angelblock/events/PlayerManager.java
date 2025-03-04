@@ -119,7 +119,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
         var entity = event.getEntity();
-        Utils.instance.attributeModifiers.updateArmorAttributeModifier(entity);
+        if (entity instanceof ServerPlayer serverPlayer)
+            new UpdateArmorDurabilityPacketToClient().sendToPlayer(serverPlayer);
 
         IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
