@@ -4,8 +4,9 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -98,9 +99,10 @@ public class DiamithicArmor extends Armor
             event.setDamageMultiplier(0.3f);
         }
 
-        if ((event.getEntity() instanceof Player playerEntity) && !playerEntity.hasEffect(MobEffects.SLOW_FALLING))
+        if ((event.getEntity() instanceof ServerPlayer playerEntity) && !playerEntity.hasEffect(MobEffects.SLOW_FALLING))
         {
-            breakIce(playerEntity, false);
+            breakBlockUnderPlayer(playerEntity, false, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound);
+            breakBlockUnderPlayer(playerEntity, false, isCrackedBlockPredicate, Blocks.AIR.defaultBlockState(), playCrackedBlockBreakSound);
         }
     }
 
@@ -113,7 +115,11 @@ public class DiamithicArmor extends Armor
         boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
         detectCreepers(isHelmetModifiedWithDetector,false);
 
-        breakIce(player.getEntity(),true);
+        if (player.getEntity() instanceof ServerPlayer playerEntity)
+        {
+            breakBlockUnderPlayer(playerEntity, true, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound);
+            breakBlockUnderPlayer(playerEntity, true, isCrackedBlockPredicate, Blocks.AIR.defaultBlockState(), playCrackedBlockBreakSound);
+        }
     }
 
     @Override

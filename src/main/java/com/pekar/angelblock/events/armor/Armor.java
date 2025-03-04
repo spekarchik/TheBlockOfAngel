@@ -1,10 +1,12 @@
 package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.events.effect.IArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.utils.TriPredicate;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,11 +23,14 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 abstract class Armor implements IArmor
 {
@@ -37,6 +42,26 @@ abstract class Armor implements IArmor
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final double CREEPER_AGRY_DISTANCE = 3.0;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 1200;
+
+    protected final TriPredicate<Block, BlockPos, Level> isIcePredicate = (block, pos, level) ->
+    {
+        var belowBlockState = level.getBlockState(pos.below());
+        return block == Blocks.ICE && (belowBlockState.isAir() || Utils.instance.blocks.types.isLiquid(belowBlockState.getBlock()));
+    };
+
+    protected final TriPredicate<Block, BlockPos, Level> isCrackedBlockPredicate = (block, pos, level) ->
+            block == BlockRegistry.CRACKED_ENDSTONE.get() || block == BlockRegistry.CRACKED_OBSIDIAN.get();
+
+    protected final Consumer<ServerPlayer> playIceBreakSound = (player) ->
+    {
+        new PlaySoundPacket(SoundEvents.GLASS_BREAK).sendToPlayer(player);
+        new PlaySoundPacket(SoundEvents.GENERIC_SPLASH).sendToPlayer(player);
+    };
+
+    protected final Consumer<ServerPlayer> playCrackedBlockBreakSound = (player) ->
+    {
+        new PlaySoundPacket(SoundEvents.TURTLE_EGG_BREAK, 2.0F).sendToPlayer(player);
+    };
 
     protected Armor(IPlayer player)
     {
@@ -192,7 +217,7 @@ abstract class Armor implements IArmor
         }
     }
 
-    protected void breakIce(Player player, boolean doRandomly)
+    protected void breakBlockUnderPlayer(ServerPlayer player, boolean doRandomly, TriPredicate<Block, BlockPos, Level> blockUnderPlayer, BlockState stateToTransformTo, Consumer<ServerPlayer> runOnSucceeded)
     {
         var randomSource = RandomSource.create();
         int diamithicArmorSlots = 0;
@@ -210,8 +235,7 @@ abstract class Armor implements IArmor
         var posBelow = BlockPos.containing(player.getX(), player.getY() - 0.5, player.getZ());
 
         var block1 = level.getBlockState(posBelow).getBlock();
-        var block2State = level.getBlockState(posBelow.below());
-        if (block1 != Blocks.ICE || (!block2State.isAir() && !Utils.instance.blocks.types.isLiquid(block2State.getBlock())))
+        if (!blockUnderPlayer.test(block1, posBelow, level))
         {
             return;
         }
@@ -221,15 +245,16 @@ abstract class Armor implements IArmor
             {
                 var currentPos = new BlockPos(x, posBelow.getY(), z);
                 block1 = level.getBlockState(currentPos).getBlock();
-                block2State = level.getBlockState(currentPos.below());
-                if (block1 == Blocks.ICE && (block2State.isAir() || Utils.instance.blocks.types.isLiquid(block2State.getBlock())))
+                if (blockUnderPlayer.test(block1, currentPos, level))
                 {
-                    level.setBlock(currentPos, Blocks.WATER.defaultBlockState(), 11);
+                    if (stateToTransformTo.isAir())
+                        level.destroyBlock(currentPos, true, player);
+                    else
+                        level.setBlock(currentPos, stateToTransformTo, 11);
                 }
             }
 
-        new PlaySoundPacket(SoundEvents.GLASS_BREAK).sendToPlayer((ServerPlayer) player);
-        new PlaySoundPacket(SoundEvents.GENERIC_SPLASH).sendToPlayer((ServerPlayer) player);
+        runOnSucceeded.accept(player);
     }
 
     // for tests

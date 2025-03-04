@@ -11,21 +11,28 @@ public class PlaySoundPacket extends ServerToClientPacket
 {
     private final SoundType soundType;
     private final SoundEvent soundEvent;
+    private final float pitch;
 
     public PlaySoundPacket(SoundType soundType)
     {
-        this(soundType, SoundEvents.NOTE_BLOCK_XYLOPHONE.value());
+        this(soundType, null, 5.0F);
     }
 
     public PlaySoundPacket(SoundEvent soundEvent)
     {
-        this(SoundType.MINECRAFT, soundEvent);
+        this(SoundType.MINECRAFT, soundEvent, 1.0F);
     }
 
-    private PlaySoundPacket(SoundType soundType, SoundEvent soundEvent)
+    public PlaySoundPacket(SoundEvent soundEvent, float pitch)
+    {
+        this(SoundType.MINECRAFT, soundEvent, pitch);
+    }
+
+    private PlaySoundPacket(SoundType soundType, SoundEvent soundEvent, float pitch)
     {
         this.soundType = soundType;
         this.soundEvent = soundEvent;
+        this.pitch = pitch;
     }
 
     @Override
@@ -39,7 +46,8 @@ public class PlaySoundPacket extends ServerToClientPacket
     {
         var soundType = SoundType.getByIndex(buffer.readInt());
         var soundEvent = SoundEvent.createVariableRangeEvent(buffer.readResourceLocation());
-        return new PlaySoundPacket(soundType, soundEvent);
+        var pitch = buffer.readFloat();
+        return new PlaySoundPacket(soundType, soundEvent, pitch);
     }
 
     @Override
@@ -47,6 +55,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     {
         buffer.writeInt(SoundType.getIndex(soundType));
         buffer.writeResourceLocation(soundEvent.getLocation());
+        buffer.writeFloat(pitch);
     }
 
     @Override
@@ -55,7 +64,7 @@ public class PlaySoundPacket extends ServerToClientPacket
         var sound = getSound(soundType);
         if (sound == null) return;
 
-        Minecraft.getInstance().player.playSound(sound, 1.0F, 5.0F);
+        Minecraft.getInstance().player.playSound(sound, 1.0F, pitch);
     }
 
     private SoundEvent getSound(SoundType soundType)
