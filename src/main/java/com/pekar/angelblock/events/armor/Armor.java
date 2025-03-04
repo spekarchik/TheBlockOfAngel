@@ -52,6 +52,9 @@ abstract class Armor implements IArmor
     protected final TriPredicate<Block, BlockPos, Level> isCrackedBlockPredicate = (block, pos, level) ->
             block == BlockRegistry.CRACKED_ENDSTONE.get() || block == BlockRegistry.CRACKED_OBSIDIAN.get();
 
+    protected final TriPredicate<Block, BlockPos, Level> isNetherrackPredicate = (block, pos, level) ->
+            block == Blocks.NETHERRACK;
+
     protected final Consumer<ServerPlayer> playIceBreakSound = (player) ->
     {
         new PlaySoundPacket(SoundEvents.GLASS_BREAK).sendToPlayer(player);
@@ -217,19 +220,8 @@ abstract class Armor implements IArmor
         }
     }
 
-    protected void breakBlockUnderPlayer(ServerPlayer player, boolean doRandomly, TriPredicate<Block, BlockPos, Level> blockUnderPlayer, BlockState stateToTransformTo, Consumer<ServerPlayer> runOnSucceeded)
+    protected void breakBlockUnderPlayer(ServerPlayer player, boolean doRandomly, TriPredicate<Block, BlockPos, Level> blockUnderPlayer, BlockState stateToTransformTo, Consumer<ServerPlayer> runOnSucceeded, int chanceToAvoidBreaking)
     {
-        var randomSource = RandomSource.create();
-        int diamithicArmorSlots = 0;
-        for (var slot : player.getArmorSlots())
-        {
-            if (slot.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
-                diamithicArmorSlots++;
-        }
-        int rnd = randomSource.nextInt(32);
-        boolean shouldIceBeBroken = rnd <= diamithicArmorSlots * diamithicArmorSlots;
-        if (doRandomly && !shouldIceBeBroken) return;
-
         var level = player.level();
         if (level.isClientSide()) return;
         var posBelow = BlockPos.containing(player.getX(), player.getY() - 0.5, player.getZ());
@@ -239,6 +231,17 @@ abstract class Armor implements IArmor
         {
             return;
         }
+
+        var randomSource = RandomSource.create();
+        int diamithicArmorSlots = 0;
+        for (var slot : player.getArmorSlots())
+        {
+            if (slot.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
+                diamithicArmorSlots++;
+        }
+        int rnd = randomSource.nextInt(chanceToAvoidBreaking);
+        boolean shouldIceBeBroken = rnd <= diamithicArmorSlots * diamithicArmorSlots;
+        if (doRandomly && !shouldIceBeBroken) return;
 
         for (int x = posBelow.getX() - 1; x <= posBelow.getX() + 1; x++)
             for (int z = posBelow.getZ() - 1; z <= posBelow.getZ() + 1; z++)

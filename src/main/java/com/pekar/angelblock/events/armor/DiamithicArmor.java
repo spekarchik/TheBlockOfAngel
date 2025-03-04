@@ -101,8 +101,9 @@ public class DiamithicArmor extends Armor
 
         if ((event.getEntity() instanceof ServerPlayer playerEntity) && !playerEntity.hasEffect(MobEffects.SLOW_FALLING))
         {
-            breakBlockUnderPlayer(playerEntity, false, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound);
-            breakBlockUnderPlayer(playerEntity, false, isCrackedBlockPredicate, Blocks.AIR.defaultBlockState(), playCrackedBlockBreakSound);
+            breakBlockUnderPlayer(playerEntity, false, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound, 0);
+            breakBlockUnderPlayer(playerEntity, false, isCrackedBlockPredicate, Blocks.AIR.defaultBlockState(), playCrackedBlockBreakSound, 0);
+            breakBlockUnderPlayer(playerEntity, true, isNetherrackPredicate, Blocks.AIR.defaultBlockState(), playCrackedBlockBreakSound, 20);
         }
     }
 
@@ -117,8 +118,8 @@ public class DiamithicArmor extends Armor
 
         if (player.getEntity() instanceof ServerPlayer playerEntity)
         {
-            breakBlockUnderPlayer(playerEntity, true, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound);
-            breakBlockUnderPlayer(playerEntity, true, isCrackedBlockPredicate, Blocks.AIR.defaultBlockState(), playCrackedBlockBreakSound);
+            breakBlockUnderPlayer(playerEntity, true, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound, 32);
+            breakBlockUnderPlayer(playerEntity, true, isCrackedBlockPredicate, Blocks.AIR.defaultBlockState(), playCrackedBlockBreakSound, 32);
         }
     }
 

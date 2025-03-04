@@ -119,7 +119,7 @@ public class RendelithicArmor extends Armor
     public void onCreeperCheck()
     {
         if (player.getEntity() instanceof ServerPlayer serverPlayer)
-            breakBlockUnderPlayer(serverPlayer,true, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound);
+            breakBlockUnderPlayer(serverPlayer,true, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound, 32);
     }
 
     @Override
