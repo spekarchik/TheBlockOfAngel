@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "angelblock:saltpeter_block"
+    }
+  ],
+  "result": {
+    "id": "angelblock:saltpeter",
+    "count": 9
+  }
+}

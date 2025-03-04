@@ -34,12 +34,12 @@
 									"function": "minecraft:explosion_decay"
 								}
 							],
-							"name": "minecraft:gunpowder"
+							"name": "angelblock:saltpeter"
 						}
 					]
 				}
 			]
 		}
 	],
-	"random_sequence": "angelblock:blocks/destroying_gunpowder"
+	"random_sequence": "angelblock:blocks/destroying_saltpeter"
 }

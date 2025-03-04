@@ -22,6 +22,8 @@ public class BlockRegistry
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f)));
     public static final DeferredBlock<Block> ENDSTONE_POWDER_BLOCK = register("endstone_powder_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
+    public static final DeferredBlock<Block> SALTPETER_BLOCK = register("saltpeter_block", () ->
+            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
     public static final DeferredBlock<Block> DIAMITHIC_MATERIAL_BLOCK = register("diamithic_material_block", () ->
             new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final DeferredBlock<Block> RENDELITHIC_MATERIAL_BLOCK = register("rendelithic_material_block", () ->
@@ -66,7 +68,7 @@ public class BlockRegistry
     public static final DeferredBlock<Block> DESTROYING_RED_WOOL = registerSkipTab("destroying_red_wool", AirBlock::new);
     public static final DeferredBlock<Block> DESTROYING_BLACK_WOOL = registerSkipTab("destroying_black_wool", AirBlock::new);
     //public static final DeferredBlock<Block> DESTROYING_RAW_IRON = registerSkipTab("destroying_raw_iron", AirBlock::new);
-    public static final DeferredBlock<Block> DESTROYING_GUNPOWDER = registerSkipTab("destroying_gunpowder", AirBlock::new);
+    public static final DeferredBlock<Block> DESTROYING_SALTPETER = registerSkipTab("destroying_saltpeter", AirBlock::new);
 
     public static void initStatic()
     {

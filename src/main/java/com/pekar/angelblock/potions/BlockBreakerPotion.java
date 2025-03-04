@@ -175,7 +175,7 @@ public class BlockBreakerPotion extends ThrownPotion
         }
         else if (block == Blocks.TUFF)
         {
-            level.setBlock(pos, BlockRegistry.DESTROYING_GUNPOWDER.get().defaultBlockState(), 0);
+            level.setBlock(pos, BlockRegistry.DESTROYING_SALTPETER.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
         }
 //        else if (block == Blocks.CRYING_OBSIDIAN)
@@ -199,7 +199,8 @@ public class BlockBreakerPotion extends ThrownPotion
         }
         else if (block == Blocks.GRASS_BLOCK || block == Blocks.FARMLAND)
         {
-            level.setBlock(pos, Blocks.DIRT.defaultBlockState(), 11);
+            level.setBlock(pos, Blocks.DIRT_PATH.defaultBlockState(), Block.UPDATE_ALL);
+            level.setBlock(pos, Blocks.DIRT.defaultBlockState(), Block.UPDATE_ALL);
         }
         else if (block == Blocks.ICE || block == Blocks.SNOW_BLOCK)
         {

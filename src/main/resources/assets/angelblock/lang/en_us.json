@@ -407,6 +407,7 @@
   "item.angelblock.rendelithic_ingot": "Rendelithic Ingot",
   "item.angelblock.diamond_powder": "Diamond Powder",
   "item.angelblock.diamond_powder.desc": "Can be got by breaking Diamond Blocks with Splash Destroying Potion",
+  "item.angelblock.saltpeter": "Saltpeter",
   "item.angelblock.armor_fiber": "Durable Fiber",
   "item.angelblock.rendelithic_plate": "Rendelithic Plate",
   "item.angelblock.diamithic_powder": "Diamithic Mixture",
@@ -902,6 +903,7 @@
   "block.angelblock.endstone_powder_block": "Endstone Powder Block",
   "block.angelblock.obsidian_powder_block": "Obsidian Powder Block",
   "block.angelblock.diamond_powder_block": "Diamond Powder Block",
+  "block.angelblock.saltpeter_block": "Saltpeter Block",
   "block.angelblock.gunpowder_block": "Gunpowder Block",
   "block.angelblock.gunpowder_block.desc": "Explodes after falling, hit or fired",
 

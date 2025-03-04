@@ -66,7 +66,7 @@ public class EndRod extends AmethystRod
             {
                 if (!isClientSide)
                 {
-                    level.setBlock(pos, BlockRegistry.DESTROYING_GUNPOWDER.get().defaultBlockState(), 0);
+                    level.setBlock(pos, BlockRegistry.DESTROYING_SALTPETER.get().defaultBlockState(), 0);
                     level.destroyBlock(pos, true, player, 1);
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
