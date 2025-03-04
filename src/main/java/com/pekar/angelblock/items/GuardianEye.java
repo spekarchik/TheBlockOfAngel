@@ -26,7 +26,7 @@ public class GuardianEye extends ModItemWithMultipleHoverText
 
         for (int i = 1; i <= 3; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, i == 1 || i == 2, false));
+            tooltipComponents.add(getDescription(i, false, false, i == 3, false));
         }
     }
 
