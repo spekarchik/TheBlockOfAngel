@@ -33,7 +33,6 @@ public class AttributeModifiers
             double durabilityPercent = (double) (durabilitySum) / (double) maxDamageSum;
             double correction = armorAttribute.getValue() * (durabilityPercent - 1.0);
             armorAttribute.addTransientModifier(new AttributeModifier(armorModifierId, correction, AttributeModifier.Operation.ADD_VALUE));
-            Main.LOGGER.error("*** ARMOR: " + correction + " ***");
         }
     }
 
