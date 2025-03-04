@@ -63,11 +63,6 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
                 new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
 
                 damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
-
-                if (!utils.blocks.transformations.updateNeighbors(level, upPos))
-                {
-                    return InteractionResult.FAIL;
-                }
             }
 
             return getToolInteractionResult(true, level.isClientSide());

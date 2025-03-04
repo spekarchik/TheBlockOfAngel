@@ -62,8 +62,6 @@ public class MarineRod extends AncientRod
                         level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
                         new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
                         damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
-
-                        utils.blocks.transformations.updateNeighbors(level, upPos);
                     }
 
                     return getToolInteractionResult(true, isClientSide);

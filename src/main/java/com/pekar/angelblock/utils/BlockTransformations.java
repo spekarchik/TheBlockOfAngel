@@ -18,32 +18,6 @@ public class BlockTransformations
 
     }
 
-    private void notifyNeighbourChanged(BlockState state, Level level, BlockPos pos)
-    {
-        var block = state.getBlock();
-        if (!(block instanceof LiquidBlock liquidBlock)) return;
-
-        liquidBlock.onNeighborChange(state, level, pos, pos.above());
-        liquidBlock.onNeighborChange(state, level, pos, pos.below());
-        liquidBlock.onNeighborChange(state, level, pos, pos.east());
-        liquidBlock.onNeighborChange(state, level, pos, pos.west());
-        liquidBlock.onNeighborChange(state, level, pos, pos.north());
-        liquidBlock.onNeighborChange(state, level, pos, pos.south());
-    }
-
-    public boolean updateNeighbors(Level level, BlockPos pos)
-    {
-        BlockState waterBlockState = level.getBlockState(pos);
-        if (waterBlockState.getBlock() instanceof LiquidBlock)
-        {
-            notifyNeighbourChanged(waterBlockState, level, pos);
-            //liquidBlock.neighborChanged(waterBlockState, level, pos, liquidBlock, pos, false /* ignored */);
-            return true;
-        }
-
-        return false;
-    }
-
     public boolean mossyTransforming(Player player, BlockPos pos, Block block)
     {
         boolean isClientSide = player.level().isClientSide();

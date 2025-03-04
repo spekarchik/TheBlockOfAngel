@@ -67,7 +67,6 @@ public class FireRod extends MarineRod
                     if (!isClientSide)
                     {
                         level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
-                        utils.blocks.transformations.updateNeighbors(level, upPos);
                         damageMainHandItemIfSurvivalIgnoreClient(player, level);
                         new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
                     }
