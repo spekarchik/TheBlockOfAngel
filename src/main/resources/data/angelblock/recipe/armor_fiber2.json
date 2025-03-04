@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "III",
+    "RRR",
     "BBB",
-    "RRR"
+    "III"
   ],
   "key": {
     "I":
     {
-      "item": "minecraft:end_rod"
+      "item": "minecraft:honeycomb"
     },
     "R":
     {
-      "item": "minecraft:redstone"
+      "item": "minecraft:blaze_rod"
     },
     "B":
     {
@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "id": "angelblock:energy_fiber",
+    "id": "angelblock:armor_fiber",
     "count": 2
   }
 }

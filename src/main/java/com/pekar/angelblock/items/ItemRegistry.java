@@ -55,7 +55,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> FLAX_FIBRE = Main.ITEMS.register("flax_fibre", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> ENERGY_CRYSTAL = Main.ITEMS.register("energy_crystal", () -> new ModItem());
     public static final DeferredItem<Item> ARMOR_FIBER = Main.ITEMS.register("armor_fiber", () -> new ModItem());
-    public static final DeferredItem<Item> ENERGY_FIBER = Main.ITEMS.register("energy_fiber", () -> new ModItem());
+    public static final DeferredItem<Item> ENERGY_FIBER = Main.ITEMS.register("energy_fiber", () -> new ModItemWithHoverText());
     public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.register("bios_diamond", BiosDiamond::new);
     public static final DeferredItem<Item> END_SAPPHIRE = Main.ITEMS.register("end_sapphire", EndSapphire::new);
     public static final DeferredItem<Item> FLAME_STONE = Main.ITEMS.register("flame_stone", () -> new ModItemWithDoubleHoverText());

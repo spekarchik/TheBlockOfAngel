@@ -1,22 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "IRI",
-    "RMR",
-    "IRI"
+    "III",
+    "BBB",
+    "RRR"
   ],
   "key": {
     "I":
     {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:honeycomb"
     },
     "R":
     {
       "item": "minecraft:blaze_rod"
     },
-    "M":
+    "B":
     {
-      "item": "minecraft:magma_block"
+      "item": "angelblock:basalt_fiber"
     }
   },
   "result": {
