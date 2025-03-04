@@ -25,6 +25,8 @@ public final class NetworkingEventHandler implements IEventHandler
         registerPacket(registrar, new ToolsModeChangePacket());
         registerPacket(registrar, new PlaySoundPacket(SoundType.UNDEFINED));
         registerPacket(registrar, new HoldingAngelRodPacket());
+        registerPacket(registrar, new UpdateArmorDurabilityPacketToServer());
+        registerPacket(registrar, new UpdateArmorDurabilityPacketToClient());
 //        registerPacket(registrar, new AngelRodLightPacket());
     }
 

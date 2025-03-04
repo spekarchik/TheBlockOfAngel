@@ -3,14 +3,18 @@ package com.pekar.angelblock.events;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IArmorEvents;
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
-import com.pekar.angelblock.events.block_cleaner.LightCleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
+import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToServer;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -41,13 +45,18 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
 //        event.player.sendMessage(new TextComponentString("Player appeared: " + event.player.getName()));
 
-        IPlayer player = new Player(event.getEntity());
+        var entity = event.getEntity();
+
+        IPlayer player = new Player(entity);
         players.put(player.getEntity().getUUID(), player);
 
 //        player.sendMessage("Player joined: " + player.getPlayerName());
 //        player.sendMessage("set initial dimension: " + event.getPlayer().level.dimension().location().getPath());
 
         player.updateArmorUsed();
+
+        if (entity instanceof ServerPlayer serverPlayer)
+            new UpdateArmorDurabilityPacketToClient().sendToPlayer(serverPlayer);
 
         for (IArmorEvents armor : player.getArmorTypesUsed())
         {
@@ -67,7 +76,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onEntityTravelToDimensionEvent(EntityTravelToDimensionEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getUUID());
+        var entity = event.getEntity();
+        IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
 
         var playerEntity = player.getEntity();
@@ -83,7 +93,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getUUID());
+        var entity = event.getEntity();
+        IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
 
         for (IArmorEvents armor : player.getArmorTypesUsed())
@@ -107,20 +118,11 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        IPlayer player = players.get(event.getEntity().getUUID());
+        var entity = event.getEntity();
+        Utils.instance.attributeModifiers.updateArmorAttributeModifier(entity);
+
+        IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
-
-//        player.sendMessage("EquipmentChange: " + event.getEntityLiving().getName().getString());
-
-        // after coming back from the End World a player entity becomes another instance.
-        // player.getArmorInventoryList() works incorrect on the old instance.
-        // so, it's necessary to update the player
-//        if (player.getEntity() != event.getEntity())
-//        {
-//            player.sendMessage("player <> EntityLiving !!!");
-//            // IT'S UPDATED IN onPlayerClone()
-////            player.updateEntity((net.minecraft.world.entity.player.Player) event.getEntityLiving());
-//        }
 
         var playerEntity = player.getEntity();
         var oldSlotItem = event.getFrom();
