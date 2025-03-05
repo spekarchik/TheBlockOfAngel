@@ -4,7 +4,7 @@
         "item": "angelblock:rendelithic_chestplate"
     },
     "addition": {
-        "item": "minecraft:pearlescent_froglight"
+        "tag": "minecraft:froglights"
     },
     "result": {
         "id": "angelblock:rendelithic_chestplate_with_levitation"
