@@ -54,7 +54,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     public void encode(FriendlyByteBuf buffer)
     {
         buffer.writeInt(SoundType.getIndex(soundType));
-        buffer.writeResourceLocation(soundEvent.getLocation());
+        buffer.writeResourceLocation(soundEvent != null ? soundEvent.getLocation() : SoundEvents.BONE_MEAL_USE.getLocation());
         buffer.writeFloat(pitch);
     }
 
