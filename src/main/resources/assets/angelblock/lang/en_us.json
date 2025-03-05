@@ -31,7 +31,7 @@
 
   "angelblock.lapis_armor.desc1": "Purpose: Underwater",
   "angelblock.lapis_armor.desc2": "Repair: lapis ingot",
-  "angelblock.lapis_armor.desc3": "Weakness: fire, magma, lava, freezing §o(damage - lava +20%, freezing +100%)",
+  "angelblock.lapis_armor.desc3": "Weakness: fire, magma, lava, freezing §o(damage - fire, magma, lava +20%, freezing +100%)",
   "angelblock.lapis_armor.desc4": "Fire and magma set Wither effect for 30 sec",
   "angelblock.lapis_armor.desc5": "Common armor capabilities",
   "angelblock.lapis_armor.desc6": " Fire and lava protection: -",

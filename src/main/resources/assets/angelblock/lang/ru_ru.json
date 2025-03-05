@@ -31,7 +31,7 @@
 
   "angelblock.lapis_armor.desc1": "Предназначение: Подводный мир",
   "angelblock.lapis_armor.desc2": "Ремонт: лазуритовый слиток",
-  "angelblock.lapis_armor.desc3": "Уязвимости: огонь, магма, лава, мороз §o(урон - лава +20%, мороз +100%)",
+  "angelblock.lapis_armor.desc3": "Уязвимости: огонь, магма, лава, мороз §o(урон - огонь, магма, лава +20%, мороз +100%)",
   "angelblock.lapis_armor.desc4": "Контакт с огнем и магмой вызывает эффект Иссушение на 30 сек",
   "angelblock.lapis_armor.desc5": "Общие характеристики брони",
   "angelblock.lapis_armor.desc6": " Защита от огня и лавы: -",

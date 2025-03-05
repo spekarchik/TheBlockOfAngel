@@ -63,7 +63,8 @@ public class LapisArmor extends Armor
         {
             witherEffect.trySwitch();
         }
-        else if (isLavaDamage(damageSource))
+
+        if (isFireOrLavaOrHotFloorDamage(damageSource))
         {
             event.setNewDamage(event.getNewDamage() * 1.2f);
         }
