@@ -144,6 +144,27 @@ public class LapisArmor extends Armor
                 }
             }
         }
+
+        // FOR TESTS
+//        if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
+//        {
+//            boolean isDamaged = false;
+//            for (var slot : player.getEntity().getArmorSlots())
+//            {
+//                if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
+//                {
+//                    if (modArmor.isDamaged(slot)) isDamaged = true;
+//                }
+//            }
+//
+//            for (var slot : player.getEntity().getArmorSlots())
+//            {
+//                if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
+//                {
+//                    damageArmor(!isDamaged);
+//                }
+//            }
+//        }
     }
 
     @Override
