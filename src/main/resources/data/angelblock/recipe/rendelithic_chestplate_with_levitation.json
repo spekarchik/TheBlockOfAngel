@@ -4,7 +4,7 @@
         "item": "angelblock:rendelithic_chestplate"
     },
     "addition": {
-        "tag": "minecraft:froglights"
+        "item": "angelblock:soaring_spore_essence"
     },
     "result": {
         "id": "angelblock:rendelithic_chestplate_with_levitation"

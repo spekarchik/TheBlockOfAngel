@@ -32,6 +32,7 @@ public interface IArmorEffect
     IArmorEffect availableOnBootsWithStrengthBooster();
     IArmorEffect availableOnBootsWithSeaPower();
     IArmorEffect availableOnChestPlateWithStrengthBooster();
+    IArmorEffect availableOnChestPlateWithLevitation();
     IArmorEffect availableOnLeggingsWithHealthRegenerator();
     IArmorEffect availableOnFullArmorSet();
     IArmorEffect availableOnAnyArmorElement();

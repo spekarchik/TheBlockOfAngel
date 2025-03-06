@@ -230,6 +230,12 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
     }
 
     @Override
+    public IArmorEffect availableOnChestPlateWithLevitation()
+    {
+        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
+    }
+
+    @Override
     public IArmorEffect availableOnLeggingsWithHealthRegenerator()
     {
         throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");

@@ -153,7 +153,7 @@ public class ModArmor extends ArmorItem
         return switch (getEquipmentSlot())
         {
             case HEAD -> 4;
-            case CHEST -> 7;
+            case CHEST -> 8;
             case LEGS -> 5;
             case FEET -> 7;
             default -> 0;

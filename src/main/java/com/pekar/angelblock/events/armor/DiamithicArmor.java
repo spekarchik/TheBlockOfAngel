@@ -20,6 +20,7 @@ public class DiamithicArmor extends Armor
     private final IArmorEffect healthBoostEffect;
     private final IArmorEffect hasteEffect;
     private final IArmorEffect slownessEffect;
+    private final IArmorEffect glowingEffect;
 
     private static final int STRENGTH_EFFECT_AMPLIFIER_DEFAULT = 0;
     private static final int STRENGTH_EFFECT_AMPLIFIER_IMPROVED = 1;
@@ -32,10 +33,10 @@ public class DiamithicArmor extends Armor
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         hasteEffect = new HasteArmorEffect(player, this);
         slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable);
+        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithLevitation();
 
         jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
-        slowFallingEffect.setupAvailability(this::isSlowFallingEffectAvailable);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithLevitation();
     }
 
     @Override
@@ -44,6 +45,7 @@ public class DiamithicArmor extends Armor
         nightVisionEffect.updateSwitchState();
         jumpBoostEffect.updateSwitchState();
         slowFallingEffect.updateSwitchState();
+        glowingEffect.updateSwitchState();
     }
 
     @Override
@@ -77,6 +79,7 @@ public class DiamithicArmor extends Armor
         healthBoostEffect.updateEffectAvailability();
         hasteEffect.updateEffectAvailability();
         slownessEffect.updateEffectAvailability();
+        glowingEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -147,6 +150,11 @@ public class DiamithicArmor extends Armor
                 jumpBoostEffect.trySwitchOff();
             }
         }
+
+        if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))
+        {
+            glowingEffect.trySwitch();
+        }
     }
 
     @Override
@@ -210,6 +218,7 @@ public class DiamithicArmor extends Armor
         healthBoostEffect.updateEffectActivity();
         hasteEffect.updateEffectActivity();
         slownessEffect.updateEffectActivity();
+        glowingEffect.updateEffectActivity();
     }
 
     private int getStrengthEffectAmplifier()
@@ -217,11 +226,6 @@ public class DiamithicArmor extends Armor
         return player.isChestPlateModifiedWithStrengthBooster(this)
                 ? STRENGTH_EFFECT_AMPLIFIER_IMPROVED
                 : STRENGTH_EFFECT_AMPLIFIER_DEFAULT;
-    }
-
-    private boolean isSlowFallingEffectAvailable(IPlayer player, IArmor armor)
-    {
-        return player.isArmorModifiedWithLevitation(armor);
     }
 
     private boolean isSlownessAvailable(IPlayer player, IArmor armor)

@@ -19,6 +19,7 @@ public class RendelithicArmor extends Armor
     private final IArmorEffect nauseaEffect;
     private final IArmorEffect slownessEffect;
     private final IArmorEffect slowFallingEffect;
+    private final IArmorEffect glowingEffect;
     private final SwitchingEffectSynchronizer jumpEffect;
 
     private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 3;
@@ -29,7 +30,8 @@ public class RendelithicArmor extends Armor
         super(player);
         nauseaEffect = new NauseaTemporaryEffect(player, this, 200).showIcon();
         slownessEffect = new SlownessArmorEffect(player, this, 5, 400);
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isSlowFallingAvailable).showIcon();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithLevitation().showIcon();
+        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithLevitation();
 
         JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
@@ -43,6 +45,7 @@ public class RendelithicArmor extends Armor
     {
         jumpEffect.updateSwitchState();
         slowFallingEffect.updateSwitchState();
+        glowingEffect.updateSwitchState();
     }
 
     @Override
@@ -92,6 +95,7 @@ public class RendelithicArmor extends Armor
         nauseaEffect.updateEffectAvailability();
         slownessEffect.updateEffectAvailability();
         slowFallingEffect.updateEffectAvailability();
+        glowingEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -144,6 +148,11 @@ public class RendelithicArmor extends Armor
                     slowFallingEffect.trySwitch();
                 }
             }
+        }
+
+        if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))
+        {
+            glowingEffect.trySwitch();
         }
 
 //        if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))
@@ -215,6 +224,7 @@ public class RendelithicArmor extends Armor
     private void updatePotionEffects()
     {
         jumpEffect.updateEffectActivity(getJumpBoostAmplifier());
+        glowingEffect.updateEffectActivity();
 
         checkForNausea();
 
@@ -264,10 +274,5 @@ public class RendelithicArmor extends Armor
         float leggingsProtection = player.isArmorElementPutOn(this, EquipmentSlot.LEGS) ? initialDamageAmount * 0.3f : 0;
         float realDamage = initialDamageAmount - helmetProtection - bootsProtection - chestplateProtection - leggingsProtection;
         return realDamage > 0 ? realDamage : 0;
-    }
-
-    private boolean isSlowFallingAvailable(IPlayer player, IArmor armor)
-    {
-        return player.isFullArmorSetPutOn(armor) && player.isArmorModifiedWithLevitation(armor);
     }
 }

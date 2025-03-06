@@ -71,7 +71,7 @@ public class FlyingArmor extends Armor
     @Override
     public void onLivingDamageEvent(LivingDamageEvent.Pre event)
     {
-
+        // none
     }
 
     @Override
