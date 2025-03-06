@@ -139,7 +139,7 @@ public class ModArmor extends ArmorItem
 
         for (int i = 1; i <= 10; i++)
         {
-            tooltipComponents.add(getCommonDescription(i, i == 5, false, i == 4, false));
+            tooltipComponents.add(getCommonDescription(i, i == 5, false, false, false));
         }
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)
