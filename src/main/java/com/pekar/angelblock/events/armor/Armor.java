@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.events.effect.IArmorEffect;
@@ -9,8 +10,11 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.utils.TriPredicate;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -268,5 +272,16 @@ abstract class Armor implements IArmor
             var damageValue = damage ? item.getMaxDamage() - 1 : 0;
             item.setDamageValue(damageValue);
         }
+    }
+
+    protected final boolean isVulnerable(DamageSource damageSource)
+    {
+        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Main.MODID, getVulnerabilitiesTagName()));
+        return damageSource.is(vulnerabilities);
+    }
+
+    protected String getVulnerabilitiesTagName()
+    {
+        return getFamilyName() + "_armor_vulnerabilities";
     }
 }
