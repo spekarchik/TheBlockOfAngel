@@ -14,12 +14,12 @@ public interface IPlayer extends IPlayerEvents
     boolean isFullArmorSetPutOn(IArmor armor);
     boolean isAllArmorElementsPutOn(IArmor armor, EquipmentSlot ... equipmentSlots);
     boolean isAnyArmorElementPutOn(IArmor armor);
-    boolean isArmorModifiedWithDetector(IArmor armor);
-    boolean isArmorModifiedWithHealthRegenerator(IArmor armor);
+    boolean isHelmetModifiedWithDetector(IArmor armor);
     boolean isChestPlateModifiedWithStrengthBooster(IArmor armor);
-    boolean isChestPlateModifiedWithSeaPower(IArmor armor);
-    boolean isChestPlateModifiedWithLevitation(IArmor armor);
-    boolean areBootsModifiedWithStrengthBooster(IArmor armor);
+    boolean isChestPlateModifiedWithLuck(IArmor armor);
+    boolean isChestPlateModifiedWithSlowFalling(IArmor armor);
+    boolean areLeggingsModifiedWithHealthRegenerator(IArmor armor);
+    boolean areBootsModifiedWithJumpBooster(IArmor armor);
     boolean areBootsModifiedWithSeaPower(IArmor armor);
     void updateArmorUsed();
 

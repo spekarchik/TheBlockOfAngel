@@ -30,8 +30,8 @@ public class RendelithicArmor extends Armor
         super(player);
         nauseaEffect = new NauseaTemporaryEffect(player, this, 200).showIcon();
         slownessEffect = new SlownessArmorEffect(player, this, 5, 400);
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithLevitation().showIcon();
-        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithLevitation();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling().showIcon();
+        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
 
         JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
@@ -67,7 +67,7 @@ public class RendelithicArmor extends Armor
         }
         else
         {
-            boolean hasHealthRegeneration = player.isArmorModifiedWithHealthRegenerator(this);
+            boolean hasHealthRegeneration = player.areLeggingsModifiedWithHealthRegenerator(this);
             if (hasHealthRegeneration && damageSource.is(DamageTypes.WITHER))
             {
                 event.setCanceled(true);
@@ -111,7 +111,7 @@ public class RendelithicArmor extends Armor
     {
         if (jumpEffect.isEffectOn() && jumpEffect.isActive())
         {
-            if (player.areBootsModifiedWithStrengthBooster(this))
+            if (player.areBootsModifiedWithJumpBooster(this))
             {
                 // Note: the JUMP_BOOST effect provides itself damage protection
                 event.setDamageMultiplier(0.6f);
@@ -236,7 +236,7 @@ public class RendelithicArmor extends Armor
 
     private int getJumpBoostAmplifier()
     {
-        return player.areBootsModifiedWithStrengthBooster(this)
+        return player.areBootsModifiedWithJumpBooster(this)
                 ? JUMP_EFFECT_AMPLIFIER_BOOSTED
                 : JUMP_EFFECT_AMPLIFIER_DEFAULT;
     }

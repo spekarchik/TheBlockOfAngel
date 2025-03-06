@@ -11,7 +11,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE = Main.ITEMS.register("rendelithic_chestplate", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.CHESTPLATE));
     public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("rendelithic_chestplate_with_levitation", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.CHESTPLATE).withLevitation());
+            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.CHESTPLATE).withSlowFalling());
     public static final DeferredItem<ModArmor> RENDELITHIC_LEGGINGS = Main.ITEMS.register("rendelithic_leggings", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.LEGGINGS));
     public static final DeferredItem<ModArmor> RENDELITHIC_LEGGINGS_WITH_HEALTH_REGENERATOR = Main.ITEMS.register("rendelithic_leggings_with_regenerator", () ->
@@ -19,7 +19,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModArmor> RENDELITHIC_BOOTS = Main.ITEMS.register("rendelithic_boots", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.BOOTS));
     public static final DeferredItem<ModArmor> RENDELITHIC_BOOTS_WITH_STRENGTH_BOOST = Main.ITEMS.register("rendelithic_boots_with_strength_boost", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.BOOTS).withStrengthBooster());
+            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.BOOTS).withJumpBooster());
 
     public static final DeferredItem<ModArmor> LAPIS_HELMET = Main.ITEMS.register("lapis_helmet", () ->
             new ModArmor(ModArmorMaterial.LAPIS, ArmorItem.Type.HELMET));
@@ -53,7 +53,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModArmor> LIMONITE_BOOTS = Main.ITEMS.register("limonite_boots", () ->
             new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.BOOTS));
     public static final DeferredItem<ModArmor> LIMONITE_BOOTS_WITH_STRENGTH = Main.ITEMS.register("limonite_boots_with_strength", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.BOOTS).withStrengthBooster());
+            new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.BOOTS).withJumpBooster());
 
     public static final DeferredItem<ModArmor> DIAMITHIC_HELMET = Main.ITEMS.register("diamithic_helmet", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, ArmorItem.Type.HELMET));
@@ -64,9 +64,9 @@ public class ArmorRegistry
     public static final DeferredItem<ModArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH = Main.ITEMS.register("diamithic_chestplate_with_strength", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE).withStrengthBooster());
     public static final DeferredItem<ModArmor> DIAMITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("diamithic_chestplate_with_levitation", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE).withLevitation());
+            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE).withSlowFalling());
     public static final DeferredItem<ModArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH_AND_LEVITATION = Main.ITEMS.register("diamithic_chestplate_with_strength_and_levitation", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE).withStrengthBooster().withLevitation());
+            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE).withStrengthBooster().withSlowFalling());
     public static final DeferredItem<ModArmor> DIAMITHIC_LEGGINGS = Main.ITEMS.register("diamithic_leggings", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, ArmorItem.Type.LEGGINGS));
     public static final DeferredItem<ModArmor> DIAMITHIC_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("diamithic_leggings_with_regenerator", () ->
@@ -74,7 +74,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModArmor> DIAMITHIC_BOOTS = Main.ITEMS.register("diamithic_boots", () ->
             new ModArmor(ModArmorMaterial.DIAMITHIC, ArmorItem.Type.BOOTS));
     public static final DeferredItem<ModArmor> DIAMITHIC_BOOTS_WITH_STRENGTH = Main.ITEMS.register("diamithic_boots_with_strength", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.BOOTS).withStrengthBooster());
+            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.BOOTS).withJumpBooster());
 
     public static final DeferredItem<ModArmor> SUPER_HELMET = Main.ITEMS.register("super_helmet", () ->
             new SuperArmor(ModArmorMaterial.SUPER, ArmorItem.Type.HELMET));
@@ -91,11 +91,11 @@ public class ArmorRegistry
     public static final DeferredItem<ModArmor> SUPER_BOOTS = Main.ITEMS.register("super_boots", () ->
             new SuperArmor(ModArmorMaterial.SUPER, ArmorItem.Type.BOOTS));
     public static final DeferredItem<ModArmor> SUPER_BOOTS_WITH_STRENGTH = Main.ITEMS.register("super_boots_with_strength", () ->
-            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS).withStrengthBooster());
+            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS).withJumpBooster());
     public static final DeferredItem<ModArmor> SUPER_BOOTS_WITH_SEA_POWER = Main.ITEMS.register("super_boots_with_sea_power", () ->
             new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS).withSeaPower());
     public static final DeferredItem<ModArmor> SUPER_BOOTS_WITH_STRENGTH_AND_SEA_POWER = Main.ITEMS.register("super_boots_with_strength_and_sea_power", () ->
-            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS).withSeaPower().withStrengthBooster());
+            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS).withSeaPower().withJumpBooster());
 
     public static final DeferredItem<ModArmor> FLYING_HELMET = Main.ITEMS.register("flying_helmet", () ->
             new FlyingArmor(ModArmorMaterial.FLYING, ArmorItem.Type.HELMET));

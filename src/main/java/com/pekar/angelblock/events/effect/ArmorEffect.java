@@ -179,14 +179,14 @@ abstract class ArmorEffect implements IArmorEffect
     @Override
     public IArmorEffect availableOnHelmetWithDetector()
     {
-        availabilityPredicate = IPlayer::isArmorModifiedWithDetector;
+        availabilityPredicate = IPlayer::isHelmetModifiedWithDetector;
         return this;
     }
 
     @Override
     public IArmorEffect availableOnBootsWithStrengthBooster()
     {
-        availabilityPredicate = IPlayer::areBootsModifiedWithStrengthBooster;
+        availabilityPredicate = IPlayer::areBootsModifiedWithJumpBooster;
         return this;
     }
 
@@ -205,16 +205,16 @@ abstract class ArmorEffect implements IArmorEffect
     }
 
     @Override
-    public IArmorEffect availableOnChestPlateWithLevitation()
+    public IArmorEffect availableOnChestPlateWithSlowFalling()
     {
-        availabilityPredicate = IPlayer::isChestPlateModifiedWithLevitation;
+        availabilityPredicate = IPlayer::isChestPlateModifiedWithSlowFalling;
         return this;
     }
 
     @Override
     public IArmorEffect availableOnLeggingsWithHealthRegenerator()
     {
-        availabilityPredicate = IPlayer::isArmorModifiedWithHealthRegenerator;
+        availabilityPredicate = IPlayer::areLeggingsModifiedWithHealthRegenerator;
         return this;
     }
 

@@ -4,9 +4,10 @@ public enum ArmorModificators
 {
     Detector,
     Regenerator,
-    Levitation,
+    SlowFalling,
     StrengthBooster,
     SeaPower,
     Elytra,
-    Luck
+    Luck,
+    JumpBooster
 }

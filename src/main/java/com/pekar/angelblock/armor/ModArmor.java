@@ -76,9 +76,14 @@ public class ModArmor extends ArmorItem
         return armorModificatorSet.contains(ArmorModificators.StrengthBooster);
     }
 
-    public final boolean isModifiedWithLevitation()
+    public final boolean isModifiedWithJumpBooster()
     {
-        return armorModificatorSet.contains(ArmorModificators.Levitation);
+        return armorModificatorSet.contains(ArmorModificators.JumpBooster);
+    }
+
+    public final boolean isModifiedWithSlowFalling()
+    {
+        return armorModificatorSet.contains(ArmorModificators.SlowFalling);
     }
 
     public final boolean isModifiedWithSeaPower()
@@ -114,9 +119,15 @@ public class ModArmor extends ArmorItem
         return this;
     }
 
-    public final ModArmor withLevitation()
+    public final ModArmor withJumpBooster()
     {
-        armorModificatorSet.add(ArmorModificators.Levitation);
+        armorModificatorSet.add(ArmorModificators.JumpBooster);
+        return this;
+    }
+
+    public final ModArmor withSlowFalling()
+    {
+        armorModificatorSet.add(ArmorModificators.SlowFalling);
         return this;
     }
 

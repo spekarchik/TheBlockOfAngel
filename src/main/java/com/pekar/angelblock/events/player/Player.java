@@ -90,7 +90,7 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean isArmorModifiedWithDetector(IArmor armor)
+    public boolean isHelmetModifiedWithDetector(IArmor armor)
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.HEAD).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
@@ -99,7 +99,7 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean isArmorModifiedWithHealthRegenerator(IArmor armor)
+    public boolean areLeggingsModifiedWithHealthRegenerator(IArmor armor)
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.LEGS).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
@@ -108,12 +108,12 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean areBootsModifiedWithStrengthBooster(IArmor armor)
+    public boolean areBootsModifiedWithJumpBooster(IArmor armor)
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
-        return armorItem.isModifiedWithStrengthBooster();
+        return armorItem.isModifiedWithJumpBooster();
     }
 
     @Override
@@ -126,21 +126,21 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean isChestPlateModifiedWithLevitation(IArmor armor)
+    public boolean isChestPlateModifiedWithSlowFalling(IArmor armor)
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
-        return armorItem.isModifiedWithLevitation();
+        return armorItem.isModifiedWithSlowFalling();
     }
 
     @Override
-    public boolean isChestPlateModifiedWithSeaPower(IArmor armor)
+    public boolean isChestPlateModifiedWithLuck(IArmor armor)
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
-        return armorItem.isModifiedWithSeaPower();
+        return armorItem.isModifiedWithLuck();
     }
 
     @Override

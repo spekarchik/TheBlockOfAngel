@@ -79,13 +79,19 @@ public class CustomSmithingMenu extends SmithingMenu
                 if (armor.isModifiedWithStrengthBooster() && (!isResultModArmor || !resultAsModArmor.isModifiedWithStrengthBooster()))
                     player.getInventory().add(new ItemStack(ItemRegistry.STRENGTH_PEARL.get()));
 
+                if (armor.isModifiedWithJumpBooster() && (!isResultModArmor || !resultAsModArmor.isModifiedWithJumpBooster()))
+                    player.getInventory().add(new ItemStack(ItemRegistry.STRENGTH_PEARL.get()));
+
                 if (armor.isModifiedWithHealthRegenerator() && (!isResultModArmor || !resultAsModArmor.isModifiedWithHealthRegenerator()))
                     player.getInventory().add(new ItemStack(ItemRegistry.BIOS_DIAMOND.get()));
 
-                if (armor.isModifiedWithLevitation() && (!isResultModArmor || !resultAsModArmor.isModifiedWithLevitation()))
-                    player.getInventory().add(new ItemStack(Blocks.OCHRE_FROGLIGHT));
+                if (armor.isModifiedWithSlowFalling() && (!isResultModArmor || !resultAsModArmor.isModifiedWithSlowFalling()))
+                    player.getInventory().add(new ItemStack(ItemRegistry.SOARING_SPORE_ESSENCE.get()));
 
                 if (armor.isModifiedWithSeaPower() && (!isResultModArmor || !resultAsModArmor.isModifiedWithSeaPower()))
+                    player.getInventory().add(new ItemStack(Items.HEART_OF_THE_SEA));
+
+                if (armor.isModifiedWithLuck() && (!isResultModArmor || !resultAsModArmor.isModifiedWithLuck()))
                     player.getInventory().add(new ItemStack(Items.HEART_OF_THE_SEA));
 
                 if (armor.isModifiedWithElytra() && (!isResultModArmor || !resultAsModArmor.isModifiedWithElytra()))

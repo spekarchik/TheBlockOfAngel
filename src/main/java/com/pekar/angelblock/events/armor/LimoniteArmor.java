@@ -78,9 +78,9 @@ public class LimoniteArmor extends Armor
         }
         else if (isThornOrMagicDamage(damageSource))
         {
-            event.setCanceled(player.isArmorModifiedWithHealthRegenerator(this));
+            event.setCanceled(player.areLeggingsModifiedWithHealthRegenerator(this));
         }
-        else if (player.isEffectActive(MobEffects.POISON) && player.isArmorModifiedWithHealthRegenerator(this))
+        else if (player.isEffectActive(MobEffects.POISON) && player.areLeggingsModifiedWithHealthRegenerator(this))
         {
             player.clearEffect(MobEffects.POISON);
             event.setCanceled(damageSource.getMsgId().equals("magic")); // Bee's poison
@@ -162,7 +162,7 @@ public class LimoniteArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
+        boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
 
         detectCreepers(isHelmetModifiedWithDetector, player.isFullArmorSetPutOn(this));
     }
@@ -288,11 +288,11 @@ public class LimoniteArmor extends Armor
 
     private int getJumpEffectAmplifier()
     {
-        return player.areBootsModifiedWithStrengthBooster(this) ? JUMP_EFFECT_AMPLIFIER_BOOSTED : JUMP_EFFECT_AMPLIFIER_DEFAULT;
+        return player.areBootsModifiedWithJumpBooster(this) ? JUMP_EFFECT_AMPLIFIER_BOOSTED : JUMP_EFFECT_AMPLIFIER_DEFAULT;
     }
 
     private boolean isLuckEffectAvailable(IPlayer player, IArmor armor)
     {
-        return player.isFullArmorSetPutOn(armor) && player.isChestPlateModifiedWithSeaPower(armor);
+        return player.isFullArmorSetPutOn(armor) && player.isChestPlateModifiedWithLuck(armor);
     }
 }

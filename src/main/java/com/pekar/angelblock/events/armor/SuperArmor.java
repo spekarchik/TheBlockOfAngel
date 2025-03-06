@@ -113,11 +113,11 @@ public class SuperArmor extends Armor
         }
         else if (hasImmunity(damageSource))
         {
-            event.setCanceled(player.isArmorModifiedWithHealthRegenerator(this));
+            event.setCanceled(player.areLeggingsModifiedWithHealthRegenerator(this));
         }
         else if (damageSource.is(DamageTypes.WITHER))
         {
-            if (player.isArmorModifiedWithHealthRegenerator(this))
+            if (player.areLeggingsModifiedWithHealthRegenerator(this))
             {
                 event.setCanceled(true);
                 player.getEntity().removeEffect(MobEffects.WITHER);
@@ -128,7 +128,7 @@ public class SuperArmor extends Armor
             if (isFullArmorSet)
                 event.setCanceled(true);
         }
-        else if (player.isEffectActive(MobEffects.POISON) && player.isArmorModifiedWithHealthRegenerator(this))
+        else if (player.isEffectActive(MobEffects.POISON) && player.areLeggingsModifiedWithHealthRegenerator(this))
         {
             player.clearEffect(MobEffects.POISON);
             event.setCanceled(damageSource.getMsgId().equals("magic")); // Bee's poison
@@ -252,7 +252,7 @@ public class SuperArmor extends Armor
     {
         updateSlowFallingEffect();
 
-        boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
+        boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
 
         detectCreepers(isHelmetModifiedWithDetector, false);
     }
@@ -498,7 +498,7 @@ public class SuperArmor extends Armor
 
     private boolean isSuperJumpEffectAvailable(IPlayer player, IArmor armor)
     {
-        if (!player.isFullArmorSetPutOn(this) || !player.areBootsModifiedWithStrengthBooster(this))
+        if (!player.isFullArmorSetPutOn(this) || !player.areBootsModifiedWithJumpBooster(this))
             return false;
 
         var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);

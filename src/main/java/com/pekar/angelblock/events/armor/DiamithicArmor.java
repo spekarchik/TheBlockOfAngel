@@ -33,10 +33,10 @@ public class DiamithicArmor extends Armor
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
         hasteEffect = new HasteArmorEffect(player, this);
         slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable);
-        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithLevitation();
+        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
 
         jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithLevitation();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
     }
 
     @Override
@@ -97,7 +97,7 @@ public class DiamithicArmor extends Armor
         slownessEffect.updateEffectAvailability();
         slownessEffect.updateEffectActivity();
 
-        if (player.areBootsModifiedWithStrengthBooster(this))
+        if (player.areBootsModifiedWithJumpBooster(this))
         {
             event.setDamageMultiplier(0.3f);
         }
@@ -116,7 +116,7 @@ public class DiamithicArmor extends Armor
         slownessEffect.updateEffectAvailability();
         slownessEffect.updateEffectActivity();
 
-        boolean isHelmetModifiedWithDetector = player.isArmorModifiedWithDetector(this);
+        boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
         detectCreepers(isHelmetModifiedWithDetector,false);
 
         if (player.getEntity() instanceof ServerPlayer playerEntity)
