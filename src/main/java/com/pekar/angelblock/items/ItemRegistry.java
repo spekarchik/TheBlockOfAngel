@@ -71,6 +71,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.register("blue_axolotl_bucket", BlueAxolotlBucket::new);
 
     public static final DeferredItem<Item> BLOCK_BREAKER_POTION_ITEM = Main.ITEMS.register("block_breaker_potion_item", BlockBreakerPotionItem::new);
+    public static final DeferredItem<Item> SOARING_SPORE_ESSENCE = Main.ITEMS.register("soaring_spore_essence", SoaringSporeEssence::new);
 
     public static void initStatic()
     {
