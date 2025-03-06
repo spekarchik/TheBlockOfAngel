@@ -91,6 +91,11 @@ public class ModArmor extends ArmorItem
         return armorModificatorSet.contains(ArmorModificators.Elytra);
     }
 
+    public final boolean isModifiedWithLuck()
+    {
+        return armorModificatorSet.contains(ArmorModificators.Luck);
+    }
+
     public final ModArmor withDetector()
     {
         armorModificatorSet.add(ArmorModificators.Detector);
@@ -118,6 +123,12 @@ public class ModArmor extends ArmorItem
     public final ModArmor withSeaPower()
     {
         armorModificatorSet.add(ArmorModificators.SeaPower);
+        return this;
+    }
+
+    public final ModArmor withLuck()
+    {
+        armorModificatorSet.add(ArmorModificators.Luck);
         return this;
     }
 

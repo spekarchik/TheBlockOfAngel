@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
   "base": {
-    "item": "angelblock:limonite_chestplate_with_sea_power"
+    "item": "angelblock:limonite_chestplate_with_luck"
   },
   "addition": {
     "item": "minecraft:flint"

@@ -16,10 +16,10 @@ public interface IPlayer extends IPlayerEvents
     boolean isAnyArmorElementPutOn(IArmor armor);
     boolean isArmorModifiedWithDetector(IArmor armor);
     boolean isArmorModifiedWithHealthRegenerator(IArmor armor);
-    boolean areBootsModifiedWithStrengthBooster(IArmor armor);
     boolean isChestPlateModifiedWithStrengthBooster(IArmor armor);
-    boolean isArmorModifiedWithLevitation(IArmor armor);
     boolean isChestPlateModifiedWithSeaPower(IArmor armor);
+    boolean isChestPlateModifiedWithLevitation(IArmor armor);
+    boolean areBootsModifiedWithStrengthBooster(IArmor armor);
     boolean areBootsModifiedWithSeaPower(IArmor armor);
     void updateArmorUsed();
 

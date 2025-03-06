@@ -7,5 +7,6 @@ public enum ArmorModificators
     Levitation,
     StrengthBooster,
     SeaPower,
-    Elytra
+    Elytra,
+    Luck
 }

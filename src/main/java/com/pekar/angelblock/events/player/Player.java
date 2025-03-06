@@ -126,7 +126,7 @@ public class Player implements IPlayer
     }
 
     @Override
-    public boolean isArmorModifiedWithLevitation(IArmor armor)
+    public boolean isChestPlateModifiedWithLevitation(IArmor armor)
     {
         var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!(item instanceof ModArmor armorItem)) return false;

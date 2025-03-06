@@ -7,7 +7,7 @@
         "item": "minecraft:heart_of_the_sea"
     },
     "result": {
-        "id": "angelblock:limonite_chestplate_with_sea_power"
+        "id": "angelblock:limonite_chestplate_with_luck"
     },
     "template": {
         "item": "angelblock:limonite_armor_upgrade_kit"

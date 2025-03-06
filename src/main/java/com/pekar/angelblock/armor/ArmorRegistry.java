@@ -44,8 +44,8 @@ public class ArmorRegistry
             new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.HELMET).withDetector());
     public static final DeferredItem<ModArmor> LIMONITE_CHESTPLATE = Main.ITEMS.register("limonite_chestplate", () ->
             new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ModArmor> LIMONITE_CHESTPLATE_WITH_SEA_POWER = Main.ITEMS.register("limonite_chestplate_with_sea_power", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.CHESTPLATE).withSeaPower());
+    public static final DeferredItem<ModArmor> LIMONITE_CHESTPLATE_WITH_LUCK = Main.ITEMS.register("limonite_chestplate_with_luck", () ->
+            new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.CHESTPLATE).withLuck());
     public static final DeferredItem<ModArmor> LIMONITE_LEGGINGS = Main.ITEMS.register("limonite_leggings", () ->
             new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.LEGGINGS));
     public static final DeferredItem<ModArmor> LIMONITE_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("limonite_leggings_with_regenerator", () ->

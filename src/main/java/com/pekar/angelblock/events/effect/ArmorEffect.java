@@ -207,7 +207,7 @@ abstract class ArmorEffect implements IArmorEffect
     @Override
     public IArmorEffect availableOnChestPlateWithLevitation()
     {
-        availabilityPredicate = IPlayer::isArmorModifiedWithLevitation;
+        availabilityPredicate = IPlayer::isChestPlateModifiedWithLevitation;
         return this;
     }
 
