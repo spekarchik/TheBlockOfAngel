@@ -5,7 +5,6 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -72,7 +71,6 @@ public class LimoniteArmor extends Armor
     public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         var damageSource = event.getSource();
-        var attacker = damageSource.getEntity();
 
         if (isFreezeDamage(damageSource))
         {
@@ -125,9 +123,9 @@ public class LimoniteArmor extends Armor
                 event.setNewDamage(damageAmount * 0.2F);
             }
         }
-        else if (isFireOrLavaOrHotFloorDamage(damageSource) || damageSource.is(DamageTypes.EXPLOSION))
+        else if (isVulnerable(damageSource))
         {
-            event.setNewDamage(event.getNewDamage() * 2F);
+            event.setNewDamage(event.getNewDamage() * 1.5F);
         }
     }
 

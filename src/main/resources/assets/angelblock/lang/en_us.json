@@ -42,7 +42,7 @@
 
   "angelblock.limonite_armor.desc1": "Purpose: Forests, Jungle, Snowy bioms, Mountains, Caves",
   "angelblock.limonite_armor.desc2": "Repair: limonite ingot",
-  "angelblock.limonite_armor.desc3": "Weakness: fire, lava, magma, explosions §o(double damage)",
+  "angelblock.limonite_armor.desc3": "Weakness: wither, wind charge, explosions §o(+50%)",
   "angelblock.limonite_armor.desc4": "Regenerating under rain. Bite immunity (80%): spiders, silverfish, bees. Full freezing protection. Invisible to creepers beyond 3 blocks",
   "angelblock.limonite_armor.desc5": "Common armor capabilities",
   "angelblock.limonite_armor.desc6": " Fire and lava protection: -",
