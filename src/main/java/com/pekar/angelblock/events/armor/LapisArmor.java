@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -30,10 +31,10 @@ public class LapisArmor extends Armor
     {
         super(player);
         nightVisionEffect = new NightVisionArmorEffect(player, this);
-        glowingEffect = new GlowingArmorEffect(player, this);
-        waterBreathingEffect = new WaterBreathingEffect(player, this);
+        glowingEffect = new GlowingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
+        waterBreathingEffect = new WaterBreathingEffect(player, this).availableIfSlotSet(EquipmentSlot.HEAD);
         hasteEffect = new HasteArmorEffect(player, this);
-        luckEffect = new LuckArmorEffect(player, this);
+        luckEffect = new LuckArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
         regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
         blindnessEffect = new BlindnessArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION).showIcon();
         witherEffect = new WitherEffect(player, this, 0, 600).showIcon();

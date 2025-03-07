@@ -28,8 +28,7 @@ public class SuperArmor extends Armor
     private final IArmorEffect jumpNegativeEffect;
     private final IArmorEffect levitationEffect;
     private final IArmorEffect slowFallingEffect;
-    private final IArmorEffect superJumpEffect;
-    private final IArmorEffect dolphinsGraceEffect;
+    private final SwitchingEffectSynchronizer superJumpEffect;
     private boolean isSlowFallingActivatedOnGround = true;
 
     private static final int REGENERATION_EFFECT_DURATION = 300;
@@ -46,24 +45,29 @@ public class SuperArmor extends Armor
     {
         super(player);
         nightVisionEffect = new NightVisionArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.HEAD);
-        glowingEffect = new GlowingArmorEffect(player, this);
+        glowingEffect = new GlowingArmorEffect(player, this).availableIfSlotsSet(EquipmentSlot.CHEST);
 
-        luckEffect = new LuckArmorEffect(player, this);
+        luckEffect = new LuckArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
         regenerationEffect = new RegenerationArmorEffect(player, this, REGENERATION_EFFECT_HEAL_AMPLIFIER, REGENERATION_EFFECT_DURATION);
         slownessEffect = new SlownessArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_EFFECT_DURATION);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
-        levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableOnFullArmorSet();
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnFullArmorSet();
-        superJumpEffect = new SuperJumpSwitchingEffect(player, this).setupAvailability(this::isSuperJumpEffectAvailable);
-        dolphinsGraceEffect = new DolphinsGraceEffect(player, this);
+        levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableIfSlotSet(EquipmentSlot.CHEST);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
+
+        var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
+        superJumpEffect.setupAvailability(this::isSuperJumpEffectAvailable);
+        var dolphinsGraceEffect = new DolphinsGraceEffect(player, this);
+        this.superJumpEffect = new SwitchingEffectSynchronizer(superJumpEffect);
+        this.superJumpEffect.addDependentEffect(dolphinsGraceEffect);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);
-        jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
+        jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
-        speedEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
+        speedEffect.availableIfSlotsSet(EquipmentSlot.FEET);
         var strengthEffect = new StrengthSwitchingEffect(player, this, 2);
         var waterBreathingEffect = new WaterBreathSwitchingEffect(player, this);
+        waterBreathingEffect.availableIfSlotSet(EquipmentSlot.HEAD);
         var hasteEffect = new HasteSwitchingEffect(player, this, 1);
         hasteEffect.availableIfSlotSet(EquipmentSlot.CHEST);
 
@@ -88,7 +92,6 @@ public class SuperArmor extends Armor
             levitationEffect.updateSwitchState();
             slowFallingEffect.updateSwitchState();
             superJumpEffect.updateSwitchState();
-            dolphinsGraceEffect.updateSwitchState();
         }
     }
 
@@ -177,7 +180,7 @@ public class SuperArmor extends Armor
         }
         else if (isExplosionDamage(damageSource))
         {
-            if (isFullArmorSet)
+            if (player.isChestPlateModifiedWithStrengthBooster(this))
                 event.setNewDamage(event.getNewDamage() * 0.5f);
         }
         else if (isBiting(damageSource.getEntity()))
@@ -204,7 +207,6 @@ public class SuperArmor extends Armor
         levitationEffect.updateEffectAvailability();
         slowFallingEffect.updateEffectAvailability();
         superJumpEffect.updateEffectAvailability();
-        dolphinsGraceEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -214,7 +216,7 @@ public class SuperArmor extends Armor
     {
         updateSlowFallingEffect();
 
-        if (!player.isArmorElementPutOn(this, EquipmentSlot.LEGS)) return;
+        if (!player.isArmorElementPutOn(this, EquipmentSlot.FEET)) return;
 
         if (jumpEffect.isActive() || slownessEffect.isActive()) return;
 
@@ -237,14 +239,6 @@ public class SuperArmor extends Armor
         {
             event.setDamageMultiplier(0.3f);
         }
-        else if (jumpEffect.isEffectOn() && jumpEffect.isActive())
-        {
-            event.setDamageMultiplier(0.3f);
-        }
-        else
-        {
-            event.setDamageMultiplier(0.6f);
-        }
     }
 
     @Override
@@ -260,7 +254,6 @@ public class SuperArmor extends Armor
     @Override
     public void onEffectAddedEvent(MobEffectEvent.Added event)
     {
-
     }
 
     @Override
@@ -375,10 +368,6 @@ public class SuperArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
         {
             superJumpEffect.trySwitch();
-            if (superJumpEffect.isEffectAvailable())
-                dolphinsGraceEffect.trySwitchTo(superJumpEffect.isEffectOn());
-            else
-                dolphinsGraceEffect.trySwitch();
         }
 
         if (levitationEffect.isEffectOn())
@@ -471,7 +460,6 @@ public class SuperArmor extends Armor
         slownessEffect.updateEffectActivity();
         jumpNegativeEffect.updateEffectActivity();
         superJumpEffect.updateEffectActivity();
-        dolphinsGraceEffect.updateEffectActivity();
 
         levitationEffect.updateEffectActivity(getLevitationAmplifier());
         slowFallingEffect.updateEffectActivity();
@@ -498,18 +486,13 @@ public class SuperArmor extends Armor
 
     private boolean isSuperJumpEffectAvailable(IPlayer player, IArmor armor)
     {
-        if (!player.isFullArmorSetPutOn(this) || !player.areBootsModifiedWithJumpBooster(this))
-            return false;
+        if (!player.areBootsModifiedWithJumpBooster(this)) return false;
 
         var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
-        var leggings = player.getEntity().getItemBySlot(EquipmentSlot.LEGS);
-
         int bootsDamage = boots.getDamageValue();
-        int leggingsDamage = leggings.getDamageValue();
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
-        int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
 
-        return bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
+        return bootsDamage < maxBootsDamageToJump;
     }
 
     private void updateSlowFallingEffect()

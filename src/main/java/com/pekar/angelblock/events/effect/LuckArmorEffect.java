@@ -9,6 +9,5 @@ public class LuckArmorEffect extends PermanentArmorEffect
     public LuckArmorEffect(IPlayer player, IArmor armor)
     {
         super(player, armor, MobEffects.LUCK, 1);
-        availableOnFullArmorSet();
     }
 }

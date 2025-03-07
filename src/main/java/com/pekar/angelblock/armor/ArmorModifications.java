@@ -1,6 +1,6 @@
 package com.pekar.angelblock.armor;
 
-public enum ArmorModificators
+public enum ArmorModifications
 {
     Detector,
     Regenerator,

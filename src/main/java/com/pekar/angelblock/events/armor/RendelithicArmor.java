@@ -30,11 +30,11 @@ public class RendelithicArmor extends Armor
         super(player);
         nauseaEffect = new NauseaTemporaryEffect(player, this, 200).showIcon();
         slownessEffect = new SlownessArmorEffect(player, this, 5, 400);
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling().showIcon();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
         glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
 
         JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
-        jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
+        jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
         SpeedSwitchingEffect speedEffect = new SpeedSwitchingEffect(player, this, 0);
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -109,14 +109,7 @@ public class RendelithicArmor extends Armor
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        if (jumpEffect.isEffectOn() && jumpEffect.isActive())
-        {
-            if (player.areBootsModifiedWithJumpBooster(this))
-            {
-                // Note: the JUMP_BOOST effect provides itself damage protection
-                event.setDamageMultiplier(0.6f);
-            }
-        }
+        // Note: the JUMP_BOOST effect provides itself damage protection
     }
 
     @Override
@@ -246,14 +239,6 @@ public class RendelithicArmor extends Armor
         Player entity = player.getEntity();
         if (entity.isInWaterOrRain())
         {
-//            if (nauseaEffect.isActive())
-//            {
-//                double x = entity.posX;
-//                double y = entity.posY;
-//                double z = entity.posZ;
-//                entity.setPositionAndUpdate(x, y + 0.2, z);
-//            }
-
             if (!slownessEffect.isActive())
             {
                 nauseaEffect.trySwitch();

@@ -24,7 +24,7 @@ public class ModArmor extends ArmorItem
     protected final int maxDamage;
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
-    private final Set<ArmorModificators> armorModificatorSet = new HashSet<>();
+    private final Set<ArmorModifications> armorModificatorSet = new HashSet<>();
 
     protected ModArmor(ModArmorMaterial material, Type armorItemType)
     {
@@ -63,89 +63,89 @@ public class ModArmor extends ArmorItem
 
     public final boolean isModifiedWithDetector()
     {
-        return armorModificatorSet.contains(ArmorModificators.Detector);
+        return armorModificatorSet.contains(ArmorModifications.Detector);
     }
 
     public final boolean isModifiedWithHealthRegenerator()
     {
-        return armorModificatorSet.contains(ArmorModificators.Regenerator);
+        return armorModificatorSet.contains(ArmorModifications.Regenerator);
     }
 
     public final boolean isModifiedWithStrengthBooster()
     {
-        return armorModificatorSet.contains(ArmorModificators.StrengthBooster);
+        return armorModificatorSet.contains(ArmorModifications.StrengthBooster);
     }
 
     public final boolean isModifiedWithJumpBooster()
     {
-        return armorModificatorSet.contains(ArmorModificators.JumpBooster);
+        return armorModificatorSet.contains(ArmorModifications.JumpBooster);
     }
 
     public final boolean isModifiedWithSlowFalling()
     {
-        return armorModificatorSet.contains(ArmorModificators.SlowFalling);
+        return armorModificatorSet.contains(ArmorModifications.SlowFalling);
     }
 
     public final boolean isModifiedWithSeaPower()
     {
-        return armorModificatorSet.contains(ArmorModificators.SeaPower);
+        return armorModificatorSet.contains(ArmorModifications.SeaPower);
     }
 
     public final boolean isModifiedWithElytra()
     {
-        return armorModificatorSet.contains(ArmorModificators.Elytra);
+        return armorModificatorSet.contains(ArmorModifications.Elytra);
     }
 
     public final boolean isModifiedWithLuck()
     {
-        return armorModificatorSet.contains(ArmorModificators.Luck);
+        return armorModificatorSet.contains(ArmorModifications.Luck);
     }
 
     public final ModArmor withDetector()
     {
-        armorModificatorSet.add(ArmorModificators.Detector);
+        armorModificatorSet.add(ArmorModifications.Detector);
         return this;
     }
 
     public final ModArmor withHealthRegenerator()
     {
-        armorModificatorSet.add(ArmorModificators.Regenerator);
+        armorModificatorSet.add(ArmorModifications.Regenerator);
         return this;
     }
 
     public final ModArmor withStrengthBooster()
     {
-        armorModificatorSet.add(ArmorModificators.StrengthBooster);
+        armorModificatorSet.add(ArmorModifications.StrengthBooster);
         return this;
     }
 
     public final ModArmor withJumpBooster()
     {
-        armorModificatorSet.add(ArmorModificators.JumpBooster);
+        armorModificatorSet.add(ArmorModifications.JumpBooster);
         return this;
     }
 
     public final ModArmor withSlowFalling()
     {
-        armorModificatorSet.add(ArmorModificators.SlowFalling);
+        armorModificatorSet.add(ArmorModifications.SlowFalling);
         return this;
     }
 
     public final ModArmor withSeaPower()
     {
-        armorModificatorSet.add(ArmorModificators.SeaPower);
+        armorModificatorSet.add(ArmorModifications.SeaPower);
         return this;
     }
 
     public final ModArmor withLuck()
     {
-        armorModificatorSet.add(ArmorModificators.Luck);
+        armorModificatorSet.add(ArmorModifications.Luck);
         return this;
     }
 
     public final ModArmor withElytra()
     {
-        armorModificatorSet.add(ArmorModificators.Elytra);
+        armorModificatorSet.add(ArmorModifications.Elytra);
         return this;
     }
 

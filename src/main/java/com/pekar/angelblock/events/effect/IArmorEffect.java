@@ -29,7 +29,7 @@ public interface IArmorEffect
     IArmorEffect setupAvailability(IArmorEffect copyFrom);
     IArmorEffect alwaysAvailable();
     IArmorEffect availableOnHelmetWithDetector();
-    IArmorEffect availableOnBootsWithStrengthBooster();
+    IArmorEffect availableOnBootsWithJumpBooster();
     IArmorEffect availableOnBootsWithSeaPower();
     IArmorEffect availableOnChestPlateWithStrengthBooster();
     IArmorEffect availableOnChestPlateWithSlowFalling();

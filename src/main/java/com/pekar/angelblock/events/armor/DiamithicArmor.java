@@ -57,11 +57,11 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingDamageEvent(LivingDamageEvent.Pre event)
     {
-        boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
         var damageSource = event.getSource();
-        if (isFullArmorSet && isExplosionDamage(damageSource) && player.isChestPlateModifiedWithStrengthBooster(this))
+        if (isExplosionDamage(damageSource))
         {
-            event.setNewDamage(event.getNewDamage() * 0.5f);
+            if (player.isChestPlateModifiedWithStrengthBooster(this))
+                event.setNewDamage(event.getNewDamage() * 0.5f);
         }
         else if (isBiting(damageSource.getEntity()))
         {
@@ -96,11 +96,6 @@ public class DiamithicArmor extends Armor
     {
         slownessEffect.updateEffectAvailability();
         slownessEffect.updateEffectActivity();
-
-        if (player.areBootsModifiedWithJumpBooster(this))
-        {
-            event.setDamageMultiplier(0.3f);
-        }
 
         if ((event.getEntity() instanceof ServerPlayer playerEntity) && !playerEntity.hasEffect(MobEffects.SLOW_FALLING))
         {
@@ -142,13 +137,11 @@ public class DiamithicArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
             jumpBoostEffect.trySwitch();
-            slowFallingEffect.trySwitch();
+        }
 
-            if (jumpBoostEffect.isEffectAvailable() && slowFallingEffect.isEffectAvailable() && jumpBoostEffect.isEffectOn() != slowFallingEffect.isEffectOn())
-            {
-                slowFallingEffect.trySwitchOff();
-                jumpBoostEffect.trySwitchOff();
-            }
+        if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
+        {
+            slowFallingEffect.trySwitch();
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))

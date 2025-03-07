@@ -184,7 +184,7 @@ abstract class ArmorEffect implements IArmorEffect
     }
 
     @Override
-    public IArmorEffect availableOnBootsWithStrengthBooster()
+    public IArmorEffect availableOnBootsWithJumpBooster()
     {
         availabilityPredicate = IPlayer::areBootsModifiedWithJumpBooster;
         return this;

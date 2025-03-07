@@ -37,20 +37,19 @@ public class FlyingArmor extends ModArmor
         var mainHandItemStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
         var mainHandItem = mainHandItemStack.getItem();
 
-        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
-                .equals(ArmorRegistry.FLYING_HELMET.get().getArmorFamilyName());
-        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
-                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getArmorFamilyName());
-        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
-                .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
+//        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
+//                .equals(ArmorRegistry.FLYING_HELMET.get().getArmorFamilyName());
+//        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
+//                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getArmorFamilyName());
+//        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
+//                .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
         boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
                 .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getArmorFamilyName());
-        boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
-        int maxDamageToFly = getMaxDamage() / 2;
+        int maxDamageToFly = stack.getMaxDamage() / 2;
         int chestDamage = stack.getDamageValue();
 
-        return isFullArmorSet && chestDamage < maxDamageToFly
+        return isFlyingChestplate && chestDamage < maxDamageToFly
                 && !mainHandItem.getName(mainHandItemStack).equals(Items.FIREWORK_ROCKET.getName(mainHandItemStack));
     }
 

@@ -37,7 +37,7 @@ public class LimoniteArmor extends Armor
         super(player);
 
         nightVisionEffect = new NightVisionArmorEffect(player, this);
-        glowingEffect = new GlowingArmorEffect(player, this);
+        glowingEffect = new GlowingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
         luckEffect = new LuckArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 1);
         regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
@@ -45,10 +45,10 @@ public class LimoniteArmor extends Armor
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
-        jumpEffect.availableIfSlotsSet(EquipmentSlot.FEET, EquipmentSlot.LEGS);
+        jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
         var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
-        slowFallingEffect.setupAvailability(jumpEffect);
+        slowFallingEffect.availableIfSlotSet(EquipmentSlot.CHEST);
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -153,10 +153,7 @@ public class LimoniteArmor extends Armor
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        if (jumpEffect.isEffectOn() && jumpEffect.isActive())
-        {
-            event.setDamageMultiplier(0);
-        }
+        // none
     }
 
     @Override
@@ -293,6 +290,6 @@ public class LimoniteArmor extends Armor
 
     private boolean isLuckEffectAvailable(IPlayer player, IArmor armor)
     {
-        return player.isFullArmorSetPutOn(armor) && player.isChestPlateModifiedWithLuck(armor);
+        return player.isChestPlateModifiedWithLuck(armor);
     }
 }

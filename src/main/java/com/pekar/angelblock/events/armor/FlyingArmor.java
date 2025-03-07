@@ -20,7 +20,7 @@ public class FlyingArmor extends Armor
     {
         super(player);
 
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).setupAvailability(this::isLevitationSwitchingEffectAvailable);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
 
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
         speedEffect.setupAvailability(this::isJumpEffectAvailable);
@@ -180,23 +180,15 @@ public class FlyingArmor extends Armor
         slowFallingEffect.updateEffectActivity();
     }
 
-    private boolean isLevitationSwitchingEffectAvailable(IPlayer player, IArmor armor)
-    {
-        return player.isFullArmorSetPutOn(this);
-    }
-
     private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)
     {
         var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
-        var leggings = player.getEntity().getItemBySlot(EquipmentSlot.LEGS);
 
         int bootsDamage = boots.getDamageValue();
-        int leggingsDamage = leggings.getDamageValue();
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
-        int maxLeggingsDamageToJump = leggings.getMaxDamage() / 2;
 
-        return player.isFullArmorSetPutOn(this)
-                && bootsDamage < maxBootsDamageToJump && leggingsDamage < maxLeggingsDamageToJump;
+        return player.isArmorElementPutOn(this, EquipmentSlot.FEET)
+                && bootsDamage < maxBootsDamageToJump;
     }
 
     private void updateSlowFallingEffect()
