@@ -110,7 +110,7 @@
   "item.angelblock.rendelithic_chestplate.desc6": " Flying: -",
   "item.angelblock.rendelithic_chestplate.desc7": " Luck: -",
   "item.angelblock.rendelithic_chestplate.desc8": " Glowing: -",
-  "item.angelblock.rendelithic_chestplate_with_levitation": "Rendelithic Chestplate With Levitation",
+  "item.angelblock.rendelithic_chestplate_with_levitation": "Rendelithic Chestplate of Soft Landing",
   "item.angelblock.rendelithic_chestplate_with_levitation.desc1": "Chestplate capabilities",
   "item.angelblock.rendelithic_chestplate_with_levitation.desc2": " Stregth level: -",
   "item.angelblock.rendelithic_chestplate_with_levitation.desc3": " Haste level: -",
@@ -927,7 +927,7 @@
   "key.angelblock.jump_boost": "Jump Boost Mode",
   "key.angelblock.glowing": "Glowing Mode",
   "key.angelblock.regen": "Regeneration",
-  "key.angelblock.levitation": "Levitation Mode",
+  "key.angelblock.levitation": "Slow Falling Mode",
   "key.angelblock.sword_effects": "Sword/Tool Modes",
   "key.angelblock.super_jump": "Super Jump Mode",
 

@@ -110,7 +110,7 @@
   "item.angelblock.rendelithic_chestplate.desc6": " Способность летать: -",
   "item.angelblock.rendelithic_chestplate.desc7": " Удача: -",
   "item.angelblock.rendelithic_chestplate.desc8": " Подсветка игрока: -",
-  "item.angelblock.rendelithic_chestplate_with_levitation": "Ренделитовый нагрудник с левитацией",
+  "item.angelblock.rendelithic_chestplate_with_levitation": "Ренделитовый нагрудник замедляющий падение",
   "item.angelblock.rendelithic_chestplate_with_levitation.desc1": "Характеристики нагрудника",
   "item.angelblock.rendelithic_chestplate_with_levitation.desc2": " Сила: -",
   "item.angelblock.rendelithic_chestplate_with_levitation.desc3": " Спешка: -",
@@ -927,7 +927,7 @@
   "key.angelblock.jump_boost": "Режим прыгучести",
   "key.angelblock.glowing": "Режим подсветки",
   "key.angelblock.regen": "Восстановление здоровья",
-  "key.angelblock.levitation": "Режим левитации",
+  "key.angelblock.levitation": "Режим плавного падения",
   "key.angelblock.sword_effects": "Режимы оружия/инструментов",
   "key.angelblock.super_jump": "Режим суперпрыжка",
 
