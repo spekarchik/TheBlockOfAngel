@@ -212,7 +212,7 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
     }
 
     @Override
-    public IArmorEffect availableOnBootsWithStrengthBooster()
+    public IArmorEffect availableOnBootsWithJumpBooster()
     {
         throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
     }
@@ -279,27 +279,43 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
 
     private void switchDependentEffects()
     {
+        boolean isMasterEffectAvailable = masterEffect.isEffectAvailable();
+
         for (SwitchingArmorEffect effect : dependentEffects)
         {
-            if (masterEffect.isEffectOn())
+            if (isMasterEffectAvailable)
             {
-                effect.trySwitchOn();
+                if (masterEffect.isEffectOn())
+                {
+                    effect.trySwitchOn();
+                }
+                else
+                {
+                    effect.trySwitchOff();
+                }
             }
             else
             {
-                effect.trySwitchOff();
+                effect.trySwitch();
             }
         }
 
         for (SwitchingArmorEffect effect : dependentInvertedEffects)
         {
-            if (masterEffect.isEffectOn())
+            if (isMasterEffectAvailable)
             {
-                effect.trySwitchOff();
+                if (masterEffect.isEffectOn())
+                {
+                    effect.trySwitchOff();
+                }
+                else
+                {
+                    effect.trySwitchOn();
+                }
             }
             else
             {
-                effect.trySwitchOn();
+                effect.trySwitch();
             }
         }
     }
