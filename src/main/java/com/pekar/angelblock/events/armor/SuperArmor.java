@@ -64,7 +64,6 @@ public class SuperArmor extends Armor
         var jumpEffect = new JumpBoostArmorEffect(player, this, 5);
         jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
-        speedEffect.availableIfSlotsSet(EquipmentSlot.FEET);
         var strengthEffect = new StrengthSwitchingEffect(player, this, 2);
         var waterBreathingEffect = new WaterBreathSwitchingEffect(player, this);
         waterBreathingEffect.availableIfSlotSet(EquipmentSlot.HEAD);
@@ -233,12 +232,6 @@ public class SuperArmor extends Armor
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        if (!player.isArmorElementPutOn(this, EquipmentSlot.FEET)) return;
-
-        if (superJumpEffect.isEffectOn() && superJumpEffect.isActive())
-        {
-            event.setDamageMultiplier(0.3f);
-        }
     }
 
     @Override

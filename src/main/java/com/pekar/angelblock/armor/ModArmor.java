@@ -177,7 +177,7 @@ public class ModArmor extends ArmorItem
             case HEAD -> 4;
             case CHEST -> 8;
             case LEGS -> 5;
-            case FEET -> 7;
+            case FEET -> 8;
             default -> 0;
         };
     }
