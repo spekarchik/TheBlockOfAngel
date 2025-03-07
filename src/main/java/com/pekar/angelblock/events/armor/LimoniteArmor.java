@@ -20,12 +20,12 @@ public class LimoniteArmor extends Armor
     private final IArmorEffect glowingEffect;
     private final IArmorEffect luckEffect;
     private final IArmorEffect healthBoostEffect;
-    private final IArmorEffect regenerationEffect;
+    private final ITemporaryArmorEffect regenerationEffect;
     private final IArmorEffect slownessEffect;
     private final IArmorEffect jumpNegativeEffect;
     private final SwitchingEffectSynchronizer jumpEffect;
 
-    private static final int REGENERATION_EFFECT_DURATION = 300;
+    private static final int HEAL_REGENERATION_EFFECT_DURATION = 300;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
     private static final int REGENERATION_NEGATIVE_EFFECT_DURATION = 1200;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
@@ -40,7 +40,7 @@ public class LimoniteArmor extends Armor
         glowingEffect = new GlowingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
         luckEffect = new LuckArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 1);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
+        regenerationEffect = new RegenerationArmorEffect(player, this, 0, HEAL_REGENERATION_EFFECT_DURATION);
         slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION);
 
@@ -244,10 +244,12 @@ public class LimoniteArmor extends Armor
     public void onBeingUnderRain()
     {
         if (!player.isFullArmorSetPutOn(this)) return;
+        var entityPlayer = player.getEntity();
 
-        if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+        if (entityPlayer.getHealth() < entityPlayer.getMaxHealth())
         {
-            regenerationEffect.trySwitch();
+            regenerationEffect.trySwitchForDuration(UNDER_RAIN_REGENERATION_EFFECT_DURATION);
+            entityPlayer.causeFoodExhaustion(EXHAUSTION_INCREMENT);
         }
     }
 

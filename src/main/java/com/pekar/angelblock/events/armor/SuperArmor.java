@@ -22,7 +22,7 @@ public class SuperArmor extends Armor
     private final SwitchingEffectSynchronizer jumpEffect;
     private final IArmorEffect glowingEffect;
     private final IArmorEffect luckEffect;
-    private final IArmorEffect regenerationEffect;
+    private final ITemporaryArmorEffect regenerationEffect;
     private final IArmorEffect healthBoostEffect;
     private final IArmorEffect slownessEffect;
     private final IArmorEffect jumpNegativeEffect;
@@ -31,7 +31,7 @@ public class SuperArmor extends Armor
     private final SwitchingEffectSynchronizer superJumpEffect;
     private boolean isSlowFallingActivatedOnGround = true;
 
-    private static final int REGENERATION_EFFECT_DURATION = 300;
+    private static final int HEAL_REGENERATION_EFFECT_DURATION = 300;
     private static final int REGENERATION_EFFECT_UNDER_RAIN_AMPLIFIER = 0;
     private static final int REGENERATION_EFFECT_HEAL_AMPLIFIER = 1;
     private static final int SLOWNESS_EFFECT_DURATION = 600;
@@ -48,7 +48,7 @@ public class SuperArmor extends Armor
         glowingEffect = new GlowingArmorEffect(player, this).availableIfSlotsSet(EquipmentSlot.CHEST);
 
         luckEffect = new LuckArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
-        regenerationEffect = new RegenerationArmorEffect(player, this, REGENERATION_EFFECT_HEAL_AMPLIFIER, REGENERATION_EFFECT_DURATION);
+        regenerationEffect = new RegenerationArmorEffect(player, this, REGENERATION_EFFECT_HEAL_AMPLIFIER, HEAL_REGENERATION_EFFECT_DURATION);
         slownessEffect = new SlownessArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_EFFECT_DURATION);
         healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
@@ -414,10 +414,12 @@ public class SuperArmor extends Armor
     public void onBeingUnderRain()
     {
         if (!player.isFullArmorSetPutOn(this)) return;
+        var entityPlayer = player.getEntity();
 
-        if (player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+        if (entityPlayer.getHealth() < entityPlayer.getMaxHealth())
         {
-            regenerationEffect.trySwitch(REGENERATION_EFFECT_UNDER_RAIN_AMPLIFIER);
+            regenerationEffect.trySwitchForDuration(REGENERATION_EFFECT_UNDER_RAIN_AMPLIFIER, UNDER_RAIN_REGENERATION_EFFECT_DURATION);
+            entityPlayer.causeFoodExhaustion(EXHAUSTION_INCREMENT);
         }
     }
 
