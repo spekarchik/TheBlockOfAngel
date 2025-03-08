@@ -98,12 +98,7 @@ abstract class ArmorEffect implements IArmorEffect
         {
             if (isEffectOn() && isEffectAvailable())
             {
-                if (isActive() && canResetEffect())
-                {
-                    player.clearEffect(effectType);
-                }
-
-                if (!isActive() || !canResetEffect())
+                if (!isActive())
                 {
                     player.setEffect(effectType, amplifier, showIcon);
                 }
@@ -261,11 +256,6 @@ abstract class ArmorEffect implements IArmorEffect
     }
 
     protected boolean canClearEffect()
-    {
-        return true;
-    }
-
-    protected boolean canResetEffect()
     {
         return true;
     }
