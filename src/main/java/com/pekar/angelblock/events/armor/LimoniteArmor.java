@@ -21,9 +21,11 @@ public class LimoniteArmor extends Armor
     private final IArmorEffect luckEffect;
     private final IArmorEffect healthBoostEffect;
     private final ITemporaryArmorEffect regenerationEffect;
+    private final ITemporaryArmorEffect waterBreathingEffect;
     private final IArmorEffect slownessEffect;
     private final IArmorEffect jumpNegativeEffect;
     private final SwitchingEffectSynchronizer jumpEffect;
+    private boolean hasWaterBreathingBeenUsed;
 
     private static final int HEAL_REGENERATION_EFFECT_DURATION = 300;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
@@ -31,6 +33,7 @@ public class LimoniteArmor extends Armor
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 1200;
     private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 2;
     private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 6;
+    private static final int WATER_BREATHING_EFFECT_DURATION = 600;
 
     public LimoniteArmor(IPlayer player)
     {
@@ -43,6 +46,7 @@ public class LimoniteArmor extends Armor
         regenerationEffect = new RegenerationArmorEffect(player, this, 0, HEAL_REGENERATION_EFFECT_DURATION);
         slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION);
+        waterBreathingEffect = new WaterBreathingTemporaryEffect(player, this, 0, WATER_BREATHING_EFFECT_DURATION);
 
         var jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
@@ -60,6 +64,7 @@ public class LimoniteArmor extends Armor
     {
         nightVisionEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
+        waterBreathingEffect.updateSwitchState();
 
         if (!slownessEffect.isActive())
         {
@@ -140,6 +145,7 @@ public class LimoniteArmor extends Armor
         regenerationEffect.updateEffectAvailability();
         slownessEffect.updateEffectAvailability();
         jumpNegativeEffect.updateEffectAvailability();
+        waterBreathingEffect.updateEffectAvailability();
 
         updatePotionEffects();
     }
@@ -159,8 +165,17 @@ public class LimoniteArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
+        var playerEntity = player.getEntity();
+        if (!playerEntity.isUnderWater())
+        {
+            hasWaterBreathingBeenUsed = false;
+            if (waterBreathingEffect.isActive() && waterBreathingEffect.isArmorEffect())
+            {
+                waterBreathingEffect.trySwitchOff();
+            }
+        }
 
+        boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
         detectCreepers(isHelmetModifiedWithDetector, player.isFullArmorSetPutOn(this));
     }
 
@@ -237,7 +252,11 @@ public class LimoniteArmor extends Armor
     @Override
     public void onBeingInWater()
     {
-        // none
+        if (!hasWaterBreathingBeenUsed && !waterBreathingEffect.isActive() && player.getEntity().isUnderWater())
+        {
+            hasWaterBreathingBeenUsed = true;
+            waterBreathingEffect.trySwitch();
+        }
     }
 
     @Override
@@ -274,6 +293,7 @@ public class LimoniteArmor extends Armor
         regenerationEffect.updateEffectActivity();
         slownessEffect.updateEffectActivity();
         jumpNegativeEffect.updateEffectActivity();
+        waterBreathingEffect.updateEffectActivity();
 
         if (!slownessEffect.isActive())
         {
