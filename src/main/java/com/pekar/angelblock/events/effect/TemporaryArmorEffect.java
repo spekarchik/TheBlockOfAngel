@@ -47,6 +47,14 @@ abstract class TemporaryArmorEffect extends ArmorEffect implements ITemporaryArm
     }
 
     @Override
+    public boolean trySwitchOff()
+    {
+        if (!isArmorEffect) return false;
+        isArmorEffect = false;
+        return super.trySwitchOff();
+    }
+
+    @Override
     public boolean isEffectOn()
     {
         return false;
