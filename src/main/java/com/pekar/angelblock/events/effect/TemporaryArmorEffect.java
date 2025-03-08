@@ -8,27 +8,26 @@ import net.minecraft.world.effect.MobEffect;
 
 abstract class TemporaryArmorEffect extends ArmorEffect implements ITemporaryArmorEffect
 {
-    protected final int duration;
+    protected final int defaultDuration;
+    protected boolean isArmorEffect;
 
-    public TemporaryArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int duration)
+    public TemporaryArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
     {
         super(player, armor, effectType, defaultAmplifier);
-        this.duration = duration;
+        this.defaultDuration = defaultDuration;
     }
 
     @Override
     public boolean trySwitch(int amplifier)
     {
-        if (!isAvailable) return false;
-        player.setEffect(effectType, duration, amplifier, showIcon);
+        trySwitchForDuration(amplifier, defaultDuration);
         return true;
     }
 
     @Override
     public boolean trySwitchForDuration(int duration)
     {
-        if (!isAvailable) return false;
-        player.setEffect(effectType, duration, defaultAmplifier, showIcon);
+        trySwitchForDuration(defaultAmplifier, duration);
         return true;
     }
 
@@ -36,7 +35,8 @@ abstract class TemporaryArmorEffect extends ArmorEffect implements ITemporaryArm
     public boolean trySwitchForDuration(int amplifier, int duration)
     {
         if (!isAvailable) return false;
-        player.setEffect(effectType, duration, amplifier, showIcon);
+        isArmorEffect = true;
+        player.setEffect(this, duration, amplifier, showIcon);
         return true;
     }
 
@@ -50,5 +50,17 @@ abstract class TemporaryArmorEffect extends ArmorEffect implements ITemporaryArm
     public boolean isEffectOn()
     {
         return false;
+    }
+
+    @Override
+    public boolean isArmorEffect()
+    {
+        return isArmorEffect;
+    }
+
+    @Override
+    public void resetIsArmorEffect()
+    {
+        isArmorEffect = false;
     }
 }

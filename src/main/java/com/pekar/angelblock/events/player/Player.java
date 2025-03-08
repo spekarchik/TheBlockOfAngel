@@ -2,6 +2,7 @@ package com.pekar.angelblock.events.player;
 
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
+import com.pekar.angelblock.events.effect.IArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.potions.PotionUtils;
 import com.pekar.angelblock.tools.ToolRegistry;
@@ -191,13 +192,26 @@ public class Player implements IPlayer
     @Override
     public void setEffect(Holder<MobEffect> effect, int duration, int amplifier)
     {
-        entity.addEffect(new MobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, false /*showIcon*/));
+        setEffect(effect, duration, amplifier, false);
     }
 
     @Override
     public void setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
     {
-        entity.addEffect(new MobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/));
+        entity.addEffect(new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/));
+    }
+
+    @Override
+    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier)
+    {
+        setEffect(armorEffect, duration, amplifier, false);
+    }
+
+    @Override
+    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
+    {
+        entity.addEffect(new ModMobEffectInstance(armorEffect.getEffect(), duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/,
+                armorEffect::resetIsArmorEffect));
     }
 
     @Override
