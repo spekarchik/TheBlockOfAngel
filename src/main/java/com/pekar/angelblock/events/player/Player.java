@@ -2,9 +2,8 @@ package com.pekar.angelblock.events.player;
 
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
-import com.pekar.angelblock.events.effect.IArmorEffect;
+import com.pekar.angelblock.events.effect.ITemporaryArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
-import com.pekar.angelblock.potions.PotionUtils;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -180,13 +179,13 @@ public class Player implements IPlayer
     @Override
     public void setEffect(Holder<MobEffect> effect, int amplifier)
     {
-        setEffect(effect, PotionUtils.DURATION_UNLIMITED, amplifier);
+        setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier);
     }
 
     @Override
     public void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon)
     {
-        setEffect(effect, PotionUtils.DURATION_UNLIMITED, amplifier, showIcon);
+        setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier, showIcon);
     }
 
     @Override

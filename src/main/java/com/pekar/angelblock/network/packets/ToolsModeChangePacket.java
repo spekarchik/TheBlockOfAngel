@@ -3,7 +3,6 @@ package com.pekar.angelblock.network.packets;
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.Packet;
 import com.pekar.angelblock.potions.PotionRegistry;
-import com.pekar.angelblock.potions.PotionUtils;
 import com.pekar.angelblock.tools.IModTool;
 import com.pekar.angelblock.tools.ModSword;
 import net.minecraft.network.FriendlyByteBuf;
@@ -31,7 +30,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
                 if (!isAdvancedModeActive)
                 {
                     var effect = new MobEffectInstance(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT,
-                            PotionUtils.DURATION_UNLIMITED, 0, true, false, true);
+                            MobEffectInstance.INFINITE_DURATION, 0, true, false, true);
                     player.addEffect(effect);
                 }
                 else
@@ -51,7 +50,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
                     if (sword.hasExplosionMode())
                     {
                         var effect = new MobEffectInstance(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT,
-                                PotionUtils.DURATION_UNLIMITED, 0, true, false, true);
+                                MobEffectInstance.INFINITE_DURATION, 0, true, false, true);
                         player.addEffect(effect);
                     }
                 }
@@ -62,7 +61,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
                     if (sword.hasFireMode())
                     {
                         var effect = new MobEffectInstance(PotionRegistry.SWORD_FIRE_MODE_EFFECT,
-                                PotionUtils.DURATION_UNLIMITED, 0, true, false, true);
+                                MobEffectInstance.INFINITE_DURATION, 0, true, false, true);
                         player.addEffect(effect);
                     }
                 }
@@ -73,19 +72,19 @@ public class ToolsModeChangePacket extends ClientToServerPacket
                 else if (sword.hasWebMode())
                 {
                     var effect = new MobEffectInstance(PotionRegistry.SWORD_WEB_MODE_EFFECT,
-                            PotionUtils.DURATION_UNLIMITED, 0, true, false, true);
+                            MobEffectInstance.INFINITE_DURATION, 0, true, false, true);
                     player.addEffect(effect);
                 }
                 else if (sword.hasExplosionMode())
                 {
                     var effect = new MobEffectInstance(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT,
-                            PotionUtils.DURATION_UNLIMITED, 0, true, false, true);
+                            MobEffectInstance.INFINITE_DURATION, 0, true, false, true);
                     player.addEffect(effect);
                 }
                 else if (sword.hasFireMode())
                 {
                     var effect = new MobEffectInstance(PotionRegistry.SWORD_FIRE_MODE_EFFECT,
-                            PotionUtils.DURATION_UNLIMITED, 0, true, false, true);
+                            MobEffectInstance.INFINITE_DURATION, 0, true, false, true);
                     player.addEffect(effect);
                 }
 
@@ -96,7 +95,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
                 if (!isRodMagneticModeActive)
                 {
                     var effect = new MobEffectInstance(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT,
-                            PotionUtils.DURATION_UNLIMITED, 0, true, false, true);
+                            MobEffectInstance.INFINITE_DURATION, 0, true, false, true);
                     player.addEffect(effect);
                 }
                 else
