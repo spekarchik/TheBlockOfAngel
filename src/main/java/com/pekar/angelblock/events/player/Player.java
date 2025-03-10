@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Player implements IPlayer
 {
@@ -29,7 +30,7 @@ public class Player implements IPlayer
     private final IArmor flyingArmorModel = new FlyingArmor(this);
 
     private net.minecraft.world.entity.player.Player entity;
-    private final Set<IArmor> armorInUse = new HashSet<>();
+    private final Set<IArmor> armorInUse = ConcurrentHashMap.newKeySet();
 
     public Player(net.minecraft.world.entity.player.Player entity)
     {
@@ -37,7 +38,7 @@ public class Player implements IPlayer
     }
 
     @Override
-    public synchronized Iterable<IArmor> getArmorTypesUsed()
+    public Iterable<IArmor> getArmorTypesUsed()
     {
         return armorInUse;
     }
@@ -160,7 +161,7 @@ public class Player implements IPlayer
     }
 
     @Override
-    public synchronized void updateArmorUsed()
+    public void updateArmorUsed()
     {
         armorInUse.clear();
 
