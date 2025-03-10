@@ -59,16 +59,20 @@ public class SwitchingEffectSynchronizer implements ISwitchingEffectSynchronizer
     @Override
     public void updateDependentEffectsActivity()
     {
-        updateDependentSwitchStates();
-
         for (var effect : dependentEffects)
         {
-            effect.updateActivity();
+            if (effect.isOn() != masterEffect.isOn())
+                effect.trySwitch();
+            else
+                effect.updateActivity();
         }
 
         for (var effect : dependentInvertedEffects)
         {
-            effect.updateActivity();
+            if (effect.isOn() == masterEffect.isOn())
+                effect.trySwitch();
+            else
+                effect.updateActivity();
         }
     }
 
@@ -154,22 +158,9 @@ public class SwitchingEffectSynchronizer implements ISwitchingEffectSynchronizer
     }
 
     @Override
-    public void invertSwitchState()
-    {
-        masterEffect.invertSwitchState();
-        updateDependentSwitchStates();
-    }
-
-    @Override
     public void updateSwitchState()
     {
         masterEffect.updateSwitchState();
-        updateDependentSwitchStates();
-    }
-
-    protected void setSwitchState(boolean isOn)
-    {
-        masterEffect.setSwitchState(isOn);
         updateDependentSwitchStates();
     }
 
@@ -211,10 +202,10 @@ public class SwitchingEffectSynchronizer implements ISwitchingEffectSynchronizer
         else
         {
             for (var effect : dependentEffects)
-                effect.trySwitchOff();
+                effect.trySwitch();
 
             for (var effect : dependentInvertedEffects)
-                effect.trySwitchOff();
+                effect.trySwitch();
         }
     }
 

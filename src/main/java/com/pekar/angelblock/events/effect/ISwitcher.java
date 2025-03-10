@@ -8,6 +8,4 @@ public interface ISwitcher
     void trySwitch();
     void trySwitchOn();
     void trySwitchOff();
-
-    void invertSwitchState();
 }

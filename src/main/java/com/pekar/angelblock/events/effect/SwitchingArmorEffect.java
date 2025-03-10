@@ -76,12 +76,6 @@ class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements
     }
 
     @Override
-    public final void invertSwitchState()
-    {
-        setSwitchState(getState().isOff());
-    }
-
-    @Override
     public ISwitchingArmorEffect getSelf()
     {
         return this;
