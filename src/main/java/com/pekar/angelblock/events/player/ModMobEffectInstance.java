@@ -36,7 +36,7 @@ public class ModMobEffectInstance extends MobEffectInstance
     {
         boolean isUpdated = super.update(other);
 
-        if (isUpdated)
+        if (isUpdated && onEffectEnded != null)
             onEffectEnded.run();
 
         return isUpdated;

@@ -38,12 +38,6 @@ class PermanentArmorEffect extends ArmorEffect<IPermanentArmorEffect> implements
     }
 
     @Override
-    protected boolean shouldPersist()
-    {
-        return true;
-    }
-
-    @Override
     protected boolean isOn()
     {
         return true;
