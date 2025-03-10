@@ -13,9 +13,15 @@ class TemporaryPersistentArmorEffect extends TemporaryBaseArmorEffect<ITemporary
     }
 
     @Override
-    public void onDurationEnd()
+    protected boolean isOn()
     {
-        setState(State.OFF);
+        return true;
+    }
+
+    @Override
+    protected void setEffect(int amplifier, int duration)
+    {
+        player.setEffect(effectType, duration, amplifier, getShowIcon());
     }
 
     @Override

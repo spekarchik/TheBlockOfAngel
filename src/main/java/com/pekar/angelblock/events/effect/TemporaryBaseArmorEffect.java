@@ -35,12 +35,6 @@ abstract class TemporaryBaseArmorEffect<T extends IArmorEffect> extends ArmorEff
     }
 
     @Override
-    protected void setEffect(int amplifier, int duration)
-    {
-        player.setEffect(this, duration, amplifier, getShowIcon());
-    }
-
-    @Override
     public void updateActivity()
     {
         super.updateActivity(defaultAmplifier, defaultDuration);

@@ -27,6 +27,12 @@ class TemporaryArmorEffect extends TemporaryBaseArmorEffect<ITemporaryArmorEffec
     }
 
     @Override
+    protected void setEffect(int amplifier, int duration)
+    {
+        player.setEffect(this, duration, amplifier, getShowIcon());
+    }
+
+    @Override
     public final void onDurationEnd()
     {
         isArmorEffect = false;

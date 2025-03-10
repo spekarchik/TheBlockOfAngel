@@ -203,13 +203,13 @@ public class Player implements IPlayer
     }
 
     @Override
-    public void setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier)
+    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier)
     {
         setEffect(armorEffect, duration, amplifier, false);
     }
 
     @Override
-    public void setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
+    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
     {
         entity.addEffect(new ModMobEffectInstance(armorEffect.getEffect(), duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/,
                 armorEffect::onDurationEnd));

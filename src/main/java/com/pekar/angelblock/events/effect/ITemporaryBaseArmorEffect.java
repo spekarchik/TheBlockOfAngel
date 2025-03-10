@@ -8,6 +8,5 @@ public interface ITemporaryBaseArmorEffect
     void tryActivate();
     void tryActivate(int duration);
     void tryActivate(int amplifier, int duration);
-    void onDurationEnd();
     Holder<MobEffect> getEffect();
 }

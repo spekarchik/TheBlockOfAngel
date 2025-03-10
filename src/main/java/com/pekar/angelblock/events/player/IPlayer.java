@@ -32,8 +32,8 @@ public interface IPlayer extends IPlayerEvents
     void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon);
     void setEffect(Holder<MobEffect> effect, int duration, int amplifier);
     void setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon);
-    void setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier);
-    void setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon);
+    void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier);
+    void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon);
     void clearEffect(Holder<MobEffect> effect);
 
     String getPlayerName();
