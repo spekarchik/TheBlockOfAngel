@@ -3,8 +3,6 @@ package com.pekar.angelblock.events.player;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.events.effect.ITemporaryArmorEffect;
-import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
-import com.pekar.angelblock.events.effect.ITemporaryPersistentArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.Holder;
