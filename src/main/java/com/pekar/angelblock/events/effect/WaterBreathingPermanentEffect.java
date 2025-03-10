@@ -4,11 +4,10 @@ import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class GlowingArmorEffect extends SwitchingArmorEffect
+public class WaterBreathingPermanentEffect extends PermanentArmorEffect
 {
-    public GlowingArmorEffect(IPlayer player, IArmor armor)
+    public WaterBreathingPermanentEffect(IPlayer player, IArmor armor)
     {
-        super(player, armor, MobEffects.GLOWING, 0);
-        showIcon = true;
+        super(player, armor, MobEffects.WATER_BREATHING, 0);
     }
 }

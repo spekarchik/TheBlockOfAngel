@@ -1,8 +1,9 @@
 package com.pekar.angelblock.events.player;
 
 import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.armor.ITemporaryArmorEffect;
-import com.pekar.angelblock.events.effect.IArmorEffect;
+import com.pekar.angelblock.events.effect.ITemporaryArmorEffect;
+import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
+import com.pekar.angelblock.events.effect.ITemporaryPersistentArmorEffect;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -31,8 +32,8 @@ public interface IPlayer extends IPlayerEvents
     void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon);
     void setEffect(Holder<MobEffect> effect, int duration, int amplifier);
     void setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon);
-    void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier);
-    void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon);
+    void setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier);
+    void setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon);
     void clearEffect(Holder<MobEffect> effect);
 
     String getPlayerName();

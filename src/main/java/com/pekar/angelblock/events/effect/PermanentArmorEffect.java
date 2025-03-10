@@ -4,23 +4,54 @@ import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 
-abstract class PermanentArmorEffect extends ArmorEffect
+class PermanentArmorEffect extends ArmorEffect<IPermanentArmorEffect> implements IPermanentArmorEffect
 {
-    public PermanentArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
+    protected PermanentArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
         super(player, armor, effectType, defaultAmplifier);
     }
 
     @Override
-    public boolean isEffectOn()
+    protected void setEffect(int amplifier, int duration)
+    {
+        player.setEffect(effectType, amplifier, getShowIcon());
+    }
+
+    @Override
+    public final void tryActivate()
+    {
+        this.tryActivate(defaultAmplifier);
+    }
+
+    @Override
+    public void tryActivate(int amplifier)
+    {
+        super.tryActivate(amplifier, MobEffectInstance.INFINITE_DURATION);
+    }
+
+    @Override
+    public void updateActivity(int amplifier)
+    {
+        super.updateActivity(amplifier, MobEffectInstance.INFINITE_DURATION);
+    }
+
+    @Override
+    protected boolean shouldPersist()
     {
         return true;
     }
 
     @Override
-    public boolean trySwitch(int amplifier)
+    protected boolean isOn()
     {
         return true;
+    }
+
+    @Override
+    public IPermanentArmorEffect getSelf()
+    {
+        return this;
     }
 }

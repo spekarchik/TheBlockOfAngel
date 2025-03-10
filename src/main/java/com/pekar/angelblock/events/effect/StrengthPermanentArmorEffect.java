@@ -5,9 +5,9 @@ import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 
-public class StrengthArmorEffect extends PermanentArmorEffect
+public class StrengthPermanentArmorEffect extends PermanentArmorEffect
 {
-    public StrengthArmorEffect(IPlayer player, IArmor armor, int amplifier)
+    public StrengthPermanentArmorEffect(IPlayer player, IArmor armor, int amplifier)
     {
         super(player, armor, MobEffects.DAMAGE_BOOST, amplifier);
         availableIfSlotSet(EquipmentSlot.CHEST);

@@ -9,6 +9,6 @@ public class SuperJumpSwitchingEffect extends SwitchingArmorEffect
     public SuperJumpSwitchingEffect(IPlayer player, IArmor armor)
     {
         super(player, armor, PotionRegistry.ARMOR_SUPER_JUMP_MODE_EFFECT, 0);
-        showIcon = true;
+        showIcon();
     }
 }

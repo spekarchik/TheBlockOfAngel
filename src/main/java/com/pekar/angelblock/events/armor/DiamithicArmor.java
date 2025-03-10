@@ -13,14 +13,15 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class DiamithicArmor extends Armor
 {
-    private final IArmorEffect strengthEffect;
-    private final IArmorEffect nightVisionEffect;
-    private final IArmorEffect jumpBoostEffect;
-    private final IArmorEffect slowFallingEffect;
-    private final IArmorEffect healthBoostEffect;
-    private final IArmorEffect hasteEffect;
-    private final IArmorEffect slownessEffect;
-    private final IArmorEffect glowingEffect;
+    private final IPermanentArmorEffect strengthEffect;
+    private final IPermanentArmorEffect healthBoostEffect;
+    private final IPermanentArmorEffect hasteEffect;
+    private final IPermanentArmorEffect slownessEffect;
+
+    private final ISwitchingArmorEffect nightVisionEffect;
+    private final ISwitchingArmorEffect jumpBoostEffect;
+    private final ISwitchingArmorEffect slowFallingEffect;
+    private final ISwitchingArmorEffect glowingEffect;
 
     private static final int STRENGTH_EFFECT_AMPLIFIER_DEFAULT = 0;
     private static final int STRENGTH_EFFECT_AMPLIFIER_IMPROVED = 1;
@@ -28,14 +29,14 @@ public class DiamithicArmor extends Armor
     public DiamithicArmor(IPlayer player)
     {
         super(player);
-        strengthEffect = new StrengthArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
-        nightVisionEffect = new NightVisionArmorEffect(player, this);
-        healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
-        hasteEffect = new HasteArmorEffect(player, this);
+        strengthEffect = new StrengthPermanentArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 2);
+        hasteEffect = new HastePermanentArmorEffect(player, this);
         slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable);
-        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
 
-        jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
+        jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, 2);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
     }
 
@@ -72,14 +73,14 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        nightVisionEffect.updateEffectAvailability();
-        strengthEffect.updateEffectAvailability();
-        jumpBoostEffect.updateEffectAvailability();
-        slowFallingEffect.updateEffectAvailability();
-        healthBoostEffect.updateEffectAvailability();
-        hasteEffect.updateEffectAvailability();
-        slownessEffect.updateEffectAvailability();
-        glowingEffect.updateEffectAvailability();
+        nightVisionEffect.updateAvailability();
+        strengthEffect.updateAvailability();
+        jumpBoostEffect.updateAvailability();
+        slowFallingEffect.updateAvailability();
+        healthBoostEffect.updateAvailability();
+        hasteEffect.updateAvailability();
+        slownessEffect.updateAvailability();
+        glowingEffect.updateAvailability();
 
         updatePotionEffects();
     }
@@ -87,15 +88,15 @@ public class DiamithicArmor extends Armor
     @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        slownessEffect.updateEffectAvailability();
-        slownessEffect.updateEffectActivity();
+        slownessEffect.updateAvailability();
+        slownessEffect.updateActivity();
     }
 
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        slownessEffect.updateEffectAvailability();
-        slownessEffect.updateEffectActivity();
+        slownessEffect.updateAvailability();
+        slownessEffect.updateActivity();
 
         if ((event.getEntity() instanceof ServerPlayer playerEntity) && !playerEntity.hasEffect(MobEffects.SLOW_FALLING))
         {
@@ -108,8 +109,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        slownessEffect.updateEffectAvailability();
-        slownessEffect.updateEffectActivity();
+        slownessEffect.updateAvailability();
+        slownessEffect.updateActivity();
 
         boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
         detectCreepers(isHelmetModifiedWithDetector,false);
@@ -165,7 +166,7 @@ public class DiamithicArmor extends Armor
     @Override
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        if (jumpBoostEffect.isEffectOn())
+        if (jumpBoostEffect.isOn())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
@@ -180,8 +181,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onBeingInWater()
     {
-        slownessEffect.updateEffectAvailability();
-        slownessEffect.updateEffectActivity();
+        slownessEffect.updateAvailability();
+        slownessEffect.updateActivity();
     }
 
     @Override
@@ -204,14 +205,14 @@ public class DiamithicArmor extends Armor
 
     private void updatePotionEffects()
     {
-        nightVisionEffect.updateEffectActivity();
-        strengthEffect.updateEffectActivity(getStrengthEffectAmplifier());
-        jumpBoostEffect.updateEffectActivity();
-        slowFallingEffect.updateEffectActivity();
-        healthBoostEffect.updateEffectActivity();
-        hasteEffect.updateEffectActivity();
-        slownessEffect.updateEffectActivity();
-        glowingEffect.updateEffectActivity();
+        nightVisionEffect.updateActivity();
+        strengthEffect.updateActivity(getStrengthEffectAmplifier());
+        jumpBoostEffect.updateActivity();
+        slowFallingEffect.updateActivity();
+        healthBoostEffect.updateActivity();
+        hasteEffect.updateActivity();
+        slownessEffect.updateActivity();
+        glowingEffect.updateActivity();
     }
 
     private int getStrengthEffectAmplifier()

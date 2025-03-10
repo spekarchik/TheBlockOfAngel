@@ -16,15 +16,16 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class LimoniteArmor extends Armor
 {
-    private final IArmorEffect nightVisionEffect;
-    private final IArmorEffect glowingEffect;
-    private final IArmorEffect luckEffect;
-    private final IArmorEffect healthBoostEffect;
+    private final IPermanentArmorEffect luckEffect;
+    private final IPermanentArmorEffect healthBoostEffect;
     private final ITemporaryArmorEffect regenerationEffect;
     private final ITemporaryArmorEffect waterBreathingEffect;
-    private final IArmorEffect slownessEffect;
-    private final IArmorEffect jumpNegativeEffect;
-    private final SwitchingEffectSynchronizer jumpEffect;
+    private final ITemporaryPersistentArmorEffect slownessEffect;
+    private final ITemporaryPersistentArmorEffect jumpNegativeEffect;
+    private final ISwitchingArmorEffect nightVisionEffect;
+    private final ISwitchingArmorEffect glowingEffect;
+    private final ISwitchingEffectSynchronizer jumpEffect;
+
     private boolean hasWaterBreathingBeenUsed;
 
     private static final int HEAL_REGENERATION_EFFECT_DURATION = 300;
@@ -39,16 +40,16 @@ public class LimoniteArmor extends Armor
     {
         super(player);
 
-        nightVisionEffect = new NightVisionArmorEffect(player, this);
-        glowingEffect = new GlowingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
-        luckEffect = new LuckArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
-        healthBoostEffect = new HealthBoostArmorEffect(player, this, 1);
-        regenerationEffect = new RegenerationArmorEffect(player, this, 0, HEAL_REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
+        luckEffect = new LuckPermanentArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
+        healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 1);
+        regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, 0, HEAL_REGENERATION_EFFECT_DURATION);
+        slownessEffect = new SlownessNegativeArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION);
         waterBreathingEffect = new WaterBreathingTemporaryEffect(player, this, 0, WATER_BREATHING_EFFECT_DURATION);
 
-        var jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
+        var jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
         var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
@@ -137,15 +138,15 @@ public class LimoniteArmor extends Armor
     @Override
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        jumpEffect.updateEffectAvailability();
-        nightVisionEffect.updateEffectAvailability();
-        luckEffect.updateEffectAvailability();
-        glowingEffect.updateEffectAvailability();
-        healthBoostEffect.updateEffectAvailability();
-        regenerationEffect.updateEffectAvailability();
-        slownessEffect.updateEffectAvailability();
-        jumpNegativeEffect.updateEffectAvailability();
-        waterBreathingEffect.updateEffectAvailability();
+        jumpEffect.updateAvailability();
+        nightVisionEffect.updateAvailability();
+        luckEffect.updateAvailability();
+        glowingEffect.updateAvailability();
+        healthBoostEffect.updateAvailability();
+        regenerationEffect.updateAvailability();
+        slownessEffect.updateAvailability();
+        jumpNegativeEffect.updateAvailability();
+        waterBreathingEffect.updateAvailability();
 
         updatePotionEffects();
     }
@@ -171,7 +172,7 @@ public class LimoniteArmor extends Armor
             hasWaterBreathingBeenUsed = false;
             if (waterBreathingEffect.isActive() && waterBreathingEffect.isArmorEffect())
             {
-                waterBreathingEffect.trySwitchOff();
+                waterBreathingEffect.tryRemove();
             }
         }
 
@@ -190,15 +191,15 @@ public class LimoniteArmor extends Armor
     {
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isEffectAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+            if (regenerationEffect.isAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
                 jumpEffect.trySwitchOff();
-                slownessEffect.trySwitch();
-                jumpNegativeEffect.trySwitch();
+                slownessEffect.tryActivate();
+                jumpNegativeEffect.tryActivate();
 
                 if (!regenerationEffect.isActive())
                 {
-                    regenerationEffect.trySwitch();
+                    regenerationEffect.tryActivate();
                 }
             }
         }
@@ -237,7 +238,7 @@ public class LimoniteArmor extends Armor
     @Override
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        if (jumpEffect.isEffectOn())
+        if (jumpEffect.isOn())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
@@ -255,7 +256,7 @@ public class LimoniteArmor extends Armor
         if (!hasWaterBreathingBeenUsed && !waterBreathingEffect.isActive() && player.getEntity().isUnderWater())
         {
             hasWaterBreathingBeenUsed = true;
-            waterBreathingEffect.trySwitch();
+            waterBreathingEffect.tryActivate();
         }
     }
 
@@ -267,7 +268,7 @@ public class LimoniteArmor extends Armor
 
         if (entityPlayer.getHealth() < entityPlayer.getMaxHealth())
         {
-            regenerationEffect.trySwitchForDuration(UNDER_RAIN_REGENERATION_EFFECT_DURATION);
+            regenerationEffect.tryActivate(UNDER_RAIN_REGENERATION_EFFECT_DURATION);
             entityPlayer.causeFoodExhaustion(EXHAUSTION_INCREMENT);
         }
     }
@@ -286,18 +287,18 @@ public class LimoniteArmor extends Armor
 
     private void updatePotionEffects()
     {
-        nightVisionEffect.updateEffectActivity();
-        luckEffect.updateEffectActivity();
-        glowingEffect.updateEffectActivity();
-        healthBoostEffect.updateEffectActivity();
-        regenerationEffect.updateEffectActivity();
-        slownessEffect.updateEffectActivity();
-        jumpNegativeEffect.updateEffectActivity();
-        waterBreathingEffect.updateEffectActivity();
+        nightVisionEffect.updateActivity();
+        luckEffect.updateActivity();
+        glowingEffect.updateActivity();
+        healthBoostEffect.updateActivity();
+        regenerationEffect.updateActivity();
+        slownessEffect.updateActivity();
+        jumpNegativeEffect.updateActivity();
+        waterBreathingEffect.updateActivity();
 
         if (!slownessEffect.isActive())
         {
-            jumpEffect.updateEffectActivity(getJumpEffectAmplifier());
+            jumpEffect.updateActivity(getJumpEffectAmplifier());
         }
         else
         {

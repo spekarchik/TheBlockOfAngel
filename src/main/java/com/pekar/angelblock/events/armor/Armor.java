@@ -96,22 +96,6 @@ abstract class Armor implements IArmor
         return getFamilyName().hashCode();
     }
 
-    protected void synchronizeEffect(IArmorEffect basicEffect, IArmorEffect dependentEffect)
-    {
-        if (basicEffect.isEffectOn() != dependentEffect.isEffectOn())
-        {
-            dependentEffect.invertSwitchState();
-        }
-    }
-
-    protected void synchronizeEffectInversely(IArmorEffect basicEffect, IArmorEffect dependentEffect)
-    {
-        if (basicEffect.isEffectOn() == dependentEffect.isEffectOn())
-        {
-            dependentEffect.invertSwitchState();
-        }
-    }
-
     protected boolean isFreezeDamage(DamageSource damageSource)
     {
         return damageSource.is(DamageTypes.FREEZE);

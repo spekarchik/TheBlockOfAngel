@@ -23,7 +23,7 @@ public class ModMobEffectInstance extends MobEffectInstance
     @Override
     public boolean tick(LivingEntity entity, Runnable onExpirationRunnable)
     {
-        if (onEffectEnded != null && getDuration() == 0)
+        if (onEffectEnded != null && getDuration() == 1)
         {
             onEffectEnded.run();
         }

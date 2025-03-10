@@ -3,6 +3,8 @@ package com.pekar.angelblock.events.player;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.events.effect.ITemporaryArmorEffect;
+import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
+import com.pekar.angelblock.events.effect.ITemporaryPersistentArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.Holder;
@@ -201,16 +203,16 @@ public class Player implements IPlayer
     }
 
     @Override
-    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier)
+    public void setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier)
     {
         setEffect(armorEffect, duration, amplifier, false);
     }
 
     @Override
-    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
+    public void setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
     {
         entity.addEffect(new ModMobEffectInstance(armorEffect.getEffect(), duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/,
-                armorEffect::resetIsArmorEffect));
+                armorEffect::onDurationEnd));
     }
 
     @Override

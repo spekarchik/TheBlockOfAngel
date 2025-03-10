@@ -4,10 +4,10 @@ import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class WaterBreathingEffect extends PermanentArmorEffect
+public class LuckPermanentArmorEffect extends PermanentArmorEffect
 {
-    public WaterBreathingEffect(IPlayer player, IArmor armor)
+    public LuckPermanentArmorEffect(IPlayer player, IArmor armor)
     {
-        super(player, armor, MobEffects.WATER_BREATHING, 0);
+        super(player, armor, MobEffects.LUCK, 1);
     }
 }

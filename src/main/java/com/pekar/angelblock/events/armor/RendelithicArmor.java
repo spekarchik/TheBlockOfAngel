@@ -16,11 +16,11 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class RendelithicArmor extends Armor
 {
-    private final IArmorEffect nauseaEffect;
-    private final IArmorEffect slownessEffect;
-    private final IArmorEffect slowFallingEffect;
-    private final IArmorEffect glowingEffect;
-    private final SwitchingEffectSynchronizer jumpEffect;
+    private final ITemporaryPersistentArmorEffect nauseaEffect;
+    private final ITemporaryPersistentArmorEffect slownessEffect;
+    private final ISwitchingArmorEffect slowFallingEffect;
+    private final ISwitchingArmorEffect glowingEffect;
+    private final ISwitchingEffectSynchronizer jumpEffect;
 
     private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 3;
     private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 5;
@@ -28,12 +28,12 @@ public class RendelithicArmor extends Armor
     public RendelithicArmor(IPlayer player)
     {
         super(player);
-        nauseaEffect = new NauseaTemporaryEffect(player, this, 200).showIcon();
-        slownessEffect = new SlownessArmorEffect(player, this, 5, 400);
+        nauseaEffect = new NauseaNegativeEffect(player, this, 200).showIcon();
+        slownessEffect = new SlownessNegativeArmorEffect(player, this, 5, 400);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
-        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
 
-        JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
+        JumpBoostSwitchingArmorEffect jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
         SpeedSwitchingEffect speedEffect = new SpeedSwitchingEffect(player, this, 0);
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
@@ -91,11 +91,11 @@ public class RendelithicArmor extends Armor
     @Override
     public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        jumpEffect.updateEffectAvailability();
-        nauseaEffect.updateEffectAvailability();
-        slownessEffect.updateEffectAvailability();
-        slowFallingEffect.updateEffectAvailability();
-        glowingEffect.updateEffectAvailability();
+        jumpEffect.updateAvailability();
+        nauseaEffect.updateAvailability();
+        slownessEffect.updateAvailability();
+        slowFallingEffect.updateAvailability();
+        glowingEffect.updateAvailability();
 
         updatePotionEffects();
     }
@@ -134,9 +134,9 @@ public class RendelithicArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            if (slowFallingEffect.isEffectAvailable())
+            if (slowFallingEffect.isAvailable())
             {
-                if (!slownessEffect.isActive() || slowFallingEffect.isEffectOn())
+                if (!slownessEffect.isActive() || slowFallingEffect.isOn())
                 {
                     slowFallingEffect.trySwitch();
                 }
@@ -178,7 +178,7 @@ public class RendelithicArmor extends Armor
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.02f);
         }
-        else if (jumpEffect.isEffectOn())
+        else if (jumpEffect.isOn())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
@@ -216,14 +216,14 @@ public class RendelithicArmor extends Armor
 
     private void updatePotionEffects()
     {
-        jumpEffect.updateEffectActivity(getJumpBoostAmplifier());
-        glowingEffect.updateEffectActivity();
+        jumpEffect.updateActivity(getJumpBoostAmplifier());
+        glowingEffect.updateActivity();
 
         checkForNausea();
 
         if (!slownessEffect.isActive())
         {
-            slowFallingEffect.updateEffectActivity();
+            slowFallingEffect.updateActivity();
         }
     }
 
@@ -241,9 +241,9 @@ public class RendelithicArmor extends Armor
         {
             if (!slownessEffect.isActive())
             {
-                nauseaEffect.trySwitch();
-                slownessEffect.trySwitch();
-                if (slowFallingEffect.isEffectOn())
+                nauseaEffect.tryActivate();
+                slownessEffect.tryActivate();
+                if (slowFallingEffect.isOn())
                 {
                     slowFallingEffect.trySwitchOff();
                 }
