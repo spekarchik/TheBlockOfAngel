@@ -191,16 +191,13 @@ public class LimoniteArmor extends Armor
     {
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+            if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
                 jumpEffect.trySwitchOff();
                 slownessEffect.tryActivate();
                 jumpNegativeEffect.tryActivate();
 
-                if (!regenerationEffect.isActive())
-                {
-                    regenerationEffect.tryActivate();
-                }
+                regenerationEffect.tryActivate();
             }
         }
 

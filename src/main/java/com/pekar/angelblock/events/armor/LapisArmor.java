@@ -135,7 +135,7 @@ public class LapisArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isAvailable() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+            if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
                 blindnessEffect.tryActivate();
                 regenerationEffect.tryActivate();

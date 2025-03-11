@@ -267,7 +267,7 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isAvailable() && playerEntity.getHealth() < playerEntity.getMaxHealth())
+            if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && playerEntity.getHealth() < playerEntity.getMaxHealth())
             {
                 jumpEffect.trySwitchOff();
                 levitationEffect.trySwitchOff();
@@ -275,15 +275,12 @@ public class SuperArmor extends Armor
                 slownessEffect.tryActivate();
                 jumpNegativeEffect.tryActivate();
 
-                if (!regenerationEffect.isActive())
-                {
-                    regenerationEffect.tryActivate();
+                regenerationEffect.tryActivate();
 
-                    if (regenerationEffect.isActive() && !playerEntity.onGround() && slowFallingEffect.isAvailable())
-                    {
-                        slowFallingEffect.trySwitchOn();
-                        isSlowFallingActivatedOnGround = false;
-                    }
+                if (regenerationEffect.isActive() && !playerEntity.onGround() && slowFallingEffect.isAvailable())
+                {
+                    slowFallingEffect.trySwitchOn();
+                    isSlowFallingActivatedOnGround = false;
                 }
             }
         }
