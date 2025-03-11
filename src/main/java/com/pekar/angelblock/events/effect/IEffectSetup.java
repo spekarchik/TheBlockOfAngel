@@ -9,7 +9,10 @@ import java.util.function.BiPredicate;
 public interface IEffectSetup<T extends IArmorEffect>
 {
     T setupAvailability(BiPredicate<IPlayer, IArmor> predicate);
+    T setupUnavailability(BiPredicate<IPlayer, IArmor> predicate);
     T setupAvailability(IEffectSetup<T> copyFrom);
+    T setupUnavailability(IEffectSetup<T> copyFrom);
+
     T alwaysAvailable();
     T availableOnHelmetWithDetector();
     T availableOnBootsWithJumpBooster();
@@ -21,6 +24,9 @@ public interface IEffectSetup<T extends IArmorEffect>
     T availableOnAnyArmorElement();
     T availableIfSlotSet(EquipmentSlot slot);
     T availableIfSlotsSet(EquipmentSlot... slot);
+
+    T unavailableIfNotModArmor(EquipmentSlot slot);
+
     T showIcon();
     T hideIcon();
 }

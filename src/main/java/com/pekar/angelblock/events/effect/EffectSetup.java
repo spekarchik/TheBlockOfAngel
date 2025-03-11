@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events.effect;
 
+import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,6 +14,10 @@ interface EffectSetup<T extends IArmorEffect> extends IEffectSetup<T>
     void setAvailabilityPredicate(BiPredicate<IPlayer, IArmor> value);
 
     BiPredicate<IPlayer, IArmor> getAvailabilityPredicate();
+
+    void setUnavailabilityPredicate(BiPredicate<IPlayer, IArmor> value);
+
+    BiPredicate<IPlayer, IArmor> getUnavailabilityPredicate();
 
     T getSelf();
 
@@ -28,9 +33,21 @@ interface EffectSetup<T extends IArmorEffect> extends IEffectSetup<T>
         return getSelf();
     }
 
+    default T setupUnavailability(IEffectSetup<T> copyFrom)
+    {
+        setUnavailabilityPredicate(((EffectSetup<T>) copyFrom).getUnavailabilityPredicate());
+        return getSelf();
+    }
+
     default T setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
     {
         setAvailabilityPredicate(predicate);
+        return getSelf();
+    }
+
+    default T setupUnavailability(BiPredicate<IPlayer, IArmor> predicate)
+    {
+        setUnavailabilityPredicate(predicate);
         return getSelf();
     }
 
@@ -91,6 +108,17 @@ interface EffectSetup<T extends IArmorEffect> extends IEffectSetup<T>
     default T availableIfSlotsSet(EquipmentSlot... slots)
     {
         setAvailabilityPredicate((player1, armor1) -> player1.isAllArmorElementsPutOn(armor1, slots));
+        return getSelf();
+    }
+
+    @Override
+    default T unavailableIfNotModArmor(EquipmentSlot slot)
+    {
+        setUnavailabilityPredicate(((player, armor) -> {
+            var stack = player.getEntity().getItemBySlot(slot);
+            return stack.isEmpty() || !(stack.getItem() instanceof ModArmor);
+        }));
+
         return getSelf();
     }
 

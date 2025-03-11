@@ -15,9 +15,11 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     protected final Holder<MobEffect> effectType;
     private State state = State.OFF;
     private boolean isAvailable;
+    private boolean isNotAvailable;
     protected final int defaultAmplifier;
     private boolean showIcon;
     private BiPredicate<IPlayer, IArmor> availabilityPredicate = (p, a) -> false;
+    private BiPredicate<IPlayer, IArmor> unavailabilityPredicate = (p, a) -> !availabilityPredicate.test(p, a);
 
     protected ArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
@@ -58,9 +60,16 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     }
 
     @Override
+    public final boolean isUnavailable()
+    {
+        return isNotAvailable;
+    }
+
+    @Override
     public final void updateAvailability()
     {
         isAvailable = availabilityPredicate.test(player, armor);
+        isNotAvailable = unavailabilityPredicate.test(player, armor);
     }
 
     @Override
@@ -94,7 +103,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
                 setEffect(amplifier, duration);
             }
         }
-        else
+        else if (isUnavailable())
         {
             tryRemove();
         }
@@ -153,5 +162,17 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     public final BiPredicate<IPlayer, IArmor> getAvailabilityPredicate()
     {
         return availabilityPredicate;
+    }
+
+    @Override
+    public void setUnavailabilityPredicate(BiPredicate<IPlayer, IArmor> value)
+    {
+        unavailabilityPredicate = value;
+    }
+
+    @Override
+    public BiPredicate<IPlayer, IArmor> getUnavailabilityPredicate()
+    {
+        return unavailabilityPredicate;
     }
 }
