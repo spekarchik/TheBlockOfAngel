@@ -79,19 +79,77 @@ public class SuperArmor extends Armor
     }
 
     @Override
-    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
+    protected void onLogin(PlayerEvent.PlayerLoggedInEvent event)
     {
         isSlowFallingActivatedOnGround = player.getEntity().onGround();
+    }
 
+    @Override
+    protected void updateAvailability()
+    {
+        slownessEffect.updateAvailability();
+        jumpNegativeEffect.updateAvailability();
+
+        slowFallingEffect.updateAvailability();
+        glowingEffect.updateAvailability();
+        levitationEffect.updateAvailability();
+        luckEffect.updateAvailability();
+        healthBoostEffect.updateAvailability();
+        regenerationEffect.updateAvailability();
+        nightVisionEffect.updateAvailability();
+
+        jumpEffect.updateAvailability();
+        superJumpEffect.updateAvailability();
+    }
+
+    @Override
+    protected void updateEffectStates()
+    {
         nightVisionEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
 
-        if (!slownessEffect.isActive())
+        if (!jumpNegativeEffect.isActive())
         {
             jumpEffect.updateSwitchState();
             levitationEffect.updateSwitchState();
             slowFallingEffect.updateSwitchState();
             superJumpEffect.updateSwitchState();
+        }
+    }
+
+    @Override
+    protected void updateActivity(EquipmentSlot slot)
+    {
+        switch (slot)
+        {
+            case CHEST:
+                slowFallingEffect.updateActivity();
+                glowingEffect.updateActivity();
+                levitationEffect.updateActivity(getLevitationAmplifier());
+                luckEffect.updateActivity();
+                break;
+
+            case LEGS:
+                healthBoostEffect.updateActivity();
+                regenerationEffect.updateActivity();
+                break;
+
+            case FEET:
+                break;
+
+            case HEAD:
+                nightVisionEffect.updateActivity();
+                break;
+        }
+
+        superJumpEffect.updateActivity();
+        if (!jumpNegativeEffect.isActive())
+        {
+            jumpEffect.updateActivity();
+        }
+        else
+        {
+            jumpEffect.updateDependentEffectsActivity();
         }
     }
 
@@ -194,31 +252,13 @@ public class SuperArmor extends Armor
     }
 
     @Override
-    public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
-    {
-        jumpEffect.updateAvailability();
-        nightVisionEffect.updateAvailability();
-        luckEffect.updateAvailability();
-        glowingEffect.updateAvailability();
-        regenerationEffect.updateAvailability();
-        healthBoostEffect.updateAvailability();
-        slownessEffect.updateAvailability();
-        jumpNegativeEffect.updateAvailability();
-        levitationEffect.updateAvailability();
-        slowFallingEffect.updateAvailability();
-        superJumpEffect.updateAvailability();
-
-        updatePotionEffects();
-    }
-
-    @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
         updateSlowFallingEffect();
 
         if (!player.isArmorElementPutOn(this, EquipmentSlot.FEET)) return;
 
-        if (jumpEffect.isMasterActive() || slownessEffect.isActive()) return;
+        if (jumpEffect.isMasterActive() || jumpNegativeEffect.isActive()) return;
 
         if (slowFallingEffect.isOn() && slowFallingEffect.isActive())
         {
@@ -287,7 +327,7 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
-            if (!slownessEffect.isActive())
+            if (!jumpNegativeEffect.isActive())
             {
                 jumpEffect.trySwitch();
             }
@@ -311,7 +351,7 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            if (!slownessEffect.isActive())
+            if (!jumpNegativeEffect.isActive())
             {
                 if (jumpEffect.isMasterAvailable() && jumpEffect.isOn())
                 {
@@ -441,30 +481,6 @@ public class SuperArmor extends Armor
         float leggingsProtection = player.isArmorElementPutOn(this, EquipmentSlot.LEGS) ? initialDamageAmount * 0.3f : 0;
         float realDamage = initialDamageAmount - helmetProtection - bootsProtection - chestplateProtection - leggingsProtection;
         return realDamage > 0 ? realDamage : 0;
-    }
-
-    private void updatePotionEffects()
-    {
-        nightVisionEffect.updateActivity();
-        luckEffect.updateActivity();
-        glowingEffect.updateActivity();
-        regenerationEffect.updateActivity();
-        healthBoostEffect.updateActivity();
-        slownessEffect.updateActivity();
-        jumpNegativeEffect.updateActivity();
-        superJumpEffect.updateActivity();
-
-        levitationEffect.updateActivity(getLevitationAmplifier());
-        slowFallingEffect.updateActivity();
-
-        if (!slownessEffect.isActive())
-        {
-            jumpEffect.updateActivity();
-        }
-        else
-        {
-            jumpEffect.updateDependentEffectsActivity();
-        }
     }
 
     private boolean hasImmunity(DamageSource damageSource)

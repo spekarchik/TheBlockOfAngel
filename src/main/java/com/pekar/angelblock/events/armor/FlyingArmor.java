@@ -34,6 +34,42 @@ public class FlyingArmor extends Armor
     }
 
     @Override
+    protected void onLogin(PlayerEvent.PlayerLoggedInEvent event)
+    {
+        isSlowFallingActivatedOnGround = player.getEntity().onGround();
+    }
+
+    @Override
+    protected void updateAvailability()
+    {
+        jumpBoostEffect.updateAvailability();
+        slowFallingEffect.updateAvailability();
+    }
+
+    @Override
+    protected void updateEffectStates()
+    {
+        jumpBoostEffect.updateSwitchState();
+
+        if (!player.isNether())
+        {
+            slowFallingEffect.updateSwitchState();
+        }
+    }
+
+    @Override
+    protected void updateActivity(EquipmentSlot slot)
+    {
+        updateEffectActivity();
+    }
+
+    @Override
+    protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
+    {
+        slowFallingEffect.updateSwitchState();
+    }
+
+    @Override
     public String getFamilyName()
     {
         return ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName();
@@ -43,19 +79,6 @@ public class FlyingArmor extends Armor
     public int getPriority()
     {
         return 1;
-    }
-
-    @Override
-    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
-    {
-        isSlowFallingActivatedOnGround = player.getEntity().onGround();
-
-        jumpBoostEffect.updateSwitchState();
-
-        if (!player.isNether())
-        {
-            slowFallingEffect.updateSwitchState();
-        }
     }
 
     @Override
@@ -72,16 +95,6 @@ public class FlyingArmor extends Armor
     public void onLivingDamageEvent(LivingDamageEvent.Pre event)
     {
         // none
-    }
-
-    @Override
-    public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
-    {
-        jumpBoostEffect.updateAvailability();
-        slowFallingEffect.updateAvailability();
-
-        slowFallingEffect.updateSwitchState();
-        updatePotionEffects();
     }
 
     @Override
@@ -132,7 +145,7 @@ public class FlyingArmor extends Armor
         jumpBoostEffect.updateAvailability();
         slowFallingEffect.updateAvailability();
 
-        updatePotionEffects();
+        updateEffectActivity();
     }
 
     @Override
@@ -174,7 +187,7 @@ public class FlyingArmor extends Armor
     {
     }
 
-    private void updatePotionEffects()
+    private void updateEffectActivity()
     {
         jumpBoostEffect.updateActivity();
         slowFallingEffect.updateActivity();

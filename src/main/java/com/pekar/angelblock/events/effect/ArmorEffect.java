@@ -103,7 +103,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
                 setEffect(amplifier, duration);
             }
         }
-        else if (isUnavailable())
+        else //if (isUnavailable())
         {
             tryRemove();
         }

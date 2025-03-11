@@ -32,7 +32,7 @@ public class LapisArmor extends Armor
         super(player);
         nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
         glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
-        waterBreathingEffect = new WaterBreathingPermanentEffect(player, this).availableIfSlotSet(EquipmentSlot.HEAD);
+        waterBreathingEffect = new WaterBreathingPermanentEffect(player, this);
         hasteEffect = new HastePermanentArmorEffect(player, this);
         luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
@@ -43,11 +43,59 @@ public class LapisArmor extends Armor
     }
 
     @Override
-    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
+    protected void updateAvailability()
+    {
+        nightVisionEffect.updateAvailability();
+        hasteEffect.updateAvailability();
+        waterBreathingEffect.updateAvailability();
+        luckEffect.updateAvailability();
+        glowingEffect.updateAvailability();
+        regenerationEffect.updateAvailability();
+        blindnessEffect.updateAvailability();
+        witherEffect.updateAvailability();
+        strengthEffect.updateAvailability();
+        dolphinsGrace.updateAvailability();
+    }
+
+    @Override
+    protected void updateEffectStates()
     {
         nightVisionEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
         dolphinsGrace.updateSwitchState();
+    }
+
+    @Override
+    protected void updateActivity(EquipmentSlot slot)
+    {
+        blindnessEffect.updateActivity();
+
+        switch (slot)
+        {
+            case HEAD ->
+            {
+                nightVisionEffect.updateActivity();
+                waterBreathingEffect.updateActivity();
+            }
+
+            case CHEST ->
+            {
+                hasteEffect.updateActivity();
+                luckEffect.updateActivity();
+                glowingEffect.updateActivity();
+                strengthEffect.updateActivity();
+            }
+
+            case LEGS ->
+            {
+                regenerationEffect.updateActivity();
+            }
+
+            case FEET ->
+            {
+                dolphinsGrace.updateActivity();
+            }
+        }
     }
 
     @Override
@@ -73,23 +121,6 @@ public class LapisArmor extends Armor
         {
             event.setNewDamage(event.getNewDamage() * 2f);
         }
-    }
-
-    @Override
-    public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
-    {
-        nightVisionEffect.updateAvailability();
-        hasteEffect.updateAvailability();
-        waterBreathingEffect.updateAvailability();
-        luckEffect.updateAvailability();
-        glowingEffect.updateAvailability();
-        regenerationEffect.updateAvailability();
-        blindnessEffect.updateAvailability();
-        witherEffect.updateAvailability();
-        strengthEffect.updateAvailability();
-        dolphinsGrace.updateAvailability();
-
-        updatePotionEffects();
     }
 
     @Override
@@ -210,19 +241,6 @@ public class LapisArmor extends Armor
     public int getPriority()
     {
         return 5;
-    }
-
-    private void updatePotionEffects()
-    {
-        nightVisionEffect.updateActivity();
-        hasteEffect.updateActivity();
-        waterBreathingEffect.updateActivity();
-        luckEffect.updateActivity();
-        glowingEffect.updateActivity();
-        regenerationEffect.updateActivity();
-        blindnessEffect.updateActivity();
-        strengthEffect.updateActivity();
-        dolphinsGrace.updateActivity();
     }
 
     private boolean isFireOrMagmaDamage(DamageSource damageSource)

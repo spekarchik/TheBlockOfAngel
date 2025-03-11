@@ -3,7 +3,6 @@ package com.pekar.angelblock.events.armor;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.events.effect.IArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
@@ -31,6 +30,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,6 +43,7 @@ abstract class Armor implements IArmor
     private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter = 0;
+    private boolean needUpdateStatesAfterLogin = false;
 
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final double CREEPER_AGRY_DISTANCE = 3.0;
@@ -80,6 +82,42 @@ abstract class Armor implements IArmor
         equipmentSlots.add(EquipmentSlot.LEGS);
         equipmentSlots.add(EquipmentSlot.CHEST);
         equipmentSlots.add(EquipmentSlot.HEAD);
+    }
+
+    protected abstract void updateAvailability();
+    protected abstract void updateEffectStates();
+    protected abstract void updateActivity(EquipmentSlot slot);
+
+    protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
+    {
+        // can be overriden
+    }
+
+    protected void onLogin(PlayerEvent.PlayerLoggedInEvent event)
+    {
+        // can be overriden
+    }
+
+    @Override
+    public final void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
+    {
+        needUpdateStatesAfterLogin = true;
+        onLogin(event);
+    }
+
+    @Override
+    public final void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
+    {
+        updateAvailability();
+
+        if (needUpdateStatesAfterLogin)
+        {
+            updateEffectStates();
+            needUpdateStatesAfterLogin = false;
+        }
+
+        updateActivity(event.getSlot());
+        onEquipmentChangeEvent(event);
     }
 
     @Override

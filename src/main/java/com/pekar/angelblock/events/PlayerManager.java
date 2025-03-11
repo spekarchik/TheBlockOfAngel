@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events;
 
+import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IArmorEvents;
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
@@ -21,9 +22,11 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.ToIntFunction;
 
 public class PlayerManager implements IEventHandler, IPlayerManager
 {
@@ -133,20 +136,60 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 //        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, offHandItemStack, ItemRegistry.END_SAPPHIRE.get());
 //        removeEffectIfHoldItem(playerEntity, MobEffects.ABSORPTION, oldSlotItem, offHandItemStack, ItemRegistry.BIOS_DIAMOND.get());
 
-        Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
-        Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);
-        player.updateArmorUsed();
-        armorAffected.addAll((Collection<IArmor>) player.getArmorTypesUsed());
-
-        if (armorAffected.isEmpty())
+        if (event.getSlot().isArmor())
         {
-            Utils.instance.attributeModifiers.removeArmorAttributeModifier(playerEntity);
+            Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
+            Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);
+            player.updateArmorUsed();
+            armorAffected.addAll((Collection<IArmor>) player.getArmorTypesUsed());
+
+            if (armorAffected.isEmpty())
+            {
+                Utils.instance.attributeModifiers.removeArmorAttributeModifier(playerEntity);
+            }
+
+            ToIntFunction<IArmor> armorPriority = getArmorPriorityFunction(event);
+
+            for (IArmor armor : armorAffected.stream().sorted(Comparator.comparingInt(armorPriority)).toList())
+            {
+                System.out.println("*** ARMOR: " + armor.getFamilyName());
+                armor.onLivingEquipmentChangeEvent(event);
+            }
+        }
+    }
+
+    private static @NotNull ToIntFunction<IArmor> getArmorPriorityFunction(LivingEquipmentChangeEvent event)
+    {
+        var from = event.getFrom();
+        var to = event.getTo();
+        String fromItemName;
+        String toItemName;
+        if (from.getItem() instanceof ModArmor modArmor)
+        {
+            fromItemName = modArmor.getArmorFamilyName();
+        }
+        else
+        {
+            fromItemName = "";
         }
 
-        for (IArmor armor : armorAffected.stream().sorted(Comparator.comparing(IArmor::getPriority)).toList())
+        if (to.getItem() instanceof ModArmor modArmor)
         {
-            armor.onLivingEquipmentChangeEvent(event);
+            toItemName = modArmor.getArmorFamilyName();
         }
+        else
+        {
+            toItemName = "";
+        }
+
+        ToIntFunction<IArmor> armorPriority = a ->
+        {
+            if (a.getFamilyName().equals(fromItemName)) return 0;
+            if (a.getFamilyName().equals(toItemName)) return 100;
+            return a.getPriority() + 2;
+        };
+
+        return armorPriority;
     }
 
     @Override

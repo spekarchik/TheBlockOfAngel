@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -41,12 +42,54 @@ public class DiamithicArmor extends Armor
     }
 
     @Override
-    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
+    protected void updateAvailability()
+    {
+        slownessEffect.updateAvailability();
+
+        strengthEffect.updateAvailability();
+        hasteEffect.updateAvailability();
+        slowFallingEffect.updateAvailability();
+        glowingEffect.updateAvailability();
+        healthBoostEffect.updateAvailability();
+        jumpBoostEffect.updateAvailability();
+        nightVisionEffect.updateAvailability();
+    }
+
+    @Override
+    protected void updateEffectStates()
     {
         nightVisionEffect.updateSwitchState();
         jumpBoostEffect.updateSwitchState();
         slowFallingEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
+    }
+
+    @Override
+    protected void updateActivity(EquipmentSlot slot)
+    {
+        slownessEffect.updateActivity();
+
+        switch (slot)
+        {
+            case CHEST:
+                strengthEffect.updateActivity(getStrengthEffectAmplifier());
+                slowFallingEffect.updateActivity();
+                hasteEffect.updateActivity();
+                glowingEffect.updateActivity();
+                break;
+
+            case LEGS:
+                healthBoostEffect.updateActivity();
+                break;
+
+            case FEET:
+                jumpBoostEffect.updateActivity();
+                break;
+
+            case HEAD:
+                nightVisionEffect.updateActivity();
+                break;
+        }
     }
 
     @Override
@@ -68,21 +111,6 @@ public class DiamithicArmor extends Armor
         {
             event.setNewDamage(event.getNewDamage() * 2f);
         }
-    }
-
-    @Override
-    public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
-    {
-        nightVisionEffect.updateAvailability();
-        strengthEffect.updateAvailability();
-        jumpBoostEffect.updateAvailability();
-        slowFallingEffect.updateAvailability();
-        healthBoostEffect.updateAvailability();
-        hasteEffect.updateAvailability();
-        slownessEffect.updateAvailability();
-        glowingEffect.updateAvailability();
-
-        updatePotionEffects();
     }
 
     @Override
@@ -201,18 +229,6 @@ public class DiamithicArmor extends Armor
     public int getPriority()
     {
         return 3;
-    }
-
-    private void updatePotionEffects()
-    {
-        nightVisionEffect.updateActivity();
-        strengthEffect.updateActivity(getStrengthEffectAmplifier());
-        jumpBoostEffect.updateActivity();
-        slowFallingEffect.updateActivity();
-        healthBoostEffect.updateActivity();
-        hasteEffect.updateActivity();
-        slownessEffect.updateActivity();
-        glowingEffect.updateActivity();
     }
 
     private int getStrengthEffectAmplifier()
