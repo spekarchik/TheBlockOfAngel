@@ -27,6 +27,8 @@ public interface IPlayer extends IPlayerEvents
     void updateArmorUsed();
 
     boolean isEffectActive(Holder<MobEffect> effect);
+    boolean hasArmorEffect(Holder<MobEffect> effect);
+    boolean hasAnotherEffect(Holder<MobEffect> effect);
 
     void setEffect(Holder<MobEffect> effect, int amplifier);
     void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon);
@@ -35,8 +37,6 @@ public interface IPlayer extends IPlayerEvents
     void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier);
     void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon);
     void clearEffect(Holder<MobEffect> effect);
-    boolean hasArmorEffect(Holder<MobEffect> effect);
-    boolean hasAnotherEffect(Holder<MobEffect> effect);
 
     String getPlayerName();
     Player getEntity();
