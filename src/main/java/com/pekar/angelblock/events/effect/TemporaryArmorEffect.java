@@ -7,8 +7,6 @@ import net.minecraft.world.effect.MobEffect;
 
 class TemporaryArmorEffect extends TemporaryBaseArmorEffect<ITemporaryArmorEffect> implements ITemporaryArmorEffect
 {
-    protected boolean isArmorEffect;
-
     protected TemporaryArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
     {
         super(player, armor, effectType, defaultAmplifier, defaultDuration);
@@ -23,7 +21,7 @@ class TemporaryArmorEffect extends TemporaryBaseArmorEffect<ITemporaryArmorEffec
     @Override
     public final boolean isArmorEffect()
     {
-        return isArmorEffect;
+        return player.hasArmorEffect(effectType);
     }
 
     @Override
@@ -35,7 +33,6 @@ class TemporaryArmorEffect extends TemporaryBaseArmorEffect<ITemporaryArmorEffec
     @Override
     public final void onDurationEnd()
     {
-        isArmorEffect = false;
         setState(State.OFF);
     }
 

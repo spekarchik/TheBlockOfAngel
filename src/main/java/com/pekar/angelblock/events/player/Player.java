@@ -221,6 +221,20 @@ public class Player implements IPlayer
     }
 
     @Override
+    public boolean hasArmorEffect(Holder<MobEffect> effect)
+    {
+        var effectInstance = entity.getEffect(effect);
+        return effectInstance != null && !effectInstance.isVisible();
+    }
+
+    @Override
+    public boolean hasAnotherEffect(Holder<MobEffect> effect)
+    {
+        var effectInstance = entity.getEffect(effect);
+        return effectInstance != null && effectInstance.isVisible();
+    }
+
+    @Override
     public String getPlayerName()
     {
         return entity.getName().getString();
