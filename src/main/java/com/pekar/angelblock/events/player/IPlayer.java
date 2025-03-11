@@ -3,9 +3,9 @@ package com.pekar.angelblock.events.player;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.effect.ITemporaryArmorEffect;
 import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
-import com.pekar.angelblock.events.effect.ITemporaryPersistentArmorEffect;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 
@@ -30,12 +30,13 @@ public interface IPlayer extends IPlayerEvents
     boolean hasArmorEffect(Holder<MobEffect> effect);
     boolean hasAnotherEffect(Holder<MobEffect> effect);
 
-    void setEffect(Holder<MobEffect> effect, int amplifier);
-    void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon);
-    void setEffect(Holder<MobEffect> effect, int duration, int amplifier);
-    void setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon);
-    void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier);
-    void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon);
+    IModMobEffectInstance setEffect(Holder<MobEffect> effect, int amplifier);
+    IModMobEffectInstance setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon);
+    IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier);
+    IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon);
+    IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier);
+    IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon);
+    MobEffectInstance getEffectInstance(Holder<MobEffect> effect);
     void clearEffect(Holder<MobEffect> effect);
 
     String getPlayerName();

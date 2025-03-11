@@ -3,6 +3,7 @@ package com.pekar.angelblock.events.player;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.events.effect.ITemporaryArmorEffect;
+import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.Holder;
@@ -178,49 +179,6 @@ public class Player implements IPlayer
     }
 
     @Override
-    public void setEffect(Holder<MobEffect> effect, int amplifier)
-    {
-        setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier);
-    }
-
-    @Override
-    public void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon)
-    {
-        setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier, showIcon);
-    }
-
-    @Override
-    public void setEffect(Holder<MobEffect> effect, int duration, int amplifier)
-    {
-        setEffect(effect, duration, amplifier, false);
-    }
-
-    @Override
-    public void setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
-    {
-        entity.addEffect(new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/));
-    }
-
-    @Override
-    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier)
-    {
-        setEffect(armorEffect, duration, amplifier, false);
-    }
-
-    @Override
-    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
-    {
-        entity.addEffect(new ModMobEffectInstance(armorEffect.getEffect(), duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/,
-                armorEffect::onDurationEnd));
-    }
-
-    @Override
-    public void clearEffect(Holder<MobEffect> effect)
-    {
-        entity.removeEffect(effect);
-    }
-
-    @Override
     public boolean hasArmorEffect(Holder<MobEffect> effect)
     {
         var effectInstance = entity.getEffect(effect);
@@ -232,6 +190,59 @@ public class Player implements IPlayer
     {
         var effectInstance = entity.getEffect(effect);
         return effectInstance != null && effectInstance.isVisible();
+    }
+
+    @Override
+    public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int amplifier)
+    {
+        return setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier);
+    }
+
+    @Override
+    public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon)
+    {
+        return setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier, showIcon);
+    }
+
+    @Override
+    public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier)
+    {
+        return setEffect(effect, duration, amplifier, false);
+    }
+
+    @Override
+    public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
+    {
+        var effectInstance = new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/);
+        entity.addEffect(effectInstance);
+        return effectInstance;
+    }
+
+    @Override
+    public IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier)
+    {
+        return setEffect(armorEffect, duration, amplifier, false);
+    }
+
+    @Override
+    public IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
+    {
+        var effectInstance = new ModMobEffectInstance(armorEffect.getEffect(), duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/,
+                armorEffect::onDurationEnd);
+        entity.addEffect(effectInstance);
+        return effectInstance;
+    }
+
+    @Override
+    public MobEffectInstance getEffectInstance(Holder<MobEffect> effect)
+    {
+        return getEntity().getEffect(effect);
+    }
+
+    @Override
+    public void clearEffect(Holder<MobEffect> effect)
+    {
+        entity.removeEffect(effect);
     }
 
     @Override

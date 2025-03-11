@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.player.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -14,9 +15,9 @@ class PermanentArmorEffect extends ArmorEffect<IPermanentArmorEffect> implements
     }
 
     @Override
-    protected void setEffect(int amplifier, int duration)
+    protected IModMobEffectInstance setEffect(int amplifier, int duration)
     {
-        player.setEffect(effectType, amplifier, getShowIcon());
+        return player.setEffect(effectType, amplifier, getShowIcon());
     }
 
     @Override
@@ -28,7 +29,7 @@ class PermanentArmorEffect extends ArmorEffect<IPermanentArmorEffect> implements
     @Override
     public void tryActivate(int amplifier)
     {
-        super.tryActivate(amplifier, MobEffectInstance.INFINITE_DURATION);
+        super.tryActivateInternal(amplifier, MobEffectInstance.INFINITE_DURATION);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.player.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -25,15 +26,23 @@ class TemporaryArmorEffect extends TemporaryBaseArmorEffect<ITemporaryArmorEffec
     }
 
     @Override
-    protected void setEffect(int amplifier, int duration)
+    protected IModMobEffectInstance setEffect(int amplifier, int duration)
     {
-        player.setEffect(this, duration, amplifier, getShowIcon());
+        return player.setEffect(this, duration, amplifier, getShowIcon());
+    }
+
+    @Override
+    public void tryActivate(int amplifier, int duration)
+    {
+        if (isAnotherActive()) return;
+        super.tryActivateInternal(amplifier, duration);
     }
 
     @Override
     public final void onDurationEnd()
     {
         setState(State.OFF);
+        clearEffectInstance();
     }
 
     @Override

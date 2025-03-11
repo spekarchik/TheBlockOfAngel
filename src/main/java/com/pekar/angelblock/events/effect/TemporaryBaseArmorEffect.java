@@ -18,20 +18,13 @@ abstract class TemporaryBaseArmorEffect<T extends IArmorEffect> extends ArmorEff
     @Override
     public void tryActivate()
     {
-        this.tryActivate(defaultAmplifier, defaultDuration);
+        tryActivateInternal(defaultAmplifier, defaultDuration);
     }
 
     @Override
     public final void tryActivate(int duration)
     {
-        this.tryActivate(defaultAmplifier, duration);
-    }
-
-    @Override
-    public void tryActivate(int amplifier, int duration)
-    {
-        if (isAnotherActive()) return;
-        super.tryActivate(amplifier, duration);
+        tryActivateInternal(defaultAmplifier, duration);
     }
 
     @Override

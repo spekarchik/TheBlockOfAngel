@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.player.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -18,6 +19,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     private boolean isNotAvailable;
     protected final int defaultAmplifier;
     private boolean showIcon;
+    private IModMobEffectInstance effectInstance;
     private BiPredicate<IPlayer, IArmor> availabilityPredicate = (p, a) -> false;
     private BiPredicate<IPlayer, IArmor> unavailabilityPredicate = (p, a) -> !availabilityPredicate.test(p, a);
 
@@ -38,13 +40,13 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     @Override
     public final boolean isActive()
     {
-        return player.hasArmorEffect(effectType);
+        return isOn() && player.hasArmorEffect(effectType) && effectInstance != null && effectInstance.equals(player.getEffectInstance(effectType));
     }
 
     @Override
     public boolean isAnotherActive()
     {
-        return player.hasAnotherEffect(effectType);
+        return player.isEffectActive(effectType) && !isActive();
     }
 
     @Override
@@ -96,11 +98,12 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
 
     protected final void updateActivity(int amplifier, int duration)
     {
+        System.out.println("Activity: " + effectType.getRegisteredName() + " : ARMOR = " + armor.getFamilyName() + ", IsAvailable = " + isAvailable() + ", isOn = " + isOn() + ", isActive = " + isActive());
         if (isAvailable() && isOn())
         {
             if (!isActive() || shouldPersist())
             {
-                setEffect(amplifier, duration);
+                effectInstance = setEffect(amplifier, duration);
             }
         }
         else //if (isUnavailable())
@@ -114,14 +117,14 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
         return false;
     }
 
-    protected abstract void setEffect(int amplifier, int duration);
+    protected abstract IModMobEffectInstance setEffect(int amplifier, int duration);
 
     protected final void setState(State state)
     {
         this.state = state;
     }
 
-    protected void tryActivate(int amplifier, int duration)
+    protected void tryActivateInternal(int amplifier, int duration)
     {
         setState(State.ON);
         updateActivity(amplifier, duration);
@@ -131,7 +134,12 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     {
         if (canClearEffect())
         {
-            if (isActive()) player.clearEffect(effectType);
+            if (isActive())
+            {
+                player.clearEffect(effectType);
+                effectInstance = null;
+            }
+
             if (state.isOn()) setState(State.OFF);
         }
     }
@@ -144,6 +152,11 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     protected boolean getShowIcon()
     {
         return showIcon;
+    }
+
+    protected final void clearEffectInstance()
+    {
+        effectInstance = null;
     }
 
     @Override

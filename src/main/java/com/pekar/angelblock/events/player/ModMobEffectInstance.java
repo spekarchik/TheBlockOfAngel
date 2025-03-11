@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
-public class ModMobEffectInstance extends MobEffectInstance
+public class ModMobEffectInstance extends MobEffectInstance implements IModMobEffectInstance
 {
     private final Runnable onEffectEnded;
 

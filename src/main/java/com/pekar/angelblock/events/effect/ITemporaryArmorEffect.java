@@ -4,5 +4,4 @@ public interface ITemporaryArmorEffect extends ITemporaryBaseArmorEffect, IArmor
 {
     void tryRemove();
     boolean isArmorEffect();
-    void onDurationEnd();
 }

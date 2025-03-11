@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.player.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -14,9 +15,9 @@ class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements
     }
 
     @Override
-    protected void setEffect(int amplifier, int duration)
+    protected IModMobEffectInstance setEffect(int amplifier, int duration)
     {
-        player.setEffect(effectType, amplifier, getShowIcon());
+        return player.setEffect(effectType, amplifier, getShowIcon());
     }
 
     @Override
@@ -42,7 +43,7 @@ class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements
     public void trySwitchOn(int amplifier)
     {
         if (isAnotherActive()) return;
-        tryActivate(amplifier, MobEffectInstance.INFINITE_DURATION);
+        tryActivateInternal(amplifier, MobEffectInstance.INFINITE_DURATION);
     }
 
     @Override
