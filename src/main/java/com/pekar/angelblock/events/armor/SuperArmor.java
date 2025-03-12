@@ -118,30 +118,36 @@ public class SuperArmor extends Armor
     }
 
     @Override
+    protected void updateActivityForHeadSlot()
+    {
+        nightVisionEffect.updateActivity();
+    }
+
+    @Override
+    protected void updateActivityForFeetSlot()
+    {
+
+    }
+
+    @Override
+    protected void updateActivityForLegsSlot()
+    {
+        healthBoostEffect.updateActivity();
+        regenerationEffect.updateActivity();
+    }
+
+    @Override
+    protected void updateActivityForChestSlot()
+    {
+        slowFallingEffect.updateActivity();
+        glowingEffect.updateActivity();
+        levitationEffect.updateActivity(getLevitationAmplifier());
+        luckEffect.updateActivity();
+    }
+
+    @Override
     protected void updateActivity(EquipmentSlot slot)
     {
-        switch (slot)
-        {
-            case CHEST:
-                slowFallingEffect.updateActivity();
-                glowingEffect.updateActivity();
-                levitationEffect.updateActivity(getLevitationAmplifier());
-                luckEffect.updateActivity();
-                break;
-
-            case LEGS:
-                healthBoostEffect.updateActivity();
-                regenerationEffect.updateActivity();
-                break;
-
-            case FEET:
-                break;
-
-            case HEAD:
-                nightVisionEffect.updateActivity();
-                break;
-        }
-
         superJumpEffect.updateActivity();
         if (!jumpNegativeEffect.isActive())
         {

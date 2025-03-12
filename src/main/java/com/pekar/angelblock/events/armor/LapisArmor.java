@@ -66,36 +66,37 @@ public class LapisArmor extends Armor
     }
 
     @Override
+    protected void updateActivityForHeadSlot()
+    {
+        nightVisionEffect.updateActivity();
+        waterBreathingEffect.updateActivity();
+    }
+
+    @Override
+    protected void updateActivityForFeetSlot()
+    {
+        dolphinsGrace.updateActivity();
+    }
+
+    @Override
+    protected void updateActivityForLegsSlot()
+    {
+        regenerationEffect.updateActivity();
+    }
+
+    @Override
+    protected void updateActivityForChestSlot()
+    {
+        hasteEffect.updateActivity();
+        luckEffect.updateActivity();
+        glowingEffect.updateActivity();
+        strengthEffect.updateActivity();
+    }
+
+    @Override
     protected void updateActivity(EquipmentSlot slot)
     {
         blindnessEffect.updateActivity();
-
-        switch (slot)
-        {
-            case HEAD ->
-            {
-                nightVisionEffect.updateActivity();
-                waterBreathingEffect.updateActivity();
-            }
-
-            case CHEST ->
-            {
-                hasteEffect.updateActivity();
-                luckEffect.updateActivity();
-                glowingEffect.updateActivity();
-                strengthEffect.updateActivity();
-            }
-
-            case LEGS ->
-            {
-                regenerationEffect.updateActivity();
-            }
-
-            case FEET ->
-            {
-                dolphinsGrace.updateActivity();
-            }
-        }
     }
 
     @Override

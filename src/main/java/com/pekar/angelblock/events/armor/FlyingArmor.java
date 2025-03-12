@@ -58,9 +58,30 @@ public class FlyingArmor extends Armor
     }
 
     @Override
+    protected void updateActivityForHeadSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForFeetSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForLegsSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForChestSlot()
+    {
+        slowFallingEffect.updateActivity();
+    }
+
+    @Override
     protected void updateActivity(EquipmentSlot slot)
     {
-        updateEffectActivity();
+        jumpBoostEffect.updateActivity();
     }
 
     @Override
@@ -145,7 +166,8 @@ public class FlyingArmor extends Armor
         jumpBoostEffect.updateAvailability();
         slowFallingEffect.updateAvailability();
 
-        updateEffectActivity();
+        jumpBoostEffect.updateActivity();
+        slowFallingEffect.updateActivity();
     }
 
     @Override
@@ -185,12 +207,6 @@ public class FlyingArmor extends Armor
     @Override
     public void onEffectAddedEvent(MobEffectEvent.Added event)
     {
-    }
-
-    private void updateEffectActivity()
-    {
-        jumpBoostEffect.updateActivity();
-        slowFallingEffect.updateActivity();
     }
 
     private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)

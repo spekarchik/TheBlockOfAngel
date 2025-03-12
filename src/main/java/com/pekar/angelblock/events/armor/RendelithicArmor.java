@@ -65,17 +65,36 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
-    protected void updateActivity(EquipmentSlot slot)
+    protected void updateActivityForHeadSlot()
     {
-        jumpEffect.updateActivity(getJumpBoostAmplifier());
-        glowingEffect.updateActivity();
+    }
 
-        checkForNausea();
+    @Override
+    protected void updateActivityForFeetSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForLegsSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForChestSlot()
+    {
+        glowingEffect.updateActivity();
 
         if (!jumpNegativeEffect.isActive())
         {
             slowFallingEffect.updateActivity();
         }
+    }
+
+    @Override
+    protected void updateActivity(EquipmentSlot slot)
+    {
+        jumpEffect.updateActivity(getJumpBoostAmplifier());
+        checkForNausea();
     }
 
     @Override

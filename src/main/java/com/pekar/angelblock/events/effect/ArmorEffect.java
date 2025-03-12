@@ -83,7 +83,8 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     @Override
     public final void updateSwitchState()
     {
-        setSwitchState(isAvailable() && player.hasArmorEffect(effectType));
+        boolean canHandleEffect = isAvailable() && player.hasArmorEffect(effectType);
+        setSwitchState(canHandleEffect);
     }
 
     protected void setSwitchState(boolean isOn)

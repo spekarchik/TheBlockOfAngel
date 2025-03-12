@@ -68,28 +68,33 @@ public class DiamithicArmor extends Armor
     protected void updateActivity(EquipmentSlot slot)
     {
         slownessEffect.updateActivity();
+    }
 
-        switch (slot)
-        {
-            case CHEST:
-                strengthEffect.updateActivity(getStrengthEffectAmplifier());
-                slowFallingEffect.updateActivity();
-                hasteEffect.updateActivity();
-                glowingEffect.updateActivity();
-                break;
+    @Override
+    public void updateActivityForHeadSlot()
+    {
+        nightVisionEffect.updateActivity();
+    }
 
-            case LEGS:
-                healthBoostEffect.updateActivity();
-                break;
+    @Override
+    public void updateActivityForFeetSlot()
+    {
+        jumpBoostEffect.updateActivity();
+    }
 
-            case FEET:
-                jumpBoostEffect.updateActivity();
-                break;
+    @Override
+    public void updateActivityForLegsSlot()
+    {
+        healthBoostEffect.updateActivity();
+    }
 
-            case HEAD:
-                nightVisionEffect.updateActivity();
-                break;
-        }
+    @Override
+    public void updateActivityForChestSlot()
+    {
+        strengthEffect.updateActivity(getStrengthEffectAmplifier());
+        slowFallingEffect.updateActivity();
+        hasteEffect.updateActivity();
+        glowingEffect.updateActivity();
     }
 
     @Override

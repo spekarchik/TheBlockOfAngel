@@ -86,6 +86,11 @@ abstract class Armor implements IArmor
 
     protected abstract void updateAvailability();
     protected abstract void updateEffectStates();
+    protected abstract void updateActivityForHeadSlot();
+    protected abstract void updateActivityForFeetSlot();
+    protected abstract void updateActivityForLegsSlot();
+    protected abstract void updateActivityForChestSlot();
+    protected void updateActivityForHandSlots() {}
     protected abstract void updateActivity(EquipmentSlot slot);
 
     protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
@@ -114,6 +119,31 @@ abstract class Armor implements IArmor
         {
             updateEffectStates();
             needUpdateStatesAfterLogin = false;
+        }
+
+        switch (event.getSlot())
+        {
+            case CHEST ->
+                    updateActivityForChestSlot();
+
+            case LEGS ->
+                    updateActivityForLegsSlot();
+
+            case FEET ->
+                    updateActivityForFeetSlot();
+
+            case HEAD ->
+                    updateActivityForHeadSlot();
+
+            case MAINHAND, OFFHAND ->
+            {
+                updateActivityForHeadSlot();
+                updateActivityForChestSlot();
+                updateActivityForLegsSlot();
+                updateActivityForFeetSlot();
+
+                updateActivityForHandSlots();
+            }
         }
 
         updateActivity(event.getSlot());

@@ -93,39 +93,40 @@ public class LimoniteArmor extends Armor
     {
         slownessEffect.updateActivity();
         jumpNegativeEffect.updateActivity();
+    }
 
-        switch (slot)
+    @Override
+    public void updateActivityForFeetSlot()
+    {
+        if (!jumpNegativeEffect.isActive())
         {
-            case HEAD ->
-            {
-                nightVisionEffect.updateActivity();
-                waterBreathingEffect.updateActivity();
-            }
-
-            case CHEST ->
-            {
-                luckEffect.updateActivity();
-                glowingEffect.updateActivity();
-            }
-
-            case LEGS ->
-            {
-                healthBoostEffect.updateActivity();
-                regenerationEffect.updateActivity();
-            }
-
-            case FEET ->
-            {
-                if (!jumpNegativeEffect.isActive())
-                {
-                    jumpEffect.updateActivity(getJumpEffectAmplifier());
-                }
-                else
-                {
-                    jumpEffect.updateDependentEffectsActivity();
-                }
-            }
+            jumpEffect.updateActivity(getJumpEffectAmplifier());
         }
+        else
+        {
+            jumpEffect.updateDependentEffectsActivity();
+        }
+    }
+
+    @Override
+    public void updateActivityForLegsSlot()
+    {
+        healthBoostEffect.updateActivity();
+        regenerationEffect.updateActivity();
+    }
+
+    @Override
+    public void updateActivityForChestSlot()
+    {
+        luckEffect.updateActivity();
+        glowingEffect.updateActivity();
+    }
+
+    @Override
+    public void updateActivityForHeadSlot()
+    {
+        nightVisionEffect.updateActivity();
+        waterBreathingEffect.updateActivity();
     }
 
     @Override
