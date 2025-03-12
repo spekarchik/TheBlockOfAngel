@@ -10,13 +10,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.brewing.BrewingRecipe;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
-@EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Main.MODID)
 public class RecipeRegistry
 {
     public static void initStatic()

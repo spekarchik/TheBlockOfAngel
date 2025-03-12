@@ -15,10 +15,14 @@ import java.util.stream.Stream;
 public abstract class FilteringPotionIngredient implements ICustomIngredient
 {
     private final Predicate<ItemStack> condition;
+    private final Item potionGroup;
+    private final Holder<Potion> potionType;
 
-    private FilteringPotionIngredient(Predicate<ItemStack> condition)
+    private FilteringPotionIngredient(Predicate<ItemStack> condition, Item potionGroup, Holder<Potion> potionType)
     {
         this.condition = condition;
+        this.potionGroup = potionGroup;
+        this.potionType = potionType;
     }
 
     protected FilteringPotionIngredient(Item potionGroup, Holder<Potion> potionType)
@@ -32,7 +36,7 @@ public abstract class FilteringPotionIngredient implements ICustomIngredient
             PotionContents contents = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
             return contents.potion().flatMap(holder -> holder.unwrapKey().map(ResourceKey::location))
                     .equals(potionType.unwrapKey().map(ResourceKey::location));
-        });
+        }, potionGroup, potionType);
     }
 
     @Override
@@ -44,7 +48,9 @@ public abstract class FilteringPotionIngredient implements ICustomIngredient
     @Override
     public Stream<ItemStack> getItems()
     {
-        return Stream.empty();
+        var itemStack = new ItemStack(potionGroup);
+        itemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(potionType));
+        return Stream.of(itemStack);
     }
 
     @Override

@@ -7,7 +7,7 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class SoaringSporeEssence extends ModItemWithHoverText
+public class SoaringSporeEssence extends ModItemWithDoubleHoverText
 {
     public SoaringSporeEssence()
     {
@@ -15,10 +15,14 @@ public class SoaringSporeEssence extends ModItemWithHoverText
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (!utils.text.showExtendedDescription(components)) return;
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        components.add(getDisplayName().withStyle(ChatFormatting.GRAY));
+        for (int i = 1; i <= 2; i++)
+        {
+            var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
+            tooltipComponents.add(component);
+        }
     }
 }
