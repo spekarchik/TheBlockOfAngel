@@ -1,24 +1,27 @@
 package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.player.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.BiPredicate;
 
-abstract class ArmorEffect implements IArmorEffect
+abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IArmorEffect
 {
-    protected IPlayer player;
-    protected IArmor armor;
-    protected Holder<MobEffect> effectType;
-    protected boolean isOn;
-    protected boolean wasAvailable;
-    protected boolean isAvailable;
-    protected int defaultAmplifier;
-    protected boolean showIcon;
+    protected final IPlayer player;
+    protected final IArmor armor;
+    protected final Holder<MobEffect> effectType;
+    private State state = State.OFF;
+    private boolean isAvailable;
+    private boolean isNotAvailable;
+    protected final int defaultAmplifier;
+    private boolean showIcon;
+    private IModMobEffectInstance effectInstance;
     private BiPredicate<IPlayer, IArmor> availabilityPredicate = (p, a) -> false;
+    private BiPredicate<IPlayer, IArmor> unavailabilityPredicate = (p, a) -> !availabilityPredicate.test(p, a);
 
     protected ArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
@@ -29,234 +32,160 @@ abstract class ArmorEffect implements IArmorEffect
     }
 
     @Override
-    public boolean isEffectOn()
+    public final State getState()
     {
-        return isOn;
+        return state;
     }
 
     @Override
     public final boolean isActive()
     {
+        return isOn() && player.hasArmorEffect(effectType) && effectInstance != null && effectInstance.equals(player.getEffectInstance(effectType));
+    }
+
+    @Override
+    public boolean isAnotherActive()
+    {
+        return player.isEffectActive(effectType) && !isActive();
+    }
+
+    @Override
+    public boolean isAnyActive()
+    {
         return player.isEffectActive(effectType);
     }
 
     @Override
-    public final boolean isEffectAvailable()
+    public final boolean isAvailable()
     {
         return isAvailable;
     }
 
     @Override
-    public final boolean updateEffectAvailability()
+    public final boolean isUnavailable()
     {
-        wasAvailable = isAvailable;
-        return isAvailable = availabilityPredicate.test(player, armor);
+        return isNotAvailable;
     }
 
     @Override
-    public final boolean trySwitch()
+    public final void updateAvailability()
     {
-        return trySwitch(defaultAmplifier);
+        isAvailable = availabilityPredicate.test(player, armor);
+        isNotAvailable = unavailabilityPredicate.test(player, armor);
     }
 
     @Override
-    public boolean trySwitch(int amplifier)
+    public void updateActivity()
     {
-        boolean isOnOld = isOn;
-        isOn = isAvailable ? !isOn : false;
-        updateEffectActivity(amplifier);
-        return isOn != isOnOld;
-    }
-
-    @Override
-    public boolean trySwitchTo(boolean switchOn)
-    {
-        return switchOn ? trySwitchOn() : trySwitchOff();
+        updateActivity(defaultAmplifier, MobEffectInstance.INFINITE_DURATION);
     }
 
     @Override
     public final void updateSwitchState()
     {
-        isOn = isActive();
+        boolean canHandleEffect = isAvailable() && player.hasArmorEffect(effectType);
+        setSwitchState(canHandleEffect);
     }
 
-    @Override
-    public final void invertSwitchState()
+    protected void setSwitchState(boolean isOn)
     {
-        isOn = !isOn;
+        setState(isOn ? State.ON : State.OFF);
     }
 
-    protected final void setSwitchState(boolean isOn)
+    protected boolean isOn()
     {
-        this.isOn = isOn;
+        return state.isOn();
     }
 
-    @Override
-    public final void updateEffectActivity(int amplifier)
+    protected final void updateActivity(int amplifier, int duration)
     {
-        if (isEffectAvailable() || wasAvailable)
+        if (isAvailable() && isOn())
         {
-            if (isEffectOn() && isEffectAvailable())
+            if (!isActive() || shouldPersist())
             {
-                if (!isActive())
-                {
-                    player.setEffect(effectType, amplifier, showIcon);
-                }
-            }
-            else
-            {
-                trySwitchOff();
+                effectInstance = setEffect(amplifier, duration);
             }
         }
-
-        wasAvailable = isAvailable;
-    }
-
-    @Override
-    public final void updateEffectActivity()
-    {
-        updateEffectActivity(defaultAmplifier);
-    }
-
-    @Override
-    public boolean trySwitchOff()
-    {
-        if (canClearEffect() && isActive())
+        else //if (isUnavailable())
         {
-            isOn = false;
-            player.clearEffect(effectType);
+            tryRemove();
         }
-
-        return !isActive();
     }
 
-    @Override
-    public boolean trySwitchOn(int amplifier)
+    protected boolean shouldPersist()
     {
-        isOn = true;
-        updateEffectActivity(amplifier);
-        return isActive();
+        return false;
     }
 
-    @Override
-    public final boolean trySwitchOn()
+    protected abstract IModMobEffectInstance setEffect(int amplifier, int duration);
+
+    protected final void setState(State state)
     {
-        return trySwitchOn(defaultAmplifier);
+        this.state = state;
     }
 
-    @Override
-    public final Holder<MobEffect> getEffect()
+    protected void tryActivateInternal(int amplifier, int duration)
     {
-        return effectType;
+        setState(State.ON);
+        updateActivity(amplifier, duration);
     }
 
-    @Override
-    public IArmorEffect alwaysAvailable()
+    protected void tryRemove()
     {
-        availabilityPredicate = (player, armor) -> true;
-        return this;
-    }
+        if (canClearEffect())
+        {
+            if (isActive())
+            {
+                player.clearEffect(effectType);
+                effectInstance = null;
+            }
 
-    @Override
-    public IArmorEffect setupAvailability(IArmorEffect copyFrom)
-    {
-        availabilityPredicate = ((ArmorEffect)copyFrom).availabilityPredicate;
-        return this;
-    }
-
-    @Override
-    public final IArmorEffect setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
-    {
-        availabilityPredicate = predicate;
-        return this;
-    }
-
-    @Override
-    public IArmorEffect availableOnHelmetWithDetector()
-    {
-        availabilityPredicate = IPlayer::isHelmetModifiedWithDetector;
-        return this;
-    }
-
-    @Override
-    public IArmorEffect availableOnBootsWithJumpBooster()
-    {
-        availabilityPredicate = IPlayer::areBootsModifiedWithJumpBooster;
-        return this;
-    }
-
-    @Override
-    public IArmorEffect availableOnBootsWithSeaPower()
-    {
-        availabilityPredicate = IPlayer::areBootsModifiedWithSeaPower;
-        return this;
-    }
-
-    @Override
-    public IArmorEffect availableOnChestPlateWithStrengthBooster()
-    {
-        availabilityPredicate = IPlayer::isChestPlateModifiedWithStrengthBooster;
-        return this;
-    }
-
-    @Override
-    public IArmorEffect availableOnChestPlateWithSlowFalling()
-    {
-        availabilityPredicate = IPlayer::isChestPlateModifiedWithSlowFalling;
-        return this;
-    }
-
-    @Override
-    public IArmorEffect availableOnLeggingsWithHealthRegenerator()
-    {
-        availabilityPredicate = IPlayer::areLeggingsModifiedWithHealthRegenerator;
-        return this;
-    }
-
-    @Override
-    public final IArmorEffect availableOnFullArmorSet()
-    {
-        availabilityPredicate = IPlayer::isFullArmorSetPutOn;
-        return this;
-    }
-
-    @Override
-    public final IArmorEffect availableOnAnyArmorElement()
-    {
-        availabilityPredicate = IPlayer::isAnyArmorElementPutOn;
-        return this;
-    }
-
-    @Override
-    public final IArmorEffect availableIfSlotSet(EquipmentSlot slot)
-    {
-        availabilityPredicate = (player1, armor1) -> player1.isArmorElementPutOn(armor1, slot);
-        return this;
-    }
-
-    @Override
-    public final IArmorEffect availableIfSlotsSet(EquipmentSlot... slots)
-    {
-        availabilityPredicate = (player1, armor1) -> player1.isAllArmorElementsPutOn(armor1, slots);
-        return this;
-    }
-
-    @Override
-    public IArmorEffect showIcon()
-    {
-        showIcon = true;
-        return this;
-    }
-
-    @Override
-    public IArmorEffect hideIcon()
-    {
-        showIcon = false;
-        return this;
+            if (state.isOn()) setState(State.OFF);
+        }
     }
 
     protected boolean canClearEffect()
     {
         return true;
+    }
+
+    protected boolean getShowIcon()
+    {
+        return showIcon;
+    }
+
+    protected final void clearEffectInstance()
+    {
+        effectInstance = null;
+    }
+
+    @Override
+    public final void setShowIcon(boolean value)
+    {
+        showIcon = value;
+    }
+
+    @Override
+    public final void setAvailabilityPredicate(BiPredicate<IPlayer, IArmor> value)
+    {
+        availabilityPredicate = value;
+    }
+
+    @Override
+    public final BiPredicate<IPlayer, IArmor> getAvailabilityPredicate()
+    {
+        return availabilityPredicate;
+    }
+
+    @Override
+    public void setUnavailabilityPredicate(BiPredicate<IPlayer, IArmor> value)
+    {
+        unavailabilityPredicate = value;
+    }
+
+    @Override
+    public BiPredicate<IPlayer, IArmor> getUnavailabilityPredicate()
+    {
+        return unavailabilityPredicate;
     }
 }

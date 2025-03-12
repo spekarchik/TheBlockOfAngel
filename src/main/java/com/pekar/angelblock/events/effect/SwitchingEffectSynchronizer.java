@@ -1,159 +1,160 @@
 package com.pekar.angelblock.events.effect;
 
-import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.player.IPlayer;
-import net.minecraft.core.Holder;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.EquipmentSlot;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiPredicate;
 
-public class SwitchingEffectSynchronizer implements IArmorEffect
+public class SwitchingEffectSynchronizer implements ISwitchingEffectSynchronizer
 {
-    private final SwitchingArmorEffect masterEffect;
-    private final List<SwitchingArmorEffect> dependentEffects = new ArrayList<>();
-    private final List<SwitchingArmorEffect> dependentInvertedEffects = new ArrayList<>();
+    private final IExtendedSwitchingArmorEffect masterEffect;
+    private final List<IExtendedSwitchingArmorEffect> dependentEffects = new ArrayList<>();
+    private final List<IExtendedSwitchingArmorEffect> dependentInvertedEffects = new ArrayList<>();
 
-    public SwitchingEffectSynchronizer(SwitchingArmorEffect masterEffect)
+    public SwitchingEffectSynchronizer(IExtendedSwitchingArmorEffect masterEffect)
     {
         this.masterEffect = masterEffect;
     }
 
     @Override
-    public boolean isEffectOn()
+    public final boolean isOn()
     {
-        return masterEffect.isEffectOn();
+        return masterEffect.isOn();
     }
 
     @Override
-    public boolean isActive()
+    public final State getState()
+    {
+        return masterEffect.getState();
+    }
+
+    @Override
+    public void updateAvailability()
+    {
+        masterEffect.updateAvailability();
+
+        for (var effect : dependentEffects)
+        {
+            effect.updateAvailability();
+        }
+
+        for (var effect : dependentInvertedEffects)
+        {
+            effect.updateAvailability();
+        }
+    }
+
+    @Override
+    public void updateActivity()
+    {
+        masterEffect.updateActivity();
+        updateDependentEffectsActivity();
+    }
+
+    @Override
+    public void updateActivity(int masterEffectAmplifier)
+    {
+        masterEffect.updateActivity(masterEffectAmplifier);
+        updateDependentEffectsActivity();
+    }
+
+    @Override
+    public void updateDependentEffectsActivity()
+    {
+        for (var effect : dependentEffects)
+        {
+            if (effect.isOn() != masterEffect.isOn())
+                effect.trySwitch();
+            else
+                effect.updateActivity();
+        }
+
+        for (var effect : dependentInvertedEffects)
+        {
+            if (effect.isOn() == masterEffect.isOn())
+                effect.trySwitch();
+            else
+                effect.updateActivity();
+        }
+    }
+
+    @Override
+    public boolean isMasterActive()
     {
         return masterEffect.isActive();
     }
 
     @Override
-    public boolean isEffectAvailable()
+    public boolean isMasterAvailable()
     {
-        return masterEffect.isEffectAvailable();
+        return masterEffect.isAvailable();
     }
 
     @Override
-    public boolean updateEffectAvailability()
+    public void trySwitch()
     {
-        boolean result = masterEffect.updateEffectAvailability();
-
-        for (SwitchingArmorEffect effect : dependentEffects)
-        {
-            effect.updateEffectAvailability();
-        }
-
-        for (SwitchingArmorEffect effect : dependentInvertedEffects)
-        {
-            effect.updateEffectAvailability();
-        }
-
-        return result;
-    }
-
-    @Override
-    public void updateEffectActivity()
-    {
-        updateEffectActivity(masterEffect.defaultAmplifier);
-    }
-
-    public void updateDependentEffectsActivity()
-    {
-        updateDependentSwitchStates();
-
-        for (SwitchingArmorEffect effect : dependentEffects)
-        {
-            effect.updateEffectActivity();
-        }
-
-        for (SwitchingArmorEffect effect : dependentInvertedEffects)
-        {
-            effect.updateEffectActivity();
-        }
-    }
-
-    @Override
-    public void updateEffectActivity(int amplifier)
-    {
-        masterEffect.updateEffectActivity(amplifier);
-        updateDependentEffectsActivity();
-    }
-
-    @Override
-    public boolean trySwitch()
-    {
-        return trySwitch(masterEffect.defaultAmplifier);
-    }
-
-    @Override
-    public boolean trySwitch(int amplifier)
-    {
-        boolean result = masterEffect.trySwitch(amplifier);
-
+        masterEffect.trySwitch();
         switchDependentEffects();
-
-        return result;
     }
 
     @Override
-    public boolean trySwitchTo(boolean switchOn)
+    public final void trySwitchTo(boolean switchOn)
     {
-        return switchOn ? trySwitchOn() : trySwitchOff();
+        if (switchOn) trySwitchOn();
+        else trySwitchOff();
     }
 
     @Override
-    public boolean trySwitchOff()
+    public void trySwitchOff()
     {
-        boolean result = masterEffect.trySwitchOff();
+        masterEffect.trySwitchOff();
 
-        for (SwitchingArmorEffect effect : dependentEffects)
+        for (var effect : dependentEffects)
         {
             effect.trySwitchOff();
         }
 
-        for (SwitchingArmorEffect effect : dependentInvertedEffects)
+        for (var effect : dependentInvertedEffects)
         {
             effect.trySwitchOn();
         }
-
-        return result;
     }
 
     @Override
-    public boolean trySwitchOn(int amplifier)
+    public void trySwitchOn()
     {
-        boolean result = masterEffect.trySwitchOn(amplifier);
+        masterEffect.trySwitchOn();
 
-        for (SwitchingArmorEffect effect : dependentEffects)
+        for (var effect : dependentEffects)
         {
             effect.trySwitchOn();
         }
 
-        for (SwitchingArmorEffect effect : dependentInvertedEffects)
+        for (var effect : dependentInvertedEffects)
         {
             effect.trySwitchOff();
         }
-
-        return result;
     }
 
     @Override
-    public boolean trySwitchOn()
+    public void trySwitch(int masterEffectAmplifier)
     {
-        return trySwitchOn(masterEffect.defaultAmplifier);
+        masterEffect.trySwitch(masterEffectAmplifier);
+        switchDependentEffects();
     }
 
     @Override
-    public void invertSwitchState()
+    public void trySwitchOn(int masterEffectAmplifier)
     {
-        masterEffect.invertSwitchState();
-        updateDependentSwitchStates();
+        masterEffect.trySwitchOn(masterEffectAmplifier);
+
+        for (var effect : dependentEffects)
+        {
+            effect.trySwitchOn();
+        }
+
+        for (var effect : dependentInvertedEffects)
+        {
+            effect.trySwitchOff();
+        }
     }
 
     @Override
@@ -163,173 +164,61 @@ public class SwitchingEffectSynchronizer implements IArmorEffect
         updateDependentSwitchStates();
     }
 
-    protected void setSwitchState(boolean isOn)
-    {
-        masterEffect.setSwitchState(isOn);
-        updateDependentSwitchStates();
-    }
-
-    @Override
-    public Holder<MobEffect> getEffect()
-    {
-        return masterEffect.getEffect();
-    }
-
-    public void addDependentEffect(SwitchingArmorEffect effect)
+    public void addDependentEffect(IExtendedSwitchingArmorEffect effect)
     {
         dependentEffects.add(effect);
-        effect.setSwitchState(masterEffect.isOn);
+        effect.setSwitchState(masterEffect.isOn());
     }
 
-    public void addDependentInvertedEffect(SwitchingArmorEffect effect)
+    public void addDependentInvertedEffect(IExtendedSwitchingArmorEffect effect)
     {
         dependentInvertedEffects.add(effect);
-        effect.setSwitchState(!masterEffect.isOn);
-    }
-
-    @Override
-    public IArmorEffect setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect setupAvailability(IArmorEffect copyFrom)
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect alwaysAvailable()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableOnHelmetWithDetector()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableOnBootsWithJumpBooster()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableOnBootsWithSeaPower()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableOnChestPlateWithStrengthBooster()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableOnChestPlateWithSlowFalling()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableOnLeggingsWithHealthRegenerator()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableOnFullArmorSet()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableOnAnyArmorElement()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableIfSlotSet(EquipmentSlot slot)
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect availableIfSlotsSet(EquipmentSlot... slot)
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect showIcon()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
-    }
-
-    @Override
-    public IArmorEffect hideIcon()
-    {
-        throw new UnsupportedOperationException("Method not supported for SwitchingEffectSynchronizer.");
+        effect.setSwitchState(!masterEffect.isOn());
     }
 
     private void switchDependentEffects()
     {
-        boolean isMasterEffectAvailable = masterEffect.isEffectAvailable();
+        boolean isMasterEffectAvailable = masterEffect.isAvailable();
 
-        for (SwitchingArmorEffect effect : dependentEffects)
+        if (isMasterEffectAvailable)
         {
-            if (isMasterEffectAvailable)
+            if (masterEffect.isOn())
             {
-                if (masterEffect.isEffectOn())
-                {
+                for (var effect : dependentEffects)
                     effect.trySwitchOn();
-                }
-                else
-                {
+
+                for (var effect : dependentInvertedEffects)
                     effect.trySwitchOff();
-                }
             }
             else
             {
-                effect.trySwitch();
+                for (var effect : dependentEffects)
+                    effect.trySwitchOff();
+
+                for (var effect : dependentInvertedEffects)
+                    effect.trySwitchOn();
             }
         }
-
-        for (SwitchingArmorEffect effect : dependentInvertedEffects)
+        else
         {
-            if (isMasterEffectAvailable)
-            {
-                if (masterEffect.isEffectOn())
-                {
-                    effect.trySwitchOff();
-                }
-                else
-                {
-                    effect.trySwitchOn();
-                }
-            }
-            else
-            {
+            for (var effect : dependentEffects)
                 effect.trySwitch();
-            }
+
+            for (var effect : dependentInvertedEffects)
+                effect.trySwitch();
         }
     }
 
     private void updateDependentSwitchStates()
     {
-        for (SwitchingArmorEffect effect : dependentEffects)
+        for (var effect : dependentEffects)
         {
-            effect.setSwitchState(masterEffect.isOn);
+            effect.setSwitchState(masterEffect.isOn());
         }
 
-        for (SwitchingArmorEffect effect : dependentInvertedEffects)
+        for (var effect : dependentInvertedEffects)
         {
-            effect.setSwitchState(!masterEffect.isOn);
+            effect.setSwitchState(!masterEffect.isOn());
         }
     }
 }

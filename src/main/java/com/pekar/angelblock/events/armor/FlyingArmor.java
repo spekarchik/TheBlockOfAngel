@@ -11,8 +11,8 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class FlyingArmor extends Armor
 {
-    private final SwitchingEffectSynchronizer jumpBoostEffect;
-    private final IArmorEffect slowFallingEffect;
+    private final ISwitchingEffectSynchronizer jumpBoostEffect;
+    private final ISwitchingArmorEffect slowFallingEffect;
     private static final int JUMP_BOOST_AMPLIFIER = 24;
     private boolean isSlowFallingActivatedOnGround = true;
 
@@ -24,13 +24,70 @@ public class FlyingArmor extends Armor
 
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
         speedEffect.setupAvailability(this::isJumpEffectAvailable);
-        var jumpBoostEffect = new JumpBoostArmorEffect(player, this, JUMP_BOOST_AMPLIFIER);
+        var jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_BOOST_AMPLIFIER);
         jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable);
         var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
         superJumpEffect.setupAvailability(this::isJumpEffectAvailable);
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
         this.jumpBoostEffect.addDependentEffect(speedEffect);
         this.jumpBoostEffect.addDependentEffect(superJumpEffect);
+    }
+
+    @Override
+    protected void onLogin(PlayerEvent.PlayerLoggedInEvent event)
+    {
+        isSlowFallingActivatedOnGround = player.getEntity().onGround();
+    }
+
+    @Override
+    protected void updateAvailability()
+    {
+        jumpBoostEffect.updateAvailability();
+        slowFallingEffect.updateAvailability();
+    }
+
+    @Override
+    protected void updateEffectStates()
+    {
+        jumpBoostEffect.updateSwitchState();
+
+        if (!player.isNether())
+        {
+            slowFallingEffect.updateSwitchState();
+        }
+    }
+
+    @Override
+    protected void updateActivityForHeadSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForFeetSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForLegsSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForChestSlot()
+    {
+        slowFallingEffect.updateActivity();
+    }
+
+    @Override
+    protected void updateActivity(EquipmentSlot slot)
+    {
+        jumpBoostEffect.updateActivity();
+    }
+
+    @Override
+    protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
+    {
+        slowFallingEffect.updateSwitchState();
     }
 
     @Override
@@ -43,19 +100,6 @@ public class FlyingArmor extends Armor
     public int getPriority()
     {
         return 1;
-    }
-
-    @Override
-    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
-    {
-        isSlowFallingActivatedOnGround = player.getEntity().onGround();
-
-        jumpBoostEffect.updateSwitchState();
-
-        if (!player.isNether())
-        {
-            slowFallingEffect.updateSwitchState();
-        }
     }
 
     @Override
@@ -72,16 +116,6 @@ public class FlyingArmor extends Armor
     public void onLivingDamageEvent(LivingDamageEvent.Pre event)
     {
         // none
-    }
-
-    @Override
-    public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
-    {
-        jumpBoostEffect.updateEffectAvailability();
-        slowFallingEffect.updateEffectAvailability();
-
-        slowFallingEffect.updateSwitchState();
-        updatePotionEffects();
     }
 
     @Override
@@ -111,7 +145,7 @@ public class FlyingArmor extends Armor
         {
             slowFallingEffect.trySwitch();
 
-            if (slowFallingEffect.isEffectOn())
+            if (slowFallingEffect.isOn())
                 isSlowFallingActivatedOnGround = player.getEntity().onGround();
             else
                 isSlowFallingActivatedOnGround = true;
@@ -129,16 +163,17 @@ public class FlyingArmor extends Armor
     @Override
     public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
     {
-        jumpBoostEffect.updateEffectAvailability();
-        slowFallingEffect.updateEffectAvailability();
+        jumpBoostEffect.updateAvailability();
+        slowFallingEffect.updateAvailability();
 
-        updatePotionEffects();
+        jumpBoostEffect.updateActivity();
+        slowFallingEffect.updateActivity();
     }
 
     @Override
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        if (player.getEntity().isInWaterRainOrBubble() || jumpBoostEffect.isEffectOn())
+        if (player.getEntity().isInWaterRainOrBubble() || jumpBoostEffect.isOn())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
@@ -147,14 +182,14 @@ public class FlyingArmor extends Armor
     @Override
     public void onBeingInLava()
     {
-        if (slowFallingEffect.isEffectOn())
+        if (slowFallingEffect.isOn())
             slowFallingEffect.trySwitchOff();
     }
 
     @Override
     public void onBeingInWater()
     {
-        if (slowFallingEffect.isEffectOn())
+        if (slowFallingEffect.isOn())
             slowFallingEffect.trySwitchOff();
     }
 
@@ -174,12 +209,6 @@ public class FlyingArmor extends Armor
     {
     }
 
-    private void updatePotionEffects()
-    {
-        jumpBoostEffect.updateEffectActivity();
-        slowFallingEffect.updateEffectActivity();
-    }
-
     private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)
     {
         var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
@@ -193,7 +222,7 @@ public class FlyingArmor extends Armor
 
     private void updateSlowFallingEffect()
     {
-        if (!isSlowFallingActivatedOnGround && slowFallingEffect.isEffectOn() && player.getEntity().onGround())
+        if (!isSlowFallingActivatedOnGround && slowFallingEffect.isOn() && player.getEntity().onGround())
         {
             slowFallingEffect.trySwitchOff();
             isSlowFallingActivatedOnGround = true;

@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -13,14 +14,15 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class DiamithicArmor extends Armor
 {
-    private final IArmorEffect strengthEffect;
-    private final IArmorEffect nightVisionEffect;
-    private final IArmorEffect jumpBoostEffect;
-    private final IArmorEffect slowFallingEffect;
-    private final IArmorEffect healthBoostEffect;
-    private final IArmorEffect hasteEffect;
-    private final IArmorEffect slownessEffect;
-    private final IArmorEffect glowingEffect;
+    private final IPermanentArmorEffect strengthEffect;
+    private final IPermanentArmorEffect healthBoostEffect;
+    private final IPermanentArmorEffect hasteEffect;
+    private final IPermanentArmorEffect slownessEffect;
+
+    private final ISwitchingArmorEffect nightVisionEffect;
+    private final ISwitchingArmorEffect jumpBoostEffect;
+    private final ISwitchingArmorEffect slowFallingEffect;
+    private final ISwitchingArmorEffect glowingEffect;
 
     private static final int STRENGTH_EFFECT_AMPLIFIER_DEFAULT = 0;
     private static final int STRENGTH_EFFECT_AMPLIFIER_IMPROVED = 1;
@@ -28,24 +30,71 @@ public class DiamithicArmor extends Armor
     public DiamithicArmor(IPlayer player)
     {
         super(player);
-        strengthEffect = new StrengthArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
-        nightVisionEffect = new NightVisionArmorEffect(player, this);
-        healthBoostEffect = new HealthBoostArmorEffect(player, this, 2);
-        hasteEffect = new HasteArmorEffect(player, this);
+        strengthEffect = new StrengthPermanentArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 2);
+        hasteEffect = new HastePermanentArmorEffect(player, this);
         slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable);
-        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
 
-        jumpBoostEffect = new JumpBoostArmorEffect(player, this, 2);
+        jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, 2);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
     }
 
     @Override
-    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
+    protected void updateAvailability()
+    {
+        slownessEffect.updateAvailability();
+
+        strengthEffect.updateAvailability();
+        hasteEffect.updateAvailability();
+        slowFallingEffect.updateAvailability();
+        glowingEffect.updateAvailability();
+        healthBoostEffect.updateAvailability();
+        jumpBoostEffect.updateAvailability();
+        nightVisionEffect.updateAvailability();
+    }
+
+    @Override
+    protected void updateEffectStates()
     {
         nightVisionEffect.updateSwitchState();
         jumpBoostEffect.updateSwitchState();
         slowFallingEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
+    }
+
+    @Override
+    protected void updateActivity(EquipmentSlot slot)
+    {
+        slownessEffect.updateActivity();
+    }
+
+    @Override
+    public void updateActivityForHeadSlot()
+    {
+        nightVisionEffect.updateActivity();
+    }
+
+    @Override
+    public void updateActivityForFeetSlot()
+    {
+        jumpBoostEffect.updateActivity();
+    }
+
+    @Override
+    public void updateActivityForLegsSlot()
+    {
+        healthBoostEffect.updateActivity();
+    }
+
+    @Override
+    public void updateActivityForChestSlot()
+    {
+        strengthEffect.updateActivity(getStrengthEffectAmplifier());
+        slowFallingEffect.updateActivity();
+        hasteEffect.updateActivity();
+        glowingEffect.updateActivity();
     }
 
     @Override
@@ -70,32 +119,17 @@ public class DiamithicArmor extends Armor
     }
 
     @Override
-    public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
-    {
-        nightVisionEffect.updateEffectAvailability();
-        strengthEffect.updateEffectAvailability();
-        jumpBoostEffect.updateEffectAvailability();
-        slowFallingEffect.updateEffectAvailability();
-        healthBoostEffect.updateEffectAvailability();
-        hasteEffect.updateEffectAvailability();
-        slownessEffect.updateEffectAvailability();
-        glowingEffect.updateEffectAvailability();
-
-        updatePotionEffects();
-    }
-
-    @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
-        slownessEffect.updateEffectAvailability();
-        slownessEffect.updateEffectActivity();
+        slownessEffect.updateAvailability();
+        slownessEffect.updateActivity();
     }
 
     @Override
     public void onLivingFallEvent(LivingFallEvent event)
     {
-        slownessEffect.updateEffectAvailability();
-        slownessEffect.updateEffectActivity();
+        slownessEffect.updateAvailability();
+        slownessEffect.updateActivity();
 
         if ((event.getEntity() instanceof ServerPlayer playerEntity) && !playerEntity.hasEffect(MobEffects.SLOW_FALLING))
         {
@@ -108,8 +142,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        slownessEffect.updateEffectAvailability();
-        slownessEffect.updateEffectActivity();
+        slownessEffect.updateAvailability();
+        slownessEffect.updateActivity();
 
         boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
         detectCreepers(isHelmetModifiedWithDetector,false);
@@ -165,7 +199,7 @@ public class DiamithicArmor extends Armor
     @Override
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        if (jumpBoostEffect.isEffectOn())
+        if (jumpBoostEffect.isOn())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
@@ -180,8 +214,8 @@ public class DiamithicArmor extends Armor
     @Override
     public void onBeingInWater()
     {
-        slownessEffect.updateEffectAvailability();
-        slownessEffect.updateEffectActivity();
+        slownessEffect.updateAvailability();
+        slownessEffect.updateActivity();
     }
 
     @Override
@@ -200,18 +234,6 @@ public class DiamithicArmor extends Armor
     public int getPriority()
     {
         return 3;
-    }
-
-    private void updatePotionEffects()
-    {
-        nightVisionEffect.updateEffectActivity();
-        strengthEffect.updateEffectActivity(getStrengthEffectAmplifier());
-        jumpBoostEffect.updateEffectActivity();
-        slowFallingEffect.updateEffectActivity();
-        healthBoostEffect.updateEffectActivity();
-        hasteEffect.updateEffectActivity();
-        slownessEffect.updateEffectActivity();
-        glowingEffect.updateEffectActivity();
     }
 
     private int getStrengthEffectAmplifier()

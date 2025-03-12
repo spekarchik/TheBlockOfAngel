@@ -1,74 +1,53 @@
 package com.pekar.angelblock.events.effect;
 
 import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.armor.ITemporaryArmorEffect;
+import com.pekar.angelblock.events.player.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 
-abstract class TemporaryArmorEffect extends ArmorEffect implements ITemporaryArmorEffect
+class TemporaryArmorEffect extends TemporaryBaseArmorEffect<ITemporaryArmorEffect> implements ITemporaryArmorEffect
 {
-    protected final int defaultDuration;
-    protected boolean isArmorEffect;
-
-    public TemporaryArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
+    protected TemporaryArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
     {
-        super(player, armor, effectType, defaultAmplifier);
-        this.defaultDuration = defaultDuration;
+        super(player, armor, effectType, defaultAmplifier, defaultDuration);
     }
 
     @Override
-    public boolean trySwitch(int amplifier)
+    public void tryRemove()
     {
-        trySwitchForDuration(amplifier, defaultDuration);
-        return true;
+        super.tryRemove();
     }
 
     @Override
-    public boolean trySwitchForDuration(int duration)
+    public final boolean isArmorEffect()
     {
-        trySwitchForDuration(defaultAmplifier, duration);
-        return true;
+        return player.hasArmorEffect(effectType);
     }
 
     @Override
-    public boolean trySwitchForDuration(int amplifier, int duration)
+    protected IModMobEffectInstance setEffect(int amplifier, int duration)
     {
-        if (!isAvailable) return false;
-        isArmorEffect = true;
-        player.setEffect(this, duration, amplifier, showIcon);
-        return true;
+        return player.setEffect(this, duration, amplifier, getShowIcon());
     }
 
     @Override
-    public boolean trySwitchOn(int amplifier)
+    public void tryActivate(int amplifier, int duration)
     {
-        return trySwitch(amplifier);
+        if (isAnotherActive()) return;
+        super.tryActivateInternal(amplifier, duration);
     }
 
     @Override
-    public boolean trySwitchOff()
+    public final void onDurationEnd()
     {
-        if (!isArmorEffect) return false;
-        isArmorEffect = false;
-        return super.trySwitchOff();
+        setState(State.OFF);
+        clearEffectInstance();
     }
 
     @Override
-    public boolean isEffectOn()
+    public ITemporaryArmorEffect getSelf()
     {
-        return false;
-    }
-
-    @Override
-    public boolean isArmorEffect()
-    {
-        return isArmorEffect;
-    }
-
-    @Override
-    public void resetIsArmorEffect()
-    {
-        isArmorEffect = false;
+        return this;
     }
 }

@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
-public class ModMobEffectInstance extends MobEffectInstance
+public class ModMobEffectInstance extends MobEffectInstance implements IModMobEffectInstance
 {
     private final Runnable onEffectEnded;
 
@@ -23,7 +23,7 @@ public class ModMobEffectInstance extends MobEffectInstance
     @Override
     public boolean tick(LivingEntity entity, Runnable onExpirationRunnable)
     {
-        if (onEffectEnded != null && getDuration() == 0)
+        if (onEffectEnded != null && getDuration() == 1)
         {
             onEffectEnded.run();
         }
@@ -36,7 +36,7 @@ public class ModMobEffectInstance extends MobEffectInstance
     {
         boolean isUpdated = super.update(other);
 
-        if (isUpdated)
+        if (isUpdated && onEffectEnded != null)
             onEffectEnded.run();
 
         return isUpdated;

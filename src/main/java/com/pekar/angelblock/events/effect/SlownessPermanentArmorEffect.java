@@ -10,10 +10,4 @@ public class SlownessPermanentArmorEffect extends PermanentArmorEffect
     {
         super(player, armor, MobEffects.MOVEMENT_SLOWDOWN, defaultAmplifier);
     }
-
-    @Override
-    public boolean trySwitch(int amplifier)
-    {
-        return isEffectAvailable();
-    }
 }

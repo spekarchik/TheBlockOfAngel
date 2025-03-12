@@ -11,6 +11,6 @@ public class LevitationSwitchingEffect extends SwitchingArmorEffect
     {
         super(player, armor, MobEffects.LEVITATION, amplifier);
         availableIfSlotSet(EquipmentSlot.FEET);
-        showIcon = true;
+        showIcon();
     }
 }

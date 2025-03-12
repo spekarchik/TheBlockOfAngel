@@ -3,6 +3,7 @@ package com.pekar.angelblock.events.player;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.events.effect.ITemporaryArmorEffect;
+import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.Holder;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Player implements IPlayer
 {
@@ -27,7 +29,7 @@ public class Player implements IPlayer
     private final IArmor flyingArmorModel = new FlyingArmor(this);
 
     private net.minecraft.world.entity.player.Player entity;
-    private final Set<IArmor> armorInUse = new HashSet<>();
+    private final Set<IArmor> armorInUse = ConcurrentHashMap.newKeySet();
 
     public Player(net.minecraft.world.entity.player.Player entity)
     {
@@ -35,7 +37,7 @@ public class Player implements IPlayer
     }
 
     @Override
-    public synchronized Iterable<IArmor> getArmorTypesUsed()
+    public Iterable<IArmor> getArmorTypesUsed()
     {
         return armorInUse;
     }
@@ -158,7 +160,7 @@ public class Player implements IPlayer
     }
 
     @Override
-    public synchronized void updateArmorUsed()
+    public void updateArmorUsed()
     {
         armorInUse.clear();
 
@@ -177,40 +179,64 @@ public class Player implements IPlayer
     }
 
     @Override
-    public void setEffect(Holder<MobEffect> effect, int amplifier)
+    public boolean hasArmorEffect(Holder<MobEffect> effect)
     {
-        setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier);
+        var effectInstance = entity.getEffect(effect);
+        return effectInstance != null && !effectInstance.isVisible();
     }
 
     @Override
-    public void setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon)
+    public boolean hasAnotherEffect(Holder<MobEffect> effect)
     {
-        setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier, showIcon);
+        var effectInstance = entity.getEffect(effect);
+        return effectInstance != null && effectInstance.isVisible();
     }
 
     @Override
-    public void setEffect(Holder<MobEffect> effect, int duration, int amplifier)
+    public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int amplifier)
     {
-        setEffect(effect, duration, amplifier, false);
+        return setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier);
     }
 
     @Override
-    public void setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
+    public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon)
     {
-        entity.addEffect(new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/));
+        return setEffect(effect, MobEffectInstance.INFINITE_DURATION, amplifier, showIcon);
     }
 
     @Override
-    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier)
+    public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier)
     {
-        setEffect(armorEffect, duration, amplifier, false);
+        return setEffect(effect, duration, amplifier, false);
     }
 
     @Override
-    public void setEffect(ITemporaryArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
+    public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
     {
-        entity.addEffect(new ModMobEffectInstance(armorEffect.getEffect(), duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/,
-                armorEffect::resetIsArmorEffect));
+        var effectInstance = new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/);
+        entity.addEffect(effectInstance);
+        return effectInstance;
+    }
+
+    @Override
+    public IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier)
+    {
+        return setEffect(armorEffect, duration, amplifier, false);
+    }
+
+    @Override
+    public IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
+    {
+        var effectInstance = new ModMobEffectInstance(armorEffect.getEffect(), duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/,
+                armorEffect::onDurationEnd);
+        entity.addEffect(effectInstance);
+        return effectInstance;
+    }
+
+    @Override
+    public MobEffectInstance getEffectInstance(Holder<MobEffect> effect)
+    {
+        return getEntity().getEffect(effect);
     }
 
     @Override

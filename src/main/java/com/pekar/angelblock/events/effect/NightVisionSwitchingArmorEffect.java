@@ -4,12 +4,12 @@ import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class NightVisionArmorEffect extends SwitchingArmorEffect
+public class NightVisionSwitchingArmorEffect extends SwitchingArmorEffect
 {
-    public NightVisionArmorEffect(IPlayer player, IArmor armor)
+    public NightVisionSwitchingArmorEffect(IPlayer player, IArmor armor)
     {
         super(player, armor, MobEffects.NIGHT_VISION, 0);
         availableOnHelmetWithDetector();
-        showIcon = true;
+        showIcon();
     }
 }

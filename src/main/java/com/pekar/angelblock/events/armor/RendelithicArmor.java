@@ -16,24 +16,29 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class RendelithicArmor extends Armor
 {
-    private final IArmorEffect nauseaEffect;
-    private final IArmorEffect slownessEffect;
-    private final IArmorEffect slowFallingEffect;
-    private final IArmorEffect glowingEffect;
-    private final SwitchingEffectSynchronizer jumpEffect;
+    private final ITemporaryPersistentArmorEffect nauseaEffect;
+    private final ITemporaryPersistentArmorEffect slownessEffect;
+    private final ITemporaryPersistentArmorEffect jumpNegativeEffect;
+    private final ISwitchingArmorEffect slowFallingEffect;
+    private final ISwitchingArmorEffect glowingEffect;
+    private final ISwitchingEffectSynchronizer jumpEffect;
 
     private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 3;
     private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 5;
+    private static final int SLOWNESS_NEGATIVE_EFFECT_AMPLIFIER = 5;
+    private static final int SLOWNESS_NEGATIVE_EFFECT_DURATION = 400;
+    private static final int NAUSEA_NEGATIVE_EFFECT_DURATION = 200;
 
     public RendelithicArmor(IPlayer player)
     {
         super(player);
-        nauseaEffect = new NauseaTemporaryEffect(player, this, 200).showIcon();
-        slownessEffect = new SlownessArmorEffect(player, this, 5, 400);
+        nauseaEffect = new NauseaNegativeEffect(player, this, NAUSEA_NEGATIVE_EFFECT_DURATION).showIcon();
+        slownessEffect = new SlownessNegativeArmorEffect(player, this, SLOWNESS_NEGATIVE_EFFECT_AMPLIFIER, SLOWNESS_NEGATIVE_EFFECT_DURATION);
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_NEGATIVE_EFFECT_DURATION);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
-        glowingEffect = new GlowingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
 
-        JumpBoostArmorEffect jumpEffect = new JumpBoostArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
+        JumpBoostSwitchingArmorEffect jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
         SpeedSwitchingEffect speedEffect = new SpeedSwitchingEffect(player, this, 0);
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
@@ -41,11 +46,55 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
-    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event)
+    protected void updateAvailability()
+    {
+        jumpEffect.updateAvailability();
+        nauseaEffect.updateAvailability();
+        slownessEffect.updateAvailability();
+        jumpNegativeEffect.updateAvailability();
+        slowFallingEffect.updateAvailability();
+        glowingEffect.updateAvailability();
+    }
+
+    @Override
+    protected void updateEffectStates()
     {
         jumpEffect.updateSwitchState();
         slowFallingEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
+    }
+
+    @Override
+    protected void updateActivityForHeadSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForFeetSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForLegsSlot()
+    {
+    }
+
+    @Override
+    protected void updateActivityForChestSlot()
+    {
+        glowingEffect.updateActivity();
+
+        if (!jumpNegativeEffect.isActive())
+        {
+            slowFallingEffect.updateActivity();
+        }
+    }
+
+    @Override
+    protected void updateActivity(EquipmentSlot slot)
+    {
+        jumpEffect.updateActivity(getJumpBoostAmplifier());
+        checkForNausea();
     }
 
     @Override
@@ -89,18 +138,6 @@ public class RendelithicArmor extends Armor
     }
 
     @Override
-    public void onLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event)
-    {
-        jumpEffect.updateEffectAvailability();
-        nauseaEffect.updateEffectAvailability();
-        slownessEffect.updateEffectAvailability();
-        slowFallingEffect.updateEffectAvailability();
-        glowingEffect.updateEffectAvailability();
-
-        updatePotionEffects();
-    }
-
-    @Override
     public void onLivingJumpEvent(LivingEvent.LivingJumpEvent event)
     {
         // none
@@ -134,9 +171,9 @@ public class RendelithicArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            if (slowFallingEffect.isEffectAvailable())
+            if (slowFallingEffect.isAvailable())
             {
-                if (!slownessEffect.isActive() || slowFallingEffect.isEffectOn())
+                if (!jumpNegativeEffect.isActive() || slowFallingEffect.isOn())
                 {
                     slowFallingEffect.trySwitch();
                 }
@@ -162,7 +199,7 @@ public class RendelithicArmor extends Armor
     @Override
     public void onEntityTravelToDimensionEvent(EntityTravelToDimensionEvent event)
     {
-        updatePotionEffects();
+        //updatePotionEffects();
     }
 
     @Override
@@ -178,7 +215,7 @@ public class RendelithicArmor extends Armor
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.02f);
         }
-        else if (jumpEffect.isEffectOn())
+        else if (jumpEffect.isOn())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
@@ -214,19 +251,6 @@ public class RendelithicArmor extends Armor
         return 2;
     }
 
-    private void updatePotionEffects()
-    {
-        jumpEffect.updateEffectActivity(getJumpBoostAmplifier());
-        glowingEffect.updateEffectActivity();
-
-        checkForNausea();
-
-        if (!slownessEffect.isActive())
-        {
-            slowFallingEffect.updateEffectActivity();
-        }
-    }
-
     private int getJumpBoostAmplifier()
     {
         return player.areBootsModifiedWithJumpBooster(this)
@@ -239,11 +263,13 @@ public class RendelithicArmor extends Armor
         Player entity = player.getEntity();
         if (entity.isInWaterOrRain())
         {
-            if (!slownessEffect.isActive())
+            if (!jumpNegativeEffect.isActive())
             {
-                nauseaEffect.trySwitch();
-                slownessEffect.trySwitch();
-                if (slowFallingEffect.isEffectOn())
+                nauseaEffect.tryActivate();
+                slownessEffect.tryActivate();
+                jumpNegativeEffect.tryActivate();
+
+                if (slowFallingEffect.isOn())
                 {
                     slowFallingEffect.trySwitchOff();
                 }
