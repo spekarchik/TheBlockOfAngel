@@ -21,10 +21,4 @@ public class AwkwardSplashPotionIngredient extends FilteringPotionIngredient
     {
         return AWKWARD_SPLASH_POTION_INGREDIENT_TYPE;
     }
-
-    @Override
-    public Ingredient toVanilla()
-    {
-        return super.toVanilla();
-    }
 }

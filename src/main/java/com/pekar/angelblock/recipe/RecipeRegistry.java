@@ -12,6 +12,7 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.brewing.BrewingRecipe;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
 @EventBusSubscriber(modid = Main.MODID)

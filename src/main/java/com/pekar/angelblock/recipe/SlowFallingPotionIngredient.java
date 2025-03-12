@@ -21,10 +21,4 @@ public class SlowFallingPotionIngredient extends FilteringPotionIngredient
     {
         return SLOW_FALLING_POTION_INGREDIENT_TYPE;
     }
-
-    @Override
-    public Ingredient toVanilla()
-    {
-        return super.toVanilla();
-    }
 }
