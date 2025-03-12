@@ -154,7 +154,6 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
             for (IArmor armor : armorAffected.stream().sorted(Comparator.comparingInt(armorPriority)).toList())
             {
-                System.out.println("*** ARMOR: " + armor.getFamilyName());
                 armor.onLivingEquipmentChangeEvent(event);
             }
         }

@@ -99,7 +99,6 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
 
     protected final void updateActivity(int amplifier, int duration)
     {
-        System.out.println("Activity: " + effectType.getRegisteredName() + " : ARMOR = " + armor.getFamilyName() + ", IsAvailable = " + isAvailable() + ", isOn = " + isOn() + ", isActive = " + isActive());
         if (isAvailable() && isOn())
         {
             if (!isActive() || shouldPersist())
