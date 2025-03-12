@@ -30,7 +30,7 @@ public class LimoniteArmor extends Armor
 
     private static final int HEAL_REGENERATION_EFFECT_DURATION = 300;
     private static final int MONSTER_SLOWDOWNED_EFFECT_DURATION = 100;
-    private static final int REGENERATION_NEGATIVE_EFFECT_DURATION = 400;
+    private static final int REGENERATION_NEGATIVE_EFFECT_DURATION = 1200;
     private static final int ATTACKING_MONSTER_GLOWING_EFFECT_DURATION = 400;
     private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 2;
     private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 6;
@@ -290,7 +290,7 @@ public class LimoniteArmor extends Armor
     @Override
     public void onBeingInWater()
     {
-        if (!hasWaterBreathingBeenUsed && !waterBreathingEffect.isActive() && player.getEntity().isUnderWater())
+        if (!hasWaterBreathingBeenUsed && !waterBreathingEffect.isAnyActive() && player.getEntity().isUnderWater())
         {
             hasWaterBreathingBeenUsed = true;
             waterBreathingEffect.tryActivate();
