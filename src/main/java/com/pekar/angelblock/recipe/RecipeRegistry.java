@@ -12,15 +12,16 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.brewing.BrewingRecipe;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
 @EventBusSubscriber(modid = Main.MODID)
 public class RecipeRegistry
 {
+    private static final Ingredient AWKWARD_SPLASH_POTION = new Ingredient(new AwkwardSplashPotionIngredient());
+    private static final Ingredient SLOW_FALLING_POTION = new Ingredient(new SlowFallingPotionIngredient());
+
     public static void initStatic()
     {
-
     }
 
     @SubscribeEvent
