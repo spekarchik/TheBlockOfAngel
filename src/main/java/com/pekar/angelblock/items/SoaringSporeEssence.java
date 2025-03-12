@@ -53,7 +53,7 @@ public class SoaringSporeEssence extends ModItemWithMultipleHoverText
 
         for (int i = 1; i <= 3; i++)
         {
-            var component = getDescription();
+            var component = getDescription(i, false);
             tooltipComponents.add(component);
         }
     }
