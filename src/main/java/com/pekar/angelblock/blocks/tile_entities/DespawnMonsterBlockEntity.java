@@ -67,7 +67,7 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
         if (level.isClientSide()) return;
 
 
-        var monsters = level.getEntities((LivingEntity)null,
+        var monsters = level.getEntitiesOfClass(LivingEntity.class,
                 utils.getRenderBoundingBox(blockEntity.getBlockPos()).inflate(getEffectiveRadius()),
                 this::needToDespawnEntity);
 

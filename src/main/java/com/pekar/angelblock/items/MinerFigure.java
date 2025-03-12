@@ -24,9 +24,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
 
         if (!level.isClientSide())
         {
-            var monsters = level.getEntities((Entity) null,
-                    new AABB(pos).inflate(EFFECTIVE_RADIUS),
-                    entity -> entity instanceof Piglin);
+            var monsters = level.getEntitiesOfClass(Piglin.class, new AABB(pos).inflate(EFFECTIVE_RADIUS));
 
             for (Entity entity : monsters)
             {
@@ -50,9 +48,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
 
             if (!level.isClientSide())
             {
-                var monsters = level.getEntities((Entity) null,
-                        new AABB(pos).inflate(EFFECTIVE_RADIUS),
-                        entity -> entity instanceof Piglin);
+                var monsters = level.getEntitiesOfClass(Piglin.class, new AABB(pos).inflate(EFFECTIVE_RADIUS));
 
                 for (Entity entity : monsters)
                 {

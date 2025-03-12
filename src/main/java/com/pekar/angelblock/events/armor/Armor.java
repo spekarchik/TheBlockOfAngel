@@ -244,9 +244,7 @@ abstract class Armor implements IArmor
 
         if (level.isClientSide()) return;
 
-        var monsters = level.getEntities((Entity)null, entityPlayer.getBoundingBox().inflate(CREEPER_NOTIFY_DISTANCE),
-                        entity -> entity instanceof Creeper)
-                .stream().map(e -> (Mob)e).toList();
+        var monsters = level.getEntitiesOfClass(Creeper.class, entityPlayer.getBoundingBox().inflate(CREEPER_NOTIFY_DISTANCE));
 
         if (!monsters.isEmpty())
         {
