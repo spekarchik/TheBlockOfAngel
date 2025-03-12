@@ -1,9 +1,11 @@
 package com.pekar.angelblock.items;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
@@ -17,11 +19,38 @@ public class MinerFigure extends ModItemWithDoubleHoverText
     private static final double EFFECTIVE_RADIUS = 16.0;
 
     @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand)
+    {
+        if (!(interactionTarget instanceof Piglin piglin)) return InteractionResult.PASS;
+
+        var level = player.level();
+        var isClientSide = level.isClientSide();
+
+        if (!isClientSide)
+        {
+            piglin.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
+            piglin.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
+        }
+
+        return getToolInteractionResult(level.isClientSide());
+    }
+
+    @Override
     public InteractionResult useOn(UseOnContext context)
     {
         var level = context.getLevel();
         var pos = context.getClickedPos();
 
+        if (erasePiglinsMemory(level, pos))
+        {
+            return getToolInteractionResult(level.isClientSide());
+        }
+
+        return InteractionResult.PASS;
+    }
+
+    private boolean erasePiglinsMemory(Level level, BlockPos pos)
+    {
         if (!level.isClientSide())
         {
             var monsters = level.getEntitiesOfClass(Piglin.class, new AABB(pos).inflate(EFFECTIVE_RADIUS));
@@ -33,10 +62,9 @@ public class MinerFigure extends ModItemWithDoubleHoverText
                 piglin.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
             }
 
-            if (!monsters.isEmpty()) return getToolInteractionResult(level.isClientSide());
+            return !monsters.isEmpty();
         }
-
-        return InteractionResult.PASS;
+        return false;
     }
 
     @Override
@@ -46,19 +74,9 @@ public class MinerFigure extends ModItemWithDoubleHoverText
         {
             var pos = player.getOnPos();
 
-            if (!level.isClientSide())
+            if (erasePiglinsMemory(level, pos))
             {
-                var monsters = level.getEntitiesOfClass(Piglin.class, new AABB(pos).inflate(EFFECTIVE_RADIUS));
-
-                for (Entity entity : monsters)
-                {
-                    var piglin = (Piglin) entity;
-                    piglin.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
-                    piglin.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
-                }
-
-                if (!monsters.isEmpty())
-                    return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
+                return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
             }
         }
 
