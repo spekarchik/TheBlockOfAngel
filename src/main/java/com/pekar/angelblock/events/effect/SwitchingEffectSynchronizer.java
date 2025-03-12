@@ -61,7 +61,7 @@ public class SwitchingEffectSynchronizer implements ISwitchingEffectSynchronizer
     {
         for (var effect : dependentEffects)
         {
-            if (effect.isOn() != masterEffect.isOn())
+            if (effect.isOn() != masterEffect.isOn() && effect.isAvailable())
                 effect.trySwitch();
             else
                 effect.updateActivity();
@@ -69,7 +69,7 @@ public class SwitchingEffectSynchronizer implements ISwitchingEffectSynchronizer
 
         for (var effect : dependentInvertedEffects)
         {
-            if (effect.isOn() == masterEffect.isOn())
+            if (effect.isOn() == masterEffect.isOn() && effect.isAvailable())
                 effect.trySwitch();
             else
                 effect.updateActivity();

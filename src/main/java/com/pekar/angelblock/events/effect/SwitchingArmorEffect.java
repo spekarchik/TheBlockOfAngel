@@ -66,8 +66,6 @@ class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements
 
     protected final void trySwitchTo(boolean switchOn, int amplifier)
     {
-        if (!isAvailable()) return;
-
         if (switchOn) trySwitchOn(amplifier);
         else trySwitchOff();
     }
