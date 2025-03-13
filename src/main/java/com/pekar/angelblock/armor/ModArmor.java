@@ -166,7 +166,7 @@ public class ModArmor extends ArmorItem
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)
         {
-            tooltipComponents.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 7, false));
+            tooltipComponents.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 8, false));
         }
     }
 
