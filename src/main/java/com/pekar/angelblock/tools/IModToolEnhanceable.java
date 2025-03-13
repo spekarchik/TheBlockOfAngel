@@ -15,8 +15,7 @@ public interface IModToolEnhanceable extends IModTool
     {
         if (!canPreventBlockDestroying(player, pos)) return false;
 
-        var cancelBreaking = !getMaterialProperties().isSafeToBreak(player, pos);
-        return cancelBreaking;
+        return !getMaterialProperties().isSafeToBreak(player, pos);
     }
 
     default boolean canPreventBlockDestroying(LivingEntity entity, BlockPos pos)
