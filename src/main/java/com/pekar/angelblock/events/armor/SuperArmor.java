@@ -24,7 +24,6 @@ public class SuperArmor extends Armor
     private final IPermanentArmorEffect luckEffect;
     private final ITemporaryArmorEffect regenerationEffect;
     private final IPermanentArmorEffect healthBoostEffect;
-    private final ITemporaryPersistentArmorEffect slownessEffect;
     private final ITemporaryPersistentArmorEffect jumpNegativeEffect;
     private final ISwitchingArmorEffect levitationEffect;
     private final ISwitchingArmorEffect slowFallingEffect;
@@ -50,8 +49,7 @@ public class SuperArmor extends Armor
 
         luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, REGENERATION_EFFECT_HEAL_AMPLIFIER, HEAL_REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessNegativeArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION);
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_EFFECT_DURATION);
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION);
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 2);
         levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableIfSlotSet(EquipmentSlot.CHEST);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
@@ -87,7 +85,6 @@ public class SuperArmor extends Armor
     @Override
     protected void updateAvailability()
     {
-        slownessEffect.updateAvailability();
         jumpNegativeEffect.updateAvailability();
 
         slowFallingEffect.updateAvailability();
@@ -318,7 +315,6 @@ public class SuperArmor extends Armor
                 jumpEffect.trySwitchOff();
                 levitationEffect.trySwitchOff();
                 slowFallingEffect.trySwitchOff();
-                slownessEffect.tryActivate();
                 jumpNegativeEffect.tryActivate();
 
                 regenerationEffect.tryActivate();

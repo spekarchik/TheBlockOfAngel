@@ -6,9 +6,9 @@ import com.pekar.angelblock.potions.PotionRegistry;
 
 public class JumpNegativeArmorEffect extends NegativeTemporaryArmorEffect
 {
-    public JumpNegativeArmorEffect(IPlayer player, IArmor armor, int duration)
+    public JumpNegativeArmorEffect(IPlayer player, IArmor armor, int slownessAmplifier, int duration)
     {
-        super(player, armor, PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT, 0, duration);
+        super(player, armor, PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT, slownessAmplifier, duration);
         showIcon();
     }
 }

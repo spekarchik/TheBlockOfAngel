@@ -17,7 +17,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 public class RendelithicArmor extends Armor
 {
     private final ITemporaryPersistentArmorEffect nauseaEffect;
-    private final ITemporaryPersistentArmorEffect slownessEffect;
     private final ITemporaryPersistentArmorEffect jumpNegativeEffect;
     private final ISwitchingArmorEffect slowFallingEffect;
     private final ISwitchingArmorEffect glowingEffect;
@@ -33,8 +32,7 @@ public class RendelithicArmor extends Armor
     {
         super(player);
         nauseaEffect = new NauseaNegativeEffect(player, this, NAUSEA_NEGATIVE_EFFECT_DURATION).showIcon();
-        slownessEffect = new SlownessNegativeArmorEffect(player, this, SLOWNESS_NEGATIVE_EFFECT_AMPLIFIER, SLOWNESS_NEGATIVE_EFFECT_DURATION);
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_NEGATIVE_EFFECT_DURATION);
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_NEGATIVE_EFFECT_AMPLIFIER, SLOWNESS_NEGATIVE_EFFECT_DURATION);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
         glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
 
@@ -50,7 +48,6 @@ public class RendelithicArmor extends Armor
     {
         jumpEffect.updateAvailability();
         nauseaEffect.updateAvailability();
-        slownessEffect.updateAvailability();
         jumpNegativeEffect.updateAvailability();
         slowFallingEffect.updateAvailability();
         glowingEffect.updateAvailability();
@@ -266,7 +263,6 @@ public class RendelithicArmor extends Armor
             if (!jumpNegativeEffect.isActive())
             {
                 nauseaEffect.tryActivate();
-                slownessEffect.tryActivate();
                 jumpNegativeEffect.tryActivate();
 
                 if (slowFallingEffect.isOn())

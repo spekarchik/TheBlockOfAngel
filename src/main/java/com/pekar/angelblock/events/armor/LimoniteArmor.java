@@ -20,7 +20,6 @@ public class LimoniteArmor extends Armor
     private final IPermanentArmorEffect healthBoostEffect;
     private final ITemporaryArmorEffect regenerationEffect;
     private final ITemporaryArmorEffect waterBreathingEffect;
-    private final ITemporaryPersistentArmorEffect slownessEffect;
     private final ITemporaryPersistentArmorEffect jumpNegativeEffect;
     private final ISwitchingArmorEffect nightVisionEffect;
     private final ISwitchingArmorEffect glowingEffect;
@@ -45,8 +44,7 @@ public class LimoniteArmor extends Armor
         luckEffect = new LuckPermanentArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 1);
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, 0, HEAL_REGENERATION_EFFECT_DURATION);
-        slownessEffect = new SlownessNegativeArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
-        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION);
+        jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
         waterBreathingEffect = new WaterBreathingTemporaryEffect(player, this, 0, WATER_BREATHING_EFFECT_DURATION);
 
         var jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
@@ -63,7 +61,6 @@ public class LimoniteArmor extends Armor
     @Override
     protected void updateAvailability()
     {
-        slownessEffect.updateAvailability();
         jumpNegativeEffect.updateAvailability();
 
         nightVisionEffect.updateAvailability();
@@ -91,7 +88,6 @@ public class LimoniteArmor extends Armor
     @Override
     protected void updateActivity(EquipmentSlot slot)
     {
-        slownessEffect.updateActivity();
         jumpNegativeEffect.updateActivity();
     }
 
@@ -234,7 +230,6 @@ public class LimoniteArmor extends Armor
             if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
             {
                 jumpEffect.trySwitchOff();
-                slownessEffect.tryActivate();
                 jumpNegativeEffect.tryActivate();
 
                 regenerationEffect.tryActivate();
