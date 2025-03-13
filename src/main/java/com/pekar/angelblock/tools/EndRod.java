@@ -187,16 +187,16 @@ public class EndRod extends AmethystRod
 
         if (isEnhanced())
         {
-            for (int i = 0; i <= 8; i++)
+            for (int i = 0; i <= 11; i++)
             {
-                tooltipComponents.add(getDescription(i, false, false, false, i == 0));
+                tooltipComponents.add(getDescription(i, false, false, i == 10, i == 0));
             }
         }
         else
         {
-            for (int i = 0; i <= 8; i++)
+            for (int i = 0; i <= 11; i++)
             {
-                tooltipComponents.add(getDescription(i, i == 1 || i == 4 || i == 6, false, false, i == 8));
+                tooltipComponents.add(getDescription(i, i == 1 || i == 4 || i == 6, false, i == 10, i == 8));
             }
         }
     }

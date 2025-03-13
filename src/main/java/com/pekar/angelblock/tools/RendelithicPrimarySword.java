@@ -28,9 +28,9 @@ public class RendelithicPrimarySword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 2; i++)
+        for (int i = 0; i <= 4; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1));
+            tooltipComponents.add(getDescription(i, i == 1, false, i == 3));
         }
     }
 }

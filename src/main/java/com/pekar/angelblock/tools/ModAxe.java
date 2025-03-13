@@ -75,9 +75,9 @@ public class ModAxe extends AxeItem implements IModToolEnhanceable
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        for (int i = 0; i <= 0; i++)
+        for (int i = 0; i <= 2; i++)
         {
-            tooltipComponents.add(getDescription(i, false));
+            tooltipComponents.add(getDescription(i, false, false, i == 1));
         }
     }
 }

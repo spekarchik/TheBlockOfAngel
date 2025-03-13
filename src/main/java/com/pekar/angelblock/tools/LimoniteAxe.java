@@ -35,9 +35,9 @@ public class LimoniteAxe extends EnhancedAxe
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i <= 7; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1, false, i == 3));
+            tooltipComponents.add(getDescription(i, i == 1, false, i == 3 || i == 6));
         }
     }
 

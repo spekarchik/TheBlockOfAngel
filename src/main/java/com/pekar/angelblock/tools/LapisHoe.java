@@ -62,9 +62,9 @@ public class LapisHoe extends EnhancedHoe
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 12; i++)
+        for (int i = 0; i <= 14; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 5 || i == 7, false, i == 3));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 5 || i == 7, false, i == 3 || i == 13));
         }
     }
 }

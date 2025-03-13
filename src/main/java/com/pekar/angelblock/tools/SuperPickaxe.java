@@ -71,9 +71,9 @@ public class SuperPickaxe extends EnhancedPickaxe
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 10; i++)
+        for (int i = 0; i <= 12; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, i == 6));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, i == 6 || i == 11));
         }
     }
 }

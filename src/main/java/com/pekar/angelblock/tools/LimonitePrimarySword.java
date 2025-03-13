@@ -48,9 +48,9 @@ public class LimonitePrimarySword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1));
+            tooltipComponents.add(getDescription(i, i == 1, false, i == 4));
         }
     }
 }

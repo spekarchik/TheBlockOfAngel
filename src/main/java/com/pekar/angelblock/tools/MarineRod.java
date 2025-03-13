@@ -138,16 +138,16 @@ public class MarineRod extends AncientRod
 
         if (isEnhanced())
         {
-            for (int i = 0; i <= 8; i++)
+            for (int i = 0; i <= 11; i++)
             {
-                tooltipComponents.add(getDescription(i, false, false, false, i == 0));
+                tooltipComponents.add(getDescription(i, false, false, i == 10, i == 0));
             }
         }
         else
         {
-            for (int i = 0; i <= 12; i++)
+            for (int i = 0; i <= 15; i++)
             {
-                tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, false, i == 12));
+                tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, i == 14, i == 12));
             }
         }
     }

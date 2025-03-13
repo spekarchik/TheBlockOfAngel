@@ -35,9 +35,9 @@ public class SuperAxe extends EnhancedAxe
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 8; i++)
+        for (int i = 0; i <= 10; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1, false, i == 6));
+            tooltipComponents.add(getDescription(i, i == 1, false, i == 6 || i == 9));
         }
     }
 

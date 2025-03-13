@@ -29,9 +29,9 @@ public class AngelRod extends EndRod
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 1; i <= 5; i++)
+        for (int i = 1; i <= 8; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, i == 4 || i == 5, i <= 2));
+            tooltipComponents.add(getDescription(i, false, false, i == 4 || i == 5 || i == 7, i <= 2));
         }
     }
 

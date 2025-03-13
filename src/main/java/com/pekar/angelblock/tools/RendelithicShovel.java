@@ -51,9 +51,9 @@ public final class RendelithicShovel extends EnhancedShovel
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 6; i++)
+        for (int i = 0; i <= 8; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 5, false, i == 3));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 5, false, i == 3 || i == 7));
         }
     }
 }

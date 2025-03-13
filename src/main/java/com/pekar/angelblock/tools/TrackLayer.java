@@ -79,9 +79,9 @@ public class TrackLayer extends WorkRod
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i <= 8; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 3,  false, false, i == 5));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 3,  false, i == 7, i == 5));
         }
     }
 

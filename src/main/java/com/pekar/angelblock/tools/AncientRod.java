@@ -211,16 +211,16 @@ public class AncientRod extends MagneticRod
 
         if (isEnhanced())
         {
-            for (int i = 0; i <= 8; i++)
+            for (int i = 0; i <= 11; i++)
             {
-                tooltipComponents.add(getDescription(i, false, false, false, i == 0));
+                tooltipComponents.add(getDescription(i, false, false, i == 10, i == 0));
             }
         }
         else
         {
-            for (int i = 0; i <= 12; i++)
+            for (int i = 0; i <= 15; i++)
             {
-                tooltipComponents.add(getDescription(i, i == 1 || i == 3 || i == 9));
+                tooltipComponents.add(getDescription(i, i == 1 || i == 3 || i == 9, false, i == 14));
             }
         }
     }

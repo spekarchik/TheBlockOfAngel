@@ -20,9 +20,9 @@ public class LapisPickaxe extends EnhancedPickaxe
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 4; i++)
+        for (int i = 0; i <= 6; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1, false, i == 3));
+            tooltipComponents.add(getDescription(i, i == 1, false, i == 3 || i == 5));
         }
     }
 }
