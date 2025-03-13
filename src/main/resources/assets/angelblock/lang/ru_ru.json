@@ -15,7 +15,7 @@
   "angelblock.rendelithic_armor.desc6": " Защита от огня и лавы: + (100%)",
   "angelblock.rendelithic_armor.desc7": " Регенерация под дождём: -",
   "angelblock.rendelithic_armor.desc8": " Поджигает/замедляет и подсвечивает атаковавших: -",
-  "angelblock.rendelithic_armor.desc9": " Износостойкость: 11",
+  "angelblock.rendelithic_armor.desc9": "§a Износостойкость: 11",
   "angelblock.rendelithic_armor.desc10": "Защита брони зависит от износа. Полностью изношенная броня не ломается",
 
   "angelblock.diamithic_armor.desc1": "§lПредназначение:§r§7 Сражения с боссами, универсальная броня. Отличная защита, неплохой набор функций. Тяжелая",
@@ -26,7 +26,7 @@
   "angelblock.diamithic_armor.desc6": " Защита от огня и лавы: -",
   "angelblock.diamithic_armor.desc7": " Регенерация под дождём: -",
   "angelblock.diamithic_armor.desc8": " Поджигает/замедляет и подсвечивает атаковавших: -",
-  "angelblock.diamithic_armor.desc9": " Износостойкость: 45",
+  "angelblock.diamithic_armor.desc9": "§a Износостойкость: 45",
   "angelblock.diamithic_armor.desc10": "Защита брони зависит от износа. Полностью изношенная броня не ломается",
 
   "angelblock.lapis_armor.desc1": "§lПредназначение:§r§7 Подводный мир. Хорошая защита. Набор функций специфичен для подводного выживания. Восприимчива к высоким и низким температурам",
@@ -37,7 +37,7 @@
   "angelblock.lapis_armor.desc6": " Защита от огня и лавы: -",
   "angelblock.lapis_armor.desc7": " Регенерация под дождём: -",
   "angelblock.lapis_armor.desc8": " Поджигает/замедляет и подсвечивает атаковавших: -",
-  "angelblock.lapis_armor.desc9": " Износостойкость: 40",
+  "angelblock.lapis_armor.desc9": "§a Износостойкость: 40",
   "angelblock.lapis_armor.desc10": "Защита брони зависит от износа. Полностью изношенная броня не ломается",
 
   "angelblock.limonite_armor.desc1": "§lПредназначение:§r§7 Универсальная броня. Слабоватая защита, средняя износоустойчивость, но широкий набор функций. Подходит для леса, джунглей, снежных биомов, гор, пещер",
@@ -48,7 +48,7 @@
   "angelblock.limonite_armor.desc6": " Защита от огня и лавы: -",
   "angelblock.limonite_armor.desc7": " Регенерация под дождём: + (быстрое истощение)",
   "angelblock.limonite_armor.desc8": " Поджигает/замедляет и подсвечивает атаковавших: +",
-  "angelblock.limonite_armor.desc9": " Износостойкость: 23",
+  "angelblock.limonite_armor.desc9": "§a Износостойкость: 23",
   "angelblock.limonite_armor.desc10": "Защита брони зависит от износа. Полностью изношенная броня не ломается. Замедляет атаковавших которые находятся рядом, иначе - воспламеняет",
 
   "angelblock.super_armor.desc1": "§lПредназначение:§r§7 Заменяет любую броню, сочетая в себе все преимущества. Лучший вариант для сражения с боссами и как универсальная",
@@ -59,7 +59,7 @@
   "angelblock.super_armor.desc6": " Защита от огня и лавы: + (100% от огня, 95% от лавы)",
   "angelblock.super_armor.desc7": " Регенерация под дождём: + (быстрое истощение)",
   "angelblock.super_armor.desc8": " Поджигает/замедляет и подсвечивает атаковавших: +",
-  "angelblock.super_armor.desc9": " Износостойкость: 43",
+  "angelblock.super_armor.desc9": "§a Износостойкость: 43",
   "angelblock.super_armor.desc10": "Защита брони зависит от износа. Полностью изношенная броня не ломается. Замедляет атаковавших которые находятся рядом, иначе - воспламеняет",
 
   "angelblock.flying_armor.desc1": "§lПредназначение:§r§7 Полеты, быстрое перемещение. Очень слабая защита и износоустойчивость. Не восприимчива к зачарованию",
@@ -70,7 +70,7 @@
   "angelblock.flying_armor.desc6": " Защита от огня и лавы: -",
   "angelblock.flying_armor.desc7": " Регенерация под дождём: -",
   "angelblock.flying_armor.desc8": " Поджигает/замедляет и подсвечивает атаковавших: -",
-  "angelblock.flying_armor.desc9": " Износостойкость: 3",
+  "angelblock.flying_armor.desc9": "§a Износостойкость: 3",
   "angelblock.flying_armor.desc10": "Защита брони зависит от износа. Полностью изношенная броня не ломается",
 
   "item.angelblock.rendelithic_boots": "Ренделитовые ботинки",

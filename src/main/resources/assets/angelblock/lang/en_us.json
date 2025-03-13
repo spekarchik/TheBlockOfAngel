@@ -15,7 +15,7 @@
   "angelblock.rendelithic_armor.desc6": " Fire and lava protection: + (100%)",
   "angelblock.rendelithic_armor.desc7": " Regeneration in the Rain: -",
   "angelblock.rendelithic_armor.desc8": " Burns or slows attackers, applies Glowing: -",
-  "angelblock.rendelithic_armor.desc9": " Durability resistance: 11",
+  "angelblock.rendelithic_armor.desc9": "§a Durability resistance: 11",
   "angelblock.rendelithic_armor.desc10": "Armor protection depends on durability. Fully broken armor does not disappear",
 
   "angelblock.diamithic_armor.desc1": "§lPurpose:§r§7 Boss fights, universal armor. Excellent protection, decent functionality. Heavy",
@@ -26,7 +26,7 @@
   "angelblock.diamithic_armor.desc6": " Fire and lava protection: -",
   "angelblock.diamithic_armor.desc7": " Regeneration in the Rain: -",
   "angelblock.diamithic_armor.desc8": " Burns or slows attackers, applies Glowing: -",
-  "angelblock.diamithic_armor.desc9": " Durability resistance: 45",
+  "angelblock.diamithic_armor.desc9": "§a Durability resistance: 45",
   "angelblock.diamithic_armor.desc10": "Armor protection depends on durability. Fully broken armor does not disappear",
 
   "angelblock.lapis_armor.desc1": "§lPurpose:§r§7 Underwater world. Good protection. Features are tailored for underwater survival. Sensitive to extreme temperatures",
@@ -37,7 +37,7 @@
   "angelblock.lapis_armor.desc6": " Fire and lava protection: -",
   "angelblock.lapis_armor.desc7": " Regeneration in the Rain: -",
   "angelblock.lapis_armor.desc8": " Burns or slows attackers, applies Glowing: -",
-  "angelblock.lapis_armor.desc9": " Durability resistance: 40",
+  "angelblock.lapis_armor.desc9": "§a Durability resistance: 40",
   "angelblock.lapis_armor.desc10": "Armor protection depends on durability. Fully broken armor does not disappear",
 
   "angelblock.limonite_armor.desc1": "§lPurpose:§r§7 Universal armor. Weak protection, medium durability, but a wide range of abilities. Suitable for forests, jungles, snowy biomes, mountains, and caves",
@@ -48,7 +48,7 @@
   "angelblock.limonite_armor.desc6": " Fire and lava protection: -",
   "angelblock.limonite_armor.desc7": " Regeneration in the Rain: + (Faster Exhaustion)",
   "angelblock.limonite_armor.desc8": " Burns or slows attackers, applies Glowing: +",
-  "angelblock.limonite_armor.desc9": " Durability resistance: 23",
+  "angelblock.limonite_armor.desc9": "§a Durability resistance: 23",
   "angelblock.limonite_armor.desc10": "Armor protection depends on durability. Fully broken armor does not disappear. Slows nearby attackers; otherwise, ignites them",
 
   "angelblock.super_armor.desc1": "§lPurpose:§r§7 Replaces any armor, combining all advantages. The best choice for boss fights and as a universal set",
@@ -59,7 +59,7 @@
   "angelblock.super_armor.desc6": " Fire and lava protection: + (100% for fire, 95% for lava)",
   "angelblock.super_armor.desc7": " Regeneration in the Rain: + (Faster Exhaustion)",
   "angelblock.super_armor.desc8": " Burns or slows attackers, applies Glowing: +",
-  "angelblock.super_armor.desc9": " Durability resistance: 43",
+  "angelblock.super_armor.desc9": "§a Durability resistance: 43",
   "angelblock.super_armor.desc10": "Armor protection depends on durability. Fully broken armor does not disappear. Slows nearby attackers; otherwise, ignites them",
 
   "angelblock.flying_armor.desc1": "§lPurpose:§r§7 Flight, fast movement. Very weak protection and durability. Cannot be enchanted",
@@ -70,7 +70,7 @@
   "angelblock.flying_armor.desc6": " Fire and lava protection: -",
   "angelblock.flying_armor.desc7": " Regeneration in the Rain: -",
   "angelblock.flying_armor.desc8": " Burns or slows attackers, applies Glowing: -",
-  "angelblock.flying_armor.desc9": " Durability resistance: 3",
+  "angelblock.flying_armor.desc9": "§a Durability resistance: 3",
   "angelblock.flying_armor.desc10": "Armor protection depends on durability. Fully broken armor does not disappear",
 
   "item.angelblock.rendelithic_boots": "Rendelithic Boots",
