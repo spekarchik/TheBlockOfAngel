@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -132,24 +131,47 @@ public class MarineRod extends AncientRod
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        super.appendPlacingBlockInfo(tooltipComponents, false);
 
-        if (isEnhanced())
+        for (int i = 2; i <= 5; i++)
         {
-            for (int i = 0; i <= 11; i++)
-            {
-                tooltipComponents.add(getDescription(i, false, false, i == 10, i == 0));
-            }
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
         }
-        else
+    }
+
+    @Override
+    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        super.appendBlockTransformInfo(tooltipComponents, false);
+
+        for (int i = 9; i <= 11; i++)
         {
-            for (int i = 0; i <= 15; i++)
-            {
-                tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, i == 14, i == 12));
-            }
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
         }
+    }
+
+    @Override
+    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 13; i <= 20; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, false, false, false));
+        }
+    }
+
+    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 21; i <= 23; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 22, false, false));
+        }
+    }
+
+    private String getRodId()
+    {
+        return ToolRegistry.MARINE_ROD.getRegisteredName();
     }
 
     @Override

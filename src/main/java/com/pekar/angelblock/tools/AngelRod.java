@@ -12,7 +12,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 
 import java.util.List;
@@ -24,14 +23,40 @@ public class AngelRod extends EndRod
         super(material, isMagnetic, properties);
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    private String getRodId()
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        return ToolRegistry.ANGEL_ROD.getRegisteredName();
+    }
 
-        for (int i = 1; i <= 8; i++)
+    @Override
+    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        super.appendPlacingBlockInfo(tooltipComponents, false);
+    }
+
+    @Override
+    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        super.appendBlockTransformInfo(tooltipComponents, false);
+
+        for (int i = 2; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, i == 4 || i == 5 || i == 7, i <= 2));
+            if (i == 3) continue;
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
+        }
+    }
+
+    @Override
+    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    {
+        super.appendMagneticInfo(tooltipComponents);
+    }
+
+    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 6; i <= 8; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 7, false, false));
         }
     }
 

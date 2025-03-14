@@ -4,9 +4,12 @@ import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.utils.Utils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -207,21 +210,104 @@ public class AncientRod extends MagneticRod
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!showExtendedDescription(tooltipComponents)) return;
 
-        if (isEnhanced())
+        // Common
+        appendCommonPreInfo(tooltipComponents);
+
+        if (tooltipFlag.hasControlDown())
         {
-            for (int i = 0; i <= 11; i++)
-            {
-                tooltipComponents.add(getDescription(i, false, false, i == 10, i == 0));
-            }
+            // Magnetic
+            if (!isEnhanced())
+                tooltipComponents.add(Component.translatable("description.rods.no_magnet_mode").withStyle(ChatFormatting.DARK_RED));
+
+            appendMagneticInfo(tooltipComponents);
         }
-        else
+        else if (tooltipFlag.hasShiftDown())
         {
-            for (int i = 0; i <= 15; i++)
-            {
-                tooltipComponents.add(getDescription(i, i == 1 || i == 3 || i == 9, false, i == 14));
-            }
+            // Placing
+            appendPlacingBlockInfo(tooltipComponents, true);
+        }
+        else if (tooltipFlag.hasAltDown())
+        {
+            // Transformations
+            appendBlockTransformInfo(tooltipComponents, true);
+        }
+
+        // Common
+        appendCommonPostInfo(tooltipComponents);
+
+        tooltipComponents.add(Component.empty());
+
+        if (tooltipFlag.hasControlDown())
+        {
+            // Magnetic
+            tooltipComponents.add(Component.translatable("description.rods.press_shift"));
+            tooltipComponents.add(Component.translatable("description.rods.press_alt"));
+        }
+        else if (tooltipFlag.hasShiftDown())
+        {
+            // Placing
+            tooltipComponents.add(Component.translatable("description.rods.press_alt"));
+            tooltipComponents.add(Component.translatable("description.rods.press_ctrl"));
+        }
+        else if (tooltipFlag.hasAltDown())
+        {
+            // Transformations
+            tooltipComponents.add(Component.translatable("description.rods.press_shift"));
+            tooltipComponents.add(Component.translatable("description.rods.press_ctrl"));
+        }
+    }
+
+    private String getRodId()
+    {
+        return ToolRegistry.ANCIENT_ROD.getRegisteredName();
+    }
+
+    protected MutableComponent getDescription(String rodId, int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isSelectedText)
+    {
+        var descriptionId = "item." + rodId.replace(':', '.');
+        var component = Component.translatable(descriptionId + ".desc" + lineNumber);
+        var formattedComponent = Utils.instance.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return isSelectedText ? formattedComponent.withStyle(ChatFormatting.WHITE) : formattedComponent;
+    }
+
+    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        for (int i = 1; i <= 8; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, i == 1 || i == 3, false, false, false, false));
+        }
+    }
+
+    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        for (int i = 9; i <= 12; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, i == 9, false, false, false, false));
+        }
+    }
+
+    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 13; i <= 20; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, false, false, false));
+        }
+    }
+
+    protected void appendCommonPreInfo(List<Component> tooltipComponents)
+    {
+        tooltipComponents.add(getDescription(0, false));
+        if (isEnhanced())
+            tooltipComponents.add(getDescription(1, false));
+    }
+
+    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 21; i <= 23; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 22, false, false));
         }
     }
 

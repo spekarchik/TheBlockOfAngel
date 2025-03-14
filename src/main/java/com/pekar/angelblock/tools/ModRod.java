@@ -1,9 +1,11 @@
 package com.pekar.angelblock.tools;
 
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -20,6 +22,8 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.common.ItemAbility;
+
+import java.util.List;
 
 public class ModRod extends ModRodTool implements IModTool
 {
@@ -94,6 +98,17 @@ public class ModRod extends ModRodTool implements IModTool
         if (durability <= amount) return;
 
         super.damageOffHandItem(amount, livingEntity);
+    }
+
+    protected boolean showExtendedDescription(List<Component> tooltipComponents)
+    {
+        if (!Screen.hasShiftDown() && !Screen.hasAltDown() && !Screen.hasAltDown())
+        {
+            tooltipComponents.add(Component.translatable("description.rods.press_shift_alt_or_ctrl"));
+            return false;
+        }
+
+        return true;
     }
 
     protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)

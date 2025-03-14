@@ -15,7 +15,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -180,24 +179,47 @@ public class EndRod extends AmethystRod
                 || (!isBroken(stack) && (block == Blocks.TUFF));
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    private String getRodId()
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        return ToolRegistry.END_ROD.getRegisteredName();
+    }
 
-        if (isEnhanced())
+    @Override
+    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        super.appendPlacingBlockInfo(tooltipComponents, false);
+
+        for (int i = 2; i <= 3; i++)
         {
-            for (int i = 0; i <= 11; i++)
-            {
-                tooltipComponents.add(getDescription(i, false, false, i == 10, i == 0));
-            }
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
         }
-        else
+    }
+
+    @Override
+    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        super.appendBlockTransformInfo(tooltipComponents, false);
+
+        for (int i = 4; i <= 5; i++)
         {
-            for (int i = 0; i <= 9; i++)
-            {
-                tooltipComponents.add(getDescription(i, i == 1 || i == 4, false, i == 8, i == 6));
-            }
+            tooltipComponents.add(getDescription(getRodId(), i,i == 4, false, false, false, selectAsNew));
+        }
+    }
+
+    @Override
+    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 7; i <= 14; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, i == 7, false, false, false, false));
+        }
+    }
+
+    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 15; i <= 17; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 16, false, false));
         }
     }
 

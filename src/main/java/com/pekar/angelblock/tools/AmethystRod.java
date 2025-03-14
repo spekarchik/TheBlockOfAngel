@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
@@ -57,8 +56,7 @@ public class AmethystRod extends FireRod
             }
 
             if (block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.ANDESITE
-                    || block == Blocks.DIORITE || block == Blocks.CALCITE
-                    || block == Blocks.DRIPSTONE_BLOCK)
+                    || block == Blocks.DIORITE || block == Blocks.DRIPSTONE_BLOCK)
             {
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return setOnBlockSide(context, this::setGlowLichen);
@@ -101,24 +99,47 @@ public class AmethystRod extends FireRod
                 || block == Blocks.DRIPSTONE_BLOCK || block == Blocks.DIAMOND_BLOCK || block == Blocks.BONE_BLOCK));
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    private String getRodId()
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        return ToolRegistry.AMETHYST_ROD.getRegisteredName();
+    }
 
-        if (isEnhanced())
+    @Override
+    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        super.appendPlacingBlockInfo(tooltipComponents, false);
+
+        for (int i = 2; i <= 2; i++)
         {
-            for (int i = 0; i <= 11; i++)
-            {
-                tooltipComponents.add(getDescription(i, false, false, i == 10, i == 0));
-            }
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
         }
-        else
+    }
+
+    @Override
+    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    {
+        super.appendBlockTransformInfo(tooltipComponents, false);
+
+        for (int i = 9; i <= 11; i++)
         {
-            for (int i = 0; i <= 15; i++)
-            {
-                tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, i == 14, i == 12));
-            }
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
+        }
+    }
+
+    @Override
+    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 13; i <= 20; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, false, false, false));
+        }
+    }
+
+    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    {
+        for (int i = 21; i <= 23; i++)
+        {
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 22, false, false));
         }
     }
 
