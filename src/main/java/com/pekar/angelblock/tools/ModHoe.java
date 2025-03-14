@@ -92,6 +92,8 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
+        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+
         for (int i = 0; i <= 2; i++)
         {
             tooltipComponents.add(getDescription(i, false, false, i == 1));
