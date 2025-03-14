@@ -178,7 +178,7 @@ abstract class Armor implements IArmor
 
     protected boolean isStandingInSoulFire()
     {
-        return player.getEntity().getBlockStateOn().is(Blocks.SOUL_FIRE);
+        return false; // no ways to distinguish fire types for now
     }
 
     protected boolean isLavaDamage(DamageSource damageSource)
