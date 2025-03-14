@@ -52,7 +52,7 @@
   "angelblock.limonite_armor.desc10": "Armor protection depends on durability. Fully broken armor does not disappear. Slows nearby attackers; otherwise, ignites them",
 
   "angelblock.super_armor.desc1": "§f§lPurpose:§r§7 Replaces any armor, combining all advantages. The best choice for boss fights and as a universal set",
-  "angelblock.super_armor.desc2": "§f§lWeaknesses:§r§7 Has normal visibility to creepers, unlike Limonite armor. No protection from soul fire",
+  "angelblock.super_armor.desc2": "§f§lWeaknesses:§r§7 Has normal visibility to creepers, unlike Limonite armor",
   "angelblock.super_armor.desc3": "§f§lTraits:§r§7 Bite immunity (80%): spiders, silverfish, bees. Full freezing protection.",
   "angelblock.super_armor.desc4": "§6§lRepair:§r§6 superite ingot",
   "angelblock.super_armor.desc5": "Common armor capabilities",
