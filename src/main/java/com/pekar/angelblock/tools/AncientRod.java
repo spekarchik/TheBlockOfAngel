@@ -227,16 +227,17 @@ public class AncientRod extends MagneticRod
         {
             // Placing
             appendPlacingBlockInfo(tooltipComponents, true);
+            tooltipComponents.add(Component.empty());
         }
         else if (tooltipFlag.hasAltDown())
         {
             // Transformations
             appendBlockTransformInfo(tooltipComponents, true);
+            tooltipComponents.add(Component.empty());
         }
 
         // Common
         appendCommonPostInfo(tooltipComponents);
-
         tooltipComponents.add(Component.empty());
 
         if (tooltipFlag.hasControlDown())
@@ -290,9 +291,10 @@ public class AncientRod extends MagneticRod
 
     protected void appendMagneticInfo(List<Component> tooltipComponents)
     {
-        for (int i = 13; i <= 20; i++)
+        for (int i = 13; i <= 21; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, false, false, false));
+            if (i == 21) tooltipComponents.add(Component.empty());
+            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, i == 21, false, false));
         }
     }
 
@@ -305,7 +307,7 @@ public class AncientRod extends MagneticRod
 
     protected void appendCommonPostInfo(List<Component> tooltipComponents)
     {
-        for (int i = 21; i <= 23; i++)
+        for (int i = 22; i <= 23; i++)
         {
             tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 22, false, false));
         }

@@ -314,15 +314,16 @@ public class FireRod extends MarineRod
     @Override
     protected void appendMagneticInfo(List<Component> tooltipComponents)
     {
-        for (int i = 14; i <= 21; i++)
+        for (int i = 14; i <= 22; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, i == 14, false, false, false, false));
+            if (i == 22) tooltipComponents.add(Component.empty());
+            tooltipComponents.add(getDescription(getRodId(), i, i == 14, false, i == 22, false, false));
         }
     }
 
     protected void appendCommonPostInfo(List<Component> tooltipComponents)
     {
-        for (int i = 22; i <= 24; i++)
+        for (int i = 23; i <= 24; i++)
         {
             tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 23, false, false));
         }

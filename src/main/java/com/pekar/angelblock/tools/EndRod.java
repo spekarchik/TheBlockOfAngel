@@ -209,15 +209,16 @@ public class EndRod extends AmethystRod
     @Override
     protected void appendMagneticInfo(List<Component> tooltipComponents)
     {
-        for (int i = 7; i <= 14; i++)
+        for (int i = 7; i <= 15; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, i == 7, false, false, false, false));
+            if (i == 15) tooltipComponents.add(Component.empty());
+            tooltipComponents.add(getDescription(getRodId(), i, i == 7, false, i == 15, false, false));
         }
     }
 
     protected void appendCommonPostInfo(List<Component> tooltipComponents)
     {
-        for (int i = 15; i <= 17; i++)
+        for (int i = 16; i <= 17; i++)
         {
             tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 16, false, false));
         }

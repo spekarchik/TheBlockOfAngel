@@ -54,7 +54,7 @@ public class AngelRod extends EndRod
 
     protected void appendCommonPostInfo(List<Component> tooltipComponents)
     {
-        for (int i = 6; i <= 8; i++)
+        for (int i = 7; i <= 8; i++)
         {
             tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 7, false, false));
         }
