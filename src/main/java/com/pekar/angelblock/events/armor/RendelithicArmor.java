@@ -101,8 +101,11 @@ public class RendelithicArmor extends Armor
 
         if (isFireDamage(damageSource))
         {
-            float realDamage = getRealDamage(event.getAmount());
-            event.setCanceled(realDamage <= 0);
+            if (isStandingInSoulFire())
+            {
+                float realDamage = getRealDamage(event.getAmount());
+                event.setCanceled(realDamage <= 0);
+            }
 
             if (player.isFullArmorSetPutOn(this))
                 event.getEntity().clearFire();
@@ -127,7 +130,7 @@ public class RendelithicArmor extends Armor
     {
         var damageSource = event.getSource();
 
-        if (isFireDamage(damageSource))
+        if (isFireDamage(damageSource) && isStandingInSoulFire())
         {
             float realDamage = getRealDamage(event.getNewDamage());
             event.setNewDamage(realDamage);
