@@ -164,7 +164,7 @@ public class SuperArmor extends Armor
 
         if (isFireDamage(damageSource))
         {
-            if (isStandingInSoulFire())
+            if (!isStandingInSoulFire())
             {
                 float realDamage = getRealDamage(event.getAmount());
                 event.setCanceled(realDamage <= 0);
@@ -230,7 +230,7 @@ public class SuperArmor extends Armor
         DamageSource damageSource = event.getSource();
         boolean isFullArmorSet = player.isFullArmorSetPutOn(this);
 
-        if (isFireDamage(damageSource) && isStandingInSoulFire())
+        if (isFireDamage(damageSource) && !isStandingInSoulFire())
         {
             float realDamage = getRealDamage(event.getNewDamage());
             event.setNewDamage(realDamage);
