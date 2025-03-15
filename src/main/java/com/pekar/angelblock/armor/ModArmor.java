@@ -61,6 +61,11 @@ public class ModArmor extends ArmorItem
         return super.damageItem(stack, amount, entity, onBroken);
     }
 
+    public boolean isBroken(ItemStack stack)
+    {
+        return stack.getMaxDamage() - stack.getDamageValue() <= 1;
+    }
+
     public final boolean isModifiedWithDetector()
     {
         return armorModificatorSet.contains(ArmorModifications.Detector);

@@ -129,10 +129,11 @@ public class LimoniteArmor extends Armor
     public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         var damageSource = event.getSource();
+        boolean isAnyArmorElementPutOn = player.isAnyArmorElementPutOn(this);
 
         if (isFreezeDamage(damageSource))
         {
-            event.setCanceled(true);
+            event.setCanceled(isAnyArmorElementPutOn);
         }
         else if (isThornOrMagicDamage(damageSource))
         {

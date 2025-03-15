@@ -2,7 +2,6 @@ package com.pekar.angelblock.events.player;
 
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.*;
-import com.pekar.angelblock.events.effect.ITemporaryArmorEffect;
 import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.tools.ToolRegistry;
@@ -48,7 +47,7 @@ public class Player implements IPlayer
         var itemStack = getEntity().getItemBySlot(equipmentSlot);
         if (itemStack.isEmpty()) return false;
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem)) return false;
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
 
         return armor.getFamilyName().equals(armorItem.getArmorFamilyName());
     }
@@ -68,7 +67,7 @@ public class Player implements IPlayer
             var itemStack = getEntity().getItemBySlot(slot);
             if (itemStack.isEmpty()) return false;
             var item = itemStack.getItem();
-            if (!(item instanceof ModArmor armorItem)) return false;
+            if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
 
             if (!armor.getFamilyName().equals(armorItem.getArmorFamilyName())) return false;
         }
@@ -78,6 +77,21 @@ public class Player implements IPlayer
 
     @Override
     public boolean isAnyArmorElementPutOn(IArmor armor)
+    {
+        for (var itemStack : getEntity().getArmorSlots())
+        {
+            if (itemStack.isEmpty()) continue;
+            var item = itemStack.getItem();
+            if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) continue;
+
+            if (armor.getFamilyName().equals(armorItem.getArmorFamilyName())) return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isAnyArmorElementInclBrokenPutOn(IArmor armor)
     {
         for (var itemStack : getEntity().getArmorSlots())
         {
@@ -94,8 +108,9 @@ public class Player implements IPlayer
     @Override
     public boolean isHelmetModifiedWithDetector(IArmor armor)
     {
-        var item = getEntity().getItemBySlot(EquipmentSlot.HEAD).getItem();
-        if (!(item instanceof ModArmor armorItem)) return false;
+        var itemStack = getEntity().getItemBySlot(EquipmentSlot.HEAD);
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithDetector();
     }
@@ -103,8 +118,9 @@ public class Player implements IPlayer
     @Override
     public boolean areLeggingsModifiedWithHealthRegenerator(IArmor armor)
     {
-        var item = getEntity().getItemBySlot(EquipmentSlot.LEGS).getItem();
-        if (!(item instanceof ModArmor armorItem)) return false;
+        var itemStack = getEntity().getItemBySlot(EquipmentSlot.LEGS);
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithHealthRegenerator();
     }
@@ -112,8 +128,9 @@ public class Player implements IPlayer
     @Override
     public boolean areBootsModifiedWithJumpBooster(IArmor armor)
     {
-        var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
-        if (!(item instanceof ModArmor armorItem)) return false;
+        var itemStack = getEntity().getItemBySlot(EquipmentSlot.FEET);
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithJumpBooster();
     }
@@ -121,8 +138,9 @@ public class Player implements IPlayer
     @Override
     public boolean isChestPlateModifiedWithStrengthBooster(IArmor armor)
     {
-        var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
-        if (!(item instanceof ModArmor armorItem)) return false;
+        var itemStack = getEntity().getItemBySlot(EquipmentSlot.CHEST);
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithStrengthBooster();
     }
@@ -130,8 +148,9 @@ public class Player implements IPlayer
     @Override
     public boolean isChestPlateModifiedWithSlowFalling(IArmor armor)
     {
-        var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
-        if (!(item instanceof ModArmor armorItem)) return false;
+        var itemStack = getEntity().getItemBySlot(EquipmentSlot.CHEST);
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithSlowFalling();
     }
@@ -139,8 +158,9 @@ public class Player implements IPlayer
     @Override
     public boolean isChestPlateModifiedWithLuck(IArmor armor)
     {
-        var item = getEntity().getItemBySlot(EquipmentSlot.CHEST).getItem();
-        if (!(item instanceof ModArmor armorItem)) return false;
+        var itemStack = getEntity().getItemBySlot(EquipmentSlot.CHEST);
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithLuck();
     }
@@ -148,8 +168,9 @@ public class Player implements IPlayer
     @Override
     public boolean areBootsModifiedWithSeaPower(IArmor armor)
     {
-        var item = getEntity().getItemBySlot(EquipmentSlot.FEET).getItem();
-        if (!(item instanceof ModArmor armorItem)) return false;
+        var itemStack = getEntity().getItemBySlot(EquipmentSlot.FEET);
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithSeaPower();
     }

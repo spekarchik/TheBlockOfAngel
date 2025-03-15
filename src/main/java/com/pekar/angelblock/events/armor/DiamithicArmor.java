@@ -245,6 +245,6 @@ public class DiamithicArmor extends Armor
 
     private boolean isSlownessAvailable(IPlayer player, IArmor armor)
     {
-        return player.isAnyArmorElementPutOn(armor) && !player.getEntity().isInWater();
+        return player.isAnyArmorElementInclBrokenPutOn(armor) && !player.getEntity().isInWater();
     }
 }
