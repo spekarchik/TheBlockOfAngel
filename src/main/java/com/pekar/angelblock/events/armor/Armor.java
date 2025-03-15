@@ -294,14 +294,14 @@ abstract class Armor implements IArmor
         }
 
         var randomSource = RandomSource.create();
-        int diamithicArmorSlots = 0;
+        int heavyArmorSlots = 0;
         for (var slot : player.getArmorSlots())
         {
             if (slot.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
-                diamithicArmorSlots++;
+                heavyArmorSlots++;
         }
         int rnd = randomSource.nextInt(chanceToAvoidBreaking);
-        boolean shouldIceBeBroken = rnd <= diamithicArmorSlots * diamithicArmorSlots;
+        boolean shouldIceBeBroken = rnd <= heavyArmorSlots * heavyArmorSlots;
         if (doRandomly && !shouldIceBeBroken) return;
 
         for (int x = posBelow.getX() - 1; x <= posBelow.getX() + 1; x++)

@@ -110,14 +110,14 @@ public class RendelithicArmor extends Armor
             if (player.isFullArmorSetPutOn(this))
                 event.getEntity().clearFire();
         }
-        else if (isLavaDamage(damageSource) && player.isFullArmorSetPutOn(this))
+        else if (isLavaDamage(damageSource))
         {
-            event.setCanceled(true);
+            event.setCanceled(player.isFullArmorSetPutOn(this));
         }
-        else
+        else if (damageSource.is(DamageTypes.WITHER))
         {
             boolean hasHealthRegeneration = player.areLeggingsModifiedWithHealthRegenerator(this);
-            if (hasHealthRegeneration && damageSource.is(DamageTypes.WITHER))
+            if (hasHealthRegeneration)
             {
                 event.setCanceled(true);
                 player.getEntity().removeEffect(MobEffects.WITHER);
