@@ -153,6 +153,12 @@ public class FlyingArmor extends Armor
             if (slowFallingEffect.isActive())
                 player.getEntity().stopFallFlying();
         }
+
+        // for tests
+//        if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))
+//        {
+//            switchArmorDamage();
+//        }
     }
 
     @Override

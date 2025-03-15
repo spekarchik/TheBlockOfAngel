@@ -245,6 +245,8 @@ public class LimoniteArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))
         {
             glowingEffect.trySwitch();
+            // for tests
+            //switchArmorDamage();
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))

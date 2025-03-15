@@ -181,6 +181,8 @@ public class DiamithicArmor extends Armor
         if (pressedKeyDescription.equals(KeyRegistry.GLOWING.getName()))
         {
             glowingEffect.trySwitch();
+            // for tests
+            //switchArmorDamage();
         }
     }
 

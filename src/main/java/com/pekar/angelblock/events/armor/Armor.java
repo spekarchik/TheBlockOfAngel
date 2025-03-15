@@ -331,6 +331,26 @@ abstract class Armor implements IArmor
         }
     }
 
+    protected void switchArmorDamage()
+    {
+        boolean isDamaged = false;
+        for (var slot : player.getEntity().getArmorSlots())
+        {
+            if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
+            {
+                if (modArmor.isDamaged(slot)) isDamaged = true;
+            }
+        }
+
+        for (var slot : player.getEntity().getArmorSlots())
+        {
+            if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
+            {
+                damageArmor(!isDamaged);
+            }
+        }
+    }
+
     protected final boolean isVulnerable(DamageSource damageSource)
     {
         var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Main.MODID, getVulnerabilitiesTagName()));
