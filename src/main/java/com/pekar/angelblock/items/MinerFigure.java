@@ -6,7 +6,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.monster.Zoglin;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,18 +23,28 @@ public class MinerFigure extends ModItemWithDoubleHoverText
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand)
     {
-        if (!(interactionTarget instanceof Piglin piglin)) return InteractionResult.PASS;
-
-        var level = player.level();
-        var isClientSide = level.isClientSide();
-
-        if (!isClientSide)
+        if (interactionTarget instanceof Piglin || interactionTarget instanceof Zoglin)
         {
-            piglin.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
-            piglin.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
-        }
+            var level = player.level();
+            var isClientSide = level.isClientSide();
 
-        return getToolInteractionResult(level.isClientSide());
+            if (!isClientSide)
+            {
+                eraseMobMemory((Mob)interactionTarget);
+            }
+
+            return getToolInteractionResult(level.isClientSide());
+        }
+        else
+        {
+            return InteractionResult.PASS;
+        }
+    }
+
+    private static void eraseMobMemory(Mob mob)
+    {
+        mob.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
+        mob.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
     }
 
     @Override
@@ -53,7 +65,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
     {
         if (!level.isClientSide())
         {
-            var monsters = level.getEntitiesOfClass(Piglin.class, new AABB(pos).inflate(EFFECTIVE_RADIUS));
+            var monsters = level.getEntitiesOfClass(Mob.class, new AABB(pos).inflate(EFFECTIVE_RADIUS), entity -> entity instanceof Piglin || entity instanceof Zoglin);
 
             for (Entity entity : monsters)
             {
