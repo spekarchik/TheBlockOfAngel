@@ -5,7 +5,10 @@ import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -66,5 +69,37 @@ public class AngelRodBlock extends ModBlockWithDoubleHoverText implements Entity
     public Item asItem()
     {
         return ToolRegistry.ANGEL_ROD.get();
+    }
+
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
+    {
+        if (!level.isClientSide())
+        {
+            var blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
+            {
+
+                if (player.isSteppingCarefully())
+                {
+                    var itemStack1 = new ItemStack(ToolRegistry.END_MAGNETIC_ROD.get());
+                    itemStack1.setDamageValue(angelRodBlockEntity.getDamage());
+                    var itemStack2 = new ItemStack(BlockRegistry.ANGEL_BLOCK.get());
+                    var itemStack3 = new ItemStack(Items.TOTEM_OF_UNDYING);
+
+                    popResource(level, pos, itemStack1);
+                    popResource(level, pos, itemStack2);
+                    popResource(level, pos, itemStack3);
+                }
+                else
+                {
+                    var itemStack = new ItemStack(ToolRegistry.ANGEL_ROD.get());
+                    itemStack.setDamageValue(angelRodBlockEntity.getDamage());
+                    popResource(level, pos, itemStack);
+                }
+            }
+        }
+
+        return super.playerWillDestroy(level, pos, state, player);
     }
 }
