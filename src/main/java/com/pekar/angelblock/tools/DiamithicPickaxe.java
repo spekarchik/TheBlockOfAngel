@@ -22,7 +22,7 @@ public class DiamithicPickaxe extends EnhancedPickaxe
 
         for (int i = 0; i <= 7; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1, false, i == 4 || i == 6));
+            tooltipComponents.add(getDescription(i, i == 1, false, i == 4, false, i == 6));
         }
     }
 }

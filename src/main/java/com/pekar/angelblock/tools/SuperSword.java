@@ -138,7 +138,7 @@ public class SuperSword extends ModSword
 
         for (int i = 0; i <= 16; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 6, i == 7 || i == 9 || i == 13, i == 12 || i == 15));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 6, i == 7 || i == 9 || i == 13, i == 12, false, i == 15));
         }
     }
 

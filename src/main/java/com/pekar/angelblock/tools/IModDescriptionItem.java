@@ -5,11 +5,16 @@ import net.minecraft.network.chat.MutableComponent;
 
 public interface IModDescriptionItem
 {
+    default MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isDarkGray)
+    {
+        var component = getDisplayName(lineNumber);
+        return Utils.instance.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, isDarkGray);
+    }
 
     default MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
     {
         var component = getDisplayName(lineNumber);
-        return Utils.instance.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return Utils.instance.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, false);
     }
 
     default MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)

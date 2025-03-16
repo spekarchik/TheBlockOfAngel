@@ -53,7 +53,7 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
 
         for (int i = 1; i <= 18; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 3, false, i == 18, i == 17));
+            tooltipComponents.add(getDescription(i, i == 3, false, i == 17));
         }
     }
 }

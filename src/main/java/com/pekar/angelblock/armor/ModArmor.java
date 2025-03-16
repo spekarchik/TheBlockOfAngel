@@ -166,12 +166,12 @@ public class ModArmor extends ArmorItem
 
         for (int i = 1; i <= 10; i++)
         {
-            tooltipComponents.add(getCommonDescription(i, i == 5, false, i == 10, false));
+            tooltipComponents.add(getCommonDescription(i, i == 5, false, false, false, i == 10));
         }
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)
         {
-            tooltipComponents.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 8, false));
+            tooltipComponents.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 8, false, false));
         }
     }
 
@@ -199,16 +199,16 @@ public class ModArmor extends ArmorItem
         return true;
     }
 
-    private MutableComponent getCommonDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
+    private MutableComponent getCommonDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isDarkGray)
     {
         var component = getCommonDisplayName(lineNumber);
-        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, isDarkGray);
     }
 
-    private MutableComponent getSpecificDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
+    private MutableComponent getSpecificDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isDarkGray)
     {
         var component = getSpecificDisplayName(lineNumber);
-        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, isDarkGray);
     }
 
     private MutableComponent getSpecificDisplayName(int lineNumber)

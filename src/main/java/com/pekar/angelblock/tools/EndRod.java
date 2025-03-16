@@ -191,7 +191,7 @@ public class EndRod extends AmethystRod
 
         for (int i = 2; i <= 3; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
         }
     }
 
@@ -202,7 +202,7 @@ public class EndRod extends AmethystRod
 
         for (int i = 4; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,i == 4, false, false, false, selectAsNew));
+            tooltipComponents.add(getDescription(getRodId(), i,i == 4, false, false, false, selectAsNew, false));
         }
     }
 
@@ -212,7 +212,7 @@ public class EndRod extends AmethystRod
         for (int i = 7; i <= 15; i++)
         {
             if (i == 15) tooltipComponents.add(Component.empty());
-            tooltipComponents.add(getDescription(getRodId(), i, i == 7, false, i == 15, false, false));
+            tooltipComponents.add(getDescription(getRodId(), i, i == 7, false, false, false, false, i == 15));
         }
     }
 
@@ -220,7 +220,7 @@ public class EndRod extends AmethystRod
     {
         for (int i = 16; i <= 17; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 16, false, false));
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, false, false, false, i == 16));
         }
     }
 

@@ -1056,7 +1056,7 @@
   "block.angelblock.angel_block.desc15": " Паучий глаз: Пещерный паук      Тотем бессмертия: Вызыватель",
   "block.angelblock.angel_block.desc16": " Седло: Разоритель               Кусочек золота: Пиглин",
   "block.angelblock.angel_block.desc17": " Кремень: очищает фильтр - блок снова удаляет всех монстров",
-  "block.angelblock.angel_block.desc18": "(Использованный предмет НЕ пропадает)",
+  "block.angelblock.angel_block.desc18": "§2Использованный предмет НЕ расходуется",
   "block.angelblock.devil_block": "§bДьявольский блок",
   "block.angelblock.devil_block.desc1": "Делает бессмертными всех монстров в радиусе 70 блоков",
   "block.angelblock.devil_block.desc2": "",
@@ -1073,7 +1073,7 @@
   "block.angelblock.devil_block.desc13": " Паучий глаз: Пещерный паук      Тотем бессмертия: Вызыватель",
   "block.angelblock.devil_block.desc14": " Седло: Разоритель               Кусочек золота: Пиглин",
   "block.angelblock.devil_block.desc15": " Песок: Кадавр                   Арбалет: Разбойник",
-  "block.angelblock.devil_block.desc16": "(Использованный предмет пропадает!)",
+  "block.angelblock.devil_block.desc16": "§2Использованный предмет расходуется!",
   "block.angelblock.angel_rod_block": "§bПосох Ангела",
   "block.angelblock.angel_rod_block.desc1": "Когда игрок держит в руке или установлен на блоке, очищает от монстров область в радиусе 20 блоков",
   "block.angelblock.angel_rod_block.desc2": "Блок может быть разрушен на исходные компоненты - игрок должен приседать при разрушении",
@@ -1120,10 +1120,10 @@
   "item.angelblock.block_breaker_potion_item.desc16": " Стекло: 0-4 Осколков Призмарина",
   "item.angelblock.block_breaker_potion_item.desc17": " Песок около воды: 4 Куска Глины",
   "item.angelblock.block_breaker_potion_item.desc18": " Призмарин: 0-4 Призмариновых Кристалла",
-  "item.angelblock.block_breaker_potion_item.desc19": "Разрушает алмазную броню на стойке и мобах. Выпадает Алмазная Пыль",
+  "item.angelblock.block_breaker_potion_item.desc19": "§8Разрушает алмазную броню на стойке и мобах. Выпадает Алмазная Пыль",
   "item.angelblock.soaring_spore_essence": "Эссенция парящей квампы",
   "item.angelblock.soaring_spore_essence.desc1": "Используется для добавления броне возможности подсветки игрока и плавного падения",
-  "item.angelblock.soaring_spore_essence.desc2": "При использовании на живых существах поочерёдно накладывает или снимает бесконечные эффекты подсветки и плавного падения",
+  "item.angelblock.soaring_spore_essence.desc2": "§8При использовании на живых существах поочерёдно накладывает или снимает бесконечные эффекты подсветки и плавного падения",
   "item.angelblock.soaring_spore_essence.desc3": "§3§lРецепт для варочной стойки:§r§3 Квампа, Зелье плавного падения",
   "effect.angelblock.tool_advanced_mode_effect": "Улучшенный режим",
   "effect.angelblock.sword_explosion_mode_effect": "Режим взрыва",
@@ -1140,5 +1140,6 @@
   "description.rods.press_shift": "§7Нажмите §9Shift§7 для отображения информации о применении на блоках...",
   "description.rods.press_alt": "§7Нажмите §9Alt§7 для отображения информации о трансформации блоков...",
   "description.rods.press_ctrl": "§7Нажмите §9Ctrl+Alt§7 для отображения параметров режима Магнита...",
-  "description.rods.no_magnet_mode": "Улучшите посох, чтобы добавить режим Магнита"
+  "description.rods.no_magnet_mode": "Улучшите посох, чтобы добавить режим Магнита",
+  "description.rods.magnet_mode": "Посох вытягивает на поверхность блоки руды, кроме алмазной. Руда может проходить только через Камень, Булыжник, Гранит, Диорит, Андезит, Туф. При обнаружении Алмазной руды, Рельс (Заброшенные шахты), Скалка, Кальцита и Гладкого базальта (Аметистовые жилы) издается определенный звук (как металлоискатель)"
 }

@@ -14,10 +14,16 @@ public class ModBlockWithMultipleHoverText extends Block
         super(properties);
     }
 
+    protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isDarkGray)
+    {
+        var component = getDisplayName(lineNumber);
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, isDarkGray);
+    }
+
     protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
     {
         var component = getDisplayName(lineNumber);
-        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, false);
     }
 
     protected MutableComponent getDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice)

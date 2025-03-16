@@ -1056,7 +1056,7 @@
   "block.angelblock.angel_block.desc15": " Spider Eye: Cave Spider        Totem of Undying: Evoker",
   "block.angelblock.angel_block.desc16": " Saddle: Ravager                Gold Nugget: Pigline",
   "block.angelblock.angel_block.desc17": " Flint: resets the filter - block removes ANY monsters again",
-  "block.angelblock.angel_block.desc18": "(The item used on the block is NOT consumed)",
+  "block.angelblock.angel_block.desc18": "§2The item used on the block is NOT consumed",
   "block.angelblock.devil_block": "§bDevil Block",
   "block.angelblock.devil_block.desc1": "Prevents deaths of monsters in 70 block radius",
   "block.angelblock.devil_block.desc2": "",
@@ -1073,7 +1073,7 @@
   "block.angelblock.devil_block.desc13": " Spider Eye: Cave Spider        Totem of Undying: Evoker",
   "block.angelblock.devil_block.desc14": " Saddle: Ravager                Gold Nugget: Pigline",
   "block.angelblock.devil_block.desc15": " Sand: Husk                     Cross Bow: Pillager",
-  "block.angelblock.devil_block.desc16": "(The item used on the block is consumed!)",
+  "block.angelblock.devil_block.desc16": "§2The item used on the block is consumed!",
   "block.angelblock.angel_rod_block": "§bThe Rod of Angel",
   "block.angelblock.angel_rod_block.desc1": "When hold in a hand or placed on a block it despawns any monsters in 20 block radius",
   "block.angelblock.angel_rod_block.desc2": "The block can be dropped as source items - player should be sitting when drops",
@@ -1120,10 +1120,10 @@
   "item.angelblock.block_breaker_potion_item.desc16": " Glass: destroys and drops 0-4 Prismarine Shards",
   "item.angelblock.block_breaker_potion_item.desc17": " Sand near water: destroys and drops 4 Clays",
   "item.angelblock.block_breaker_potion_item.desc18": " Prismarine: destroys and drops 0-4 Prismarine Crystals",
-  "item.angelblock.block_breaker_potion_item.desc19": "Destroys diamond armor on armor stand and mobs. Drops Diamond Powder",
+  "item.angelblock.block_breaker_potion_item.desc19": "§8Destroys diamond armor on armor stand and mobs. Drops Diamond Powder",
   "item.angelblock.soaring_spore_essence": "Soaring Spore Essence",
   "item.angelblock.soaring_spore_essence.desc1": "Used to grant the armor the ability to highlight the player and enable slow falling",
-  "item.angelblock.soaring_spore_essence.desc2": "When used on living beings, it alternately applies or removes infinite Glowing and Slow Falling effects",
+  "item.angelblock.soaring_spore_essence.desc2": "§8When used on living beings, it alternately applies or removes infinite Glowing and Slow Falling effects",
   "item.angelblock.soaring_spore_essence.desc3": "§3§lBrewing Recipe:§r§3 Froglight, Potion of Slow Falling",
   "effect.angelblock.tool_advanced_mode_effect": "Enhanced Mode",
   "effect.angelblock.sword_explosion_mode_effect": "Sword Explosion Mode",
@@ -1140,5 +1140,6 @@
   "description.rods.press_shift": "§7Press §9Shift§7 to display information about block usage...",
   "description.rods.press_alt": "§7Press §9Alt§7 to display information about block transformation...",
   "description.rods.press_ctrl": "§7Press §9Ctrl+Alt§7 to display Magnet Mode settings...",
-  "description.rods.no_magnet_mode": "Upgrade the rod to unlock Magnet Mode"
+  "description.rods.no_magnet_mode": "Upgrade the rod to unlock Magnet Mode",
+  "description.rods.magnet_mode": "The rod pulls ore blocks to the surface, except for Diamond Ore. Ore can only pass through Stone, Cobblestone, Granite, Diorite, Andesite, and Tuff. When detecting Diamond Ore, Rails (Abandoned Mineshafts), Sculk, Calcite, and Smooth Basalt (Amethyst Geodes), a distinct sound is played, similar to a metal detector"
 }

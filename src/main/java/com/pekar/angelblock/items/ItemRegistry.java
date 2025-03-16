@@ -9,7 +9,7 @@ public class ItemRegistry
 {
     public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.register("obsidian_powder", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> ENDSTONE_POWDER = Main.ITEMS.register("endstone_powder", EndstonePowder::new);
-    public static final DeferredItem<Item> DIAMOND_POWDER = Main.ITEMS.register("diamond_powder", () -> new ModItemWithHoverText(TextStyle.Notice));
+    public static final DeferredItem<Item> DIAMOND_POWDER = Main.ITEMS.register("diamond_powder", DiamondPowder::new);
     public static final DeferredItem<Item> SALTPETER = Main.ITEMS.register("saltpeter", SaltPeter::new);
     public static final DeferredItem<Item> RENDELITHIC_POWDER = Main.ITEMS.register("rendelithic_powder", () -> new ModItem());
     public static final DeferredItem<Item> DIAMITHIC_POWDER = Main.ITEMS.register("diamithic_powder", () -> new ModItem());

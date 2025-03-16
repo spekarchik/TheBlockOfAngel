@@ -29,7 +29,7 @@ public class ModBlockWithHoverText extends Block
     protected MutableComponent getDescription(boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
     {
         var component = getDisplayName();
-        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice);
+        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, false);
     }
 
     protected MutableComponent getDisplayName()

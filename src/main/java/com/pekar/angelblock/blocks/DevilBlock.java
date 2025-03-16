@@ -70,7 +70,7 @@ public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityB
 
         for (int i = 1; i <= 16; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 3, false, i == 16, false));
+            tooltipComponents.add(getDescription(i, i == 3, false, false, false));
         }
     }
 }

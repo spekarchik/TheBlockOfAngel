@@ -52,7 +52,7 @@ public class SuperShovel extends EnhancedShovel
 
         for (int i = 0; i <= 11; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, i == 6 || i == 10));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, i == 6, false, i == 10));
         }
     }
 }

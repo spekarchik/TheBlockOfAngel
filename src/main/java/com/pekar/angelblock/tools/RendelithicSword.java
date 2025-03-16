@@ -69,7 +69,7 @@ public class RendelithicSword extends ModSword
 
         for (int i = 0; i <= 6; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 3, false, i == 5));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 3, false, false, false, i == 5));
         }
     }
 

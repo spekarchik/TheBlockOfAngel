@@ -6,5 +6,6 @@ public enum TextStyle
     Header,
     Subheader,
     Notice,
-    ImportantNotice
+    ImportantNotice,
+    DarkGray
 }

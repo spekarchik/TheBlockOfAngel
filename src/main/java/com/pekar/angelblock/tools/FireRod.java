@@ -296,7 +296,7 @@ public class FireRod extends MarineRod
 
         for (int i = 2; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
         }
     }
 
@@ -307,7 +307,7 @@ public class FireRod extends MarineRod
 
         for (int i = 7; i <= 12; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
         }
     }
 
@@ -317,7 +317,7 @@ public class FireRod extends MarineRod
         for (int i = 14; i <= 22; i++)
         {
             if (i == 22) tooltipComponents.add(Component.empty());
-            tooltipComponents.add(getDescription(getRodId(), i, i == 14, false, i == 22, false, false));
+            tooltipComponents.add(getDescription(getRodId(), i, i == 14, false, false, false, false, i == 22));
         }
     }
 
@@ -325,7 +325,7 @@ public class FireRod extends MarineRod
     {
         for (int i = 23; i <= 24; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 23, false, false));
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, false, false, false, i == 23));
         }
     }
 

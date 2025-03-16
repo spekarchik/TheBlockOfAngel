@@ -137,7 +137,7 @@ public class MarineRod extends AncientRod
 
         for (int i = 2; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
         }
     }
 
@@ -148,7 +148,7 @@ public class MarineRod extends AncientRod
 
         for (int i = 9; i <= 11; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
         }
     }
 
@@ -158,7 +158,7 @@ public class MarineRod extends AncientRod
         for (int i = 13; i <= 21; i++)
         {
             if (i == 21) tooltipComponents.add(Component.empty());
-            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, i == 21, false, false));
+            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, false, false, false, i == 21));
         }
     }
 
@@ -166,7 +166,7 @@ public class MarineRod extends AncientRod
     {
         for (int i = 22; i <= 23; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 22, false, false));
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, false, false, false, i == 22));
         }
     }
 

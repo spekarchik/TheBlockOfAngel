@@ -15,7 +15,7 @@ public class Text
 
     }
 
-    public MutableComponent getFormattedTextComponent(MutableComponent initialComponent, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice)
+    public MutableComponent getFormattedTextComponent(MutableComponent initialComponent, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isDarkGray)
     {
         TextStyle textStyle;
 
@@ -23,6 +23,7 @@ public class Text
         else if (isSubHeader) textStyle = TextStyle.Subheader;
         else if (isNotice) textStyle = TextStyle.Notice;
         else if (isImportantNotice) textStyle = TextStyle.ImportantNotice;
+        else if (isDarkGray) textStyle = TextStyle.DarkGray;
         else textStyle = TextStyle.Regular;
 
         return getDescription(initialComponent, textStyle);
@@ -36,6 +37,7 @@ public class Text
             case Subheader -> initialComponent.withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GRAY);
             case Notice -> initialComponent.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
             case ImportantNotice -> initialComponent.withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.WHITE);
+            case DarkGray -> initialComponent.withStyle(ChatFormatting.DARK_GRAY);
             default -> initialComponent.withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY);
         };
     }

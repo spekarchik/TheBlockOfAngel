@@ -195,7 +195,7 @@ public class Builder extends WorkRod
 
         for (int i = 0; i <= 9; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1,  i == 4 || i == 2, i == 8, i == 6));
+            tooltipComponents.add(getDescription(i, i == 1,  i == 4 || i == 2, false, i == 6, i == 8));
         }
     }
 

@@ -99,7 +99,7 @@ public class LimoniteSword extends ModSword
 
         for (int i = 0; i <= 11; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 4, i == 5, i == 7 || i == 9 || i == 10));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 4, i == 5, i == 7 || i == 9, false, i == 10));
         }
     }
 

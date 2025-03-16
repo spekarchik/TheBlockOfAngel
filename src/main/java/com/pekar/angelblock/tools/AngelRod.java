@@ -42,7 +42,7 @@ public class AngelRod extends EndRod
         for (int i = 2; i <= 5; i++)
         {
             if (i == 3) continue;
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew));
+            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
         }
     }
 
@@ -56,7 +56,7 @@ public class AngelRod extends EndRod
     {
         for (int i = 7; i <= 8; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, false, false, i == 7, false, false));
+            tooltipComponents.add(getDescription(getRodId(), i, false, false, false, false, false, i == 7));
         }
     }
 

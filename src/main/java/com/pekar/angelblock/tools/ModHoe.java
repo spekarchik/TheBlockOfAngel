@@ -96,7 +96,7 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
 
         for (int i = 0; i <= 2; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, i == 1));
+            tooltipComponents.add(getDescription(i, false, false, false, false, i == 1));
         }
     }
 
