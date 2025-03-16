@@ -66,7 +66,7 @@ public class AncientRod extends MagneticRod
 
         var player = context.getPlayer();
 
-        if (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
+        if (isEnhanced() && player != null && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
             return result;
 
         var level = player.level();

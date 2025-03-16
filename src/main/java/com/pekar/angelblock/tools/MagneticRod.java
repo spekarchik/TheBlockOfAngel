@@ -30,6 +30,11 @@ public class MagneticRod extends ModRod
     {
         var result = useOnInternal(context);
         if (result == InteractionResult.PASS) return InteractionResult.FAIL;
+        if (result == InteractionResult.CONSUME || result == InteractionResult.CONSUME_PARTIAL)
+        {
+            var player = context.getPlayer();
+            causePlayerExhaustion(player);
+        }
         return result;
     }
 
