@@ -41,8 +41,10 @@ public class BiosDiamond extends ModItemWithDoubleHoverText
         for (int i = 1; i <= 3; i++)
         {
             var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
-            if (i > 1)
+            if (i == 2)
                 component.withStyle(ChatFormatting.ITALIC);
+            if (i == 3)
+                component.withStyle(ChatFormatting.DARK_GREEN);
             tooltipComponents.add(component);
         }
     }
