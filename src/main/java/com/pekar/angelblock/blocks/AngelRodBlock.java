@@ -74,7 +74,7 @@ public class AngelRodBlock extends ModBlockWithDoubleHoverText implements Entity
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
     {
-        if (!level.isClientSide())
+        if (!level.isClientSide() && !player.isCreative())
         {
             var blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
