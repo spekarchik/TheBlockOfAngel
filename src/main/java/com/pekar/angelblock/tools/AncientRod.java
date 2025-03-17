@@ -6,6 +6,7 @@ import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -215,7 +216,7 @@ public class AncientRod extends MagneticRod
         // Common
         appendCommonPreInfo(tooltipComponents);
 
-        if (tooltipFlag.hasControlDown())
+        if (Screen.hasControlDown())
         {
             // Magnetic
             if (!isEnhanced())
@@ -225,13 +226,13 @@ public class AncientRod extends MagneticRod
 
             appendMagneticInfo(tooltipComponents);
         }
-        else if (tooltipFlag.hasShiftDown())
+        else if (Screen.hasShiftDown())
         {
             // Placing
             appendPlacingBlockInfo(tooltipComponents, true);
             tooltipComponents.add(Component.empty());
         }
-        else if (tooltipFlag.hasAltDown())
+        else if (Screen.hasAltDown())
         {
             // Transformations
             appendBlockTransformInfo(tooltipComponents, true);
@@ -242,19 +243,19 @@ public class AncientRod extends MagneticRod
         appendCommonPostInfo(tooltipComponents);
         tooltipComponents.add(Component.empty());
 
-        if (tooltipFlag.hasControlDown())
+        if (Screen.hasControlDown())
         {
             // Magnetic
             tooltipComponents.add(Component.translatable("description.rods.press_shift"));
             tooltipComponents.add(Component.translatable("description.rods.press_alt"));
         }
-        else if (tooltipFlag.hasShiftDown())
+        else if (Screen.hasShiftDown())
         {
             // Placing
             tooltipComponents.add(Component.translatable("description.rods.press_alt"));
             tooltipComponents.add(Component.translatable("description.rods.press_ctrl"));
         }
-        else if (tooltipFlag.hasAltDown())
+        else if (Screen.hasAltDown())
         {
             // Transformations
             tooltipComponents.add(Component.translatable("description.rods.press_shift"));
