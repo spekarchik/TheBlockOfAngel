@@ -8,7 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.monster.Zoglin;
+import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,28 +23,29 @@ public class MinerFigure extends ModItemWithDoubleHoverText
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand)
     {
-        if (interactionTarget instanceof Piglin || interactionTarget instanceof Zoglin)
-        {
-            var level = player.level();
-            var isClientSide = level.isClientSide();
+        var level = player.level();
+        var isClientSide = level.isClientSide();
 
+        if (interactionTarget instanceof Piglin piglin)
+        {
             if (!isClientSide)
             {
-                eraseMobMemory((Mob)interactionTarget);
+                eraseMobMemory(piglin, player);
             }
 
             return getToolInteractionResult(level.isClientSide());
         }
-        else
-        {
-            return InteractionResult.PASS;
-        }
-    }
+//        else if (interactionTarget instanceof ZombifiedPiglin zombifiedPiglin)
+//        {
+//            if (!isClientSide)
+//            {
+//                eraseMobMemory(zombifiedPiglin, player);
+//            }
+//
+//            return getToolInteractionResult(level.isClientSide());
+//        }
 
-    private static void eraseMobMemory(Mob mob)
-    {
-        mob.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
-        mob.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
         var level = context.getLevel();
         var pos = context.getClickedPos();
 
-        if (erasePiglinsMemory(level, pos))
+        if (erasePiglinsMemory(level, pos, context.getPlayer()))
         {
             return getToolInteractionResult(level.isClientSide());
         }
@@ -61,22 +62,52 @@ public class MinerFigure extends ModItemWithDoubleHoverText
         return InteractionResult.PASS;
     }
 
-    private boolean erasePiglinsMemory(Level level, BlockPos pos)
+    private boolean erasePiglinsMemory(Level level, BlockPos pos, Player player)
     {
         if (!level.isClientSide())
         {
-            var monsters = level.getEntitiesOfClass(Mob.class, new AABB(pos).inflate(EFFECTIVE_RADIUS), entity -> entity instanceof Piglin || entity instanceof Zoglin);
+            var monsters = level.getEntitiesOfClass(Mob.class, new AABB(pos).inflate(EFFECTIVE_RADIUS), entity -> entity instanceof Piglin || entity instanceof ZombifiedPiglin);
 
             for (Entity entity : monsters)
             {
-                var piglin = (Piglin) entity;
-                piglin.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
-                piglin.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
+                if (entity instanceof Piglin piglin) eraseMobMemory(piglin, player);
+                else if (entity instanceof ZombifiedPiglin zombifiedPiglin) eraseMobMemory(zombifiedPiglin, player);
             }
 
             return !monsters.isEmpty();
         }
         return false;
+    }
+
+    private void eraseMobMemory(Mob mob, Player player)
+    {
+        mob.setLastHurtByMob(null);
+        mob.setTarget(null);
+
+//        if (mob instanceof ZombifiedPiglin piglin)
+//        {
+//            var level = mob.level();
+//            piglin.setPersistentAngerTarget(null);
+//            piglin.stopBeingAngry();
+//            piglin.setRemainingPersistentAngerTime(0);
+////            piglin.goalSelector.getAvailableGoals().clear();
+////            piglin.targetSelector.getAvailableGoals().clear();
+//
+////            piglin.targetSelector.removeAllGoals(x -> x instanceof HurtByTargetGoal);
+////            piglin.targetSelector.addGoal(1, new HurtByTargetGoal(piglin, ZombifiedPiglin.class).setAlertOthers());
+//            piglin.getBrain().eraseMemory(MemoryModuleType.HURT_BY);
+//
+//            if (piglin.targetSelector.getAvailableGoals().stream().noneMatch(g -> g.getGoal() instanceof HurtByTargetGoal))
+//            {
+//                piglin.targetSelector.addGoal(1, new HurtByTargetGoal(piglin, ZombifiedPiglin.class).setAlertOthers());
+//            }
+//
+//            piglin.getBrain().setActiveActivityIfPossible(Activity.IDLE);
+//            piglin.getBrain().updateActivityFromSchedule(level.getDayTime(), level.getGameTime());
+//        }
+
+        mob.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
+        mob.getBrain().eraseMemory(MemoryModuleType.ANGRY_AT);
     }
 
     @Override
@@ -86,7 +117,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
         {
             var pos = player.getOnPos();
 
-            if (erasePiglinsMemory(level, pos))
+            if (erasePiglinsMemory(level, pos, player))
             {
                 return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
             }
