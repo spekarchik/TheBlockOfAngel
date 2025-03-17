@@ -515,7 +515,8 @@
   "item.angelblock.rod_upgrade_kit.desc2": "Встречается в Подозрительных Блоках около Пирамид и Колодцев в Пустыне",
   "item.angelblock.rod_upgrade_kit.desc3": "Может быть подарен священником (вероятность 1/11) когда игрок имеет статус 'Герой Деревни'",
   "item.angelblock.downgrade_kit": "Кузнечный набор",
-  "item.angelblock.downgrade_kit.desc": "Снятие улучшений с брони, инструментов, оружия",
+  "item.angelblock.downgrade_kit.desc1": "Снятие улучшений с брони, инструментов, оружия",
+  "item.angelblock.downgrade_kit.desc2": "§r§8При снятии улучшений один предмет забирается вручную, остальные возвращаются в инвентарь",
 
   "item.angelblock.diamithic_sword": "Улучшенный диамитовый меч",
   "item.angelblock.diamithic_sword.desc0": "§6§lРемонт:§r§6 диамитовый слиток",

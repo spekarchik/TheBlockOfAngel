@@ -515,7 +515,8 @@
   "item.angelblock.rod_upgrade_kit.desc2": "Can be found in Suspicious Blocks at Desert Pyramids and Desert Wells",
   "item.angelblock.rod_upgrade_kit.desc3": "Can be given by a cleric as a gift (1/11 chance) when player has the 'Hero of the Village' status",
   "item.angelblock.downgrade_kit": "Smithing Kit",
-  "item.angelblock.downgrade_kit.desc": "Armor, tools and weapon downgrade",
+  "item.angelblock.downgrade_kit.desc1": "Armor, tools and weapon downgrade",
+  "item.angelblock.downgrade_kit.desc2": "§r§8When removing upgrades, one item must be taken manually, while the rest are returned to the inventory",
 
   "item.angelblock.diamithic_sword": "Diamithic Sword",
   "item.angelblock.diamithic_sword.desc0": "§6§lRepair:§r§6 diamithic ingot",
