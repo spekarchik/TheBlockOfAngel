@@ -73,8 +73,8 @@
   "angelblock.super_armor.desc12": "When the player is standing on the ground, activating Slow Fall together with Jump Boost grants the Levitation effect. Reactivating Slow Fall disables Levitation",
 
   "angelblock.flying_armor.desc1": "§f§lPurpose:§r§7 Flight, fast movement. Very weak protection and durability. Cannot be enchanted",
-  "angelblock.flying_armor.desc2": "§f§lWeaknesses:§r§7 extremely low protection. Don't fly in Nether",
-  "angelblock.flying_armor.desc3": "§f§lTraits:§r§7 Can't fly in rain or when chestplate damage > 50%. Can't use fireworks to speed up",
+  "angelblock.flying_armor.desc2": "§f§lWeaknesses:§r§7 extremely low protection",
+  "angelblock.flying_armor.desc3": "§f§lTraits:§r§7 Can't fly in Nether, in rain or when chestplate damage > 50%. Can't use fireworks to speed up",
   "angelblock.flying_armor.desc4": "§6§lRepair:§r§6 phantom membrane",
   "angelblock.flying_armor.desc5": "Common armor capabilities",
   "angelblock.flying_armor.desc6": " Fire and lava protection: -",
@@ -82,7 +82,7 @@
   "angelblock.flying_armor.desc8": " Burns or slows attackers, applies Glowing: -",
   "angelblock.flying_armor.desc9": "§a Durability resistance: 3",
   "angelblock.flying_armor.desc10": "Armor protection depends on durability. Fully broken armor does not disappear but loses all its beneficial effects",
-  "angelblock.flying_armor.desc11": "",
+  "angelblock.flying_armor.desc11": "Flying works only when wearing the full armor set",
   "angelblock.flying_armor.desc12": "",
 
   "item.angelblock.rendelithic_boots": "Rendelithic Boots",
