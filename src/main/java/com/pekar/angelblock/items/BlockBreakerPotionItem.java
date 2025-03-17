@@ -44,9 +44,9 @@ public class BlockBreakerPotionItem extends ModItemWithMultipleHoverText
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 19; i++)
+        for (int i = 0; i <= 20; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 12, false, i == 19));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 12, false, false, false, i == 20));
         }
     }
 }

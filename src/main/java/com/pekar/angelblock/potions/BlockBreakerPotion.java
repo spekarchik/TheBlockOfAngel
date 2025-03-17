@@ -155,11 +155,6 @@ public class BlockBreakerPotion extends ThrownPotion
         {
             level.setBlock(pos, Blocks.SAND.defaultBlockState(), 11);
         }
-        else if (block == Blocks.WHITE_WOOL)
-        {
-            level.setBlock(pos, BlockRegistry.DESTROYING_WHITE_WOOL_BY_POTION.get().defaultBlockState(), 0);
-            level.destroyBlock(pos, true, source, 1);
-        }
 //        else if (block == Blocks.GRAVEL)
 //        {
 //            level.setBlock(pos, BlockRegistry.DESTROYING_RAW_IRON.get().defaultBlockState(), 0);
@@ -220,6 +215,15 @@ public class BlockBreakerPotion extends ThrownPotion
         {
             level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_CRYSTALS.get().defaultBlockState(), 0);
             level.destroyBlock(pos, true, source, 1);
+        }
+        else
+        {
+            var woolBlock = utils.blocks.types.getDestroyingWoolBlock(block);
+            if (woolBlock != null)
+            {
+                level.setBlock(pos, woolBlock.defaultBlockState(), 0);
+                level.destroyBlock(pos, true, source, 1);
+            }
         }
     }
 }

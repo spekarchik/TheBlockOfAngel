@@ -58,19 +58,19 @@ public class FireRod extends MarineRod
                     return plant(player, level, pos, interactionHand, facing, Blocks.NETHER_WART);
                 }
 
-                var upPos = pos.above();
-                var upBlock = level.getBlockState(upPos).getBlock();
-                if (block == Blocks.OBSIDIAN && upBlock == Blocks.LAVA && level.getFluidState(upPos).getAmount() < FluidState.AMOUNT_FULL)
-                {
-                    if (!isClientSide)
-                    {
-                        level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
-                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                        new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
-                    }
-
-                    return getToolInteractionResult(true, isClientSide);
-                }
+//                var upPos = pos.above();
+//                var upBlock = level.getBlockState(upPos).getBlock();
+//                if (block == Blocks.OBSIDIAN && upBlock == Blocks.LAVA && level.getFluidState(upPos).getAmount() < FluidState.AMOUNT_FULL)
+//                {
+//                    if (!isClientSide)
+//                    {
+//                        level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
+//                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
+//                        new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
+//                    }
+//
+//                    return getToolInteractionResult(true, isClientSide);
+//                }
             }
             else
             {
@@ -92,24 +92,24 @@ public class FireRod extends MarineRod
 
         if (!isBroken)
         {
-            Block woolBlock = null;
-
-            if (!isClientSide)
-            {
-                woolBlock = getDestroyingWoolBlock(block);
-
-                if (woolBlock != null)
-                {
-                    level.setBlock(pos, woolBlock.defaultBlockState(), 0);
-                    level.destroyBlock(pos, true, player, 1);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-            }
-
-            if (woolBlock != null)
-            {
-                return getToolInteractionResult(true, isClientSide);
-            }
+//            Block woolBlock = null;
+//
+//            if (!isClientSide)
+//            {
+//                woolBlock = utils.blocks.types.getDestroyingWoolBlock(block);
+//
+//                if (woolBlock != null)
+//                {
+//                    level.setBlock(pos, woolBlock.defaultBlockState(), 0);
+//                    level.destroyBlock(pos, true, player, 1);
+//                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
+//                }
+//            }
+//
+//            if (woolBlock != null)
+//            {
+//                return getToolInteractionResult(true, isClientSide);
+//            }
 
             if (block == Blocks.MAGMA_BLOCK)
             {
@@ -203,76 +203,6 @@ public class FireRod extends MarineRod
         return result;
     }
 
-    private Block getDestroyingWoolBlock(Block block)
-    {
-        if (block == Blocks.WHITE_WOOL)
-        {
-            return BlockRegistry.DESTROYING_WHITE_WOOL_BY_ROD.get();
-        }
-        else if (block == Blocks.ORANGE_WOOL)
-        {
-            return BlockRegistry.DESTROYING_ORANGE_WOOL.get();
-        }
-        else if (block == Blocks.MAGENTA_WOOL)
-        {
-            return BlockRegistry.DESTROYING_MAGENTA_WOOL.get();
-        }
-        else if (block == Blocks.LIGHT_BLUE_WOOL)
-        {
-            return BlockRegistry.DESTROYING_LIGHT_BLUE_WOOL.get();
-        }
-        else if (block == Blocks.YELLOW_WOOL)
-        {
-            return BlockRegistry.DESTROYING_YELLOW_WOOL.get();
-        }
-        else if (block == Blocks.LIME_WOOL)
-        {
-            return BlockRegistry.DESTROYING_LIME_WOOL.get();
-        }
-        else if (block == Blocks.PINK_WOOL)
-        {
-            return BlockRegistry.DESTROYING_PINK_WOOL.get();
-        }
-        else if (block == Blocks.GRAY_WOOL)
-        {
-            return BlockRegistry.DESTROYING_GRAY_WOOL.get();
-        }
-        else if (block == Blocks.LIGHT_GRAY_WOOL)
-        {
-            return BlockRegistry.DESTROYING_LIGHT_GRAY_WOOL.get();
-        }
-        else if (block == Blocks.CYAN_WOOL)
-        {
-            return BlockRegistry.DESTROYING_CYAN_WOOL.get();
-        }
-        else if (block == Blocks.PURPLE_WOOL)
-        {
-            return BlockRegistry.DESTROYING_PURPLE_WOOL.get();
-        }
-        else if (block == Blocks.BLUE_WOOL)
-        {
-            return BlockRegistry.DESTROYING_BLUE_WOOL.get();
-        }
-        else if (block == Blocks.BROWN_WOOL)
-        {
-            return BlockRegistry.DESTROYING_BROWN_WOOL.get();
-        }
-        else if (block == Blocks.GREEN_WOOL)
-        {
-            return BlockRegistry.DESTROYING_GREEN_WOOL.get();
-        }
-        else if (block == Blocks.RED_WOOL)
-        {
-            return BlockRegistry.DESTROYING_RED_WOOL.get();
-        }
-        else if (block == Blocks.BLACK_WOOL)
-        {
-            return BlockRegistry.DESTROYING_BLACK_WOOL.get();
-        }
-        
-        return null;
-    }
-
     @Override
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
@@ -280,7 +210,7 @@ public class FireRod extends MarineRod
 
         return super.isCorrectToolForDrops(stack, state)
                 || (!isBroken(stack) && (block == Blocks.SOUL_SAND || block == Blocks.LAVA || block == Blocks.END_STONE
-                || getDestroyingWoolBlock(block) != null || block == Blocks.MAGMA_BLOCK || block == Blocks.GLOWSTONE
+                || utils.blocks.types.getDestroyingWoolBlock(block) != null || block == Blocks.MAGMA_BLOCK || block == Blocks.GLOWSTONE
                 || block == Blocks.BASALT || block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM || block == Blocks.SHROOMLIGHT));
     }
 
@@ -294,7 +224,7 @@ public class FireRod extends MarineRod
     {
         super.appendPlacingBlockInfo(tooltipComponents, false);
 
-        for (int i = 2; i <= 5; i++)
+        for (int i = 2; i <= 3; i++)
         {
             tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
         }
@@ -307,7 +237,9 @@ public class FireRod extends MarineRod
 
         for (int i = 7; i <= 12; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
+            var component = getDescription(getRodId(), i,false, false, false, false, selectAsNew, false);
+            if (!component.getString().isEmpty())
+                tooltipComponents.add(component);
         }
     }
 
