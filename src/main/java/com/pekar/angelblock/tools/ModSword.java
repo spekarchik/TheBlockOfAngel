@@ -90,6 +90,7 @@ public class ModSword extends SwordItem implements IModTool
             }
 
         damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
+        causePlayerExhaustion(player);
     }
 
     protected final void setEffectAhead(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
@@ -163,6 +164,7 @@ public class ModSword extends SwordItem implements IModTool
             }
 
         damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
+        causePlayerExhaustion(player);
     }
 
     protected void processBlock(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
@@ -204,6 +206,7 @@ public class ModSword extends SwordItem implements IModTool
         level.explode(player, pos.getX() - 0.8, pos.getY() + 1.5, pos.getZ() - 0.8, 0.8f, Level.ExplosionInteraction.NONE);
 
         damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
+        causePlayerExhaustion(player);
     }
 
     protected final void plantCacti(Player player, Level level, BlockPos pos, InteractionHand interactionHand, Direction facing)
@@ -218,7 +221,11 @@ public class ModSword extends SwordItem implements IModTool
                 succeeded = true;
         }
 
-        if (succeeded) damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
+        if (succeeded)
+        {
+            damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
+            causePlayerExhaustion(player);
+        }
     }
 
     protected final boolean canUseToolEffect(Player player)

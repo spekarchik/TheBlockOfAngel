@@ -47,8 +47,7 @@ public class SuperSword extends ModSword
 
             return getToolInteractionResult(true, level.isClientSide());
         }
-
-        if (player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
+        else if (player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
         {
             if (!level.isClientSide())
             {
@@ -65,8 +64,7 @@ public class SuperSword extends ModSword
 
             return getToolInteractionResult(true, level.isClientSide());
         }
-
-        if (player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
+        else if (player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
         {
             if (!level.isClientSide())
             {
@@ -101,8 +99,15 @@ public class SuperSword extends ModSword
         {
             attacker.level().explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.8f, false, Level.ExplosionInteraction.NONE);
         }
+        else if (attacker.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
+        {
+            target.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0, true, true));
+        }
+        else if (attacker.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
+        {
+            target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));
+        }
 
-        target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 400, 0, true, true));
 
         if (attacker instanceof Player player)
@@ -136,9 +141,9 @@ public class SuperSword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 16; i++)
+        for (int i = 0; i <= 18; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 6, i == 7 || i == 9 || i == 13, i == 12, false, i == 15));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 7, i == 8 || i == 10 || i == 14, i == 13, false, i == 16 || i == 17));
         }
     }
 

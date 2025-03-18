@@ -140,4 +140,14 @@ public interface IModTool extends IModDescriptionItem
         if (!applied) return InteractionResult.PASS;
         return isClientSide ? InteractionResult.SUCCESS_NO_ITEM_USED: InteractionResult.CONSUME_PARTIAL;
     }
+
+    default void causePlayerExhaustion(Player player)
+    {
+        if (player != null)
+        {
+            var foodData = player.getFoodData();
+            foodData.setSaturation(foodData.getSaturationLevel() * 0.5F);
+            player.causeFoodExhaustion(0.5F);
+        }
+    }
 }

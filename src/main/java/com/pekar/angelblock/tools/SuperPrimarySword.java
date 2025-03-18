@@ -38,7 +38,6 @@ public class SuperPrimarySword extends ModSword
             }
         }
 
-        target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0, true, true));
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, true, true));
     }
 
@@ -67,7 +66,9 @@ public class SuperPrimarySword extends ModSword
 
         for (int i = 0; i <= 7; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1, false, false, false, i == 6));
+            var component = getDescription(i, i == 1, false, false, false, i == 6);
+            if (!component.getString().isEmpty())
+                tooltipComponents.add(component);
         }
     }
 

@@ -71,6 +71,9 @@ public class LimoniteSword extends ModSword
     @Override
     protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
+        if (attacker.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
+            target.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0, true, true));
+
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 400, 0, true, true));
     }
 
@@ -97,9 +100,9 @@ public class LimoniteSword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 11; i++)
+        for (int i = 0; i <= 13; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 4, i == 5, i == 7 || i == 9, false, i == 10));
+            tooltipComponents.add(getDescription(i, i == 1 || i == 5, i == 6, i == 8 || i == 10, false, i == 11 || i == 12));
         }
     }
 

@@ -22,6 +22,7 @@ public class LimonitePrimarySword extends ModSword
     @Override
     protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
+        target.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0, true, true));
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, true, true));
     }
 
@@ -48,9 +49,9 @@ public class LimonitePrimarySword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i <= 6; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1, false, false, false, i == 4));
+            tooltipComponents.add(getDescription(i, i == 1, false, false, false, i == 5));
         }
     }
 }

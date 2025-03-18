@@ -27,8 +27,6 @@ import java.util.List;
 
 public class ModRod extends ModRodTool implements IModTool
 {
-    private static final float EXHAUSTION_INCREMENT = 0.5F;
-
     private final boolean isMagnetic;
 
     public ModRod(Tier material, boolean isMagnetic, Properties properties)
@@ -148,16 +146,6 @@ public class ModRod extends ModRodTool implements IModTool
         else
         {
             return InteractionResult.FAIL;
-        }
-    }
-
-    protected final void causePlayerExhaustion(Player player)
-    {
-        if (player != null)
-        {
-            var foodData = player.getFoodData();
-            foodData.setSaturation(foodData.getSaturationLevel() * 0.5F);
-            player.causeFoodExhaustion(EXHAUSTION_INCREMENT);
         }
     }
 
