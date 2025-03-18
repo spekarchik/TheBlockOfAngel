@@ -147,7 +147,7 @@ public class AncientRod extends MagneticRod
                 if (block == Blocks.GRASS_BLOCK)
                 {
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                    int randomValue = itemRand.nextInt() % 16;
+                    int randomValue = itemRand.nextInt(16);
                     return plant(player, level, pos, hand, facing, chooseFlowerByValue(randomValue));
                 }
 
