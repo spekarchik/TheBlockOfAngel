@@ -79,7 +79,6 @@ public class AngelRodBlock extends ModBlockWithDoubleHoverText implements Entity
             var blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
             {
-
                 if (player.isSteppingCarefully())
                 {
                     var itemStack1 = new ItemStack(ToolRegistry.END_MAGNETIC_ROD.get());
