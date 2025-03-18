@@ -58,9 +58,9 @@ public class GunpowderBlock extends FallingBlock
     }
 
     @Override
-    public void fallOn(Level level, BlockState blockState, BlockPos pos, Entity entity, float p_152430_)
+    public void fallOn(Level level, BlockState blockState, BlockPos pos, Entity entity, float fallDistance)
     {
-        super.fallOn(level, blockState, pos, entity, p_152430_);
+        super.fallOn(level, blockState, pos, entity, fallDistance);
         fireAndExplode(level, entity);
     }
 
@@ -95,15 +95,9 @@ public class GunpowderBlock extends FallingBlock
     }
 
     @Override
-    public boolean dropFromExplosion(Explosion p_49826_)
-    {
-        return false;
-    }
-
-    @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
     {
-        components.add(getDisplayName().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+        components.add(getDisplayName().withStyle(ChatFormatting.DARK_GRAY));
     }
 
     private MutableComponent getDisplayName()
