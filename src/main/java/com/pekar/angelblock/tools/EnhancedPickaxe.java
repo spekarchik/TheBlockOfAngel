@@ -86,7 +86,7 @@ public class EnhancedPickaxe extends ModPickaxe
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
             var originBlock = originBlockState.getBlock();
-            if (!utils.blocks.types.isOre(originBlock) || originBlock == block)
+            if (!utils.blocks.types.isOre(originBlockState) || originBlock == block)
             {
                 if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
                     damageMainHandItem(1, entityLiving);

@@ -221,8 +221,10 @@ public class AncientRod extends MagneticRod
             // Magnetic
             if (!isEnhanced())
                 tooltipComponents.add(Component.translatable("description.rods.no_magnet_mode").withStyle(ChatFormatting.DARK_RED));
+            else if (this instanceof FireRod)
+                tooltipComponents.add(Component.translatable("description.rods.magnet_mode.fire_rod").withStyle(ChatFormatting.DARK_GRAY));
             else
-                tooltipComponents.add(Component.translatable("description.rods.magnet_mode").withStyle(ChatFormatting.DARK_GRAY));
+                tooltipComponents.add(Component.translatable("description.rods.magnet_mode.ancient_rod").withStyle(ChatFormatting.DARK_GRAY));
 
             appendMagneticInfo(tooltipComponents);
         }

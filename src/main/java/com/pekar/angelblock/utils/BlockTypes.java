@@ -1,9 +1,14 @@
 package com.pekar.angelblock.utils;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockTypes
 {
@@ -12,10 +17,10 @@ public class BlockTypes
 
     }
 
-    public boolean isOre(Block block)
+    public boolean isOre(BlockState blockState)
     {
-        return block instanceof DropExperienceBlock || block instanceof RedStoneOreBlock || block == Blocks.ANCIENT_DEBRIS
-                || block == BlockRegistry.GREEN_DIAMOND_ORE.get();
+        var ores = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "ores"));
+        return blockState.is(ores);
     }
 
     public boolean isLiquid(Block block)

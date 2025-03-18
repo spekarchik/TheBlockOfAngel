@@ -801,7 +801,7 @@
   "item.angelblock.ancient_rod.desc14": " Effective Ore Depth: 5",
   "item.angelblock.ancient_rod.desc15": " Effect Radius: 1",
   "item.angelblock.ancient_rod.desc16": " Can Detect Diamonds: No",
-  "item.angelblock.ancient_rod.desc17": " Can Detect in Nether: No",
+  "item.angelblock.ancient_rod.desc17": " Pulls Nether ore: No",
   "item.angelblock.ancient_rod.desc18": " Skulk Detection Depth: -",
   "item.angelblock.ancient_rod.desc19": " Amethyst Detection Depth: -",
   "item.angelblock.ancient_rod.desc20": " Rails Detection Depth: -",
@@ -841,7 +841,7 @@
   "item.angelblock.fire_rod.desc6": "Transformations:",
   "item.angelblock.fire_rod.desc7": " Magma Block -> Glow Stone",
   "item.angelblock.fire_rod.desc8": "",
-  "item.angelblock.fire_rod.desc9": " Shroomlight -> Crimson Stem or Warped Stem",
+  "item.angelblock.fire_rod.desc9": " Crimson or Warped Stem <-> Shroomlight",
   "item.angelblock.fire_rod.desc10": " Basalt -> Black Stone",
   "item.angelblock.fire_rod.desc11": " End Stone (side face) -> Netherrack",
   "item.angelblock.fire_rod.desc12": " Clay Block -> Terracotta",
@@ -1155,5 +1155,6 @@
   "description.rods.press_alt": "§7Press §9Alt§7 to display information about block transformation...",
   "description.rods.press_ctrl": "§7Press §9Ctrl+Alt§7 to display Magnet Mode settings...",
   "description.rods.no_magnet_mode": "Upgrade the rod to unlock Magnet Mode",
-  "description.rods.magnet_mode": "The rod pulls ore blocks to the surface, except for Diamond Ore. Ore can only pass through Stone, Cobblestone, Granite, Diorite, Andesite, and Tuff. When detecting Diamond Ore, Rails (Abandoned Mineshafts), Sculk, Calcite, and Smooth Basalt (Amethyst Geodes), a distinct sound is played, similar to a metal detector"
+  "description.rods.magnet_mode.ancient_rod": "The rod pulls ore blocks to the surface, except for Diamond Ore. Ore can only pass through Stone, Cobblestone, Deepslate, Cobbled Deepslate, Granite, Diorite, Andesite, Tuff. When detecting Diamond Ore, Rails (Abandoned Mineshafts), Sculk, Calcite, and Smooth Basalt (Amethyst Geodes), a distinct sound is played, similar to a metal detector",
+  "description.rods.magnet_mode.fire_rod": "The rod pulls ore blocks to the surface, except for Diamond Ore. Ore can only pass through Stone, Cobblestone, Deepslate, Cobbled Deepslate, Granite, Diorite, Andesite, Tuff, Netherrack, Basalt, Blackstone, Magma. When detecting Diamond Ore, Rails (Abandoned Mineshafts), Sculk, Calcite, and Smooth Basalt (Amethyst Geodes), a distinct sound is played, similar to a metal detector"
 }

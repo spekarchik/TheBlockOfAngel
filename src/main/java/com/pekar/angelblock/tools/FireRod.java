@@ -1,22 +1,24 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
 
 import java.util.List;
 
@@ -264,19 +266,17 @@ public class FireRod extends MarineRod
     @Override
     protected boolean canBeReplaced(Level level, BlockPos pos)
     {
-        if (utils.dimension.isNether(level.dimension()))
-        {
-            var block = level.getBlockState(pos).getBlock();
-            return block == Blocks.NETHERRACK || block == Blocks.BASALT || block == Blocks.BLACKSTONE || block == Blocks.MAGMA_BLOCK;
-        }
-
-        return super.canBeReplaced(level, pos);
+        var blockState = level.getBlockState(pos);
+        var replaceables = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "nether_replaceables"));
+        return blockState.is(replaceables) || super.canBeReplaced(level, pos);
     }
 
     @Override
-    protected boolean isShiftingOre(Block block)
+    protected boolean isShiftingOre(Level level, BlockPos pos)
     {
-        return block == Blocks.ANCIENT_DEBRIS || super.isShiftingOre(block);
+        var blockState = level.getBlockState(pos);
+        var netherShiftingOres = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "nether_shifting_ores"));
+        return blockState.is(netherShiftingOres) || super.isShiftingOre(level, pos);
     }
 
     @Override

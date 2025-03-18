@@ -1,11 +1,15 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
@@ -150,7 +154,7 @@ public class MagneticRod extends ModRod
                     // check current block: ore? diamond?
                     var currentBlock = level.getBlockState(currentPos).getBlock();
                     boolean isDiamondOre = utils.blocks.types.isDiamondOre(currentBlock);
-                    boolean isShiftingOre = isShiftingOre(currentBlock);
+                    boolean isShiftingOre = isShiftingOre(level, currentPos);
                     boolean isAmethystGeode = isAmethystGeode(currentBlock);
                     boolean isRail = utils.blocks.types.isRail(currentBlock);
                     boolean isSculkVein = utils.blocks.types.isSculk(currentBlock);
@@ -250,23 +254,16 @@ public class MagneticRod extends ModRod
 
     protected boolean canBeReplaced(Level level, BlockPos pos)
     {
-        if (!utils.dimension.isOverworld(level.dimension())) return false;
-
-        var block = level.getBlockState(pos).getBlock();
-
-        return block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.DIORITE || block == Blocks.ANDESITE
-                || block == Blocks.DEEPSLATE || block == Blocks.TUFF || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE;
+        var blockState = level.getBlockState(pos);
+        var replaceables = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "overworld_replaceables"));
+        return blockState.is(replaceables);
     }
 
-    protected boolean isShiftingOre(Block block)
+    protected boolean isShiftingOre(Level level, BlockPos pos)
     {
-        return utils.blocks.types.isOre(block) && !utils.blocks.types.isDiamondOre(block) && !utils.blocks.types.isSculk(block);
-    }
-
-    private boolean isShiftingOre(Level level, BlockPos pos)
-    {
-        var block = level.getBlockState(pos).getBlock();
-        return isShiftingOre(block);
+        var blockState = level.getBlockState(pos);
+        var shiftingOres = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "overworld_shifting_ores"));
+        return blockState.is(shiftingOres);
     }
 
     private boolean isAmethystGeode(Block block)
