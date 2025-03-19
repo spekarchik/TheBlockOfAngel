@@ -142,7 +142,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
         if (distance < SQR_EFFECTIVE_RADIUS)
         {
-            //entity.setHealth(entity.getMaxHealth());
+            entity.setHealth(1.0F);
             event.setCanceled(true);
         }
     }
