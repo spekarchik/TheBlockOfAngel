@@ -102,7 +102,7 @@ public class ModRod extends ModRodTool implements IModTool
 
     protected boolean showExtendedDescription(List<Component> tooltipComponents)
     {
-        if (!Screen.hasShiftDown() && !Screen.hasAltDown() && !Screen.hasAltDown())
+        if (!Screen.hasShiftDown() && !Screen.hasAltDown() && !Screen.hasControlDown())
         {
             tooltipComponents.add(Component.translatable("description.rods.press_shift_alt_or_ctrl"));
             return false;
