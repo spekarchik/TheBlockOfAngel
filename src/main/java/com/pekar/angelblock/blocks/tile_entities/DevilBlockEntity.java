@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -160,59 +161,22 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
     @Override
     public void tick(Level level, BlockPos pos, BlockState blockState, DevilBlockEntity devilBlockEntity)
     {
-        if (level.getGameTime() % 20 != 0) return;
+        if (level.isClientSide() || level.getGameTime() % 20 != 0) return;
 
-        //for (int i = 0; i < 3; i++)
+        final int horizRadius = 15;
+        final int vertRadius = 5;
+        for (int i = 0; i < 5; i++)
         {
-            int x = pos.getX() + random.nextInt(41) - 20;
-            int y = pos.getY() + random.nextInt(11) - 5;
-            int z = pos.getZ() + random.nextInt(41) - 20;
+            int x = pos.getX() + random.nextInt((horizRadius << 1) + 1) - horizRadius;
+            int y = pos.getY() + random.nextInt((vertRadius << 1) + 1) - vertRadius;
+            int z = pos.getZ() + random.nextInt((horizRadius << 1) + 1) - horizRadius;
 
             var targetPos = new BlockPos(x, y, z);
             var targetState = level.getBlockState(targetPos);
             var abovePos = targetPos.above();
-            var aboveBlockState = level.getBlockState(abovePos);
+            var aboveState = level.getBlockState(abovePos);
 
-            if (aboveBlockState.isAir() || aboveBlockState.getBlock() instanceof BushBlock)
-            {
-                if (targetState.is(Blocks.GRASS_BLOCK))
-                {
-                    level.setBlock(targetPos, Blocks.MYCELIUM.defaultBlockState(), 3);
-                }
-                else if (targetState.is(Blocks.FARMLAND))
-                {
-                    level.setBlock(targetPos, Blocks.DIRT.defaultBlockState(), 3);
-                }
-                else if (targetState.is(Blocks.STONE))
-                {
-                    boolean isMossy = random.nextBoolean();
-                    if (isMossy)
-                        level.setBlock(targetPos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 3);
-                    else
-                        level.setBlock(targetPos, Blocks.INFESTED_STONE.defaultBlockState(), 3);
-                }
-                else if (targetState.is(Blocks.COBBLESTONE))
-                {
-                    boolean isMossy = random.nextBoolean();
-                    if (isMossy)
-                        level.setBlock(targetPos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 3);
-                    else
-                        level.setBlock(targetPos, Blocks.INFESTED_COBBLESTONE.defaultBlockState(), 3);
-                }
-                else if (targetState.is(Blocks.DEEPSLATE))
-                {
-                    level.setBlock(targetPos, Blocks.INFESTED_DEEPSLATE.defaultBlockState(), 3);
-                }
-                else if (targetState.is(Blocks.SAND))
-                {
-                    level.setBlock(targetPos, Blocks.TERRACOTTA.defaultBlockState(), 3);
-                }
-                else if (targetState.is(Blocks.END_STONE))
-                {
-                    level.setBlock(targetPos, BlockRegistry.CRACKED_ENDSTONE.get().defaultBlockState(), 3);
-                }
-            }
-            else if (targetState.is(BlockTags.LOGS))
+            if (targetState.is(BlockTags.LOGS))
             {
                 for (int j = 0; j < 3; j++)
                 {
@@ -225,6 +189,77 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                     if (leafState.is(BlockTags.LEAVES))
                     {
                         level.destroyBlock(leafPos, true);
+                    }
+                }
+            }
+            else if (targetState.is(BlockTags.LEAVES))
+            {
+                level.destroyBlock(targetPos, true);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    int lx = targetPos.getX() + random.nextInt(11) - 5;
+                    int ly = targetPos.getY() + random.nextInt(9) - 4;
+                    int lz = targetPos.getZ() + random.nextInt(11) - 5;
+                    BlockPos leafPos = new BlockPos(lx, ly, lz);
+                    BlockState leafState = level.getBlockState(leafPos);
+
+                    if (leafState.is(BlockTags.LEAVES))
+                    {
+                        level.destroyBlock(leafPos, true);
+                    }
+                }
+            }
+            else if (i == 0)
+            {
+                if (targetState.getBlock() instanceof BushBlock)
+                {
+                    level.destroyBlock(targetPos, true);
+                }
+                else if (aboveState.isAir() || aboveState.is(Blocks.WATER) || aboveState.getBlock() instanceof BushBlock)
+                {
+                    if (targetState.is(Blocks.GRASS_BLOCK))
+                    {
+                        level.setBlock(targetPos, Blocks.MYCELIUM.defaultBlockState(), Block.UPDATE_ALL);
+                    }
+                    else if (targetState.is(Blocks.FARMLAND) || targetState.is(Blocks.DIRT_PATH) || targetState.is(Blocks.DIRT))
+                    {
+                        level.setBlock(targetPos, Blocks.MUD.defaultBlockState(), Block.UPDATE_ALL);
+                    }
+                    else if (targetState.is(Blocks.STONE))
+                    {
+                        boolean isMossy = random.nextBoolean();
+                        if (isMossy)
+                            level.setBlock(targetPos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), Block.UPDATE_ALL);
+                        else
+                            level.setBlock(targetPos, Blocks.INFESTED_STONE.defaultBlockState(), Block.UPDATE_ALL);
+                    }
+                    else if (targetState.is(Blocks.COBBLESTONE))
+                    {
+                        boolean isMossy = random.nextBoolean();
+                        if (isMossy)
+                            level.setBlock(targetPos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), Block.UPDATE_ALL);
+                        else
+                            level.setBlock(targetPos, Blocks.INFESTED_COBBLESTONE.defaultBlockState(), Block.UPDATE_ALL);
+                    }
+                    else if (targetState.is(Blocks.DEEPSLATE))
+                    {
+                        level.setBlock(targetPos, Blocks.INFESTED_DEEPSLATE.defaultBlockState(), Block.UPDATE_ALL);
+                    }
+                    else if (targetState.is(Blocks.SAND))
+                    {
+                        if (aboveState.is(Blocks.WATER))
+                            level.setBlock(targetPos, Blocks.CLAY.defaultBlockState(), Block.UPDATE_ALL);
+                        else
+                            level.setBlock(targetPos, Blocks.TERRACOTTA.defaultBlockState(), Block.UPDATE_ALL);
+                    }
+                    else if (targetState.is(Blocks.END_STONE))
+                    {
+                        level.setBlock(targetPos, BlockRegistry.CRACKED_ENDSTONE.get().defaultBlockState(), Block.UPDATE_ALL);
+                    }
+                    else if (targetState.is(BlockTags.TERRACOTTA))
+                    {
+                        level.setBlock(targetPos, Blocks.BLACK_TERRACOTTA.defaultBlockState(), Block.UPDATE_ALL);
                     }
                 }
             }

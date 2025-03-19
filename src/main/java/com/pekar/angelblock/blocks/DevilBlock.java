@@ -96,9 +96,9 @@ public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityB
         }
         else if (Screen.hasAltDown())
         {
-            for (int i = 17; i <= 30; i++)
+            for (int i = 17; i <= 31; i++)
             {
-                var component = getDescription(i, i == 17, false, false, false, i >= 27);
+                var component = getDescription(i, i == 17, false, false, false, i >= 28);
                 if (!component.getString().isEmpty())
                     tooltipComponents.add(component);
             }
