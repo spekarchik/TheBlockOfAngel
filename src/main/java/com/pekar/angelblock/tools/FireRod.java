@@ -168,38 +168,38 @@ public class FireRod extends MarineRod
                 return getToolInteractionResult(true, isClientSide);
             }
 
-            if (block == Blocks.SHROOMLIGHT)
-            {
-                for (int x = pos.getX() - 1; x <= pos.getX() + 1; x++)
-                    for (int y = pos.getY() - 1; y <= pos.getY() + 1; y++)
-                        for (int z = pos.getZ() - 1; z <= pos.getZ() + 1; z++)
-                        {
-                            if (x == pos.getX() && y == pos.getY() && z == pos.getZ()) continue;
-                            var block1 = level.getBlockState(new BlockPos(x, y, z)).getBlock();
-
-                            if (block1 == Blocks.CRIMSON_STEM || block1 == Blocks.CRIMSON_NYLIUM || block1 == Blocks.NETHER_WART_BLOCK
-                                    || block1 == Blocks.NETHER_WART || block1 == Blocks.CRIMSON_HYPHAE)
-                            {
-                                if (!isClientSide)
-                                {
-                                    setBlock(player, pos, Blocks.CRIMSON_STEM);
-                                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                                }
-                                return getToolInteractionResult(true, isClientSide);
-                            }
-
-                            if (block1 == Blocks.WARPED_STEM || block1 == Blocks.WARPED_NYLIUM || block1 == Blocks.WARPED_WART_BLOCK
-                                    || block1 == Blocks.WARPED_HYPHAE)
-                            {
-                                if (!isClientSide)
-                                {
-                                    setBlock(player, pos, Blocks.WARPED_STEM);
-                                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                                }
-                                return getToolInteractionResult(true, isClientSide);
-                            }
-                        }
-            }
+//            if (block == Blocks.SHROOMLIGHT)
+//            {
+//                for (int x = pos.getX() - 1; x <= pos.getX() + 1; x++)
+//                    for (int y = pos.getY() - 1; y <= pos.getY() + 1; y++)
+//                        for (int z = pos.getZ() - 1; z <= pos.getZ() + 1; z++)
+//                        {
+//                            if (x == pos.getX() && y == pos.getY() && z == pos.getZ()) continue;
+//                            var block1 = level.getBlockState(new BlockPos(x, y, z)).getBlock();
+//
+//                            if (block1 == Blocks.CRIMSON_STEM || block1 == Blocks.CRIMSON_NYLIUM || block1 == Blocks.NETHER_WART_BLOCK
+//                                    || block1 == Blocks.NETHER_WART || block1 == Blocks.CRIMSON_HYPHAE)
+//                            {
+//                                if (!isClientSide)
+//                                {
+//                                    setBlock(player, pos, Blocks.CRIMSON_STEM);
+//                                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
+//                                }
+//                                return getToolInteractionResult(true, isClientSide);
+//                            }
+//
+//                            if (block1 == Blocks.WARPED_STEM || block1 == Blocks.WARPED_NYLIUM || block1 == Blocks.WARPED_WART_BLOCK
+//                                    || block1 == Blocks.WARPED_HYPHAE)
+//                            {
+//                                if (!isClientSide)
+//                                {
+//                                    setBlock(player, pos, Blocks.WARPED_STEM);
+//                                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
+//                                }
+//                                return getToolInteractionResult(true, isClientSide);
+//                            }
+//                        }
+//            }
         }
 
         return result;
