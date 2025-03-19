@@ -1,5 +1,6 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
+import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
 import com.pekar.angelblock.events.ILivingDeathEventHandler;
@@ -9,24 +10,31 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
-public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHandler
+public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHandler, BlockEntityTicker<DevilBlockEntity>
 {
     private static final int EFFECTIVE_RADIUS = 70;
     private static final int SQR_EFFECTIVE_RADIUS = EFFECTIVE_RADIUS * EFFECTIVE_RADIUS;
     private static final int MONSTER_SPAWN_RADIUS = 30;
+    private static final Random random = new Random();
 
     private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
 
@@ -147,5 +155,79 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
     private void addToMonsterMap(IMonster monster)
     {
         monstersByActionItem.put(monster.getActionItem(), monster);
+    }
+
+    @Override
+    public void tick(Level level, BlockPos pos, BlockState blockState, DevilBlockEntity devilBlockEntity)
+    {
+        if (level.getGameTime() % 20 != 0) return;
+
+        //for (int i = 0; i < 3; i++)
+        {
+            int x = pos.getX() + random.nextInt(41) - 20;
+            int y = pos.getY() + random.nextInt(11) - 5;
+            int z = pos.getZ() + random.nextInt(41) - 20;
+
+            var targetPos = new BlockPos(x, y, z);
+            var targetState = level.getBlockState(targetPos);
+            var abovePos = targetPos.above();
+            var aboveBlockState = level.getBlockState(abovePos);
+
+            if (aboveBlockState.isAir() || aboveBlockState.getBlock() instanceof BushBlock)
+            {
+                if (targetState.is(Blocks.GRASS_BLOCK))
+                {
+                    level.setBlock(targetPos, Blocks.MYCELIUM.defaultBlockState(), 3);
+                }
+                else if (targetState.is(Blocks.FARMLAND))
+                {
+                    level.setBlock(targetPos, Blocks.DIRT.defaultBlockState(), 3);
+                }
+                else if (targetState.is(Blocks.STONE))
+                {
+                    boolean isMossy = random.nextBoolean();
+                    if (isMossy)
+                        level.setBlock(targetPos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 3);
+                    else
+                        level.setBlock(targetPos, Blocks.INFESTED_STONE.defaultBlockState(), 3);
+                }
+                else if (targetState.is(Blocks.COBBLESTONE))
+                {
+                    boolean isMossy = random.nextBoolean();
+                    if (isMossy)
+                        level.setBlock(targetPos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 3);
+                    else
+                        level.setBlock(targetPos, Blocks.INFESTED_COBBLESTONE.defaultBlockState(), 3);
+                }
+                else if (targetState.is(Blocks.DEEPSLATE))
+                {
+                    level.setBlock(targetPos, Blocks.INFESTED_DEEPSLATE.defaultBlockState(), 3);
+                }
+                else if (targetState.is(Blocks.SAND))
+                {
+                    level.setBlock(targetPos, Blocks.TERRACOTTA.defaultBlockState(), 3);
+                }
+                else if (targetState.is(Blocks.END_STONE))
+                {
+                    level.setBlock(targetPos, BlockRegistry.CRACKED_ENDSTONE.get().defaultBlockState(), 3);
+                }
+            }
+            else if (targetState.is(BlockTags.LOGS))
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    int lx = targetPos.getX() + random.nextInt(11) - 5;
+                    int ly = targetPos.getY() + random.nextInt(8) - 2;
+                    int lz = targetPos.getZ() + random.nextInt(11) - 5;
+                    BlockPos leafPos = new BlockPos(lx, ly, lz);
+                    BlockState leafState = level.getBlockState(leafPos);
+
+                    if (leafState.is(BlockTags.LEAVES))
+                    {
+                        level.destroyBlock(leafPos, true);
+                    }
+                }
+            }
+        }
     }
 }
