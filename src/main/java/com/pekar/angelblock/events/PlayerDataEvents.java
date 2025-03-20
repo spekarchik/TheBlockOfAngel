@@ -6,7 +6,6 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.tools.IModTool;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
