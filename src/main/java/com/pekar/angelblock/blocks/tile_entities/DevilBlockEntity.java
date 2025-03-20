@@ -216,7 +216,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                 {
                     level.destroyBlock(targetPos, true);
                 }
-                else if (aboveState.isAir() || aboveState.is(Blocks.WATER) || aboveState.getBlock() instanceof BushBlock)
+                else if (aboveState.isAir() || aboveState.is(Blocks.WATER) || isPlant(aboveState))
                 {
                     if (targetState.is(Blocks.GRASS_BLOCK))
                     {
@@ -264,5 +264,10 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                 }
             }
         }
+    }
+
+    private boolean isPlant(BlockState blockState)
+    {
+        return blockState.getBlock() instanceof BushBlock || blockState.is(Blocks.CACTUS);
     }
 }
