@@ -8,8 +8,13 @@
 		[
 			{
 				"type": "minecraft:item",
-				"name": "angelblock:ancient_scroll"
-			}
+				"name": "angelblock:ancient_scroll",
+                "weight": 1
+			},
+            {
+              "type": "minecraft:empty",
+              "weight": 1
+            }
 		]
 	},
     {
