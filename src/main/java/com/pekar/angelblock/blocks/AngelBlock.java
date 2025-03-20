@@ -130,8 +130,7 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("description.common.press_alt"));
         }
-
-        if (Screen.hasAltDown())
+        else if (Screen.hasAltDown())
         {
             for (int i = 21; i <= 27; i++)
             {
