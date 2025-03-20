@@ -62,29 +62,41 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
         //addToMonsterMap(Monsters.Pillager);
     }
 
-    public void addMonsterToFilter(Item item, Player player)
+    public boolean addMonsterToFilter(Item item, Player player)
     {
-        if (!monstersByActionItem.containsKey(item)) return;
+        if (!monstersByActionItem.containsKey(item)) return false;
 
-        var monster = monstersByActionItem.get(item);
-        monstersToIgnore.add(monster);
-        if (!getLevel().isClientSide() && player instanceof ServerPlayer serverPlayer)
+        if (!player.level().isClientSide())
         {
-            new PlaySoundPacket(SoundEvents.DRIPSTONE_BLOCK_PLACE).sendToPlayer(serverPlayer);
-        }
+            var monster = monstersByActionItem.get(item);
+            if (monstersToIgnore.contains(monster))
+                monstersToIgnore.remove(monster);
+            else
+                monstersToIgnore.add(monster);
+            if (player instanceof ServerPlayer serverPlayer)
+            {
+                new PlaySoundPacket(SoundEvents.DRIPSTONE_BLOCK_PLACE).sendToPlayer(serverPlayer);
+            }
 
-        setChanged();
+            setChanged();
+        }
+        return true;
     }
 
     public void resetFilter(Player player)
     {
         monstersToIgnore.clear();
-        if (!getLevel().isClientSide() && player instanceof ServerPlayer serverPlayer)
+        if (!player.level().isClientSide() && player instanceof ServerPlayer serverPlayer)
         {
             new PlaySoundPacket(SoundEvents.MAGMA_CUBE_DEATH_SMALL).sendToPlayer(serverPlayer);
         }
 
         setChanged();
+    }
+
+    public int monstersInFilter()
+    {
+        return monstersToIgnore.size();
     }
 
     @Override

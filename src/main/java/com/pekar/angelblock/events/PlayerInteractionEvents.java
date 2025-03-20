@@ -1,8 +1,5 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.blocks.tile_entities.AngelBlockEntity;
-import com.pekar.angelblock.blocks.tile_entities.DevilBlockEntity;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -11,9 +8,7 @@ import com.pekar.angelblock.tools.IModToolEnhanceable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -136,58 +131,9 @@ public class PlayerInteractionEvents implements IEventHandler
         }
     }
 
-    @SubscribeEvent
+    //@SubscribeEvent
     public void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event)
     {
-        var player = event.getEntity();
-
-        var pos = event.getPos();
-        var level = player.level();
-        var block = level.getBlockState(pos).getBlock();
-
-        if (block == BlockRegistry.ANGEL_BLOCK.get())
-        {
-            var blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof AngelBlockEntity angelBlockEntity)
-            {
-                var interactionItemStack = player.getItemInHand(event.getHand());
-                if (interactionItemStack.isEmpty()) return;
-
-                var isClientSide = level.isClientSide();
-
-                var interactionItem = interactionItemStack.getItem();
-                if (interactionItem == Items.FLINT)
-                {
-                    if (!isClientSide)
-                        angelBlockEntity.resetFilter(player);
-
-                    event.setUseItem(TriState.TRUE);
-                }
-                else
-                {
-                    if (!isClientSide)
-                        angelBlockEntity.addMonsterToFilter(interactionItem, player);
-
-                    event.setUseItem(TriState.TRUE);
-                }
-            }
-        }
-
-        if (block == BlockRegistry.DEVIL_BLOCK.get())
-        {
-            var blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof DevilBlockEntity devilBlockEntity)
-            {
-                var interactionItemStack = player.getItemInHand(event.getHand());
-                if (interactionItemStack.isEmpty()) return;
-
-                var interactionItem = interactionItemStack.getItem();
-
-                var success = devilBlockEntity.spawnMonster(interactionItem, player, interactionItemStack);
-
-                event.setUseItem(success ? TriState.TRUE : TriState.DEFAULT);
-            }
-        }
     }
 
     @SubscribeEvent

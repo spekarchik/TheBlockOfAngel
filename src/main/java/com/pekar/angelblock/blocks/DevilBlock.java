@@ -5,6 +5,8 @@ import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,6 +35,26 @@ public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityB
         super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM)
                 .strength(10F, 1200F)
                 .lightLevel(blockState -> 10));
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    {
+        var blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof DevilBlockEntity devilBlockEntity)
+        {
+            var interactionItemStack = player.getItemInHand(hand);
+            if (interactionItemStack.isEmpty()) return ItemInteractionResult.FAIL;
+
+            var interactionItem = interactionItemStack.getItem();
+
+            if (!level.isClientSide())
+                devilBlockEntity.spawnMonster(interactionItem, player, interactionItemStack);
+
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        }
+
+        return ItemInteractionResult.FAIL;
     }
 
     @Nullable
@@ -92,7 +115,7 @@ public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityB
             }
 
             tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("description.rods.press_alt"));
+            tooltipComponents.add(Component.translatable("description.common.press_alt"));
         }
         else if (Screen.hasAltDown())
         {
