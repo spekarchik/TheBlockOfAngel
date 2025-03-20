@@ -5,6 +5,8 @@ import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -107,6 +109,15 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
         var stateValue = Math.min(value, MaxMonstersFilterValue);
         BlockState state = level.getBlockState(pos);
         level.setBlock(pos, state.setValue(MONSTERS_IN_FILTER, stateValue), 3);
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston)
+    {
+        if (!level.isClientSide)
+        {
+            level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 1.0f, 1.0f);
+        }
     }
 
     @Override

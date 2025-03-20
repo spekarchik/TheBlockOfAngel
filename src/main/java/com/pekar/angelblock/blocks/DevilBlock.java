@@ -5,6 +5,8 @@ import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -94,6 +96,15 @@ public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityB
         return level.isClientSide()
                 ? null
                 : (level0, pos, blockState0, blockEntity) -> ((DevilBlockEntity)blockEntity).tick(level0, pos, blockState0, (DevilBlockEntity)blockEntity);
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston)
+    {
+        if (!level.isClientSide)
+        {
+            level.playSound(null, pos, SoundEvents.AMBIENT_CAVE.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
+        }
     }
 
     @Override
