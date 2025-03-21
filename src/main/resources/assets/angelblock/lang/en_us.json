@@ -1121,7 +1121,7 @@
   "block.angelblock.devil_block.desc31": " ",
   "block.angelblock.devil_block.desc32": "Destroys leaves on trees",
   "block.angelblock.devil_block.desc33": "",
-  "block.angelblock.devil_block.desc34": "Affects blocks within a 15-block horizontal radius, provided there is air, water or a plant above them",
+  "block.angelblock.devil_block.desc34": "Affects blocks within a 18-block horizontal radius, provided there is air, water or a plant above them",
   "block.angelblock.devil_block.desc35": "",
   "block.angelblock.angel_rod_block": "§bThe Rod of Angel",
   "block.angelblock.angel_rod_block.desc1": "When hold in a hand or placed on a block it despawns any monsters in 20 block radius",

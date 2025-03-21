@@ -163,13 +163,16 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
     {
         if (level.isClientSide() || level.getGameTime() % 20 != 0) return;
 
-        final int horizRadius = 15;
+        final int horizRadius = 18;
         final int vertRadius = 5;
         for (int i = 0; i < 5; i++)
         {
-            int x = pos.getX() + random.nextInt((horizRadius << 1) + 1) - horizRadius;
+            int dx = random.nextInt((horizRadius << 1) + 1) - horizRadius;
+            int x = pos.getX() + dx;
+            int radiusDecrement = Math.max(Math.abs(dx) - horizRadius / 2, 0);
+            int newRadius = horizRadius - radiusDecrement;
+            int z = pos.getZ() + random.nextInt((newRadius << 1) + 1) - newRadius;
             int y = pos.getY() + random.nextInt((vertRadius << 1) + 1) - vertRadius;
-            int z = pos.getZ() + random.nextInt((horizRadius << 1) + 1) - horizRadius;
 
             var targetPos = new BlockPos(x, y, z);
             var targetState = level.getBlockState(targetPos);
