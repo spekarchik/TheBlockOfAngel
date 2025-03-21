@@ -210,6 +210,22 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                     }
                 }
             }
+            else if (targetState.is(Blocks.DIAMOND_ORE) || targetState.is(Blocks.DEEPSLATE_DIAMOND_ORE))
+            {
+                level.setBlock(targetPos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState(), Block.UPDATE_ALL);
+            }
+            else if (targetState.is(Blocks.OBSIDIAN))
+            {
+                boolean isCrying = random.nextBoolean();
+                if (isCrying)
+                    level.setBlock(targetPos, Blocks.CRYING_OBSIDIAN.defaultBlockState(), Block.UPDATE_ALL);
+                else
+                    level.setBlock(targetPos, BlockRegistry.CRACKED_OBSIDIAN.get().defaultBlockState(), Block.UPDATE_ALL);
+            }
+            else if (targetState.is(BlockTags.TERRACOTTA))
+            {
+                level.setBlock(targetPos, Blocks.BLACK_TERRACOTTA.defaultBlockState(), Block.UPDATE_ALL);
+            }
             else if (i == 0)
             {
                 if (targetState.getBlock() instanceof BushBlock)
@@ -218,7 +234,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                 }
                 else if (aboveState.isAir() || aboveState.is(Blocks.WATER) || isPlant(aboveState))
                 {
-                    if (targetState.is(Blocks.GRASS_BLOCK))
+                    if (targetState.is(Blocks.GRASS_BLOCK) || targetState.is(Blocks.PODZOL))
                     {
                         level.setBlock(targetPos, Blocks.MYCELIUM.defaultBlockState(), Block.UPDATE_ALL);
                     }
@@ -251,15 +267,21 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                         if (aboveState.is(Blocks.WATER))
                             level.setBlock(targetPos, Blocks.CLAY.defaultBlockState(), Block.UPDATE_ALL);
                         else
-                            level.setBlock(targetPos, Blocks.TERRACOTTA.defaultBlockState(), Block.UPDATE_ALL);
+                        {
+                            boolean isEndstone = random.nextBoolean();
+                            if (isEndstone)
+                                level.setBlock(targetPos, Blocks.END_STONE.defaultBlockState(), Block.UPDATE_ALL);
+                            else
+                                level.setBlock(targetPos, Blocks.TERRACOTTA.defaultBlockState(), Block.UPDATE_ALL);
+                        }
                     }
                     else if (targetState.is(Blocks.END_STONE))
                     {
                         level.setBlock(targetPos, BlockRegistry.CRACKED_ENDSTONE.get().defaultBlockState(), Block.UPDATE_ALL);
                     }
-                    else if (targetState.is(BlockTags.TERRACOTTA))
+                    else if (targetState.is(BlockTags.ICE))
                     {
-                        level.setBlock(targetPos, Blocks.BLACK_TERRACOTTA.defaultBlockState(), Block.UPDATE_ALL);
+                        level.setBlock(targetPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL);
                     }
                 }
             }
