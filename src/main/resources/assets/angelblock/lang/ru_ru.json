@@ -1106,7 +1106,7 @@
   "block.angelblock.devil_block.desc16": "§2Использованный предмет расходуется!",
   "block.angelblock.devil_block.desc17": "Установленный блок со временем меняет окружающие блоки:",
   "block.angelblock.devil_block.desc18": " Дёрн -> Мицелиум",
-  "block.angelblock.devil_block.desc19": " Пашня, Тропа, Блок земли -> Грязь",
+  "block.angelblock.devil_block.desc19": " Блок земли, Пашня, Тропа, Глина -> Грязь",
   "block.angelblock.devil_block.desc20": " Песок -> Глина (если под водой) или Терракота",
   "block.angelblock.devil_block.desc21": " Терракота -> Черная керамика",
   "block.angelblock.devil_block.desc22": " Камень -> Зараженный камень или Замшелый булыжник",

@@ -1106,7 +1106,7 @@
   "block.angelblock.devil_block.desc16": "§2The item used on the block is consumed!",
   "block.angelblock.devil_block.desc17": "The placed block gradually changes surrounding blocks:",
   "block.angelblock.devil_block.desc18": " Grass Block -> Mycelium",
-  "block.angelblock.devil_block.desc19": " Farmland, Dirt Path, Dirt -> Mud",
+  "block.angelblock.devil_block.desc19": " Dirt, Farmland, Dirt Path, Clay -> Mud",
   "block.angelblock.devil_block.desc20": " Sand -> Clay (if under water) or Terracotta",
   "block.angelblock.devil_block.desc21": " Terracotta -> Black Terracotta",
   "block.angelblock.devil_block.desc22": " Stone -> Infested Stone or Mossy Cobblestone",

@@ -222,7 +222,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                     {
                         level.setBlock(targetPos, Blocks.MYCELIUM.defaultBlockState(), Block.UPDATE_ALL);
                     }
-                    else if (targetState.is(Blocks.FARMLAND) || targetState.is(Blocks.DIRT_PATH) || targetState.is(Blocks.DIRT))
+                    else if (targetState.is(Blocks.FARMLAND) || targetState.is(Blocks.DIRT_PATH) || targetState.is(Blocks.DIRT) || targetState.is(Blocks.CLAY))
                     {
                         level.setBlock(targetPos, Blocks.MUD.defaultBlockState(), Block.UPDATE_ALL);
                     }
