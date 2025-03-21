@@ -268,6 +268,6 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
     private boolean isPlant(BlockState blockState)
     {
-        return blockState.getBlock() instanceof BushBlock || blockState.is(Blocks.CACTUS);
+        return blockState.getBlock() instanceof BushBlock || blockState.is(Blocks.CACTUS) || blockState.is(Blocks.SUGAR_CANE);
     }
 }
