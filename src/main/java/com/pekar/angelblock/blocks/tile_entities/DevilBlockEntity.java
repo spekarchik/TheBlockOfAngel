@@ -226,19 +226,20 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
             {
                 level.setBlock(targetPos, Blocks.BLACK_TERRACOTTA.defaultBlockState(), Block.UPDATE_ALL);
             }
-            else if (i == 0)
+            else if (isPlant(targetState))
             {
-                if (targetState.getBlock() instanceof BushBlock)
-                {
+                if (i == 0)
                     level.destroyBlock(targetPos, true);
-                }
-                else if (aboveState.isAir() || aboveState.is(Blocks.WATER) || isPlant(aboveState))
+            }
+            else if (aboveState.isAir() || aboveState.is(Blocks.WATER) || isPlant(aboveState))
+            {
+                if (i == 0)
                 {
                     if (targetState.is(Blocks.GRASS_BLOCK) || targetState.is(Blocks.PODZOL))
                     {
                         level.setBlock(targetPos, Blocks.MYCELIUM.defaultBlockState(), Block.UPDATE_ALL);
                     }
-                    else if (targetState.is(Blocks.FARMLAND) || targetState.is(Blocks.DIRT_PATH) || targetState.is(Blocks.DIRT) || targetState.is(Blocks.CLAY))
+                    else if (targetState.is(Blocks.FARMLAND) || targetState.is(Blocks.DIRT_PATH) || targetState.is(Blocks.DIRT))
                     {
                         level.setBlock(targetPos, Blocks.MUD.defaultBlockState(), Block.UPDATE_ALL);
                     }
@@ -283,6 +284,11 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                     {
                         level.setBlock(targetPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL);
                     }
+                }
+
+                if (targetState.is(Blocks.CLAY))
+                {
+                    level.setBlock(targetPos, Blocks.MUD.defaultBlockState(), Block.UPDATE_ALL);
                 }
             }
         }
