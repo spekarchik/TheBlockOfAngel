@@ -7,16 +7,16 @@ import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
-import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToServer;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -136,6 +136,25 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         removeEffectIfHoldItem(playerEntity, MobEffects.NIGHT_VISION, oldSlotItem, offHandItemStack, ItemRegistry.GUARDIAN_EYE.get());
 //        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, offHandItemStack, ItemRegistry.END_SAPPHIRE.get());
 //        removeEffectIfHoldItem(playerEntity, MobEffects.ABSORPTION, oldSlotItem, offHandItemStack, ItemRegistry.BIOS_DIAMOND.get());
+
+        if (!entity.level().isClientSide())
+        {
+            if (event.getTo().is(ItemRegistry.ENERGY_CRYSTAL))
+            {
+                if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) && !entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))
+                {
+                    player.setEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 10);
+
+                    if (entity instanceof ServerPlayer serverPlayer)
+                        new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
+                }
+            }
+            else if (oldSlotItem.is(ItemRegistry.ENERGY_CRYSTAL) && !entity.getMainHandItem().is(ItemRegistry.ENERGY_CRYSTAL) && !entity.getOffhandItem().is(ItemRegistry.ENERGY_CRYSTAL))
+            {
+                if (entity.hasEffect(MobEffects.MOVEMENT_SPEED))
+                    player.clearEffect(MobEffects.MOVEMENT_SPEED);
+            }
+        }
 
         var slot = event.getSlot();
         if (slot.isArmor() || slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND)
