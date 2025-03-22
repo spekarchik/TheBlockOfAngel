@@ -138,22 +138,6 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "max": 39.0,
-                "min": 20.0
-              },
-              "options": "#minecraft:on_random_loot"
-            }
-          ],
-          "name": "minecraft:netherite_sword"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 3,
           "functions": [
             {
@@ -193,7 +177,7 @@
               "options": "#minecraft:on_random_loot"
             }
           ],
-          "name": "minecraft:diamond_boots"
+          "name": "minecraft:netherite_helmet"
         },
         {
           "type": "minecraft:item",
@@ -225,7 +209,7 @@
               "options": "#minecraft:on_random_loot"
             }
           ],
-          "name": "minecraft:diamond_chestplate"
+          "name": "minecraft:diamond_boots"
         },
         {
           "type": "minecraft:item",
@@ -241,7 +225,7 @@
               "options": "#minecraft:on_random_loot"
             }
           ],
-          "name": "minecraft:netherite_chestplate"
+          "name": "minecraft:diamond_chestplate"
         },
         {
           "type": "minecraft:item",

@@ -35,7 +35,7 @@
             }
           ],
           "name": "minecraft:dead_fire_coral",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -67,7 +67,7 @@
             }
           ],
           "name": "minecraft:dead_horn_coral",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:empty",
