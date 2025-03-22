@@ -1,5 +1,8 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -20,11 +23,12 @@ public class EndSapphire extends ModItemWithDoubleHoverText
     {
         if (!player.hasEffect(MobEffects.LEVITATION))
         {
-            if (!level.isClientSide())
+            if (player instanceof ServerPlayer serverPlayer)
             {
                 int duration = level.getRandom().nextIntBetweenInclusive(40, 300);
                 int effectLevel = level.getRandom().nextIntBetweenInclusive(0, 50);
                 player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, duration, effectLevel, true, true));
+                new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
             }
 
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());

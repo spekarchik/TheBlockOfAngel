@@ -137,22 +137,23 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 //        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, offHandItemStack, ItemRegistry.END_SAPPHIRE.get());
 //        removeEffectIfHoldItem(playerEntity, MobEffects.ABSORPTION, oldSlotItem, offHandItemStack, ItemRegistry.BIOS_DIAMOND.get());
 
-        if (!entity.level().isClientSide())
+        if (entity instanceof ServerPlayer serverPlayer)
         {
             if (event.getTo().is(ItemRegistry.ENERGY_CRYSTAL))
             {
                 if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) && !entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))
                 {
                     player.setEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 10);
-
-                    if (entity instanceof ServerPlayer serverPlayer)
-                        new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
+                    new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
                 }
             }
             else if (oldSlotItem.is(ItemRegistry.ENERGY_CRYSTAL) && !entity.getMainHandItem().is(ItemRegistry.ENERGY_CRYSTAL) && !entity.getOffhandItem().is(ItemRegistry.ENERGY_CRYSTAL))
             {
                 if (entity.hasEffect(MobEffects.MOVEMENT_SPEED))
+                {
                     player.clearEffect(MobEffects.MOVEMENT_SPEED);
+                    new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
+                }
             }
         }
 
@@ -237,12 +238,13 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
     private void removeEffectIfHoldItem(net.minecraft.world.entity.player.Player player, Holder<MobEffect> effect, ItemStack slotItemStack, ItemStack offHandItemStack, Item holdItemToCheck)
     {
-        if (!player.hasEffect(effect)) return;
+        if (!(player instanceof ServerPlayer serverPlayer) || !player.hasEffect(effect)) return;
 
         if ((!slotItemStack.isEmpty() && slotItemStack.getItem() == holdItemToCheck)
                 || (!offHandItemStack.isEmpty() && offHandItemStack.getItem() == holdItemToCheck))
         {
             player.removeEffect(effect);
+            new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
         }
     }
 }

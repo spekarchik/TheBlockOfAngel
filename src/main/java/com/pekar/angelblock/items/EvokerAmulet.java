@@ -1,6 +1,9 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -20,14 +23,20 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
     {
         var itemStack = player.getItemInHand(interactionHand);
 
-        if (!level.isClientSide() && level instanceof ServerLevel serverLevel)
+        if (level instanceof ServerLevel serverLevel)
         {
-            var allays = ((ServerLevel) level).getLevel().getEntities((Entity)null,
+            var allays = (serverLevel).getLevel().getEntities((Entity)null,
                     player.getBoundingBox().inflate(EFFECTIVE_RADIUS), entity -> entity instanceof Allay);
 
             if (allays.size() < 3)
-                level.getChunk(player.getOnPos()).addEntity(
-                        EntityType.ALLAY.spawn(serverLevel, itemStack, player, player.getOnPos().above(5), MobSpawnType.NATURAL, true, true));
+            {
+                var allay = EntityType.ALLAY.spawn(serverLevel, itemStack, player, player.getOnPos().above(5), MobSpawnType.NATURAL, true, true);
+                if (allay != null)
+                    level.getChunk(player.getOnPos()).addEntity(allay);
+
+                if (player instanceof ServerPlayer serverPlayer)
+                    new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
+            }
         }
 
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());

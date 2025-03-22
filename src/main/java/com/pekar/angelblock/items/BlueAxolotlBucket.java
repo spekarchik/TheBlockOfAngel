@@ -1,10 +1,13 @@
 package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.TextStyle;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -31,7 +34,7 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
         var player = context.getPlayer();
         var pos = context.getClickedPos().relative(context.getClickedFace());
 
-        if (!level.isClientSide() && level instanceof ServerLevel serverLevel && player != null)
+        if (level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer)
         {
             var axolotl = EntityType.AXOLOTL.create(serverLevel);
             if (axolotl != null)
@@ -44,6 +47,7 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
 
                 if (result)
                 {
+                    new PlaySoundPacket(SoundEvents.BUCKET_EMPTY_AXOLOTL, 1.0F).sendToPlayer(serverPlayer);
                     level.setBlock(pos, Blocks.WATER.defaultBlockState(), 11);
                     player.setItemInHand(context.getHand(), new ItemStack(Items.BUCKET));
                 }

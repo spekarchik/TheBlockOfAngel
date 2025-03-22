@@ -1,6 +1,9 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -35,9 +38,10 @@ public class GuardianEye extends ModItemWithMultipleHoverText
     {
         if (!player.hasEffect(MobEffects.NIGHT_VISION))
         {
-            if (!level.isClientSide())
+            if (player instanceof ServerPlayer serverPlayer)
             {
                 player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0, true, true));
+                new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
             }
 
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
