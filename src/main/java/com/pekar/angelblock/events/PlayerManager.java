@@ -143,7 +143,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
             {
                 if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) && !entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))
                 {
-                    player.setEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 10);
+                    player.setEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 3);
                     new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
                 }
             }
