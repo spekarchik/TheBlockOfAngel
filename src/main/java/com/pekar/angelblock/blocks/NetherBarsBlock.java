@@ -34,7 +34,7 @@ public class NetherBarsBlock extends ModBlockWithDoubleHoverText
 
     private static final VoxelShape HITBOX_X = Shapes.box(
             7.0 / 16.0, 0.0 / 16.0, 0.0 / 16.0,
-            9.0 / 16.0, 16.0 / 16.0, 16.0 / 16.0 
+            9.0 / 16.0, 16.0 / 16.0, 16.0 / 16.0
     );
 
     public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
