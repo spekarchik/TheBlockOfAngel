@@ -43,6 +43,7 @@ public class BlockRegistry
 
     public static final DeferredBlock<Block> GREEN_DIAMOND_ORE = register("green_diamond_ore", GreenDiamondBlock::new);
     public static final DeferredBlock<Block> GUNPOWDER_BLOCK = register("gunpowder_block", GunpowderBlock::new);
+    public static final DeferredBlock<Block> NETHER_BARS = register("nether_bars_block", NetherBarsBlock::new);
 
     // Internal blocks (not added to Creative Tab)
     //public static final DeferredBlock<Block> DESTROYING_DIAMOND_BLOCK = registerSkipTab("destroying_diamond_block", AirBlock::new);

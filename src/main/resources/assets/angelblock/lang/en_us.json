@@ -1046,8 +1046,6 @@
   "item.angelblock.evoker_amulet": "§eEvoker Amulet",
   "item.angelblock.evoker_amulet.desc1": "Using it spawns Allays (up to 3 in a radius)",
   "item.angelblock.evoker_amulet.desc2": "Can be found in Woodland Mansions",
-  "item.angelblock.nether_bars": "§eNether Bars",
-  "item.angelblock.nether_bars.desc": "Can be found in Bastion Remnants",
   "item.angelblock.ancient_scroll": "§eAntique Scroll",
   "item.angelblock.ancient_scroll.desc": "Can be found in Stronghold libraries",
   "item.angelblock.blue_axolotl_bucket": "§dBucket of Blue Axolotl",
@@ -1141,6 +1139,9 @@
   "block.angelblock.saltpeter_block": "Saltpeter Block",
   "block.angelblock.gunpowder_block": "Gunpowder Block",
   "block.angelblock.gunpowder_block.desc": "Explodes after falling, hit or fired",
+  "block.angelblock.nether_bars_block": "§eNether Bars",
+  "block.angelblock.nether_bars_block.desc1": "Can be found in Bastion Remnants",
+  "block.angelblock.nether_bars_block.desc2": "Blast resistance - like Obsidian",
 
   "key.angelblock.night_vision": "Night Vision Mode",
   "key.angelblock.jump_boost": "Jump Boost Mode",

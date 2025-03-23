@@ -1046,8 +1046,6 @@
   "item.angelblock.evoker_amulet": "§eАмулет вызывателя",
   "item.angelblock.evoker_amulet.desc1": "Использование вызывает Тихоню (не более 3 в радиусе)",
   "item.angelblock.evoker_amulet.desc2": "Встречается в Лесных Особняках",
-  "item.angelblock.nether_bars": "§eРешетка Нижнего мира",
-  "item.angelblock.nether_bars.desc": "Встречается в Развалинах Бастиона",
   "item.angelblock.ancient_scroll": "§eСтаринный свиток",
   "item.angelblock.ancient_scroll.desc": "Встречается в библиотеках Крепостей",
   "item.angelblock.blue_axolotl_bucket": "§dСиний аксолотль в ведре",
@@ -1141,6 +1139,9 @@
   "block.angelblock.saltpeter_block": "Блок селитры",
   "block.angelblock.gunpowder_block": "Блок пороха",
   "block.angelblock.gunpowder_block.desc": "Взрывается при падении, столкновении и воспламенении",
+  "block.angelblock.nether_bars_block": "§eРешетка Нижнего мира",
+  "block.angelblock.nether_bars_block.desc1": "Встречается в Развалинах Бастиона",
+  "block.angelblock.nether_bars_block.desc2": "Устойчивость к взрывам - как у Обсидиана",
 
   "key.angelblock.night_vision": "Режим ночного зрения",
   "key.angelblock.jump_boost": "Режим прыгучести",

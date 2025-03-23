@@ -1,0 +1,7 @@
+{
+  "variants":
+  {
+    "axis=x": { "model": "angelblock:block/nether_bars_block_x" },
+    "axis=z": { "model": "angelblock:block/nether_bars_block_z" }
+  }
+}
