@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public abstract class ServerToClientPacket extends Packet implements IServerToClientPacket
 {
@@ -31,11 +30,5 @@ public abstract class ServerToClientPacket extends Packet implements IServerToCl
     public final boolean isServerToClient()
     {
         return true;
-    }
-
-    @Override
-    protected final void onReceive(IPayloadContext context)
-    {
-        onReceive();
     }
 }

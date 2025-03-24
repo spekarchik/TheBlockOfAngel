@@ -6,11 +6,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class CreeperDetectedPacket extends ServerToClientPacket
 {
     @Override
-    public void onReceive()
+    public void onReceive(IPayloadContext context)
     {
         if (Minecraft.getInstance().screen instanceof PauseScreen) return;
 

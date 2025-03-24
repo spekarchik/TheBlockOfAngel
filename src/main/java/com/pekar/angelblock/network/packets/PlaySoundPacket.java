@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PlaySoundPacket extends ServerToClientPacket
 {
@@ -59,7 +60,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     }
 
     @Override
-    public void onReceive()
+    public void onReceive(IPayloadContext context)
     {
         var sound = getSound(soundType);
         if (sound == null) return;
