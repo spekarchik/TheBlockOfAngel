@@ -449,7 +449,7 @@
   "item.angelblock.obsidian_powder": "Обсидиановая пыль",
   "item.angelblock.obsidian_powder.desc": "Добывается из Потрескавшегося Обсидиана",
   "item.angelblock.endstone_powder": "Эндерняковая пыль",
-  "item.angelblock.endstone_powder.desc1": "Превращает Текущую Лаву в Эндерняк",
+  "item.angelblock.endstone_powder.desc1": "Превращает Лаву (полный блок) в Эндерняк",
   "item.angelblock.endstone_powder.desc2": "Добывается из Потрескавшегося Эндерняка",
   "item.angelblock.rendelithic_powder": "Ренделитовая смесь",
   "item.angelblock.rendelithic_ingot": "Ренделитовый слиток",

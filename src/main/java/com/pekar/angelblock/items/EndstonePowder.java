@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FluidState;
 
@@ -45,7 +46,7 @@ public class EndstonePowder extends ModItemWithDoubleHoverText
                     var currentPos = new BlockPos(x, Y, z);
                     var upBlock = level.getBlockState(currentPos).getBlock();
 
-                    if (upBlock == Blocks.LAVA && level.getFluidState(currentPos).getAmount() < FluidState.AMOUNT_FULL)
+                    if (upBlock == Blocks.LAVA && level.getFluidState(currentPos).getAmount() == FluidState.AMOUNT_FULL)
                     {
                         blocksToTransform.add(currentPos);
                     }
@@ -53,14 +54,17 @@ public class EndstonePowder extends ModItemWithDoubleHoverText
 
             for (var ps : blocksToTransform)
             {
-                level.setBlock(ps, Blocks.END_STONE.defaultBlockState(), 11);
+                level.setBlock(ps, Blocks.END_STONE.defaultBlockState(), Block.UPDATE_ALL);
             }
 
-            if (!blocksToTransform.isEmpty())
-                new PlaySoundPacket(SoundType.STEAM).sendToPlayer((ServerPlayer) player);
+            if (player instanceof ServerPlayer serverPlayer)
+            {
+                if (!blocksToTransform.isEmpty())
+                    new PlaySoundPacket(SoundType.STEAM).sendToPlayer(serverPlayer);
 
-            var itemStack = player.getItemInHand(context.getHand());
-            itemStack.setCount(itemStack.getCount() - 1);
+                var itemStack = player.getItemInHand(context.getHand());
+                itemStack.shrink(1);
+            }
 
             return InteractionResult.CONSUME;
         }
