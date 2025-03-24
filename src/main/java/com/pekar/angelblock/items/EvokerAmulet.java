@@ -25,7 +25,7 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
 
         if (level instanceof ServerLevel serverLevel)
         {
-            var allays = (serverLevel).getLevel().getEntities((Entity)null,
+            var allays = serverLevel.getEntities((Entity)null,
                     player.getBoundingBox().inflate(EFFECTIVE_RADIUS), entity -> entity instanceof Allay);
 
             if (allays.size() < 3)
