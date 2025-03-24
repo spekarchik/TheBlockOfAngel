@@ -25,6 +25,7 @@ import java.util.Set;
 public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity>
 {
     private static final String MonsterFilterTagName = Main.MODID + ":MonsterFilter";
+    private static final String IsActivatedTagName = Main.MODID + ":IsActive";
 
     private final Set<IMonster> monstersToIgnore = new HashSet<>();
     private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
@@ -69,34 +70,37 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     {
         if (!monstersByActionItem.containsKey(item) || isInactive()) return false;
 
-        if (!player.level().isClientSide())
-        {
-            var monster = monstersByActionItem.get(item);
-            if (monstersToIgnore.contains(monster))
-                monstersToIgnore.remove(monster);
-            else
-                monstersToIgnore.add(monster);
+        var monster = monstersByActionItem.get(item);
+        if (monstersToIgnore.contains(monster))
+            monstersToIgnore.remove(monster);
+        else
+            monstersToIgnore.add(monster);
 
-            if (player instanceof ServerPlayer serverPlayer)
-            {
-                new PlaySoundPacket(SoundEvents.DRIPSTONE_BLOCK_PLACE).sendToPlayer(serverPlayer);
-            }
+        if (player instanceof ServerPlayer serverPlayer)
+        {
+            new PlaySoundPacket(SoundEvents.DRIPSTONE_BLOCK_PLACE).sendToPlayer(serverPlayer);
 
             setChanged();
         }
+
         return true;
     }
 
-    public void resetFilter(Player player)
+    public boolean resetFilter(Player player)
     {
+        if (isActivated && monstersInFilter() == 0) return false;
+
         isActivated = true;
         monstersToIgnore.clear();
-        if (!player.level().isClientSide() && player instanceof ServerPlayer serverPlayer)
+
+        if (player instanceof ServerPlayer serverPlayer)
         {
             new PlaySoundPacket(SoundEvents.MAGMA_CUBE_DEATH_SMALL).sendToPlayer(serverPlayer);
+
+            setChanged();
         }
 
-        setChanged();
+        return true;
     }
 
     public int monstersInFilter()
@@ -128,6 +132,7 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     {
         monstersToIgnore.clear();
 
+        isActivated = tag.getBoolean(IsActivatedTagName);
         byte[] array = tag.getByteArray(MonsterFilterTagName);
         for (var monsterId : array)
         {
@@ -138,6 +143,8 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     @Override
     protected void saveModTag(CompoundTag tag)
     {
+        tag.putBoolean(IsActivatedTagName, isActivated);
+
         byte[] array = new byte[monstersToIgnore.size()];
 
         int i = 0;

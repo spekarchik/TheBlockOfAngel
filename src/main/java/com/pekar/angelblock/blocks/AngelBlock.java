@@ -58,11 +58,14 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
             var isClientSide = level.isClientSide();
 
             var interactionItem = interactionItemStack.getItem();
-            if (interactionItem == Items.FLINT)
+            if (interactionItem == Items.ECHO_SHARD)
             {
+                var isReset = angelBlockEntity.resetFilter(player);
+                if (!isReset)
+                    return ItemInteractionResult.FAIL;
+
                 if (!isClientSide)
                 {
-                    angelBlockEntity.resetFilter(player);
                     setBlockStateValue(level, pos, 0);
                 }
 
@@ -70,12 +73,12 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
             }
             else
             {
-                var result = angelBlockEntity.addMonsterToFilter(interactionItem, player);
-                if (result)
+                var isAdded = angelBlockEntity.addMonsterToFilter(interactionItem, player);
+                if (isAdded)
                 {
                     setBlockStateValue(level, pos, angelBlockEntity.monstersInFilter());
                 }
-                return result ? ItemInteractionResult.sidedSuccess(isClientSide) : ItemInteractionResult.FAIL;
+                return isAdded ? ItemInteractionResult.sidedSuccess(isClientSide) : ItemInteractionResult.FAIL;
             }
         }
 
@@ -143,6 +146,8 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
         }
         else if (Screen.hasAltDown())
         {
+            tooltipComponents.add(Component.empty());
+
             for (int i = 21; i <= 28; i++)
             {
                 var component = getDescription(i, i == 21, false, false, false, i == 28);
