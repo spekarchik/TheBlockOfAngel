@@ -143,9 +143,9 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
         }
         else if (Screen.hasAltDown())
         {
-            for (int i = 21; i <= 27; i++)
+            for (int i = 21; i <= 28; i++)
             {
-                var component = getDescription(i, i == 21);
+                var component = getDescription(i, i == 21, false, false, false, i == 28);
                 if (!component.getString().isEmpty())
                     tooltipComponents.add(component);
             }
