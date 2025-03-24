@@ -13,15 +13,19 @@
 					"function": "minecraft:set_count",
 					"count": {
 						"type": "minecraft:uniform",
-						"min": 0.0,
-						"max": 2.0
+						"min": 1.0,
+						"max": 10.0
 					},
 					"add": false
 				}
 			],
 			"weight": 1,
 			"name": "angelblock:nether_bars_block"
-		}
+		},
+        {
+          "type": "minecraft:empty",
+          "weight": 1
+        }
 	  ]
 	},
     {
