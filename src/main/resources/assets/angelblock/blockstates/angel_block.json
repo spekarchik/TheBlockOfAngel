@@ -4,6 +4,7 @@
     "monsters_in_filter=1": { "model": "angelblock:block/angel_block_filtering1" },
     "monsters_in_filter=2": { "model": "angelblock:block/angel_block_filtering2" },
     "monsters_in_filter=3": { "model": "angelblock:block/angel_block_filtering3" },
-    "monsters_in_filter=4": { "model": "angelblock:block/angel_block_filtering4" }
+    "monsters_in_filter=4": { "model": "angelblock:block/angel_block_filtering4" },
+    "monsters_in_filter=5": { "model": "angelblock:block/angel_block_inactive" }
   }
 }

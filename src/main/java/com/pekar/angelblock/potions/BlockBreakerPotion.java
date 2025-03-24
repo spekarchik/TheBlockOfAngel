@@ -18,6 +18,7 @@ import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -145,33 +146,33 @@ public class BlockBreakerPotion extends ThrownPotion
 
         if (block == Blocks.DIAMOND_BLOCK)
         {
-            level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_POWDER_BLOCK.get().defaultBlockState(), 0);
+            level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_POWDER_BLOCK.get().defaultBlockState(), Block.UPDATE_NONE);
             level.destroyBlock(pos, true, source, 1);
         }
         else if (block == Blocks.COBBLESTONE)
         {
-            level.setBlock(pos, Blocks.GRAVEL.defaultBlockState(), 11);
+            level.setBlock(pos, Blocks.GRAVEL.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         else if (block == Blocks.STONE)
         {
-            level.setBlock(pos, Blocks.SAND.defaultBlockState(), 11);
+            level.setBlock(pos, Blocks.SAND.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
 //        else if (block == Blocks.GRAVEL)
 //        {
 //            level.setBlock(pos, BlockRegistry.DESTROYING_RAW_IRON.get().defaultBlockState(), 0);
 //            level.destroyBlock(pos, true, source, 1);
 //        }
-        else if (block == Blocks.LAVA /*&& utils.blocks.conditions.isUnderAirBlock(level, pos)*/)
+        else if (block == Blocks.LAVA && level.getFluidState(pos).getAmount() == FluidState.AMOUNT_FULL/*&& utils.blocks.conditions.isUnderAirBlock(level, pos)*/)
         {
-            level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), 11);
+            level.setBlock(pos, Blocks.END_STONE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         else if (block == Blocks.WATER && utils.blocks.conditions.isUnderAirBlock(level, pos) /*&& utils.blocks.conditions.isAboveWaterBlock(level, pos)*/)
         {
-            level.setBlock(pos, Blocks.ICE.defaultBlockState(), 11);
+            level.setBlock(pos, Blocks.ICE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         else if (block == Blocks.TUFF)
         {
-            level.setBlock(pos, BlockRegistry.DESTROYING_SALTPETER.get().defaultBlockState(), 0);
+            level.setBlock(pos, BlockRegistry.DESTROYING_SALTPETER.get().defaultBlockState(), Block.UPDATE_NONE);
             level.destroyBlock(pos, true, source, 1);
         }
 //        else if (block == Blocks.CRYING_OBSIDIAN)
@@ -181,7 +182,7 @@ public class BlockBreakerPotion extends ThrownPotion
 //        }
         else if (block == Blocks.GLASS)
         {
-            level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_SHARD_BLOCK.get().defaultBlockState(), 0);
+            level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_SHARD_BLOCK.get().defaultBlockState(), Block.UPDATE_NONE);
             level.destroyBlock(pos, true, source, 1);
         }
 //        else if (block == Blocks.GLOWSTONE)
@@ -191,30 +192,30 @@ public class BlockBreakerPotion extends ThrownPotion
 //        }
         else if (block == Blocks.GRANITE)
         {
-            level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), 11);
+            level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         else if (block == Blocks.GRASS_BLOCK || block == Blocks.FARMLAND)
         {
-            level.setBlock(pos, Blocks.DIRT_PATH.defaultBlockState(), Block.UPDATE_ALL);
-            level.setBlock(pos, Blocks.DIRT.defaultBlockState(), Block.UPDATE_ALL);
+            level.setBlock(pos, Blocks.DIRT_PATH.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+            level.setBlock(pos, Blocks.DIRT.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         else if (block == Blocks.ICE || block == Blocks.SNOW_BLOCK)
         {
-            level.setBlock(pos, Blocks.POWDER_SNOW.defaultBlockState(), 11);
+            level.setBlock(pos, Blocks.POWDER_SNOW.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         else if (block == Blocks.PACKED_ICE || block == Blocks.BLUE_ICE)
         {
-            level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 11);
+            level.setBlock(pos, Blocks.SNOW.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         else if (block == Blocks.SAND && utils.blocks.conditions.isNearWaterHorizontal(level, pos))
         {
-            level.setBlock(pos, Blocks.CLAY.defaultBlockState(), 0);
+            level.setBlock(pos, Blocks.CLAY.defaultBlockState(), Block.UPDATE_NONE);
             level.destroyBlock(pos, true, source, 1);
-            level.setBlock(pos, Blocks.WATER.defaultBlockState(), 0);
+            level.setBlock(pos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         else if (block == Blocks.PRISMARINE)
         {
-            level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_CRYSTALS.get().defaultBlockState(), 0);
+            level.setBlock(pos, BlockRegistry.DESTROYING_PRISMARINE_CRYSTALS.get().defaultBlockState(), Block.UPDATE_NONE);
             level.destroyBlock(pos, true, source, 1);
         }
         else
@@ -222,7 +223,7 @@ public class BlockBreakerPotion extends ThrownPotion
             var woolBlock = utils.blocks.types.getDestroyingWoolBlock(block);
             if (woolBlock != null)
             {
-                level.setBlock(pos, woolBlock.defaultBlockState(), 0);
+                level.setBlock(pos, woolBlock.defaultBlockState(), Block.UPDATE_NONE);
                 level.destroyBlock(pos, true, source, 1);
             }
         }

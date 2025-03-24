@@ -34,7 +34,7 @@ import java.util.List;
 
 public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityBlock
 {
-    private static final int MaxMonstersFilterValue = 4;
+    public static final int MaxMonstersFilterValue = 5;
     public static final IntegerProperty MONSTERS_IN_FILTER = IntegerProperty.create("monsters_in_filter", 0, MaxMonstersFilterValue);
 
     public AngelBlock()
@@ -43,7 +43,7 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
                 .strength(1.5F, 1200F)
                 .lightLevel(state -> 15));
 
-        registerDefaultState(this.stateDefinition.any().setValue(MONSTERS_IN_FILTER, 0));
+        registerDefaultState(this.stateDefinition.any().setValue(MONSTERS_IN_FILTER, MaxMonstersFilterValue));
     }
 
     @Override
@@ -108,7 +108,7 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
     {
         var stateValue = Math.min(value, MaxMonstersFilterValue);
         BlockState state = level.getBlockState(pos);
-        level.setBlock(pos, state.setValue(MONSTERS_IN_FILTER, stateValue), 3);
+        level.setBlock(pos, state.setValue(MONSTERS_IN_FILTER, stateValue), Block.UPDATE_ALL_IMMEDIATE);
     }
 
     @Override

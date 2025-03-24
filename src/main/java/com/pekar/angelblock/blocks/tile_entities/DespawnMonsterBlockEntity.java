@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends BlockEntity implements BlockEntityTicker<T>
 {
-    private int counter;
     private final Utils utils = new Utils();
 
     public DespawnMonsterBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState)
@@ -25,10 +24,9 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
     @Override
     public void tick(Level level, BlockPos pos, BlockState blockState, T entity)
     {
-        if (++counter > 15)
+        if (level.getGameTime() % 15 == 0)
         {
             onUpdate(level, entity);
-            counter = 0;
         }
     }
 
