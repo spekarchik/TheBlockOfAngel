@@ -120,7 +120,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
             var chunk = level.getChunk(pos);
             var entityType = monster.getEntityType();
-            var entity = entityType.spawn(serverLevel, interactionHandItemStack, player, pos, EntitySpawnReason.COMMAND, true, true); // TODO: Check the reason
+            var entity = entityType.spawn(serverLevel, interactionHandItemStack, player, pos, EntitySpawnReason.SPAWNER, true, true);
             if (entity != null)
                 chunk.addEntity(entity);
 

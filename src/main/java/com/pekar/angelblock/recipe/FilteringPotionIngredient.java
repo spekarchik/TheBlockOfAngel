@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -40,17 +41,17 @@ public abstract class FilteringPotionIngredient implements ICustomIngredient
     }
 
     @Override
-    public boolean test(ItemStack stack)
+    public boolean test(@NotNull ItemStack stack)
     {
         return condition.test(stack);
     }
 
     @Override
-    public Stream<ItemStack> getItems()
+    public @NotNull Stream<Holder<Item>> items()
     {
         var itemStack = new ItemStack(potionGroup);
         itemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(potionType));
-        return Stream.of(itemStack);
+        return Stream.of(itemStack.getItemHolder());
     }
 
     @Override

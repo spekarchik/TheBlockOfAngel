@@ -1,25 +1,18 @@
 package com.pekar.angelblock.armor;
 
-import com.pekar.angelblock.utils.Utils;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.equipment.ArmorType;
 
 public class FlyingArmor extends ModArmor
 {
-    protected FlyingArmor(ModArmorMaterial material, Type equipmentSlot)
+    protected FlyingArmor(ModArmorMaterial material, ArmorType equipmentSlot)
     {
         super(material, equipmentSlot);
     }
 
-    @Override
-    public boolean isEnchantable(ItemStack stack)
-    {
-        return false;
-    }
+    // TODO: Check if it's not enchantable
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book)
@@ -27,38 +20,33 @@ public class FlyingArmor extends ModArmor
         return false;
     }
 
-    @Override
-    public boolean canElytraFly(ItemStack stack, LivingEntity entity)
-    {
-        if (type != Type.CHESTPLATE) return false;
-        if (entity.hasEffect(MobEffects.SLOW_FALLING)) return false;
-        if (Utils.instance.dimension.isNether(entity.level().dimension()) || entity.isInWaterRainOrBubble()) return false;
-
-        var mainHandItemStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
-        var mainHandItem = mainHandItemStack.getItem();
-
-        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
-                .equals(ArmorRegistry.FLYING_HELMET.get().getArmorFamilyName());
-        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
-                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getArmorFamilyName());
-        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
-                .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
-        boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
-                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getArmorFamilyName());
-
-        int maxDamageToFly = stack.getMaxDamage() / 2;
-        int chestDamage = stack.getDamageValue();
-        boolean isFullArmorSetPutOn = isFlyingBoots && isFlyingLeggings && isFlyingChestplate && isFlyingHelmet;
-
-        return isFullArmorSetPutOn && chestDamage < maxDamageToFly
-                && !mainHandItem.getName(mainHandItemStack).equals(Items.FIREWORK_ROCKET.getName(mainHandItemStack));
-    }
-
-    @Override
-    public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
-    {
-        return canElytraFly(stack, entity);
-    }
+    // TODO: Add Flying behavior
+//    @Override
+//    public boolean canElytraFly(ItemStack stack, LivingEntity entity)
+//    {
+//        if (type != Type.CHESTPLATE) return false;
+//        if (entity.hasEffect(MobEffects.SLOW_FALLING)) return false;
+//        if (Utils.instance.dimension.isNether(entity.level().dimension()) || entity.isInWaterRainOrBubble()) return false;
+//
+//        var mainHandItemStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
+//        var mainHandItem = mainHandItemStack.getItem();
+//
+//        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
+//                .equals(ArmorRegistry.FLYING_HELMET.get().getArmorFamilyName());
+//        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
+//                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getArmorFamilyName());
+//        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
+//                .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
+//        boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
+//                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getArmorFamilyName());
+//
+//        int maxDamageToFly = stack.getMaxDamage() / 2;
+//        int chestDamage = stack.getDamageValue();
+//        boolean isFullArmorSetPutOn = isFlyingBoots && isFlyingLeggings && isFlyingChestplate && isFlyingHelmet;
+//
+//        return isFullArmorSetPutOn && chestDamage < maxDamageToFly
+//                && !mainHandItem.getName(mainHandItemStack).equals(Items.FIREWORK_ROCKET.getName(mainHandItemStack));
+//    }
 
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)

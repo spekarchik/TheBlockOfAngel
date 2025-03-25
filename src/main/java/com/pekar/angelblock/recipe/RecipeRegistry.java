@@ -2,10 +2,6 @@ package com.pekar.angelblock.recipe;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.items.ItemRegistry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
@@ -49,8 +45,7 @@ public class RecipeRegistry
         //var input = new ItemStack(Items.POTION);
         //input.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.SLOW_FALLING));
         var output = new ItemStack(ItemRegistry.SOARING_SPORE_ESSENCE.get());
-        TagKey<Item> froglightsTag = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("minecraft", "froglights"));
-        var recipe = new BrewingRecipe(SLOW_FALLING_POTION, Ingredient.of(froglightsTag), output);
+        var recipe = new BrewingRecipe(SLOW_FALLING_POTION, Ingredient.of(Items.OCHRE_FROGLIGHT, Items.VERDANT_FROGLIGHT, Items.PEARLESCENT_FROGLIGHT), output);
 
         builder.addRecipe(recipe);
     }

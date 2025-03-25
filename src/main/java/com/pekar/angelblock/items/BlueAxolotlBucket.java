@@ -9,8 +9,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -36,13 +36,13 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
 
         if (level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer)
         {
-            var axolotl = EntityType.AXOLOTL.create(serverLevel);
+            var axolotl = EntityType.AXOLOTL.create(serverLevel, EntitySpawnReason.BUCKET);
             if (axolotl != null)
             {
                 axolotl.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
                 axolotl.setVariant(Axolotl.Variant.BLUE);
                 axolotl.setBaby(true);
-                axolotl.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(new BlockPos(pos)), MobSpawnType.BUCKET, null);
+                axolotl.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(new BlockPos(pos)), EntitySpawnReason.BUCKET, null);
                 var result = serverLevel.addFreshEntity(axolotl);
 
                 if (result)
@@ -54,7 +54,7 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
             }
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return sidedSuccess(level.isClientSide());
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.pekar.angelblock.explosions.ExplosionNoHurtEntityDamageCalculator;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -48,20 +49,22 @@ public class BlockBreakerPotion extends ThrownPotion
     protected void onHit(HitResult result)
     {
         if (shooter == null) return;
+        var level = shooter.level();
+        if (!(level instanceof ServerLevel serverLevel)) return;
 
         var location = result.getLocation();
         BlockPos pos = new BlockPos((int) location.x, (int) location.y, (int) location.z);
 
-        var targetEntities = shooter.level().getEntities((Entity)null, new AABB(pos).inflate(3),
+        var targetEntities = level.getEntities((Entity)null, new AABB(pos).inflate(3),
                 e -> e instanceof LivingEntity).stream().map(x -> (LivingEntity)x).toList();
 
-        shooter.level().explode(this, null, explosionCalculator, pos.getX(), pos.getY(), pos.getZ(), 2.0F, false, Level.ExplosionInteraction.NONE);
-        applyKnockback(shooter.level(), location, 1.0F);
+        level.explode(this, null, explosionCalculator, pos.getX(), pos.getY(), pos.getZ(), 2.0F, false, Level.ExplosionInteraction.NONE);
+        applyKnockback(level, location, 1.0F);
 
         for (var target : targetEntities)
         {
             if (!(target instanceof Player))
-                destroyDiamondArmor(target);
+                destroyDiamondArmor(serverLevel, target);
         }
 
         super.onHit(result);
@@ -110,7 +113,7 @@ public class BlockBreakerPotion extends ThrownPotion
         }
     }
 
-    private void destroyDiamondArmor(LivingEntity entity)
+    private void destroyDiamondArmor(ServerLevel serverLevel, LivingEntity entity)
     {
         for (var slot : EquipmentSlot.values())
         {
@@ -119,7 +122,7 @@ public class BlockBreakerPotion extends ThrownPotion
             var itemStack = entity.getItemBySlot(slot);
             if (!itemStack.isEmpty() && itemStack.getItem() instanceof ArmorItem armorItem)
             {
-                if (armorItem.getMaterial().equals(ArmorMaterials.DIAMOND))
+                if (armorItem.getDefaultInstance().is(ItemRegistry.DIAMOND_ARMOR_TAG))
                 {
                     entity.setItemSlot(slot, ItemStack.EMPTY);
                     int itemCount = switch (slot)
@@ -132,7 +135,7 @@ public class BlockBreakerPotion extends ThrownPotion
                     };
 
                     var dropsNumber = random.nextIntBetweenInclusive(itemCount / 3, itemCount);
-                    entity.spawnAtLocation(new ItemStack(ItemRegistry.DIAMOND_POWDER.get(), dropsNumber), 1.0F);
+                    entity.spawnAtLocation(serverLevel, new ItemStack(ItemRegistry.DIAMOND_POWDER.get(), dropsNumber), 1.0F);
                 }
             }
         }

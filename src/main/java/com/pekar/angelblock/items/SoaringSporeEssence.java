@@ -1,7 +1,6 @@
 package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -48,7 +47,7 @@ public class SoaringSporeEssence extends ModItemWithMultipleHoverText
                 stack.shrink(1);
         }
 
-        return InteractionResult.sidedSuccess(isClientSide);
+        return sidedSuccess(isClientSide);
     }
 
     @Override

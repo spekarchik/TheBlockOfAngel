@@ -1,7 +1,6 @@
 package com.pekar.angelblock.potions;
 
 import com.pekar.angelblock.Main;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -18,13 +17,13 @@ public class HeavyJumpEffect extends MobEffect
         super(MobEffectCategory.HARMFUL, 0x5A4D41);
 
         this.addAttributeModifier(
-                BuiltInRegistries.ATTRIBUTE.getHolderOrThrow(Attributes.JUMP_STRENGTH.getKey()),
+                Attributes.JUMP_STRENGTH,
                 JUMP_MODIFIER_ID,
                 -0.15,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         this.addAttributeModifier(
-                BuiltInRegistries.ATTRIBUTE.getHolderOrThrow(Attributes.MOVEMENT_SPEED.getKey()),
+                Attributes.MOVEMENT_SPEED,
                 SLOW_MOTION_MODIFIER_ID,
                 -0.15,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);

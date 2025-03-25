@@ -24,14 +24,15 @@ public class SuperArmor extends ModArmor
         return leggings.getArmorFamilyName().equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorFamilyName());
     }
 
-    @Override
-    public boolean isEnderMask(ItemStack stack, Player player, EnderMan endermanEntity)
-    {
-        var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
-        var helmetItem = itemStack.getItem();
-        if (!(helmetItem instanceof ModArmor helmet)) return false;
-        return helmet.getArmorFamilyName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
-    }
+    // TODO: Add the behavior
+//    @Override
+//    public boolean isEnderMask(ItemStack stack, Player player, EnderMan endermanEntity)
+//    {
+//        var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
+//        var helmetItem = itemStack.getItem();
+//        if (!(helmetItem instanceof ModArmor helmet)) return false;
+//        return helmet.getArmorFamilyName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
+//    }
 
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)

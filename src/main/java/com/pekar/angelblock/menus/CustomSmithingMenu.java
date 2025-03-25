@@ -4,11 +4,13 @@ import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.armor.ModArmorMaterial;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.tools.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SmithingMenu;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.level.block.Blocks;
 
 public class CustomSmithingMenu extends SmithingMenu
@@ -202,17 +204,14 @@ public class CustomSmithingMenu extends SmithingMenu
             }
             else if (mainItem.getItem() instanceof ArmorItem armorItem && result.getItem() instanceof ArmorItem resultAsArmorItem)
             {
-                if (armorItem.getMaterial().equals(ArmorMaterials.NETHERITE) && resultAsArmorItem.getMaterial().equals(ArmorMaterials.DIAMOND))
+                if (armorItem.getDefaultInstance().is(ItemRegistry.NETHERITE_ARMOR_TAG) && resultAsArmorItem.getDefaultInstance().is(ItemRegistry.DIAMOND_ARMOR_TAG))
                 {
                     player.getInventory().add(new ItemStack(Items.NETHERITE_INGOT));
                 }
             }
-            else if (mainItem.getItem() instanceof TieredItem tieredItem && result.getItem() instanceof TieredItem resultAsTieredItem)
+            else if (mainItem.getItem().getDefaultInstance().is(ItemRegistry.NETHERITE_TOOL_TAG) && result.getItem().getDefaultInstance().is(ItemRegistry.DIAMOND_TOOL_TAG))
             {
-                if (tieredItem.getTier().equals(Tiers.NETHERITE) && resultAsTieredItem.getTier().equals(Tiers.DIAMOND))
-                {
-                    player.getInventory().add(new ItemStack(Items.NETHERITE_INGOT));
-                }
+                player.getInventory().add(new ItemStack(Items.NETHERITE_INGOT));
             }
         }
 
