@@ -5,7 +5,6 @@ import com.pekar.angelblock.tools.properties.SuperMaterialProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class SuperShovel extends EnhancedShovel
 {
-    public SuperShovel(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    public SuperShovel(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties, new SuperMaterialProperties());
     }

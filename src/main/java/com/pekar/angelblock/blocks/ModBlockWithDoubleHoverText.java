@@ -1,20 +1,16 @@
 package com.pekar.angelblock.blocks;
 
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
-public class ModBlockWithDoubleHoverText extends Block
+public class ModBlockWithDoubleHoverText extends ModBlock
 {
-    protected final Utils utils = new Utils();
-
     public ModBlockWithDoubleHoverText(Properties properties)
     {
         super(properties);

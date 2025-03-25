@@ -23,7 +23,7 @@ import java.util.List;
 
 public class EndRod extends AmethystRod
 {
-    public EndRod(Tier material, boolean isMagnetic, Properties properties)
+    public EndRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
     }

@@ -15,7 +15,7 @@ public abstract class ModRodTool extends DiggerItem implements IModTool
     }
 
     @Override
-    public TieredItem getTool()
+    public IModTool getTool()
     {
         return this;
     }

@@ -5,7 +5,6 @@ import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
@@ -13,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class EnhancedAxe extends ModAxe
 {
-    public EnhancedAxe(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public EnhancedAxe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
         super(material, attackDamage, attackSpeed, properties, materialProperties);
     }

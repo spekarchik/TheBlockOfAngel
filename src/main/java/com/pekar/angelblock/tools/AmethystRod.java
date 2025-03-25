@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
@@ -17,7 +16,7 @@ import java.util.List;
 
 public class AmethystRod extends FireRod
 {
-    public AmethystRod(Tier material, boolean isMagnetic, Properties properties)
+    public AmethystRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
     }

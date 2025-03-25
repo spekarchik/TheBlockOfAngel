@@ -11,14 +11,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 
 import java.util.List;
 
 public class AngelRod extends EndRod
 {
-    public AngelRod(Tier material, boolean isMagnetic, Properties properties)
+    public AngelRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
     }
@@ -78,7 +77,7 @@ public class AngelRod extends EndRod
                 : InteractionHand.OFF_HAND;
         var itemStack = hand == InteractionHand.MAIN_HAND ? mainHandItemStack : offHandItemStack;
 
-        if (player.isShiftKeyDown() && blockState.isSolidRender(level, pos))
+        if (player.isShiftKeyDown() && blockState.isSolidRender()) // TODO: blockState.isSolidRender()
         {
             if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
             {
@@ -103,7 +102,7 @@ public class AngelRod extends EndRod
                 if (itemCount > 0)
                     itemStack.setCount(itemCount - 1);
 
-                return InteractionResult.sidedSuccess(isClientSide);
+                return getToolInteractionResult(true, isClientSide);
             }
         }
 

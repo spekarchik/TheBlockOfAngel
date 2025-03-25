@@ -24,7 +24,7 @@ import java.util.List;
 
 public class Planter extends WorkRod
 {
-    public Planter(Tier material, Properties properties)
+    public Planter(ModToolMaterial material, Properties properties)
     {
         super(material, properties);
     }
@@ -59,7 +59,7 @@ public class Planter extends WorkRod
 
         var result = getToolInteractionResult(success, level.isClientSide());
 
-        if (result == InteractionResult.CONSUME || result == InteractionResult.CONSUME_PARTIAL)
+        if (result == InteractionResult.SUCCESS || result == InteractionResult.SUCCESS_SERVER)
         {
             causePlayerExhaustion(player);
         }

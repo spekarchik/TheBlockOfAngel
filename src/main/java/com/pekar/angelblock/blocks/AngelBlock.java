@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -47,13 +47,13 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         var blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof AngelBlockEntity angelBlockEntity)
         {
             var interactionItemStack = player.getItemInHand(hand);
-            if (interactionItemStack.isEmpty()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            if (interactionItemStack.isEmpty()) return InteractionResult.FAIL;
 
             var isClientSide = level.isClientSide();
 
@@ -62,14 +62,14 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
             {
                 var isReset = angelBlockEntity.resetFilter(player);
                 if (!isReset)
-                    return ItemInteractionResult.FAIL;
+                    return InteractionResult.FAIL;
 
                 if (!isClientSide)
                 {
                     setBlockStateValue(level, pos, 0);
                 }
 
-                return ItemInteractionResult.sidedSuccess(isClientSide);
+                return getInteractionSidedSuccess(isClientSide);
             }
             else
             {
@@ -78,11 +78,11 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
                 {
                     setBlockStateValue(level, pos, angelBlockEntity.monstersInFilter());
                 }
-                return isAdded ? ItemInteractionResult.sidedSuccess(isClientSide) : ItemInteractionResult.FAIL;
+                return isAdded ? getInteractionSidedSuccess(isClientSide) : InteractionResult.FAIL;
             }
         }
 
-        return ItemInteractionResult.FAIL;
+        return InteractionResult.FAIL;
     }
 
     @Nullable

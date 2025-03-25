@@ -5,12 +5,15 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -152,7 +155,7 @@ public class NetherBarsBlock extends ModBlockWithDoubleHoverText
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos)
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random)
     {
         boolean north = connectsTo(level.getBlockState(pos.north()), level, pos);
         boolean south = connectsTo(level.getBlockState(pos.south()), level, pos);
@@ -165,9 +168,9 @@ public class NetherBarsBlock extends ModBlockWithDoubleHoverText
                 .setValue(EAST, east);
     }
 
-    private boolean connectsTo(BlockState state, LevelAccessor level, BlockPos pos)
+    private boolean connectsTo(BlockState state, LevelReader level, BlockPos pos)
     {
-        return (state.getBlock() instanceof NetherBarsBlock) || (state.isSolidRender(level, pos));
+        return (state.getBlock() instanceof NetherBarsBlock) || (state.isSolidRender()); // TODO: state.isSolidRender()
     }
 
     @Override

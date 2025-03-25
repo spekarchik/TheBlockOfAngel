@@ -59,9 +59,9 @@ public class PlayerInteractionEvents implements IEventHandler
             var weapon = attacker.getWeaponItem();
             if (weapon != null && weapon.getItem() instanceof IModTool modTool)
             {
-                if (modTool.hasExtraLowEfficiencyDurability(weapon))
+                if (modTool.hasExtraLowEfficiencyDamage(weapon))
                     event.setNewDamage(event.getNewDamage() * 0.4F);
-                else if (modTool.hasLowEfficiencyDurability(weapon))
+                else if (modTool.hasLowEfficiencyDamage(weapon))
                     event.setNewDamage(event.getNewDamage() * 0.6F);
             }
         }

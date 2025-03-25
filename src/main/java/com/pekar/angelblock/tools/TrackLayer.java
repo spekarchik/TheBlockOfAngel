@@ -21,7 +21,7 @@ import java.util.List;
 
 public class TrackLayer extends WorkRod
 {
-    public TrackLayer(Tier material, Properties properties)
+    public TrackLayer(ModToolMaterial material, Properties properties)
     {
         super(material, properties);
     }
@@ -44,7 +44,7 @@ public class TrackLayer extends WorkRod
 
         var result = getToolInteractionResult(success, level.isClientSide());
 
-        if (result == InteractionResult.CONSUME || result == InteractionResult.CONSUME_PARTIAL)
+        if (result == InteractionResult.SUCCESS || result == InteractionResult.SUCCESS_SERVER)
         {
             causePlayerExhaustion(player);
         }
@@ -353,7 +353,7 @@ public class TrackLayer extends WorkRod
     {
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
-        return blockState.isSolidRender(level, pos) || block instanceof TransparentBlock;
+        return blockState.isSolidRender() || block instanceof TransparentBlock;
     }
 
     @NotNull

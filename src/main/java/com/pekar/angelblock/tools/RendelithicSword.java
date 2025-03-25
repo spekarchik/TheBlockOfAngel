@@ -10,7 +10,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class RendelithicSword extends ModSword
 {
-    public RendelithicSword(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public RendelithicSword(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties);
     }

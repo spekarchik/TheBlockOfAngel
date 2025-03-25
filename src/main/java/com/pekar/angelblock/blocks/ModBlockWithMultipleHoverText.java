@@ -1,14 +1,9 @@
 package com.pekar.angelblock.blocks;
 
-import com.pekar.angelblock.utils.Utils;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.level.block.Block;
 
-public class ModBlockWithMultipleHoverText extends Block
+public class ModBlockWithMultipleHoverText extends ModBlockWithDoubleHoverText
 {
-    protected final Utils utils = new Utils();
-
     public ModBlockWithMultipleHoverText(Properties properties)
     {
         super(properties);
@@ -39,10 +34,5 @@ public class ModBlockWithMultipleHoverText extends Block
     protected MutableComponent getDescription(int lineNumber, boolean isHeader)
     {
         return getDescription(lineNumber, isHeader, false);
-    }
-
-    private MutableComponent getDisplayName(int lineNumber)
-    {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
     }
 }

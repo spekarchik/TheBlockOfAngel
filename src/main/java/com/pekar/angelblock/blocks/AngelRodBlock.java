@@ -60,13 +60,13 @@ public class AngelRodBlock extends ModBlockWithDoubleHoverText implements Entity
     }
 
     @Override
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext)
+    public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext)
     {
         return Shapes.create(0.328125, 0.0, 0.46875, 0.671875, 1.21875, 0.53125);
     }
 
     @Override
-    public Item asItem()
+    public @NotNull Item asItem()
     {
         return ToolRegistry.ANGEL_ROD.get();
     }

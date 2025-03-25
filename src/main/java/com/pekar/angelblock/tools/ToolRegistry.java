@@ -183,14 +183,6 @@ public class ToolRegistry
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
 
-    // + морской кристалл - Marine Crystal - древний страж 50%
-    // + огненный камень - Flame Stone - сундуки крепости 10%
-    // + жемчужина силы - Pearl of Strength - заброшенная шахта
-    // + зеленый алмаз жизни - Green Diamond of Bios - алмазная руда + древний посох = зеленая алмазная руда
-    // + кристалл Края - End Crystal - сундуки города Края
-    // + супер кристалл - Super Crystal - крафт
-    // + древний посох - Ancient Rod - храм в джунглях 10%
-
     public static void initStatic()
     {
         // just to initialize static members

@@ -14,7 +14,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -28,11 +27,13 @@ import java.util.List;
 public class ModRod extends ModRodTool implements IModTool
 {
     private final boolean isMagnetic;
+    private final ModToolMaterial material;
 
-    public ModRod(Tier material, boolean isMagnetic, Properties properties)
+    public ModRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
-        super(material, properties);
+        super(material, material.getIncorrectBlocksForDrops(), 0, -3.0F, properties);
         this.isMagnetic = isMagnetic;
+        this.material = material;
     }
 
     @Override
@@ -82,6 +83,12 @@ public class ModRod extends ModRodTool implements IModTool
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
         return false;
+    }
+
+    @Override
+    public ModToolMaterial getMaterial()
+    {
+        return material;
     }
 
     @Override

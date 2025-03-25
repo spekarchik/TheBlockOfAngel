@@ -5,10 +5,11 @@ import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,23 +41,23 @@ public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityB
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         var blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof DevilBlockEntity devilBlockEntity)
         {
             var interactionItemStack = player.getItemInHand(hand);
-            if (interactionItemStack.isEmpty()) return ItemInteractionResult.FAIL;
+            if (interactionItemStack.isEmpty()) return InteractionResult.FAIL;
 
             var interactionItem = interactionItemStack.getItem();
 
             if (!level.isClientSide())
                 devilBlockEntity.spawnMonster(interactionItem, player, interactionItemStack);
 
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            return getInteractionSidedSuccess(level.isClientSide());
         }
 
-        return ItemInteractionResult.FAIL;
+        return InteractionResult.FAIL;
     }
 
     @Nullable
@@ -67,10 +68,10 @@ public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityB
     }
 
     @Override
-    public void onBlockExploded(BlockState state, Level world, BlockPos pos, Explosion explosion)
+    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion)
     {
-        disposeBlockEntity(world, pos);
-        super.onBlockExploded(state, world, pos, explosion);
+        disposeBlockEntity(level, pos);
+        super.onBlockExploded(state, level, pos, explosion);
     }
 
     private void disposeBlockEntity(Level world, BlockPos pos)

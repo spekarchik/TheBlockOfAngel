@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +23,7 @@ import java.util.function.Function;
 
 public class MagneticRod extends ModRod
 {
-    public MagneticRod(Tier material, boolean isMagnetic, Properties properties)
+    public MagneticRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
     }
@@ -34,7 +33,7 @@ public class MagneticRod extends ModRod
     {
         var result = useOnInternal(context);
         if (result == InteractionResult.PASS) return InteractionResult.FAIL;
-        if (result == InteractionResult.CONSUME || result == InteractionResult.CONSUME_PARTIAL)
+        if (result == InteractionResult.SUCCESS || result == InteractionResult.SUCCESS_SERVER)
         {
             var player = context.getPlayer();
             causePlayerExhaustion(player);

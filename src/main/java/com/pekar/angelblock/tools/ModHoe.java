@@ -26,16 +26,18 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
+    private final ModToolMaterial material;
 
-    public static ModHoe createPrimary(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public static ModHoe createPrimary(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
     {
         return new ModHoe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
     }
 
-    public ModHoe(Tier material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public ModHoe(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.attributes(HoeItem.createAttributes(material, attackDamage, attackSpeed)));
+        super(material.getVanillaMaterial(), attackDamage, attackSpeed, properties);
         this.materialProperties = materialProperties;
+        this.material = material;
     }
 
     @Override
@@ -131,6 +133,12 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
     }
 
     @Override
+    public ModToolMaterial getMaterial()
+    {
+        return material;
+    }
+
+    @Override
     public float getDestroySpeed(ItemStack stack, BlockState state)
     {
         if (hasCriticalDamage(stack)) return 1F;
@@ -138,7 +146,7 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
     }
 
     @Override
-    public TieredItem getTool()
+    public IModTool getTool()
     {
         return this;
     }

@@ -20,16 +20,18 @@ public class ModShovel extends ShovelItem implements IModToolEnhanceable
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
+    private final ModToolMaterial material;
 
-    public static ModShovel createPrimary(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    public static ModShovel createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         return new ModShovel(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
     }
 
-    public ModShovel(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public ModShovel(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.attributes(ShovelItem.createAttributes(material, attackDamage, attackSpeed)));
+        super(material.getVanillaMaterial(), attackDamage, attackSpeed, properties);
         this.materialProperties = materialProperties;
+        this.material = material;
         FLATTENABLES.put(Blocks.FARMLAND, Blocks.DIRT_PATH.defaultBlockState());
     }
 
@@ -58,7 +60,7 @@ public class ModShovel extends ShovelItem implements IModToolEnhanceable
     }
 
     @Override
-    public final TieredItem getTool()
+    public final IModTool getTool()
     {
         return this;
     }
@@ -74,6 +76,12 @@ public class ModShovel extends ShovelItem implements IModToolEnhanceable
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
         return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
+    }
+
+    @Override
+    public ModToolMaterial getMaterial()
+    {
+        return material;
     }
 
     @Override

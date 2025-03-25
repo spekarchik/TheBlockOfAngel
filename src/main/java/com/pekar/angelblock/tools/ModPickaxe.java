@@ -16,16 +16,18 @@ public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
+    private final ModToolMaterial material;
 
-    public static ModPickaxe createPrimary(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public static ModPickaxe createPrimary(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
     {
         return new ModPickaxe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
     }
 
-    public ModPickaxe(Tier material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public ModPickaxe(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.attributes(PickaxeItem.createAttributes(material, attackDamage, attackSpeed)));
+        super(material.getVanillaMaterial(), attackDamage, attackSpeed, properties);
         this.materialProperties = materialProperties;
+        this.material = material;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable
     }
 
     @Override
-    public TieredItem getTool()
+    public IModTool getTool()
     {
         return this;
     }
@@ -64,6 +66,12 @@ public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
         return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
+    }
+
+    @Override
+    public ModToolMaterial getMaterial()
+    {
+        return material;
     }
 
     @Override

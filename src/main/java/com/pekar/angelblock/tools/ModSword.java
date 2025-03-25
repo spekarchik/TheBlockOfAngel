@@ -26,10 +26,12 @@ public class ModSword extends SwordItem implements IModTool
     private static final int WebLifeTime = 1200;
     private static final int TimeThreshold = 600;
     protected final Utils utils = new Utils();
+    private final ModToolMaterial material;
 
-    public ModSword(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public ModSword(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
     {
-        super(material, properties.attributes(SwordItem.createAttributes(material, attackDamage, attackSpeed)));
+        super(material.getVanillaMaterial(), attackDamage, attackSpeed, properties);
+        this.material = material;
     }
 
     @Override
@@ -43,6 +45,12 @@ public class ModSword extends SwordItem implements IModTool
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
         return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
+    }
+
+    @Override
+    public ModToolMaterial getMaterial()
+    {
+        return material;
     }
 
     @Override
@@ -308,7 +316,7 @@ public class ModSword extends SwordItem implements IModTool
     }
 
     @Override
-    public TieredItem getTool()
+    public IModTool getTool()
     {
         return this;
     }

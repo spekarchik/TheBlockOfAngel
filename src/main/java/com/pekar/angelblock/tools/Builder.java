@@ -11,7 +11,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -22,7 +21,7 @@ import java.util.List;
 
 public class Builder extends WorkRod
 {
-    public Builder(Tier material, Properties properties)
+    public Builder(ModToolMaterial material, Properties properties)
     {
         super(material, properties);
     }
@@ -48,7 +47,7 @@ public class Builder extends WorkRod
 
         var result = getToolInteractionResult(success, level.isClientSide());
 
-        if (result == InteractionResult.CONSUME || result == InteractionResult.CONSUME_PARTIAL)
+        if (result == InteractionResult.SUCCESS_SERVER || result == InteractionResult.SUCCESS)
         {
             causePlayerExhaustion(player);
         }
@@ -220,7 +219,7 @@ public class Builder extends WorkRod
     {
         var block = blockState.getBlock();
         return !blockState.hasBlockEntity() && !(block instanceof FallingBlock)
-                && (blockState.isSolidRender(level, pos) || utils.blocks.types.isGlassBlock(block));
+                && (blockState.isSolidRender() || utils.blocks.types.isGlassBlock(block)); // TODO: Check if blockState.isSolidRender() works
     }
 
     @Override

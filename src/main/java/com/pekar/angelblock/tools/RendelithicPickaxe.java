@@ -5,7 +5,6 @@ import com.pekar.angelblock.tools.properties.RendelithicMaterialProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public class RendelithicPickaxe extends EnhancedPickaxe
 {
-    public RendelithicPickaxe(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public RendelithicPickaxe(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties, new RendelithicMaterialProperties());
     }

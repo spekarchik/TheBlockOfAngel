@@ -20,9 +20,9 @@ public class PlayerDataEvents implements IEventHandler
         var mainHandItem = entityPlayer.getMainHandItem();
         if (!mainHandItem.isEmpty() && mainHandItem.getItem() instanceof IModTool modTool)
         {
-            if (modTool.hasExtraLowEfficiencyDurability(mainHandItem))
+            if (modTool.hasExtraLowEfficiencyDamage(mainHandItem))
                 event.setNewSpeed(event.getNewSpeed() * 0.2F);
-            else if (modTool.hasLowEfficiencyDurability(mainHandItem))
+            else if (modTool.hasLowEfficiencyDamage(mainHandItem))
                 event.setNewSpeed(event.getNewSpeed() * 0.5F);
         }
 

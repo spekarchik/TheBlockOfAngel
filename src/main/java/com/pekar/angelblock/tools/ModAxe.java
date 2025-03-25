@@ -16,16 +16,18 @@ public class ModAxe extends AxeItem implements IModToolEnhanceable
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
+    private final ModToolMaterial material;
 
-    public static ModAxe createPrimary(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    public static ModAxe createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         return new ModAxe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
     }
 
-    public ModAxe(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public ModAxe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.attributes(AxeItem.createAttributes(material, attackDamage, attackSpeed)));
+        super(material.getVanillaMaterial(), attackDamage, attackSpeed, properties);
         this.materialProperties = materialProperties;
+        this.material = material;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class ModAxe extends AxeItem implements IModToolEnhanceable
     }
 
     @Override
-    public TieredItem getTool()
+    public IModTool getTool()
     {
         return this;
     }
@@ -57,6 +59,12 @@ public class ModAxe extends AxeItem implements IModToolEnhanceable
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
         return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
+    }
+
+    @Override
+    public ModToolMaterial getMaterial()
+    {
+        return material;
     }
 
     @Override

@@ -5,7 +5,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class LimonitePrimarySword extends ModSword
 {
-    public LimonitePrimarySword(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public LimonitePrimarySword(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties);
     }

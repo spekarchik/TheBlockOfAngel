@@ -1,6 +1,5 @@
 package com.pekar.angelblock.blocks;
 
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.valueproviders.IntProvider;

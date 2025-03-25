@@ -1,53 +1,14 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-public interface IModTool extends IModDescriptionItem
+public interface IModTool extends IModDescriptionItem, IDamageable, IToolService
 {
-    default boolean hasCriticalDamage(ItemStack stack)
-    {
-        return stack.getMaxDamage() - stack.getDamageValue() <= getCriticalDurability();
-    }
-
-    default int getCriticalDurability()
-    {
-        return 2;
-    }
-
-    default boolean hasLowEfficiencyDurability(ItemStack stack)
-    {
-        return stack.getMaxDamage() - stack.getDamageValue() <= getLowEfficiencyDurability(stack.getMaxDamage());
-    }
-
-    default boolean hasExtraLowEfficiencyDurability(ItemStack stack)
-    {
-        return stack.getMaxDamage() - stack.getDamageValue() <= getExtraLowEfficiencyDurability(stack.getMaxDamage());
-    }
-
-    default int getLowEfficiencyDurability(int maxDurability)
-    {
-        return maxDurability / 3;
-    }
-
-    default int getExtraLowEfficiencyDurability(int maxDurability)
-    {
-        return maxDurability / 5;
-    }
-
     default boolean isTool()
     {
         return false;
@@ -70,6 +31,10 @@ public interface IModTool extends IModDescriptionItem
 
     IModTool getTool();
 
+    boolean isCorrectToolForDrops(ItemStack stack, BlockState state);
+
+    String getDescriptionId();
+
     ModToolMaterial getMaterial();
 
     default String getMaterialName()
@@ -82,73 +47,15 @@ public interface IModTool extends IModDescriptionItem
         return "";
     }
 
-    default void damageMainHandItem(int amount, LivingEntity livingEntity)
-    {
-        var itemStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
-        var durability = itemStack.getMaxDamage() - itemStack.getDamageValue();
-        var modifiedAmount = durability > amount ? amount : durability - 1;
-
-        if (itemStack.getItem().equals(this))
-            itemStack.hurtAndBreak(modifiedAmount, livingEntity, EquipmentSlot.MAINHAND);
-    }
-
-    default void damageOffHandItem(int amount, LivingEntity livingEntity)
-    {
-        var itemStack = livingEntity.getItemInHand(InteractionHand.OFF_HAND);
-        itemStack.hurtAndBreak(amount, livingEntity, EquipmentSlot.OFFHAND);
-    }
-
-    default void damageMainHandItemIfSurvivalIgnoreClient(Player player, Level level)
-    {
-        if (level.isClientSide()) return;
-
-        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.isCreative())
-        {
-            damageMainHandItem(1, player);
-        }
-    }
-
-    default void damageOffHandItemIfSurvivalIgnoreClient(Player player, Level level)
-    {
-        if (level.isClientSide()) return;
-
-        if (player instanceof ServerPlayer serverPlayer && !serverPlayer.isCreative())
-        {
-            damageOffHandItem(1, player);
-        }
-    }
-
     default boolean isToolEffective(LivingEntity entityLiving, BlockPos pos)
     {
         BlockState blockState = entityLiving.level().getBlockState(pos);
         return getTool().isCorrectToolForDrops(entityLiving.getMainHandItem(), blockState);
     }
 
-    default void setBlock(Player player, BlockPos pos, Block block)
-    {
-        player.level().setBlock(pos, block.defaultBlockState(), 11);
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
-    }
-
     @Override
     default MutableComponent getDisplayName(int lineNumber)
     {
         return Component.translatable(getTool().getDescriptionId() + ".desc" + lineNumber);
-    }
-
-    default InteractionResult getToolInteractionResult(boolean applied, boolean isClientSide)
-    {
-        if (!applied) return InteractionResult.PASS;
-        return isClientSide ? InteractionResult.SUCCESS_NO_ITEM_USED: InteractionResult.CONSUME_PARTIAL;
-    }
-
-    default void causePlayerExhaustion(Player player)
-    {
-        if (player != null)
-        {
-            var foodData = player.getFoodData();
-            foodData.setSaturation(foodData.getSaturationLevel() * 0.5F);
-            player.causeFoodExhaustion(0.5F);
-        }
     }
 }

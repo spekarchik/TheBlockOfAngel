@@ -9,7 +9,7 @@ public class OnGroundMonsterSpawnStrategy implements ISpawnStrategy
     @Override
     public boolean canSpawnAtPos(Level level, BlockPos pos, Player player)
     {
-        return level.getBlockState(pos).isSolidRender(level, pos)
+        return level.getBlockState(pos).isSolidRender()
                 && Math.abs(pos.getY() - player.getOnPos().getY()) <= 5
                 && hasSpaceAbove(level, pos);
     }
