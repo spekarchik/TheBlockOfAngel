@@ -1,7 +1,10 @@
 package com.pekar.angelblock.potions;
 
 import com.pekar.angelblock.Main;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -29,7 +32,7 @@ public class PotionRegistry
     public static final Holder<MobEffect> ARMOR_HEAVY_JUMP_EFFECT = registerMobEffect("armor_heavy_jump_effect", HeavyJumpEffect::new);
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownPotion>> BLOCK_BREAKER_POTION =
-            registerThrownPotion("block_breaker_potion", BlockBreakerPotion::new);
+            registerThrownPotion("block_breaker_potion", BlockBreakerPotion::new); // TODO: Check if works
 
 
     public static void initStatic()
@@ -49,8 +52,11 @@ public class PotionRegistry
 
     private static DeferredHolder<EntityType<?>, EntityType<ThrownPotion>> registerThrownPotion(String name, EntityType.EntityFactory<ThrownPotion> potionFactory)
     {
+        var location = Utils.instance.resources.createResourceLocation(Main.MODID, name);
+        var resourceKey = ResourceKey.create(Registries.ENTITY_TYPE, location);
+
         return Main.ENTITY_TYPES.register(name, () -> EntityType.Builder.of(potionFactory, MobCategory.MISC)
                 .sized(0.25F, 0.25F) // Entity size
-                .build(name));
+                .build(resourceKey));
     }
 }

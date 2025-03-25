@@ -5,13 +5,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class EvokerAmulet extends ModItemWithDoubleHoverText
@@ -19,7 +18,7 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
     private static final double EFFECTIVE_RADIUS = 120.0;
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
+    public InteractionResult use(Level level, Player player, InteractionHand interactionHand)
     {
         var itemStack = player.getItemInHand(interactionHand);
 
@@ -30,7 +29,7 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
 
             if (allays.size() < 3)
             {
-                var allay = EntityType.ALLAY.spawn(serverLevel, itemStack, player, player.getOnPos().above(5), MobSpawnType.NATURAL, true, true);
+                var allay = EntityType.ALLAY.spawn(serverLevel, itemStack, player, player.getOnPos().above(5), EntitySpawnReason.NATURAL, true, true);
                 if (allay != null)
                     level.getChunk(player.getOnPos()).addEntity(allay);
 
@@ -39,6 +38,6 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
             }
         }
 
-        return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+        return sidedSuccess(level.isClientSide());
     }
 }

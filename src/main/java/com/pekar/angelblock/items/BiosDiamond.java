@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +19,7 @@ import java.util.List;
 public class BiosDiamond extends ModItemWithDoubleHoverText
 {
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
+    public InteractionResult use(Level level, Player player, InteractionHand interactionHand)
     {
         if (!player.hasEffect(MobEffects.ABSORPTION))
         {
@@ -31,10 +31,10 @@ public class BiosDiamond extends ModItemWithDoubleHoverText
                 new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
             }
 
-            return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
+            return sidedSuccess(level.isClientSide());
         }
 
-        return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
+        return InteractionResult.PASS;
     }
 
     @Override

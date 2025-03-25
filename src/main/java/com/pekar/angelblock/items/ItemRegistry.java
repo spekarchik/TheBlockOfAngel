@@ -2,11 +2,22 @@ package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.TextStyle;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ItemRegistry
 {
+    public static final TagKey<Item> RENDELITHIC_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rendelithic_ingot_tag"));
+    public static final TagKey<Item> DIAMITHIC_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "diamithic_ingot_tag"));
+    public static final TagKey<Item> LAPIS_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "lapis_ingot_tag"));
+    public static final TagKey<Item> LIMONITE_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "limonite_ingot_tag"));
+    public static final TagKey<Item> SUPER_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "super_ingot_tag"));
+    public static final TagKey<Item> FLYING_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "flying_ingot_tag"));
+    public static final TagKey<Item> BAMBOO_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "bamboo_tag"));
+
     public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.register("obsidian_powder", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> ENDSTONE_POWDER = Main.ITEMS.register("endstone_powder", EndstonePowder::new);
     public static final DeferredItem<Item> DIAMOND_POWDER = Main.ITEMS.register("diamond_powder", DiamondPowder::new);

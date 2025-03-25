@@ -9,15 +9,15 @@ public class EntityRegistry
 {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AngelBlockEntity>> ANGEL_BLOCK_ENTITY =
             Main.BLOCK_ENTITIES.register("angel_block_entity", () ->
-                    BlockEntityType.Builder.of(AngelBlockEntity::new, BlockRegistry.ANGEL_BLOCK.get()).build(null));
+                    new BlockEntityType<>(AngelBlockEntity::new,BlockRegistry.ANGEL_BLOCK.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DevilBlockEntity>> DEVIL_BLOCK_ENTITY =
             Main.BLOCK_ENTITIES.register("devil_block_entity", () ->
-                    BlockEntityType.Builder.of(DevilBlockEntity::new, BlockRegistry.DEVIL_BLOCK.get()).build(null));
+                    new BlockEntityType<>(DevilBlockEntity::new, BlockRegistry.DEVIL_BLOCK.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AngelRodBlockEntity>> ANGEL_ROD_BLOCK_ENTITY =
             Main.BLOCK_ENTITIES.register("angel_rod_block_entity", () ->
-                    BlockEntityType.Builder.of(AngelRodBlockEntity::new, BlockRegistry.ANGEL_ROD_BLOCK.get()).build(null));
+                    new BlockEntityType<>(AngelRodBlockEntity::new, BlockRegistry.ANGEL_ROD_BLOCK.get()));
 
     public static void initStatic()
     {

@@ -11,8 +11,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -120,7 +120,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
             var chunk = level.getChunk(pos);
             var entityType = monster.getEntityType();
-            var entity = entityType.spawn(serverLevel, interactionHandItemStack, player, pos, MobSpawnType.SPAWNER, true, true);
+            var entity = entityType.spawn(serverLevel, interactionHandItemStack, player, pos, EntitySpawnReason.COMMAND, true, true); // TODO: Check the reason
             if (entity != null)
                 chunk.addEntity(entity);
 

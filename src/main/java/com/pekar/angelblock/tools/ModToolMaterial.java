@@ -1,33 +1,34 @@
 package com.pekar.angelblock.tools;
 
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.component.Tool;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.level.block.Block;
-import org.apache.commons.lang3.NotImplementedException;
 
-import java.util.List;
-
-public class ModToolMaterial implements Tier
+public class ModToolMaterial
 {
     private final String name;
-    private final int uses;
+    private final int durability;
     private final float speed;
     private final float attackDamageBonus;
     private final int level;
-    private final int enchantability;
-    private final Ingredient repairIngredient;
+    private final int enchantmentValue;
+    private final TagKey<Item> repairIngredient;
+    private final ToolMaterial vanillaMaterial;
+    private final TagKey<Block> incorrectBlocksForDrops;
 
-    protected ModToolMaterial(String name, int uses, float speed, float attackDamageBonus, int level, int enchantability, Ingredient repairIngredient)
+    protected ModToolMaterial(String name, TagKey<Block> incorrectBlocksForDrops, int durability, float speed, float attackDamageBonus, int level, int enchantmentValue, TagKey<Item> repairItems)
     {
         this.name = name;
-        this.uses = uses;
+        this.durability = durability;
         this.speed = speed;
         this.attackDamageBonus = attackDamageBonus;
         this.level = level;
-        this.enchantability = enchantability;
-        this.repairIngredient = repairIngredient;
+        this.enchantmentValue = enchantmentValue;
+        this.repairIngredient = repairItems;
+        this.incorrectBlocksForDrops = incorrectBlocksForDrops; // BlockTags.INCORRECT_FOR_DIAMOND_TOOL
+
+        this.vanillaMaterial = new ToolMaterial(incorrectBlocksForDrops, durability, speed, attackDamageBonus, enchantmentValue, repairItems);
     }
 
     public String getName()
@@ -35,46 +36,29 @@ public class ModToolMaterial implements Tier
         return name;
     }
 
-    @Override
-    public int getUses()
+    public int getDurability()
     {
-        return uses;
+        return durability;
     }
 
-    @Override
     public float getSpeed()
     {
         return speed;
     }
 
-    @Override
     public float getAttackDamageBonus()
     {
         return attackDamageBonus;
     }
 
-    @Override
     public int getEnchantmentValue()
     {
-        return enchantability;
+        return enchantmentValue;
     }
 
-    @Override
-    public Ingredient getRepairIngredient()
+    public TagKey<Item> getRepairItems()
     {
         return repairIngredient;
-    }
-
-    @Override
-    public Tool createToolProperties(TagKey<Block> tagKey)
-    {
-        return new Tool(List.of(Tool.Rule.minesAndDrops(tagKey, this.getSpeed())), getSpeed(), 1);
-    }
-
-    @Override
-    public TagKey<Block> getIncorrectBlocksForDrops()
-    {
-        throw new NotImplementedException("Not implemented [AngelBlock].ModToolMaterial.getIncorrectBlocksForDrops().");
     }
 
     public int getLevel()
@@ -82,8 +66,18 @@ public class ModToolMaterial implements Tier
         return level;
     }
 
-    public ModToolMaterial clone(String name, int uses)
+    public TagKey<Block> getIncorrectBlocksForDrops()
     {
-        return new ModToolMaterial(name, uses, getSpeed(), getAttackDamageBonus(), getLevel(), getEnchantmentValue(), getRepairIngredient());
+        return incorrectBlocksForDrops;
+    }
+
+    public ToolMaterial getVanillaMaterial()
+    {
+        return vanillaMaterial;
+    }
+
+    public ModToolMaterial clone(String name, int durability)
+    {
+        return new ModToolMaterial(name, getIncorrectBlocksForDrops(), durability, getSpeed(), getAttackDamageBonus(), getLevel(), getEnchantmentValue(), getRepairItems());
     }
 }

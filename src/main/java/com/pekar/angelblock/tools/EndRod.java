@@ -11,10 +11,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -78,12 +76,12 @@ public class EndRod extends AmethystRod
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
+    public InteractionResult use(Level level, Player player, InteractionHand interactionHand)
     {
         var offHandItemStack = player.getOffhandItem();
 
         if (offHandItemStack.isEmpty() || isBroken(player.getMainHandItem()) || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
-            return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
+            return InteractionResult.PASS;
 
         var offHandItem = offHandItemStack.getItem();
 
@@ -104,7 +102,7 @@ public class EndRod extends AmethystRod
                 levelData.setRaining(false);
             }
 
-            return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
+            return InteractionResult.CONSUME;
         }
         else if (offHandItem == ItemRegistry.MARINE_CRYSTAL.get())
         {
@@ -131,7 +129,7 @@ public class EndRod extends AmethystRod
                 level.setThunderLevel(0);
             }
 
-            return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
+            return InteractionResult.CONSUME;
         }
         else if (offHandItem == ItemRegistry.STRENGTH_PEARL.get())
         {
@@ -159,10 +157,10 @@ public class EndRod extends AmethystRod
                 level.setRainLevel(1.0F);
             }
 
-            return InteractionResultHolder.consume(player.getItemInHand(interactionHand));
+            return InteractionResult.CONSUME;
         }
 
-        return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
+        return InteractionResult.PASS;
     }
 
     private void playWeatherSound(ServerPlayer serverPlayer)

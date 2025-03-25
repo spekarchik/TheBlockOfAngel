@@ -6,10 +6,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
 
 public class SuperArmor extends ModArmor
 {
-    protected SuperArmor(ModArmorMaterial material, Type equipmentSlot)
+    protected SuperArmor(ModArmorMaterial material, ArmorType equipmentSlot)
     {
         super(material, equipmentSlot);
     }

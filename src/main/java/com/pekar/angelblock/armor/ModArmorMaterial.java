@@ -5,18 +5,14 @@ import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.items.ItemRegistry;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import java.util.EnumMap;
-import java.util.List;
-import java.util.function.Supplier;
 
 // Durability:
 // LEATHER: 5
@@ -28,15 +24,15 @@ import java.util.function.Supplier;
 
 public class ModArmorMaterial
 {
-    private final Holder<ArmorMaterial> material;
+    private final ArmorMaterial material;
     private final String materialName;
     private final int durabilityMultiplier;
-    private final EnumMap<ArmorItem.Type, Integer> armorResistanceMap;
+    private final EnumMap<ArmorType, Integer> armorResistanceMap;
     private final int enchantmentValue;
     private final float toughness;
     private final float knockbackResistance;
     private final Holder<SoundEvent> equipmentSound;
-    private final Supplier<Ingredient> repairIngredient;
+    private final TagKey<Item> repairIngredient;
 
     public static final String RENDELITHIC_MATERIAL_NAME = "rendelithic";
     public static final String LIMONITE_MATERIAL_NAME = "limonite";
@@ -45,24 +41,26 @@ public class ModArmorMaterial
     public static final String SUPER_MATERIAL_NAME = "super";
     public static final String FLYING_MATERIAL_NAME = "flying";
 
+    // ArmorMaterials
+
     protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial(RENDELITHIC_MATERIAL_NAME, "rendelithic_armor",
             createArmorTypeMap(3, 7, 9, 3, 7),
-            25, 0F, 0F, 11, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get()));
+            25, 0F, 0F, 11, SoundEvents.ARMOR_EQUIP_GOLD, ItemRegistry.RENDELITHIC_INGOT_TAG);
     protected static final ModArmorMaterial LIMONITE = new ModArmorMaterial(LIMONITE_MATERIAL_NAME, "limonite_armor",
             createArmorTypeMap(2, 5, 7, 3, 3),
-            30, 1F, 0F, 23, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ItemRegistry.LIMONITE_INGOT.get()));
+            30, 1F, 0F, 23, SoundEvents.ARMOR_EQUIP_LEATHER, ItemRegistry.LIMONITE_INGOT_TAG);
     protected static final ModArmorMaterial LAPIS = new ModArmorMaterial(LAPIS_MATERIAL_NAME, "lapis_armor",
             createArmorTypeMap(3, 6, 8, 3, 11),
-            10, 0F, 0F,40, SoundEvents.ARMOR_EQUIP_DIAMOND, () -> Ingredient.of(ItemRegistry.LAPIS_INGOT.get()));
+            10, 0F, 0F,40, SoundEvents.ARMOR_EQUIP_DIAMOND, ItemRegistry.LAPIS_INGOT_TAG);
     protected static final ModArmorMaterial DIAMITHIC = new ModArmorMaterial(DIAMITHIC_MATERIAL_NAME, "diamithic_armor",
             createArmorTypeMap(3, 7, 9, 3, 11),
-            14, 3F, 0.2F, 45, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get()));
+            14, 3F, 0.2F, 45, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.DIAMITHIC_INGOT_TAG);
     protected static final ModArmorMaterial SUPER = new ModArmorMaterial(SUPER_MATERIAL_NAME, "super_armor",
             createArmorTypeMap(5, 9, 11, 5, 15),
-            1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
+            1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.SUPER_INGOT_TAG);
     protected static final ModArmorMaterial FLYING = new ModArmorMaterial(FLYING_MATERIAL_NAME, "flying_armor",
             createArmorTypeMap(1, 2, 3, 1, 1),
-            0, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, () -> Ingredient.of(Items.PHANTOM_MEMBRANE));
+            0, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, ItemRegistry.FLYING_INGOT_TAG);
 
     // other armor models (other textures)
     protected static final ModArmorMaterial RENDELITHIC2 = copyOf(RENDELITHIC, "rendelithic_armor2");
@@ -72,11 +70,11 @@ public class ModArmorMaterial
     protected static final ModArmorMaterial SUPER2 = copyOf(SUPER, "super_armor2");
 
 
-    public ModArmorMaterial(String materialName, String armorModelName, EnumMap<ArmorItem.Type, Integer> armorResistanceMap,
+    public ModArmorMaterial(String materialName, String armorModelName, EnumMap<ArmorType, Integer> armorResistanceMap,
                             int enchantmentValue, float toughness, float knockbackResistance, int durabilityMultiplier,
-                            Holder<SoundEvent> equipmentSound, Supplier<Ingredient> repairIngredient)
+                            Holder<SoundEvent> equipmentSound, TagKey<Item> repairIngredient)
     {
-        this.material = register(armorModelName, armorResistanceMap, enchantmentValue, equipmentSound, toughness, knockbackResistance, repairIngredient);
+        this.material = register(armorModelName, durabilityMultiplier, armorResistanceMap, enchantmentValue, equipmentSound, toughness, knockbackResistance, repairIngredient);
         this.materialName = materialName;
         this.armorResistanceMap = armorResistanceMap;
         this.enchantmentValue = enchantmentValue;
@@ -87,7 +85,7 @@ public class ModArmorMaterial
         this.repairIngredient = repairIngredient;
     }
 
-    public Holder<ArmorMaterial> getMaterial()
+    public ArmorMaterial getMaterial()
     {
         return material;
     }
@@ -115,45 +113,30 @@ public class ModArmorMaterial
         return materialName.hashCode();
     }
 
-    // copied from ArmorMaterials and modified
-    private static Holder<ArmorMaterial> register(
+    // copied from ArmorMaterials 1.21.1 and modified
+    private static ArmorMaterial register(
             String armorName,
-            EnumMap<ArmorItem.Type, Integer> map,
+            int durability,
+            EnumMap<ArmorType, Integer> defence,
             int enchantmentValue,
             Holder<SoundEvent> equipSound,
             float toughness,
             float knockbackResistance,
-            Supplier<Ingredient> repairIngredient)
+            TagKey<Item> repairIngredient)
     {
-        var armorLayers = getNonDyeableArmorLayers(armorName);
-        EnumMap<ArmorItem.Type, Integer> enummap = new EnumMap<>(ArmorItem.Type.class);
-
-        for (ArmorItem.Type armoritem$type : ArmorItem.Type.values()) {
-            enummap.put(armoritem$type, map.get(armoritem$type));
-        }
-
-        return Registry.registerForHolder(
-                BuiltInRegistries.ARMOR_MATERIAL,
-                Utils.instance.resources.createResourceLocation(Main.MODID, armorName),
-                new ArmorMaterial(enummap, enchantmentValue, equipSound, repairIngredient, armorLayers, toughness, knockbackResistance)
-        );
+        var modelId = Utils.instance.resources.createResourceLocation(Main.MODID, armorName);
+        return new ArmorMaterial(durability, defence, enchantmentValue, equipSound, toughness, knockbackResistance, repairIngredient, modelId);
     }
 
-    private static EnumMap<ArmorItem.Type, Integer> createArmorTypeMap(int bootsResistance, int leggingsResistance, int chestplateResistance, int helmetResistance, int bodyResistance)
+    private static EnumMap<ArmorType, Integer> createArmorTypeMap(int bootsResistance, int leggingsResistance, int chestplateResistance, int helmetResistance, int bodyResistance)
     {
-        return Util.make(new EnumMap<>(ArmorItem.Type.class), armorTypeMap -> {
-            armorTypeMap.put(ArmorItem.Type.BOOTS, bootsResistance);
-            armorTypeMap.put(ArmorItem.Type.LEGGINGS, leggingsResistance);
-            armorTypeMap.put(ArmorItem.Type.CHESTPLATE, chestplateResistance);
-            armorTypeMap.put(ArmorItem.Type.HELMET, helmetResistance);
-            armorTypeMap.put(ArmorItem.Type.BODY, bodyResistance);
+        return Util.make(new EnumMap<>(ArmorType.class), armorTypeMap -> {
+            armorTypeMap.put(ArmorType.BOOTS, bootsResistance);
+            armorTypeMap.put(ArmorType.LEGGINGS, leggingsResistance);
+            armorTypeMap.put(ArmorType.CHESTPLATE, chestplateResistance);
+            armorTypeMap.put(ArmorType.HELMET, helmetResistance);
+            armorTypeMap.put(ArmorType.BODY, bodyResistance);
         });
-    }
-
-    private static List<ArmorMaterial.Layer> getNonDyeableArmorLayers(String armorName)
-    {
-        var resourceLocation = Utils.instance.resources.createResourceLocation(Main.MODID, armorName);
-        return List.of(new ArmorMaterial.Layer(resourceLocation));
     }
 
     private static ModArmorMaterial copyOf(ModArmorMaterial armorMaterial, String armorModelName)

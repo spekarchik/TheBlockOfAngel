@@ -3,10 +3,11 @@ package com.pekar.angelblock.armor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
 
 public class RendelithicArmor extends ModArmor
 {
-    protected RendelithicArmor(ModArmorMaterial material, Type equipmentSlot)
+    protected RendelithicArmor(ModArmorMaterial material, ArmorType equipmentSlot)
     {
         super(material, equipmentSlot);
     }

@@ -55,7 +55,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     public void encode(FriendlyByteBuf buffer)
     {
         buffer.writeInt(SoundType.getIndex(soundType));
-        buffer.writeResourceLocation(soundEvent != null ? soundEvent.getLocation() : SoundEvents.BONE_MEAL_USE.getLocation());
+        buffer.writeResourceLocation(soundEvent != null ? soundEvent.location() : SoundEvents.BONE_MEAL_USE.location());
         buffer.writeFloat(pitch);
     }
 
@@ -65,7 +65,9 @@ public class PlaySoundPacket extends ServerToClientPacket
         var sound = getSound(soundType);
         if (sound == null) return;
 
-        Minecraft.getInstance().player.playSound(sound, 1.0F, pitch);
+        var player = Minecraft.getInstance().player;
+        if (player != null)
+            player.playSound(sound, 1.0F, pitch);
     }
 
     private SoundEvent getSound(SoundType soundType)

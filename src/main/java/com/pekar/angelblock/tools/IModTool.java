@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -69,11 +68,13 @@ public interface IModTool extends IModDescriptionItem
         return false;
     }
 
-    TieredItem getTool();
+    IModTool getTool();
+
+    ModToolMaterial getMaterial();
 
     default String getMaterialName()
     {
-        if (getTool().getTier() instanceof ModToolMaterial toolMaterial)
+        if (getTool().getMaterial() instanceof ModToolMaterial toolMaterial)
         {
             return toolMaterial.getName();
         }

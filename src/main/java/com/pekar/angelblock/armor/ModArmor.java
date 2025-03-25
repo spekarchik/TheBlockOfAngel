@@ -11,6 +11,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.equipment.ArmorType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -20,13 +21,13 @@ import java.util.function.Consumer;
 
 public class ModArmor extends ArmorItem
 {
-    protected final ArmorItem.Type armorItemType;
+    protected final ArmorType armorItemType;
     protected final int maxDamage;
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
     private final Set<ArmorModifications> armorModificatorSet = new HashSet<>();
 
-    protected ModArmor(ModArmorMaterial material, Type armorItemType)
+    protected ModArmor(ModArmorMaterial material, ArmorType armorItemType)
     {
         super(material.getMaterial(), armorItemType, new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
         this.material = material;
@@ -173,13 +174,13 @@ public class ModArmor extends ArmorItem
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)
         {
-            tooltipComponents.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 8, false, false));
+            tooltipComponents.add(getSpecificDescription(i, i == 1, false, armorItemType.getSlot() == EquipmentSlot.FEET && i == 8, false, false));
         }
     }
 
     private int getDescriptionLineCount()
     {
-        return switch (getEquipmentSlot())
+        return switch (armorItemType.getSlot())
         {
             case HEAD -> 5;
             case CHEST -> 8;
@@ -187,12 +188,6 @@ public class ModArmor extends ArmorItem
             case FEET -> 8;
             default -> 0;
         };
-    }
-
-    @Override
-    public boolean isEnchantable(ItemStack stack)
-    {
-        return !isDamaged(stack);
     }
 
     @Override

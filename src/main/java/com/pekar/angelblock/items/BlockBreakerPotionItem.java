@@ -3,7 +3,7 @@ package com.pekar.angelblock.items;
 import com.pekar.angelblock.potions.BlockBreakerPotion;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -19,13 +19,13 @@ public class BlockBreakerPotionItem extends ModItemWithMultipleHoverText
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+    public InteractionResult use(Level level, Player player, InteractionHand hand)
     {
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (!level.isClientSide)
         {
-            BlockBreakerPotion potionEntity = new BlockBreakerPotion(level, player);
+            BlockBreakerPotion potionEntity = new BlockBreakerPotion(level, player, itemStack);
             potionEntity.setItem(itemStack);
             potionEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 0.5F, 1.0F);
             level.addFreshEntity(potionEntity);
@@ -36,7 +36,7 @@ public class BlockBreakerPotionItem extends ModItemWithMultipleHoverText
             itemStack.shrink(1);
         }
 
-        return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+        return sidedSuccess(level.isClientSide());
     }
 
     @Override

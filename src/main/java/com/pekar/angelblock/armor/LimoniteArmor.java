@@ -4,10 +4,11 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
 
 public class LimoniteArmor extends ModArmor
 {
-    protected LimoniteArmor(ModArmorMaterial material, Type equipmentSlot)
+    protected LimoniteArmor(ModArmorMaterial material, ArmorType equipmentSlot)
     {
         super(material, equipmentSlot);
     }

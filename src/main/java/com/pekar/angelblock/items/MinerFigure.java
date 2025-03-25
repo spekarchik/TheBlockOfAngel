@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -117,7 +116,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand)
+    public InteractionResult use(Level level, Player player, InteractionHand interactionHand)
     {
         if (interactionHand == InteractionHand.MAIN_HAND)
         {
@@ -125,15 +124,15 @@ public class MinerFigure extends ModItemWithDoubleHoverText
 
             if (erasePiglinsMemory(level, pos, player))
             {
-                return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
+                return sidedSuccess(level.isClientSide());
             }
         }
 
-        return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
+        return InteractionResult.PASS;
     }
 
     private InteractionResult getToolInteractionResult(boolean isClientSide)
     {
-        return isClientSide ? InteractionResult.SUCCESS_NO_ITEM_USED: InteractionResult.CONSUME_PARTIAL;
+        return isClientSide ? InteractionResult.SUCCESS: InteractionResult.SUCCESS_SERVER;
     }
 }
