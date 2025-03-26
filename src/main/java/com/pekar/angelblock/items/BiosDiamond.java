@@ -18,6 +18,11 @@ import java.util.List;
 
 public class BiosDiamond extends ModItemWithDoubleHoverText
 {
+    public BiosDiamond(Properties properties)
+    {
+        super(properties);
+    }
+
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand interactionHand)
     {

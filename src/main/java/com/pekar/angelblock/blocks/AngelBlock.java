@@ -20,12 +20,9 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,11 +34,9 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
     public static final int MaxMonstersFilterValue = 5;
     public static final IntegerProperty MONSTERS_IN_FILTER = IntegerProperty.create("monsters_in_filter", 0, MaxMonstersFilterValue);
 
-    public AngelBlock()
+    public AngelBlock(Properties properties)
     {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM)
-                .strength(1.5F, 1200F)
-                .lightLevel(state -> 15));
+        super(properties);
 
         registerDefaultState(this.stateDefinition.any().setValue(MONSTERS_IN_FILTER, MaxMonstersFilterValue));
     }

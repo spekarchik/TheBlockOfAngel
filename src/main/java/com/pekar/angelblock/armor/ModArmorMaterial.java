@@ -60,7 +60,7 @@ public class ModArmorMaterial
             1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.SUPER_INGOT_TAG);
     protected static final ModArmorMaterial FLYING = new ModArmorMaterial(FLYING_MATERIAL_NAME, "flying_armor",
             createArmorTypeMap(1, 2, 3, 1, 1),
-            0, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, ItemRegistry.FLYING_INGOT_TAG);
+            1, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, ItemRegistry.FLYING_INGOT_TAG);
 
     // other armor models (other textures)
     protected static final ModArmorMaterial RENDELITHIC2 = copyOf(RENDELITHIC, "rendelithic_armor2");
@@ -74,7 +74,7 @@ public class ModArmorMaterial
                             int enchantmentValue, float toughness, float knockbackResistance, int durabilityMultiplier,
                             Holder<SoundEvent> equipmentSound, TagKey<Item> repairIngredient)
     {
-        this.material = register(armorModelName, durabilityMultiplier, armorResistanceMap, enchantmentValue, equipmentSound, toughness, knockbackResistance, repairIngredient);
+        this.material = createVanillaMaterial(armorModelName, durabilityMultiplier, armorResistanceMap, enchantmentValue, equipmentSound, toughness, knockbackResistance, repairIngredient);
         this.materialName = materialName;
         this.armorResistanceMap = armorResistanceMap;
         this.enchantmentValue = enchantmentValue;
@@ -114,7 +114,7 @@ public class ModArmorMaterial
     }
 
     // copied from ArmorMaterials 1.21.1 and modified
-    private static ArmorMaterial register(
+    private static ArmorMaterial createVanillaMaterial(
             String armorName,
             int durability,
             EnumMap<ArmorType, Integer> defence,

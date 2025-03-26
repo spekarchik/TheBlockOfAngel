@@ -7,18 +7,14 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 import java.util.List;
 
 public class GreenDiamondBlock extends ModDropExperienceBlockWithHoverText
 {
-    public GreenDiamondBlock()
+    public GreenDiamondBlock(Properties properties)
     {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE).strength(1F)
-                .lightLevel(state -> 12).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops());
+        super(properties);
     }
 
     @Override

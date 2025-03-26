@@ -17,6 +17,11 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
 {
     private static final double EFFECTIVE_RADIUS = 120.0;
 
+    public EvokerAmulet(Properties properties)
+    {
+        super(properties);
+    }
+
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand interactionHand)
     {

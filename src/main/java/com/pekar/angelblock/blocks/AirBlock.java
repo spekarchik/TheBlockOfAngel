@@ -1,11 +1,9 @@
 package com.pekar.angelblock.blocks;
 
-import net.minecraft.world.level.block.Block;
-
-public class AirBlock extends Block
+public class AirBlock extends net.minecraft.world.level.block.AirBlock
 {
-    AirBlock()
+    AirBlock(Properties properties)
     {
-        super(Properties.of());
+        super(properties);
     }
 }

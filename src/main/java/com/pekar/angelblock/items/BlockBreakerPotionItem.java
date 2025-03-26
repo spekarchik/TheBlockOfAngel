@@ -13,9 +13,9 @@ import java.util.List;
 
 public class BlockBreakerPotionItem extends ModItemWithMultipleHoverText
 {
-    public BlockBreakerPotionItem()
+    public BlockBreakerPotionItem(Properties properties)
     {
-        super(new Properties().stacksTo(4));
+        super(properties);
     }
 
     @Override

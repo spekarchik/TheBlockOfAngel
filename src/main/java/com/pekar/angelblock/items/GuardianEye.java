@@ -17,9 +17,9 @@ import java.util.List;
 
 public class GuardianEye extends ModItemWithMultipleHoverText
 {
-    public GuardianEye()
+    public GuardianEye(Properties properties)
     {
-        super(new Properties());
+        super(properties);
     }
 
     @Override

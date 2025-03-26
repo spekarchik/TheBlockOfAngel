@@ -9,9 +9,9 @@ import java.util.List;
 
 public class SaltPeter extends ModItemWithHoverText
 {
-    public SaltPeter()
+    public SaltPeter(Properties properties)
     {
-        super(TextStyle.Notice);
+        super(TextStyle.Notice, properties);
     }
 
     @Override

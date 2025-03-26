@@ -10,11 +10,6 @@ import java.util.List;
 
 public class ModItemWithDoubleHoverText extends ModItem
 {
-    public ModItemWithDoubleHoverText()
-    {
-        this(new Properties());
-    }
-
     public ModItemWithDoubleHoverText(Properties properties)
     {
         super(properties);

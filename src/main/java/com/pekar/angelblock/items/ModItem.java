@@ -8,11 +8,6 @@ public class ModItem extends Item
 {
     protected final Utils utils = new Utils();
 
-    public ModItem()
-    {
-        this(new Properties());
-    }
-
     public ModItem(Properties properties)
     {
         super(properties);

@@ -73,7 +73,7 @@ public class ToolMaterials
     static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_SWORD_NAME, 525);
 
     static final ModToolMaterial ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, BlockTags.INCORRECT_FOR_WOODEN_TOOL,
-            60, 2.0F, 0F, 0, 0, ItemRegistry.BAMBOO_TAG); // TODO: check BlockTags.INCORRECT_FOR_WOODEN_TOOL
+            60, 2.0F, 0F, 0, 1, ItemRegistry.BAMBOO_TAG); // TODO: check BlockTags.INCORRECT_FOR_WOODEN_TOOL
 
     static final ModToolMaterial ROD_MATERIAL2 = ROD_MATERIAL1.clone(ROD_MATERIAL2_NAME, 120);
 

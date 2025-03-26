@@ -22,6 +22,11 @@ public class MinerFigure extends ModItemWithDoubleHoverText
 {
     private static final double EFFECTIVE_RADIUS = 16.0;
 
+    public MinerFigure(Properties properties)
+    {
+        super(properties);
+    }
+
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand)
     {

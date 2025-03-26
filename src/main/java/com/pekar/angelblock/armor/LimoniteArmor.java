@@ -8,9 +8,9 @@ import net.minecraft.world.item.equipment.ArmorType;
 
 public class LimoniteArmor extends ModArmor
 {
-    protected LimoniteArmor(ModArmorMaterial material, ArmorType equipmentSlot)
+    protected LimoniteArmor(ModArmorMaterial material, ArmorType equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot);
+        super(material, equipmentSlot, properties);
     }
 
     @Override

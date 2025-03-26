@@ -27,9 +27,9 @@ public class ModArmor extends ArmorItem
     protected final Utils utils = new Utils();
     private final Set<ArmorModifications> armorModificatorSet = new HashSet<>();
 
-    protected ModArmor(ModArmorMaterial material, ArmorType armorItemType)
+    protected ModArmor(ModArmorMaterial material, ArmorType armorItemType, Properties properties)
     {
-        super(material.getMaterial(), armorItemType, new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
+        super(material.getMaterial(), armorItemType, properties);
         this.material = material;
         this.armorItemType = armorItemType;
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());

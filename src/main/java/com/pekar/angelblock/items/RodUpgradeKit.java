@@ -9,6 +9,11 @@ import java.util.List;
 
 public class RodUpgradeKit extends ModItemWithDoubleHoverText
 {
+    public RodUpgradeKit(Properties properties)
+    {
+        super(properties);
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {

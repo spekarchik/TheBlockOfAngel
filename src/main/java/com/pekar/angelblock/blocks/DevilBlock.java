@@ -20,11 +20,8 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,11 +30,9 @@ import java.util.List;
 
 public class DevilBlock extends ModBlockWithMultipleHoverText implements EntityBlock
 {
-    public DevilBlock()
+    public DevilBlock(Properties properties)
     {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM)
-                .strength(10F, 1200F)
-                .lightLevel(blockState -> 10));
+        super(properties);
     }
 
     @Override

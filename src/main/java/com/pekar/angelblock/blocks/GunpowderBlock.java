@@ -16,9 +16,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -28,11 +26,6 @@ import java.util.List;
 public class GunpowderBlock extends FallingBlock
 {
     private static final MapCodec<GunpowderBlock> CODEC = simpleCodec(GunpowderBlock::new);
-
-    public GunpowderBlock()
-    {
-        this(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).sound(SoundType.SNOW).strength(0.2F));
-    }
 
     public GunpowderBlock(BlockBehaviour.Properties properties)
     {

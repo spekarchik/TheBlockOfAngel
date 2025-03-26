@@ -22,9 +22,9 @@ import java.util.List;
 
 public class BlueAxolotlBucket extends ModItemWithHoverText
 {
-    public BlueAxolotlBucket()
+    public BlueAxolotlBucket(Properties properties)
     {
-        super(TextStyle.Notice);
+        super(TextStyle.Notice, properties);
     }
 
     @Override

@@ -17,9 +17,9 @@ import java.util.List;
 
 public class SoaringSporeEssence extends ModItemWithMultipleHoverText
 {
-    public SoaringSporeEssence()
+    public SoaringSporeEssence(Properties properties)
     {
-        super(new Properties().stacksTo(4));
+        super(properties);
     }
 
     @Override

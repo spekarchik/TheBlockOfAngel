@@ -14,36 +14,48 @@ import java.util.function.Supplier;
 
 public class BlockRegistry
 {
-    public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new);
-    public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedObsidianBlock::new);
-    public static final DeferredBlock<Block> DIAMOND_POWDER_BLOCK = register("diamond_powder_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
-    public static final DeferredBlock<Block> OBSIDIAN_POWDER_BLOCK = register("obsidian_powder_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> ENDSTONE_POWDER_BLOCK = register("endstone_powder_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
-    public static final DeferredBlock<Block> SALTPETER_BLOCK = register("saltpeter_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
-    public static final DeferredBlock<Block> DIAMITHIC_MATERIAL_BLOCK = register("diamithic_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> RENDELITHIC_MATERIAL_BLOCK = register("rendelithic_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> LIMONITE_MATERIAL_BLOCK = register("limonite_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> LAPIS_MATERIAL_BLOCK = register("lapis_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> SUPER_MATERIAL_BLOCK = register("super_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
+    public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new,
+            BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SNOW).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedObsidianBlock::new,
+            BlockBehaviour.Properties.of().strength(10f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> DIAMOND_POWDER_BLOCK = register("diamond_powder_block", Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
+    public static final DeferredBlock<Block> OBSIDIAN_POWDER_BLOCK = register("obsidian_powder_block", Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> ENDSTONE_POWDER_BLOCK = register("endstone_powder_block", Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
+    public static final DeferredBlock<Block> SALTPETER_BLOCK = register("saltpeter_block", Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
+    public static final DeferredBlock<Block> DIAMITHIC_MATERIAL_BLOCK = register("diamithic_material_block", Block::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> RENDELITHIC_MATERIAL_BLOCK = register("rendelithic_material_block", Block::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> LIMONITE_MATERIAL_BLOCK = register("limonite_material_block", Block::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> LAPIS_MATERIAL_BLOCK = register("lapis_material_block", Block::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> SUPER_MATERIAL_BLOCK = register("super_material_block", Block::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", Block::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
 
-    public static final DeferredBlock<Block> ANGEL_BLOCK = register("angel_block", AngelBlock::new);
-    public static final DeferredBlock<Block> DEVIL_BLOCK = register("devil_block", DevilBlock::new);
-    public static final DeferredBlock<Block> ANGEL_ROD_BLOCK = registerSkipTab("angel_rod_block", AngelRodBlock::new);
+    public static final DeferredBlock<Block> ANGEL_BLOCK = register("angel_block", AngelBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 1200F)
+                    .lightLevel(state -> 15));
+    public static final DeferredBlock<Block> DEVIL_BLOCK = register("devil_block", DevilBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM)
+                    .strength(10F, 1200F).lightLevel(blockState -> 10));
+    public static final DeferredBlock<Block> ANGEL_ROD_BLOCK = registerSkipTab("angel_rod_block", AngelRodBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHTNING_ROD).strength(0.1F, 1200F).sound(SoundType.COPPER)
+                    .lightLevel(state -> 15));
 
-    public static final DeferredBlock<Block> GREEN_DIAMOND_ORE = register("green_diamond_ore", GreenDiamondBlock::new);
-    public static final DeferredBlock<Block> GUNPOWDER_BLOCK = register("gunpowder_block", GunpowderBlock::new);
-    public static final DeferredBlock<Block> NETHER_BARS = register("nether_bars_block", NetherBarsBlock::new);
+    public static final DeferredBlock<Block> GREEN_DIAMOND_ORE = register("green_diamond_ore", GreenDiamondBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE).strength(1F).lightLevel(state -> 12)
+                    .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> GUNPOWDER_BLOCK = register("gunpowder_block", GunpowderBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).sound(SoundType.SNOW).strength(0.2F));
+    public static final DeferredBlock<Block> NETHER_BARS = register("nether_bars_block", NetherBarsBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS).strength(10F, 1200F).requiresCorrectToolForDrops());
 
     // Internal blocks (not added to Creative Tab)
     //public static final DeferredBlock<Block> DESTROYING_DIAMOND_BLOCK = registerSkipTab("destroying_diamond_block", AirBlock::new);
@@ -79,7 +91,21 @@ public class BlockRegistry
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> supplier)
     {
         var blockObject = Main.BLOCKS.register(name, supplier);
-        Main.ITEMS.register(name, () -> new ModBlockItem(blockObject.get()));
+        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
+        return blockObject;
+    }
+
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> supplier)
+    {
+        var blockObject = Main.BLOCKS.registerBlock(name, supplier);
+        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
+        return blockObject;
+    }
+
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> supplier, BlockBehaviour.Properties properties)
+    {
+        var blockObject = Main.BLOCKS.registerBlock(name, supplier, properties);
+        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
         return blockObject;
     }
 
@@ -93,5 +119,15 @@ public class BlockRegistry
     private static <T extends Block> DeferredBlock<T> registerSkipTab(String name, Supplier<T> supplier)
     {
         return Main.BLOCKS.register(name, supplier);
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerSkipTab(String name, Function<BlockBehaviour.Properties, T> supplier)
+    {
+        return Main.BLOCKS.registerBlock(name, supplier);
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerSkipTab(String name, Function<BlockBehaviour.Properties, T> supplier, BlockBehaviour.Properties properties)
+    {
+        return Main.BLOCKS.registerBlock(name, supplier, properties);
     }
 }

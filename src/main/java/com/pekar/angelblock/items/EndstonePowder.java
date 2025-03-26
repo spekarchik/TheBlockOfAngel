@@ -14,6 +14,11 @@ import java.util.ArrayList;
 
 public class EndstonePowder extends ModItemWithDoubleHoverText
 {
+    public EndstonePowder(Properties properties)
+    {
+        super(properties);
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext context)
     {

@@ -148,7 +148,7 @@ public class BlockBreakerPotion extends ThrownPotion
 
         if (block == Blocks.DIAMOND_BLOCK)
         {
-            level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_POWDER_BLOCK.get().defaultBlockState(), Block.UPDATE_NONE);
+            level.setBlock(pos, BlockRegistry.DESTROYING_DIAMOND_POWDER_BLOCK.get().defaultBlockState(), Block.UPDATE_NONE); // TODO: Check for drop
             level.destroyBlock(pos, true, source, 1);
         }
         else if (block == Blocks.COBBLESTONE)

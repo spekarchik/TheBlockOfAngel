@@ -12,9 +12,9 @@ import net.minecraft.world.level.Level;
 
 public class EndSapphire extends ModItemWithDoubleHoverText
 {
-    public EndSapphire()
+    public EndSapphire(Properties properties)
     {
-        super(new Properties());
+        super(properties);
     }
 
     @Override

@@ -11,13 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -29,11 +26,9 @@ import java.util.function.Function;
 
 public class AngelRodBlock extends ModBlockWithDoubleHoverText implements EntityBlock
 {
-    public AngelRodBlock()
+    public AngelRodBlock(Properties properties)
     {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHTNING_ROD) // LIGHTNING_ROD doesn't drop by hand
-                .strength(0.1F, 1200F).sound(SoundType.COPPER)
-                .lightLevel(state -> 15));
+        super(properties);
     }
 
     @Nullable

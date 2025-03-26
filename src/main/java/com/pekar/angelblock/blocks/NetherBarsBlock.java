@@ -11,12 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -96,9 +94,10 @@ public class NetherBarsBlock extends ModBlockWithDoubleHoverText
     public static final BooleanProperty WEST = BlockStateProperties.WEST;
     public static final BooleanProperty EAST = BlockStateProperties.EAST;
 
-    public NetherBarsBlock()
+    public NetherBarsBlock(Properties properties)
     {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS).strength(10F, 1200F).requiresCorrectToolForDrops());
+        super(properties);
+
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(NORTH, false)
                 .setValue(SOUTH, false)

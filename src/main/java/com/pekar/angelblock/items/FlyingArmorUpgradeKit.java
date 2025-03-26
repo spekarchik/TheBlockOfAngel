@@ -8,9 +8,9 @@ import java.util.List;
 
 public class FlyingArmorUpgradeKit extends ModItemWithMultipleHoverText
 {
-    public FlyingArmorUpgradeKit()
+    public FlyingArmorUpgradeKit(Properties properties)
     {
-        super(new Properties());
+        super(properties);
     }
 
     @Override

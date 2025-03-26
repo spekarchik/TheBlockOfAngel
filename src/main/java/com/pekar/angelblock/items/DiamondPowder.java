@@ -9,9 +9,9 @@ import java.util.List;
 
 public class DiamondPowder extends ModItemWithHoverText
 {
-    public DiamondPowder()
+    public DiamondPowder(Properties properties)
     {
-        super(TextStyle.Notice);
+        super(TextStyle.Notice, properties);
     }
 
     @Override
