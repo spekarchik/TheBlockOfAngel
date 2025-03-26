@@ -32,6 +32,6 @@ public class ModBlockWithDoubleHoverText extends ModBlock
 
     protected MutableComponent getDisplayName(int lineNumber)
     {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
+        return Component.translatable(asItem().getDescriptionId() + ".desc" + lineNumber);
     }
 }

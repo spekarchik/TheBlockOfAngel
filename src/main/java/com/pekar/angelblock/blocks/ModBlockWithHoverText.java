@@ -30,6 +30,6 @@ public class ModBlockWithHoverText extends ModBlock
 
     protected MutableComponent getDisplayName()
     {
-        return Component.translatable(this.getDescriptionId() + ".desc");
+        return Component.translatable(asItem().getDescriptionId() + ".desc");
     }
 }

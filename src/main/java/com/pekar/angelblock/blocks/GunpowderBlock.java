@@ -95,7 +95,7 @@ public class GunpowderBlock extends FallingBlock
 
     private MutableComponent getDisplayName()
     {
-        return Component.translatable(this.getDescriptionId() + ".desc");
+        return Component.translatable(asItem().getDescriptionId() + ".desc");
     }
 
     @Override
