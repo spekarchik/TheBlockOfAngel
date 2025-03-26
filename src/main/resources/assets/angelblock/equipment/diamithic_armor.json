@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "angelblock:diamithic_armor"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "angelblock:diamithic_armor"
+      }
+    ]
+  }
+}

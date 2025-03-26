@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.Equippable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -29,7 +30,12 @@ public class ModArmor extends ArmorItem
 
     protected ModArmor(ModArmorMaterial material, ArmorType armorItemType, Properties properties)
     {
-        super(material.getMaterial(), armorItemType, properties);
+        super(material.getMaterial(), armorItemType,
+                properties.component(
+                        DataComponents.EQUIPPABLE,
+                        Equippable.builder(EquipmentSlot.FEET)
+                                .setAsset(material.getMaterial().assetId())
+                                .build()));
         this.material = material;
         this.armorItemType = armorItemType;
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
