@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "angelblock:lapis_armor"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "angelblock:lapis_armor"
+      }
+    ]
+  }
+}
