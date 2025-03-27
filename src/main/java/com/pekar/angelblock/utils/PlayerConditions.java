@@ -65,12 +65,12 @@ public class PlayerConditions
 
     public boolean isNearLavaOrWaterOrUnsafe(LivingEntity entityPlayer, BlockPos pos)
     {
-        return isNearLavaOrWater(entityPlayer.level(), pos) || !isFallSafeWide(entityPlayer, pos);
+        return isNearLavaOrWater(entityPlayer, pos) || !isFallSafeWide(entityPlayer, pos);
     }
 
     public boolean isNearLavaOrWaterOrUnsafeOrStandingOnBreakingBlock(LivingEntity entityPlayer, BlockPos pos)
     {
-        return isNearLavaOrWater(entityPlayer.level(), pos) || !isFallSafeWide(entityPlayer, pos) || isStandingOnBreakingBlock(entityPlayer, pos);
+        return isNearLavaOrWater(entityPlayer, pos) || !isFallSafeWide(entityPlayer, pos) || isStandingOnBreakingBlock(entityPlayer, pos);
     }
 
     private boolean isAboveLavaOrWaterOrAir(Level level, BlockPos pos)
@@ -79,9 +79,10 @@ public class PlayerConditions
                 || level.getBlockState(pos.below()).getBlock() instanceof LiquidBlock;
     }
 
-    public boolean isNearLavaOrWater(Level level, BlockPos pos)
+    public boolean isNearLavaOrWater(LivingEntity entityPlayer, BlockPos pos)
     {
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
+        final var level = entityPlayer.level();
 
         for (int x = posX - 1; x <= posX + 1; x++)
         {
@@ -94,7 +95,7 @@ public class PlayerConditions
                     if (z != posZ && (x != posX || y != posY)) continue;
 
                     Block block = level.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block == Blocks.LAVA || block == Blocks.WATER)
+                    if (block == Blocks.LAVA || (block == Blocks.WATER && !entityPlayer.isInWater()))
                     {
                         return true;
                     }
