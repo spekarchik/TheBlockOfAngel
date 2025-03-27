@@ -2,11 +2,7 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": {
-        "type": "minecraft:uniform",
-        "min": 0.0,
-        "max": 2.0
-      },
+      "rolls": 2.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -17,7 +13,7 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 0.0,
+                "min": 1.0,
                 "max": 3.0
               },
               "add": false
@@ -33,13 +29,17 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 0.0,
+                "min": 1.0,
                 "max": 2.0
               },
               "add": false
             }
           ],
           "name": "minecraft:shulker_box"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 3
         }
 	  ]
 	},
