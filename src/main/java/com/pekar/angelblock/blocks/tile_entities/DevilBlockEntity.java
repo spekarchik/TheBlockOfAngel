@@ -136,6 +136,8 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
         LivingEntity entity = event.getEntity();
 //        PlayerManager.instance().sendMessage("living death");
         if (!(entity instanceof Enemy)) return;
+        var blockEntityLevel = getLevel();
+        if (blockEntityLevel == null || !entity.level().dimension().equals(blockEntityLevel.dimension())) return;
 
         var pos = getPosition();
         double distance = entity.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
