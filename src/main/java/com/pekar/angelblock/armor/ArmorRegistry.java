@@ -1,5 +1,7 @@
 package com.pekar.angelblock.armor;
 
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -84,7 +86,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModArmor> SUPER_CHESTPLATE = ITEMS.registerItem("super_chestplate", p ->
             new SuperArmor(ModArmorMaterial.SUPER, ArmorType.CHESTPLATE, p));
     public static final DeferredItem<ModArmor> SUPER_CHESTPLATE_FLYING = ITEMS.registerItem("super_chestplate_flying", p ->
-            new SuperArmorFlying(ModArmorMaterial.SUPER2, ArmorType.CHESTPLATE, p));
+            new SuperArmorFlying(ModArmorMaterial.SUPER2, ArmorType.CHESTPLATE, p.component(DataComponents.GLIDER, Unit.INSTANCE)));
     public static final DeferredItem<ModArmor> SUPER_LEGGINGS = ITEMS.registerItem("super_leggings", p ->
             new SuperArmor(ModArmorMaterial.SUPER, ArmorType.LEGGINGS, p));
     public static final DeferredItem<ModArmor> SUPER_LEGGINGS_WITH_REGENERATOR2 = ITEMS.registerItem("super_leggings_with_regenerator", p ->
@@ -101,7 +103,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModArmor> FLYING_HELMET = ITEMS.registerItem("flying_helmet", p ->
             new FlyingArmor(ModArmorMaterial.FLYING, ArmorType.HELMET, p));
     public static final DeferredItem<ModArmor> FLYING_CHESTPLATE = ITEMS.registerItem("flying_chestplate", p ->
-            new FlyingArmor(ModArmorMaterial.FLYING, ArmorType.CHESTPLATE, p));
+            new FlyingArmor(ModArmorMaterial.FLYING, ArmorType.CHESTPLATE, p.component(DataComponents.GLIDER, Unit.INSTANCE)));
     public static final DeferredItem<ModArmor> FLYING_LEGGINGS = ITEMS.registerItem("flying_leggings", p ->
             new FlyingArmor(ModArmorMaterial.FLYING, ArmorType.LEGGINGS, p));
     public static final DeferredItem<ModArmor> FLYING_BOOTS = ITEMS.registerItem("flying_boots", p ->

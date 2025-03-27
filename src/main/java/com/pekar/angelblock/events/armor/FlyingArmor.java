@@ -216,7 +216,7 @@ public class FlyingArmor extends Armor
         updateSlowFallingEffect();
 
         var playerEntity = player.getEntity();
-        if (playerEntity.isFallFlying() && !canFly())
+        if (playerEntity.isFallFlying() && player.isArmorElementPutOn(this, EquipmentSlot.CHEST) && !canFly())
         {
             playerEntity.stopFallFlying();
         }
