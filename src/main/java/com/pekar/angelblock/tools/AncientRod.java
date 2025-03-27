@@ -51,7 +51,7 @@ public class AncientRod extends MagneticRod
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
     {
-        if (isBroken(itemStack)) return 1F;
+        if (hasCriticalDamage(itemStack)) return 1F;
 
         if (blockState.getBlock() == Blocks.COBWEB)
             return 18.0F;
@@ -87,7 +87,7 @@ public class AncientRod extends MagneticRod
 
         var itemStack = player.getItemInHand(context.getHand());
 
-        if (!isBroken(itemStack))
+        if (!hasCriticalDamage(itemStack))
         {
             if (block instanceof InfestedBlock infestedBlock)
             {
@@ -194,18 +194,7 @@ public class AncientRod extends MagneticRod
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
         var block = state.getBlock();
-
-        return block == Blocks.STONE || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE
-                || block == Blocks.DEEPSLATE || block == Blocks.MOSSY_COBBLESTONE || block == Blocks.COBBLESTONE_SLAB || block == Blocks.STONE_SLAB
-                || block == Blocks.MOSSY_COBBLESTONE_SLAB || block == Blocks.STONE_BRICKS || block == Blocks.DEEPSLATE_BRICKS
-                || block == Blocks.MOSSY_STONE_BRICKS || block == Blocks.STONE_BRICK_SLAB || block == Blocks.DEEPSLATE_BRICK_SLAB
-                || block == Blocks.MOSSY_STONE_BRICK_SLAB
-                || (!isBroken(stack) && (block instanceof InfestedBlock || block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE
-                || block instanceof LeavesBlock || block == Blocks.COBWEB
-                || block == Blocks.DIRT || block == Blocks.COARSE_DIRT
-                || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || utils.blocks.types.isSandBlock(block)
-                || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM || block == Blocks.FARMLAND
-                || block == Blocks.DIRT_PATH));
+        return !hasCriticalDamage(stack) && block == Blocks.COBWEB;
     }
 
     @Override
@@ -330,7 +319,7 @@ public class AncientRod extends MagneticRod
 
                     if (block == Blocks.COBWEB)
                     {
-                        level.destroyBlock(localPos, false);
+                        level.destroyBlock(localPos, true);
                     }
                 }
     }

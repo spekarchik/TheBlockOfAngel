@@ -249,7 +249,7 @@ public class Planter extends WorkRod
 
     private boolean plantOffHandItem(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack, Block plantBlock)
     {
-        if (isBroken(toolItemStack)) return false;
+        if (hasCriticalDamage(toolItemStack)) return false;
 
         var blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
@@ -272,7 +272,7 @@ public class Planter extends WorkRod
 
     private boolean bonemealPlant(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack)
     {
-        if (isBroken(toolItemStack)) return false;
+        if (hasCriticalDamage(toolItemStack)) return false;
 
         var blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();

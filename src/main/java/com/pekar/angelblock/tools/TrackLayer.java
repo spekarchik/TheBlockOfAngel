@@ -55,7 +55,7 @@ public class TrackLayer extends WorkRod
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        if (isBroken(itemStack)) return false;
+        if (hasCriticalDamage(itemStack)) return false;
 
         var block = blockState.getBlock();
         if (!level.isClientSide() && isTrackLayerCompatible(block) && livingEntity instanceof Player player)
@@ -70,7 +70,7 @@ public class TrackLayer extends WorkRod
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
     {
-        if (isBroken(itemStack)) return 1F;
+        if (hasCriticalDamage(itemStack)) return 1F;
 
         return isTrackLayerCompatible(blockState.getBlock()) ? 10F : 1F;
     }
@@ -266,7 +266,7 @@ public class TrackLayer extends WorkRod
 
     private boolean dropBlock(Player player, Level level, Block originBlock, BlockPos pos, ItemStack toolItemStack, boolean shouldDrop)
     {
-        if (isBroken(toolItemStack)) return false;
+        if (hasCriticalDamage(toolItemStack)) return false;
 
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
@@ -285,7 +285,7 @@ public class TrackLayer extends WorkRod
 
     private boolean placeBlock(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack, Block placingBlock)
     {
-        if (isBroken(toolItemStack)) return false;
+        if (hasCriticalDamage(toolItemStack)) return false;
 
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int itemCount = offHandItemStack.getCount();

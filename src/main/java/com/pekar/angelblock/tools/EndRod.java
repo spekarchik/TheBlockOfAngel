@@ -40,7 +40,7 @@ public class EndRod extends AmethystRod
 
         var itemStack = player.getItemInHand(context.getHand());
 
-        if (!isBroken(itemStack))
+        if (!hasCriticalDamage(itemStack))
         {
             var pos = context.getClickedPos();
             var level = player.level();
@@ -82,7 +82,7 @@ public class EndRod extends AmethystRod
     {
         var offHandItemStack = player.getOffhandItem();
 
-        if (offHandItemStack.isEmpty() || isBroken(player.getMainHandItem()) || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
+        if (offHandItemStack.isEmpty() || hasCriticalDamage(player.getMainHandItem()) || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
             return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
 
         var offHandItem = offHandItemStack.getItem();
@@ -168,15 +168,6 @@ public class EndRod extends AmethystRod
     private void playWeatherSound(ServerPlayer serverPlayer)
     {
         new PlaySoundPacket(SoundEvents.EXPERIENCE_ORB_PICKUP).sendToPlayer(serverPlayer);
-    }
-
-    @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
-    {
-        var block = state.getBlock();
-
-        return super.isCorrectToolForDrops(stack, state)
-                || (!isBroken(stack) && (block == Blocks.TUFF));
     }
 
     private String getRodId()

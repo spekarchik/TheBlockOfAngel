@@ -156,7 +156,7 @@ public class Builder extends WorkRod
 
     protected boolean placeBlock(Player player, Level level, Block clickedBlock, BlockPos clickedPos, BlockPos pos, Direction facing, ItemStack toolItemStack, Block placingBlock)
     {
-        if (isBroken(toolItemStack)) return false;
+        if (hasCriticalDamage(toolItemStack)) return false;
 
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int itemCount = offHandItemStack.getCount();

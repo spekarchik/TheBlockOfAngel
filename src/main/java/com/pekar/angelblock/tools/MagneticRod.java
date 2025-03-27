@@ -47,7 +47,7 @@ public class MagneticRod extends ModRod
         var player = context.getPlayer();
         var itemStack = player.getItemInHand(context.getHand());
 
-        if (isBroken(itemStack)) return InteractionResult.FAIL;
+        if (hasCriticalDamage(itemStack)) return InteractionResult.FAIL;
 
         if (!isEnhanced() || !player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
         {
