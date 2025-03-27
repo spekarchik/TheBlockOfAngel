@@ -7,17 +7,11 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:rendelithic_ingot"
-    },
+    "angelblock:rendelithic_ingot",
     "B":
-    {
-      "item": "angelblock:armor_fiber"
-    },
+    "angelblock:armor_fiber",
     "C":
-    {
-      "item": "angelblock:vesicular_terracotta"
-    }
+    "angelblock:vesicular_terracotta"
   },
   "result": {
     "id": "angelblock:rendelithic_plate",

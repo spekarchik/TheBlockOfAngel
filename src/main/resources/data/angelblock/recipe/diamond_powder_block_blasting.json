@@ -1,8 +1,6 @@
 {
     "type": "minecraft:blasting",
-    "ingredient": {
-        "item": "angelblock:diamond_powder_block"
-    },
+    "ingredient": "angelblock:diamond_powder_block",
     "result": {
         "id": "minecraft:diamond_block"
     },

@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "angelblock:endstone_powder_block"
-    }
+    "angelblock:endstone_powder_block"
   ],
   "result": {
     "id": "angelblock:endstone_powder",

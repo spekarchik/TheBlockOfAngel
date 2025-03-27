@@ -7,9 +7,7 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:saltpeter"
-    }
+    "angelblock:saltpeter"
   },
   "result": {
     "id": "angelblock:saltpeter_block",

@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:rendelithic_leggings"
-    },
-    "addition": {
-        "item": "angelblock:super_plate"
-    },
+    "base": "angelblock:rendelithic_leggings",
+    "addition": "angelblock:super_plate",
     "result": {
         "id": "angelblock:super_leggings"
     },
-    "template": {
-        "item": "angelblock:super_armor_upgrade_kit"
-    }
+    "template": "angelblock:super_armor_upgrade_kit"
 }

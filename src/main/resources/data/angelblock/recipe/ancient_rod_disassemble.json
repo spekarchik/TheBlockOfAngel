@@ -1,16 +1,10 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:ancient_rod"
-    },
-    "addition": {
-        "item": "minecraft:flint"
-    },
+    "base": "angelblock:ancient_rod",
+    "addition": "minecraft:flint",
     "result": {
         "id": "minecraft:bamboo",
         "count": 2
     },
-    "template": {
-        "item": "angelblock:downgrade_kit"
-    }
+    "template": "angelblock:downgrade_kit"
 }

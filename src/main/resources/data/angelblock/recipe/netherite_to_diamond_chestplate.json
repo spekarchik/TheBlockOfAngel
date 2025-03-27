@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:netherite_chestplate"
-  },
-  "addition": {
-    "item": "minecraft:flint"
-  },
+  "base": "minecraft:netherite_chestplate",
+  "addition": "minecraft:flint",
   "result": {
     "id": "minecraft:diamond_chestplate"
   },
-  "template": {
-    "item": "angelblock:downgrade_kit"
-  }
+  "template": "angelblock:downgrade_kit"
 }

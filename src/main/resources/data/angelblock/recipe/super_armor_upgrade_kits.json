@@ -6,18 +6,10 @@
     "DDD"
   ],
   "key": {
-    "@": {
-      "item": "angelblock:super_armor_upgrade_kit"
-    },
-    "#": {
-      "item": "angelblock:super_ingot"
-    },
-    "A": {
-      "item": "minecraft:copper_ingot"
-    },
-    "D": {
-      "item": "minecraft:diamond"
-    }
+    "@": "angelblock:super_armor_upgrade_kit",
+    "#": "angelblock:super_ingot",
+    "A": "minecraft:copper_ingot",
+    "D": "minecraft:diamond"
   },
   "result": {
     "id": "angelblock:super_armor_upgrade_kit",

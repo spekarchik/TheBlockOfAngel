@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:diamond_axe"
-  },
-  "addition": {
-    "item": "angelblock:limonite_ingot"
-  },
+  "base": "minecraft:diamond_axe",
+  "addition": "angelblock:limonite_ingot",
   "result": {
     "id": "angelblock:limonite_primary_axe"
   },
-  "template": {
-    "item": "angelblock:limonite_tool_upgrade_kit"
-  }
+  "template": "angelblock:limonite_tool_upgrade_kit"
 }

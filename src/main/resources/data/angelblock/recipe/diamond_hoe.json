@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "minecraft:iron_hoe"
-    },
-    "addition": {
-        "item": "minecraft:diamond_hoe"
-    },
+    "base": "minecraft:iron_hoe",
+    "addition": "minecraft:diamond_hoe",
     "result": {
         "id": "minecraft:diamond_hoe"
     },
-    "template": {
-        "item": "angelblock:diamond_tool_upgrade_kit"
-    }
+    "template": "angelblock:diamond_tool_upgrade_kit"
 }

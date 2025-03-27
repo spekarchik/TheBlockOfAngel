@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:rendelithic_primary_sword"
-    },
-    "addition": {
-        "item": "angelblock:flame_stone"
-    },
+    "base": "angelblock:rendelithic_primary_sword",
+    "addition": "angelblock:flame_stone",
     "result": {
         "id": "angelblock:rendelithic_sword"
     },
-    "template": {
-        "item": "angelblock:rendelithic_tool_upgrade_kit"
-    }
+    "template": "angelblock:rendelithic_tool_upgrade_kit"
 }

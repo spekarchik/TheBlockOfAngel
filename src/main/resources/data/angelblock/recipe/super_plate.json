@@ -7,17 +7,11 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:super_ingot"
-    },
+    "angelblock:super_ingot",
     "B":
-    {
-      "item": "angelblock:energy_fiber"
-    },
+    "angelblock:energy_fiber",
     "C":
-    {
-      "item": "angelblock:energy_crystal"
-    }
+    "angelblock:energy_crystal"
   },
   "result": {
     "id": "angelblock:super_plate",

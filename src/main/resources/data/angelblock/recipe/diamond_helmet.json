@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "minecraft:iron_helmet"
-    },
-    "addition": {
-        "item": "minecraft:diamond_helmet"
-    },
+    "base": "minecraft:iron_helmet",
+    "addition": "minecraft:diamond_helmet",
     "result": {
         "id": "minecraft:diamond_helmet"
     },
-    "template": {
-        "item": "angelblock:diamond_armor_upgrade_kit"
-    }
+    "template": "angelblock:diamond_armor_upgrade_kit"
 }

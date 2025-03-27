@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "angelblock:lapis_material_block"
-    }
+    "angelblock:lapis_material_block"
   ],
   "result": {
     "id": "angelblock:lapis_ingot",

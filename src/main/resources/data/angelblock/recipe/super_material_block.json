@@ -7,9 +7,7 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:super_ingot"
-    }
+    "angelblock:super_ingot"
   },
   "result": {
     "id": "angelblock:super_material_block",

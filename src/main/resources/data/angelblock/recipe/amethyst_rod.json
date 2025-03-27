@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:fire_rod"
-    },
-    "addition": {
-        "item": "minecraft:amethyst_shard"
-    },
+    "base": "angelblock:fire_rod",
+    "addition": "minecraft:amethyst_shard",
     "result": {
         "id": "angelblock:amethyst_rod"
     },
-    "template": {
-        "item": "angelblock:rod_upgrade_kit"
-    }
+    "template": "angelblock:rod_upgrade_kit"
 }

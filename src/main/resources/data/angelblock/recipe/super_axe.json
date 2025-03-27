@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:super_primary_axe"
-    },
-    "addition": {
-        "item": "angelblock:super_crystal"
-    },
+    "base": "angelblock:super_primary_axe",
+    "addition": "angelblock:super_crystal",
     "result": {
         "id": "angelblock:super_axe"
     },
-    "template": {
-        "item": "angelblock:super_tool_upgrade_kit"
-    }
+    "template": "angelblock:super_tool_upgrade_kit"
 }

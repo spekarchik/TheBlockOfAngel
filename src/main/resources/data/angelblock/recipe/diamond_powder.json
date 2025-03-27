@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "angelblock:diamond_powder_block"
-    }
+    "angelblock:diamond_powder_block"
   ],
   "result": {
     "id": "angelblock:diamond_powder",

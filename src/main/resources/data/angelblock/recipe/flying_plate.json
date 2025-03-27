@@ -6,15 +6,9 @@
         "aaa"
     ],
     "key": {
-        "a": {
-            "item": "angelblock:flying_ingot"
-        },
-        "A": {
-            "item": "angelblock:armor_fiber"
-        },
-        "P": {
-            "item": "minecraft:phantom_membrane"
-        }
+        "a": "angelblock:flying_ingot",
+        "A": "angelblock:armor_fiber",
+        "P": "minecraft:phantom_membrane"
     },
     "result": {
         "id": "angelblock:flying_plate",

@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:end_rod"
-    },
-    "addition": {
-        "item": "minecraft:flint"
-    },
+    "base": "angelblock:end_rod",
+    "addition": "minecraft:flint",
     "result": {
         "id": "angelblock:amethyst_rod"
     },
-    "template": {
-        "item": "angelblock:downgrade_kit"
-    }
+    "template": "angelblock:downgrade_kit"
 }

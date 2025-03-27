@@ -6,18 +6,10 @@
     "DDD"
   ],
   "key": {
-    "@": {
-      "item": "angelblock:lapis_tool_upgrade_kit"
-    },
-    "#": {
-      "item": "angelblock:lapis_ingot"
-    },
-    "A": {
-      "item": "minecraft:copper_ingot"
-    },
-    "D": {
-      "item": "minecraft:diamond"
-    }
+    "@": "angelblock:lapis_tool_upgrade_kit",
+    "#": "angelblock:lapis_ingot",
+    "A": "minecraft:copper_ingot",
+    "D": "minecraft:diamond"
   },
   "result": {
     "id": "angelblock:lapis_tool_upgrade_kit",

@@ -7,9 +7,7 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:flying_ingot"
-    }
+    "angelblock:flying_ingot"
   },
   "result": {
     "id": "angelblock:flying_material_block",

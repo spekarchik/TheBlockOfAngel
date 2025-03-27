@@ -6,15 +6,9 @@
         "?"
     ],
     "key": {
-        "#": {
-            "item": "minecraft:dispenser"
-        },
-        "@": {
-            "item": "minecraft:nautilus_shell"
-        },
-        "?": {
-            "item": "angelblock:ancient_rod"
-        }
+        "#": "minecraft:dispenser",
+        "@": "minecraft:nautilus_shell",
+        "?": "angelblock:ancient_rod"
     },
     "result": {
         "id": "angelblock:planter",

@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "angelblock:diamithic_material_block"
-    }
+    "angelblock:diamithic_material_block"
   ],
   "result": {
     "id": "angelblock:diamithic_ingot",

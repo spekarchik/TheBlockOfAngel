@@ -7,9 +7,7 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:diamithic_ingot"
-    }
+    "angelblock:diamithic_ingot"
   },
   "result": {
     "id": "angelblock:diamithic_material_block",

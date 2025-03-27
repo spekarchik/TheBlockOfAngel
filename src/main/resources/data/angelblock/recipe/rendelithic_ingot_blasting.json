@@ -1,8 +1,6 @@
 {
     "type": "minecraft:blasting",
-    "ingredient": {
-        "item": "angelblock:rendelithic_powder"
-    },
+    "ingredient": "angelblock:rendelithic_powder",
     "result": {
         "id": "angelblock:rendelithic_ingot"
     },

@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:netherite_axe"
-  },
-  "addition": {
-    "item": "minecraft:flint"
-  },
+  "base": "minecraft:netherite_axe",
+  "addition": "minecraft:flint",
   "result": {
     "id": "minecraft:diamond_axe"
   },
-  "template": {
-    "item": "angelblock:downgrade_kit"
-  }
+  "template": "angelblock:downgrade_kit"
 }

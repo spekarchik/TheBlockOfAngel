@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:marine_rod"
-    },
-    "addition": {
-        "item": "minecraft:lodestone"
-    },
+    "base": "angelblock:marine_rod",
+    "addition": "minecraft:lodestone",
     "result": {
         "id": "angelblock:marine_magnetic_rod"
     },
-    "template": {
-        "item": "angelblock:rod_upgrade_kit"
-    }
+    "template": "angelblock:rod_upgrade_kit"
 }

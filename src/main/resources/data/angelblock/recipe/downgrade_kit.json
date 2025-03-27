@@ -6,15 +6,9 @@
     "AAA"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:iron_ingot"
-    },
-    "A": {
-      "item": "minecraft:flint"
-    },
-    "D": {
-      "item": "minecraft:copper_ingot"
-    }
+    "#": "minecraft:iron_ingot",
+    "A": "minecraft:flint",
+    "D": "minecraft:copper_ingot"
   },
   "result": {
     "id": "angelblock:downgrade_kit",

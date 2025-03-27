@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:diamithic_leggings"
-    },
-    "addition": {
-        "item": "angelblock:bios_diamond"
-    },
+    "base": "angelblock:diamithic_leggings",
+    "addition": "angelblock:bios_diamond",
     "result": {
         "id": "angelblock:diamithic_leggings_with_regenerator"
     },
-    "template": {
-        "item": "angelblock:diamithic_armor_upgrade_kit"
-    }
+    "template": "angelblock:diamithic_armor_upgrade_kit"
 }

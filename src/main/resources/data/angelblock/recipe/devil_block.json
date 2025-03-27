@@ -7,21 +7,13 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:guardian_eye"
-    },
+    "angelblock:guardian_eye",
     "B":
-    {
-      "item": "angelblock:ancient_canine"
-    },
+    "angelblock:ancient_canine",
     "C":
-    {
-      "item": "angelblock:nether_bars_block"
-    },
+    "angelblock:nether_bars_block",
     "D":
-    {
-      "item": "minecraft:dragon_head"
-    }
+    "minecraft:dragon_head"
   },
   "result": {
     "id": "angelblock:devil_block",

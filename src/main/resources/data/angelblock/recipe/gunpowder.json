@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "angelblock:gunpowder_block"
-    }
+    "angelblock:gunpowder_block"
   ],
   "result": {
     "id": "minecraft:gunpowder",

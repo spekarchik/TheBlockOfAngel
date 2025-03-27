@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:netherite_helmet"
-  },
-  "addition": {
-    "item": "minecraft:flint"
-  },
+  "base": "minecraft:netherite_helmet",
+  "addition": "minecraft:flint",
   "result": {
     "id": "minecraft:diamond_helmet"
   },
-  "template": {
-    "item": "angelblock:downgrade_kit"
-  }
+  "template": "angelblock:downgrade_kit"
 }

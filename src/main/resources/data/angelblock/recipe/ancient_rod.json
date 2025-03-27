@@ -6,12 +6,8 @@
         "/"
     ],
     "key": {
-        "#": {
-            "item": "angelblock:bios_diamond"
-        },
-        "/": {
-            "item": "minecraft:bamboo"
-        }
+        "#": "angelblock:bios_diamond",
+        "/": "minecraft:bamboo"
     },
     "result": {
         "id": "angelblock:ancient_rod",

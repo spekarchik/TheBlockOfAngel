@@ -1,9 +1,7 @@
 {
     "type": "minecraft:blasting",
     "ingredient":
-    {
-        "item": "angelblock:diamithic_powder"
-    },
+    "angelblock:diamithic_powder",
     "result": {
         "id": "angelblock:diamithic_ingot"
     },

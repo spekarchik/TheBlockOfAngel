@@ -7,21 +7,13 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:evoker_amulet"
-    },
+    "angelblock:evoker_amulet",
     "C":
-    {
-      "item": "angelblock:devil_block"
-    },
+    "angelblock:devil_block",
     "D":
-    {
-      "item": "angelblock:ancient_scroll"
-    },
+    "angelblock:ancient_scroll",
     "E":
-    {
-      "item": "angelblock:miner_figure"
-    }
+    "angelblock:miner_figure"
   },
   "result": {
     "id": "angelblock:angel_block",

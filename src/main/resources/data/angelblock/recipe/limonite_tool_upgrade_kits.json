@@ -6,18 +6,10 @@
     "DDD"
   ],
   "key": {
-    "@": {
-      "item": "angelblock:limonite_tool_upgrade_kit"
-    },
-    "#": {
-      "item": "angelblock:limonite_ingot"
-    },
-    "A": {
-      "item": "minecraft:copper_ingot"
-    },
-    "D": {
-      "item": "minecraft:diamond"
-    }
+    "@": "angelblock:limonite_tool_upgrade_kit",
+    "#": "angelblock:limonite_ingot",
+    "A": "minecraft:copper_ingot",
+    "D": "minecraft:diamond"
   },
   "result": {
     "id": "angelblock:limonite_tool_upgrade_kit",

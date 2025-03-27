@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "minecraft:chainmail_chestplate"
-    },
-    "addition": {
-        "item": "angelblock:rendelithic_plate"
-    },
+    "base": "minecraft:chainmail_chestplate",
+    "addition": "angelblock:rendelithic_plate",
     "result": {
         "id": "angelblock:rendelithic_chestplate"
     },
-    "template": {
-        "item": "angelblock:rendelithic_armor_upgrade_kit"
-    }
+    "template": "angelblock:rendelithic_armor_upgrade_kit"
 }

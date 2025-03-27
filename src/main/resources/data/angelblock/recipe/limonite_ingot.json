@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "angelblock:limonite_material_block"
-    }
+    "angelblock:limonite_material_block"
   ],
   "result": {
     "id": "angelblock:limonite_ingot",

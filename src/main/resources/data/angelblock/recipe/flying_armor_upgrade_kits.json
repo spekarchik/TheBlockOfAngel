@@ -6,18 +6,10 @@
     "DDD"
   ],
   "key": {
-    "@": {
-      "item": "angelblock:flying_armor_upgrade_kit"
-    },
-    "#": {
-      "item": "angelblock:flying_ingot"
-    },
-    "A": {
-      "item": "minecraft:copper_ingot"
-    },
-    "D": {
-      "item": "minecraft:diamond"
-    }
+    "@": "angelblock:flying_armor_upgrade_kit",
+    "#": "angelblock:flying_ingot",
+    "A": "minecraft:copper_ingot",
+    "D": "minecraft:diamond"
   },
   "result": {
     "id": "angelblock:flying_armor_upgrade_kit",

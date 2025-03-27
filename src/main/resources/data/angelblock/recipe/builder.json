@@ -6,15 +6,9 @@
         "?"
     ],
     "key": {
-        "#": {
-            "item": "minecraft:piston"
-        },
-        "/": {
-            "item": "angelblock:strength_pearl"
-        },
-        "?": {
-            "item": "angelblock:amethyst_rod"
-        }
+        "#": "minecraft:piston",
+        "/": "angelblock:strength_pearl",
+        "?": "angelblock:amethyst_rod"
     },
     "result": {
         "id": "angelblock:builder",

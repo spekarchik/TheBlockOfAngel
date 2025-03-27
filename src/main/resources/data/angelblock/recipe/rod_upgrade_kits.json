@@ -6,18 +6,10 @@
     "DDD"
   ],
   "key": {
-    "@": {
-      "item": "angelblock:rod_upgrade_kit"
-    },
-    "#": {
-      "item": "minecraft:crying_obsidian"
-    },
-    "A": {
-      "item": "minecraft:copper_ingot"
-    },
-    "D": {
-      "item": "minecraft:diamond"
-    }
+    "@": "angelblock:rod_upgrade_kit",
+    "#": "minecraft:crying_obsidian",
+    "A": "minecraft:copper_ingot",
+    "D": "minecraft:diamond"
   },
   "result": {
     "id": "angelblock:rod_upgrade_kit",

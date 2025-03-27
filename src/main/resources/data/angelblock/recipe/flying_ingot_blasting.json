@@ -1,8 +1,6 @@
 {
     "type": "minecraft:blasting",
-    "ingredient": {
-        "item": "angelblock:flying_powder"
-    },
+    "ingredient": "angelblock:flying_powder",
     "result": {
         "id": "angelblock:flying_ingot"
     },

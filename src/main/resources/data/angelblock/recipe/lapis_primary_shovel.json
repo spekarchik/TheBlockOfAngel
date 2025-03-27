@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:diamond_shovel"
-  },
-  "addition": {
-    "item": "angelblock:lapis_ingot"
-  },
+  "base": "minecraft:diamond_shovel",
+  "addition": "angelblock:lapis_ingot",
   "result": {
     "id": "angelblock:lapis_primary_shovel"
   },
-  "template": {
-    "item": "angelblock:lapis_tool_upgrade_kit"
-  }
+  "template": "angelblock:lapis_tool_upgrade_kit"
 }

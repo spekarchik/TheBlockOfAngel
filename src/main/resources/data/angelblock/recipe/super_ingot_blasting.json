@@ -1,8 +1,6 @@
 {
     "type": "minecraft:blasting",
-    "ingredient": {
-        "item": "angelblock:super_powder"
-    },
+    "ingredient": "angelblock:super_powder",
     "result": {
         "id": "angelblock:super_ingot"
     },

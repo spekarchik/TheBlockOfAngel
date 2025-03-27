@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:diamithic_primary_pickaxe"
-    },
-    "addition": {
-        "item": "angelblock:strength_pearl"
-    },
+    "base": "angelblock:diamithic_primary_pickaxe",
+    "addition": "angelblock:strength_pearl",
     "result": {
         "id": "angelblock:diamithic_pickaxe"
     },
-    "template": {
-        "item": "angelblock:diamithic_tool_upgrade_kit"
-    }
+    "template": "angelblock:diamithic_tool_upgrade_kit"
 }

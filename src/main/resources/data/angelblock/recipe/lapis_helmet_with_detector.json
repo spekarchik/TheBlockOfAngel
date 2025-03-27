@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:lapis_helmet"
-    },
-    "addition": {
-        "item": "minecraft:sculk_sensor"
-    },
+    "base": "angelblock:lapis_helmet",
+    "addition": "minecraft:sculk_sensor",
     "result": {
         "id": "angelblock:lapis_helmet_with_detector"
     },
-    "template": {
-        "item": "angelblock:lapis_armor_upgrade_kit"
-    }
+    "template": "angelblock:lapis_armor_upgrade_kit"
 }

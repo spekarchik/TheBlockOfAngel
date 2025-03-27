@@ -7,9 +7,7 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:diamond_powder"
-    }
+    "angelblock:diamond_powder"
   },
   "result": {
     "id": "angelblock:diamond_powder_block",

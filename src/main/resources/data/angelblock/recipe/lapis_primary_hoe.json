@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:diamond_hoe"
-  },
-  "addition": {
-    "item": "angelblock:lapis_ingot"
-  },
+  "base": "minecraft:diamond_hoe",
+  "addition": "angelblock:lapis_ingot",
   "result": {
     "id": "angelblock:lapis_primary_hoe"
   },
-  "template": {
-    "item": "angelblock:lapis_tool_upgrade_kit"
-  }
+  "template": "angelblock:lapis_tool_upgrade_kit"
 }

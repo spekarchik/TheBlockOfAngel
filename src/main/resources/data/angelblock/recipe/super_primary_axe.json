@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:netherite_axe"
-  },
-  "addition": {
-    "item": "angelblock:super_ingot"
-  },
+  "base": "minecraft:netherite_axe",
+  "addition": "angelblock:super_ingot",
   "result": {
     "id": "angelblock:super_primary_axe"
   },
-  "template": {
-    "item": "angelblock:super_tool_upgrade_kit"
-  }
+  "template": "angelblock:super_tool_upgrade_kit"
 }

@@ -1,8 +1,6 @@
 {
     "type": "minecraft:smelting",
-    "ingredient": {
-        "item": "angelblock:limonite_powder"
-    },
+    "ingredient": "angelblock:limonite_powder",
     "result": {
         "id": "angelblock:limonite_ingot"
     },

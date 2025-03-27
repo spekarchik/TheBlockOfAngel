@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "angelblock:limonite_leggings_with_regenerator"
-  },
-  "addition": {
-    "item": "minecraft:flint"
-  },
+  "base": "angelblock:limonite_leggings_with_regenerator",
+  "addition": "minecraft:flint",
   "result": {
     "id": "minecraft:chainmail_leggings"
   },
-  "template": {
-    "item": "angelblock:downgrade_kit"
-  }
+  "template": "angelblock:downgrade_kit"
 }

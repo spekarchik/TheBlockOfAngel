@@ -7,25 +7,15 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:bios_diamond"
-    },
+    "angelblock:bios_diamond",
     "B":
-    {
-      "item": "angelblock:strength_pearl"
-    },
+    "angelblock:strength_pearl",
     "C":
-    {
-      "item": "angelblock:flame_stone"
-    },
+    "angelblock:flame_stone",
     "D":
-    {
-      "item": "angelblock:marine_crystal"
-    },
+    "angelblock:marine_crystal",
     "E":
-    {
-      "item": "angelblock:end_sapphire"
-    }
+    "angelblock:end_sapphire"
   },
   "result": {
     "id": "angelblock:super_crystal",

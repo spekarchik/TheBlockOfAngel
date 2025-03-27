@@ -1,8 +1,6 @@
 {
     "type": "minecraft:blasting",
-    "ingredient": {
-        "item": "minecraft:obsidian"
-    },
+    "ingredient": "minecraft:obsidian",
     "result": {
         "id": "angelblock:cracked_obsidian_block"
     },

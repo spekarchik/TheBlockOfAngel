@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:netherite_sword"
-  },
-  "addition": {
-    "item": "minecraft:flint"
-  },
+  "base": "minecraft:netherite_sword",
+  "addition": "minecraft:flint",
   "result": {
     "id": "minecraft:diamond_sword"
   },
-  "template": {
-    "item": "angelblock:downgrade_kit"
-  }
+  "template": "angelblock:downgrade_kit"
 }

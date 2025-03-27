@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:rendelithic_boots"
-    },
-    "addition": {
-        "item": "angelblock:strength_pearl"
-    },
+    "base": "angelblock:rendelithic_boots",
+    "addition": "angelblock:strength_pearl",
     "result": {
         "id": "angelblock:rendelithic_boots_with_strength_boost"
     },
-    "template": {
-        "item": "angelblock:rendelithic_armor_upgrade_kit"
-    }
+    "template": "angelblock:rendelithic_armor_upgrade_kit"
 }

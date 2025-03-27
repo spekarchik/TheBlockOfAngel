@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "angelblock:lapis_boots_with_sea_power"
-  },
-  "addition": {
-    "item": "minecraft:flint"
-  },
+  "base": "angelblock:lapis_boots_with_sea_power",
+  "addition": "minecraft:flint",
   "result": {
     "id": "minecraft:diamond_boots"
   },
-  "template": {
-    "item": "angelblock:downgrade_kit"
-  }
+  "template": "angelblock:downgrade_kit"
 }

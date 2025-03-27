@@ -1,21 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "angelblock:rendelithic_ingot"
-    },
-    {
-      "item": "angelblock:diamithic_ingot"
-    },
-    {
-      "item": "angelblock:limonite_ingot"
-    },
-    {
-      "item": "angelblock:lapis_ingot"
-    },
-    {
-      "item": "minecraft:popped_chorus_fruit"
-    }
+    "angelblock:rendelithic_ingot",
+    "angelblock:diamithic_ingot",
+    "angelblock:limonite_ingot",
+    "angelblock:lapis_ingot",
+    "minecraft:popped_chorus_fruit"
   ],
   "result": {
     "id": "angelblock:super_ingot",

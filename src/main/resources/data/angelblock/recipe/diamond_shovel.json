@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "minecraft:iron_shovel"
-    },
-    "addition": {
-        "item": "minecraft:diamond_shovel"
-    },
+    "base": "minecraft:iron_shovel",
+    "addition": "minecraft:diamond_shovel",
     "result": {
         "id": "minecraft:diamond_shovel"
     },
-    "template": {
-        "item": "angelblock:diamond_tool_upgrade_kit"
-    }
+    "template": "angelblock:diamond_tool_upgrade_kit"
 }

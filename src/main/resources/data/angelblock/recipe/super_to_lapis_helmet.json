@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "angelblock:super_helmet"
-  },
-  "addition": {
-    "item": "minecraft:flint"
-  },
+  "base": "angelblock:super_helmet",
+  "addition": "minecraft:flint",
   "result": {
     "id": "angelblock:lapis_helmet"
   },
-  "template": {
-    "item": "angelblock:downgrade_kit"
-  }
+  "template": "angelblock:downgrade_kit"
 }

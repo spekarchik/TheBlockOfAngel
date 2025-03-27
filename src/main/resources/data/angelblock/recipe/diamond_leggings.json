@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "minecraft:iron_leggings"
-    },
-    "addition": {
-        "item": "minecraft:diamond_leggings"
-    },
+    "base": "minecraft:iron_leggings",
+    "addition": "minecraft:diamond_leggings",
     "result": {
         "id": "minecraft:diamond_leggings"
     },
-    "template": {
-        "item": "angelblock:diamond_armor_upgrade_kit"
-    }
+    "template": "angelblock:diamond_armor_upgrade_kit"
 }

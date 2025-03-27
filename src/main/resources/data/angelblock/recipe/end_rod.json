@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:amethyst_rod"
-    },
-    "addition": {
-        "item": "angelblock:super_crystal"
-    },
+    "base": "angelblock:amethyst_rod",
+    "addition": "angelblock:super_crystal",
     "result": {
         "id": "angelblock:end_rod"
     },
-    "template": {
-        "item": "angelblock:rod_upgrade_kit"
-    }
+    "template": "angelblock:rod_upgrade_kit"
 }

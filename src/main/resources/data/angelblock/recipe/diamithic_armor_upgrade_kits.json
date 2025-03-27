@@ -6,18 +6,10 @@
     "DDD"
   ],
   "key": {
-    "@": {
-      "item": "angelblock:diamithic_armor_upgrade_kit"
-    },
-    "#": {
-      "item": "angelblock:diamithic_ingot"
-    },
-    "A": {
-      "item": "minecraft:copper_ingot"
-    },
-    "D": {
-      "item": "minecraft:diamond"
-    }
+    "@": "angelblock:diamithic_armor_upgrade_kit",
+    "#": "angelblock:diamithic_ingot",
+    "A": "minecraft:copper_ingot",
+    "D": "minecraft:diamond"
   },
   "result": {
     "id": "angelblock:diamithic_armor_upgrade_kit",

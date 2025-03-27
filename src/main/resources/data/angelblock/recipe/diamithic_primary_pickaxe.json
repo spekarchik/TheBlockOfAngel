@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "minecraft:netherite_pickaxe"
-  },
-  "addition": {
-    "item": "angelblock:diamithic_ingot"
-  },
+  "base": "minecraft:netherite_pickaxe",
+  "addition": "angelblock:diamithic_ingot",
   "result": {
     "id": "angelblock:diamithic_primary_pickaxe"
   },
-  "template": {
-    "item": "angelblock:diamithic_tool_upgrade_kit"
-  }
+  "template": "angelblock:diamithic_tool_upgrade_kit"
 }

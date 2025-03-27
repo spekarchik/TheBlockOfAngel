@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:lapis_primary_hoe"
-    },
-    "addition": {
-        "item": "angelblock:marine_crystal"
-    },
+    "base": "angelblock:lapis_primary_hoe",
+    "addition": "angelblock:marine_crystal",
     "result": {
         "id": "angelblock:lapis_hoe"
     },
-    "template": {
-        "item": "angelblock:lapis_tool_upgrade_kit"
-    }
+    "template": "angelblock:lapis_tool_upgrade_kit"
 }

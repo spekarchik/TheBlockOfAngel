@@ -7,17 +7,11 @@
   ],
   "key": {
     "I":
-    {
-      "item": "minecraft:end_rod"
-    },
+    "minecraft:end_rod",
     "R":
-    {
-      "item": "minecraft:redstone"
-    },
+    "minecraft:redstone",
     "B":
-    {
-      "item": "angelblock:basalt_fiber"
-    }
+    "angelblock:basalt_fiber"
   },
   "result": {
     "id": "angelblock:energy_fiber",

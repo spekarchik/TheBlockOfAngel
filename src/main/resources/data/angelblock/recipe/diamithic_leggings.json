@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "minecraft:netherite_leggings"
-    },
-    "addition": {
-        "item": "angelblock:diamithic_plate"
-    },
+    "base": "minecraft:netherite_leggings",
+    "addition": "angelblock:diamithic_plate",
     "result": {
         "id": "angelblock:diamithic_leggings"
     },
-    "template": {
-        "item": "angelblock:diamithic_armor_upgrade_kit"
-    }
+    "template": "angelblock:diamithic_armor_upgrade_kit"
 }

@@ -7,17 +7,11 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:limonite_ingot"
-    },
+    "angelblock:limonite_ingot",
     "B":
-    {
-      "item": "angelblock:armor_fiber"
-    },
+    "angelblock:armor_fiber",
     "C":
-    {
-      "item": "angelblock:flax_fibre"
-    }
+    "angelblock:flax_fibre"
   },
   "result": {
     "id": "angelblock:limonite_plate",

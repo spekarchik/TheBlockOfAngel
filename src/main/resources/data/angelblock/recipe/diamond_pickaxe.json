@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "minecraft:iron_pickaxe"
-    },
-    "addition": {
-        "item": "minecraft:diamond_pickaxe"
-    },
+    "base": "minecraft:iron_pickaxe",
+    "addition": "minecraft:diamond_pickaxe",
     "result": {
         "id": "minecraft:diamond_pickaxe"
     },
-    "template": {
-        "item": "angelblock:diamond_tool_upgrade_kit"
-    }
+    "template": "angelblock:diamond_tool_upgrade_kit"
 }

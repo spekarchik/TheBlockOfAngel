@@ -1,8 +1,6 @@
 {
     "type": "minecraft:smelting",
-    "ingredient": {
-        "item": "minecraft:end_stone"
-    },
+    "ingredient": "minecraft:end_stone",
     "result": {
         "id": "angelblock:cracked_endstone_block"
     },

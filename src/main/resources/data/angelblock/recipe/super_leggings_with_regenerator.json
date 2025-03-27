@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:super_leggings"
-    },
-    "addition": {
-        "item": "angelblock:bios_diamond"
-    },
+    "base": "angelblock:super_leggings",
+    "addition": "angelblock:bios_diamond",
     "result": {
         "id": "angelblock:super_leggings_with_regenerator"
     },
-    "template": {
-        "item": "angelblock:super_armor_upgrade_kit"
-    }
+    "template": "angelblock:super_armor_upgrade_kit"
 }

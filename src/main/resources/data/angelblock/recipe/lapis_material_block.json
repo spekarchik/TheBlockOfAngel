@@ -7,9 +7,7 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:lapis_ingot"
-    }
+    "angelblock:lapis_ingot"
   },
   "result": {
     "id": "angelblock:lapis_material_block",

@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "angelblock:lapis_primary_hoe"
-  },
-  "addition": {
-    "item": "minecraft:flint"
-  },
+  "base": "angelblock:lapis_primary_hoe",
+  "addition": "minecraft:flint",
   "result": {
     "id": "minecraft:diamond_hoe"
   },
-  "template": {
-    "item": "angelblock:downgrade_kit"
-  }
+  "template": "angelblock:downgrade_kit"
 }

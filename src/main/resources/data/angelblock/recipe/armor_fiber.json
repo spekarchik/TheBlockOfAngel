@@ -7,17 +7,11 @@
   ],
   "key": {
     "I":
-    {
-      "item": "minecraft:honeycomb"
-    },
+    "minecraft:honeycomb",
     "R":
-    {
-      "item": "minecraft:blaze_rod"
-    },
+    "minecraft:blaze_rod",
     "B":
-    {
-      "item": "angelblock:basalt_fiber"
-    }
+    "angelblock:basalt_fiber"
   },
   "result": {
     "id": "angelblock:armor_fiber",

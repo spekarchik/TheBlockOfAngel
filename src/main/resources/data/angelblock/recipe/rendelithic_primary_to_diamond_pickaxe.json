@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:rendelithic_primary_pickaxe"
-    },
-    "addition": {
-        "item": "minecraft:flint"
-    },
+    "base": "angelblock:rendelithic_primary_pickaxe",
+    "addition": "minecraft:flint",
     "result": {
         "id": "minecraft:diamond_pickaxe"
     },
-    "template": {
-        "item": "angelblock:downgrade_kit"
-    }
+    "template": "angelblock:downgrade_kit"
 }

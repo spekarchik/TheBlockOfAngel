@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "angelblock:flying_material_block"
-    }
+    "angelblock:flying_material_block"
   ],
   "result": {
     "id": "angelblock:flying_ingot",

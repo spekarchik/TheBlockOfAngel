@@ -7,9 +7,7 @@
   ],
   "key": {
     "A":
-    {
-      "item": "angelblock:limonite_ingot"
-    }
+    "angelblock:limonite_ingot"
   },
   "result": {
     "id": "angelblock:limonite_material_block",

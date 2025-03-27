@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:diamithic_chestplate"
-    },
-    "addition": {
-        "item": "angelblock:strength_pearl"
-    },
+    "base": "angelblock:diamithic_chestplate",
+    "addition": "angelblock:strength_pearl",
     "result": {
         "id": "angelblock:diamithic_chestplate_with_strength"
     },
-    "template": {
-        "item": "angelblock:diamithic_armor_upgrade_kit"
-    }
+    "template": "angelblock:diamithic_armor_upgrade_kit"
 }

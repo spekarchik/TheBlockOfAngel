@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:lapis_chestplate"
-    },
-    "addition": {
-        "item": "angelblock:strength_pearl"
-    },
+    "base": "angelblock:lapis_chestplate",
+    "addition": "angelblock:strength_pearl",
     "result": {
         "id": "angelblock:lapis_chestplate_with_strength"
     },
-    "template": {
-        "item": "angelblock:lapis_armor_upgrade_kit"
-    }
+    "template": "angelblock:lapis_armor_upgrade_kit"
 }

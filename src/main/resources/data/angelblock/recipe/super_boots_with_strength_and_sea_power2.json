@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:super_boots_with_sea_power"
-    },
-    "addition": {
-        "item": "angelblock:strength_pearl"
-    },
+    "base": "angelblock:super_boots_with_sea_power",
+    "addition": "angelblock:strength_pearl",
     "result": {
         "id": "angelblock:super_boots_with_strength_and_sea_power"
     },
-    "template": {
-        "item": "angelblock:super_armor_upgrade_kit"
-    }
+    "template": "angelblock:super_armor_upgrade_kit"
 }

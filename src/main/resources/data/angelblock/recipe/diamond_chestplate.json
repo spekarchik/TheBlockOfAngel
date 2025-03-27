@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "minecraft:iron_chestplate"
-    },
-    "addition": {
-        "item": "minecraft:diamond_chestplate"
-    },
+    "base": "minecraft:iron_chestplate",
+    "addition": "minecraft:diamond_chestplate",
     "result": {
         "id": "minecraft:diamond_chestplate"
     },
-    "template": {
-        "item": "angelblock:diamond_armor_upgrade_kit"
-    }
+    "template": "angelblock:diamond_armor_upgrade_kit"
 }

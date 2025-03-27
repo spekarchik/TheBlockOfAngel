@@ -1,15 +1,9 @@
 {
     "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:super_helmet"
-    },
-    "addition": {
-        "item": "minecraft:calibrated_sculk_sensor"
-    },
+    "base": "angelblock:super_helmet",
+    "addition": "minecraft:calibrated_sculk_sensor",
     "result": {
         "id": "angelblock:super_helmet_with_detector"
     },
-    "template": {
-        "item": "angelblock:super_armor_upgrade_kit"
-    }
+    "template": "angelblock:super_armor_upgrade_kit"
 }
