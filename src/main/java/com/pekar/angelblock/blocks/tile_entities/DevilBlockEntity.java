@@ -184,7 +184,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                 for (int j = 0; j < 3; j++)
                 {
                     int lx = targetPos.getX() + random.nextInt(11) - 5;
-                    int ly = targetPos.getY() + random.nextInt(8) - 2;
+                    int ly = targetPos.getY() + random.nextInt(10) - 3;
                     int lz = targetPos.getZ() + random.nextInt(11) - 5;
                     BlockPos leafPos = new BlockPos(lx, ly, lz);
                     BlockState leafState = level.getBlockState(leafPos);
