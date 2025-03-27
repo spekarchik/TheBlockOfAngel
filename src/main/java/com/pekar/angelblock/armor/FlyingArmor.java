@@ -34,8 +34,10 @@ public class FlyingArmor extends ModArmor
         if (entity.hasEffect(MobEffects.SLOW_FALLING)) return false;
         if (Utils.instance.dimension.isNether(entity.level().dimension()) || entity.isInWaterRainOrBubble()) return false;
 
-        var mainHandItemStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
-        var mainHandItem = mainHandItemStack.getItem();
+        var mainHandItemStack = entity.getMainHandItem();
+        if (mainHandItemStack.is(Items.FIREWORK_ROCKET)) return false;
+        var offHandItemStack = entity.getOffhandItem();
+        if (offHandItemStack.is(Items.FIREWORK_ROCKET)) return false;
 
         boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
                 .equals(ArmorRegistry.FLYING_HELMET.get().getArmorFamilyName());
@@ -50,8 +52,7 @@ public class FlyingArmor extends ModArmor
         int chestDamage = stack.getDamageValue();
         boolean isFullArmorSetPutOn = isFlyingBoots && isFlyingLeggings && isFlyingChestplate && isFlyingHelmet;
 
-        return isFullArmorSetPutOn && chestDamage < maxDamageToFly
-                && !mainHandItem.getName(mainHandItemStack).equals(Items.FIREWORK_ROCKET.getName(mainHandItemStack));
+        return isFullArmorSetPutOn && chestDamage < maxDamageToFly;
     }
 
     @Override
