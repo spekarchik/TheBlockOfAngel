@@ -14,29 +14,6 @@ public class SuperArmorFlying extends SuperArmor
         withElytra();
     }
 
-    // TODO: Add flying behavior
-//    @Override
-//    public boolean canElytraFly(ItemStack stack, LivingEntity entity)
-//    {
-//        if (type != Type.CHESTPLATE) return false;
-//        if (entity.hasEffect(MobEffects.SLOW_FALLING)) return false;
-//
-////        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
-////                .equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
-////        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
-////                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorFamilyName());
-////        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
-////                .equals(ArmorRegistry.SUPER_BOOTS.get().getArmorFamilyName());
-//        boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
-//                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getArmorFamilyName());
-////        boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
-//
-//        int maxDamageToFly = stack.getMaxDamage() / 2;
-//        int chestDamage = stack.getDamageValue();
-//
-//        return isFlyingChestplate && chestDamage < maxDamageToFly;
-//    }
-
     private String getModelName(LivingEntity entity, EquipmentSlot slot)
     {
         var item = entity.getItemBySlot(slot).getItem();

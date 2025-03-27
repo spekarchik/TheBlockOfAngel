@@ -169,7 +169,7 @@ public class NetherBarsBlock extends ModBlockWithDoubleHoverText
 
     private boolean connectsTo(BlockState state, LevelReader level, BlockPos pos)
     {
-        return (state.getBlock() instanceof NetherBarsBlock) || (state.isSolidRender()); // TODO: state.isSolidRender()
+        return (state.getBlock() instanceof NetherBarsBlock) || (state.isSolidRender());
     }
 
     @Override

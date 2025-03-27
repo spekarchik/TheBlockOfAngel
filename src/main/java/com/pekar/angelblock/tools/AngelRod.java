@@ -77,7 +77,7 @@ public class AngelRod extends EndRod
                 : InteractionHand.OFF_HAND;
         var itemStack = hand == InteractionHand.MAIN_HAND ? mainHandItemStack : offHandItemStack;
 
-        if (player.isShiftKeyDown() && blockState.isSolidRender()) // TODO: blockState.isSolidRender()
+        if (player.isShiftKeyDown() && blockState.isSolidRender())
         {
             if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
             {

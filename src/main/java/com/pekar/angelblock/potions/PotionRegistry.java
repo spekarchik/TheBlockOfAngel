@@ -32,7 +32,7 @@ public class PotionRegistry
     public static final Holder<MobEffect> ARMOR_HEAVY_JUMP_EFFECT = registerMobEffect("armor_heavy_jump_effect", HeavyJumpEffect::new);
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownPotion>> BLOCK_BREAKER_POTION =
-            registerThrownPotion("block_breaker_potion", BlockBreakerPotion::new); // TODO: Check if works
+            registerThrownPotion("block_breaker_potion", BlockBreakerPotion::new);
 
 
     public static void initStatic()

@@ -219,7 +219,7 @@ public class Builder extends WorkRod
     {
         var block = blockState.getBlock();
         return !blockState.hasBlockEntity() && !(block instanceof FallingBlock)
-                && (blockState.isSolidRender() || utils.blocks.types.isGlassBlock(block)); // TODO: Check if blockState.isSolidRender() works
+                && (blockState.isSolidRender() || utils.blocks.types.isGlassBlock(block));
     }
 
     @Override
