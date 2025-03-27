@@ -4,7 +4,10 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import com.pekar.angelblock.utils.Utils;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -88,6 +91,9 @@ public class FlyingArmor extends Armor
     protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
         slowFallingEffect.updateSwitchState();
+
+        if (event.getTo().is(Items.FIREWORK_ROCKET))
+            player.getEntity().stopFallFlying();
     }
 
     @Override
@@ -208,6 +214,12 @@ public class FlyingArmor extends Armor
     public void onCreeperCheck()
     {
         updateSlowFallingEffect();
+
+        var playerEntity = player.getEntity();
+        if (playerEntity.isFallFlying() && !canFly())
+        {
+            playerEntity.stopFallFlying();
+        }
     }
 
     @Override
@@ -224,6 +236,26 @@ public class FlyingArmor extends Armor
 
         return player.isArmorElementPutOn(this, EquipmentSlot.FEET)
                 && bootsDamage < maxBootsDamageToJump;
+    }
+
+    private boolean canFly()
+    {
+        if (!player.isFullArmorSetPutOn(this)) return false;
+
+        var playerEntity = player.getEntity();
+        if (playerEntity.hasEffect(MobEffects.SLOW_FALLING)) return false;
+        if (Utils.instance.dimension.isNether(playerEntity.level().dimension()) || playerEntity.isInWaterRainOrBubble()) return false;
+
+        var mainHandItemStack = playerEntity.getMainHandItem();
+        if (mainHandItemStack.is(Items.FIREWORK_ROCKET)) return false;
+        var offHandItemStack = playerEntity.getOffhandItem();
+        if (offHandItemStack.is(Items.FIREWORK_ROCKET)) return false;
+
+        var chestplate = playerEntity.getItemBySlot(EquipmentSlot.CHEST);
+        int maxDamageToFly = chestplate.getMaxDamage() / 2;
+        int chestDamage = chestplate.getDamageValue();
+
+        return chestDamage < maxDamageToFly;
     }
 
     private void updateSlowFallingEffect()

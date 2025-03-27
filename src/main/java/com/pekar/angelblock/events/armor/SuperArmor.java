@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -138,7 +139,7 @@ public class SuperArmor extends Armor
     {
         slowFallingEffect.updateActivity();
         glowingEffect.updateActivity();
-        levitationEffect.updateActivity(getLevitationAmplifier());
+        levitationEffect.updateActivity(LEVITATION_UP_AMPLIFIER);
         luckEffect.updateActivity();
     }
 
@@ -286,6 +287,12 @@ public class SuperArmor extends Armor
     {
         updateSlowFallingEffect();
 
+        var playerEntity = player.getEntity();
+        if (playerEntity.isFallFlying() && !canFly())
+        {
+            playerEntity.stopFallFlying();
+        }
+
         boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
 
         detectCreepers(isHelmetModifiedWithDetector, false);
@@ -383,7 +390,7 @@ public class SuperArmor extends Armor
                     }
                     else if (!playerEntity.isInLava())
                     {
-                        levitationEffect.trySwitch(getLevitationAmplifier());
+                        levitationEffect.trySwitch(LEVITATION_UP_AMPLIFIER);
                     }
                 }
                 else
@@ -495,11 +502,6 @@ public class SuperArmor extends Armor
         return isThornOrMagicDamage(damageSource) || damageSource.is(DamageTypes.DRAGON_BREATH);
     }
 
-    private int getLevitationAmplifier()
-    {
-        return LEVITATION_UP_AMPLIFIER;
-    }
-
     private boolean isSuperJumpEffectAvailable(IPlayer player, IArmor armor)
     {
         if (!player.areBootsModifiedWithJumpBooster(this)) return false;
@@ -509,6 +511,16 @@ public class SuperArmor extends Armor
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
 
         return bootsDamage < maxBootsDamageToJump;
+    }
+
+    private boolean canFly()
+    {
+        var playerEntity = player.getEntity();
+        var chestplate = playerEntity.getItemBySlot(EquipmentSlot.CHEST);
+        int maxDamageToFly = chestplate.getMaxDamage() / 2;
+        int chestDamage = chestplate.getDamageValue();
+
+        return chestDamage < maxDamageToFly;
     }
 
     private void updateSlowFallingEffect()

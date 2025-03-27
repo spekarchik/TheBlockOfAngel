@@ -3,10 +3,10 @@ package com.pekar.angelblock.armor;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.ArmorType;
+import org.jetbrains.annotations.Nullable;
 
 public class SuperArmor extends ModArmor
 {
@@ -24,15 +24,14 @@ public class SuperArmor extends ModArmor
         return leggings.getArmorFamilyName().equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorFamilyName());
     }
 
-    // TODO: Add the behavior
-//    @Override
-//    public boolean isEnderMask(ItemStack stack, Player player, EnderMan endermanEntity)
-//    {
-//        var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
-//        var helmetItem = itemStack.getItem();
-//        if (!(helmetItem instanceof ModArmor helmet)) return false;
-//        return helmet.getArmorFamilyName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
-//    }
+    @Override
+    public boolean isGazeDisguise(ItemStack stack, Player player, @Nullable LivingEntity entity)
+    {
+        var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
+        var helmetItem = itemStack.getItem();
+        if (!(helmetItem instanceof ModArmor helmet)) return false;
+        return helmet.getArmorFamilyName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
+    }
 
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
