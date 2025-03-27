@@ -17,6 +17,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.ServerLevelData;
 
 import java.util.List;
@@ -82,6 +83,9 @@ public class EndRod extends AmethystRod
 
         if (offHandItemStack.isEmpty() || hasCriticalDamage(player.getMainHandItem()) || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
             return InteractionResult.PASS;
+
+        if (!utils.dimension.isOverworld(level.dimension()))
+            return InteractionResult.FAIL;
 
         var offHandItem = offHandItemStack.getItem();
 
