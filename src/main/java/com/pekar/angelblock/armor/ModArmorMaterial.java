@@ -62,7 +62,7 @@ public class ModArmorMaterial
             1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, () -> Ingredient.of(ItemRegistry.SUPER_INGOT.get()));
     protected static final ModArmorMaterial FLYING = new ModArmorMaterial(FLYING_MATERIAL_NAME, "flying_armor",
             createArmorTypeMap(1, 2, 3, 1, 1),
-            0, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, () -> Ingredient.of(Items.PHANTOM_MEMBRANE));
+            0, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, () -> Ingredient.of(ItemRegistry.FLYING_INGOT.get()));
 
     // other armor models (other textures)
     protected static final ModArmorMaterial RENDELITHIC2 = copyOf(RENDELITHIC, "rendelithic_armor2");
