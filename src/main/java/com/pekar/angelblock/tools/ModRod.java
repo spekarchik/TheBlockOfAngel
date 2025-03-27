@@ -39,7 +39,7 @@ public class ModRod extends ModRodTool implements IModTool
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
     {
-        if (!isBroken(itemStack))
+        if (!hasCriticalDamage(itemStack))
             additionalActionOnMineBlock(itemStack, level, blockState, pos, entity);
 
         return true;
@@ -150,8 +150,9 @@ public class ModRod extends ModRodTool implements IModTool
         }
     }
 
-    protected boolean isBroken(ItemStack itemStack)
+    @Override
+    public int getCriticalDurability()
     {
-        return itemStack.getMaxDamage() - itemStack.getDamageValue() <= 1;
+        return 1;
     }
 }

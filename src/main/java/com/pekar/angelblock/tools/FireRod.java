@@ -39,7 +39,7 @@ public class FireRod extends MarineRod
 
         var interactionHand = context.getHand();
         var itemStack = player.getItemInHand(interactionHand);
-        boolean isBroken = isBroken(itemStack);
+        boolean isBroken = hasCriticalDamage(itemStack);
 
         boolean isClientSide = level.isClientSide();
 
@@ -202,17 +202,6 @@ public class FireRod extends MarineRod
         }
 
         return result;
-    }
-
-    @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
-    {
-        var block = state.getBlock();
-
-        return super.isCorrectToolForDrops(stack, state)
-                || (!isBroken(stack) && (block == Blocks.SOUL_SAND || block == Blocks.LAVA || block == Blocks.END_STONE
-                || utils.blocks.types.getDestroyingWoolBlock(block) != null || block == Blocks.MAGMA_BLOCK || block == Blocks.GLOWSTONE
-                || block == Blocks.BASALT || block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM || block == Blocks.SHROOMLIGHT));
     }
 
     private String getRodId()

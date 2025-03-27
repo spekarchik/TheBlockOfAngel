@@ -34,7 +34,7 @@ public class AmethystRod extends FireRod
 
         boolean isClientSide = level.isClientSide();
 
-        if (!isBroken(itemStack))
+        if (!hasCriticalDamage(itemStack))
         {
             var pos = context.getClickedPos();
             var blockState = level.getBlockState(pos);
@@ -85,17 +85,6 @@ public class AmethystRod extends FireRod
         }
 
         return InteractionResult.PASS;
-    }
-
-    @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
-    {
-        var block = state.getBlock();
-
-        return super.isCorrectToolForDrops(stack, state)
-                || (!isBroken(stack) && (block == Blocks.OBSIDIAN || block == Blocks.GRANITE || block == Blocks.ANDESITE
-                || block == Blocks.DIORITE || block == Blocks.CALCITE
-                || block == Blocks.DRIPSTONE_BLOCK || block == Blocks.DIAMOND_BLOCK || block == Blocks.BONE_BLOCK));
     }
 
     private String getRodId()
