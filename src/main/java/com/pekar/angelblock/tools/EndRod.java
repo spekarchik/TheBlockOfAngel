@@ -87,7 +87,7 @@ public class EndRod extends AmethystRod
             return InteractionResultHolder.pass(player.getItemInHand(interactionHand));
 
         if (!utils.dimension.isOverworld(level.dimension()))
-            return InteractionResult.FAIL;
+            return InteractionResultHolder.fail(player.getItemInHand(interactionHand));
 
         var offHandItem = offHandItemStack.getItem();
 
