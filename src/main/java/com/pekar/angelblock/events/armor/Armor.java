@@ -331,6 +331,14 @@ abstract class Armor implements IArmor
         }
     }
 
+    protected void damageMainHandItem()
+    {
+        var itemStack = player.getEntity().getMainHandItem();
+        var maxDamage = itemStack.getMaxDamage();
+        var newDamage = maxDamage * 2 / 3 - 2;
+        itemStack.setDamageValue(newDamage);
+    }
+
     protected void switchArmorDamage()
     {
         boolean isDamaged = false;

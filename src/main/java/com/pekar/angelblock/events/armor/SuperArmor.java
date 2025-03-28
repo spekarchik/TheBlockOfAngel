@@ -318,6 +318,7 @@ public class SuperArmor extends Armor
             glowingEffect.trySwitch();
             // for tests
             //switchArmorDamage();
+            //damageMainHandItem();
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
