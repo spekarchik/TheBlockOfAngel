@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
@@ -59,7 +60,7 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
         {
             if (!level.isClientSide)
             {
-                level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
+                level.setBlock(upPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
                 new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
 
                 damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
@@ -94,9 +95,9 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 0; i <= 2; i++)
+        for (int i = 0; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, false, false, i == 1));
+            tooltipComponents.add(getDescription(i, false, false, false, false, i == 4));
         }
     }
 
