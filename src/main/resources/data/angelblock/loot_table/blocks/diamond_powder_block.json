@@ -10,11 +10,6 @@
 				"type": "minecraft:item",
 				"name": "angelblock:diamond_powder_block"
 			}
-		],
-		"conditions": [
-			{
-				"condition": "minecraft:survives_explosion"
-			}
 		]
     }
   ],

@@ -9,11 +9,6 @@
           "type": "minecraft:item",
           "name": "angelblock:devil_block"
         }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
       ]
     }
   ],
