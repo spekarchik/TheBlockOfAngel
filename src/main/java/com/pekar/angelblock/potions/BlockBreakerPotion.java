@@ -11,8 +11,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
@@ -27,13 +28,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class BlockBreakerPotion extends ThrownPotion
+public class BlockBreakerPotion extends ThrowableItemProjectile
 {
     private final Utils utils = new Utils();
     private final LivingEntity shooter;
     private static final ExplosionDamageCalculator explosionCalculator = new ExplosionNoHurtEntityDamageCalculator();
 
-    public BlockBreakerPotion(EntityType<? extends ThrownPotion> type, Level level)
+    public BlockBreakerPotion(EntityType<? extends BlockBreakerPotion> type, Level level)
     {
         super(type, level);
         this.shooter = null;
@@ -41,14 +42,28 @@ public class BlockBreakerPotion extends ThrownPotion
 
     public BlockBreakerPotion(Level level, LivingEntity shooter, ItemStack itemStack)
     {
-        super(level, shooter, itemStack);
+        super(PotionRegistry.BLOCK_BREAKER_POTION.get(), shooter, level, itemStack);
         this.shooter = shooter;
+    }
+
+    public BlockBreakerPotion(double x, double y, double z, Level level, ItemStack item)
+    {
+        super(PotionRegistry.BLOCK_BREAKER_POTION.get(), x, y, z, level, item);
+        this.shooter = null;
+    }
+
+    @Override
+    protected Item getDefaultItem()
+    {
+        return ItemRegistry.BLOCK_BREAKER_POTION_ITEM.get();
     }
 
     @Override
     protected void onHit(HitResult result)
     {
+        super.onHit(result);
         if (shooter == null) return;
+
         var level = shooter.level();
         if (!(level instanceof ServerLevel serverLevel)) return;
 
@@ -67,12 +82,14 @@ public class BlockBreakerPotion extends ThrownPotion
                 destroyDiamondArmor(serverLevel, target);
         }
 
-        super.onHit(result);
+        discard();
     }
 
     @Override
     protected void onHitBlock(BlockHitResult result)
     {
+        super.onHitBlock(result);
+
         if (shooter == null) return;
 
         BlockPos position = result.getBlockPos();

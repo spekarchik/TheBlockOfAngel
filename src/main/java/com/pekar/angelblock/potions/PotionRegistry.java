@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.alchemy.Potion;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -31,8 +30,11 @@ public class PotionRegistry
 
     public static final Holder<MobEffect> ARMOR_HEAVY_JUMP_EFFECT = registerMobEffect("armor_heavy_jump_effect", HeavyJumpEffect::new);
 
-    public static final DeferredHolder<EntityType<?>, EntityType<ThrownPotion>> BLOCK_BREAKER_POTION =
+    public static final DeferredHolder<EntityType<?>, EntityType<BlockBreakerPotion>> BLOCK_BREAKER_POTION =
             registerThrownPotion("block_breaker_potion", BlockBreakerPotion::new);
+
+//    public static final DeferredRegister<EntityType<Snowball>> BLOCK_BREAKER_POTION = Main.ENTITY_TYPES.register("block_breaker_potion",
+//            EntityType.Builder.of(Snowball::new, MobCategory.MISC).noLootTable().sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
 
 
     public static void initStatic()
@@ -50,13 +52,15 @@ public class PotionRegistry
         return Main.MOB_EFFECTS.register(name, mobEffect);
     }
 
-    private static DeferredHolder<EntityType<?>, EntityType<ThrownPotion>> registerThrownPotion(String name, EntityType.EntityFactory<ThrownPotion> potionFactory)
+    private static DeferredHolder<EntityType<?>, EntityType<BlockBreakerPotion>> registerThrownPotion(String name, EntityType.EntityFactory<BlockBreakerPotion> potionFactory)
     {
         var location = Utils.instance.resources.createResourceLocation(Main.MODID, name);
         var resourceKey = ResourceKey.create(Registries.ENTITY_TYPE, location);
 
         return Main.ENTITY_TYPES.register(name, () -> EntityType.Builder.of(potionFactory, MobCategory.MISC)
+                .noLootTable()
                 .sized(0.25F, 0.25F) // Entity size
+                .clientTrackingRange(4).updateInterval(10)
                 .build(resourceKey));
     }
 }
