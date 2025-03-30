@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
 
-public class ModSword extends SwordItem implements IModTool
+public class ModSword extends Item implements IModTool
 {
     private static final int[] dx = { 3, -3, 2, 2, -2, -2, 0, 0, 1, 1, -1, -1 };
     private static final int[] dz = { 0, 0, 1, -1, 1, -1, 3, -3, 2, -2, 2, -2 };
@@ -30,7 +30,7 @@ public class ModSword extends SwordItem implements IModTool
 
     public ModSword(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
     {
-        super(material.getVanillaMaterial(), attackDamage, attackSpeed, properties);
+        super(material.getVanillaMaterial().applySwordProperties(properties, attackDamage, attackSpeed));
         this.material = material;
     }
 
