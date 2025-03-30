@@ -5,27 +5,29 @@ import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
-public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable
+public class ModPickaxe extends ModTool implements IModToolEnhanceable
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
     private final ModToolMaterial material;
 
-    public static ModPickaxe createPrimary(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
+    public static ModPickaxe createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         return new ModPickaxe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
     }
 
-    public ModPickaxe(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public ModPickaxe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material.getVanillaMaterial(), attackDamage, attackSpeed, properties);
+        super(material, BlockTags.MINEABLE_WITH_PICKAXE, attackDamage, attackSpeed, properties);
         this.materialProperties = materialProperties;
         this.material = material;
     }
@@ -34,12 +36,6 @@ public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable
     public boolean isTool()
     {
         return true;
-    }
-
-    @Override
-    public IModTool getTool()
-    {
-        return this;
     }
 
     @Override
@@ -77,7 +73,7 @@ public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
-        return !hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
+        return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(itemAbility);
     }
 
     @Override

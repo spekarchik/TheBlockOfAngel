@@ -6,9 +6,12 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -16,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
 public class ModSword extends Item implements IModTool
@@ -28,10 +32,14 @@ public class ModSword extends Item implements IModTool
     protected final Utils utils = new Utils();
     private final ModToolMaterial material;
 
-    public ModSword(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
+    public ModSword(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         super(material.getVanillaMaterial().applySwordProperties(properties, attackDamage, attackSpeed));
         this.material = material;
+    }
+
+    public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
+        return !player.isCreative();
     }
 
     @Override
@@ -54,6 +62,17 @@ public class ModSword extends Item implements IModTool
     }
 
     @Override
+    public String getMaterialName()
+    {
+        if (getMaterial() instanceof ModToolMaterial toolMaterial)
+        {
+            return toolMaterial.getName();
+        }
+
+        return "";
+    }
+
+    @Override
     public int getCriticalDurability()
     {
         return 3;
@@ -69,7 +88,7 @@ public class ModSword extends Item implements IModTool
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
-        return !hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
+        return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_SWORD_ACTIONS.contains(itemAbility);
     }
 
     @Override
@@ -78,7 +97,13 @@ public class ModSword extends Item implements IModTool
         if (!hasCriticalDamage(stack))
             additionalActionOnHurtEnemy(stack, target, attacker);
 
-        return super.hurtEnemy(stack, target, attacker);
+        return true;
+    }
+
+    @Override
+    public void postHurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker)
+    {
+        itemStack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 
     protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
@@ -315,12 +340,6 @@ public class ModSword extends Item implements IModTool
         return true;
     }
 
-    @Override
-    public IModTool getTool()
-    {
-        return this;
-    }
-
     public boolean hasExplosionMode()
     {
         return false;
@@ -334,5 +353,11 @@ public class ModSword extends Item implements IModTool
     public boolean hasWebMode()
     {
         return false;
+    }
+
+    @Override
+    public MutableComponent getDisplayName(int lineNumber)
+    {
+        return Component.translatable(getDescriptionId() + ".desc" + lineNumber);
     }
 }

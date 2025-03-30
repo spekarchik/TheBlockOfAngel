@@ -24,14 +24,14 @@ import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
-public class ModRod extends ModRodTool implements IModTool
+public class ModRod extends ModTool implements IModTool
 {
     private final boolean isMagnetic;
     private final ModToolMaterial material;
 
     public ModRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
-        super(material, material.getIncorrectBlocksForDrops(), 0, -3.0F, properties);
+        super(material, material.getIncorrectBlocksForDrops(), 0F, -3.0F, properties);
         this.isMagnetic = isMagnetic;
         this.material = material;
     }
