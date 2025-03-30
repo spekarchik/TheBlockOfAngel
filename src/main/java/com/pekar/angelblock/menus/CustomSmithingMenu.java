@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SmithingMenu;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.level.block.Blocks;
 
 public class CustomSmithingMenu extends SmithingMenu
@@ -202,9 +201,9 @@ public class CustomSmithingMenu extends SmithingMenu
                     }
                 }
             }
-            else if (mainItem.getItem() instanceof ArmorItem armorItem && result.getItem() instanceof ArmorItem resultAsArmorItem)
+            else if (mainItem.is(ItemTags.TRIMMABLE_ARMOR) && result.is(ItemTags.TRIMMABLE_ARMOR))
             {
-                if (armorItem.getDefaultInstance().is(ItemRegistry.NETHERITE_ARMOR_TAG) && resultAsArmorItem.getDefaultInstance().is(ItemRegistry.DIAMOND_ARMOR_TAG))
+                if (mainItem.is(ItemRegistry.NETHERITE_ARMOR_TAG) && result.is(ItemRegistry.DIAMOND_ARMOR_TAG))
                 {
                     player.getInventory().add(new ItemStack(Items.NETHERITE_INGOT));
                 }

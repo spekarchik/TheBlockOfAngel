@@ -6,13 +6,13 @@ import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ExplosionDamageCalculator;
@@ -137,9 +137,9 @@ public class BlockBreakerPotion extends ThrowableItemProjectile
             if (!slot.isArmor()) continue;
 
             var itemStack = entity.getItemBySlot(slot);
-            if (!itemStack.isEmpty() && itemStack.getItem() instanceof ArmorItem armorItem)
+            if (!itemStack.isEmpty() && itemStack.is(ItemTags.TRIMMABLE_ARMOR))
             {
-                if (armorItem.getDefaultInstance().is(ItemRegistry.DIAMOND_ARMOR_TAG))
+                if (itemStack.is(ItemRegistry.DIAMOND_ARMOR_TAG))
                 {
                     entity.setItemSlot(slot, ItemStack.EMPTY);
                     int itemCount = switch (slot)

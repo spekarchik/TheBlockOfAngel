@@ -7,12 +7,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.Equippable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -20,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class ModArmor extends ArmorItem
+public class ModArmor extends Item
 {
     protected final ArmorType armorItemType;
     protected final int maxDamage;
@@ -30,7 +28,7 @@ public class ModArmor extends ArmorItem
 
     protected ModArmor(ModArmorMaterial material, ArmorType armorItemType, Properties properties)
     {
-        super(material.getMaterial(), armorItemType, properties);
+        super(material.getMaterial().humanoidProperties(properties, armorItemType));
         this.material = material;
         this.armorItemType = armorItemType;
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
