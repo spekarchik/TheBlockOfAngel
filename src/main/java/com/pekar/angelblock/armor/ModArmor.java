@@ -30,12 +30,7 @@ public class ModArmor extends ArmorItem
 
     protected ModArmor(ModArmorMaterial material, ArmorType armorItemType, Properties properties)
     {
-        super(material.getMaterial(), armorItemType,
-                properties.component(
-                        DataComponents.EQUIPPABLE,
-                        Equippable.builder(EquipmentSlot.FEET)
-                                .setAsset(material.getMaterial().assetId())
-                                .build()));
+        super(material.getMaterial(), armorItemType, properties);
         this.material = material;
         this.armorItemType = armorItemType;
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
