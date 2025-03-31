@@ -5,7 +5,6 @@ import com.pekar.angelblock.network.packets.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,7 +13,13 @@ public interface IToolService
 {
     default void setBlock(Player player, BlockPos pos, Block block)
     {
-        player.level().setBlock(pos, block.defaultBlockState(), 11);
+        player.level().setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+    }
+
+    default void setBlock(Player player, BlockPos pos, BlockState blockState)
+    {
+        player.level().setBlock(pos, blockState, Block.UPDATE_ALL_IMMEDIATE);
         new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
     }
 
