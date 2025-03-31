@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.blocks.GreenDiamondBlock;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -103,7 +104,8 @@ public class AncientRod extends MagneticRod
             {
                 if (!isClientSide)
                 {
-                    setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get());
+                    boolean isDark = block == Blocks.DEEPSLATE_DIAMOND_ORE;
+                    setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState().setValue(GreenDiamondBlock.IS_DARK, isDark));
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 }
                 return getToolInteractionResult(true, isClientSide);
