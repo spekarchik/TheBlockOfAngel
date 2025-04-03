@@ -3,9 +3,12 @@ package com.pekar.angelblock.utils;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.armor.ModArmor;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+
+import java.util.Arrays;
 
 public class AttributeModifiers
 {
@@ -18,7 +21,14 @@ public class AttributeModifiers
         if (armorAttribute != null)
         {
             int damageSum = 0, maxDamageSum = 0;
-            for (var slot : entity.getArmorSlots())
+            var armorItems = Arrays.asList(
+                    entity.getItemBySlot(EquipmentSlot.HEAD),
+                    entity.getItemBySlot(EquipmentSlot.CHEST),
+                    entity.getItemBySlot(EquipmentSlot.LEGS),
+                    entity.getItemBySlot(EquipmentSlot.FEET)
+            );
+
+            for (var slot : armorItems)
             {
                 if (slot.isEmpty()) continue;
                 boolean isModArmor = slot.getItem() instanceof ModArmor;
