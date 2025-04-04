@@ -12,8 +12,8 @@ public interface ITooltipProvider
 {
     void addTooltip(ItemStack stack, Item.TooltipContext context, ITooltip tooltip, TooltipFlag flag);
 
-    default void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipConsumer, TooltipFlag flag)
+    static void appendHoverText(ITooltipProvider tooltipProvider, ItemStack stack, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipConsumer, TooltipFlag flag)
     {
-        addTooltip(stack, context, Tooltip.create(tooltipConsumer), flag);
+        tooltipProvider.addTooltip(stack, context, Tooltip.create(tooltipConsumer), flag);
     }
 }

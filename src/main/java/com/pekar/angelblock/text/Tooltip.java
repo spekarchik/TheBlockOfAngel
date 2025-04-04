@@ -36,9 +36,9 @@ public class Tooltip implements ITooltip
 
     @CheckReturnValue
     @Override
-    public ITooltipLine addEmptyLine()
+    public void addEmptyLine()
     {
-        return new TooltipLine(this);
+        tooltipComponent.accept(new TooltipLine(this).getComponent());
     }
 
     @CheckReturnValue

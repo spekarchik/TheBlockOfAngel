@@ -4,7 +4,7 @@ public interface ITooltip
 {
     ITooltip ignoreEmptyLines();
     ITooltip includeEmptyLines();
-    ITooltipLine addEmptyLine();
+    void addEmptyLine();
     ITooltipLine addLine(String descriptionRoot);
     ITooltipLine addLine(String descriptionRoot, int descNumber);
 }
