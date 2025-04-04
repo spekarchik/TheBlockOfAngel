@@ -10,6 +10,6 @@ public interface ITooltipLine
     ITooltipLine asNotice();
     ITooltipLine asImportantNotice();
     ITooltipLine asDarkGrey();
-    ITooltipLine withFormatting(ChatFormatting formatting);
+    ITooltipLine withFormatting(ChatFormatting formatting, boolean applyFormatting);
     void apply();
 }

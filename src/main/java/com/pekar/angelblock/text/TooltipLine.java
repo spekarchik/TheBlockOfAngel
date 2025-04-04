@@ -89,9 +89,11 @@ public class TooltipLine implements ITooltipLine
 
     @CheckReturnValue
     @Override
-    public final ITooltipLine withFormatting(ChatFormatting formatting)
+    public final ITooltipLine withFormatting(ChatFormatting formatting, boolean applyFormatting)
     {
-        component.withStyle(formatting);
+        if (applyFormatting)
+            component.withStyle(formatting);
+
         return this;
     }
 
