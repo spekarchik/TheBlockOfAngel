@@ -1,13 +1,16 @@
 package com.pekar.angelblock.items;
 
-import net.minecraft.ChatFormatting;
+import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.text.ITooltipProvider;
+import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.List;
+import java.util.function.Consumer;
 
-public class RodUpgradeKit extends ModItemWithDoubleHoverText
+public class RodUpgradeKit extends ModItem implements ITooltipProvider
 {
     public RodUpgradeKit(Properties properties)
     {
@@ -15,16 +18,19 @@ public class RodUpgradeKit extends ModItemWithDoubleHoverText
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 1; i <= 3; i++)
         {
-            var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
-            if (i > 1)
-                component.withStyle(ChatFormatting.ITALIC);
-            tooltipComponents.add(component);
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Notice, i > 1).apply();
         }
     }
 }

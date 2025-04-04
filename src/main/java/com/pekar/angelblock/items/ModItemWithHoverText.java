@@ -1,14 +1,16 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.text.ITooltipProvider;
 import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.List;
+import java.util.function.Consumer;
 
-public class ModItemWithHoverText extends ModItem
+public class ModItemWithHoverText extends ModItem implements ITooltipProvider
 {
     private final TextStyle descriptionStyle;
 
@@ -23,16 +25,15 @@ public class ModItemWithHoverText extends ModItem
         this.descriptionStyle = descriptionStyle;
     }
 
-
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
     {
-        var component = utils.text.getDescription(getDisplayName(), descriptionStyle);
-        components.add(component);
+        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
     }
 
-    protected MutableComponent getDisplayName()
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        return Component.translatable(this.getDescriptionId() + ".desc");
+        tooltip.addLine(getDescriptionId()).apply();
     }
 }

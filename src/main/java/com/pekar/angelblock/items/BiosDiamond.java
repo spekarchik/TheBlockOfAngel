@@ -1,6 +1,9 @@
 package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.text.ITooltipProvider;
+import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,11 +15,12 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 
-import java.util.List;
+import java.util.function.Consumer;
 
-public class BiosDiamond extends ModItemWithDoubleHoverText
+public class BiosDiamond extends ModItem implements ITooltipProvider
 {
     public BiosDiamond(Properties properties)
     {
@@ -43,18 +47,19 @@ public class BiosDiamond extends ModItemWithDoubleHoverText
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 1; i <= 3; i++)
         {
-            var component = getDisplayName(i).withStyle(ChatFormatting.GRAY);
-            if (i == 2)
-                component.withStyle(ChatFormatting.ITALIC);
-            if (i == 3)
-                component.withStyle(ChatFormatting.DARK_GREEN);
-            tooltipComponents.add(component);
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Notice, i == 2).withFormatting(ChatFormatting.DARK_GREEN, i == 3).apply();
         }
     }
 }

@@ -1,9 +1,9 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.text.TextStyle;
 import com.pekar.angelblock.mixins.AxolotlAccessor;
+import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.text.ITooltipProvider;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -16,16 +16,17 @@ import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 
-import java.util.List;
+import java.util.function.Consumer;
 
-public class BlueAxolotlBucket extends ModItemWithHoverText
+public class BlueAxolotlBucket extends ModItem implements ITooltipProvider
 {
     public BlueAxolotlBucket(Properties properties)
     {
-        super(TextStyle.Notice, properties);
+        super(properties);
     }
 
     @Override
@@ -71,10 +72,16 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(components)) return;
+        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
+    }
 
-        components.add(getDisplayName().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
+
+        tooltip.addLine(getDescriptionId()).asNotice().apply();
     }
 }
