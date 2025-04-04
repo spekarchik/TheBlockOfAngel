@@ -1,6 +1,7 @@
 package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.text.TextStyle;
+import com.pekar.angelblock.mixins.AxolotlAccessor;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -40,7 +41,7 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
             if (axolotl != null)
             {
                 axolotl.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-                axolotl.setVariant(Axolotl.Variant.BLUE);
+                ((AxolotlAccessor)axolotl).invokeSetVariant(Axolotl.Variant.BLUE);
                 axolotl.setBaby(true);
                 axolotl.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(new BlockPos(pos)), EntitySpawnReason.BUCKET, null);
                 var result = serverLevel.addFreshEntity(axolotl);
