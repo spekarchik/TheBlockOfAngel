@@ -1,6 +1,6 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.TextStyle;
+import com.pekar.angelblock.text.TextStyle;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;

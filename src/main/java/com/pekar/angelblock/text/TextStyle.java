@@ -1,4 +1,4 @@
-package com.pekar.angelblock;
+package com.pekar.angelblock.text;
 
 public enum TextStyle
 {

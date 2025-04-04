@@ -1,7 +1,7 @@
 package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.TextStyle;
+import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

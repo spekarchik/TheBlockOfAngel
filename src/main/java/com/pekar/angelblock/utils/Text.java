@@ -1,6 +1,6 @@
 package com.pekar.angelblock.utils;
 
-import com.pekar.angelblock.TextStyle;
+import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;

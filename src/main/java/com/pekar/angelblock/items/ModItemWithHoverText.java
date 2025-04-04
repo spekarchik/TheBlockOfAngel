@@ -1,6 +1,6 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.TextStyle;
+import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
