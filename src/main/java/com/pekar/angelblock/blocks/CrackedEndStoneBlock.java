@@ -4,7 +4,7 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class CrackedEndStoneBlock extends ModDropExperienceBlockWithHoverText
+public class CrackedEndStoneBlock extends ModDropExperienceBlock
 {
     public CrackedEndStoneBlock(BlockBehaviour.Properties properties)
     {

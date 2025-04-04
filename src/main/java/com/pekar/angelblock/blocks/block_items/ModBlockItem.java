@@ -1,4 +1,4 @@
-package com.pekar.angelblock.blocks;
+package com.pekar.angelblock.blocks.block_items;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

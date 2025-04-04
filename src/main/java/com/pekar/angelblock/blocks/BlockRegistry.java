@@ -1,6 +1,8 @@
 package com.pekar.angelblock.blocks;
 
 import com.pekar.angelblock.Main;
+import com.pekar.angelblock.blocks.block_items.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -9,14 +11,15 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockRegistry
 {
-    public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new,
+    public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SNOW).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedObsidianBlock::new,
+    public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedObsidianBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.of().strength(10f).sound(SoundType.METAL).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> DIAMOND_POWDER_BLOCK = register("diamond_powder_block", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
@@ -39,22 +42,22 @@ public class BlockRegistry
     public static final DeferredBlock<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", Block::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
 
-    public static final DeferredBlock<Block> ANGEL_BLOCK = register("angel_block", AngelBlock::new,
+    public static final DeferredBlock<Block> ANGEL_BLOCK = register("angel_block", AngelBlock::new, AngelBlockItem::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 1200F)
                     .lightLevel(state -> 15));
-    public static final DeferredBlock<Block> DEVIL_BLOCK = register("devil_block", DevilBlock::new,
+    public static final DeferredBlock<Block> DEVIL_BLOCK = register("devil_block", DevilBlock::new, DevilBlockItem::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(10F, 1200F).lightLevel(blockState -> 10));
     public static final DeferredBlock<Block> ANGEL_ROD_BLOCK = registerSkipTab("angel_rod_block", AngelRodBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHTNING_ROD).strength(0.1F, 1200F).sound(SoundType.COPPER)
                     .lightLevel(state -> 15));
 
-    public static final DeferredBlock<Block> GREEN_DIAMOND_ORE = register("green_diamond_ore", GreenDiamondBlock::new,
+    public static final DeferredBlock<Block> GREEN_DIAMOND_ORE = register("green_diamond_ore", GreenDiamondBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE).strength(1F).lightLevel(state -> 3)
                     .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> GUNPOWDER_BLOCK = register("gunpowder_block", GunpowderBlock::new,
+    public static final DeferredBlock<Block> GUNPOWDER_BLOCK = register("gunpowder_block", GunpowderBlock::new, GunpowderBlockItem::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).sound(SoundType.SNOW).strength(0.2F));
-    public static final DeferredBlock<Block> NETHER_BARS = register("nether_bars_block", NetherBarsBlock::new,
+    public static final DeferredBlock<Block> NETHER_BARS = register("nether_bars_block", NetherBarsBlock::new, NetherBarsBlockItem::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS).strength(10F, 1200F).requiresCorrectToolForDrops());
 
     // Internal blocks (not added to Creative Tab)
@@ -88,31 +91,31 @@ public class BlockRegistry
         // just to initialize static members
     }
 
-    private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> supplier)
-    {
-        var blockObject = Main.BLOCKS.register(name, supplier);
-        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
-        return blockObject;
-    }
-
-    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> supplier)
-    {
-        var blockObject = Main.BLOCKS.registerBlock(name, supplier);
-        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
-        return blockObject;
-    }
-
-    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> supplier, BlockBehaviour.Properties properties)
-    {
-        var blockObject = Main.BLOCKS.registerBlock(name, supplier, properties);
-        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
-        return blockObject;
-    }
-
-    private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> blockSupplier, Function<Block, ? extends ModBlockItem> blockItemSupplier)
+    private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> blockSupplier)
     {
         var blockObject = Main.BLOCKS.register(name, blockSupplier);
-        Main.ITEMS.register(name, () -> blockItemSupplier.apply(blockObject.get()));
+        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
+        return blockObject;
+    }
+
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> blockSupplier)
+    {
+        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier);
+        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
+        return blockObject;
+    }
+
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> blockSupplier, BlockBehaviour.Properties properties)
+    {
+        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, properties);
+        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
+        return blockObject;
+    }
+
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> blockSupplier, BiFunction<Block, Item.Properties, ? extends ModBlockItem> blockItemSupplier, BlockBehaviour.Properties blockProperties)
+    {
+        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, blockProperties);
+        Main.ITEMS.registerItem(name, p -> blockItemSupplier.apply(blockObject.get(), p));
         return blockObject;
     }
 

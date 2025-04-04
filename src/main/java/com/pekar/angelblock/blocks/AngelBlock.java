@@ -2,18 +2,14 @@ package com.pekar.angelblock.blocks;
 
 import com.pekar.angelblock.blocks.tile_entities.AngelBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -27,9 +23,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
-public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityBlock
+public class AngelBlock extends ModBlock implements EntityBlock
 {
     public static final int MaxMonstersFilterValue = 5;
     public static final IntegerProperty MONSTERS_IN_FILTER = IntegerProperty.create("monsters_in_filter", 0, MaxMonstersFilterValue);
@@ -115,43 +109,6 @@ public class AngelBlock extends ModBlockWithMultipleHoverText implements EntityB
         if (!level.isClientSide)
         {
             level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag)
-    {
-        if (!Screen.hasShiftDown() && !Screen.hasAltDown())
-        {
-            tooltipComponents.add(Component.translatable("description.common.press_shift_or_alt"));
-            return;
-        }
-
-        if (Screen.hasShiftDown())
-        {
-            for (int i = 1; i <= 19; i++)
-            {
-                var component = getDescription(i, i == 3, false, i == 17, false, i == 18);
-                if (!component.getString().isEmpty())
-                    tooltipComponents.add(component);
-            }
-
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("description.common.press_alt"));
-        }
-        else if (Screen.hasAltDown())
-        {
-            tooltipComponents.add(Component.empty());
-
-            for (int i = 21; i <= 28; i++)
-            {
-                var component = getDescription(i, i == 21, false, false, false, i == 28);
-                if (!component.getString().isEmpty())
-                    tooltipComponents.add(component);
-            }
-
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("description.common.press_shift"));
         }
     }
 }

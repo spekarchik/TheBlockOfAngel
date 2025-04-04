@@ -1,6 +1,5 @@
 package com.pekar.angelblock.blocks;
 
-import com.google.common.collect.ImmutableMap;
 import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.tools.ToolRegistry;
@@ -24,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
-public class AngelRodBlock extends ModBlockWithDoubleHoverText implements EntityBlock
+public class AngelRodBlock extends ModBlock implements EntityBlock
 {
     public AngelRodBlock(Properties properties)
     {
@@ -48,10 +47,10 @@ public class AngelRodBlock extends ModBlockWithDoubleHoverText implements Entity
     }
 
     @Override
-    protected ImmutableMap<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> voxelShapeFunction)
+    protected Function<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> voxelShapeFunction)
     {
         var shape = Shapes.create(0.328125, 0.0, 0.46875, 0.671875, 1.21875, 0.53125);
-        return ImmutableMap.of(defaultBlockState(), shape);
+        return blockState -> shape;
     }
 
     @Override
