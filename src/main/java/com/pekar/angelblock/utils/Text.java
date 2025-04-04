@@ -1,12 +1,10 @@
 package com.pekar.angelblock.utils;
 
+import com.pekar.angelblock.text.ITooltip;
 import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-
-import java.util.List;
 
 public class Text
 {
@@ -42,11 +40,11 @@ public class Text
         };
     }
 
-    public boolean showExtendedDescription(List<Component> tooltipComponents)
+    public boolean showExtendedDescription(ITooltip tooltip)
     {
         if (!Screen.hasShiftDown())
         {
-            tooltipComponents.add(Component.translatable("description.press_shift"));
+            tooltip.addLine("description.press_shift").apply();
             return false;
         }
 
