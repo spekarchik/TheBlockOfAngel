@@ -3,17 +3,17 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.text.TextStyle;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
 import java.util.Random;
 
 public class MarineRod extends AncientRod
@@ -119,46 +119,47 @@ public class MarineRod extends AncientRod
     }
 
     @Override
-    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    protected void appendPlacingBlockInfo(ITooltip tooltip, boolean selectAsNew)
     {
-        super.appendPlacingBlockInfo(tooltipComponents, false);
+        super.appendPlacingBlockInfo(tooltip, false);
 
         for (int i = 2; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
+            tooltip.addLine(getRodDescriptionId(), i).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
         }
     }
 
     @Override
-    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    protected void appendBlockTransformInfo(ITooltip tooltip, boolean selectAsNew)
     {
-        super.appendBlockTransformInfo(tooltipComponents, false);
+        super.appendBlockTransformInfo(tooltip, false);
 
         for (int i = 9; i <= 11; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
+            tooltip.addLine(getRodDescriptionId(), i).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
         }
     }
 
     @Override
-    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    protected void appendMagneticInfo(ITooltip tooltip)
     {
         for (int i = 13; i <= 21; i++)
         {
-            if (i == 21) tooltipComponents.add(Component.empty());
-            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, false, false, false, i == 21));
+            if (i == 21) tooltip.addEmptyLine();
+            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.Header, i == 13).styledAs(TextStyle.DarkGray, i == 21).apply();
         }
     }
 
-    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    protected void appendCommonPostInfo(ITooltip tooltip)
     {
         for (int i = 22; i <= 23; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, false, false, false, false, false, i == 22));
+            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 22).apply();
         }
     }
 
-    private String getRodId()
+    @Override
+    protected String getRodId()
     {
         return ToolRegistry.MARINE_ROD.getRegisteredName();
     }

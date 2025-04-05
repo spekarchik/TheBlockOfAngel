@@ -3,7 +3,7 @@ package com.pekar.angelblock.tools;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
-public interface IModTool extends IModDescriptionItem, IDamageable, IToolService
+public interface IModTool extends IDamageable, IToolService
 {
     default boolean isTool()
     {

@@ -1,6 +1,6 @@
 package com.pekar.angelblock.tools;
 
-public class WorkRod extends ModRod
+public abstract class WorkRod extends ModRod
 {
     public WorkRod(ModToolMaterial material, Properties properties)
     {
