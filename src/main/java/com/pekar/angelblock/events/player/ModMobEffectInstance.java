@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.player;
 
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,14 +22,14 @@ public class ModMobEffectInstance extends MobEffectInstance implements IModMobEf
     }
 
     @Override
-    public boolean tick(LivingEntity entity, Runnable onExpirationRunnable)
+    public boolean tickServer(ServerLevel serverLevel, LivingEntity entity, Runnable onExpirationRunnable)
     {
         if (onEffectEnded != null && getDuration() == 1)
         {
             onEffectEnded.run();
         }
 
-        return super.tick(entity, onExpirationRunnable);
+        return super.tickServer(serverLevel, entity, onExpirationRunnable);
     }
 
     @Override
