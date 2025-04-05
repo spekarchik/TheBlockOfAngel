@@ -103,7 +103,7 @@ public abstract class ModRod extends ModTool implements IModTool
     {
         if (!Screen.hasShiftDown() && !Screen.hasAltDown() && !Screen.hasControlDown())
         {
-            tooltip.addLine("description.rods.press_shift_alt_or_ctrl").apply();
+            tooltip.addLineById("description.rods.press_shift_alt_or_ctrl").apply();
             return false;
         }
 

@@ -354,11 +354,11 @@ public class AncientRod extends MagneticRod
         {
             // Magnetic
             if (!isEnhanced())
-                tooltip.addLine("description.rods.no_magnet_mode").withFormatting(ChatFormatting.DARK_RED, true).apply();
+                tooltip.addLineById("description.rods.no_magnet_mode").withFormatting(ChatFormatting.DARK_RED, true).apply();
             else if (this instanceof FireRod)
-                tooltip.addLine("description.rods.magnet_mode.fire_rod").asDarkGrey().apply();
+                tooltip.addLineById("description.rods.magnet_mode.fire_rod").asDarkGrey().apply();
             else
-                tooltip.addLine("description.rods.magnet_mode.ancient_rod").asDarkGrey().apply();
+                tooltip.addLineById("description.rods.magnet_mode.ancient_rod").asDarkGrey().apply();
 
             appendMagneticInfo(tooltip);
         }
@@ -382,20 +382,20 @@ public class AncientRod extends MagneticRod
         if (Screen.hasControlDown())
         {
             // Magnetic
-            tooltip.addLine("description.rods.press_shift");
-            tooltip.addLine("description.rods.press_alt");
+            tooltip.addLineById("description.rods.press_shift");
+            tooltip.addLineById("description.rods.press_alt");
         }
         else if (Screen.hasShiftDown())
         {
             // Placing
-            tooltip.addLine("description.rods.press_alt");
-            tooltip.addLine("description.rods.press_ctrl");
+            tooltip.addLineById("description.rods.press_alt");
+            tooltip.addLineById("description.rods.press_ctrl");
         }
         else if (Screen.hasAltDown())
         {
             // Transformations
-            tooltip.addLine("description.rods.press_shift");
-            tooltip.addLine("description.rods.press_ctrl");
+            tooltip.addLineById("description.rods.press_shift");
+            tooltip.addLineById("description.rods.press_ctrl");
         }
     }
 }

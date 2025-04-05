@@ -14,7 +14,7 @@ public class Text
     {
         if (!Screen.hasShiftDown())
         {
-            tooltip.addLine("description.press_shift").apply();
+            tooltip.addLineById("description.press_shift").apply();
             return false;
         }
 

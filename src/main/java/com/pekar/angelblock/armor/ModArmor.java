@@ -215,7 +215,7 @@ public class ModArmor extends Item implements ITooltipProvider
 
     private String getCommonDescriptionRoot()
     {
-        return getFullArmorModelName(getArmorFamilyName()).replace(':', '.').replaceAll("[0-9]", "") + ".desc";
+        return getFullArmorModelName(getArmorFamilyName()).replace(':', '.').replaceAll("[0-9]", "");
     }
 
     private String getFullArmorModelName(String armorModelName)

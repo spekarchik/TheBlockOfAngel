@@ -31,7 +31,7 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
     {
         if (!Screen.hasShiftDown() && !Screen.hasAltDown())
         {
-            tooltip.addLine("description.common.press_shift_or_alt").apply();
+            tooltip.addLineById("description.common.press_shift_or_alt").apply();
             return;
         }
 
@@ -45,7 +45,7 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
             }
 
             tooltip.addEmptyLine();
-            tooltip.addLine("description.common.press_alt").apply();
+            tooltip.addLineById("description.common.press_alt").apply();
         }
         else if (Screen.hasAltDown())
         {
@@ -57,7 +57,7 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
             }
 
             tooltip.addEmptyLine();
-            tooltip.addLine("description.common.press_shift").apply();
+            tooltip.addLineById("description.common.press_shift").apply();
         }
     }
 }
