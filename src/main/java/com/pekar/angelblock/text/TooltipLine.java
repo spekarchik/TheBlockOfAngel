@@ -15,7 +15,7 @@ public class TooltipLine implements ITooltipLine
     TooltipLine(Tooltip tooltip, String descriptionRoot, boolean ignoreEmptyLines)
     {
         this.tooltip = tooltip;
-        this.component = Component.translatable(descriptionRoot);
+        this.component = Component.translatable(descriptionRoot).withStyle(ChatFormatting.GRAY);
         this.ignoreEmptyLines = ignoreEmptyLines;
     }
 
