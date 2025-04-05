@@ -169,8 +169,7 @@ public class EndRod extends AmethystRod
         new PlaySoundPacket(SoundEvents.EXPERIENCE_ORB_PICKUP).sendToPlayer(serverPlayer);
     }
 
-    @Override
-    protected String getRodDescriptionId()
+    private String getRodDescriptionId()
     {
         return getRodDescriptionId(getRodId());
     }

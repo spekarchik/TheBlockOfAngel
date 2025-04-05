@@ -163,8 +163,7 @@ public class MarineRod extends AncientRod
         return ToolRegistry.MARINE_ROD.getRegisteredName();
     }
 
-    @Override
-    protected String getRodDescriptionId()
+    private String getRodDescriptionId()
     {
         return getRodDescriptionId(getRodId());
     }

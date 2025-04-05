@@ -202,8 +202,7 @@ public class FireRod extends MarineRod
         return result;
     }
 
-    @Override
-    protected String getRodDescriptionId()
+    private String getRodDescriptionId()
     {
         return getRodDescriptionId(getRodId());
     }

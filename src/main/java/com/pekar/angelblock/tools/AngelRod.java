@@ -22,8 +22,7 @@ public class AngelRod extends EndRod
         super(material, isMagnetic, properties);
     }
 
-    @Override
-    protected String getRodDescriptionId()
+    private String getRodDescriptionId()
     {
         return getRodDescriptionId(getRodId());
     }

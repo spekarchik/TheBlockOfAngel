@@ -206,7 +206,7 @@ public class AncientRod extends MagneticRod
         return ToolRegistry.ANCIENT_ROD.getRegisteredName();
     }
 
-    protected String getRodDescriptionId()
+    private String getRodDescriptionId()
     {
         return getRodDescriptionId(getRodId());
     }

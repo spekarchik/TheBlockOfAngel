@@ -86,8 +86,7 @@ public class AmethystRod extends FireRod
         return InteractionResult.PASS;
     }
 
-    @Override
-    protected String getRodDescriptionId()
+    private String getRodDescriptionId()
     {
         return getRodDescriptionId(getRodId());
     }
