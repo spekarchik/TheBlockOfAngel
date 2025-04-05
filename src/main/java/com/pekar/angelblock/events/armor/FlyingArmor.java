@@ -185,7 +185,7 @@ public class FlyingArmor extends Armor
     @Override
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        if (player.getEntity().isInWaterRainOrBubble() || jumpBoostEffect.isOn())
+        if (player.getEntity().isInWaterOrRain() || jumpBoostEffect.isOn())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
@@ -244,7 +244,7 @@ public class FlyingArmor extends Armor
 
         var playerEntity = player.getEntity();
         if (playerEntity.hasEffect(MobEffects.SLOW_FALLING)) return false;
-        if (Utils.instance.dimension.isNether(playerEntity.level().dimension()) || playerEntity.isInWaterRainOrBubble()) return false;
+        if (Utils.instance.dimension.isNether(playerEntity.level().dimension()) || playerEntity.isInWaterOrRain()) return false;
 
         var mainHandItemStack = playerEntity.getMainHandItem();
         if (mainHandItemStack.is(Items.FIREWORK_ROCKET)) return false;
