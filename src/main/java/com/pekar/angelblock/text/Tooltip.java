@@ -41,18 +41,24 @@ public class Tooltip implements ITooltip
         tooltipComponent.accept(new TooltipLine(this).getComponent());
     }
 
+    @Override
+    public ITooltipLine addLineById(String descriptionId)
+    {
+        return new TooltipLine(this, descriptionId, ignoreEmptyLines);
+    }
+
     @CheckReturnValue
     @Override
     public ITooltipLine addLine(String descriptionRoot)
     {
-        return new TooltipLine(this, descriptionRoot, ignoreEmptyLines);
+        return addLineById(descriptionRoot + ".desc");
     }
 
     @CheckReturnValue
     @Override
     public ITooltipLine addLine(String descriptionRoot, int descNumber)
     {
-        return new TooltipLine(this, descriptionRoot, descNumber, ignoreEmptyLines);
+        return addLineById(descriptionRoot + ".desc" + descNumber);
     }
 
     void apply(TooltipLine tooltipLine)

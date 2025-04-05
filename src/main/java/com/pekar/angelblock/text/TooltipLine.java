@@ -12,17 +12,10 @@ public class TooltipLine implements ITooltipLine
     private final MutableComponent component;
     private final boolean ignoreEmptyLines;
 
-    TooltipLine(Tooltip tooltip, String descriptionRoot, int descNumber, boolean ignoreEmptyLines)
-    {
-        this.tooltip = tooltip;
-        this.ignoreEmptyLines = ignoreEmptyLines;
-        this.component = Component.translatable(descriptionRoot + ".desc" + descNumber);
-    }
-
     TooltipLine(Tooltip tooltip, String descriptionRoot, boolean ignoreEmptyLines)
     {
         this.tooltip = tooltip;
-        this.component = Component.translatable(descriptionRoot + ".desc");
+        this.component = Component.translatable(descriptionRoot);
         this.ignoreEmptyLines = ignoreEmptyLines;
     }
 
