@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -17,6 +18,8 @@ import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 
 public class Player
 {
@@ -25,6 +28,16 @@ public class Player
     Player()
     {
 
+    }
+
+    public List<ItemStack> getArmorInSlots(LivingEntity entity)
+    {
+        return Arrays.asList(
+                entity.getItemBySlot(EquipmentSlot.HEAD),
+                entity.getItemBySlot(EquipmentSlot.CHEST),
+                entity.getItemBySlot(EquipmentSlot.LEGS),
+                entity.getItemBySlot(EquipmentSlot.FEET)
+        );
     }
 
     public Direction getDirection(LivingEntity entityLiving, BlockPos pos)

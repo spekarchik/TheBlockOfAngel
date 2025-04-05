@@ -21,14 +21,8 @@ public class AttributeModifiers
         if (armorAttribute != null)
         {
             int damageSum = 0, maxDamageSum = 0;
-            var armorItems = Arrays.asList(
-                    entity.getItemBySlot(EquipmentSlot.HEAD),
-                    entity.getItemBySlot(EquipmentSlot.CHEST),
-                    entity.getItemBySlot(EquipmentSlot.LEGS),
-                    entity.getItemBySlot(EquipmentSlot.FEET)
-            );
 
-            for (var slot : armorItems)
+            for (var slot : Utils.instance.player.getArmorInSlots(entity))
             {
                 if (slot.isEmpty()) continue;
                 boolean isModArmor = slot.getItem() instanceof ModArmor;

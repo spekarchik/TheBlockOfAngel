@@ -295,7 +295,7 @@ abstract class Armor implements IArmor
 
         var randomSource = RandomSource.create();
         int heavyArmorSlots = 0;
-        for (var slot : player.getArmorSlots())
+        for (var slot : Utils.instance.player.getArmorInSlots(player))
         {
             if (slot.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
                 heavyArmorSlots++;
@@ -324,7 +324,7 @@ abstract class Armor implements IArmor
     // for tests
     protected void damageArmor(boolean damage)
     {
-        for (var item : player.getEntity().getArmorSlots())
+        for (var item : Utils.instance.player.getArmorInSlots(player.getEntity()))
         {
             var damageValue = damage ? item.getMaxDamage() - 1 : 0;
             item.setDamageValue(damageValue);
@@ -342,7 +342,7 @@ abstract class Armor implements IArmor
     protected void switchArmorDamage()
     {
         boolean isDamaged = false;
-        for (var slot : player.getEntity().getArmorSlots())
+        for (var slot : Utils.instance.player.getArmorInSlots(player.getEntity()))
         {
             if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
             {
@@ -350,7 +350,7 @@ abstract class Armor implements IArmor
             }
         }
 
-        for (var slot : player.getEntity().getArmorSlots())
+        for (var slot : Utils.instance.player.getArmorInSlots(player.getEntity()))
         {
             if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
             {
