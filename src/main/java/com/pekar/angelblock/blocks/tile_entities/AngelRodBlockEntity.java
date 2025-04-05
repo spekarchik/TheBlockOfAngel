@@ -31,7 +31,7 @@ public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlock
 
     protected void loadModTag(CompoundTag tag)
     {
-        damage = tag.getInt(DamageTagName);
+        damage = tag.getIntOr(DamageTagName, 0);
     }
 
     protected void saveModTag(CompoundTag tag)

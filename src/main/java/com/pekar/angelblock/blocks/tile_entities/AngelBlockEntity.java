@@ -132,8 +132,8 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     {
         monstersToIgnore.clear();
 
-        isActivated = tag.getBoolean(IsActivatedTagName);
-        byte[] array = tag.getByteArray(MonsterFilterTagName);
+        isActivated = tag.getBooleanOr(IsActivatedTagName, false);
+        byte[] array = tag.getByteArray(MonsterFilterTagName).orElse(new byte[]{});
         for (var monsterId : array)
         {
             monstersToIgnore.add(monstersById.get(monsterId));
