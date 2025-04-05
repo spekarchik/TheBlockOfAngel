@@ -200,12 +200,13 @@ public class AncientRod extends MagneticRod
         return !hasCriticalDamage(stack) && block == Blocks.COBWEB;
     }
 
-    protected String getRodId()
+    // Should not be virtual
+    private String getRodId()
     {
         return ToolRegistry.ANCIENT_ROD.getRegisteredName();
     }
 
-    protected final String getRodDescriptionId()
+    protected String getRodDescriptionId()
     {
         return getRodDescriptionId(getRodId());
     }

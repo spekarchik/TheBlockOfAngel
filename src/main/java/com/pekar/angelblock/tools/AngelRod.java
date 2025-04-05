@@ -23,7 +23,12 @@ public class AngelRod extends EndRod
     }
 
     @Override
-    protected String getRodId()
+    protected String getRodDescriptionId()
+    {
+        return getRodDescriptionId(getRodId());
+    }
+
+    private String getRodId()
     {
         return ToolRegistry.ANGEL_ROD.getRegisteredName();
     }

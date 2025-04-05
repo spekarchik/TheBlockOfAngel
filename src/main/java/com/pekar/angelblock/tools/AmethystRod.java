@@ -87,7 +87,12 @@ public class AmethystRod extends FireRod
     }
 
     @Override
-    protected String getRodId()
+    protected String getRodDescriptionId()
+    {
+        return getRodDescriptionId(getRodId());
+    }
+
+    private String getRodId()
     {
         return ToolRegistry.AMETHYST_ROD.getRegisteredName();
     }

@@ -203,7 +203,12 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    protected String getRodId()
+    protected String getRodDescriptionId()
+    {
+        return getRodDescriptionId(getRodId());
+    }
+
+    private String getRodId()
     {
         return ToolRegistry.FIRE_ROD.getRegisteredName();
     }

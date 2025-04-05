@@ -170,7 +170,12 @@ public class EndRod extends AmethystRod
     }
 
     @Override
-    protected String getRodId()
+    protected String getRodDescriptionId()
+    {
+        return getRodDescriptionId(getRodId());
+    }
+
+    private String getRodId()
     {
         return ToolRegistry.END_ROD.getRegisteredName();
     }
