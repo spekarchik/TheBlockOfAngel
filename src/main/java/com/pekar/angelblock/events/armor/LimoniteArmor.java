@@ -160,7 +160,7 @@ public class LimoniteArmor extends Armor
             }
             else
             {
-                entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
+                entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
             }
         }
 

@@ -8,7 +8,7 @@ public class SlownessNegativeArmorEffect extends NegativeTemporaryArmorEffect
 {
     public SlownessNegativeArmorEffect(IPlayer player, IArmor armor, int defaultAmplifier, int duration)
     {
-        super(player, armor, MobEffects.MOVEMENT_SLOWDOWN, defaultAmplifier, duration);
+        super(player, armor, MobEffects.SLOWNESS, defaultAmplifier, duration);
         showIcon();
     }
 }

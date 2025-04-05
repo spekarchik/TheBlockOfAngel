@@ -141,17 +141,17 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         {
             if (event.getTo().is(ItemRegistry.ENERGY_CRYSTAL))
             {
-                if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) && !entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))
+                if (!entity.hasEffect(MobEffects.SPEED) && !entity.hasEffect(MobEffects.SLOWNESS))
                 {
-                    player.setEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 3);
+                    player.setEffect(MobEffects.SPEED, MobEffectInstance.INFINITE_DURATION, 3);
                     new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
                 }
             }
             else if (oldSlotItem.is(ItemRegistry.ENERGY_CRYSTAL) && !entity.getMainHandItem().is(ItemRegistry.ENERGY_CRYSTAL) && !entity.getOffhandItem().is(ItemRegistry.ENERGY_CRYSTAL))
             {
-                if (entity.hasEffect(MobEffects.MOVEMENT_SPEED))
+                if (entity.hasEffect(MobEffects.SPEED))
                 {
-                    player.clearEffect(MobEffects.MOVEMENT_SPEED);
+                    player.clearEffect(MobEffects.SPEED);
                     new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
                 }
             }

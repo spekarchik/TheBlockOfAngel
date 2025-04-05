@@ -8,7 +8,7 @@ public class JumpBoostSwitchingArmorEffect extends SwitchingArmorEffect
 {
     public JumpBoostSwitchingArmorEffect(IPlayer player, IArmor armor, int amplifier)
     {
-        super(player, armor, MobEffects.JUMP, amplifier);
+        super(player, armor, MobEffects.JUMP_BOOST, amplifier);
         availableOnBootsWithJumpBooster();
         showIcon();
     }

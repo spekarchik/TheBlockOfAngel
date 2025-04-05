@@ -216,7 +216,7 @@ public class SuperArmor extends Armor
                 }
                 else
                 {
-                    entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
+                    entityAttackedBy.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, MONSTER_SLOWDOWNED_EFFECT_DURATION, 2));
                 }
             }
 
@@ -269,11 +269,11 @@ public class SuperArmor extends Armor
 
         if (slowFallingEffect.isOn() && slowFallingEffect.isActive())
         {
-            player.setEffect(MobEffects.JUMP, 30, 6);
+            player.setEffect(MobEffects.JUMP_BOOST, 30, 6);
         }
         else if (superJumpEffect.isMasterActive())
         {
-            player.setEffect(MobEffects.JUMP, 20, SUPER_JUMP_AMPLIFIER);
+            player.setEffect(MobEffects.JUMP_BOOST, 20, SUPER_JUMP_AMPLIFIER);
         }
     }
 

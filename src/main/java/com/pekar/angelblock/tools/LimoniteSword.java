@@ -73,7 +73,7 @@ public class LimoniteSword extends ModSword
         if (attacker.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
             target.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0, true, true));
 
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 400, 0, true, true));
+        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 400, 0, true, true));
     }
 
     @Override

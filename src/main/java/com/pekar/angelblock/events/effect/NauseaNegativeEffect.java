@@ -8,6 +8,6 @@ public class NauseaNegativeEffect extends NegativeTemporaryArmorEffect
 {
     public NauseaNegativeEffect(IPlayer player, IArmor armor, int duration)
     {
-        super(player, armor, MobEffects.CONFUSION, 12, duration);
+        super(player, armor, MobEffects.NAUSEA, 12, duration);
     }
 }

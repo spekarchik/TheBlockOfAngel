@@ -22,7 +22,7 @@ public class LimonitePrimarySword extends ModSword
     protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
         target.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0, true, true));
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, true, true));
+        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 0, true, true));
     }
 
     @Override

@@ -107,7 +107,7 @@ public class SuperSword extends ModSword
             target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));
         }
 
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 400, 0, true, true));
+        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 400, 0, true, true));
 
         if (attacker instanceof Player player)
         {

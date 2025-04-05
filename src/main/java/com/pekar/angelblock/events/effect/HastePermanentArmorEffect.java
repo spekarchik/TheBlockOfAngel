@@ -8,7 +8,7 @@ public class HastePermanentArmorEffect extends PermanentArmorEffect
 {
     public HastePermanentArmorEffect(IPlayer player, IArmor armor)
     {
-        super(player, armor, MobEffects.DIG_SPEED, 1);
+        super(player, armor, MobEffects.HASTE, 1);
         availableOnChestPlateWithStrengthBooster();
     }
 }

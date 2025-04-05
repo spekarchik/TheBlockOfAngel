@@ -5,6 +5,7 @@ import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.tools.ToolRegistry;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -78,7 +79,7 @@ public class Player implements IPlayer
     @Override
     public boolean isAnyArmorElementPutOn(IArmor armor)
     {
-        for (var itemStack : getEntity().getArmorSlots())
+        for (var itemStack : Utils.instance.player.getArmorInSlots(getEntity()))
         {
             if (itemStack.isEmpty()) continue;
             var item = itemStack.getItem();
@@ -93,7 +94,7 @@ public class Player implements IPlayer
     @Override
     public boolean isAnyArmorElementInclBrokenPutOn(IArmor armor)
     {
-        for (var itemStack : getEntity().getArmorSlots())
+        for (var itemStack : Utils.instance.player.getArmorInSlots(getEntity()))
         {
             if (itemStack.isEmpty()) continue;
             var item = itemStack.getItem();
@@ -318,7 +319,7 @@ public class Player implements IPlayer
 
     private Collection<String> getSlotArmorNames()
     {
-        Iterable<ItemStack> itemStacks = entity.getArmorSlots();
+        Iterable<ItemStack> itemStacks = Utils.instance.player.getArmorInSlots(getEntity());
         Set<String> armorNames = new HashSet<>();
 
         for (ItemStack itemStack : itemStacks)
@@ -341,7 +342,7 @@ public class Player implements IPlayer
 
     private Collection<ModArmor> getSlotArmorItems()
     {
-        Iterable<ItemStack> itemStacks = entity.getArmorSlots();
+        Iterable<ItemStack> itemStacks = Utils.instance.player.getArmorInSlots(getEntity());
         var armorItems = new ArrayList<ModArmor>();
 
         for (ItemStack itemStack : itemStacks)

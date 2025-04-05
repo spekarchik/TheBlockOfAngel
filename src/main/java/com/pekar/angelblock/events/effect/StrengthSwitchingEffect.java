@@ -9,7 +9,7 @@ public class StrengthSwitchingEffect extends SwitchingArmorEffect
 {
     public StrengthSwitchingEffect(IPlayer player, IArmor armor, int amplifier)
     {
-        super(player, armor, MobEffects.DAMAGE_BOOST, amplifier);
+        super(player, armor, MobEffects.STRENGTH, amplifier);
         availableIfSlotSet(EquipmentSlot.CHEST);
     }
 }

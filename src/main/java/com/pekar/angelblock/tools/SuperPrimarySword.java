@@ -37,7 +37,7 @@ public class SuperPrimarySword extends ModSword
             }
         }
 
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, true, true));
+        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 0, true, true));
     }
 
     @Override
