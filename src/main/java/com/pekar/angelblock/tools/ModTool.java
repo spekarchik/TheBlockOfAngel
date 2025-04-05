@@ -13,7 +13,8 @@ public abstract class ModTool extends Item implements IModTool
 
     public ModTool(ModToolMaterial material, TagKey<Block> mineableBlocks, float attackDamage, float attackSpeed, Properties properties)
     {
-        super(material.getVanillaMaterial().applyToolProperties(properties, mineableBlocks, attackDamage, attackSpeed));
+        super(material.getVanillaMaterial().applyToolProperties(properties, mineableBlocks, attackDamage, attackSpeed, /*disableBlockingForSeconds*/ 0));
+        // ToolMaterial#applyToolProperties now takes in a boolean of whether the weapon can disable a blocker (e.g., shield)
     }
 
     @Override
