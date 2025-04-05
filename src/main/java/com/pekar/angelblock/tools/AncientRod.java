@@ -264,19 +264,7 @@ public class AncientRod extends MagneticRod
         // Common
         appendCommonPreInfo(tooltip);
 
-        if (Screen.hasControlDown())
-        {
-            // Magnetic
-            if (!isEnhanced())
-                tooltip.addLineById("description.rods.no_magnet_mode").withFormatting(ChatFormatting.DARK_RED, true).apply();
-            else if (this instanceof FireRod)
-                tooltip.addLineById("description.rods.magnet_mode.fire_rod").asDarkGrey().apply();
-            else
-                tooltip.addLineById("description.rods.magnet_mode.ancient_rod").asDarkGrey().apply();
-
-            appendMagneticInfo(tooltip);
-        }
-        else if (Screen.hasShiftDown())
+        if (Screen.hasShiftDown())
         {
             // Placing
             appendPlacingBlockInfo(tooltip, true);
@@ -288,18 +276,24 @@ public class AncientRod extends MagneticRod
             appendBlockTransformInfo(tooltip, true);
             tooltip.addEmptyLine();
         }
+        else if (Screen.hasControlDown())
+        {
+            // Magnetic
+            if (!isEnhanced())
+                tooltip.addLineById("description.rods.no_magnet_mode").withFormatting(ChatFormatting.DARK_RED, true).apply();
+            else if (this instanceof FireRod)
+                tooltip.addLineById("description.rods.magnet_mode.fire_rod").asDarkGrey().apply();
+            else
+                tooltip.addLineById("description.rods.magnet_mode.ancient_rod").asDarkGrey().apply();
+
+            appendMagneticInfo(tooltip);
+        }
 
         // Common
         appendCommonPostInfo(tooltip);
         tooltip.addEmptyLine();
 
-        if (Screen.hasControlDown())
-        {
-            // Magnetic
-            tooltip.addLineById("description.rods.press_shift");
-            tooltip.addLineById("description.rods.press_alt");
-        }
-        else if (Screen.hasShiftDown())
+        if (Screen.hasShiftDown())
         {
             // Placing
             tooltip.addLineById("description.rods.press_alt");
@@ -310,6 +304,12 @@ public class AncientRod extends MagneticRod
             // Transformations
             tooltip.addLineById("description.rods.press_shift");
             tooltip.addLineById("description.rods.press_ctrl");
+        }
+        else if (Screen.hasControlDown())
+        {
+            // Magnetic
+            tooltip.addLineById("description.rods.press_shift");
+            tooltip.addLineById("description.rods.press_alt");
         }
     }
 
