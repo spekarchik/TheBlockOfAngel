@@ -1,11 +1,16 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.text.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.Block;
+
+import java.util.function.Consumer;
 
 public abstract class ModTool extends Item implements IModTool
 {
@@ -18,6 +23,12 @@ public abstract class ModTool extends Item implements IModTool
     }
 
     @Override
+    public final void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
+    {
+        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
+    }
+
+    @Override
     public String getMaterialName()
     {
         if (getMaterial() instanceof ModToolMaterial toolMaterial)
@@ -26,11 +37,5 @@ public abstract class ModTool extends Item implements IModTool
         }
 
         return "";
-    }
-
-    @Override
-    public MutableComponent getDisplayName(int lineNumber)
-    {
-        return Component.translatable(getDescriptionId() + ".desc" + lineNumber);
     }
 }

@@ -1,16 +1,15 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.text.TextStyle;
 import com.pekar.angelblock.tools.properties.SuperMaterialProperties;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.List;
 
 public class SuperShovel extends EnhancedShovel
 {
@@ -45,13 +44,17 @@ public class SuperShovel extends EnhancedShovel
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 11; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 8, false, i == 6, false, i == 10));
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1 || i == 8)
+                    .styledAs(TextStyle.Notice, i == 6)
+                    .styledAs(TextStyle.DarkGray, i == 10)
+                    .apply();
         }
     }
 }

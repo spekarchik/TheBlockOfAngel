@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.text.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -7,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -15,14 +15,16 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
-public class ModSword extends Item implements IModTool
+import java.util.function.Consumer;
+
+public abstract class ModSword extends Item implements IModTool
 {
     private static final int[] dx = { 3, -3, 2, 2, -2, -2, 0, 0, 1, 1, -1, -1 };
     private static final int[] dz = { 0, 0, 1, -1, 1, -1, 3, -3, 2, -2, 2, -2 };
@@ -88,16 +90,14 @@ public class ModSword extends Item implements IModTool
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
-        return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_SWORD_ACTIONS.contains(itemAbility);
+        return !hasCriticalDamage(stack) && super.canPerformAction(stack, itemAbility);
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
         if (!hasCriticalDamage(stack))
             additionalActionOnHurtEnemy(stack, target, attacker);
-
-        return true;
     }
 
     @Override
@@ -356,8 +356,8 @@ public class ModSword extends Item implements IModTool
     }
 
     @Override
-    public MutableComponent getDisplayName(int lineNumber)
+    public final void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
     {
-        return Component.translatable(getDescriptionId() + ".desc" + lineNumber);
+        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
     }
 }

@@ -4,19 +4,14 @@ import com.pekar.angelblock.Main;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
-import com.pekar.angelblock.text.ITooltipProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +19,6 @@ import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class MagneticRod extends ModRod
@@ -247,12 +241,6 @@ public abstract class MagneticRod extends ModRod
     protected int getSculkDetectionDepth()
     {
         return 64;
-    }
-
-    @Override
-    public final void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
-    {
-        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
     }
 
     private void exchange(Level level, BlockPos currentPos, BlockPos closerPos)

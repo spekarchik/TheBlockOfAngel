@@ -1,12 +1,13 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.text.TextStyle;
 import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -25,7 +26,6 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 
 public class ModAxe extends ModTool implements IModToolEnhanceable
@@ -52,7 +52,7 @@ public class ModAxe extends ModTool implements IModToolEnhanceable
         Level level = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
         Player player = context.getPlayer();
-        if (playerHasShieldUseIntent(context))
+        if (playerHasBlockingItemUseIntent(context))
         {
             return InteractionResult.PASS;
         }
@@ -128,20 +128,20 @@ public class ModAxe extends ModTool implements IModToolEnhanceable
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 2; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, false, false, i == 1));
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 1).apply();
         }
     }
 
-    private static boolean playerHasShieldUseIntent(UseOnContext context)
+    private static boolean playerHasBlockingItemUseIntent(UseOnContext context)
     {
         Player player = context.getPlayer();
-        return context.getHand().equals(InteractionHand.MAIN_HAND) && player.getOffhandItem().is(Items.SHIELD) && !player.isSecondaryUseActive();
+        return context.getHand().equals(InteractionHand.MAIN_HAND) && player.getOffhandItem().has(DataComponents.BLOCKS_ATTACKS) && !player.isSecondaryUseActive();
     }
 
     private Optional<BlockState> evaluateNewBlockState(Level level, BlockPos pos, @Nullable Player player, BlockState state, UseOnContext context)

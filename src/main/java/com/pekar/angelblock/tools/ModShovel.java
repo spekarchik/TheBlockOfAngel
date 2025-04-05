@@ -2,13 +2,14 @@ package com.pekar.angelblock.tools;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.text.TextStyle;
 import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -27,7 +28,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
-import java.util.List;
 import java.util.Map;
 
 public class ModShovel extends ModTool implements IModToolEnhanceable
@@ -112,13 +112,13 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 2; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, false, false, i == 1));
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 1).apply();
         }
     }
 
