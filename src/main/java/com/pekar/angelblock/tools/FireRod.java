@@ -204,7 +204,7 @@ public class FireRod extends MarineRod
 
     private String getRodDescriptionId()
     {
-        return getRodDescriptionId(getRodId());
+        return formatDescriptionId(getRodId());
     }
 
     private String getRodId()

@@ -87,7 +87,7 @@ public class TrackLayer extends WorkRod
 
         for (int i = 0; i <= 8; i++)
         {
-            tooltip.addLine(getDescriptionId())
+            tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1 || i == 3)
                     .styledAs(TextStyle.ImportantNotice, i == 5)
                     .styledAs(TextStyle.DarkGray, i == 7)

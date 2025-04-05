@@ -165,7 +165,7 @@ public class MarineRod extends AncientRod
 
     private String getRodDescriptionId()
     {
-        return getRodDescriptionId(getRodId());
+        return formatDescriptionId(getRodId());
     }
 
     @Override

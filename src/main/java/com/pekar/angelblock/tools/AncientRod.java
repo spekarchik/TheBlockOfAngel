@@ -6,20 +6,17 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.text.ITooltip;
-import com.pekar.angelblock.text.ITooltipProvider;
 import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -28,7 +25,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 
 public class AncientRod extends MagneticRod
 {
@@ -200,18 +196,19 @@ public class AncientRod extends MagneticRod
         return !hasCriticalDamage(stack) && block == Blocks.COBWEB;
     }
 
-    // Should not be virtual
+    // Should not be virtual!
     private String getRodId()
     {
         return ToolRegistry.ANCIENT_ROD.getRegisteredName();
     }
 
-    private String getRodDescriptionId()
+    // Should not be virtual!
+    private String getUnenhancedRodDescriptionId()
     {
-        return getRodDescriptionId(getRodId());
+        return formatDescriptionId(getRodId());
     }
 
-    protected final String getRodDescriptionId(String rodId)
+    protected final String formatDescriptionId(String rodId)
     {
         return "item." + rodId.replace(':', '.');
     }
@@ -220,7 +217,7 @@ public class AncientRod extends MagneticRod
     {
         for (int i = 1; i <= 8; i++)
         {
-            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.Header, i == 1 || i == 3).apply();
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 1 || i == 3).apply();
         }
     }
 
@@ -228,7 +225,7 @@ public class AncientRod extends MagneticRod
     {
         for (int i = 9; i <= 12; i++)
         {
-            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.Header, i == 9).apply();
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 9).apply();
         }
     }
 
@@ -237,22 +234,22 @@ public class AncientRod extends MagneticRod
         for (int i = 13; i <= 21; i++)
         {
             if (i == 21) tooltip.addEmptyLine();
-            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.Header, i == 13).styledAs(TextStyle.DarkGray, i == 21).apply();
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 13).styledAs(TextStyle.DarkGray, i == 21).apply();
         }
     }
 
     protected void appendCommonPreInfo(ITooltip tooltip)
     {
-        tooltip.addLine(getRodDescriptionId(), 0).apply();
+        tooltip.addLine(getDescriptionId(), 0).apply();
         if (isEnhanced())
-            tooltip.addLine(getRodDescriptionId(), 1).apply();
+            tooltip.addLine(getDescriptionId(), 1).apply();
     }
 
     protected void appendCommonPostInfo(ITooltip tooltip)
     {
         for (int i = 22; i <= 23; i++)
         {
-            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 22).apply();
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 22).apply();
         }
     }
 
