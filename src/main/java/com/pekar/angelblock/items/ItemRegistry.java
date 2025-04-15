@@ -3,10 +3,12 @@ package com.pekar.angelblock.items;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ItemRegistry
@@ -22,6 +24,7 @@ public class ItemRegistry
     public static final TagKey<Item> NETHERITE_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_armor"));
     public static final TagKey<Item> DIAMOND_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "diamond_tool"));
     public static final TagKey<Item> NETHERITE_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_tool"));
+    public static final ResourceKey<TrimMaterial> BIOS_DIAMOND_TRIM_MATERIAL = ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath(Main.MODID, "bios_diamond"));
 
     public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.registerItem("obsidian_powder", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ENDSTONE_POWDER = Main.ITEMS.registerItem("endstone_powder", EndstonePowder::new);
@@ -72,7 +75,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> ENERGY_CRYSTAL = Main.ITEMS.registerItem("energy_crystal", ModItemWithHoverText::new);
     public static final DeferredItem<Item> ARMOR_FIBER = Main.ITEMS.registerItem("armor_fiber", ModItem::new);
     public static final DeferredItem<Item> ENERGY_FIBER = Main.ITEMS.registerItem("energy_fiber", ModItemWithHoverText::new);
-    public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.registerItem("bios_diamond", BiosDiamond::new);
+    public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.registerItem("bios_diamond", BiosDiamond::new, new Item.Properties().trimMaterial(BIOS_DIAMOND_TRIM_MATERIAL));
     public static final DeferredItem<Item> END_SAPPHIRE = Main.ITEMS.registerItem("end_sapphire", EndSapphire::new);
     public static final DeferredItem<Item> FLAME_STONE = Main.ITEMS.registerItem("flame_stone", ModItemWithDoubleHoverText::new);
     public static final DeferredItem<Item> MARINE_CRYSTAL = Main.ITEMS.registerItem("marine_crystal", ModItemWithDoubleHoverText::new);
