@@ -84,7 +84,7 @@
                     "type": "minecraft:model",
                     "model": "angelblock:item/lapis_chestplate2_bios_diamond_trim"
                 },
-                "when": "minecraft:bios_diamond"
+                "when": "angelblock:bios_diamond"
             }
         ],
         "fallback": {

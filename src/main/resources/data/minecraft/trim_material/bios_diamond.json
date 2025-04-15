@@ -1,8 +1,0 @@
-{
-  "asset_name": "bios_diamond",
-  "description": {
-    "color": "#6EECB2",
-    "translate": "trim_material.angelblock.green_diamond"
-  },
-  "ingredient": "angelblock:bios_diamond"
-}
