@@ -191,7 +191,7 @@ public class TrackLayer extends WorkRod
         var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
         var originBlock = level.getBlockState(pos).getBlock();
 
-        int y = originBlock instanceof BaseRailBlock ? posY - 1 : posY; // only rails can be continued when click on it
+        int y = utils.blocks.types.isRail(originBlock) ? posY - 1 : posY; // only rails can be continued when click on it
         for (int x = posX; x != posX + shiftX; x += increment)
             for (int z = posZ; z != posZ + shiftZ; z += increment)
             {
@@ -261,7 +261,7 @@ public class TrackLayer extends WorkRod
 
     private boolean isTrackLayerCompatible(Block block)
     {
-        return block instanceof BaseRailBlock
+        return utils.blocks.types.isRail(block)
                 || block instanceof FenceBlock
                 || block instanceof WallBlock
                 || block == Blocks.REDSTONE_WIRE;
@@ -349,7 +349,7 @@ public class TrackLayer extends WorkRod
     private boolean isAllowedReplaceWater(BlockState replacingBlockState, Block placingBlock)
     {
         return replacingBlockState.getBlock() == Blocks.WATER
-                && placingBlock instanceof BaseRailBlock;
+                && utils.blocks.types.isRail(placingBlock);
     }
 
     private boolean isBlockSolidOrTransparent(Level level, BlockPos pos)
@@ -364,7 +364,7 @@ public class TrackLayer extends WorkRod
     {
         var soundType = SoundType.UNDEFINED;
 
-        if (placingBlock instanceof BaseRailBlock)
+        if (utils.blocks.types.isRail(placingBlock))
         {
             soundType = SoundType.RAIL_PLACED;
         }
