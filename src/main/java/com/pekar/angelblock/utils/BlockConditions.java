@@ -1,6 +1,5 @@
 package com.pekar.angelblock.utils;
 
-import com.pekar.angelblock.blocks.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
