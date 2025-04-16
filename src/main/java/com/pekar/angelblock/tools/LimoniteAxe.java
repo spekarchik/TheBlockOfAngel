@@ -44,7 +44,7 @@ public class LimoniteAxe extends EnhancedAxe
     }
 
     @Override
-    protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
+    protected void mineAdditionalBlocks(ItemStack itemStack, Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (!isEnhanced() || !entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
@@ -56,23 +56,23 @@ public class LimoniteAxe extends EnhancedAxe
 
         float initialHardness = block.defaultDestroyTime();
 
-        if (initialHardness != 0.0F && !isCompatiblePlant(block))
+        if (initialHardness != 0.0F && isCorrectToolForDrops(itemStack, blockState) && !isCompatiblePlant(itemStack, blockState))
         {
             int increment = 1;
             while (canProceed(entityLiving, pos.above(increment)))
             {
-                onBlockMining(level, blockState, initialHardness, pos.above(increment++), entityLiving);
+                onBlockMining(itemStack, level, blockState, initialHardness, pos.above(increment++), entityLiving);
             }
 
             increment = 1;
             while (canProceed(entityLiving, pos.below(increment)))
             {
-                onBlockMining(level, blockState, initialHardness, pos.below(increment++), entityLiving);
+                onBlockMining(itemStack, level, blockState, initialHardness, pos.below(increment++), entityLiving);
             }
         }
 
-        if (isCompatiblePlant(block))
-            super.mineAdditionalBlocks(level, pos, entityLiving);
+        if (isCompatiblePlant(itemStack, blockState))
+            super.mineAdditionalBlocks(itemStack, level, pos, entityLiving);
     }
 
     private boolean canProceed(LivingEntity entityLiving, BlockPos pos)

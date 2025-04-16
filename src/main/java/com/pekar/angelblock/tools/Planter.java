@@ -1,13 +1,20 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.Main;
+import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.text.ITooltip;
 import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,9 +23,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class Planter extends WorkRod
@@ -69,7 +75,7 @@ public class Planter extends WorkRod
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        if (!level.isClientSide() && blockState.getBlock() instanceof BushBlock && livingEntity instanceof Player player)
+        if (!level.isClientSide() && blockState.is(BlockRegistry.PLANTER_COMPATIBLE_TO_MINE) && livingEntity instanceof Player player)
         {
             grabPlants(player, level, pos, 3, true); // no tool damage
         }
@@ -80,7 +86,7 @@ public class Planter extends WorkRod
     @Override
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
-        return isPlanterCompatible(state.getBlock());
+        return state.getBlock().defaultBlockState().is(BlockRegistry.PLANTER_COMPATIBLE_TO_MINE);
     }
 
     @Override
@@ -126,9 +132,10 @@ public class Planter extends WorkRod
 
         boolean haveAnyTransformed = false;
         var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-        var originBlock = level.getBlockState(pos).getBlock();
+        var originBlockState = level.getBlockState(pos);
+        var originBlock = originBlockState.getBlock();
 
-        int y = originBlock instanceof BushBlock ? posY : pos.above().getY();
+        int y = originBlock instanceof VegetationBlock ? posY : pos.above().getY();
         for (int x = posX - x1; x != posX + x2; x += incX)
             for (int z = posZ - z1; z != posZ + z2; z += incZ)
             {
@@ -145,12 +152,13 @@ public class Planter extends WorkRod
         if (facing != Direction.UP) return false;
 
         var seedInHand = player.getItemInHand(InteractionHand.OFF_HAND);
+
         if (!(seedInHand.getItem() instanceof BlockItem blockItem)) return false;
 
-        var plantableBlock = blockItem.getBlock();
-
-        if (!isPlanterCompatible(plantableBlock))
+        if (!seedInHand.is(ItemRegistry.PLANTER_COMPATIBLE_TO_PLANT))
             return false;
+
+        var plantableBlock = blockItem.getBlock();
 
         int seedCount = seedInHand.getCount();
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
@@ -228,20 +236,11 @@ public class Planter extends WorkRod
         return haveAnyTransformed;
     }
 
-    private boolean isPlanterCompatible(Block block)
-    {
-        return block instanceof BushBlock
-                || block == Blocks.CACTUS
-                || block == Blocks.BAMBOO
-                || block == Blocks.SUGAR_CANE;
-    }
-
     private boolean grabPlant(Player player, Level level, Block originBlock, BlockPos pos, ItemStack toolItemStack, boolean shouldDrop)
     {
         var blockState = level.getBlockState(pos);
-        var block = blockState.getBlock();
 
-        if (!(block instanceof BushBlock)) return false;
+        if (!(blockState.getBlock() instanceof VegetationBlock)) return false;
 
         if (!level.isClientSide())
         {
@@ -263,6 +262,8 @@ public class Planter extends WorkRod
         var itemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int itemCount = itemStack.getCount();
         if (itemCount < 1) return false;
+
+        if (!plantBlock.defaultBlockState().is(BlockRegistry.PLANTER_COMPATIBLE_TO_PLANT)) return false;
 
         var result = plant(player, level, pos, InteractionHand.OFF_HAND, facing, plantBlock);
         if (result.consumesAction())

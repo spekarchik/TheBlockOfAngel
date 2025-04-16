@@ -211,7 +211,7 @@ public class Builder extends WorkRod
 
     protected boolean isPlant(Block block)
     {
-        return block instanceof BushBlock || block instanceof GrowingPlantBlock;
+        return block instanceof VegetationBlock || block instanceof GrowingPlantBlock;
     }
 
     protected boolean isAirOrWater(BlockState blockState)

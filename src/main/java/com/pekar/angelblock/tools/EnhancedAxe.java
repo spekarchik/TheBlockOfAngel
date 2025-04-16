@@ -6,8 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class EnhancedAxe extends ModAxe
@@ -26,11 +25,11 @@ public class EnhancedAxe extends ModAxe
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        mineAdditionalBlocks(level, pos, livingEntity);
+        mineAdditionalBlocks(itemStack, level, pos, livingEntity);
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
-    protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
+    protected void mineAdditionalBlocks(ItemStack itemStack, Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
@@ -39,7 +38,7 @@ public class EnhancedAxe extends ModAxe
         var block = blockState.getBlock();
         if (!isToolEffective(entityLiving, pos)) return;
 
-        if (blockState.hasBlockEntity() || (blockState != block.defaultBlockState() && !isCompatiblePlant(block))) return;
+        if (blockState.hasBlockEntity() || (blockState != block.defaultBlockState() && !isCompatiblePlant(itemStack, blockState))) return;
 
         float originHardness = block.defaultDestroyTime();
 
@@ -50,21 +49,21 @@ public class EnhancedAxe extends ModAxe
                 for (int z = posZ - 1; z <= posZ + 1; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockMining(level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
+                    onBlockMining(itemStack, level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
-    protected boolean isCompatiblePlant(Block block)
+    protected final boolean isCompatiblePlant(ItemStack itemStack, BlockState blockState)
     {
-        return block instanceof BushBlock;
+        return isCorrectToolForDrops(itemStack, blockState) && blockState.getBlock() instanceof VegetationBlock;
     }
 
-    protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
+    protected void onBlockMining(ItemStack itemStack, Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
-        if (blockState.hasBlockEntity() || (blockState != block.defaultBlockState() && !isCompatiblePlant(block))) return;
+        if (blockState.hasBlockEntity() || (blockState != block.defaultBlockState() && !isCompatiblePlant(itemStack, blockState))) return;
 
         float hardness = block.defaultDestroyTime();
 

@@ -24,6 +24,8 @@ public class ItemRegistry
     public static final TagKey<Item> NETHERITE_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_armor"));
     public static final TagKey<Item> DIAMOND_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "diamond_tool"));
     public static final TagKey<Item> NETHERITE_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_tool"));
+    public static final TagKey<Item> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_plant"));
+
     public static final ResourceKey<TrimMaterial> BIOS_DIAMOND_TRIM_MATERIAL = ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath(Main.MODID, "bios_diamond"));
 
     public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.registerItem("obsidian_powder", p -> new ModItemWithHoverText(TextStyle.Notice, p));

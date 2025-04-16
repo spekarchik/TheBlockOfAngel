@@ -226,14 +226,14 @@ public class TrackLayer extends WorkRod
         {
             var theBlockStateAboveUpper = level.getBlockState(upPos.above());
             var theBlockAboveUpper = theBlockStateAboveUpper.getBlock();
-            boolean canGoUp = theBlockStateAboveUpper.isAir() || theBlockAboveUpper instanceof BushBlock
+            boolean canGoUp = theBlockStateAboveUpper.isAir() || theBlockAboveUpper instanceof VegetationBlock
                     || isAllowedReplaceWater(theBlockStateAboveUpper, placingBlock) || areSimilar(theBlockAboveUpper, placingBlock);
 
             return canGoUp ? upPos : originPos;
         }
 
         // check to go down
-        if (originBlockState.isAir() || originBlock instanceof BushBlock || isAllowedReplaceWater(originBlockState, placingBlock))
+        if (originBlockState.isAir() || originBlock instanceof VegetationBlock || isAllowedReplaceWater(originBlockState, placingBlock))
         {
             var updatedPos = originPos.below();
             boolean isBlockBelowSolid = isBlockSolidOrTransparent(level, updatedPos);
@@ -308,17 +308,17 @@ public class TrackLayer extends WorkRod
         var upPos = pos.above();
         var upperBlockState = level.getBlockState(upPos);
         var upperBlock = upperBlockState.getBlock();
-        boolean isUpperBushBlock = upperBlock instanceof BushBlock;
+        boolean isUpperBlockVegetation = upperBlock instanceof VegetationBlock;
         boolean canSkip = upperBlock != Blocks.REDSTONE_WIRE && areSimilar(placingBlock, upperBlock);
         boolean isUpperWaterReplacingByRails = isAllowedReplaceWater(upperBlockState, placingBlock);
 
         if (canSkip) return true;
 
-        if (!upperBlockState.isAir() && !isUpperWaterReplacingByRails && !isUpperBushBlock) return false;
+        if (!upperBlockState.isAir() && !isUpperWaterReplacingByRails && !isUpperBlockVegetation) return false;
 
         if (!level.isClientSide())
         {
-            if (isUpperBushBlock)
+            if (isUpperBlockVegetation)
             {
                 level.destroyBlock(upPos, false);
             }

@@ -2,6 +2,9 @@ package com.pekar.angelblock.blocks;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.block_items.*;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -17,6 +20,9 @@ import java.util.function.Supplier;
 
 public class BlockRegistry
 {
+    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_MINE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_mine"));
+    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_plant"));
+
     public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SNOW).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedObsidianBlock::new, ModBlockItemWithHoverText::new,

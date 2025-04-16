@@ -121,9 +121,7 @@ public class AncientRod extends MagneticRod
 
             if (facing == Direction.UP)
             {
-                if (utils.blocks.conditions.isNearWaterHorizontal(level, pos) && (block == Blocks.DIRT || block == Blocks.COARSE_DIRT
-                        || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || utils.blocks.types.isSandBlock(block)
-                        || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM))
+                if (utils.blocks.conditions.canSustainSugarCane(level, pos))
                 {
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, hand, facing, Blocks.SUGAR_CANE);
