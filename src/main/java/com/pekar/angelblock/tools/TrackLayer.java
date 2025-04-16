@@ -323,7 +323,7 @@ public class TrackLayer extends WorkRod
                 level.destroyBlock(upPos, false);
             }
 
-            level.setBlock(upPos, placingBlock.defaultBlockState(), 11);
+            level.setBlock(upPos, placingBlock.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
 
             if (player instanceof ServerPlayer serverPlayer)
             {

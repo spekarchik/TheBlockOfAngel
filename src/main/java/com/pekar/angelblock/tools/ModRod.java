@@ -127,11 +127,11 @@ public abstract class ModRod extends ModTool implements IModTool
             boolean isClientSide = level.isClientSide();
             if (!isClientSide)
             {
-                level.setBlock(abovePos, plantBlock.defaultBlockState(), 11);
+                level.setBlock(abovePos, plantBlock.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
 
                 if (plantBlock instanceof DoublePlantBlock doublePlant)
                 {
-                    level.setBlock(abovePos.above(), doublePlant.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER), 11);
+                    level.setBlock(abovePos.above(), doublePlant.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER), Block.UPDATE_ALL_IMMEDIATE);
                 }
 
                 if (player instanceof ServerPlayer serverPlayer)

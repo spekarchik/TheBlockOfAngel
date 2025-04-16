@@ -44,6 +44,9 @@ public abstract class MagneticRod extends ModRod
     protected InteractionResult useOnInternal(UseOnContext context)
     {
         var player = context.getPlayer();
+
+        if (player == null) return InteractionResult.FAIL;
+
         var itemStack = player.getItemInHand(context.getHand());
 
         if (hasCriticalDamage(itemStack)) return InteractionResult.FAIL;

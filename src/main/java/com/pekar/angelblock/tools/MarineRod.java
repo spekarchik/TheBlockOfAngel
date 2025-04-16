@@ -11,6 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -57,7 +58,7 @@ public class MarineRod extends AncientRod
                 {
                     if (!isClientSide)
                     {
-                        level.setBlock(upPos, Blocks.WATER.defaultBlockState(), 11);
+                        level.setBlock(upPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
                         new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
                         damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
                     }
