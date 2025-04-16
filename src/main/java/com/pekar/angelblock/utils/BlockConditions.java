@@ -81,8 +81,7 @@ public class BlockConditions
 
         var soilBlockState = level.getBlockState(pos);
 
-        return (soilBlockState.is(BlockTags.DIRT) && !soilBlockState.is(Blocks.MUDDY_MANGROVE_ROOTS))
-                || soilBlockState.is(BlockTags.SAND);
+        return soilBlockState.is(BlockTags.DIRT) || soilBlockState.is(BlockTags.SAND);
     }
 
     public final boolean canSustainBamboo(Level level, BlockPos pos)
@@ -121,7 +120,7 @@ public class BlockConditions
         }
         else
         {
-            return false;
+            return true;
         }
     }
 

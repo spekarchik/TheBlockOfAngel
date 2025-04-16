@@ -7,6 +7,9 @@
     "minecraft:potatoes",
     "minecraft:wheat",
     "minecraft:nether_wart",
-    "minecraft:sweet_berry_bush"
+    "minecraft:sweet_berry_bush",
+    "minecraft:bamboo",
+    "minecraft:bamboo_sapling",
+    "minecraft:sugar_cane"
   ]
 }

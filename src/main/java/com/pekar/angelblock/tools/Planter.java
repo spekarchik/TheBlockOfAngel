@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
@@ -9,12 +8,8 @@ import com.pekar.angelblock.text.ITooltip;
 import com.pekar.angelblock.text.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -135,7 +130,7 @@ public class Planter extends WorkRod
         var originBlockState = level.getBlockState(pos);
         var originBlock = originBlockState.getBlock();
 
-        int y = originBlock instanceof VegetationBlock ? posY : pos.above().getY();
+        int y = supportsFastGrabbing(originBlockState) ? posY : pos.above().getY();
         for (int x = posX - x1; x != posX + x2; x += incX)
             for (int z = posZ - z1; z != posZ + z2; z += incZ)
             {
@@ -145,6 +140,11 @@ public class Planter extends WorkRod
             }
 
         return haveAnyTransformed;
+    }
+
+    private boolean supportsFastGrabbing(BlockState blockState)
+    {
+        return blockState.getBlock() instanceof VegetationBlock || blockState.is(BlockRegistry.PLANTER_COMPATIBLE_TO_MINE);
     }
 
     protected boolean plantOffHandItems(Player player, Level level, BlockPos pos, Direction facing)
@@ -240,7 +240,7 @@ public class Planter extends WorkRod
     {
         var blockState = level.getBlockState(pos);
 
-        if (!(blockState.getBlock() instanceof VegetationBlock)) return false;
+        if (!supportsFastGrabbing(blockState)) return false;
 
         if (!level.isClientSide())
         {
