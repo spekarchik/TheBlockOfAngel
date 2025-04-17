@@ -73,7 +73,7 @@ public class BlockBreakerPotion extends ThrowableItemProjectile
         var targetEntities = level.getEntities((Entity)null, new AABB(pos).inflate(3),
                 e -> e instanceof LivingEntity).stream().map(x -> (LivingEntity)x).toList();
 
-        level.explode(this, null, explosionCalculator, pos.getX(), pos.getY(), pos.getZ(), 2.0F, false, Level.ExplosionInteraction.NONE);
+        level.explode(this, null, explosionCalculator, pos.getX(), pos.getY(), pos.getZ(), 0.2F, false, Level.ExplosionInteraction.NONE);
         applyKnockback(level, location, 1.0F);
 
         for (var target : targetEntities)
