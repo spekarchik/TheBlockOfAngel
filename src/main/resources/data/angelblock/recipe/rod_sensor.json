@@ -2,8 +2,7 @@
     "type": "minecraft:crafting_shaped",
     "pattern": [
         "MSM",
-        " R ",
-        " N "
+        "NRN"
     ],
     "key": {
         "M": "minecraft:lodestone",
