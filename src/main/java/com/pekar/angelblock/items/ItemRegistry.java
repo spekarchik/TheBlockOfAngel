@@ -90,6 +90,7 @@ public class ItemRegistry
 //    public static final DeferredItem<Item> NETHER_BARS = Main.ITEMS.registerItem("nether_bars", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.registerItem("ancient_scroll", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.registerItem("blue_axolotl_bucket", BlueAxolotlBucket::new, new Item.Properties().rarity(Rarity.EPIC));
+    public static final DeferredItem<Item> ROD_SENSOR = Main.ITEMS.registerItem("rod_sensor", ModItem::new);
 
     public static final DeferredItem<Item> BLOCK_BREAKER_POTION_ITEM = Main.ITEMS.registerItem("block_breaker_potion_item", BlockBreakerPotionItem::new,
             new Item.Properties().stacksTo(4));

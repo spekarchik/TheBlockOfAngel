@@ -1,7 +1,7 @@
 {
     "type": "minecraft:smithing_transform",
     "base": "angelblock:ancient_rod",
-    "addition": "minecraft:lodestone",
+    "addition": "angelblock:rod_sensor",
     "result": {
         "id": "angelblock:ancient_magnetic_rod"
     },

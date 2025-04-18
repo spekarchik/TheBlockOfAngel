@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "MSM",
+        " R ",
+        " N "
+    ],
+    "key": {
+        "M": "minecraft:lodestone",
+        "S": "minecraft:calibrated_sculk_sensor",
+        "R": "minecraft:redstone",
+        "N": "minecraft:netherite_ingot"
+    },
+    "result": {
+        "id": "angelblock:rod_sensor",
+        "count": 1
+    }
+}

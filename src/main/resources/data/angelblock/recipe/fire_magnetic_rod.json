@@ -1,7 +1,7 @@
 {
     "type": "minecraft:smithing_transform",
     "base": "angelblock:fire_rod",
-    "addition": "minecraft:lodestone",
+    "addition": "angelblock:rod_sensor",
     "result": {
         "id": "angelblock:fire_magnetic_rod"
     },
