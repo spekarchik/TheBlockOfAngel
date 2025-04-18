@@ -156,7 +156,7 @@ public class CustomSmithingMenu extends SmithingMenu
 
                     if (rod.isEnhanced() && (!isResultModRod || !resultAsModRod.isEnhanced()))
                     {
-                        player.getInventory().add(new ItemStack(Blocks.LODESTONE));
+                        player.getInventory().add(new ItemStack(ItemRegistry.ROD_SENSOR.get()));
                     }
                 }
                 else
