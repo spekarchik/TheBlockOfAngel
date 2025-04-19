@@ -4,7 +4,8 @@
   "package": "com.pekar.angelblock.mixins",
   "compatibilityLevel": "JAVA_13",
   "mixins": [
-    "AxolotlAccessor"
+    "AxolotlAccessor",
+    "AxolotlMixin"
   ],
   "client": [],
   "injectors": {
