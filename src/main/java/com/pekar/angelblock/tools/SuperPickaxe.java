@@ -44,7 +44,7 @@ public class SuperPickaxe extends EnhancedPickaxe
         {
             if (!level.isClientSide())
             {
-                level.setBlock(pos, BlockRegistry.CRACKED_OBSIDIAN.get().defaultBlockState(), 11);
+                level.setBlock(pos, BlockRegistry.CRACKED_OBSIDIAN.get().defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
             }
 
             return getToolInteractionResult(true, level.isClientSide());
@@ -54,7 +54,7 @@ public class SuperPickaxe extends EnhancedPickaxe
         {
             if (!level.isClientSide())
             {
-                level.setBlock(pos, infestedBlock.getHostBlock().defaultBlockState(), 11);
+                level.setBlock(pos, infestedBlock.getHostBlock().defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
                 new PlaySoundPacket(SoundType.INFESTED_BLOCK).sendToPlayer((ServerPlayer) player);
             }
 
