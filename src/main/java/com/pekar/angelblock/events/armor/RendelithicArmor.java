@@ -81,7 +81,7 @@ public class RendelithicArmor extends Armor
     {
         glowingEffect.updateActivity();
 
-        if (!jumpNegativeEffect.isActive())
+        if (!jumpNegativeEffect.isAnyActive())
         {
             slowFallingEffect.updateActivity();
         }
@@ -173,7 +173,7 @@ public class RendelithicArmor extends Armor
         {
             if (slowFallingEffect.isAvailable())
             {
-                if (!jumpNegativeEffect.isActive() || slowFallingEffect.isOn())
+                if (!jumpNegativeEffect.isAnyActive() || slowFallingEffect.isOn())
                 {
                     slowFallingEffect.trySwitch();
                 }

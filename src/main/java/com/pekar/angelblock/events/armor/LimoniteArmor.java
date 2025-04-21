@@ -79,7 +79,7 @@ public class LimoniteArmor extends Armor
         glowingEffect.updateSwitchState();
         waterBreathingEffect.updateSwitchState();
 
-        if (!jumpNegativeEffect.isActive())
+        if (!jumpNegativeEffect.isAnyActive())
         {
             jumpEffect.updateSwitchState();
         }
@@ -251,7 +251,7 @@ public class LimoniteArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
-            if (!jumpNegativeEffect.isActive())
+            if (!jumpNegativeEffect.isAnyActive())
             {
                 jumpEffect.trySwitch(getJumpEffectAmplifier());
             }

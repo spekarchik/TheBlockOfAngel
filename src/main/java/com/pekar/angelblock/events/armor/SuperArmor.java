@@ -105,7 +105,7 @@ public class SuperArmor extends Armor
         nightVisionEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
 
-        if (!jumpNegativeEffect.isActive())
+        if (!jumpNegativeEffect.isAnyActive())
         {
             jumpEffect.updateSwitchState();
             levitationEffect.updateSwitchState();
@@ -264,7 +264,7 @@ public class SuperArmor extends Armor
 
         if (!player.isArmorElementPutOn(this, EquipmentSlot.FEET)) return;
 
-        if (jumpEffect.isMasterActive() || jumpNegativeEffect.isActive()) return;
+        if (jumpEffect.isMasterActive() || jumpNegativeEffect.isAnyActive()) return;
 
         if (slowFallingEffect.isOn() && slowFallingEffect.isActive())
         {
@@ -334,7 +334,7 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
-            if (!jumpNegativeEffect.isActive())
+            if (!jumpNegativeEffect.isAnyActive())
             {
                 jumpEffect.trySwitch();
             }
@@ -358,7 +358,7 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            if (!jumpNegativeEffect.isActive())
+            if (!jumpNegativeEffect.isAnyActive())
             {
                 if (jumpEffect.isMasterAvailable() && jumpEffect.isOn())
                 {
