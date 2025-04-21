@@ -57,7 +57,9 @@ public class Player implements IPlayer
     public boolean isFullArmorSetPutOn(IArmor armor)
     {
         var armorNamesPutOn = getSlotArmorNames();
-        return armorNamesPutOn.stream().allMatch(x -> x.equals(armor.getFamilyName()));
+        var armorStacks = Utils.instance.player.getArmorInSlots(getEntity());
+        return armorNamesPutOn.stream().allMatch(x -> x.equals(armor.getFamilyName()))
+                && armorStacks.stream().allMatch(s -> !s.isEmpty() && s.getItem() instanceof ModArmor a && !a.isBroken(s));
     }
 
     @Override
