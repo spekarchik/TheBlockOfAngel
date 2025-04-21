@@ -24,8 +24,8 @@ public class ToolMaterials
     // diamond axe: 9.0, singleDamage = 9.0
     // netherite axe: 10.0, singleDamage = 10.0
 
-    // /give @p netherite_sword[custom_name='{"text":"Супер незеритовый меч"}',enchantments={levels:{'sweeping_edge':1,'sharpness':255,'knockback':2,'looting':3,'unbreaking':3}}] 1
-    // /give @p bow[custom_name='{"text":"Супер лук"}',enchantments={levels:{'unbreaking':3,'power':255,'punch':2,'flame':1,'infinity':1}}] 1
+    // /give @p netherite_sword[custom_name='{"text":"Супер незеритовый меч"}',enchantments={'sweeping_edge':1,'sharpness':255,'knockback':2,'looting':3,'unbreaking':3}] 1
+    // /give @p bow[custom_name='{"text":"Супер лук"}',enchantments={'unbreaking':3,'power':255,'punch':2,'flame':1,'infinity':1}] 1
 
     public static final String RENDELITHIC_MATERIAL_NAME = "rendelithic";
     public static final String LIMONITE_MATERIAL_NAME = "limonite";
