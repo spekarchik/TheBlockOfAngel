@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ItemRegistry
@@ -83,7 +84,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> EVOKER_AMULET = Main.ITEMS.registerItem("evoker_amulet", EvokerAmulet::new);
 //    public static final DeferredItem<Item> NETHER_BARS = Main.ITEMS.registerItem("nether_bars", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.registerItem("ancient_scroll", p -> new ModItemWithHoverText(TextStyle.Notice, p));
-    public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.registerItem("blue_axolotl_bucket", BlueAxolotlBucket::new);
+    public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.registerItem("blue_axolotl_bucket", BlueAxolotlBucket::new, new Item.Properties().rarity(Rarity.EPIC));
 
     public static final DeferredItem<Item> BLOCK_BREAKER_POTION_ITEM = Main.ITEMS.registerItem("block_breaker_potion_item", BlockBreakerPotionItem::new,
             new Item.Properties().stacksTo(4));
