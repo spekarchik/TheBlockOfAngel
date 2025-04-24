@@ -3,5 +3,6 @@
   "description": {
     "color": "#6EECB2",
     "translate": "trim_material.angelblock.bios_diamond"
-  }
+  },
+  "ingredient": "angelblock:bios_diamond"
 }
