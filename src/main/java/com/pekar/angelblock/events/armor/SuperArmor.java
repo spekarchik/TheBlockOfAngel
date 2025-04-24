@@ -170,7 +170,7 @@ public class SuperArmor extends Armor
                 event.setCanceled(realDamage <= 0);
             }
 
-            if (player.isFullArmorSetPutOn(this))
+            if (isFullArmorSet)
                 event.getEntity().clearFire();
         }
         else if (isHotFloorDamage(damageSource) || isFreezeDamage(damageSource))
@@ -237,7 +237,7 @@ public class SuperArmor extends Armor
         }
         else if (isLavaDamage(damageSource))
         {
-            if (player.isFullArmorSetPutOn(this))
+            if (isFullArmorSet)
             {
                 event.setNewDamage(0.05f * event.getNewDamage());
             }
