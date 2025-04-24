@@ -12,10 +12,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Player implements IPlayer
@@ -56,7 +53,9 @@ public class Player implements IPlayer
     public boolean isFullArmorSetPutOn(IArmor armor)
     {
         var armorNamesPutOn = getSlotArmorNames();
-        return armorNamesPutOn.stream().allMatch(x -> x.equals(armor.getFamilyName()));
+        var armorStacks = (List<ItemStack>) getEntity().getArmorSlots();
+        return armorNamesPutOn.stream().allMatch(x -> x.equals(armor.getFamilyName()))
+                && armorStacks.stream().allMatch(s -> !s.isEmpty() && s.getItem() instanceof ModArmor a && !a.isBroken(s));
     }
 
     @Override
