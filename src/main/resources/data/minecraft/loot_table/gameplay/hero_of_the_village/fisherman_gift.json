@@ -11,12 +11,12 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 50,
           "name": "minecraft:cod"
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 49,
           "name": "minecraft:salmon"
         }
       ],

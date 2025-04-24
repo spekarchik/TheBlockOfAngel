@@ -12,9 +12,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 
@@ -24,7 +22,7 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
 {
     public BlueAxolotlBucket()
     {
-        super(TextStyle.Notice);
+        super(TextStyle.Notice, new Item.Properties().rarity(Rarity.EPIC));
     }
 
     @Override
