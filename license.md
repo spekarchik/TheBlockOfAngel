@@ -58,6 +58,9 @@ Welcome! This mod was created by Sergey Pekarchik specifically for NeoForge 1.21
 - Code: All Rights Reserved
 - Textures: see LICENSE
 
+### Allowed:
+- You are free to publish the mod on non-commercial platforms without prior approval from the author.
+
 ---
 
 # README (RU)
@@ -79,3 +82,6 @@ Welcome! This mod was created by Sergey Pekarchik specifically for NeoForge 1.21
 ### Лицензия:
 - Код: All Rights Reserved
 - Текстуры: см. LICENSE
+
+### Разрешено:
+- Публиковать мод на некоммерческих платформах без предварительного разрешения от автора.
