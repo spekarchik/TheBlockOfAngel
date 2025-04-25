@@ -6,10 +6,11 @@ All textures included in this mod are original works by Sergey Pekarchik.
 - Using modified versions of the textures with proper attribution:
   "Original textures (modified): © Sergey Pekarchik"
 - Using unmodified textures **for personal use only**, with no redistribution.
+- Creating derivative works based on the original textures, adding them to your own mods, and uploading those mods to platforms such as CurseForge or others, **and earning revenue from downloads** or other legal forms of monetization, with proper attribution.
 
 **Prohibited:**
-- Redistributing original (unmodified) textures.
-- Using textures for commercial purposes without explicit permission.
+- Using original or derivative textures for commercial purposes, including projects with monetization, such as ads, subscriptions, paid features, or any form of monetization where **your mod’s content is used directly for profit** (e.g., paid subscriptions or premium accounts).
+- Redistributing original textures without modification.
 
 **Disclaimer**: This mod is provided "as is" without any warranties or guarantees. The author is not responsible for any errors, bugs, crashes, or damages arising from the use of this mod. Users use the mod at their own risk.
 
@@ -24,11 +25,12 @@ All textures included in this mod are original works by Sergey Pekarchik.
 **Разрешено:**
 - Использовать текстуры в изменённом виде при условии обязательного указания авторства:
   "Original textures (modified): © Сергей Пекарчик"
-- Использовать оригинальные (неизменённые) текстуры **только для личного использования** без их распространения.
+- Использовать оригинальные (неизменённые) текстуры **только для личного использования**, без их распространения.
+- Создавать производные работы на основе оригинальных текстур, добавлять их в собственные моды и выкладывать эти моды на платформы, такие как CurseForge и другие, **и зарабатывать на скачиваниях** или других законных формах монетизации, с обязательным указанием авторства.
 
 **Запрещено:**
+- Использовать оригинальные или производные текстуры в коммерческих целях, включая проекты с монетизацией, такие как реклама, подписки, платные функции, или любая форма монетизации, где **контент мода используется напрямую для получения прибыли** (например, платные подписки или премиум-аккаунты).
 - Распространять оригинальные текстуры без изменений.
-- Использовать оригинальные (неизменённые) текстуры в коммерческих целях без отдельного разрешения. Изменённые текстуры разрешено использовать в любых модах, включая коммерческие, при условии указания авторства оригинала.
 
 **Отказ от гарантий**: Этот мод предоставляется "как есть", без каких-либо гарантий или заверений. Автор не несет ответственности за возможные ошибки, баги, сбои или ущерб, возникшие в результате использования мода. Пользователь использует мод на свой страх и риск.
 
