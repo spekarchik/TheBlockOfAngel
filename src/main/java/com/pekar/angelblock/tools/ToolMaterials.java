@@ -32,11 +32,6 @@ public class ToolMaterials
     public static final String DIAMITHIC_MATERIAL_NAME = "diamithic";
     public static final String LAPIS_MATERIAL_NAME = "lapis";
     public static final String SUPER_MATERIAL_NAME = "super";
-    public static final String RENDELITHIC_MATERIAL_SWORD_NAME = "rendelithic_sword";
-    public static final String LIMONITE_MATERIAL_SWORD_NAME = "limonite_sword";
-    public static final String DIAMITHIC_MATERIAL_SWORD_NAME = "diamithic_sword";
-    public static final String LAPIS_MATERIAL_SWORD_NAME = "lapis_sword";
-    public static final String SUPER_MATERIAL_SWORD_NAME = "super_sword";
     public static final String ROD_MATERIAL1_NAME = "rod1";
     public static final String ROD_MATERIAL2_NAME = "rod2";
     public static final String ROD_MATERIAL3_NAME = "rod3";
@@ -49,31 +44,31 @@ public class ToolMaterials
             600, 8F, 4.8F, 3, 25, ItemRegistry.RENDELITHIC_INGOT_TAG);
     // damagePerSecond = 15, singleDamage = 8.8; Axe: damagePerSecond = 12, singleDamage = 10.8
     
-    static final ModToolMaterial RENDELITHIC_SWORD = RENDELITHIC.clone(RENDELITHIC_MATERIAL_SWORD_NAME, 150);
+    static final ModToolMaterial RENDELITHIC_SWORD = RENDELITHIC.clone(RENDELITHIC_MATERIAL_NAME, 150);
 
     static final ModToolMaterial DIAMITHIC = new ModToolMaterial(DIAMITHIC_MATERIAL_NAME, BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
             2100, 7F, 8.3F, 4, 14, ItemRegistry.DIAMITHIC_INGOT_TAG);
     // damagePerSecond = 16, singleDamage = 12.3;  Axe: damagePerSecond = 11.4, singleDamage = 14.3
 
-    static final ModToolMaterial DIAMITHIC_SWORD = DIAMITHIC.clone(DIAMITHIC_MATERIAL_SWORD_NAME, 525);
+    static final ModToolMaterial DIAMITHIC_SWORD = DIAMITHIC.clone(DIAMITHIC_MATERIAL_NAME, 525);
 
     static final ModToolMaterial LAPIS = new ModToolMaterial(LAPIS_MATERIAL_NAME, BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
             1500, 8.7F, 3F, 3, 10, ItemRegistry.LAPIS_INGOT_TAG);
     // the same as Diamond (no weapon uses this material)
 
-    static final ModToolMaterial LAPIS_SWORD = LAPIS.clone(LAPIS_MATERIAL_SWORD_NAME, 375);
+    static final ModToolMaterial LAPIS_SWORD = LAPIS.clone(LAPIS_MATERIAL_NAME, 375);
 
     static final ModToolMaterial LIMONITE = new ModToolMaterial(LIMONITE_MATERIAL_NAME, BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
             1000, 6.8F, 3.1F, 3, 30, ItemRegistry.LIMONITE_INGOT_TAG);
     // damagePerSecond = 14.9, singleDamage = 7.1;  Axe: damagePerSecond = 10, singleDamage = 9.1
 
-    static final ModToolMaterial LIMONITE_SWORD = LIMONITE.clone(LIMONITE_MATERIAL_SWORD_NAME, 250);
+    static final ModToolMaterial LIMONITE_SWORD = LIMONITE.clone(LIMONITE_MATERIAL_NAME, 250);
 
     static final ModToolMaterial SUPER = new ModToolMaterial(SUPER_MATERIAL_NAME, BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
             2100, 11.0F, 8.5F, 4, 1, ItemRegistry.SUPER_INGOT_TAG);
     // damagePerSecond = 25, singleDamage = 12.5;  Axe: damagePerSecond = 20.3, singleDamage = 14.5
 
-    static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_SWORD_NAME, 525);
+    static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_NAME, 525);
 
     static final ModToolMaterial ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, BlockTags.INCORRECT_FOR_WOODEN_TOOL,
             60, 2.0F, 0F, 0, 1, ItemRegistry.BAMBOO_TAG); // incorrectBlocksForDrops does nothing if you don't use it
