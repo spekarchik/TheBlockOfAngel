@@ -161,43 +161,43 @@ public class CustomSmithingMenu extends SmithingMenu
                 }
                 else
                 {
-                    Item dropItem1, dropItem2;
+                    ItemStack dropItem1, dropItem2;
 
                     switch (materialName)
                     {
                         case ToolMaterials.DIAMITHIC_MATERIAL_NAME:
-                            dropItem1 = ItemRegistry.DIAMITHIC_INGOT.get();
-                            dropItem2 = ItemRegistry.STRENGTH_PEARL.get();
+                            dropItem1 = ItemRegistry.DIAMITHIC_INGOT.toStack();
+                            dropItem2 = ItemRegistry.STRENGTH_PEARL.toStack();
                             break;
                         case ToolMaterials.LAPIS_MATERIAL_NAME:
-                            dropItem1 = ItemRegistry.LAPIS_INGOT.get();
-                            dropItem2 = ItemRegistry.MARINE_CRYSTAL.get();
+                            dropItem1 = ItemRegistry.LAPIS_INGOT.toStack();
+                            dropItem2 = ItemRegistry.MARINE_CRYSTAL.toStack();
                             break;
                         case ToolMaterials.LIMONITE_MATERIAL_NAME:
-                            dropItem1 = ItemRegistry.LIMONITE_INGOT.get();
-                            dropItem2 = ItemRegistry.BIOS_DIAMOND.get();
+                            dropItem1 = ItemRegistry.LIMONITE_INGOT.toStack();
+                            dropItem2 = ItemRegistry.BIOS_DIAMOND.toStack();
                             break;
                         case ToolMaterials.SUPER_MATERIAL_NAME:
-                            dropItem1 = ItemRegistry.SUPER_INGOT.get();
-                            dropItem2 = ItemRegistry.SUPER_CRYSTAL.get();
+                            dropItem1 = ItemRegistry.SUPER_INGOT.toStack();
+                            dropItem2 = ItemRegistry.SUPER_CRYSTAL.toStack();
                             break;
                         case ToolMaterials.RENDELITHIC_MATERIAL_NAME:
-                            dropItem1 = ItemRegistry.RENDELITHIC_INGOT.get();
-                            dropItem2 = ItemRegistry.FLAME_STONE.get();
+                            dropItem1 = ItemRegistry.RENDELITHIC_INGOT.toStack();
+                            dropItem2 = ItemRegistry.FLAME_STONE.toStack();
                             break;
                         default:
-                            dropItem1 = Items.AIR;
-                            dropItem2 = Items.AIR;
+                            dropItem1 = Items.AIR.getDefaultInstance();
+                            dropItem2 = Items.AIR.getDefaultInstance();
                     }
 
                     if (!isResultModTool || !tool.getMaterialName().equals(resultAsModTool.getMaterialName()))
                     {
-                        player.getInventory().add(new ItemStack(dropItem1));
+                        player.getInventory().add(dropItem1);
                     }
 
                     if (tool.isEnhanced() && (!isResultModTool || !resultAsModTool.isEnhanced()))
                     {
-                        player.getInventory().add(new ItemStack(dropItem2));
+                        player.getInventory().add(dropItem2);
                     }
                 }
             }
@@ -205,12 +205,12 @@ public class CustomSmithingMenu extends SmithingMenu
             {
                 if (mainItem.is(ItemRegistry.NETHERITE_ARMOR_TAG) && result.is(ItemRegistry.DIAMOND_ARMOR_TAG))
                 {
-                    player.getInventory().add(new ItemStack(Items.NETHERITE_INGOT));
+                    player.getInventory().add(Items.NETHERITE_INGOT.getDefaultInstance());
                 }
             }
             else if (mainItem.getItem().getDefaultInstance().is(ItemRegistry.NETHERITE_TOOL_TAG) && result.getItem().getDefaultInstance().is(ItemRegistry.DIAMOND_TOOL_TAG))
             {
-                player.getInventory().add(new ItemStack(Items.NETHERITE_INGOT));
+                player.getInventory().add(Items.NETHERITE_INGOT.getDefaultInstance());
             }
         }
 
