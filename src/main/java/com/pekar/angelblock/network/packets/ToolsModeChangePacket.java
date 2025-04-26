@@ -23,9 +23,9 @@ public class ToolsModeChangePacket extends ClientToServerPacket
         var mainHandItemStack = player.getMainHandItem();
         var heldItem = mainHandItemStack.getItem();
 
-        if (heldItem instanceof IModTool tool && tool.isEnhanced() && !tool.hasCriticalDamage(mainHandItemStack))
+        if (heldItem instanceof IModTool tool && !tool.hasCriticalDamage(mainHandItemStack))
         {
-            if (tool.isTool())
+            if (tool.isTool() && tool.isEnhanced())
             {
                 if (!isAdvancedModeActive)
                 {
@@ -90,7 +90,7 @@ public class ToolsModeChangePacket extends ClientToServerPacket
 
                 return;
             }
-            else if (tool.isRod())
+            else if (tool.isRod() && tool.isEnhanced())
             {
                 if (!isRodMagneticModeActive)
                 {

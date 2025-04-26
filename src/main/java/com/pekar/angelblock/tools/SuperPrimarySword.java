@@ -73,12 +73,6 @@ public class SuperPrimarySword extends ModSword
     }
 
     @Override
-    public boolean isEnhanced()
-    {
-        return true;
-    }
-
-    @Override
     public boolean hasExplosionMode()
     {
         return true;
