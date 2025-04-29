@@ -9,6 +9,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -112,7 +113,12 @@ public class ModSword extends Item implements IModTool
 
     protected final void setEffectAround(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
-        final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
+        var blockState = level.getBlockState(pos);
+
+        final int posX = pos.getX(), posZ = pos.getZ();
+        final int posY = blockState.is(BlockTags.REPLACEABLE)
+                ? level.getBlockState(pos.below()).is(BlockTags.REPLACEABLE) ? pos.below(2).getY() : pos.below().getY()
+                : pos.getY();
 
         for (int dx = -4; dx <= 4; dx++)
             for (int dz = -4; dz <= 4; dz++)
@@ -128,7 +134,13 @@ public class ModSword extends Item implements IModTool
 
     protected final void setEffectAhead(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
-        final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
+        var blockState = level.getBlockState(pos);
+
+        final int posX = pos.getX(), posZ = pos.getZ();
+        final int posY = blockState.is(BlockTags.REPLACEABLE)
+                ? level.getBlockState(pos.below()).is(BlockTags.REPLACEABLE) ? pos.below(2).getY() : pos.below().getY()
+                : pos.getY();
+
         final BlockPos playerPos = player.blockPosition();
         final int playerPosX = playerPos.getX(), playerPosZ = playerPos.getZ();
         int a1, a2, k, n, b1, b2;
@@ -207,23 +219,23 @@ public class ModSword extends Item implements IModTool
 
     protected final void trySetFire(Level level, BlockPos pos)
     {
-        if (!level.isEmptyBlock(pos.above()))
+        if (!level.isEmptyBlock(pos.above()) && !level.getBlockState(pos.above()).is(BlockTags.REPLACEABLE))
         {
             return;
         }
 
         if (!level.isClientSide)
         {
-            level.setBlock(pos.above(), Blocks.FIRE.defaultBlockState(), 11);
+            level.setBlock(pos.above(), Blocks.FIRE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
     }
 
     protected final void setWeb(Player player, Level level, BlockPos pos)
     {
         if (level.isClientSide) return;
-        if (!level.isEmptyBlock(pos)) return;
+        if (!level.isEmptyBlock(pos) && !level.getBlockState(pos).is(BlockTags.REPLACEABLE)) return;
 
-        level.setBlock(pos, Blocks.COBWEB.defaultBlockState(), 11);
+        level.setBlock(pos, Blocks.COBWEB.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         int increment = Utils.random.nextInt(TimeThreshold);
         BlockCleaner.add(player, pos, WebLifeTime + increment, false, true);
 
@@ -275,15 +287,15 @@ public class ModSword extends Item implements IModTool
     {
         BlockState state = level.getBlockState(pos);
         Block block = state.getBlock();
-        if (block != Blocks.SAND || !level.isEmptyBlock(pos.above())
+        if (block != Blocks.SAND || (!level.isEmptyBlock(pos.above()) && !level.getBlockState(pos.above()).is(BlockTags.REPLACEABLE))
                 || !level.isEmptyBlock(pos.above(2)) || !level.isEmptyBlock(pos.above(3)))
         {
             return false;
         }
 
         if (!plantCactus(player, level, pos, hand, facing)) return false;
-        setBlock(level, pos.above(2), Blocks.CACTUS.defaultBlockState());
-        setBlock(level, pos.above(3), Blocks.CACTUS.defaultBlockState());
+        level.setBlock(pos.above(2), Blocks.CACTUS.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+        level.setBlock(pos.above(3), Blocks.CACTUS.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
 
         int increment = Utils.random.nextInt(TimeThreshold);
 
@@ -294,24 +306,16 @@ public class ModSword extends Item implements IModTool
         return true;
     }
 
-    private void setBlock(Level level, BlockPos pos, BlockState state)
-    {
-        if (!level.isClientSide)
-        {
-            level.setBlock(pos, state, 11);
-        }
-    }
-
     private boolean plantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
     {
         ItemStack itemstack = player.getItemInHand(hand);
         BlockState state = level.getBlockState(pos);
         if (facing == Direction.UP
-                && level.isEmptyBlock(pos.above())
+                && (level.isEmptyBlock(pos.above()) || level.getBlockState(pos.above()).is(BlockTags.REPLACEABLE))
                 && !state.getBlock().canSustainPlant(state, level, pos, Direction.UP, Blocks.CACTUS.defaultBlockState()).isFalse() // Blocks.CACTUS.defaultBlockState() -> age == 0
                 )
         {
-            level.setBlock(pos.above(), Blocks.CACTUS.defaultBlockState(), 11);
+            level.setBlock(pos.above(), Blocks.CACTUS.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
 
             if (player instanceof ServerPlayer serverPlayer)
             {
