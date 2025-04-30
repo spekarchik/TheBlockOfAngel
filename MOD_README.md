@@ -49,6 +49,7 @@ If you love making every moment meaningful, **Angel Block Mod** was made for you
 ## Technical Details
 - **Developer:** Sergey Pekarchik
 - **Supported NeoForge versions:** 1.21.4 and 1.21.5
+- **Texture resolution:** 32×32
 
 ---
 
