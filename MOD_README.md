@@ -25,6 +25,21 @@ Crafting them is not easy — it’s the culmination of your growth, your triump
 
 > *Survive first. Shine later.*
 
+## 🏛️ Decorative Elements
+
+Even in a harsh and dangerous world, beauty finds a place.
+  
+* **Nether Grate**: a black iron grille with a dusty, earth-toned finish.  
+  Perfect for moody structures like fortresses, shrines, or dark corridors, it adds tension and mystery without looking worn or decayed. Use it for windows, vents, or architectural accents where a sense of danger is more important than age.
+
+* **Cracked Obsidian** and **Cracked Endstone**: familiar materials with a fractured, rugged twist.  
+  These blocks hint at time, stress, or magical interference — ideal for ruins, battle-scarred lands, or ancient structures hidden deep underground.
+
+* **Fusion Storage Blocks**: solid-colored, full-sized blocks forged from advanced ingots.  
+  While primarily designed for compact storage and sorting, their smooth surfaces and vivid colors make them a clean and striking building material — perfect for color-coded bases, signal markers, or minimalist structures.
+
+These elements let you express your style without clutter — and add contrast to the rough survival journey ahead.
+
 ---
 
 ## 🧡 Who is this mod for?
