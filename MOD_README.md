@@ -38,6 +38,16 @@ If you love making every moment meaningful, **Angel Block Mod** was made for you
 
 ---
 
+## 💫 Thank You for Playing
+
+Thank you for choosing the path of the true adventurer.  
+Whether you're standing on a cliff at sunrise, holding your Angel Rod… or exploring deep ruins with barely a heart left — you're living a story that matters.
+
+We hope every moment in **Angel Block Mod** makes your Minecraft world feel a little more magical.  
+Stay safe, stay curious — and always move forward. 🌿
+
+---
+
 # 🛠️ Installation and Technical Information
 
 ## Installation
@@ -50,6 +60,32 @@ If you love making every moment meaningful, **Angel Block Mod** was made for you
 - **Developer:** Sergey Pekarchik
 - **Supported NeoForge versions:** 1.21.4 and 1.21.5
 - **Texture resolution:** 32×32
+
+## 💡 Optional Visual Enhancement
+
+To enjoy full visual fidelity of helmets with transparent glass,  
+we recommend using the client-side mod [Shoulder Surfing Reloaded](https://www.curseforge.com/minecraft/mc-mods/shoulder-surfing-reloaded).  
+It allows proper rendering of semi-transparent blocks in first- and third-person views.
+
+*(Licensed under MIT — freely shareable and fully compatible.)*
+
+---
+
+## 🧩 Related Mods
+
+Angel Block Mod is fully compatible with the following mods by the same author:
+
+- **[🌟 CompactMod](https://modrinth.com/mod/compactmod)** — introduces compact forms of tradeable resources for easier storage and trading:  
+  • paper (stackable and block form),  
+  • ink and glow ink (bottled),  
+  • leather (bundled),  
+  • seeds (in pouches),  
+  • feathers (as compact packs).  
+  Includes the *Burnt Paper Block* — crafted by setting a Paper Block on fire. It attracts creepers and repels bees, perfect for traps and moody builds.
+
+- **[🔧 EnchantOnce](https://modrinth.com/mod/enchantonce)** — a minimalistic but powerful rework of enchanting and repairing.  
+  Fixed XP costs, enchanted book duplication, material-based repairs, and perfect gear cloning — all with vanilla-style mechanics.  
+  Fully supports custom gear and enchantments from Angel Block Mod.
 
 ---
 
