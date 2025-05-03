@@ -25,9 +25,9 @@ Crafting them is not easy — it’s the culmination of your growth, your triump
 - **Bios Diamond:** an upgrade material used in armor enhancement and Earth Rod crafting. It also serves as a **Trim Material** with a distinct, luminous yellow-green tint — subtle, yet otherworldly.
 - **Tuff reimagined:** once just decorative, tuff now contains saltpeter — a key ingredient in crafting gunpowder.
 - **Gunpowder block:** a compact way to store gunpowder, with a twist — it behaves like falling sand, explodes when ignited, and detonates on impact or when jumped on. Perfect for building deadly traps.
-- **Alchemy with a twist:** two new potions expand your control over the world:
-  - **Splash Destroying Potion** — brewed from a Splash Awkward Potion and a Prismarine Shard. It *destroys blocks on impact*, transforming them into other materials or scattering useful resources like Saltpeter, Clay, or Prismarine Crystals. Can even disassemble wool and destroy diamond gear on mobs to yield rare powders.
-  - **Soaring Spore Essence** — made with a Froglight and a Potion of Slow Falling. Grants *infinite Glowing and Slow Falling effects* when used on living beings, toggling them on or off. Used in armor upgrades to create luminous, featherlight equipment that reveals and protects the wearer.
+- **Alchemy with a twist:** two exotic potions expand your environmental control:
+  - **Splash Destroying Potion** — brewed from a Prismarine Shard and a Splash Awkward Potion. Destroys and transforms blocks on impact, and sometimes drops valuable resources. Useful for farming Saltpeter from Tuff, Clay from sand near water, Prismarine Crystals, Diamond Powder, and more.
+  - **Soaring Spore Essence** — made from a Froglight and Potion of Slow Falling. Grants the **Glowing** and **Slow Falling** effects to mobs or players, toggled on or off with each use. Can also be used to upgrade armor, giving it toggleable passive effects.
 - **Angel Block:** creates a safe zone, free from monsters. The block can ignore specific monsters by using filters, which are activated by items. Using an Echo Shard resets the filter, and the block's color changes based on the number of monsters added to the filter.
 - **Angel Rod:** grants mobile protection while exploring; place it as a camp beacon or carry it in your hand.
 - **Devil Block** while it prevents monsters from dying, it also gradually spreads an epidemic, changing the surrounding blocks. By using certain items on the Devil Block, you can summon monsters — useful for collecting rare drops like monster heads and music discs.
@@ -39,7 +39,7 @@ Crafting them is not easy — it’s the culmination of your growth, your triump
 
 Even in a harsh and dangerous world, beauty finds a place.
   
-* **Nether Grate**: a black iron grille with a dusty, earth-toned finish.  
+* **Nether Bars**: a black, blast-resistant grating with a dusty, scorched finish — forged in the depths of the Nether.
   Perfect for moody structures like fortresses, shrines, or dark corridors, it adds tension and mystery without looking worn or decayed. Use it for windows, vents, or architectural accents where a sense of danger is more important than age.
 
 * **Cracked Obsidian** and **Cracked Endstone**: familiar materials with a fractured, rugged twist.  
