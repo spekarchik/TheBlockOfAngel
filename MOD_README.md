@@ -13,14 +13,24 @@ Crafting them is not easy — it’s the culmination of your growth, your triump
 ## ✨ Features
 
 - **True survival progression:** leather armor, stone weapons, and real hardship at the start.
-- **Angel Block:** creates a safe zone, free from monsters.
-- **Angel Rod:** grants mobile protection while exploring; place it as a camp beacon or carry it in your hand.
-- **Magnetic Rods:** pull ores to the surface, avoiding endless mining.
-- **Planter Rods:** sow entire crop rows or fertilize them instantly.
-- **Builder and Layer Rods:** lay down blocks, fences, and rails quickly and precisely.
-- **Unique armor sets:** six types, each with upgrade paths and special abilities.
+- **Unique armor sets:** six types, each with upgrade paths and special abilities. Fully compatible with Armor Trims. Armor, tools, weapons, and rods can be upgraded using **Smithing Kits**, preserving all enchantments. In rare cases, the right kit also allows **downgrading** gear — useful when switching styles or optimizing resources.
 - **Legendary weapons:** transform the battlefield with magic effects at the cost of stamina.
 - **Smart tools:** speed up tunneling without causing dangerous collapses.
+- **Armor condition matters:** protection scales with durability — worn gear still looks tough, but no longer shields you from harm.
+- **Tools and weapons degrade with use:** a mighty sword grows dull, and a perfect pickaxe slows down when nearing its limits. At zero durability, they stay in your hands — but lose their function completely.
+- **Elemental Rods:** five tiers of rods unlock powerful world-altering abilities — from planting crops and transforming terrain, to generating water sources and even creating valuable resources like slime, glowstone, blaze powder, or budding amethyst. Each rod can be upgraded to a magnetic version, allowing remote ore extraction with increasing range and depth. The final form, the **Angel Rod**, adds monster despawning in a radius and can be placed as a block to protect an area passively.
+- **Magnetic Rods:** pull ores to the surface, avoiding endless mining. Also act as detectors, emitting specific sounds when scanning downward for otherwise unreachable targets within a small radius: valuable resources like diamond ore and amethyst clusters, and structure-related blocks like rails (for locating abandoned mineshafts) or sculk (for finding the Deep Dark).
+- **Planter Rods:** sow entire crop rows or fertilize them instantly.
+- **Builder and Layer Rods:** lay down blocks, fences, and rails quickly and precisely.
+- **Bios Diamond:** an upgrade material used in armor enhancement and Earth Rod crafting. It also serves as a **Trim Material** with a distinct, luminous yellow-green tint — subtle, yet otherworldly.
+- **Tuff reimagined:** once just decorative, tuff now contains saltpeter — a key ingredient in crafting gunpowder.
+- **Gunpowder block:** a compact way to store gunpowder, with a twist — it behaves like falling sand, explodes when ignited, and detonates on impact or when jumped on. Perfect for building deadly traps.
+- **Alchemy with a twist:** two new potions expand your control over the world:
+  - **Splash Destroying Potion** — brewed from a Splash Awkward Potion and a Prismarine Shard. It *destroys blocks on impact*, transforming them into other materials or scattering useful resources like Saltpeter, Clay, or Prismarine Crystals. Can even disassemble wool and destroy diamond gear on mobs to yield rare powders.
+  - **Soaring Spore Essence** — made with a Froglight and a Potion of Slow Falling. Grants *infinite Glowing and Slow Falling effects* when used on living beings, toggling them on or off. Used in armor upgrades to create luminous, featherlight equipment that reveals and protects the wearer.
+- **Angel Block:** creates a safe zone, free from monsters. The block can ignore specific monsters by using filters, which are activated by items. Using an Echo Shard resets the filter, and the block's color changes based on the number of monsters added to the filter.
+- **Angel Rod:** grants mobile protection while exploring; place it as a camp beacon or carry it in your hand.
+- **Devil Block** while it prevents monsters from dying, it also gradually spreads an epidemic, changing the surrounding blocks. By using certain items on the Devil Block, you can summon monsters — useful for collecting rare drops like monster heads and music discs.
 - **Meaningful progression:** each shortcut is earned, not given.
 
 > *Survive first. Shine later.*
