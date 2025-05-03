@@ -100,7 +100,7 @@ It allows proper rendering of semi-transparent blocks in first- and third-person
 
 Angel Block Mod is fully compatible with the following mods by the same author:
 
-- **[🌟 CompactMod](https://modrinth.com/mod/compactmod)** — introduces compact forms of tradeable resources for easier storage and trading:  
+- **[🌟 Pouch & Paper](https://modrinth.com/mod/pouch-and-paper)** — introduces compact forms of tradeable resources for easier storage and trading:  
   • paper (stackable and block form),  
   • ink and glow ink (bottled),  
   • leather (bundled),  
