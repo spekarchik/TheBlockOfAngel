@@ -1,12 +1,12 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "aaa",
+        "@@@",
         "APA",
-        "aaa"
+        "@@@"
     ],
     "key": {
-        "a": "angelblock:flying_ingot",
+        "@": "angelblock:flying_ingot",
         "A": "angelblock:armor_fiber",
         "P": "minecraft:phantom_membrane"
     },
