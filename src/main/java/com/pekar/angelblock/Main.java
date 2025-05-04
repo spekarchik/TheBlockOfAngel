@@ -39,7 +39,8 @@ public class Main
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "angelblock";
-    public static final String MODNAME = "Angel Block Mod";
+    public static final String VANILLAID = "minecraft";
+    public static final String MODNAME = "The Block of Angel";
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);

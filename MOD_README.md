@@ -1,13 +1,13 @@
-# 🌟 Angel Block Mod — The Adventurer's Path
+# 🌟 The Block of Angel — The Adventurer's Path
 
 **Start your adventure with nothing but a leather tunic and a stone sword.**  
 In a world where survival is a true challenge, every step forward feels like a real achievement.  
-Welcome to **Angel Block Mod** — a world of vibrant landscapes, hidden artifacts, and earned power.
+Welcome to **The Block of Angel** — a world of vibrant landscapes, hidden artifacts, and earned power.
 
 Here, you won't spend hours building resource farms or digging endless tunnels.  
 Instead, you'll explore ancient temples, ocean monuments, fortresses, and the End — facing real danger to gain real rewards.
 
-**The Angel Block** and **Angel Rod** are your ultimate goals — powerful artifacts that purify the land and protect you as you journey.  
+**The Block of Angel** and **The Rod of Angel** are your ultimate goals — powerful artifacts that purify the land and protect you as you journey.  
 Crafting them is not easy — it’s the culmination of your growth, your triumph over the world’s challenges.
 
 ## ✨ Features
@@ -18,7 +18,7 @@ Crafting them is not easy — it’s the culmination of your growth, your triump
 - **Smart tools:** speed up tunneling without causing dangerous collapses.
 - **Armor condition matters:** protection scales with durability — worn gear still looks tough, but no longer shields you from harm.
 - **Tools and weapons degrade with use:** a mighty sword grows dull, and a perfect pickaxe slows down when nearing its limits. At zero durability, they stay in your hands — but lose their function completely.
-- **Elemental Rods:** five tiers of rods unlock powerful world-altering abilities — from planting crops and transforming terrain, to generating water sources and even creating valuable resources like slime, glowstone, blaze powder, or budding amethyst. Each rod can be upgraded to a magnetic version, allowing remote ore extraction with increasing range and depth. The final form, the **Angel Rod**, adds monster despawning in a radius and can be placed as a block to protect an area passively.
+- **Elemental Rods:** five tiers of rods unlock powerful world-altering abilities — from planting crops and transforming terrain, to generating water sources and even creating valuable resources like slime, glowstone, blaze powder, or budding amethyst. Each rod can be upgraded to a magnetic version, allowing remote ore extraction with increasing range and depth. The final form, the **The Rod of Angel**, adds monster despawning in a radius and can be placed as a block to protect an area passively.
 - **Magnetic Rods:** pull ores to the surface, avoiding endless mining. Also act as detectors, emitting specific sounds when scanning downward for otherwise unreachable targets within a small radius: valuable resources like diamond ore and amethyst clusters, and structure-related blocks like rails (for locating abandoned mineshafts) or sculk (for finding the Deep Dark).
 - **Planter Rods:** sow entire crop rows or fertilize them instantly.
 - **Builder and Layer Rods:** lay down blocks, fences, and rails quickly and precisely.
@@ -28,9 +28,9 @@ Crafting them is not easy — it’s the culmination of your growth, your triump
 - **Alchemy with a twist:** two exotic potions expand your environmental control:
   - **Splash Destroying Potion** — brewed from a Prismarine Shard and a Splash Awkward Potion. Destroys and transforms blocks on impact, and sometimes drops valuable resources. Useful for farming Saltpeter from Tuff, Clay from sand near water, Prismarine Crystals, Diamond Powder, and more.
   - **Soaring Spore Essence** — made from a Froglight and Potion of Slow Falling. Grants the **Glowing** and **Slow Falling** effects to mobs or players, toggled on or off with each use. Can also be used to upgrade armor, giving it toggleable passive effects.
-- **Angel Block:** creates a safe zone, free from monsters. The block can ignore specific monsters by using filters, which are activated by items. Using an Echo Shard resets the filter, and the block's color changes based on the number of monsters added to the filter.
-- **Angel Rod:** grants mobile protection while exploring; place it as a camp beacon or carry it in your hand.
-- **Devil Block** while it prevents monsters from dying, it also gradually spreads an epidemic, changing the surrounding blocks. By using certain items on the Devil Block, you can summon monsters — useful for collecting rare drops like monster heads and music discs.
+- **The Block of Angel:** creates a safe zone, free from monsters. The block can ignore specific monsters by using filters, which are activated by items. Using an Echo Shard resets the filter, and the block's color changes based on the number of monsters added to the filter.
+- **The Rod of Angel:** grants mobile protection while exploring; place it as a camp beacon or carry it in your hand.
+- **The Block of Devil** while it prevents monsters from dying, it also gradually spreads an epidemic, changing the surrounding blocks. By using certain items on The Block of Devil, you can summon monsters — useful for collecting rare drops like monster heads and music discs.
 - **Meaningful progression:** each shortcut is earned, not given.
 
 > *Survive first. Shine later.*
@@ -59,16 +59,16 @@ For players who are not interested in grinding endless resources, building farms
 For those who want to experience every discovery once — and move forward.  
 For adventurers who seek to **explore, conquer, and uncover artifacts**, not repeat the same tasks over and over.
 
-If you love making every moment meaningful, **Angel Block Mod** was made for you.
+If you love making every moment meaningful, **The Block of Angel** was made for you.
 
 ---
 
 ## 💫 Thank You for Playing
 
 Thank you for choosing the path of the true adventurer.  
-Whether you're standing on a cliff at sunrise, holding your Angel Rod… or exploring deep ruins with barely a heart left — you're living a story that matters.
+Whether you're standing on a cliff at sunrise, holding your The Rod of Angel… or exploring deep ruins with barely a heart left — you're living a story that matters.
 
-We hope every moment in **Angel Block Mod** makes your Minecraft world feel a little more magical.  
+We hope every moment in **The Block of Angel** makes your Minecraft world feel a little more magical.  
 Stay safe, stay curious — and always move forward. 🌿
 
 ---
@@ -98,7 +98,7 @@ It allows proper rendering of semi-transparent blocks in first- and third-person
 
 ## 🧩 Related Mods
 
-Angel Block Mod is fully compatible with the following mods by the same author:
+The Block of Angel mod is fully compatible with the following mods by the same author:
 
 - **[🌟 Pouch & Paper](https://modrinth.com/mod/pouch-and-paper)** — introduces compact forms of tradeable resources for easier storage and trading:  
   • paper (stackable and block form),  
@@ -110,7 +110,7 @@ Angel Block Mod is fully compatible with the following mods by the same author:
 
 - **[🔧 EnchantOnce](https://modrinth.com/mod/enchantonce)** — a minimalistic but powerful rework of enchanting and repairing.  
   Fixed XP costs, enchanted book duplication, material-based repairs, and perfect gear cloning — all with vanilla-style mechanics.  
-  Fully supports custom gear and enchantments from Angel Block Mod.
+  Fully supports custom gear and enchantments from The Block of Angel.
 
 ---
 
@@ -122,7 +122,3 @@ If you enjoy the mod and would like to support future updates and new features, 
 Your support means a lot and helps me dedicate more time to creating new content and improving the mod! ❤️
 
 ---
-
-# 📷 Screenshots and videos
-
-*(Attach screenshots showing Angel Block in action, Angel Rod protection, armor sets, Nether exploration, planter staff usage, etc.)*
