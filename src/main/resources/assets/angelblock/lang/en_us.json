@@ -4,8 +4,8 @@
   "language.code": "en_us",
   "author": "Sergey Pekarchik",
 
-  "itemGroup.angelblock": "Angel Block Mod",
-  "itemGroup.angelblock_tab": "Angel Block",
+  "itemGroup.angelblock": "The Block of Angel",
+  "itemGroup.angelblock_tab": "The Block of Angel",
 
   "angelblock.rendelithic_armor.desc1": "§f§lPurpose:§r§7 Nether. Good protection, a wide range of abilities, but low durability",
   "angelblock.rendelithic_armor.desc2": "§f§lWeaknesses:§r§7 water, rain §o(nausea 10 s, slowness 20 s)",
@@ -1063,7 +1063,7 @@
   "item.angelblock.cracked_endstone_block.desc": "The source of endstone powder",
   "item.angelblock.cracked_obsidian_block": "Cracked Obsidian",
   "item.angelblock.cracked_obsidian_block.desc": "The source of obsidian powder",
-  "item.angelblock.angel_block": "§bAngel Block",
+  "item.angelblock.angel_block": "§bThe Block of Angel",
   "item.angelblock.angel_block.desc1": "Despawns any monsters in 70 block radius",
   "item.angelblock.angel_block.desc2": " ",
   "item.angelblock.angel_block.desc3": "After using an item on the block, the block stops removing corresponding monsters:",
@@ -1092,7 +1092,7 @@
   "item.angelblock.angel_block.desc26": " Orange - 3 monsters",
   "item.angelblock.angel_block.desc27": " Red - 4 monsters",
   "item.angelblock.angel_block.desc28": "After placement, the block must be activated with Echo Shard. If more than 4 monsters are added to the filter, the block becomes inactive and must be reactivated with Echo Shard",
-  "item.angelblock.devil_block": "§bDevil Block",
+  "item.angelblock.devil_block": "§bThe Block of Devil",
   "item.angelblock.devil_block.desc1": "Prevents deaths of monsters in 70 block radius",
   "item.angelblock.devil_block.desc2": " ",
   "item.angelblock.devil_block.desc3": "Using the items on the block spawns corresponding monster in 30 block radius:",

@@ -4,8 +4,8 @@
   "language.code": "ru_ru",
   "author": "Sergey Pekarchik",
 
-  "itemGroup.angelblock": "Angel Block Mod",
-  "itemGroup.angelblock_tab": "Angel Block",
+  "itemGroup.angelblock": "The Block of Angel",
+  "itemGroup.angelblock_tab": "The Block of Angel",
 
   "angelblock.rendelithic_armor.desc1": "§f§lПредназначение:§r§7 Незер. Хорошая защита, широкий набор функций, но низкая износоустойчивость",
   "angelblock.rendelithic_armor.desc2": "§f§lУязвимости:§r§7 вода, дождь §o(тошнота 10 сек, замедление 20 сек)",
