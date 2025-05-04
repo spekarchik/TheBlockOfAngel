@@ -1,12 +1,12 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "aaa",
+        "@@@",
         "APA",
-        "aaa"
+        "@@@"
     ],
     "key": {
-        "a": {
+        "@": {
             "item": "angelblock:flying_ingot"
         },
         "A": {
