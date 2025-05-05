@@ -1,5 +1,8 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
+import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
@@ -12,7 +15,7 @@ import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
-public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable
+public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable, ITooltipProvider
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
@@ -73,13 +76,19 @@ public class ModPickaxe extends PickaxeItem implements IModToolEnhanceable
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public final void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 2; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, false, false, i == 1));
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 1).apply();
         }
     }
 }
