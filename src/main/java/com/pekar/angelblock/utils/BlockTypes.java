@@ -17,6 +17,16 @@ public class BlockTypes
 
     }
 
+    public boolean isInfested(Block block)
+    {
+        return block instanceof InfestedBlock;
+    }
+
+    public boolean isSuspicious(Block block)
+    {
+        return block instanceof BrushableBlock;
+    }
+
     public boolean isOre(BlockState blockState)
     {
         var ores = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "ores"));

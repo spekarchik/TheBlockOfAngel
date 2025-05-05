@@ -18,9 +18,11 @@ public class LapisShovel extends EnhancedShovel
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 6; i++)
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 7; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1).styledAs(TextStyle.Notice, i == 3).styledAs(TextStyle.DarkGray, i == 5).apply();
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1).styledAs(TextStyle.Notice, i == 4).styledAs(TextStyle.DarkGray, i == 6).apply();
         }
     }
 }
