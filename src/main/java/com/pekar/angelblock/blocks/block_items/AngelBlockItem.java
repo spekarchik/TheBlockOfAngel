@@ -1,8 +1,8 @@
 package com.pekar.angelblock.blocks.block_items;
 
-import com.pekar.angelblock.text.ITooltip;
-import com.pekar.angelblock.text.ITooltipProvider;
-import com.pekar.angelblock.text.TextStyle;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;

@@ -1,6 +1,6 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.text.ITooltipProvider;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;

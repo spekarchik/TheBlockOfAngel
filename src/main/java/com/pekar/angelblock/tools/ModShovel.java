@@ -2,8 +2,8 @@ package com.pekar.angelblock.tools;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.pekar.angelblock.text.ITooltip;
-import com.pekar.angelblock.text.TextStyle;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;

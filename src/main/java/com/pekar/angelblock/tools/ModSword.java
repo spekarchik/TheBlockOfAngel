@@ -1,6 +1,6 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.text.ITooltipProvider;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
 import net.minecraft.advancements.CriteriaTriggers;

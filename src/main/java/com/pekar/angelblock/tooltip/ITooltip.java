@@ -1,4 +1,4 @@
-package com.pekar.angelblock.text;
+package com.pekar.angelblock.tooltip;
 
 public interface ITooltip
 {

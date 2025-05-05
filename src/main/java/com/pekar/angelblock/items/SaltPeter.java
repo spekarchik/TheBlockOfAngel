@@ -1,7 +1,7 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.text.ITooltip;
-import com.pekar.angelblock.text.TextStyle;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 

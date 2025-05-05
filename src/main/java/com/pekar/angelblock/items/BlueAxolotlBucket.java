@@ -1,8 +1,8 @@
 package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.mixins.AxolotlAccessor;
-import com.pekar.angelblock.text.ITooltip;
-import com.pekar.angelblock.text.ITooltipProvider;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

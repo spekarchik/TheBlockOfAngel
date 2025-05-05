@@ -1,8 +1,8 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.text.ITooltip;
-import com.pekar.angelblock.text.TextStyle;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.tools.properties.SuperMaterialProperties;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;

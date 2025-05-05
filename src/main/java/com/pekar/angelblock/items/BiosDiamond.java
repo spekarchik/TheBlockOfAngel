@@ -1,9 +1,9 @@
 package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.text.ITooltip;
-import com.pekar.angelblock.text.ITooltipProvider;
-import com.pekar.angelblock.text.TextStyle;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

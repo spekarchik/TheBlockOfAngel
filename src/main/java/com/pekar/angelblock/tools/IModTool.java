@@ -1,6 +1,6 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.text.ITooltipProvider;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 

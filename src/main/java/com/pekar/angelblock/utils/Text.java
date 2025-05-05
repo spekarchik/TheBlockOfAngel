@@ -1,6 +1,6 @@
 package com.pekar.angelblock.utils;
 
-import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltip;
 import net.minecraft.client.gui.screens.Screen;
 
 public class Text

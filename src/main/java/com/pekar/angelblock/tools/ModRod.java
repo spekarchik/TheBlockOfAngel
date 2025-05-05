@@ -1,6 +1,6 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.text.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltip;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
