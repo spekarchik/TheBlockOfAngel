@@ -1,5 +1,6 @@
 {
     "type": "minecraft:smelting",
+    "category": "misc",
     "ingredient": "angelblock:lapis_powder",
     "result": {
         "id": "angelblock:lapis_ingot"

@@ -1,5 +1,6 @@
 {
     "type": "minecraft:crafting_shapeless",
+    "category": "misc",
     "ingredients": [
         "#minecraft:fire_corals",
         "minecraft:rabbit_foot",

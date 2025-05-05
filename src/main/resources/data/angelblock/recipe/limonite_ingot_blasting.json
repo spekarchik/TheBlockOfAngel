@@ -1,5 +1,6 @@
 {
     "type": "minecraft:blasting",
+    "category": "misc",
     "ingredient": "angelblock:limonite_powder",
     "result": {
         "id": "angelblock:limonite_ingot"
