@@ -1,5 +1,6 @@
 {
     "type": "minecraft:smelting",
+    "category": "building",
     "ingredient": {
         "item": "minecraft:end_stone"
     },
