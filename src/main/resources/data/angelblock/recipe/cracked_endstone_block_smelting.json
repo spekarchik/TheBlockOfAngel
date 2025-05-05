@@ -1,5 +1,6 @@
 {
     "type": "minecraft:smelting",
+    "category": "building",
     "ingredient": "minecraft:end_stone",
     "result": {
         "id": "angelblock:cracked_endstone_block"

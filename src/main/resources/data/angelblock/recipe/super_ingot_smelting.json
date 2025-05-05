@@ -1,5 +1,6 @@
 {
     "type": "minecraft:smelting",
+    "category": "misc",
     "ingredient": "angelblock:super_powder",
     "result": {
         "id": "angelblock:super_ingot"

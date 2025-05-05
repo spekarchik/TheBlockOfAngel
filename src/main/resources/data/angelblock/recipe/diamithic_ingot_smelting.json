@@ -1,5 +1,6 @@
 {
     "type": "minecraft:smelting",
+    "category": "misc",
     "ingredient":
     "angelblock:diamithic_powder",
     "result": {
