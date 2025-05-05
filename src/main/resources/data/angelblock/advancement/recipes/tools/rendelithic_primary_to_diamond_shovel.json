@@ -21,7 +21,7 @@
                                                   }
                                },
                      "item1":  {
-                                   "trigger":  "minecraft:inventory_changed",
+                                   "trigger": "minecraft:impossible",
                                    "conditions":  {
                                                       "items":  [
                                                                     {
