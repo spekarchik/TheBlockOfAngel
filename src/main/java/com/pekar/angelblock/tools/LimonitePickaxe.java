@@ -4,8 +4,9 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.LimoniteMaterialProperties;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,8 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.InfestedBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.List;
 
 public class LimonitePickaxe extends EnhancedPickaxe
 {
@@ -87,13 +86,13 @@ public class LimonitePickaxe extends EnhancedPickaxe
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 8; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 5, false, i == 3, false, i == 7));
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1 || i == 5).styledAs(TextStyle.Notice, i == 3).styledAs(TextStyle.DarkGray, i == 7).apply();
         }
     }
 
