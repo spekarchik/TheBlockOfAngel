@@ -22,7 +22,11 @@ public class SuperShovel extends EnhancedShovel
 
         for (int i = 0; i <= 11; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1).styledAs(TextStyle.Notice, i == 7).styledAs(TextStyle.DarkGray, i == 10).apply();
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.Notice, i == 7)
+                    .styledAs(TextStyle.DarkGray, i == 10)
+                    .apply();
         }
     }
 }
