@@ -1,0 +1,36 @@
+﻿{
+    "criteria":  {
+                     "item0":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "angelblock:lapis_material_block"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item1":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "angelblock:lapis_ingot"
+                                                                    }
+                                                                ]
+                                                  }
+                               }
+                 },
+    "parent":  "minecraft:recipes/root",
+    "rewards":  {
+                    "recipes":  [
+                                    "angelblock:lapis_ingot"
+                                ]
+                },
+    "requirements":  [
+                         [
+                             "item0",
+                             "item1"
+                         ]
+                     ]
+}
