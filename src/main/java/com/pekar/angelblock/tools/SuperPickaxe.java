@@ -23,7 +23,11 @@ public class SuperPickaxe extends EnhancedPickaxe
 
         for (int i = 0; i <= 12; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1).styledAs(TextStyle.Notice, i == 7).styledAs(TextStyle.DarkGray, i == 11).apply();
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.Notice, i == 7)
+                    .styledAs(TextStyle.DarkGray, i == 11)
+                    .apply();
         }
     }
 }
