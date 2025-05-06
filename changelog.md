@@ -1,4 +1,4 @@
-## 📦 Version 2.0.0-beta
+## 📦 Version 2.0.1
 
 ### ✨ Added
 - Advancement-based recipe unlocking
@@ -15,13 +15,14 @@
 - Tooltip corrections for improved clarity
 
 
-## 📦 Version 1.0.4-beta
+## 📦 Version 1.1.6
 
 ### Renamed
 - 'Angel Block Mod' renamed to 'The Block of Angel' to avoid confusion with another similarly named mod.
 - 'Angel Block' renamed to 'The Block of Angel'
 - 'Devil Block' renamed to 'The Block of Devil'
 
-## 📦 Version 1.0.3-beta
+## 📦 Version 1.1.5
 
 - Initial publishing
+
