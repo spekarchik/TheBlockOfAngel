@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "armor_fiber",
   "category": "misc",
   "pattern": [
     "RRR",
