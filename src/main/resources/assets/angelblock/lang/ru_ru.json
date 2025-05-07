@@ -1056,7 +1056,7 @@
   "item.angelblock.ancient_scroll.desc": "Встречается в библиотеках Крепостей",
   "item.angelblock.blue_axolotl_bucket": "Синий аксолотль в ведре",
   "item.angelblock.blue_axolotl_bucket.desc": "Может быть подарен рыбаком (вероятность 1/100) когда игрок имеет статус 'Герой Деревни'",
-  "item.angelblock.rod_sensor": "Датчик посоха",
+  "item.angelblock.rod_sensor": "§bДатчик посоха",
 
   "item.angelblock.green_diamond_ore": "Зелёно-алмазная руда",
   "item.angelblock.green_diamond_ore.desc": "Воздействие Посохом Земли на блок Алмазной Руды превращает его в блок Зелено-Алмазной Руды",
