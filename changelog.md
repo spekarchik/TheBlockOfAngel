@@ -1,3 +1,10 @@
+## 📦 Version 2.1.0-beta
+
+### 🛠️ Changed
+- **Ancient Canine** can now only be found in igloos (removed from Ancient Cities).
+- The rarity of certain items and blocks has been adjusted.
+- Several recipes have been grouped together.
+
 ## 📦 Version 2.0.0-beta
 
 ### ✨ Added
