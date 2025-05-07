@@ -1,7 +1,7 @@
 ## 📦 Version 2.1.0-beta
 
 ### 🛠️ Changed
-- **Ancient Canine** can now only be found in igloos (removed from Ancient Cities).
+- **Ancient Canine** can now only be found in igloos (removed from Ancient Cities). You'll still need to visit an Ancient City to find an Echo Shard required to activate the Block of Angel.
 - The rarity of certain items and blocks has been adjusted.
 - Several recipes have been grouped together.
 
