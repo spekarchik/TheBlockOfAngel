@@ -138,7 +138,7 @@ public class ToolRegistry
             () -> new EndRod(ToolMaterials.ROD_MATERIAL5, true, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final DeferredItem<ModRod> ANGEL_ROD = Main.ITEMS.register("angel_rod",
-            () -> new AngelRod(ToolMaterials.ROD_MATERIAL5, true, new Item.Properties().rarity(Rarity.RARE)));
+            () -> new AngelRod(ToolMaterials.ROD_MATERIAL5, true, new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final DeferredItem<ModRod> PLANTER = Main.ITEMS.register("planter",
             () -> new Planter(ToolMaterials.ROD_MATERIAL7, new Item.Properties().rarity(Rarity.UNCOMMON)));
