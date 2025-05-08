@@ -2,11 +2,9 @@ package com.pekar.angelblock.mixins;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.armor.ModArmor;
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
@@ -31,7 +29,7 @@ public abstract class AxolotlMixin extends Animal
     private void injectBreedOffspring(ServerLevel level, AgeableMob partner, CallbackInfoReturnable<AgeableMob> cir)
     {
         Axolotl axolotl = (Axolotl) (Object) this;
-        Axolotl offspring = EntityType.AXOLOTL.create(level, EntitySpawnReason.BREEDING);
+        Axolotl offspring = EntityType.AXOLOTL.create(level);
         if (offspring != null)
         {
             Axolotl.Variant variant;
