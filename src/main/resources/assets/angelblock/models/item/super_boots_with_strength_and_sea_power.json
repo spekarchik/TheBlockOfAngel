@@ -44,7 +44,7 @@
             }
         },
         {
-            "model": "angelblock:item/super_boots2_diamond_darker_trim",
+            "model": "angelblock:item/super_boots2_diamond_trim",
             "predicate": {
                 "trim_type": 0.8
             }
