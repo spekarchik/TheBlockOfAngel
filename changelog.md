@@ -1,3 +1,8 @@
+## 📦 Version 2.1.1-beta
+
+### 🛠️ Changed
+- Igloo chests: Increased the chance of finding an Ancient Canine to 90%, and raised the maximum stack size to 5.
+
 ## 📦 Version 2.1.0-beta
 
 ### 🛠️ Changed
