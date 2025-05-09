@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.Block;
 
-public class ModBlockWithMultipleHoverText extends Block
+public class ModBlockWithMultipleHoverText extends ModBlock
 {
     protected final Utils utils = new Utils();
 

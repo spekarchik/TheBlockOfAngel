@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GunpowderBlock extends FallingBlock
+public class GunpowderBlock extends ModFallingBlock
 {
     private static final MapCodec<GunpowderBlock> CODEC = simpleCodec(GunpowderBlock::new);
 

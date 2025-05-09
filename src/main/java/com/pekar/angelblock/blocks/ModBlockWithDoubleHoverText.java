@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
-public class ModBlockWithDoubleHoverText extends Block
+public class ModBlockWithDoubleHoverText extends ModBlock
 {
     protected final Utils utils = new Utils();
 

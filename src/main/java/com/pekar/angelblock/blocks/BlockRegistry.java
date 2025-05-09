@@ -17,25 +17,25 @@ public class BlockRegistry
     public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new);
     public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedObsidianBlock::new);
     public static final DeferredBlock<Block> DIAMOND_POWDER_BLOCK = register("diamond_powder_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
+            new ModBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
     public static final DeferredBlock<Block> OBSIDIAN_POWDER_BLOCK = register("obsidian_powder_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f)));
+            new ModBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f)));
     public static final DeferredBlock<Block> ENDSTONE_POWDER_BLOCK = register("endstone_powder_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
+            new ModBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
     public static final DeferredBlock<Block> SALTPETER_BLOCK = register("saltpeter_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
+            new ModBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
     public static final DeferredBlock<Block> DIAMITHIC_MATERIAL_BLOCK = register("diamithic_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
+            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final DeferredBlock<Block> RENDELITHIC_MATERIAL_BLOCK = register("rendelithic_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
+            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final DeferredBlock<Block> LIMONITE_MATERIAL_BLOCK = register("limonite_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
+            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final DeferredBlock<Block> LAPIS_MATERIAL_BLOCK = register("lapis_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
+            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final DeferredBlock<Block> SUPER_MATERIAL_BLOCK = register("super_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
+            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
     public static final DeferredBlock<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", () ->
-            new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
+            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
 
     public static final DeferredBlock<Block> ANGEL_BLOCK = register("angel_block", AngelBlock::new);
     public static final DeferredBlock<Block> DEVIL_BLOCK = register("devil_block", DevilBlock::new);
