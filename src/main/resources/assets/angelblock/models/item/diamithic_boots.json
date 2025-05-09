@@ -44,7 +44,7 @@
             }
         },
         {
-            "model": "angelblock:item/diamithic_boots_diamond_darker_trim",
+            "model": "angelblock:item/diamithic_boots_diamond_trim",
             "predicate": {
                 "trim_type": 0.8
             }
