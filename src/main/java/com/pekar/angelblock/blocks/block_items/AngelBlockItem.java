@@ -49,8 +49,6 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
         }
         else if (Screen.hasAltDown())
         {
-            tooltip.addEmptyLine();
-
             for (int i = 21; i <= 28; i++)
             {
                 tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 21).styledAs(TextStyle.DarkGray, i == 28).apply();

@@ -291,20 +291,20 @@ public class AncientRod extends MagneticRod
         if (Screen.hasShiftDown())
         {
             // Placing
-            tooltip.addLineById("description.rods.press_alt");
-            tooltip.addLineById("description.rods.press_ctrl");
+            tooltip.addLineById("description.rods.press_alt").apply();
+            tooltip.addLineById("description.rods.press_ctrl").apply();
         }
         else if (Screen.hasAltDown())
         {
             // Transformations
-            tooltip.addLineById("description.rods.press_shift");
-            tooltip.addLineById("description.rods.press_ctrl");
+            tooltip.addLineById("description.rods.press_shift").apply();
+            tooltip.addLineById("description.rods.press_ctrl").apply();
         }
         else if (Screen.hasControlDown())
         {
             // Magnetic
-            tooltip.addLineById("description.rods.press_shift");
-            tooltip.addLineById("description.rods.press_alt");
+            tooltip.addLineById("description.rods.press_shift").apply();
+            tooltip.addLineById("description.rods.press_alt").apply();
         }
     }
 

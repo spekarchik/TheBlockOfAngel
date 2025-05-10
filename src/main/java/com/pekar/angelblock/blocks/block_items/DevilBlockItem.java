@@ -49,7 +49,7 @@ public class DevilBlockItem extends ModBlockItem implements ITooltipProvider
             }
 
             tooltip.addEmptyLine();
-            tooltip.addLineById("description.common.press_shift");
+            tooltip.addLineById("description.common.press_shift").apply();
         }
     }
 
