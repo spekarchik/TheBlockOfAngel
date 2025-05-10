@@ -975,6 +975,7 @@
   "item.angelblock.flying_powder": "Аэритовая смесь",
   "item.angelblock.flying_ingot": "Аэритовый слиток",
   "item.angelblock.flying_plate": "Аэритовая пластина",
+
   "item.angelblock.rendelithic_armor_upgrade_kit": "Кузнечный набор",
   "item.angelblock.rendelithic_armor_upgrade_kit.desc1": "Ренделитовое улучшение брони",
   "item.angelblock.rendelithic_armor_upgrade_kit.desc2": "Встречается в деревнях и Адских Крепостях",
@@ -1149,14 +1150,6 @@
   "item.angelblock.nether_bars_block.desc1": "Встречается в Развалинах Бастиона",
   "item.angelblock.nether_bars_block.desc2": "Устойчивость к взрывам - как у Обсидиана",
 
-  "key.angelblock.night_vision": "Режим ночного зрения",
-  "key.angelblock.jump_boost": "Режим прыгучести",
-  "key.angelblock.glowing": "Режим подсветки",
-  "key.angelblock.regen": "Восстановление здоровья",
-  "key.angelblock.levitation": "Режим плавного падения",
-  "key.angelblock.sword_effects": "Режимы оружия/инструментов",
-  "key.angelblock.super_jump": "Режим суперпрыжка",
-
   "item.angelblock.block_breaker_potion_item": "Взрывное разрушающее зелье",
   "item.angelblock.block_breaker_potion_item.desc0": "§3§lРецепт для варочной стойки:§r§3 Осколок призмарина, Мутное взрывное зелье",
   "item.angelblock.block_breaker_potion_item.desc1": "Трансформации:",
@@ -1183,6 +1176,15 @@
   "item.angelblock.soaring_spore_essence.desc1": "Используется для добавления броне возможности Подсветки игрока и Плавного падения",
   "item.angelblock.soaring_spore_essence.desc2": "§8При использовании на живых существах поочерёдно накладывает или снимает бесконечные эффекты Подсветки и Плавного падения",
   "item.angelblock.soaring_spore_essence.desc3": "§3§lРецепт для варочной стойки:§r§3 Квампа, Зелье плавного падения",
+
+  "key.angelblock.night_vision": "Режим ночного зрения",
+  "key.angelblock.jump_boost": "Режим прыгучести",
+  "key.angelblock.glowing": "Режим подсветки",
+  "key.angelblock.regen": "Восстановление здоровья",
+  "key.angelblock.levitation": "Режим плавного падения",
+  "key.angelblock.sword_effects": "Режимы оружия/инструментов",
+  "key.angelblock.super_jump": "Режим суперпрыжка",
+
   "effect.angelblock.tool_advanced_mode_effect": "Улучшенный режим",
   "effect.angelblock.sword_explosion_mode_effect": "Режим Взрыва",
   "effect.angelblock.sword_fire_mode_effect": "Режим Огня",
