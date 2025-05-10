@@ -975,6 +975,7 @@
   "item.angelblock.flying_powder": "Aeryte Mixture",
   "item.angelblock.flying_ingot": "Aeryte Ingot",
   "item.angelblock.flying_plate": "Aeryte Plate",
+
   "item.angelblock.rendelithic_armor_upgrade_kit": "Smithing Kit",
   "item.angelblock.rendelithic_armor_upgrade_kit.desc1": "Armor Rendelite Upgrade",
   "item.angelblock.rendelithic_armor_upgrade_kit.desc2": "Can be found in villages and Nether Fortresses",
@@ -1150,14 +1151,6 @@
   "item.angelblock.nether_bars_block.desc1": "Can be found in Bastion Remnants",
   "item.angelblock.nether_bars_block.desc2": "Blast resistance - like Obsidian",
 
-  "key.angelblock.night_vision": "Night Vision Mode",
-  "key.angelblock.jump_boost": "Jump Boost Mode",
-  "key.angelblock.glowing": "Glowing Mode",
-  "key.angelblock.regen": "Regeneration",
-  "key.angelblock.levitation": "Slow Falling Mode",
-  "key.angelblock.sword_effects": "Sword/Tool Modes",
-  "key.angelblock.super_jump": "Super Jump Mode",
-
   "item.angelblock.block_breaker_potion_item": "Splash Destroying Potion",
   "item.angelblock.block_breaker_potion_item.desc0": "§3§lBrewing Recipe:§r§3 Prismarine Shard, Splash Awkward Potion",
   "item.angelblock.block_breaker_potion_item.desc1": "Transformations:",
@@ -1184,6 +1177,15 @@
   "item.angelblock.soaring_spore_essence.desc1": "Used to grant the armor the ability to highlight the player and enable slow falling",
   "item.angelblock.soaring_spore_essence.desc2": "§8When used on living beings, it alternately applies or removes infinite Glowing and Slow Falling effects",
   "item.angelblock.soaring_spore_essence.desc3": "§3§lBrewing Recipe:§r§3 Froglight, Potion of Slow Falling",
+
+  "key.angelblock.night_vision": "Night Vision Mode",
+  "key.angelblock.jump_boost": "Jump Boost Mode",
+  "key.angelblock.glowing": "Glowing Mode",
+  "key.angelblock.regen": "Regeneration",
+  "key.angelblock.levitation": "Slow Falling Mode",
+  "key.angelblock.sword_effects": "Sword/Tool Modes",
+  "key.angelblock.super_jump": "Super Jump Mode",
+
   "effect.angelblock.tool_advanced_mode_effect": "Enhanced Mode",
   "effect.angelblock.sword_explosion_mode_effect": "Sword Explosion Mode",
   "effect.angelblock.sword_fire_mode_effect": "Sword Fire Mode",
