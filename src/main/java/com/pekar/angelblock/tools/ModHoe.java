@@ -107,7 +107,7 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
 
         for (int i = 0; i <= 5; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 4).apply();
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1).styledAs(TextStyle.DarkGray, i == 4).apply();
         }
     }
 
