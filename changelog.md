@@ -1,3 +1,17 @@
+## 📦 Version 2.3.0-beta
+
+### ✨ New
+- Added full support for Belarusian localization
+
+### 📝 Improvements
+- Revised and improved text in both English and Russian localizations
+- Renamed `Ancient Canine` → `Ancient Tusk`  
+- Tooltip behavior improved: tooltip for **Green Diamond Ore** is collapsed now by default
+
+### 🐞 Fixes
+- Fixed several tooltip formatting and display bugs
+
+
 ## 📦 Version 2.2.0-beta
 
 ### 🛠️ Changed
