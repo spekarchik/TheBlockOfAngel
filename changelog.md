@@ -1,3 +1,10 @@
+## 📦 Version 2.3.1-beta
+
+### 📝 Improvements
+- **Rod of Angel**: improved block drop behavior when broken
+- **Rod of Angel**: now supports directional placement based on the player's facing, allowing orientation along X or Z axis
+
+
 ## 📦 Version 2.3.0-beta
 
 ### ✨ New
