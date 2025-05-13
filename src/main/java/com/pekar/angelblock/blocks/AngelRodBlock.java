@@ -8,13 +8,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -25,9 +29,44 @@ import java.util.function.Function;
 
 public class AngelRodBlock extends ModBlock implements EntityBlock
 {
+    private static final VoxelShape SHAPE_X = Shapes.create(0.328125, 0.0, 0.46875, 0.671875, 1.21875, 0.53125);
+    private static final VoxelShape SHAPE_Z = Shapes.create(0.46875, 0.0, 0.328125, 0.53125, 1.21875, 0.671875);
+
+    public static final BooleanProperty FACING_ALONG_X = BooleanProperty.create("facing_along_x");
+
     public AngelRodBlock(Properties properties)
     {
         super(properties);
+        registerDefaultState(stateDefinition.any().setValue(FACING_ALONG_X, true));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
+    {
+        builder.add(FACING_ALONG_X);
+    }
+
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context)
+    {
+        var direction = context.getHorizontalDirection();
+        return switch (direction)
+        {
+            case EAST, WEST -> defaultBlockState().setValue(FACING_ALONG_X, false);
+            default -> defaultBlockState().setValue(FACING_ALONG_X, true);
+        };
+    }
+
+    @Override
+    protected Function<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> voxelShapeFunction)
+    {
+        return blockState -> blockState.getValue(FACING_ALONG_X) ? SHAPE_X : SHAPE_Z;
+    }
+
+    @Override
+    public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext)
+    {
+        return blockState.getValue(FACING_ALONG_X) ? SHAPE_X : SHAPE_Z;
     }
 
     @Nullable
@@ -44,19 +83,6 @@ public class AngelRodBlock extends ModBlock implements EntityBlock
         return level.isClientSide()
                 ? null
                 : (level0, pos, blockState0, blockEntity) -> ((AngelRodBlockEntity)blockEntity).tick(level0, pos, blockState0, (AngelRodBlockEntity) blockEntity);
-    }
-
-    @Override
-    protected Function<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> voxelShapeFunction)
-    {
-        var shape = Shapes.create(0.328125, 0.0, 0.46875, 0.671875, 1.21875, 0.53125);
-        return blockState -> shape;
-    }
-
-    @Override
-    public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext)
-    {
-        return Shapes.create(0.328125, 0.0, 0.46875, 0.671875, 1.21875, 0.53125);
     }
 
     @Override

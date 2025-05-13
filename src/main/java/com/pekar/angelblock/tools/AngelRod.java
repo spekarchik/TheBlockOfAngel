@@ -13,7 +13,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
 
 public class AngelRod extends EndRod
 {
@@ -89,7 +91,10 @@ public class AngelRod extends EndRod
                 var isClientSide = level.isClientSide();
                 if (!isClientSide)
                 {
-                    level.setBlock(pos.above(), BlockRegistry.ANGEL_ROD_BLOCK.get().defaultBlockState(), 11);
+                    var blockToSet = BlockRegistry.ANGEL_ROD_BLOCK.get();
+                    var state = blockToSet.getStateForPlacement(new BlockPlaceContext(context));
+                    var stateToSet = state != null ? state : blockToSet.defaultBlockState();
+                    level.setBlock(pos.above(), stateToSet, Block.UPDATE_ALL_IMMEDIATE);
                     var blockEntity = level.getBlockEntity(pos.above());
                     if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
                     {
