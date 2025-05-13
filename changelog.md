@@ -1,4 +1,4 @@
-## 📦 Version 2.3.1-beta
+## 📦 Version 2.3.1
 
 ### 📝 Improvements
 - **Rod of Angel**: improved block drop behavior when broken
