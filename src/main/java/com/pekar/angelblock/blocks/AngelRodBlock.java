@@ -73,6 +73,8 @@ public class AngelRodBlock extends ModBlock implements EntityBlock
             var blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
             {
+                var dropDirection = player.getDirection().getOpposite();
+
                 if (player.isSteppingCarefully())
                 {
                     var itemStack1 = new ItemStack(ToolRegistry.END_MAGNETIC_ROD.get());
@@ -80,15 +82,15 @@ public class AngelRodBlock extends ModBlock implements EntityBlock
                     var itemStack2 = new ItemStack(BlockRegistry.ANGEL_BLOCK.get());
                     var itemStack3 = new ItemStack(Items.TOTEM_OF_UNDYING);
 
-                    popResource(level, pos, itemStack1);
-                    popResource(level, pos, itemStack2);
-                    popResource(level, pos, itemStack3);
+                    popResourceFromFace(level, pos, dropDirection, itemStack1);
+                    popResourceFromFace(level, pos, dropDirection, itemStack2);
+                    popResourceFromFace(level, pos, dropDirection, itemStack3);
                 }
                 else
                 {
                     var itemStack = new ItemStack(ToolRegistry.ANGEL_ROD.get());
                     itemStack.setDamageValue(angelRodBlockEntity.getDamage());
-                    popResource(level, pos, itemStack);
+                    popResourceFromFace(level, pos, dropDirection, itemStack);
                 }
             }
         }
