@@ -85,6 +85,7 @@ Stay safe, stay curious — and always move forward. 🌿
 - **Developer:** Sergey Pekarchik (with testing and creative support by Tima Pekarchik)
 - **Supported NeoForge versions:** 1.21.1, 1.21.4 and 1.21.5
 - **Texture resolution:** 32×32
+- **Supported languages:** English, Belarusian, Russian
 
 ## 💡 Optional Visual Enhancement
 
