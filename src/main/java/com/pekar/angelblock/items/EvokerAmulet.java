@@ -35,7 +35,7 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
                     level.getChunk(player.getOnPos()).addEntity(allay);
 
                 if (player instanceof ServerPlayer serverPlayer)
-                    new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
+                    new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
             }
         }
 

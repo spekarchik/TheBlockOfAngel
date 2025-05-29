@@ -28,7 +28,7 @@ public class EndSapphire extends ModItemWithDoubleHoverText
                 int duration = level.getRandom().nextIntBetweenInclusive(40, 300);
                 int effectLevel = level.getRandom().nextIntBetweenInclusive(0, 50);
                 player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, duration, effectLevel, true, true));
-                new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
+                new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
             }
 
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide());
