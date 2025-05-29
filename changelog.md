@@ -1,3 +1,9 @@
+## 📦 Version 2.3.2
+
+### 📝 Improvements
+- **Bios Diamond**, **End Sapphire**, **Evoker Amulet**, **Elder Guardian Eye**, **Golden Artefact**: updated usage sound from `PLAYER_LEVELUP` to `LEVER_CLICK` for a more tactile and fitting feedback.
+
+
 ## 📦 Version 2.3.1
 
 ### 📝 Improvements
