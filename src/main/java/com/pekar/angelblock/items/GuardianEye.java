@@ -34,7 +34,7 @@ public class GuardianEye extends ModItem implements ITooltipProvider
             if (player instanceof ServerPlayer serverPlayer)
             {
                 player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0, true, true));
-                new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
+                new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
             }
 
             return sidedSuccess(level.isClientSide());

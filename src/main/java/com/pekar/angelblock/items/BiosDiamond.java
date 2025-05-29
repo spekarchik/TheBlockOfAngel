@@ -37,7 +37,7 @@ public class BiosDiamond extends ModItem implements ITooltipProvider
                 int duration = level.getRandom().nextIntBetweenInclusive(40, 200);
                 int effectLevel = level.getRandom().nextIntBetweenInclusive(0, 4);
                 player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, effectLevel, true, true));
-                new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
+                new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
             }
 
             return sidedSuccess(level.isClientSide());
