@@ -89,7 +89,7 @@ public class MinerFigure extends ModItemWithDoubleHoverText
     private void eraseMobMemory(Mob mob, Player player)
     {
         if (player instanceof ServerPlayer serverPlayer)
-            new PlaySoundPacket(SoundEvents.PLAYER_LEVELUP).sendToPlayer(serverPlayer);
+            new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
 
         mob.setLastHurtByMob(null);
         mob.setTarget(null);
