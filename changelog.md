@@ -1,3 +1,9 @@
+## 📦 Version 2.3.3
+
+### 🐞 Fixes
+- Fixed a bug where **Superite Chestplate** and **Aerite Chestplate** would take durability damage during flight. Now, these chestplates are no longer damaged while the player is flying.
+
+
 ## 📦 Version 2.3.2
 
 ### 📝 Improvements
