@@ -74,7 +74,7 @@ public class ArmorRegistry
             (m, t, p) -> new SuperArmor(m, t, p).withDetector());
     public static final DeferredItem<ModArmor> SUPER_CHESTPLATE = registerArmor("super_chestplate", ModArmorMaterial.SUPER, ArmorType.CHESTPLATE, SuperArmor::new);
     public static final DeferredItem<ModArmor> SUPER_CHESTPLATE_FLYING = registerArmor("super_chestplate_flying", ModArmorMaterial.SUPER2, ArmorType.CHESTPLATE,
-            (m, t, p) -> new SuperArmorFlying(m, t,  p.component(DataComponents.GLIDER, Unit.INSTANCE)));
+            (m, t, p) -> new SuperArmorFlying(m, t,  p.component(DataComponents.GLIDER, Unit.INSTANCE)).withElytra().canFly());
     public static final DeferredItem<ModArmor> SUPER_LEGGINGS = registerArmor("super_leggings", ModArmorMaterial.SUPER, ArmorType.LEGGINGS, SuperArmor::new);
     public static final DeferredItem<ModArmor> SUPER_LEGGINGS_WITH_REGENERATOR2 = registerArmor("super_leggings_with_regenerator", ModArmorMaterial.SUPER2, ArmorType.LEGGINGS,
             (m, t, p) -> new SuperArmor(m, t, p).withHealthRegenerator());
@@ -88,7 +88,7 @@ public class ArmorRegistry
 
     public static final DeferredItem<ModArmor> FLYING_HELMET = registerArmor("flying_helmet", ModArmorMaterial.FLYING, ArmorType.HELMET, FlyingArmor::new);
     public static final DeferredItem<ModArmor> FLYING_CHESTPLATE = registerArmor("flying_chestplate", ModArmorMaterial.FLYING, ArmorType.CHESTPLATE,
-            (m, t, p) -> new FlyingArmor(m, t, p.component(DataComponents.GLIDER, Unit.INSTANCE)));
+            (m, t, p) -> new FlyingArmor(m, t, p.component(DataComponents.GLIDER, Unit.INSTANCE)).canFly());
     public static final DeferredItem<ModArmor> FLYING_LEGGINGS = registerArmor("flying_leggings", ModArmorMaterial.FLYING, ArmorType.LEGGINGS, FlyingArmor::new);
     public static final DeferredItem<ModArmor> FLYING_BOOTS = registerArmor("flying_boots", ModArmorMaterial.FLYING, ArmorType.BOOTS, FlyingArmor::new);
 
