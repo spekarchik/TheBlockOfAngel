@@ -9,7 +9,6 @@ public class SuperArmorFlying extends SuperArmor
     protected SuperArmorFlying(ModArmorMaterial material, ArmorType equipmentSlot, Properties properties)
     {
         super(material, equipmentSlot, properties);
-        withElytra();
     }
 
     private String getModelName(LivingEntity entity, EquipmentSlot slot)

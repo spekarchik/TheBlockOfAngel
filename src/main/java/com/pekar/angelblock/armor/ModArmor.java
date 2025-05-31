@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -25,6 +26,7 @@ public class ModArmor extends Item
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
     private final Set<ArmorModifications> armorModificatorSet = new HashSet<>();
+    protected boolean canFly;
 
     protected ModArmor(ModArmorMaterial material, ArmorType armorItemType, Properties properties)
     {
@@ -44,9 +46,24 @@ public class ModArmor extends Item
         return material.getMaterialName() + "_armor";
     }
 
+    public ModArmor canFly()
+    {
+        canFly = true;
+        return this;
+    }
+
+    private boolean isAutoFlightDamage(ItemStack stack, @Nullable LivingEntity entity, int amount)
+    {
+        if (!canFly) return false;
+
+        return entity instanceof Player player && player.isFallFlying() && amount <= 1;
+    }
+
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken)
     {
+        if (isAutoFlightDamage(stack, entity, amount)) return 0;
+
         var durability = stack.getMaxDamage() - stack.getDamageValue();
 
         if (entity != null)
