@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "angelblock:rendelithic_helmet_with_nv"
+    },
+    "addition": {
+        "item": "minecraft:flint"
+    },
+    "result": {
+        "id": "minecraft:chainmail_helmet"
+    },
+    "template": {
+        "item": "angelblock:downgrade_kit"
+    }
+}

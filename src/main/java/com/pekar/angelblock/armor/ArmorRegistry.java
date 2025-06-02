@@ -8,6 +8,8 @@ public class ArmorRegistry
 {
     public static final DeferredItem<ModArmor> RENDELITHIC_HELMET = Main.ITEMS.register("rendelithic_helmet", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.HELMET));
+    public static final DeferredItem<ModArmor> RENDELITHIC_HELMET_WITH_NIGHT_VISION = Main.ITEMS.register("rendelithic_helmet_with_nv", () ->
+            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.HELMET).withNightVision());
     public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE = Main.ITEMS.register("rendelithic_chestplate", () ->
             new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.CHESTPLATE));
     public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("rendelithic_chestplate_with_levitation", () ->

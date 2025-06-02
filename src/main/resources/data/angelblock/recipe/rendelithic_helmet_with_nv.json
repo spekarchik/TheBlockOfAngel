@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "angelblock:rendelithic_helmet"
+    },
+    "addition": {
+        "item": "angelblock:guardian_eye"
+    },
+    "result": {
+        "id": "angelblock:rendelithic_helmet_with_nv"
+    },
+    "template": {
+        "item": "angelblock:rendelithic_armor_upgrade_kit"
+    }
+}
