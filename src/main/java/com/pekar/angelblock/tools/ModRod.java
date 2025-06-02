@@ -60,12 +60,6 @@ public abstract class ModRod extends ModTool implements IModTool
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book)
-    {
-        return false;
-    }
-
-    @Override
     public boolean isEnhanced()
     {
         return isMagnetic;
