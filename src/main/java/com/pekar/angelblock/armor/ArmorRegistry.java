@@ -15,6 +15,8 @@ public class ArmorRegistry
 {
     public static final DeferredItem<ModArmor> RENDELITHIC_HELMET = registerArmor("rendelithic_helmet",
             ModArmorMaterial.RENDELITHIC, ArmorType.HELMET, RendelithicArmor::new);
+    public static final DeferredItem<ModArmor> RENDELITHIC_HELMET_WITH_NIGHT_VISION = registerArmor("rendelithic_helmet_with_nv",
+            ModArmorMaterial.RENDELITHIC2, ArmorType.HELMET, (m, t, p) -> new RendelithicArmor(m, t, p).withNightVision());
 
     public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE = registerArmor("rendelithic_chestplate", ModArmorMaterial.RENDELITHIC, ArmorType.CHESTPLATE, RendelithicArmor::new);
     public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = registerArmor("rendelithic_chestplate_with_levitation", ModArmorMaterial.RENDELITHIC2, ArmorType.CHESTPLATE,

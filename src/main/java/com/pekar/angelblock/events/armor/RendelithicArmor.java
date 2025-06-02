@@ -21,6 +21,7 @@ public class RendelithicArmor extends Armor
     private final ISwitchingArmorEffect slowFallingEffect;
     private final ISwitchingArmorEffect glowingEffect;
     private final ISwitchingEffectSynchronizer jumpEffect;
+    private final ISwitchingArmorEffect nightVisionEffect;
 
     private static final int JUMP_EFFECT_AMPLIFIER_DEFAULT = 3;
     private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 5;
@@ -31,6 +32,7 @@ public class RendelithicArmor extends Armor
     public RendelithicArmor(IPlayer player)
     {
         super(player);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithNightVision();
         nauseaEffect = new NauseaNegativeEffect(player, this, NAUSEA_NEGATIVE_EFFECT_DURATION).showIcon();
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_NEGATIVE_EFFECT_AMPLIFIER, SLOWNESS_NEGATIVE_EFFECT_DURATION);
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
@@ -46,6 +48,7 @@ public class RendelithicArmor extends Armor
     @Override
     protected void updateAvailability()
     {
+        nightVisionEffect.updateAvailability();
         jumpEffect.updateAvailability();
         nauseaEffect.updateAvailability();
         jumpNegativeEffect.updateAvailability();
@@ -56,6 +59,7 @@ public class RendelithicArmor extends Armor
     @Override
     protected void updateEffectStates()
     {
+        nightVisionEffect.updateSwitchState();
         jumpEffect.updateSwitchState();
         slowFallingEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
@@ -64,6 +68,7 @@ public class RendelithicArmor extends Armor
     @Override
     protected void updateActivityForHeadSlot()
     {
+        nightVisionEffect.updateActivity();
     }
 
     @Override
@@ -164,6 +169,11 @@ public class RendelithicArmor extends Armor
     @Override
     public void onKeyInputEvent(String pressedKeyDescription)
     {
+        if (pressedKeyDescription.equals(KeyRegistry.NIGHT_VISION.getName()))
+        {
+            nightVisionEffect.trySwitch();
+        }
+
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
             jumpEffect.trySwitch(getJumpBoostAmplifier());
