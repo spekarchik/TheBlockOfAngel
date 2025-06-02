@@ -25,7 +25,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:lapis_helmet"
+                                                                        "items":  "angelblock:lapis_helmet_with_detector"
                                                                     }
                                                                 ]
                                                   }

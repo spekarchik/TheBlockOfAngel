@@ -19,6 +19,7 @@ public interface IPlayer extends IPlayerEvents
     boolean isAnyArmorElementPutOn(IArmor armor);
     boolean isAnyArmorElementInclBrokenPutOn(IArmor armor);
     boolean isHelmetModifiedWithDetector(IArmor armor);
+    boolean isHelmetModifiedWithNightVision(IArmor armor);
     boolean isChestPlateModifiedWithStrengthBooster(IArmor armor);
     boolean isChestPlateModifiedWithLuck(IArmor armor);
     boolean isChestPlateModifiedWithSlowFalling(IArmor armor);

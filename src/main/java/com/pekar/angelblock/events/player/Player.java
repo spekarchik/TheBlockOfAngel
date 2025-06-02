@@ -115,6 +115,16 @@ public class Player implements IPlayer
     }
 
     @Override
+    public boolean isHelmetModifiedWithNightVision(IArmor armor)
+    {
+        var itemStack = getEntity().getItemBySlot(EquipmentSlot.HEAD);
+        var item = itemStack.getItem();
+        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!areTheSameFamily(armor, armorItem)) return false;
+        return armorItem.isModifiedWithNightVision();
+    }
+
+    @Override
     public boolean areLeggingsModifiedWithHealthRegenerator(IArmor armor)
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.LEGS);

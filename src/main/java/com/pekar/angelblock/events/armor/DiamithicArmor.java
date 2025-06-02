@@ -31,7 +31,7 @@ public class DiamithicArmor extends Armor
     {
         super(player);
         strengthEffect = new StrengthPermanentArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithDetector();
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 2);
         hasteEffect = new HastePermanentArmorEffect(player, this);
         slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable);

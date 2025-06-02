@@ -88,6 +88,11 @@ public class ModArmor extends Item
         return armorModificatorSet.contains(ArmorModifications.Detector);
     }
 
+    public final boolean isModifiedWithNightVision()
+    {
+        return armorModificatorSet.contains(ArmorModifications.NightVision);
+    }
+
     public final boolean isModifiedWithHealthRegenerator()
     {
         return armorModificatorSet.contains(ArmorModifications.Regenerator);
@@ -126,6 +131,12 @@ public class ModArmor extends Item
     public final ModArmor withDetector()
     {
         armorModificatorSet.add(ArmorModifications.Detector);
+        return this;
+    }
+
+    public final ModArmor withNightVision()
+    {
+        armorModificatorSet.add(ArmorModifications.NightVision);
         return this;
     }
 

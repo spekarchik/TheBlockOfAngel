@@ -9,5 +9,6 @@ public enum ArmorModifications
     SeaPower,
     Elytra,
     Luck,
-    JumpBooster
+    JumpBooster,
+    NightVision
 }

@@ -15,6 +15,7 @@ public interface IEffectSetup<T extends IArmorEffect>
 
     T alwaysAvailable();
     T availableOnHelmetWithDetector();
+    T availableOnHelmetWithNightVision();
     T availableOnBootsWithJumpBooster();
     T availableOnBootsWithSeaPower();
     T availableOnChestPlateWithStrengthBooster();

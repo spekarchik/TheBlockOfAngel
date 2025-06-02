@@ -77,6 +77,9 @@ public class CustomSmithingMenu extends SmithingMenu
                 if (armor.isModifiedWithDetector() && (!isResultModArmor || !resultAsModArmor.isModifiedWithDetector()))
                     player.getInventory().add(new ItemStack(Blocks.CALIBRATED_SCULK_SENSOR));
 
+                if (armor.isModifiedWithNightVision() && (!isResultModArmor || !resultAsModArmor.isModifiedWithNightVision()))
+                    player.getInventory().add(new ItemStack(ItemRegistry.GUARDIAN_EYE.get()));
+
                 if (armor.isModifiedWithStrengthBooster() && (!isResultModArmor || !resultAsModArmor.isModifiedWithStrengthBooster()))
                     player.getInventory().add(new ItemStack(ItemRegistry.STRENGTH_PEARL.get()));
 

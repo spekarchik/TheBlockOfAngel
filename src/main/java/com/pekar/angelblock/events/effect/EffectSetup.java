@@ -57,6 +57,12 @@ interface EffectSetup<T extends IArmorEffect> extends IEffectSetup<T>
         return getSelf();
     }
 
+    default T availableOnHelmetWithNightVision()
+    {
+        setAvailabilityPredicate(IPlayer::isHelmetModifiedWithNightVision);
+        return getSelf();
+    }
+
     default T availableOnBootsWithJumpBooster()
     {
         setAvailabilityPredicate(IPlayer::areBootsModifiedWithJumpBooster);

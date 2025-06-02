@@ -1,7 +1,7 @@
 {
     "type": "minecraft:smithing_transform",
     "base": "angelblock:lapis_helmet",
-    "addition": "minecraft:sculk_sensor",
+    "addition": "angelblock:guardian_eye",
     "result": {
         "id": "angelblock:lapis_helmet_with_detector"
     },
