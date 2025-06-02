@@ -30,7 +30,7 @@ public class LapisArmor extends Armor
     public LapisArmor(IPlayer player)
     {
         super(player);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithNightVision();
         glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
         waterBreathingEffect = new WaterBreathingPermanentEffect(player, this);
         hasteEffect = new HastePermanentArmorEffect(player, this);

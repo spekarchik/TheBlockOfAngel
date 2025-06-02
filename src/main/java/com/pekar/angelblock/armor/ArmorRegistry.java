@@ -27,8 +27,8 @@ public class ArmorRegistry
             (m, t, p) -> new RendelithicArmor(m, t, p).withJumpBooster());
 
     public static final DeferredItem<ModArmor> LAPIS_HELMET = registerArmor("lapis_helmet", ModArmorMaterial.LAPIS, ArmorType.HELMET, ModArmor::new);
-    public static final DeferredItem<ModArmor> LAPIS_HELMET_WITH_DETECTOR = registerArmor("lapis_helmet_with_detector", ModArmorMaterial.LAPIS2, ArmorType.HELMET,
-            (m, t, p) -> new ModArmor(m, t, p).withDetector());
+    public static final DeferredItem<ModArmor> LAPIS_HELMET_WITH_NIGHT_VISION = registerArmor("lapis_helmet_with_detector", ModArmorMaterial.LAPIS2, ArmorType.HELMET,
+            (m, t, p) -> new ModArmor(m, t, p).withNightVision());
     public static final DeferredItem<ModArmor> LAPIS_CHESTPLATE = registerArmor("lapis_chestplate", ModArmorMaterial.LAPIS, ArmorType.CHESTPLATE, ModArmor::new);
     public static final DeferredItem<ModArmor> LAPIS_CHESTPLATE_WITH_STRENGTH = registerArmor("lapis_chestplate_with_strength", ModArmorMaterial.LAPIS2, ArmorType.CHESTPLATE,
             (m, t, p) -> new ModArmor(m, t, p).withStrengthBooster());

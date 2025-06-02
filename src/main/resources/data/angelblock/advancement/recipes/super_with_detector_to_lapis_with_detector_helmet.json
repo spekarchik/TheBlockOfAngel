@@ -15,7 +15,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:lapis_helmet"
+                                                                        "items":  "angelblock:lapis_helmet_with_detector"
                                                                     }
                                                                 ]
                                                   }
@@ -25,7 +25,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:super_helmet"
+                                                                        "items":  "angelblock:super_helmet_with_detector"
                                                                     }
                                                                 ]
                                                   }
@@ -44,7 +44,7 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:super_to_lapis_helmet"
+                                    "angelblock:super_with_detector_to_lapis_with_detector_helmet"
                                 ]
                 },
     "requirements":  [
