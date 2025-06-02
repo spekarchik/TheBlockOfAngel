@@ -9,7 +9,6 @@ public class NightVisionSwitchingArmorEffect extends SwitchingArmorEffect
     public NightVisionSwitchingArmorEffect(IPlayer player, IArmor armor)
     {
         super(player, armor, MobEffects.NIGHT_VISION, 0);
-        availableOnHelmetWithDetector();
         showIcon();
     }
 }

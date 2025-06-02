@@ -1,7 +1,7 @@
 {
     "type": "minecraft:smithing_transform",
     "base": {
-        "item": "angelblock:lapis_helmet"
+        "item": "angelblock:lapis_helmet_with_detector"
     },
     "addition": {
         "item": "angelblock:super_plate"

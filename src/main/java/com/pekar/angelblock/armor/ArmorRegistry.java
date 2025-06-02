@@ -23,8 +23,8 @@ public class ArmorRegistry
 
     public static final DeferredItem<ModArmor> LAPIS_HELMET = Main.ITEMS.register("lapis_helmet", () ->
             new ModArmor(ModArmorMaterial.LAPIS, ArmorItem.Type.HELMET));
-    public static final DeferredItem<ModArmor> LAPIS_HELMET_WITH_DETECTOR = Main.ITEMS.register("lapis_helmet_with_detector", () ->
-            new ModArmor(ModArmorMaterial.LAPIS2, ArmorItem.Type.HELMET).withDetector());
+    public static final DeferredItem<ModArmor> LAPIS_HELMET_WITH_NIGHT_VISION = Main.ITEMS.register("lapis_helmet_with_detector", () ->
+            new ModArmor(ModArmorMaterial.LAPIS2, ArmorItem.Type.HELMET).withNightVision());
     public static final DeferredItem<ModArmor> LAPIS_CHESTPLATE = Main.ITEMS.register("lapis_chestplate", () ->
             new ModArmor(ModArmorMaterial.LAPIS, ArmorItem.Type.CHESTPLATE));
     public static final DeferredItem<ModArmor> LAPIS_CHESTPLATE_WITH_STRENGTH = Main.ITEMS.register("lapis_chestplate_with_strength", () ->
