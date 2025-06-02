@@ -1,3 +1,14 @@
+## 📦 Version 2.4.0
+
+### 🛠️ Changed
+- **Aquarite Helmet with Night Vision**: now uses **Elder Guardian Eye** for the Night Vision modification instead of **Calibrated Sculk Sensor**.
+- ⚠️ **Compatibility note**: Previously crafted **Aquarite Helmets with Night Vision** used **Calibrated Sculk Sensor**. After this update, disassembling such helmets with a **Downgrade Smithing Kit** will return an **Elder Guardian Eye** instead of the original **Calibrated Sculk Sensor**.
+- The mod has been adapted to the release of **NeoForge 21.5.75**. Compatibility with earlier beta NeoForge versions has been retained.
+
+### ✨ Added
+- **Rendelite Helmet with Night Vision** has been added. This is a modified version of the **Rendelite Helmet**, crafted using an **Elder Guardian Eye**.
+
+
 ## 📦 Version 2.3.3
 
 ### 🐞 Fixes
