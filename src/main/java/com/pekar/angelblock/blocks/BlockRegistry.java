@@ -59,7 +59,7 @@ public class BlockRegistry
                     .lightLevel(state -> 15));
 
     public static final DeferredBlock<Block> GREEN_DIAMOND_ORE = register("green_diamond_ore", GreenDiamondBlock::new, GreenDiamondOreBlockItem::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE).strength(1F).lightLevel(state -> 3)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE).strength(1F).lightLevel(state -> 6)
                     .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> GUNPOWDER_BLOCK = register("gunpowder_block", GunpowderBlock::new, GunpowderBlockItem::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).sound(SoundType.SNOW).strength(0.2F));
