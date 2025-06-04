@@ -62,6 +62,7 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
         addToMonsterMap(Monsters.Evoker);
         addToMonsterMap(Monsters.Ravager);
         addToMonsterMap(Monsters.Piglin);
+        addToMonsterMap(Monsters.Breeze);
         //addToMonsterMap(Monsters.Husk);
         //addToMonsterMap(Monsters.Pillager);
     }

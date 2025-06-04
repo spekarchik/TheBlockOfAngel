@@ -39,9 +39,9 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
 
         if (Screen.hasShiftDown())
         {
-            for (int i = 1; i <= 19; i++)
+            for (int i = 1; i <= 20; i++)
             {
-                tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 3).styledAs(TextStyle.Notice, i == 17).styledAs(TextStyle.DarkGray, i == 18).apply();
+                tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 3).styledAs(TextStyle.Notice, i == 18).styledAs(TextStyle.DarkGray, i == 19).apply();
             }
 
             tooltip.addEmptyLine();
