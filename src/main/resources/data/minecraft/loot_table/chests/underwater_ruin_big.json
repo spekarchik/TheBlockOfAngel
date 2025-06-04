@@ -42,16 +42,6 @@
           ],
           "name": "minecraft:iron_ingot"
         },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "angelblock:lapis_armor_upgrade_kit"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "angelblock:lapis_tool_upgrade_kit"
-        },
 		{
           "type": "minecraft:item",
           "weight": 1,
@@ -62,9 +52,33 @@
             }
           ],
           "name": "minecraft:turtle_helmet"
-		}
+		},
+        {
+          "type": "minecraft:empty",
+          "weight": 2
+        }
 	  ]
 	},
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "angelblock:lapis_armor_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "angelblock:lapis_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 2
+        }
+      ]
+    },
     {
       "bonus_rolls": 0.0,
       "entries": [

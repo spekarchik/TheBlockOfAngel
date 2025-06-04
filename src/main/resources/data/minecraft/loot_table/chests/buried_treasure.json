@@ -17,10 +17,6 @@
         {
           "type": "minecraft:item",
           "name": "angelblock:super_tool_upgrade_kit"
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 1
         }
       ]
     },
