@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
-public class AngelRodBlock extends ModBlockWithDoubleHoverText implements EntityBlock
+public class AngelRodBlock extends ModBlock implements EntityBlock
 {
     private static final VoxelShape SHAPE_X = Shapes.create(0.328125, 0.0, 0.46875, 0.671875, 1.21875, 0.53125);
     private static final VoxelShape SHAPE_Z = Shapes.create(0.46875, 0.0, 0.328125, 0.53125, 1.21875, 0.671875);
