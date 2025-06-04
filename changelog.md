@@ -1,3 +1,15 @@
+## 📦 Version 2.5.0
+
+### ✨ Added
+- **Breeze** can now be added to the **Block of Angel** filter using a **Breeze Rod** (to prevent this type of monster from despawning).
+- **Breeze** can be spawned by using a **Breeze Rod** on the **Block of Devil**.
+
+### 🛠️ Changed
+- Tooltips for the **Block of Angel** and **Block of Devil** have been updated with **Breeze**, and their monster lists have been completely rearranged.
+- Increased chances of **Smithing Upgrade Kits** generating in the following chests: **Buried Treasure**, **Nether Bridge**, **Underwater Ruin**, **Woodland Mansion**.
+- **Green Diamond Ore**: light level increased from 3 to 6.
+
+
 ## 📦 Version 2.4.0
 
 ### 🛠️ Changed
