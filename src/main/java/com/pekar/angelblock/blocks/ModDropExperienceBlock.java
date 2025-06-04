@@ -9,11 +9,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ModDropExperienceBlockWithHoverText extends ModBlockWithHoverText
+public abstract class ModDropExperienceBlock extends ModBlock
 {
     private final IntProvider xpRange;
 
-    public ModDropExperienceBlockWithHoverText(Properties properties)
+    public ModDropExperienceBlock(Properties properties)
     {
         super(properties);
         this.xpRange = getXpRange();

@@ -1,13 +1,7 @@
 package com.pekar.angelblock.blocks;
 
-import com.pekar.angelblock.utils.Utils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -24,9 +18,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
-public class NetherBarsBlock extends ModBlockWithDoubleHoverText
+public class NetherBarsBlock extends ModBlock
 {
     private static final VoxelShape HITBOX_WEST_EAST = Shapes.box(
             0.0 / 16.0, 0.0 / 16.0, 7.0 / 16.0,
@@ -93,9 +85,9 @@ public class NetherBarsBlock extends ModBlockWithDoubleHoverText
     public static final BooleanProperty WEST = BlockStateProperties.WEST;
     public static final BooleanProperty EAST = BlockStateProperties.EAST;
 
-    public NetherBarsBlock()
+    public NetherBarsBlock(Properties properties)
     {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS).strength(10F, 1200F).requiresCorrectToolForDrops());
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(NORTH, false)
                 .setValue(SOUTH, false)
@@ -168,14 +160,5 @@ public class NetherBarsBlock extends ModBlockWithDoubleHoverText
     private boolean connectsTo(BlockState state, LevelAccessor level, BlockPos pos)
     {
         return (state.getBlock() instanceof NetherBarsBlock) || (state.isSolidRender(level, pos));
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        if (!Utils.instance.text.showExtendedDescription(tooltipComponents)) return;
-
-        tooltipComponents.add(getDisplayName(1).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
-        tooltipComponents.add(getDisplayName(2).withStyle(ChatFormatting.DARK_GRAY));
     }
 }
