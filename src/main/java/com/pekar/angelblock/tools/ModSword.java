@@ -223,7 +223,7 @@ public abstract class ModSword extends Item implements IModTool
         if (level.isEmptyBlock(posAbove)) return true;
 
         var blockStateAbove = level.getBlockState(posAbove);
-        return blockStateAbove.is(BlockTags.REPLACEABLE) && !blockStateAbove.is(Blocks.WATER);
+        return blockStateAbove.is(BlockTags.REPLACEABLE) && !blockStateAbove.is(Blocks.WATER) && !blockStateAbove.is(Blocks.LAVA);
     }
 
     protected final void trySetFire(Level level, BlockPos pos)
