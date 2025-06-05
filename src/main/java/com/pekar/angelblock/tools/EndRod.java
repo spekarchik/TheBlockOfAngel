@@ -53,7 +53,7 @@ public class EndRod extends AmethystRod
 
             if (facing == Direction.UP)
             {
-                if (block == Blocks.END_STONE)
+                if (block == Blocks.END_STONE && level.isEmptyBlock(pos.above()))
                 {
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, hand, facing, Blocks.CHORUS_FLOWER);

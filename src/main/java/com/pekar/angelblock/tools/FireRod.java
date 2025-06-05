@@ -53,7 +53,7 @@ public class FireRod extends MarineRod
 
             if (facing == Direction.UP)
             {
-                if (block == Blocks.SOUL_SAND)
+                if (block == Blocks.SOUL_SAND && level.isEmptyBlock(pos.above()))
                 {
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, interactionHand, facing, Blocks.NETHER_WART);
