@@ -119,7 +119,7 @@ public class AncientRod extends MagneticRod
             var facing = context.getClickedFace();
             var itemRand = new Random();
 
-            if (facing == Direction.UP)
+            if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
             {
                 if (utils.blocks.conditions.canSustainSugarCane(level, pos))
                 {

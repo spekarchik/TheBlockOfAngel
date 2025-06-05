@@ -52,7 +52,7 @@ public class MarineRod extends AncientRod
             {
                 BlockPos upPos = pos.above();
 
-                if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
+                if ((level.isWaterAt(upPos) && !level.getBlockState(upPos).getFluidState().isSource()) || ((level.isEmptyBlock(upPos))
                         && ((utils.blocks.types.isFarmTypeBlock(level, upPos.north()) && utils.blocks.types.isFarmTypeBlock(level, upPos.south()))
                         || (utils.blocks.types.isFarmTypeBlock(level, upPos.east()) && utils.blocks.types.isFarmTypeBlock(level, upPos.west())))))
                 {
