@@ -1,3 +1,10 @@
+## 📦 Version 2.5.1
+
+### 🐞 Fixes
+- Fixed the behavior of rods underwater: they can no longer plant underwater, and now correctly transform **Diamond Ore Block** into **Green Diamond Ore Block** when used on underwater blocks.
+- Fixed the behavior of swords underwater: they can no longer apply their effects (planting cacti, placing cobwebs, or setting fire) on underwater blocks.
+
+
 ## 📦 Version 2.5.0
 
 ### ✨ Added
