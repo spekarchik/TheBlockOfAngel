@@ -217,12 +217,18 @@ public class ModSword extends Item implements IModTool
         // nothing by default
     }
 
+    protected boolean allowsApplyEffect(Level level, BlockPos clickedPos)
+    {
+        var posAbove = clickedPos.above();
+        if (level.isEmptyBlock(posAbove)) return true;
+
+        var blockStateAbove = level.getBlockState(posAbove);
+        return blockStateAbove.is(BlockTags.REPLACEABLE) && !blockStateAbove.is(Blocks.WATER);
+    }
+
     protected final void trySetFire(Level level, BlockPos pos)
     {
-        if (!level.isEmptyBlock(pos.above()) && !level.getBlockState(pos.above()).is(BlockTags.REPLACEABLE))
-        {
-            return;
-        }
+        if (!allowsApplyEffect(level, pos)) return;
 
         if (!level.isClientSide)
         {
@@ -233,7 +239,7 @@ public class ModSword extends Item implements IModTool
     protected final void setWeb(Player player, Level level, BlockPos pos)
     {
         if (level.isClientSide) return;
-        if (!level.isEmptyBlock(pos) && !level.getBlockState(pos).is(BlockTags.REPLACEABLE)) return;
+        if (!allowsApplyEffect(level, pos.below())) return;
 
         level.setBlock(pos, Blocks.COBWEB.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         int increment = Utils.random.nextInt(TimeThreshold);
@@ -287,7 +293,7 @@ public class ModSword extends Item implements IModTool
     {
         BlockState state = level.getBlockState(pos);
         Block block = state.getBlock();
-        if (block != Blocks.SAND || (!level.isEmptyBlock(pos.above()) && !level.getBlockState(pos.above()).is(BlockTags.REPLACEABLE))
+        if (block != Blocks.SAND || !allowsApplyEffect(level, pos)
                 || !level.isEmptyBlock(pos.above(2)) || !level.isEmptyBlock(pos.above(3)))
         {
             return false;
@@ -311,7 +317,7 @@ public class ModSword extends Item implements IModTool
         ItemStack itemstack = player.getItemInHand(hand);
         BlockState state = level.getBlockState(pos);
         if (facing == Direction.UP
-                && (level.isEmptyBlock(pos.above()) || level.getBlockState(pos.above()).is(BlockTags.REPLACEABLE))
+                && (allowsApplyEffect(level, pos))
                 && !state.getBlock().canSustainPlant(state, level, pos, Direction.UP, Blocks.CACTUS.defaultBlockState()).isFalse() // Blocks.CACTUS.defaultBlockState() -> age == 0
                 )
         {
