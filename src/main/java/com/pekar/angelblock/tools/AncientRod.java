@@ -122,7 +122,7 @@ public class AncientRod extends MagneticRod
             var facing = context.getClickedFace();
             var itemRand = new Random();
 
-            if (facing == Direction.UP)
+            if (facing == Direction.UP && level.isEmptyBlock(pos.above()))
             {
                 if (utils.blocks.conditions.isNearWaterHorizontal(level, pos) && (block == Blocks.DIRT || block == Blocks.COARSE_DIRT
                         || block == Blocks.GRASS_BLOCK || block == Blocks.PODZOL || utils.blocks.types.isSandBlock(block)
