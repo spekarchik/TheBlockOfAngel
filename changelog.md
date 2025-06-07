@@ -4,6 +4,10 @@
 - Tannery chest loot table updated: now **any** armor upgrade kit can be generated  
   *(Since no armorer workshops in vanilla villages contain a chest, armor upgrade kits — including those for non-leather armor — can now be found in tannery chests instead.)*
 
+### 📝 Improvements
+- Added details regarding the SuperJump effect to Superite Armor tooltip  
+  *(Clarifies that the first jump is normal, and Super Jump activates only on a second jump within 1 second.)*
+
 
 ## 📦 Version 2.5.1
 
