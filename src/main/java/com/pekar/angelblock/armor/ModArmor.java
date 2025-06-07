@@ -198,7 +198,7 @@ public class ModArmor extends Item implements ITooltipProvider
 
         tooltip.ignoreEmptyLines();
 
-        for (int i = 1; i <= 12; i++)
+        for (int i = 1; i <= 13; i++)
         {
             tooltip.addLine(getCommonDescriptionRoot(), i).styledAs(TextStyle.Header, i == 5).styledAs(TextStyle.DarkGray, i >= 10).apply();
         }
