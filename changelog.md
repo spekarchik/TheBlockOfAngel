@@ -1,3 +1,10 @@
+## 📦 Version 2.6.0
+
+### 🛠️ Changed
+- Tannery chest loot table updated: now **any** armor upgrade kit can be generated  
+  *(Since no armorer workshops in vanilla villages contain a chest, armor upgrade kits — including those for non-leather armor — can now be found in tannery chests instead.)*
+
+
 ## 📦 Version 2.5.1
 
 ### 🐞 Fixes
