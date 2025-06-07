@@ -175,7 +175,7 @@ public class ModArmor extends ArmorItem
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 1; i <= 12; i++)
+        for (int i = 1; i <= 13; i++)
         {
             var component = getCommonDescription(i, i == 5, false, false, false, i >= 10);
             if (!component.getString().isEmpty())
