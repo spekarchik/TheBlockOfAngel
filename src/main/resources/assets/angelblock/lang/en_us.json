@@ -19,6 +19,7 @@
   "angelblock.rendelithic_armor.desc10": "Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
   "angelblock.rendelithic_armor.desc11": "",
   "angelblock.rendelithic_armor.desc12": "",
+  "angelblock.rendelithic_armor.desc13": "",
 
   "angelblock.diamithic_armor.desc1": "§f§lPurpose:§r§7 For boss fights, a versatile armor. Excellent protection, decent functionality. Heavy",
   "angelblock.diamithic_armor.desc2": "§f§lWeaknesses:§r§7 bites from spiders, silverfish, or bees §o(double damage)",
@@ -32,6 +33,7 @@
   "angelblock.diamithic_armor.desc10": "Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
   "angelblock.diamithic_armor.desc11": "",
   "angelblock.diamithic_armor.desc12": "",
+  "angelblock.diamithic_armor.desc13": "",
 
   "angelblock.lapis_armor.desc1": "§f§lPurpose:§r§7 Designed for underwater survival. Good protection. Sensitive to extreme temperatures",
   "angelblock.lapis_armor.desc2": "§f§lWeaknesses:§r§7 fire, magma, and lava: +20% damage; freezing: +100% damage",
@@ -45,6 +47,7 @@
   "angelblock.lapis_armor.desc10": "Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
   "angelblock.lapis_armor.desc11": "Chance to spawn a rare axolotl increases to 1/100 if a player or mob in full set of Aquarite Armor is within 8 blocks",
   "angelblock.lapis_armor.desc12": "",
+  "angelblock.lapis_armor.desc13": "",
 
   "angelblock.limonite_armor.desc1": "§f§lPurpose:§r§7 Universal armor. Moderate protection, average durability, wide range of abilities. Suitable for forests, jungles, snowy biomes, mountains, and caves",
   "angelblock.limonite_armor.desc2": "§f§lWeaknesses:§r§7 Wither, Wind Charge, and explosions: +50% damage",
@@ -58,6 +61,7 @@
   "angelblock.limonite_armor.desc10": "Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
   "angelblock.limonite_armor.desc11": "Slows nearby attackers; ignites distant ones",
   "angelblock.limonite_armor.desc12": "",
+  "angelblock.limonite_armor.desc13": "",
 
   "angelblock.super_armor.desc1": "§f§lPurpose:§r§7 Replaces any armor by combining all its advantages. The best choice for boss fights and as a universal set",
   "angelblock.super_armor.desc2": "§f§lWeaknesses:§r§7 Normal visibility to creepers (unlike Lymonite armor)",
@@ -71,6 +75,7 @@
   "angelblock.super_armor.desc10": "Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
   "angelblock.super_armor.desc11": "Slows nearby attackers; ignites distant ones",
   "angelblock.super_armor.desc12": "When the player is standing on the ground, activating Slow Fall together with Jump Boost grants the Levitation effect. Reactivating Slow Fall disables Levitation",
+  "angelblock.super_armor.desc13": "Super Jump activates on a second jump within 1 second after the first. The first jump is normal, allowing you to clear low obstacles without triggering the Super Jump.",
 
   "angelblock.flying_armor.desc1": "§f§lPurpose:§r§7 Flight and fast travel. Very low protection and durability. Cannot be enchanted",
   "angelblock.flying_armor.desc2": "§f§lWeaknesses:§r§7 Very low protection",
@@ -84,6 +89,7 @@
   "angelblock.flying_armor.desc10": "Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
   "angelblock.flying_armor.desc11": "Flight is only possible when wearing the full armor set",
   "angelblock.flying_armor.desc12": "",
+  "angelblock.flying_armor.desc13": "",
 
   "item.angelblock.rendelithic_boots": "Rendelite Boots",
   "item.angelblock.rendelithic_boots.desc1": "Boots stats",
