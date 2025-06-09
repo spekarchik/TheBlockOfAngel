@@ -28,7 +28,10 @@ public class ModArmor extends ArmorItem
 
     protected ModArmor(ModArmorMaterial material, Type armorItemType)
     {
-        super(material.getMaterial(), armorItemType, new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
+        super(material.getMaterial(), armorItemType,
+                material.isFireResistant()
+                ? new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())).fireResistant()
+                : new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
         this.material = material;
         this.armorItemType = armorItemType;
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
