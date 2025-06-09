@@ -33,23 +33,23 @@ public class ItemRegistry
     public static final DeferredItem<Item> SUPER_PLATE = Main.ITEMS.register("super_plate", () -> new ModItem());
     public static final DeferredItem<Item> FLYING_PLATE = Main.ITEMS.register("flying_plate", () -> new ModItem());
 
-    public static final DeferredItem<Item> RENDELITHIC_ARMOR_UPGRADE_KIT = Main.ITEMS.register("rendelithic_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> DIAMITHIC_ARMOR_UPGRADE_KIT = Main.ITEMS.register("diamithic_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> LAPIS_ARMOR_UPGRADE_KIT = Main.ITEMS.register("lapis_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> LIMONITE_ARMOR_UPGRADE_KIT = Main.ITEMS.register("limonite_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> SUPER_ARMOR_UPGRADE_KIT = Main.ITEMS.register("super_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> DIAMOND_ARMOR_UPGRADE_KIT = Main.ITEMS.register("diamond_armor_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> FLYING_ARMOR_UPGRADE_KIT = Main.ITEMS.register("flying_armor_upgrade_kit", FlyingArmorUpgradeKit::new);
+    public static final DeferredItem<Item> RENDELITHIC_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("rendelithic_armor_upgrade_kit", ModArmorUpgradeKit::new);
+    public static final DeferredItem<Item> DIAMITHIC_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("diamithic_armor_upgrade_kit", ModArmorUpgradeKit::new);
+    public static final DeferredItem<Item> LAPIS_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("lapis_armor_upgrade_kit", ModArmorUpgradeKit::new);
+    public static final DeferredItem<Item> LIMONITE_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("limonite_armor_upgrade_kit", ModArmorUpgradeKit::new);
+    public static final DeferredItem<Item> SUPER_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("super_armor_upgrade_kit", ModArmorUpgradeKit::new);
+    public static final DeferredItem<Item> DIAMOND_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("diamond_armor_upgrade_kit", DiamondArmorUpgradeKit::new);
+    public static final DeferredItem<Item> FLYING_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("flying_armor_upgrade_kit", ModArmorUpgradeKit::new);
 
-    public static final DeferredItem<Item> RENDELITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.register("rendelithic_tool_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> DIAMITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.register("diamithic_tool_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> LAPIS_TOOL_UPGRADE_KIT = Main.ITEMS.register("lapis_tool_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> LIMONITE_TOOL_UPGRADE_KIT = Main.ITEMS.register("limonite_tool_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> SUPER_TOOL_UPGRADE_KIT = Main.ITEMS.register("super_tool_upgrade_kit", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> DIAMOND_TOOL_UPGRADE_KIT = Main.ITEMS.register("diamond_tool_upgrade_kit", () -> new ModItemWithDoubleHoverText());
+    public static final DeferredItem<Item> RENDELITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("rendelithic_tool_upgrade_kit", ModToolUpgradeKit::new);
+    public static final DeferredItem<Item> DIAMITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("diamithic_tool_upgrade_kit", ModToolUpgradeKit::new);
+    public static final DeferredItem<Item> LAPIS_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("lapis_tool_upgrade_kit", ModToolUpgradeKit::new);
+    public static final DeferredItem<Item> LIMONITE_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("limonite_tool_upgrade_kit", ModToolUpgradeKit::new);
+    public static final DeferredItem<Item> SUPER_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("super_tool_upgrade_kit", ModToolUpgradeKit::new);
+    public static final DeferredItem<Item> DIAMOND_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("diamond_tool_upgrade_kit", DiamondToolUpgradeKit::new);
 
-    public static final DeferredItem<Item> ROD_UPGRADE_KIT = Main.ITEMS.register("rod_upgrade_kit", RodUpgradeKit::new);
-    public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.register("downgrade_kit", () -> new ModItemWithDoubleHoverText());
+    public static final DeferredItem<Item> ROD_UPGRADE_KIT = Main.ITEMS.registerItem("rod_upgrade_kit", RodUpgradeKit::new);
+    public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.registerItem("downgrade_kit", DowngradeKit::new);
 
     public static final DeferredItem<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> BASALT_FIBER = Main.ITEMS.register("basalt_fiber", () -> new ModItem());
