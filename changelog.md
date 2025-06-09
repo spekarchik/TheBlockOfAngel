@@ -4,7 +4,6 @@
 - **Rendelite** and **Superyte** armor are now fire-resistant — they no longer take damage from fire.
 
 ### 🐞 Fixes
-- **Aerite armor** can no longer be enchanted via the Enchanting Table.
 - **Rendelite Helmet with Night Vision** can now be enchanted via the Enchanting Table.
 
 
