@@ -33,6 +33,7 @@ public class ModArmorMaterial
     private final float knockbackResistance;
     private final Holder<SoundEvent> equipmentSound;
     private final TagKey<Item> repairIngredient;
+    private final boolean isFireResistant;
 
     public static final String RENDELITHIC_MATERIAL_NAME = "rendelithic";
     public static final String LIMONITE_MATERIAL_NAME = "limonite";
@@ -45,22 +46,22 @@ public class ModArmorMaterial
 
     protected static final ModArmorMaterial RENDELITHIC = new ModArmorMaterial(RENDELITHIC_MATERIAL_NAME, "rendelithic_armor",
             createArmorTypeMap(3, 7, 9, 3, 7),
-            25, 0F, 0F, 11, SoundEvents.ARMOR_EQUIP_GOLD, ItemRegistry.RENDELITHIC_INGOT_TAG);
+            25, 0F, 0F, 11, SoundEvents.ARMOR_EQUIP_GOLD, ItemRegistry.RENDELITHIC_INGOT_TAG, true);
     protected static final ModArmorMaterial LIMONITE = new ModArmorMaterial(LIMONITE_MATERIAL_NAME, "limonite_armor",
             createArmorTypeMap(2, 5, 7, 3, 3),
-            30, 1F, 0F, 23, SoundEvents.ARMOR_EQUIP_LEATHER, ItemRegistry.LIMONITE_INGOT_TAG);
+            30, 1F, 0F, 23, SoundEvents.ARMOR_EQUIP_LEATHER, ItemRegistry.LIMONITE_INGOT_TAG, false);
     protected static final ModArmorMaterial LAPIS = new ModArmorMaterial(LAPIS_MATERIAL_NAME, "lapis_armor",
             createArmorTypeMap(3, 6, 8, 3, 11),
-            10, 0F, 0F,40, SoundEvents.ARMOR_EQUIP_DIAMOND, ItemRegistry.LAPIS_INGOT_TAG);
+            10, 0F, 0F,40, SoundEvents.ARMOR_EQUIP_DIAMOND, ItemRegistry.LAPIS_INGOT_TAG, false);
     protected static final ModArmorMaterial DIAMITHIC = new ModArmorMaterial(DIAMITHIC_MATERIAL_NAME, "diamithic_armor",
             createArmorTypeMap(3, 7, 9, 3, 11),
-            14, 3F, 0.2F, 45, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.DIAMITHIC_INGOT_TAG);
+            14, 3F, 0.2F, 45, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.DIAMITHIC_INGOT_TAG, false);
     protected static final ModArmorMaterial SUPER = new ModArmorMaterial(SUPER_MATERIAL_NAME, "super_armor",
             createArmorTypeMap(5, 9, 11, 5, 15),
-            1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.SUPER_INGOT_TAG);
+            1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.SUPER_INGOT_TAG, true);
     protected static final ModArmorMaterial FLYING = new ModArmorMaterial(FLYING_MATERIAL_NAME, "flying_armor",
             createArmorTypeMap(1, 2, 3, 1, 1),
-            1, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, ItemRegistry.FLYING_INGOT_TAG);
+            1, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, ItemRegistry.FLYING_INGOT_TAG, false);
 
     // other armor models (other textures)
     protected static final ModArmorMaterial RENDELITHIC2 = copyOf(RENDELITHIC, "rendelithic_armor2");
@@ -72,7 +73,7 @@ public class ModArmorMaterial
 
     public ModArmorMaterial(String materialName, String armorModelName, EnumMap<ArmorType, Integer> armorResistanceMap,
                             int enchantmentValue, float toughness, float knockbackResistance, int durabilityMultiplier,
-                            Holder<SoundEvent> equipmentSound, TagKey<Item> repairIngredient)
+                            Holder<SoundEvent> equipmentSound, TagKey<Item> repairIngredient, boolean isFireResistant)
     {
         this.material = createVanillaMaterial(armorModelName, durabilityMultiplier, armorResistanceMap, enchantmentValue, equipmentSound, toughness, knockbackResistance, repairIngredient);
         this.materialName = materialName;
@@ -83,6 +84,7 @@ public class ModArmorMaterial
         this.durabilityMultiplier = durabilityMultiplier;
         this.equipmentSound = equipmentSound;
         this.repairIngredient = repairIngredient;
+        this.isFireResistant = isFireResistant;
     }
 
     public ArmorMaterial getMaterial()
@@ -98,6 +100,11 @@ public class ModArmorMaterial
     public int getDurabilityMultiplier()
     {
         return durabilityMultiplier;
+    }
+
+    public boolean isFireResistant()
+    {
+        return isFireResistant;
     }
 
     @Override
@@ -150,6 +157,7 @@ public class ModArmorMaterial
                 armorMaterial.knockbackResistance,
                 armorMaterial.durabilityMultiplier,
                 armorMaterial.equipmentSound,
-                armorMaterial.repairIngredient);
+                armorMaterial.repairIngredient,
+                armorMaterial.isFireResistant);
     }
 }
