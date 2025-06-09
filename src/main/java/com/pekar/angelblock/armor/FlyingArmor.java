@@ -25,7 +25,6 @@ public class FlyingArmor extends ModArmor
     {
         return getModelName(wearer, EquipmentSlot.FEET)
             .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
-
     }
 
     private String getModelName(LivingEntity entity, EquipmentSlot slot)
