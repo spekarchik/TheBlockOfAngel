@@ -3,10 +3,9 @@ package com.pekar.angelblock.armor;
 import com.pekar.angelblock.utils.TriFunction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Unit;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import static com.pekar.angelblock.Main.ITEMS;
@@ -17,7 +16,6 @@ public class ArmorRegistry
             ModArmorMaterial.RENDELITHIC, ArmorType.HELMET, RendelithicArmor::new);
     public static final DeferredItem<ModArmor> RENDELITHIC_HELMET_WITH_NIGHT_VISION = registerArmor("rendelithic_helmet_with_nv",
             ModArmorMaterial.RENDELITHIC2, ArmorType.HELMET, (m, t, p) -> new RendelithicArmor(m, t, p).withNightVision());
-
     public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE = registerArmor("rendelithic_chestplate", ModArmorMaterial.RENDELITHIC, ArmorType.CHESTPLATE, RendelithicArmor::new);
     public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = registerArmor("rendelithic_chestplate_with_levitation", ModArmorMaterial.RENDELITHIC2, ArmorType.CHESTPLATE,
             (m, t, p) -> new RendelithicArmor(m, t, p).withSlowFalling());
@@ -100,20 +98,8 @@ public class ArmorRegistry
     }
 
     private static DeferredItem<ModArmor> registerArmor(String name, ModArmorMaterial armorMaterial, ArmorType armorType,
-                                                        TriFunction<ModArmorMaterial, ArmorType, Item.Properties, ModArmor> armorProvider)
+                                                        TriFunction<ModArmorMaterial, ArmorType, Item.Properties, ModArmor> armorConstructor)
     {
-        var equipmentSlot = switch (armorType)
-        {
-            case HELMET -> EquipmentSlot.HEAD;
-            case CHESTPLATE -> EquipmentSlot.CHEST;
-            case LEGGINGS -> EquipmentSlot.LEGS;
-            case BOOTS -> EquipmentSlot.FEET;
-            case BODY -> EquipmentSlot.BODY;
-        };
-
-        return ITEMS.registerItem(name, p -> armorProvider.apply(armorMaterial, armorType, p.component(
-                DataComponents.EQUIPPABLE,
-                Equippable.builder(equipmentSlot).setAsset(armorMaterial.getMaterial().assetId())
-                        .build())));
+        return ITEMS.registerItem(name, p -> armorConstructor.apply(armorMaterial, armorType, p));
     }
 }
