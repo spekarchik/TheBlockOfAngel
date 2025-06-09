@@ -1,3 +1,12 @@
+## 📦 Version 2.7.0
+
+### 🛠️ Changed
+- Rednelite, Diamite, Aquarite, Lymonite Armor Upgrade kits: now can be given by a leather worker as a gift when player has the 'Hero of the Village' status.
+- Superyte Armor Upgrade kits: now can be given by an armorer as a gift when player has the 'Hero of the Village' status.
+- Rednelite, Diamite, Aquarite, Lymonite, Superyte Tool Upgrade kits: now can be given by a weaponsmith or a toolsmith as a gift when player has the 'Hero of the Village' status.
+- Armor and Tool Upgrade Kit tooltips have been updated to reflect the changes.
+
+
 ## 📦 Version 2.6.0
 
 ### 🛠️ Changed
