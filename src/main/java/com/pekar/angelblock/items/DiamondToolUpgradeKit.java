@@ -10,9 +10,9 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class RodUpgradeKit extends ModItem implements ITooltipProvider
+public class DiamondToolUpgradeKit extends ModItem implements ITooltipProvider
 {
-    public RodUpgradeKit(Properties properties)
+    public DiamondToolUpgradeKit(Properties properties)
     {
         super(properties);
     }
@@ -28,11 +28,11 @@ public class RodUpgradeKit extends ModItem implements ITooltipProvider
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 1; i <= 3; i++)
+        for (int i = 1; i <= 2; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .withFormatting(ChatFormatting.GOLD, i == 1)
-                    .styledAs(TextStyle.Notice, i > 1)
+                    .styledAs(TextStyle.Notice, i == 2)
                     .apply();
         }
     }
