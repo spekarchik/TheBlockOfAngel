@@ -1,7 +1,6 @@
 package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.utils.Utils;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -66,7 +65,6 @@ public class FlyingArmor extends ModArmor
     {
         return getModelName(wearer, EquipmentSlot.FEET)
             .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
-
     }
 
     private String getModelName(LivingEntity entity, EquipmentSlot slot)
