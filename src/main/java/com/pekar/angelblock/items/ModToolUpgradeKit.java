@@ -11,9 +11,9 @@ import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.function.Consumer;
 
-public class RodUpgradeKit extends ModItem implements ITooltipProvider
+public class ModToolUpgradeKit extends ModItem implements ITooltipProvider
 {
-    public RodUpgradeKit(Properties properties)
+    public ModToolUpgradeKit(Properties properties)
     {
         super(properties);
     }
@@ -33,7 +33,7 @@ public class RodUpgradeKit extends ModItem implements ITooltipProvider
         {
             tooltip.addLine(getDescriptionId(), i)
                     .withFormatting(ChatFormatting.GOLD, i == 1)
-                    .styledAs(TextStyle.Notice, i > 1)
+                    .styledAs(TextStyle.Notice, i == 2 || i == 3)
                     .apply();
         }
     }
