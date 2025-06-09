@@ -34,7 +34,7 @@ public class ModArmor extends Item implements ITooltipProvider
 
     protected ModArmor(ModArmorMaterial material, ArmorType armorItemType, Properties properties)
     {
-        super(properties.humanoidArmor(material.getMaterial(), armorItemType));
+        super(material.isFireResistant() ? properties.humanoidArmor(material.getMaterial(), armorItemType).fireResistant() : properties.humanoidArmor(material.getMaterial(), armorItemType));
         this.material = material;
         this.armorItemType = armorItemType;
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
