@@ -1,3 +1,9 @@
+## 📦 Version 2.8.0
+
+### 🛠️ Changed
+- **Rendelite** and **Superyte** armor are now fire-resistant — they no longer take damage from fire.
+
+
 ## 📦 Version 2.7.0
 
 ### 🛠️ Changed
