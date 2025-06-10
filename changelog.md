@@ -3,6 +3,9 @@
 ### 🛠️ Changed
 - **Rendelite** and **Superyte** armor are now fire-resistant — they no longer take damage from fire.
 
+### 🐞 Fixes
+- Mod armor can no longer be enchanted with non-armor enchantments.
+
 
 ## 📦 Version 2.7.0
 
