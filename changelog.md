@@ -4,13 +4,13 @@
 - **Rendelite** and **Superyte** armor are now fire-resistant — they no longer take damage from fire.
 
 ### 🐞 Fixes
-- **Aerite armor** can no longer be enchanted via the Enchanting Table.
-- **Rendelite Helmet with Night Vision** can now be enchanted via the Enchanting Table.
+- **Aerite armor** can no longer be enchanted via the *Enchanting Table*.
+- **Rendelite Helmet with Night Vision** can now be enchanted via the *Enchanting Table*.
 
 ### 📝 Improvements
-- **Marine Rod** and **Aquarite Hoe** can now place water between **Farmland** and **Grass** blocks.
+- **Marine Rod** and **Aquarite Hoe** can now place water between **Suspicious Gravel** blocks and can not longer place water between **Red Sand** and **Dirt Path** blocks.
 - **Planter** can be enchanted with *Fortune* to harvest more crops.
-- **Planter**, **Builder**, and **Track Layer** no longer consume items from the player's off-hand in Creative mode. These tools use the off-hand stack (e.g., seeds, bone meal, blocks, rails) to apply effects across multiple blocks, but in *Creative mode*, the stack will now remain unchanged.
+- **Planter**, **Builder**, and **Track Layer** no longer consume items from the player's off-hand in *Creative mode*. These tools use the off-hand stack (e.g., seeds, bone meal, blocks, rails) to apply effects across multiple blocks, but in *Creative mode*, the stack will now remain unchanged.
 - **Planter** now only drops crops matching the clicked plant type within its area of effect.
 
 
