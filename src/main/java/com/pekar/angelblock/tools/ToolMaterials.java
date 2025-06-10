@@ -63,7 +63,7 @@ public class ToolMaterials
 
     static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_NAME, 525);
 
-    static final ModToolMaterial ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, 60, 2.0F, 0F, 0, 0,
+    static final ModToolMaterial ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, 60, 2.0F, 0F, 0, 1,
             Ingredient.of(Items.BAMBOO));
 
     static final ModToolMaterial ROD_MATERIAL2 = ROD_MATERIAL1.clone(ROD_MATERIAL2_NAME, 120);

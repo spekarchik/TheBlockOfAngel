@@ -97,6 +97,12 @@ public class Planter extends WorkRod
     }
 
     @Override
+    public boolean isEnchantable(ItemStack stack)
+    {
+        return true;
+    }
+
+    @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book)
     {
         return true;
