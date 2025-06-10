@@ -5,7 +5,6 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,7 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.equipment.ArmorType;
 import org.jetbrains.annotations.Nullable;
 
@@ -230,12 +228,6 @@ public class ModArmor extends Item implements ITooltipProvider
             case FEET -> 8;
             default -> 0;
         };
-    }
-
-    @Override
-    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment)
-    {
-        return true;
     }
 
     private String getSpecificDescriptionRoot()
