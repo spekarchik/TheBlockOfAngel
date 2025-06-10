@@ -306,7 +306,9 @@ public class Planter extends WorkRod
         if (result.consumesAction())
         {
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
-            itemStack.setCount(itemCount - 1);
+
+            if (!player.isCreative())
+                itemStack.setCount(itemCount - 1);
         }
 
         return result.consumesAction();
@@ -339,7 +341,9 @@ public class Planter extends WorkRod
                     }
 
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                    itemStack.setCount(itemCount - 1);
+
+                    if (!player.isCreative())
+                        itemStack.setCount(itemCount - 1);
                 }
             }
         }

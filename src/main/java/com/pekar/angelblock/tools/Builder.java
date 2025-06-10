@@ -187,7 +187,9 @@ public class Builder extends WorkRod
             }
 
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
-            offHandItemStack.setCount(itemCount - 1);
+
+            if (!player.isCreative())
+                offHandItemStack.setCount(itemCount - 1);
         }
 
         return true;
