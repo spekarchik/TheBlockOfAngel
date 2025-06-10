@@ -8,19 +8,30 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class Planter extends WorkRod
 {
@@ -82,6 +93,12 @@ public class Planter extends WorkRod
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
         return state.getBlock().defaultBlockState().is(BlockRegistry.PLANTER_COMPATIBLE_TO_MINE);
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment)
+    {
+        return enchantment.is(Enchantments.FORTUNE);
     }
 
     @Override
@@ -240,11 +257,31 @@ public class Planter extends WorkRod
     {
         var blockState = level.getBlockState(pos);
 
-        if (!supportsFastGrabbing(blockState)) return false;
+        if (!supportsFastGrabbing(blockState) || originBlock != blockState.getBlock()) return false;
 
-        if (!level.isClientSide())
+        if (level instanceof ServerLevel serverLevel)
         {
-            level.destroyBlock(pos, shouldDrop);
+            if (shouldDrop)
+            {
+                var paramsBuilder = new LootParams.Builder(serverLevel)
+                        .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                        .withParameter(LootContextParams.TOOL, toolItemStack)
+                        .withOptionalParameter(LootContextParams.THIS_ENTITY, player);
+
+                var drops = blockState.getDrops(paramsBuilder);
+
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+
+                for (ItemStack drop : drops)
+                {
+                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), drop);
+                }
+            }
+            else
+            {
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+            }
+
         }
 
         return true;
