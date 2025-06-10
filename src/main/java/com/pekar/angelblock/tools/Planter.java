@@ -2,9 +2,10 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -19,8 +20,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.List;
 
 public class Planter extends WorkRod
 {
@@ -85,13 +84,18 @@ public class Planter extends WorkRod
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 9; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 3,  false, i == 6, i == 5, i == 8));
+            tooltip.addLine(getDescriptionId(), i)
+                            .styledAs(TextStyle.Header, i == 1 || i == 3)
+                            .styledAs(TextStyle.Notice, i == 6)
+                            .styledAs(TextStyle.ImportantNotice, i == 5)
+                            .styledAs(TextStyle.DarkGray, i == 8)
+                            .apply();
         }
     }
 
