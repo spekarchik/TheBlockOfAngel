@@ -925,7 +925,7 @@
   "item.angelblock.planter.desc4": " Plants or fertilizes the most of plants towards the player direction",
   "item.angelblock.planter.desc5": "Second hand: seeds, planting stocks, bone meal (to fertilize), shears (to clear grass)",
   "item.angelblock.planter.desc6": "Can be crafted or given by a farmer as a gift (1/10 chance) when player has the 'Hero of the Village' status",
-  "item.angelblock.planter.desc7": "",
+  "item.angelblock.planter.desc7": "Can be enchanted with Fortune to harvest more crops",
   "item.angelblock.planter.desc8": "Using the rod drains the player. At 0 durability, the rod does not break but loses its abilities",
   "item.angelblock.planter.desc9": "§a Durability: 5000",
   "item.angelblock.track_layer": "Track Layer",
