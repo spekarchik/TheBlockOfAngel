@@ -5,6 +5,7 @@ import com.pekar.angelblock.blocks.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -50,9 +51,9 @@ public class BlockTypes
 
     public boolean isFarmTypeBlock(Level level, BlockPos pos)
     {
-        var block = level.getBlockState(pos).getBlock();
-        return block == Blocks.FARMLAND || canBeFarmland(block) || isSandBlock(block)
-                || block == Blocks.GRAVEL || level.isWaterAt(pos);
+        var blockState = level.getBlockState(pos);
+        return blockState.is(Blocks.GRASS_BLOCK) || blockState.is(BlockTags.DIRT) || blockState.is(Blocks.FARMLAND)
+                || blockState.is(BlockTags.SAND) || blockState.is(Blocks.GRAVEL) || blockState.is(Blocks.SUSPICIOUS_GRAVEL);
     }
 
     public boolean isRail(Block block)
