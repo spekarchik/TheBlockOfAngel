@@ -6,14 +6,21 @@
 ### 🐞 Fixes
 - Mod armor can no longer be enchanted with non-armor enchantments.
 
+### 📝 Improvements
+- **Marine Rod** and **Aquarite Hoe** can now place water between **Farmland** and **Grass** blocks.
+- **Planter** can be enchanted with *Fortune* to harvest more crops.
+- **Planter**, **Builder**, and **Track Layer** no longer consume items from the player's off-hand in Creative mode. These tools use the off-hand stack (e.g., seeds, bone meal, blocks, rails) to apply effects across multiple blocks, but in *Creative mode*, the stack will now remain unchanged.
+- **Planter** now only drops crops matching the clicked plant type within its area of effect.
+
+
 
 ## 📦 Version 2.7.0
 
 ### 🛠️ Changed
-- Rednelite, Diamite, Aquarite, Lymonite Armor Upgrade kits: now can be given by a leather worker as a gift when player has the 'Hero of the Village' status.
-- Superyte Armor Upgrade kits: now can be given by an armorer as a gift when player has the 'Hero of the Village' status.
-- Rednelite, Diamite, Aquarite, Lymonite, Superyte Tool Upgrade kits: now can be given by a weaponsmith or a toolsmith as a gift when player has the 'Hero of the Village' status.
-- Armor and Tool Upgrade Kit tooltips have been updated to reflect the changes.
+- **Rednelite, Diamite, Aquarite, Lymonite Armor Upgrade kits**: now can be given by a leather worker as a gift when player has the *'Hero of the Village'* status.
+- **Superyte Armor Upgrade kits**: now can be given by an armorer as a gift when player has the *'Hero of the Village'* status.
+- **Rednelite, Diamite, Aquarite, Lymonite, Superyte Tool Upgrade kits**: now can be given by a weaponsmith or a toolsmith as a gift when player has the *'Hero of the Village'* status.
+- **Armor and Tool Upgrade Kit** tooltips have been updated to reflect the changes.
 
 
 ## 📦 Version 2.6.0
