@@ -14,7 +14,6 @@
 - **Planter** now only drops crops matching the clicked plant type within its area of effect.
 
 
-
 ## 📦 Version 2.7.0
 
 ### 🛠️ Changed
