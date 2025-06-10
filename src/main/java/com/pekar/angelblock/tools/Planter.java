@@ -112,8 +112,10 @@ public class Planter extends WorkRod
                     .styledAs(TextStyle.Header, i == 1 || i == 3)
                     .styledAs(TextStyle.Notice, i == 6)
                     .styledAs(TextStyle.ImportantNotice, i == 5)
-                    .styledAs(TextStyle.DarkGray, i == 8)
+                    .styledAs(TextStyle.DarkGray, i == 7 || i == 8)
                     .apply();
+
+            if (i == 6) tooltip.addEmptyLine();
         }
     }
 
