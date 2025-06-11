@@ -2,6 +2,11 @@
 
 ### 📝 Improvements
 - Harvested crops now drop toward the player when using a **Planter**. Drops are slightly randomized for more natural movement.
+- **Planter**: planting and bonemealing behavior improved for smoother farming.
+  - Can now bonemeal crops by clicking either the crop or the farmland.
+  - Bonemealing no longer stops at empty farmland — skips it and continues.
+  - Planting now works when clicking on already planted crops.
+  - Grass and flowers are automatically cleared (without drops) during planting.
 
 
 ## 📦 Version 2.8.0
