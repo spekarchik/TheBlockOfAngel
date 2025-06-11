@@ -302,7 +302,6 @@ public class Planter extends WorkRod
             {
                 level.destroyBlock(pos, false);
             }
-
         }
 
         return true;
