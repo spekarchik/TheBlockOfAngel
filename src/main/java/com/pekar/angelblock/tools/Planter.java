@@ -312,8 +312,6 @@ public class Planter extends WorkRod
     {
         if (hasCriticalDamage(toolItemStack)) return false;
 
-        if (!blockToPlant.defaultBlockState().is(BlockRegistry.PLANTER_COMPATIBLE_TO_PLANT)) return false;
-
         var soilBlockState = level.getBlockState(soilPosToPlantOn);
         var soilBlock = soilBlockState.getBlock();
 
