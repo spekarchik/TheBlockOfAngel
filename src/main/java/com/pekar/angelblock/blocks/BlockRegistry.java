@@ -22,6 +22,7 @@ public class BlockRegistry
 {
     public static final TagKey<Block> PLANTER_COMPATIBLE_TO_MINE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_mine"));
     public static final TagKey<Block> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_plant"));
+    public static final TagKey<Block> REPLACEABLE_BY_PLANTER = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_replaceables"));
 
     public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SNOW).requiresCorrectToolForDrops());
