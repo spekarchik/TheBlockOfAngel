@@ -114,11 +114,8 @@ public class ModRod extends ModTool implements IModTool
 
     protected InteractionResult plant(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing, Block plantBlock)
     {
-        //if (!(plantBlock instanceof IPlantable plantable)) return InteractionResult.FAIL;
-
-        //var blockState = level.getBlockState(pos);
-        //boolean canSustainPlant = blockState.getBlock().canSustainPlant(blockState, level, pos, facing, plantable);
-        //if (!canSustainPlant) return InteractionResult.FAIL;  DOESN'T WORK WITH CHORUS!!!
+        var canSustainPlant = utils.blocks.conditions.canSustainPlant(level, pos, plantBlock.defaultBlockState());
+        if (!canSustainPlant) return InteractionResult.FAIL;
 
         var itemStack = player.getItemInHand(hand);
         var abovePos = pos.above();
