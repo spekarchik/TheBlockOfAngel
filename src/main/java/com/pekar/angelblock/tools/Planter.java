@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tooltip.ITooltip;
@@ -161,7 +162,12 @@ public class Planter extends WorkRod
         return haveAnyTransformed;
     }
 
-    protected boolean plantOffHandItems(Player player, Level level, BlockPos pos, Direction facing)
+    private boolean supportsFastGrabbing(BlockState blockState)
+    {
+        return isPlanterCompatible(blockState.getBlock());
+    }
+
+    protected boolean plantOffHandItems(Player player, Level level, BlockPos clickedPos, Direction facing)
     {
         if (facing != Direction.UP) return false;
 
@@ -174,7 +180,7 @@ public class Planter extends WorkRod
             return false;
 
         int seedCount = seedInHand.getCount();
-        final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
+        final int posX = clickedPos.getX(), posY = clickedPos.getY(), posZ = clickedPos.getZ();
 
         int shiftX = 0, shiftZ = 0, increment = 0;
 
@@ -195,12 +201,15 @@ public class Planter extends WorkRod
 
         boolean haveAnyTransformed = false;
         var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-        var originBlock = level.getBlockState(pos).getBlock();
+        var clickedBlockState = level.getBlockState(clickedPos);
+        var clickedBlock = clickedBlockState.getBlock();
+        int y = supportsFastGrabbing(clickedBlockState) ? clickedPos.below().getY() : posY;
+        var originSoilBlock = level.getBlockState(new BlockPos(posX, y, posZ)).getBlock();
 
         for (int x = posX; x != posX + shiftX; x += increment)
             for (int z = posZ; z != posZ + shiftZ; z += increment)
             {
-                boolean hasTransformed = plantOffHandItem(player, level, originBlock, new BlockPos(x, posY, z), facing, toolItemStack, plantableBlock);
+                boolean hasTransformed = plantOffHandItem(player, level, clickedBlock, originSoilBlock, new BlockPos(x, y, z), facing, toolItemStack, plantableBlock);
                 if (hasTransformed)
                     haveAnyTransformed = true;
                 else
@@ -210,10 +219,10 @@ public class Planter extends WorkRod
         return haveAnyTransformed;
     }
 
-    protected boolean bonemealPlants(Player player, Level level, BlockPos pos, Direction facing)
+    protected boolean bonemealPlants(Player player, Level level, BlockPos clickedPos, Direction facing)
     {
         final int MAX_BONEMEALABLE_LENGTH = 64;
-        final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
+        final int posX = clickedPos.getX(), posY = clickedPos.getY(), posZ = clickedPos.getZ();
 
         int shiftX = 0, shiftZ = 0, increment = 0;
 
@@ -234,12 +243,14 @@ public class Planter extends WorkRod
 
         boolean haveAnyTransformed = false;
         var toolItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-        var originBlock = level.getBlockState(pos).getBlock();
+        var clickedBlock = level.getBlockState(clickedPos).getBlock();
+        int y = clickedBlock instanceof BonemealableBlock ? posY : clickedPos.above().getY();
+        var originSoilBlock = level.getBlockState(new BlockPos(posX, y - 1, posZ)).getBlock();
 
         for (int x = posX; x != posX + shiftX; x += increment)
             for (int z = posZ; z != posZ + shiftZ; z += increment)
             {
-                boolean hasTransformed = bonemealPlant(player, level, originBlock, new BlockPos(x, posY, z), facing, toolItemStack);
+                boolean hasTransformed = bonemealPlant(player, level, clickedBlock, originSoilBlock, new BlockPos(x, y, z), facing, toolItemStack);
                 if (hasTransformed)
                     haveAnyTransformed = true;
                 else
@@ -260,9 +271,8 @@ public class Planter extends WorkRod
     private boolean grabPlant(Player player, Level level, Block originBlock, BlockPos pos, ItemStack toolItemStack, boolean shouldDrop)
     {
         var blockState = level.getBlockState(pos);
-        var block = blockState.getBlock();
 
-        if (!(block instanceof BushBlock) || originBlock != blockState.getBlock()) return false;
+        if (!supportsFastGrabbing(blockState) || (supportsFastGrabbing(originBlock.defaultBlockState()) && originBlock != blockState.getBlock())) return false;
 
         if (level instanceof ServerLevel serverLevel)
         {
@@ -275,7 +285,7 @@ public class Planter extends WorkRod
 
                 var drops = blockState.getDrops(paramsBuilder);
 
-                level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+                level.destroyBlock(pos, false);
 
                 var random = level.getRandom();
 
@@ -302,7 +312,7 @@ public class Planter extends WorkRod
             }
             else
             {
-                level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+                level.destroyBlock(pos, false);
             }
 
         }
@@ -310,20 +320,35 @@ public class Planter extends WorkRod
         return true;
     }
 
-    private boolean plantOffHandItem(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack, Block plantBlock)
+    private boolean plantOffHandItem(Player player, Level level, Block clickedBlock, Block originSoilBlock, BlockPos soilPosToPlantOn,
+                                     Direction facing, ItemStack toolItemStack, Block blockToPlant)
     {
         if (hasCriticalDamage(toolItemStack)) return false;
 
-        var blockState = level.getBlockState(pos);
-        Block block = blockState.getBlock();
+        var soilBlockState = level.getBlockState(soilPosToPlantOn);
+        var soilBlock = soilBlockState.getBlock();
 
-        if (block != originBlock) return false;
+        if (soilBlock != originSoilBlock) return false;
+        var blockToReplaceByPlantBlockState = level.getBlockState(soilPosToPlantOn.above());
+        if (!blockToReplaceByPlantBlockState.is(BlockRegistry.REPLACEABLE_BY_PLANTER)) return blockToReplaceByPlantBlockState.getBlock() == clickedBlock;
 
         var itemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int itemCount = itemStack.getCount();
         if (itemCount < 1) return false;
 
-        var result = plant(player, level, pos, InteractionHand.OFF_HAND, facing, plantBlock);
+        if (!blockToReplaceByPlantBlockState.isAir())
+        {
+            level.destroyBlock(soilPosToPlantOn.above(), false);
+        }
+
+        var blockAboveReplacingByPlantBlock = level.getBlockState(soilPosToPlantOn.above(2));
+        if (!blockAboveReplacingByPlantBlock.isAir() && blockAboveReplacingByPlantBlock.is(BlockRegistry.REPLACEABLE_BY_PLANTER))
+        {
+            level.destroyBlock(soilPosToPlantOn.above(2), false);
+        }
+
+        var result = plant(player, level, soilPosToPlantOn, InteractionHand.OFF_HAND, facing, blockToPlant);
+
         if (result.consumesAction())
         {
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
@@ -335,26 +360,29 @@ public class Planter extends WorkRod
         return result.consumesAction();
     }
 
-    private boolean bonemealPlant(Player player, Level level, Block originBlock, BlockPos pos, Direction facing, ItemStack toolItemStack)
+    private boolean bonemealPlant(Player player, Level level, Block clickedBlock, Block originSoilBlock, BlockPos posToBonemeal, Direction facing, ItemStack toolItemStack)
     {
         if (hasCriticalDamage(toolItemStack)) return false;
 
-        var blockState = level.getBlockState(pos);
-        Block block = blockState.getBlock();
+        var soilBlock = level.getBlockState(posToBonemeal.below()).getBlock();
+        if (soilBlock != originSoilBlock) return false;
 
-        if (!(block instanceof BonemealableBlock bonemealableBlock)) return false;
+        var blockStateAtPosToBonemeal = level.getBlockState(posToBonemeal);
+        Block blockToBonemeal = blockStateAtPosToBonemeal.getBlock();
+
+        if (!(blockToBonemeal instanceof BonemealableBlock bonemealableBlock)) return blockStateAtPosToBonemeal.isAir();
 
         var itemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int itemCount = itemStack.getCount();
         if (itemCount < 1) return false;
 
-        if (bonemealableBlock.isValidBonemealTarget(level, pos, blockState))
+        if (bonemealableBlock.isValidBonemealTarget(level, posToBonemeal, blockStateAtPosToBonemeal))
         {
             if (!level.isClientSide())
             {
-                bonemealableBlock.performBonemeal((ServerLevel) level, level.random, pos, blockState);
+                bonemealableBlock.performBonemeal((ServerLevel) level, level.random, posToBonemeal, blockStateAtPosToBonemeal);
 
-                if (bonemealableBlock.isBonemealSuccess(level, level.random, pos, blockState))
+                if (bonemealableBlock.isBonemealSuccess(level, level.random, posToBonemeal, blockStateAtPosToBonemeal))
                 {
                     if (player instanceof ServerPlayer serverPlayer)
                     {
