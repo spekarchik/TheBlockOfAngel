@@ -112,7 +112,7 @@ public abstract class ModRod extends ModTool implements IModTool
         var itemStack = player.getItemInHand(hand);
         var abovePos = pos.above();
 
-        if (facing == Direction.UP && level.getBlockState(abovePos).canBeReplaced() && level.getBlockState(abovePos.above()).canBeReplaced())
+        if (facing == Direction.UP && level.getBlockState(abovePos).isAir() && level.getBlockState(abovePos.above()).isAir())
         {
             boolean isClientSide = level.isClientSide();
             if (!isClientSide)
