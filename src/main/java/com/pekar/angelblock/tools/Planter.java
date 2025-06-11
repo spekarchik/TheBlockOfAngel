@@ -13,6 +13,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
@@ -277,9 +278,27 @@ public class Planter extends WorkRod
 
                 level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 
+                var random = level.getRandom();
+
                 for (ItemStack drop : drops)
                 {
-                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), drop);
+                    double x = pos.getX() + 0.5;
+                    double y = pos.getY() + 0.5;
+                    double z = pos.getZ() + 0.5;
+
+                    Vec3 direction = player.position().subtract(x, y, z).normalize();
+
+                    double scatter = 0.5;
+                    double dx = direction.x + (random.nextDouble() - 0.5) * scatter;
+                    double dy = direction.y + (random.nextDouble() - 0.5) * scatter;
+                    double dz = direction.z + (random.nextDouble() - 0.5) * scatter;
+
+                    Vec3 velocity = new Vec3(dx, dy, dz).normalize().scale(0.25);
+                    var itemEntity = new ItemEntity(level, x, y, z, drop);
+                    itemEntity.setDeltaMovement(velocity);
+                    itemEntity.setPickUpDelay(5);
+
+                    level.addFreshEntity(itemEntity);
                 }
             }
             else
