@@ -1,3 +1,9 @@
+## 📦 Version 2.8.1
+
+### 📝 Improvements
+- Harvested crops now drop toward the player when using a **Planter**. Drops are slightly randomized for more natural movement.
+
+
 ## 📦 Version 2.8.0
 
 ### 🛠️ Changed
