@@ -31,6 +31,7 @@ public class Builder extends WorkRod
         var player = context.getPlayer();
         var level = player.level();
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
+        int offHandItemCountBeforeUse = offHandItemStack.getCount();
         var pos = context.getClickedPos();
 
         var offHandItem = offHandItemStack.getItem();
@@ -48,7 +49,9 @@ public class Builder extends WorkRod
 
         if (result == InteractionResult.SUCCESS_SERVER || result == InteractionResult.SUCCESS)
         {
-            causePlayerExhaustion(player);
+            int offHandItemCountAfterUse = offHandItemStack.getCount();
+            if (offHandItemCountAfterUse < offHandItemCountBeforeUse)
+                causePlayerExhaustion(player);
         }
 
         return result;

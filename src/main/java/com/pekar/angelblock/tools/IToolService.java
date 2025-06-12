@@ -31,7 +31,7 @@ public interface IToolService
 
     default void causePlayerExhaustion(Player player)
     {
-        if (player != null)
+        if (player != null && !player.level().isClientSide())
         {
             var foodData = player.getFoodData();
             foodData.setSaturation(foodData.getSaturationLevel() * 0.5F);
