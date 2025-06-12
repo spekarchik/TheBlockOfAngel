@@ -1,3 +1,9 @@
+## 📦 Version 2.8.2
+
+### 🐞 Fixes
+- **Planter**, **Builder**, and **Track Layer** no longer cause player exhaustion when offhand items are not actually consumed.
+
+
 ## 📦 Version 2.8.1
 
 ### 📝 Improvements
