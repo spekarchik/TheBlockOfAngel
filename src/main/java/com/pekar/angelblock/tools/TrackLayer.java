@@ -31,6 +31,7 @@ public class TrackLayer extends WorkRod
         var player = context.getPlayer();
         var level = player.level();
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
+        int offHandItemCountBeforeUse = offHandItemStack.getCount();
         var pos = context.getClickedPos();
 
         var offHandItem = offHandItemStack.getItem();
@@ -45,7 +46,9 @@ public class TrackLayer extends WorkRod
 
         if (result == InteractionResult.CONSUME || result == InteractionResult.CONSUME_PARTIAL)
         {
-            causePlayerExhaustion(player);
+            int offHandItemCountAfterUse = offHandItemStack.getCount();
+            if (offHandItemCountAfterUse < offHandItemCountBeforeUse)
+                causePlayerExhaustion(player);
         }
 
         return result;
