@@ -53,7 +53,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:wooden_hoe",
-          "weight": 2
+          "weight": 1
         },
         {
           "type": "minecraft:item",
