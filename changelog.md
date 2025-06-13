@@ -1,3 +1,9 @@
+## 📦 Version 2.8.3
+
+### 🛠️ Changed
+- **Suspicious Sand (Warm Ocean)**: reduced the drop weight of the wooden hoe from 2 to 1 to maintain vanilla drop balance after adding custom items.
+
+
 ## 📦 Version 2.8.2
 
 ### 🐞 Fixes
