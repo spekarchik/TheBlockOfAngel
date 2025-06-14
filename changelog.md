@@ -1,3 +1,9 @@
+## 📦 Version 2.9.0
+
+### 📝 Improvements
+- The **Luck** effect can now prevent death (25% chance per level), teleporting the player to their saved respawn point with regeneration and temporary damage protection.
+
+
 ## 📦 Version 2.8.3
 
 ### 🛠️ Changed
