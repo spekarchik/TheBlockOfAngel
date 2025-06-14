@@ -226,7 +226,7 @@ public class PlayerInteractionEvents implements IEventHandler
         player.fallDistance = 0;
         player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
         player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 2400, 0));
-        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40));
+        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40));
         player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 40));
     }
 
