@@ -2,17 +2,29 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.IModTool;
 import com.pekar.angelblock.tools.IModToolEnhanceable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Relative;
+import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
+import java.util.EnumSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -147,7 +159,75 @@ public class PlayerInteractionEvents implements IEventHandler
             {
                 handler.onLivingDeathEvent(event);
             }
+
+            if (entity.hasEffect(MobEffects.LUCK) && !event.isCanceled() && !event.getSource().is(DamageTypes.GENERIC_KILL))
+            {
+                int luckLevel = entity.getEffect(MobEffects.LUCK).getAmplifier() + 1;
+                float chanceToAvoidDeath = 0.25F * luckLevel;
+
+                if (entity.getRandom().nextFloat() < chanceToAvoidDeath)
+                {
+                    event.setCanceled(true);
+                    entity.setHealth(1.0F);
+                    teleportPlayer(entity);
+                }
+            }
         }
+    }
+
+    private void teleportPlayer(LivingEntity entity)
+    {
+        if (entity instanceof ServerPlayer serverPlayer)
+        {
+            TeleportTransition.PostTeleportTransition postTeleportTransition = p -> {
+                if (p instanceof LivingEntity livingEntity)
+                    protectPlayer(livingEntity);
+            };
+
+            TeleportTransition transition = serverPlayer.findRespawnPositionAndUseSpawnBlock(true, postTeleportTransition);
+
+            var targetLevel = transition.newLevel();
+            Vec3 targetPos = transition.position();
+
+            serverPlayer.teleportTo(
+                    targetLevel,
+                    targetPos.x,
+                    targetPos.y,
+                    targetPos.z,
+                    EnumSet.noneOf(Relative.class),
+                    serverPlayer.getYRot(), serverPlayer.getXRot(),
+                    true
+            );
+
+            transition.postTeleportTransition().onTransition(serverPlayer);
+
+            ((ServerLevel)serverPlayer.level()).sendParticles(
+                    ParticleTypes.PORTAL,
+                    targetPos.x, targetPos.y + 1, targetPos.z,
+                    50, 0.5, 1, 0.5, 0.1
+            );
+
+            new PlaySoundPacket(SoundEvents.PORTAL_TRAVEL).sendToPlayer(serverPlayer);
+        }
+    }
+
+    private void protectPlayer(LivingEntity player)
+    {
+        for (MobEffectInstance effect : player.getActiveEffects())
+        {
+            if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL)
+            {
+                player.removeEffect(effect.getEffect());
+            }
+        }
+
+        player.clearFire();
+        player.setDeltaMovement(Vec3.ZERO);
+        player.fallDistance = 0;
+        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
+        player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 2400, 0));
+        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40));
+        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 40));
     }
 
     public static void subscribeLivingDeath(ILivingDeathEventHandler handler)
