@@ -1,6 +1,9 @@
 package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Main;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
+import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -18,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class ModArmor extends ArmorItem
+public class ModArmor extends ArmorItem implements ITooltipProvider
 {
     protected final ArmorItem.Type armorItemType;
     protected final int maxDamage;
@@ -174,21 +177,32 @@ public class ModArmor extends ArmorItem
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!utils.text.showExtendedDescription(tooltip)) return;
+
+        tooltip.ignoreEmptyLines();
 
         for (int i = 1; i <= 13; i++)
         {
-            var component = getCommonDescription(i, i == 5, false, false, false, i >= 10);
-            if (!component.getString().isEmpty())
-                tooltipComponents.add(component);
+            tooltip.addLine(getCommonDescriptionRoot(), i).styledAs(TextStyle.Header, i == 5).styledAs(TextStyle.DarkGray, i >= 10).apply();
         }
+
+        tooltip.includeEmptyLines();
 
         for (int i = 1; i <= getDescriptionLineCount(); i++)
         {
-            tooltipComponents.add(getSpecificDescription(i, i == 1, false, getEquipmentSlot() == EquipmentSlot.FEET && i == 8, false, false));
+            tooltip.addLine(getSpecificDescriptionRoot(), i)
+                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.Notice, armorItemType.getSlot() == EquipmentSlot.FEET && i == 8)
+                    .apply();
         }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> component, TooltipFlag flag)
+    {
+        ITooltipProvider.appendHoverText(this, stack, context, component, flag);
     }
 
     private int getDescriptionLineCount()
@@ -215,26 +229,14 @@ public class ModArmor extends ArmorItem
         return true;
     }
 
-    private MutableComponent getCommonDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isDarkGray)
+    private String getSpecificDescriptionRoot()
     {
-        var component = getCommonDisplayName(lineNumber);
-        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, isDarkGray);
+        return getDescriptionId();
     }
 
-    private MutableComponent getSpecificDescription(int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isDarkGray)
+    private String getCommonDescriptionRoot()
     {
-        var component = getSpecificDisplayName(lineNumber);
-        return utils.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, isDarkGray);
-    }
-
-    private MutableComponent getSpecificDisplayName(int lineNumber)
-    {
-        return Component.translatable(this.getDescriptionId() + ".desc" + lineNumber);
-    }
-
-    private MutableComponent getCommonDisplayName(int lineNumber)
-    {
-        return Component.translatable(getFullArmorModelName(getArmorFamilyName()).replace(':', '.').replaceAll("[0-9]", "") + ".desc" + lineNumber);
+        return getFullArmorModelName(getArmorFamilyName()).replace(':', '.').replaceAll("[0-9]", "");
     }
 
     private String getFullArmorModelName(String armorModelName)
