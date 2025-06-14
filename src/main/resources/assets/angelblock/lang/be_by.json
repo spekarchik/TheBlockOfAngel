@@ -20,6 +20,7 @@
   "angelblock.rendelithic_armor.desc11": "",
   "angelblock.rendelithic_armor.desc12": "",
   "angelblock.rendelithic_armor.desc13": "",
+  "angelblock.rendelithic_armor.desc14": "",
 
   "angelblock.diamithic_armor.desc1": "§f§lПрызначэнне:§r§7 Бітвы з босамі, універсальная браня. Выдатная абарона, нядрэнны набор функцый. Цяжкая",
   "angelblock.diamithic_armor.desc2": "§f§lУразлівасці:§r§7 укусы павукоў, лускавіц, пчол §o(падвойная шкода)",
@@ -34,6 +35,7 @@
   "angelblock.diamithic_armor.desc11": "",
   "angelblock.diamithic_armor.desc12": "",
   "angelblock.diamithic_armor.desc13": "",
+  "angelblock.diamithic_armor.desc14": "",
 
   "angelblock.lapis_armor.desc1": "§f§lПрызначэнне:§r§7 Падводны свет. Добрая абарона. Набор функцый спецыфічны для падводнага выжывання. Успрымальнасць да высокіх і нізкіх тэмператур",
   "angelblock.lapis_armor.desc2": "§f§lУразлівасці:§r§7 агонь, магма, лава — шкода +20%; мароз — шкода +100%",
@@ -46,8 +48,9 @@
   "angelblock.lapis_armor.desc9": "§a Зносаўстойлівасць: 40",
   "angelblock.lapis_armor.desc10": "Абарона бранi залежыць ад зносу. Поўнасцю зношаная браня не ламаецца, але губляе ўсе станоўчыя ўласцівасці",
   "angelblock.lapis_armor.desc11": "Верагоднасць з’яўлення рэдкага аксалотля пры развядзенні павялічваецца да 1/100, калі на адлегласці 8 блокаў знаходзіцца гулец або моб, цалкам апрануты ў Акварытавую браню",
-  "angelblock.lapis_armor.desc12": "",
+  "angelblock.lapis_armor.desc12": "Удача можа прадухіліць смерць (25% верагоднасць за ўзровень), тэлепартуючы да захаванай кропкі адраджэння з эфектамі рэгенерацыі і абароны",
   "angelblock.lapis_armor.desc13": "",
+  "angelblock.lapis_armor.desc14": "",
 
   "angelblock.limonite_armor.desc1": "§f§lПрызначэнне:§r§7 Універсальная браня. Слабаватая абарона, сярэдняя зносаўстойлівасць, але шырокі набор функцый. Падыходзіць для лесу, джунгляў, снежных біёмаў, гор, пячораў",
   "angelblock.limonite_armor.desc2": "§f§lУразлівасці:§r§7 высушэнне, зарад ветру, выбухі — шкода +50%",
@@ -60,8 +63,9 @@
   "angelblock.limonite_armor.desc9": "§a Зносаўстойлівасць: 23",
   "angelblock.limonite_armor.desc10": "Абарона бранi залежыць ад зносу. Поўнасцю зношаная браня не ламаецца, але губляе ўсе станоўчыя ўласцівасці",
   "angelblock.limonite_armor.desc11": "Запавольвае бліжэйшых нападнікаў, а астатніх — падпальвае",
-  "angelblock.limonite_armor.desc12": "",
+  "angelblock.limonite_armor.desc12": "Удача можа прадухіліць смерць (25% верагоднасць за ўзровень), тэлепартуючы да захаванай кропкі адраджэння з эфектамі рэгенерацыі і абароны",
   "angelblock.limonite_armor.desc13": "",
+  "angelblock.limonite_armor.desc14": "",
 
   "angelblock.super_armor.desc1": "§f§lПрызначэнне:§r§7 Замяняе любую броню, спалучаючы ўсе перавагі. Лепшы варыянт для бітвы з босамі і як універсальная браня",
   "angelblock.super_armor.desc2": "§f§lУразлівасці:§r§7 Мае звычайную бачнасць для крыпераў, у адрозненне ад Лайманітавай броні",
@@ -76,6 +80,7 @@
   "angelblock.super_armor.desc11": "Запавольвае бліжэйшых нападнікаў, а астатніх — падпальвае",
   "angelblock.super_armor.desc12": "Калі гулец стаіць на зямлі, актывацыя Павольнага падзення разам з Узмацненнем скачка дае эфект Левітацыі. Паўторная актывацыя Павольнага падзення адключае Левітацыю",
   "angelblock.super_armor.desc13": "Суперскачок актывуецца пры другім скачку цягам 1 секунды пасля першага. Першы скачок звычайны, каб можна было пераадольваць нізкія перашкоды без спрацоўвання суперскачка.",
+  "angelblock.super_armor.desc14": "Удача можа прадухіліць смерць (25% верагоднасць за ўзровень), тэлепартуючы да захаванай кропкі адраджэння з эфектамі рэгенерацыі і абароны",
 
   "angelblock.flying_armor.desc1": "§f§lПрызначэнне:§r§7 Палёты, хуткае перамяшчэнне. Вельмі слабая абарона і зносаўстойлівасць. Не ўспрымае зачараванне",
   "angelblock.flying_armor.desc2": "§f§lУразлівасці:§r§7 Вельмі слабая абарона",
@@ -90,6 +95,7 @@
   "angelblock.flying_armor.desc11": "Палёты магчымыя толькі пры поўным камплекце броні",
   "angelblock.flying_armor.desc12": "",
   "angelblock.flying_armor.desc13": "",
+  "angelblock.flying_armor.desc14": "",
 
   "item.angelblock.rendelithic_boots": "Рэндэлітавыя боты",
   "item.angelblock.rendelithic_boots.desc1": "Характарыстыкі ботаў",
