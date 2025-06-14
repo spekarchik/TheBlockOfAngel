@@ -16,8 +16,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Relative;
-import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -179,27 +178,25 @@ public class PlayerInteractionEvents implements IEventHandler
     {
         if (entity instanceof ServerPlayer serverPlayer)
         {
-            TeleportTransition.PostTeleportTransition postTeleportTransition = p -> {
+            DimensionTransition.PostDimensionTransition postTeleportTransition = p -> {
                 if (p instanceof LivingEntity livingEntity)
                     protectPlayer(livingEntity);
             };
 
-            TeleportTransition transition = serverPlayer.findRespawnPositionAndUseSpawnBlock(true, postTeleportTransition);
+            var transition = serverPlayer.findRespawnPositionAndUseSpawnBlock(true, postTeleportTransition);
 
             var targetLevel = transition.newLevel();
-            Vec3 targetPos = transition.position();
+            Vec3 targetPos = transition.pos();
 
             serverPlayer.teleportTo(
                     targetLevel,
                     targetPos.x,
                     targetPos.y,
                     targetPos.z,
-                    EnumSet.noneOf(Relative.class),
-                    serverPlayer.getYRot(), serverPlayer.getXRot(),
-                    true
+                    serverPlayer.getYRot(), serverPlayer.getXRot()
             );
 
-            transition.postTeleportTransition().onTransition(serverPlayer);
+            transition.postDimensionTransition().onTransition(serverPlayer);
 
             ((ServerLevel)serverPlayer.level()).sendParticles(
                     ParticleTypes.PORTAL,
