@@ -5,6 +5,7 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -192,23 +193,58 @@ public class ModArmor extends Item implements ITooltipProvider
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltip)) return;
-
-        tooltip.ignoreEmptyLines();
-
-        for (int i = 1; i <= 14; i++)
+        if (!flag.hasShiftDown() && !flag.hasAltDown() && !flag.hasControlDown())
         {
-            tooltip.addLine(getCommonDescriptionRoot(), i).styledAs(TextStyle.Header, i == 5).styledAs(TextStyle.DarkGray, i >= 10).apply();
+            tooltip.addLineById("description.common.press_shift_alt_or_ctrl").apply();
+            return;
         }
 
-        tooltip.includeEmptyLines();
-
-        for (int i = 1; i <= getDescriptionLineCount(); i++)
+        if (flag.hasShiftDown())
         {
-            tooltip.addLine(getSpecificDescriptionRoot(), i)
-                    .styledAs(TextStyle.Header, i == 1)
-                    .styledAs(TextStyle.Notice, armorItemType.getSlot() == EquipmentSlot.FEET && i == 8)
-                    .apply();
+            tooltip.ignoreEmptyLines();
+
+            for (int i = 1; i <= 9; i++)
+            {
+                tooltip.addLine(getCommonDescriptionRoot(), i).styledAs(TextStyle.Header, i == 5).apply();
+            }
+
+            tooltip.addEmptyLine();
+            tooltip.addLineById("description.armor.press_alt").apply();
+            tooltip.addLineById("description.armor.press_ctrl").apply();
+            return;
+        }
+
+        if (flag.hasAltDown())
+        {
+            tooltip.includeEmptyLines();
+
+            for (int i = 1; i <= getDescriptionLineCount(); i++)
+            {
+                tooltip.addLine(getSpecificDescriptionRoot(), i)
+                        .styledAs(TextStyle.Header, i == 1)
+                        .styledAs(TextStyle.Notice, armorItemType.getSlot() == EquipmentSlot.FEET && i == 9)
+                        .apply();
+            }
+
+            tooltip.addEmptyLine();
+            tooltip.addLineById("description.armor.press_shift").apply();
+            tooltip.addLineById("description.armor.press_ctrl").apply();
+            return;
+        }
+
+        if (flag.hasControlDown())
+        {
+            tooltip.ignoreEmptyLines();
+
+            for (int i = 10; i <= 14; i++)
+            {
+                tooltip.addLine(getCommonDescriptionRoot(), i).styledAs(TextStyle.DarkGray, true).apply();
+            }
+
+            tooltip.addEmptyLine();
+            tooltip.addLineById("description.armor.press_shift").apply();
+            tooltip.addLineById("description.armor.press_alt").apply();
+            return;
         }
     }
 
@@ -222,10 +258,10 @@ public class ModArmor extends Item implements ITooltipProvider
     {
         return switch (armorItemType.getSlot())
         {
-            case HEAD -> 5;
-            case CHEST -> 8;
-            case LEGS -> 5;
-            case FEET -> 8;
+            case HEAD -> 6;
+            case CHEST -> 9;
+            case LEGS -> 6;
+            case FEET -> 9;
             default -> 0;
         };
     }
