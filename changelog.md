@@ -2,6 +2,12 @@
 
 ### 📝 Improvements
 - The **Luck** effect can now prevent death (25% chance per level), teleporting the player to their saved respawn point with regeneration and temporary damage protection.
+- Armor tooltips are now split into three pages:
+  - **Shift** shows general information
+  - **Alt** shows stats and upgrade materials
+  - **Ctrl** shows additional lore
+- Each armor piece now displays the item required for its upgrade directly in its tooltip.
+- Updated chestplate names to better reflect their special effects and bonuses, e.g., using "with Slow Falling" for clarity.
 
 
 ## 📦 Version 2.8.3
