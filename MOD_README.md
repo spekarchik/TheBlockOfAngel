@@ -113,6 +113,9 @@ The Block of Angel mod is fully compatible with the following mods by the same a
   Fixed XP costs, enchanted book duplication, material-based repairs, and perfect gear cloning — all with vanilla-style mechanics.  
   Fully supports custom gear and enchantments from The Block of Angel.
 
+- **[🧭 Compass Cleaner](https://modrinth.com/mod/compass-cleaner)** — adds a minimalist recipe to reset a _Lodestone Compass_ to a regular _Compass_.  
+    Ideal for tidying up obsolete compasses after you lose or remove their lodestone targets.
+
 ---
 
 ## ☕ Support Development
