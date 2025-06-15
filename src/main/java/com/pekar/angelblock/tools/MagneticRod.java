@@ -36,8 +36,11 @@ public class MagneticRod extends ModRod
         if (result == InteractionResult.PASS) return InteractionResult.FAIL;
         if (result == InteractionResult.CONSUME || result == InteractionResult.CONSUME_PARTIAL)
         {
-            var player = context.getPlayer();
-            causePlayerExhaustion(player);
+            if (!context.getLevel().isClientSide())
+            {
+                var player = context.getPlayer();
+                causePlayerExhaustion(player);
+            }
         }
         return result;
     }
@@ -61,16 +64,14 @@ public class MagneticRod extends ModRod
         var blockState = level.getBlockState(pos);
         if (blockState.isAir() || utils.blocks.types.isLiquid(blockState.getBlock()))
         {
-            return getToolInteractionResult(true, isClientSide);
+            return InteractionResult.FAIL;
         }
 
-        if (isClientSide) return getToolInteractionResult(true, isClientSide);
-
-        shiftOres(player, level, pos, context.getClickedFace());
-        return getToolInteractionResult(true, isClientSide);
+        boolean shifted = shiftOres(player, level, pos, context.getClickedFace());
+        return shifted ? getToolInteractionResult(shifted, isClientSide) : InteractionResult.FAIL;
     }
 
-    private InteractionResult shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
+    private boolean shiftOres(Player player, Level level, BlockPos pos, Direction clickedFace)
     {
         int depth = Math.max(getSculkDetectionDepth(), Math.max(getAmethystDetectionDepth(), getOreDepth()));
 
@@ -105,12 +106,10 @@ public class MagneticRod extends ModRod
             initialDepth = clickedFace == Direction.EAST ? depth : -depth;
         }
 
-        shiftOreBlocks((ServerPlayer) player, level, pos, clickedFace, initialDepth, getDepthCoord, getRadiusCoord1, getRadiusCoord2, createPos);
-
-        return getToolInteractionResult(true, level.isClientSide());
+        return shiftOreBlocks(player, level, pos, clickedFace, initialDepth, getDepthCoord, getRadiusCoord1, getRadiusCoord2, createPos);
     }
 
-    private void shiftOreBlocks(ServerPlayer player, Level level, BlockPos pos, Direction clickedFace, int initialDepth, Function<BlockPos, Integer> getDepthCoord, Function<BlockPos, Integer> getRadiusCoord1, Function<BlockPos, Integer> getRadiusCoord2, TriFunction<Integer, Integer, Integer, BlockPos> createPos)
+    private boolean shiftOreBlocks(Player player, Level level, BlockPos pos, Direction clickedFace, int initialDepth, Function<BlockPos, Integer> getDepthCoord, Function<BlockPos, Integer> getRadiusCoord1, Function<BlockPos, Integer> getRadiusCoord2, TriFunction<Integer, Integer, Integer, BlockPos> createPos)
     {
         int radius = getShiftingRadius();
         boolean isDiamondOreFound = false;
@@ -123,6 +122,8 @@ public class MagneticRod extends ModRod
         int amethystDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getAmethystDetectionDepth() : -getAmethystDetectionDepth());
         int railDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getRailsDetectionDepth() : -getRailsDetectionDepth());
         int sculkDepthCoord = getDepthCoord.apply(pos) - (initialDepth >= 0 ? getSculkDetectionDepth() : -getSculkDetectionDepth());
+
+        boolean shifted = false;
 
         for (int x1 = getRadiusCoord1.apply(pos) - radius; x1 <= getRadiusCoord1.apply(pos) + radius; x1++)
             for (int x2 = getRadiusCoord2.apply(pos) - radius; x2 <= getRadiusCoord2.apply(pos) + radius; x2++)
@@ -198,12 +199,20 @@ public class MagneticRod extends ModRod
                     // replace blocks if possible, break the loop otherwise (the rest of the blocks are air ot liquid)
                     if (!solidBlockFound) break;
 
-                    tryExchange(level, currentPos, replacedPos);
+                    boolean result = tryExchange(level, currentPos, replacedPos);
+                    if (result) shifted = true;
                 }
             }
 
-        if (isShiftingOreFound || isDiamondOreFound || isAmethystFound || areRailsFound || isSculkVeinFound)
-            oreFoundEvent(player, new DetectorFlags(isShiftingOreFound, isDiamondOreFound, isAmethystFound, areRailsFound, isSculkVeinFound));
+        if (shifted || isDiamondOreFound || isAmethystFound || areRailsFound || isSculkVeinFound)
+        {
+            if (player instanceof ServerPlayer serverPlayer)
+                oreFoundEvent(serverPlayer, new DetectorFlags(shifted, isDiamondOreFound, isAmethystFound, areRailsFound, isSculkVeinFound));
+
+            return shifted;
+        }
+
+        return false;
     }
 
     protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
@@ -212,11 +221,15 @@ public class MagneticRod extends ModRod
             new PlaySoundPacket(SoundType.ORE_FOUND).sendToPlayer(player);
     }
 
-    private void tryExchange(Level level, BlockPos currentPos, BlockPos closerPos)
+    private boolean tryExchange(Level level, BlockPos currentPos, BlockPos closerPos)
     {
-        if (!isShiftingOre(level, currentPos)) return;
-        if (!canBeReplaced(level, closerPos)) return;
-        exchange(level, currentPos, closerPos);
+        if (!isShiftingOre(level, currentPos)) return false;
+        if (!canBeReplaced(level, closerPos)) return false;
+
+        if (!level.isClientSide())
+            exchange(level, currentPos, closerPos);
+
+        return true;
     }
 
     protected int getShiftingRadius()
@@ -248,8 +261,8 @@ public class MagneticRod extends ModRod
     {
         var currentBlockState = level.getBlockState(currentPos);
         var upperBlockState = level.getBlockState(closerPos);
-        level.setBlock(currentPos, upperBlockState, 11);
-        level.setBlock(closerPos, currentBlockState, 11);
+        level.setBlock(currentPos, upperBlockState, Block.UPDATE_ALL);
+        level.setBlock(closerPos, currentBlockState, Block.UPDATE_ALL);
     }
 
     protected boolean canBeReplaced(Level level, BlockPos pos)
