@@ -1,3 +1,9 @@
+## 📦 Version 2.9.1
+
+### 🐞 Fixes
+- **Magnetic rods** now cause exhaustion *only* when a block is affected in Magnetic Mode (no more stamina loss from blocked ores).
+
+
 ## 📦 Version 2.9.0 - The Lucky Update 😄
 
 ### 📝 Improvements
