@@ -76,14 +76,14 @@ Stay safe, stay curious — and always move forward. 🌿
 # 🛠️ Installation and Technical Information
 
 ## Installation
-- Make sure you have **Minecraft 1.21.1**, **1.21.4** or **1.21.5** with **NeoForge** installed.
+- Make sure you have **Minecraft 1.21.1**, **1.21.4**, **1.21.5** or **1.21.6** with **NeoForge** installed.
 - Download the mod `.jar` file.
 - Place it into your `mods` folder.
 - Launch the game and enjoy your adventure!
 
 ## Technical Details
 - **Developer:** Sergey Pekarchik (with testing and creative support by Tima Pekarchik)
-- **Supported NeoForge versions:** 1.21.1, 1.21.4 and 1.21.5
+- **Supported NeoForge versions:** 1.21.1, 1.21.4, 1.21.5 and 1.21.6
 - **Texture resolution:** 32×32
 - **Supported languages:** English, Belarusian, Russian
 
