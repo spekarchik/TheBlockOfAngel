@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Evoker extends Monster
 {
-    public Evoker(byte id)
+    public Evoker(int id)
     {
         super(id);
     }

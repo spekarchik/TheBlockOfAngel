@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class ZombieVillager extends Monster
 {
-    public ZombieVillager(byte id)
+    public ZombieVillager(int id)
     {
         super(id);
     }

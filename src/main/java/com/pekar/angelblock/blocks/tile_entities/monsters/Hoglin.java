@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 
 public class Hoglin extends Monster
 {
-    public Hoglin(byte id)
+    public Hoglin(int id)
     {
         super(id);
     }

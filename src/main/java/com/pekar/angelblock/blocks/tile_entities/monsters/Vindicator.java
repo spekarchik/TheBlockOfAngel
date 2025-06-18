@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Vindicator extends Monster
 {
-    public Vindicator(byte id)
+    public Vindicator(int id)
     {
         super(id);
     }

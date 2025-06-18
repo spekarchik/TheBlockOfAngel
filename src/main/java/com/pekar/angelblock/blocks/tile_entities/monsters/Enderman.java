@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 
 public class Enderman extends Monster
 {
-    public Enderman(byte id)
+    public Enderman(int id)
     {
         super(id);
     }

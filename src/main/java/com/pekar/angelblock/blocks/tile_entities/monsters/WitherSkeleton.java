@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class WitherSkeleton extends Monster
 {
-    public WitherSkeleton(byte id)
+    public WitherSkeleton(int id)
     {
         super(id);
     }

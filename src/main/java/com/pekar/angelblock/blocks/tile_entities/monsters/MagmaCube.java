@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class MagmaCube extends Monster
 {
-    public MagmaCube(byte id)
+    public MagmaCube(int id)
     {
         super(id);
     }

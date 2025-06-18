@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 public class Blaze extends Monster
 {
-    public Blaze(byte id)
+    public Blaze(int id)
     {
         super(id);
     }

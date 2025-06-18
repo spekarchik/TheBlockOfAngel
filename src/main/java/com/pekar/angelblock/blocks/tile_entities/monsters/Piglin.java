@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Piglin extends Monster
 {
-    public Piglin(byte id)
+    public Piglin(int id)
     {
         super(id);
     }

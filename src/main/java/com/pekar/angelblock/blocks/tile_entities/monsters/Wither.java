@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 
 public class Wither extends Monster
 {
-    public Wither(byte id)
+    public Wither(int id)
     {
         super(id);
     }

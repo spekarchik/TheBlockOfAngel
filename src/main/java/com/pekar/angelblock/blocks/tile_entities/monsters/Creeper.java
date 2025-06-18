@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 public class Creeper extends Monster
 {
-    public Creeper(byte id)
+    public Creeper(int id)
     {
         super(id);
     }

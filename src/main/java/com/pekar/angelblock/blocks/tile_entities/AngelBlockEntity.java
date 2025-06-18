@@ -16,11 +16,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity>
 {
@@ -29,7 +28,7 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
 
     private final Set<IMonster> monstersToIgnore = new HashSet<>();
     private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
-    private final Map<Byte, IMonster> monstersById = new HashMap<>();
+    private final Map<Integer, IMonster> monstersById = new HashMap<>();
     private boolean isActivated;
 
     public AngelBlockEntity(BlockPos blockPos, BlockState blockState)
@@ -130,12 +129,12 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     }
 
     @Override
-    protected void loadModTag(CompoundTag tag)
+    protected void loadModTag(ValueInput input)
     {
         monstersToIgnore.clear();
 
-        isActivated = tag.getBooleanOr(IsActivatedTagName, false);
-        byte[] array = tag.getByteArray(MonsterFilterTagName).orElse(new byte[]{});
+        isActivated = input.getBooleanOr(IsActivatedTagName, false);
+        var array = input.getIntArray(MonsterFilterTagName).orElse(new int[]{});
         for (var monsterId : array)
         {
             monstersToIgnore.add(monstersById.get(monsterId));
@@ -143,11 +142,11 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     }
 
     @Override
-    protected void saveModTag(CompoundTag tag)
+    protected void saveModTag(ValueOutput output)
     {
-        tag.putBoolean(IsActivatedTagName, isActivated);
+        output.putBoolean(IsActivatedTagName, isActivated);
 
-        byte[] array = new byte[monstersToIgnore.size()];
+        var array = new int[monstersToIgnore.size()];
 
         int i = 0;
         for (var monster : monstersToIgnore)
@@ -155,7 +154,23 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
             array[i++] = monster.getId();
         }
 
-        tag.putByteArray(MonsterFilterTagName, array);
+        output.putIntArray(MonsterFilterTagName, array);
+    }
+
+    @Override
+    protected void saveModTag(CompoundTag tag)
+    {
+        tag.putBoolean(IsActivatedTagName, isActivated);
+
+        var array = new int[monstersToIgnore.size()];
+
+        int i = 0;
+        for (var monster : monstersToIgnore)
+        {
+            array[i++] = monster.getId();
+        }
+
+        tag.putIntArray(MonsterFilterTagName, array);
     }
 
     private void addToMonsterMap(IMonster monster)

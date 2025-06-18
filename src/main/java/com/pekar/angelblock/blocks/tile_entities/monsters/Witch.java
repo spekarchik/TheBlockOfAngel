@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Witch extends Monster
 {
-    public Witch(byte id)
+    public Witch(int id)
     {
         super(id);
     }

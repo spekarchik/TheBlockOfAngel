@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 
 public class Guardian extends Monster
 {
-    public Guardian(byte id)
+    public Guardian(int id)
     {
         super(id);
     }

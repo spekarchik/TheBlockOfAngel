@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Breeze extends Monster
 {
-    public Breeze(byte id)
+    public Breeze(int id)
     {
         super(id);
     }

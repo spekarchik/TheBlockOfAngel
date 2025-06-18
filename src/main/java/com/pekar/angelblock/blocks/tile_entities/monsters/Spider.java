@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 
 public class Spider extends Monster
 {
-    public Spider(byte id)
+    public Spider(int id)
     {
         super(id);
     }

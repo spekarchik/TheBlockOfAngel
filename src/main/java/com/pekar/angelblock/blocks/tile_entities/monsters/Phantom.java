@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Phantom extends Monster
 {
-    public Phantom(byte id)
+    public Phantom(int id)
     {
         super(id);
     }

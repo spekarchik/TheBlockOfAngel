@@ -2,7 +2,7 @@ package com.pekar.angelblock.blocks.tile_entities.monsters;
 
 public class Monsters
 {
-    private static byte id = 0;
+    private static int id = 0;
 
     public static final IMonster Blaze = new Blaze(id++);
     public static final IMonster Creeper = new Creeper(id++);

@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class ElderGuardian extends Monster
 {
-    public ElderGuardian(byte id)
+    public ElderGuardian(int id)
     {
         super(id);
     }

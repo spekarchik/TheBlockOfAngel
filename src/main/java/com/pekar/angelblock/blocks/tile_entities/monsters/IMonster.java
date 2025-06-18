@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 
 public interface IMonster
 {
-    byte getId();
+    int getId();
     boolean belongs(LivingEntity livingEntity);
     Item getActionItem();
     EntityType<? extends Entity> getEntityType();

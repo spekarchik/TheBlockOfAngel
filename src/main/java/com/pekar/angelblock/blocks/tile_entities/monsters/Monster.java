@@ -4,16 +4,16 @@ import com.pekar.angelblock.blocks.tile_entities.spawn.ISpawnStrategy;
 
 abstract class Monster implements IMonster
 {
-    private final byte id;
+    private final int id;
     private ISpawnStrategy spawnStrategy;
 
-    protected Monster(byte id)
+    protected Monster(int id)
     {
         this.id = id;
     }
 
     @Override
-    public final byte getId()
+    public final int getId()
     {
         return id;
     }
@@ -21,7 +21,7 @@ abstract class Monster implements IMonster
     @Override
     public int hashCode()
     {
-        return Byte.valueOf(id).hashCode();
+        return Integer.valueOf(id).hashCode();
     }
 
     @Override

@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Ravager extends Monster
 {
-    public Ravager(byte id)
+    public Ravager(int id)
     {
         super(id);
     }

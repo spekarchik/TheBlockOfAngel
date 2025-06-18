@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class EnderDragon extends Monster
 {
-    public EnderDragon(byte id)
+    public EnderDragon(int id)
     {
         super(id);
     }

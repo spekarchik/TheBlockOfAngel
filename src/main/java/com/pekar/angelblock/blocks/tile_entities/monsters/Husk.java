@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Husk extends Monster
 {
-    public Husk(byte id)
+    public Husk(int id)
     {
         super(id);
     }

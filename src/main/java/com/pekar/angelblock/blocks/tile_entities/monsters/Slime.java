@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 
 public class Slime extends Monster
 {
-    public Slime(byte id)
+    public Slime(int id)
     {
         super(id);
     }

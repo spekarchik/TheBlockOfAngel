@@ -6,6 +6,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlockEntity>
 {
@@ -29,9 +31,14 @@ public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlock
         return entity instanceof Enemy;
     }
 
-    protected void loadModTag(CompoundTag tag)
+    protected void loadModTag(ValueInput input)
     {
-        damage = tag.getIntOr(DamageTagName, 0);
+        damage = input.getIntOr(DamageTagName, 0);
+    }
+
+    protected void saveModTag(ValueOutput output)
+    {
+        output.putInt(DamageTagName, damage);
     }
 
     protected void saveModTag(CompoundTag tag)

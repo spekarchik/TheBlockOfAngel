@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Creaking extends Monster
 {
-    public Creaking(byte id)
+    public Creaking(int id)
     {
         super(id);
     }

@@ -11,6 +11,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends BlockEntity implements BlockEntityTicker<T>
 {
@@ -31,17 +33,17 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void loadAdditional(ValueInput input)
     {
-        super.loadAdditional(tag, registries);
-        loadModTag(tag);
+        super.loadAdditional(input);
+        loadModTag(input);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void saveAdditional(ValueOutput output)
     {
-        super.saveAdditional(tag, registries);
-        saveModTag(tag);
+        super.saveAdditional(output);
+        saveModTag(output);
     }
 
     @Override
@@ -52,7 +54,9 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
         return tag;
     }
 
-    protected abstract void loadModTag(CompoundTag tag);
+    protected abstract void loadModTag(ValueInput input);
+
+    protected abstract void saveModTag(ValueOutput output);
 
     protected abstract void saveModTag(CompoundTag tag);
 

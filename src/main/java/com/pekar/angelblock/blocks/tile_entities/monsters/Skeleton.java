@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 
 public class Skeleton extends Monster
 {
-    public Skeleton(byte id)
+    public Skeleton(int id)
     {
         super(id);
     }

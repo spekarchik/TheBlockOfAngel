@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class CaveSpider extends Monster
 {
-    public CaveSpider(byte id)
+    public CaveSpider(int id)
     {
         super(id);
     }

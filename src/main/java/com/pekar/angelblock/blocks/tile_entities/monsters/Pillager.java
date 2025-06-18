@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Pillager extends Monster
 {
-    public Pillager(byte id)
+    public Pillager(int id)
     {
         super(id);
     }

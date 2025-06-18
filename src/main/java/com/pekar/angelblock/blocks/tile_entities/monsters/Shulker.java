@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Shulker extends Monster
 {
-    public Shulker(byte id)
+    public Shulker(int id)
     {
         super(id);
     }

@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 
 public class Ghast extends Monster
 {
-    public Ghast(byte id)
+    public Ghast(int id)
     {
         super(id);
     }
