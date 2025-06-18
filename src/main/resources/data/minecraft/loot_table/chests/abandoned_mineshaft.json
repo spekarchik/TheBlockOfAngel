@@ -5,34 +5,34 @@
       "rolls": 2.0,
       "bonus_rolls": 0.0,
       "entries":
-	  [
-		{
-			"type": "minecraft:item",
-			"weight": 3,
-			"functions": [
-				{
-					"function": "minecraft:set_count",
-					"count": {
-						"type": "minecraft:uniform",
-						"min": 0.0,
-						"max": 4.0
-					},
-					"add": false
-				}
-			],
-			"name": "angelblock:strength_pearl"
-		},
-		{
-			"type": "minecraft:item",
-			"weight": 4,
-			"name": "angelblock:miner_figure"
-		},
+      [
+        {
+            "type": "minecraft:item",
+            "weight": 3,
+            "functions": [
+                {
+                    "function": "minecraft:set_count",
+                    "count": {
+                        "type": "minecraft:uniform",
+                        "min": 0.0,
+                        "max": 4.0
+                    },
+                    "add": false
+                }
+            ],
+            "name": "angelblock:strength_pearl"
+        },
+        {
+            "type": "minecraft:item",
+            "weight": 4,
+            "name": "angelblock:miner_figure"
+        },
         {
           "type": "minecraft:empty",
           "weight": 2
         }
-	  ]
-	},
+      ]
+    },
     {
       "bonus_rolls": 0.0,
       "entries": [

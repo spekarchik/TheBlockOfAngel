@@ -9,17 +9,17 @@
       },
       "bonus_rolls": 0.0,
       "entries":
-	  [
-	    {
+      [
+        {
           "type": "minecraft:item",
           "weight": 2,
-		  "name": "angelblock:diamithic_armor_upgrade_kit"
-		},
-	    {
+          "name": "angelblock:diamithic_armor_upgrade_kit"
+        },
+        {
           "type": "minecraft:item",
           "weight": 2,
-		  "name": "angelblock:diamithic_tool_upgrade_kit"
-		},
+          "name": "angelblock:diamithic_tool_upgrade_kit"
+        },
         {
           "type": "minecraft:item",
           "weight": 1,
@@ -45,8 +45,8 @@
           "type": "minecraft:empty",
           "weight": 1
         }
-	  ]
-	},
+      ]
+    },
     {
       "rolls": {
         "type": "minecraft:uniform",
@@ -376,7 +376,18 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:saddle"
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:leather"
         },
         {
           "type": "minecraft:item",
@@ -399,8 +410,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "options": "#minecraft:on_good_loot",
-              "levels": 30.0
+              "levels": 30.0,
+              "options": "#minecraft:on_good_loot"
             }
           ],
           "name": "minecraft:book"

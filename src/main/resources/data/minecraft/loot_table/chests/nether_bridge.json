@@ -5,8 +5,8 @@
       "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries":
-	  [
-	    {
+      [
+        {
           "type": "minecraft:item",
           "functions": [
             {
@@ -20,9 +20,9 @@
             }
           ],
           "name": "angelblock:flame_stone"
-		}
-	  ]
-	},
+        }
+      ]
+    },
     {
       "rolls": {
         "type": "minecraft:uniform",
@@ -31,16 +31,16 @@
       },
       "bonus_rolls": 0.0,
       "entries":
-	  [
-	    {
+      [
+        {
           "type": "minecraft:item",
           "name": "angelblock:rendelithic_powder"
-		},
+        },
         {
           "type": "minecraft:empty",
           "weight": 2
         },
-	    {
+        {
           "type": "minecraft:item",
           "functions": [
             {
@@ -58,8 +58,8 @@
             }
           ],
           "name": "angelblock:rendelithic_primary_shovel"
-		},
-	    {
+        },
+        {
           "type": "minecraft:item",
           "functions": [
             {
@@ -77,9 +77,9 @@
             }
           ],
           "name": "angelblock:rendelithic_shovel"
-		}
-	  ]
-	},
+        }
+      ]
+    },
     {
       "rolls": {
         "type": "minecraft:uniform",

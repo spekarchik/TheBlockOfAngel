@@ -2,11 +2,11 @@
   "type": "minecraft:chest",
   "pools": [
     {
-	  "rolls": 1.0,
+      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries":
-	  [
-	    {
+      [
+        {
           "type": "minecraft:item",
           "weight": 9,
           "functions": [
@@ -20,20 +20,20 @@
               "add": false
             }
           ],
-		  "name": "angelblock:ancient_canine"
-		},
+          "name": "angelblock:ancient_canine"
+        },
         {
           "type": "minecraft:empty",
           "weight": 1
         }
-	  ]
-	},
+      ]
+    },
     {
-	  "rolls": 1.0,
+      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries":
-	  [
-	    {
+      [
+        {
           "type": "minecraft:item",
           "weight": 2,
           "functions": [
@@ -47,14 +47,14 @@
               "add": false
             }
           ],
-		  "name": "angelblock:flying_material_block"
-		},
+          "name": "angelblock:flying_material_block"
+        },
         {
           "type": "minecraft:empty",
           "weight": 3
         }
-	  ]
-	},
+      ]
+    },
     {
       "bonus_rolls": 0.0,
       "entries": [

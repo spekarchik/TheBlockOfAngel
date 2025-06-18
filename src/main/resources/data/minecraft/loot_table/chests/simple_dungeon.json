@@ -4,44 +4,55 @@
     {
       "rolls": 1.0,
       "bonus_rolls": 0.0,
-	  "entries":
-	  [
-		{
-			"type": "minecraft:item",
-			"weight": 1,
-			"name": "angelblock:miner_figure"
-		}
-	  ]
+      "entries":
+      [
+        {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "angelblock:miner_figure"
+        }
+      ]
     },
     {
       "rolls": 1.0,
       "bonus_rolls": 0.0,
-	  "entries":
-	  [
-		{
-			"type": "minecraft:item",
-			"functions": [
-				{
-					"function": "minecraft:set_count",
-					"count": {
-						"type": "minecraft:uniform",
-						"min": 1.0,
-						"max": 3.0
-					},
-					"add": false
-				}
-			],
-			"weight": 1,
-			"name": "angelblock:strength_pearl"
-		}
-	  ]
+      "entries":
+      [
+        {
+            "type": "minecraft:item",
+            "functions": [
+                {
+                    "function": "minecraft:set_count",
+                    "count": {
+                        "type": "minecraft:uniform",
+                        "min": 1.0,
+                        "max": 3.0
+                    },
+                    "add": false
+                }
+            ],
+            "weight": 1,
+            "name": "angelblock:strength_pearl"
+        }
+      ]
     },
     {
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:saddle",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:leather",
           "weight": 20
         },
         {

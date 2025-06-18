@@ -142,11 +142,15 @@
           "functions": [
             {
               "add": false,
-              "count": 1.0,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 1.0
+              },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:saddle",
+          "name": "minecraft:leather",
           "weight": 2
         },
         {
@@ -179,8 +183,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "options": "minecraft:swift_sneak",
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "minecraft:swift_sneak"
             }
           ],
           "name": "minecraft:book",
