@@ -74,7 +74,6 @@ public class Main
 
         EventRegistry.registerEvents();
         EventRegistry.registerEventsOnModBus(modEventBus);
-        ModDataComponents.register(modEventBus);
 
         // Register the item to a creative tab
         //modEventBus.addListener(this::addCreative);
