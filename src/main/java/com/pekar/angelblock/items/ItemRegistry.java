@@ -60,7 +60,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.register("bios_diamond", BiosDiamond::new);
     public static final DeferredItem<Item> END_SAPPHIRE = Main.ITEMS.register("end_sapphire", EndSapphire::new);
     public static final DeferredItem<Item> FLAME_STONE = Main.ITEMS.register("flame_stone", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> MARINE_CRYSTAL = Main.ITEMS.register("marine_crystal", () -> new ModItemWithDoubleHoverText());
+    public static final DeferredItem<Item> MARINE_CRYSTAL = Main.ITEMS.register("marine_crystal", MarineCrystal::new);
     public static final DeferredItem<Item> STRENGTH_PEARL = Main.ITEMS.register("strength_pearl", () -> new ModItemWithDoubleHoverText());
     public static final DeferredItem<Item> SUPER_CRYSTAL = Main.ITEMS.register("super_crystal", () -> new ModItem());
     public static final DeferredItem<Item> GUARDIAN_EYE = Main.ITEMS.register("guardian_eye", GuardianEye::new);

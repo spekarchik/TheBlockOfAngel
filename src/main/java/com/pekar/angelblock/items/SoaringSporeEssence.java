@@ -29,23 +29,19 @@ public class SoaringSporeEssence extends ModItemWithMultipleHoverText
         var level = player.level();
         var isClientSide = level.isClientSide();
 
+        if (entity instanceof Player) return InteractionResult.FAIL;
+
         if (player instanceof ServerPlayer serverPlayer)
         {
-            if (entity.hasEffect(MobEffects.GLOWING) && entity.hasEffect(MobEffects.SLOW_FALLING))
-            {
-                entity.removeEffect(MobEffects.GLOWING);
-                entity.removeEffect(MobEffects.SLOW_FALLING);
-                new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
-            }
-            else
+            if (!entity.hasEffect(MobEffects.GLOWING) || !entity.hasEffect(MobEffects.SLOW_FALLING))
             {
                 entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, MobEffectInstance.INFINITE_DURATION, 0, true, true));
                 entity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, MobEffectInstance.INFINITE_DURATION, 0, true, true));
                 new PlaySoundPacket(SoundEvents.ENCHANTMENT_TABLE_USE).sendToPlayer(serverPlayer);
-            }
 
-            if (!player.isCreative())
-                stack.shrink(1);
+                if (!player.isCreative())
+                    stack.shrink(1);
+            }
         }
 
         return InteractionResult.sidedSuccess(isClientSide);
@@ -56,7 +52,7 @@ public class SoaringSporeEssence extends ModItemWithMultipleHoverText
     {
         if (!utils.text.showExtendedDescription(tooltipComponents)) return;
 
-        for (int i = 1; i <= 3; i++)
+        for (int i = 1; i <= 4; i++)
         {
             var component = getDescription(i, false);
             tooltipComponents.add(component);
