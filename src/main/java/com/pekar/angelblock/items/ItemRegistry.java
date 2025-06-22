@@ -80,7 +80,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.registerItem("bios_diamond", BiosDiamond::new, new Item.Properties().trimMaterial(BIOS_DIAMOND_TRIM_MATERIAL));
     public static final DeferredItem<Item> END_SAPPHIRE = Main.ITEMS.registerItem("end_sapphire", EndSapphire::new);
     public static final DeferredItem<Item> FLAME_STONE = Main.ITEMS.registerItem("flame_stone", ModItemWithDoubleHoverText::new);
-    public static final DeferredItem<Item> MARINE_CRYSTAL = Main.ITEMS.registerItem("marine_crystal", ModItemWithDoubleHoverText::new);
+    public static final DeferredItem<Item> MARINE_CRYSTAL = Main.ITEMS.registerItem("marine_crystal", MarineCrystal::new);
     public static final DeferredItem<Item> STRENGTH_PEARL = Main.ITEMS.registerItem("strength_pearl", ModItemWithDoubleHoverText::new);
     public static final DeferredItem<Item> SUPER_CRYSTAL = Main.ITEMS.registerItem("super_crystal", ModItem::new);
     public static final DeferredItem<Item> GUARDIAN_EYE = Main.ITEMS.registerItem("guardian_eye", GuardianEye::new);
