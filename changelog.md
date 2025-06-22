@@ -1,3 +1,12 @@
+## 📦 Version 2.10.0
+
+### 🛠️ Changed
+- **Soaring Spore Essence** no longer removes effects — it only applies Glowing and Slow Falling.
+- **Marine Crystal** now cleanses all effects from mobs when used in mainhand.
+- Both **Soaring Spore Essence** and **Marine Crystal** do not affect players.
+- **Soaring Spore Essence** and **Marine Crystal** tooltips have been updated to reflect the changes.
+
+
 ## 📦 Version 2.9.1
 
 ### 🐞 Fixes
