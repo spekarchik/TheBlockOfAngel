@@ -34,6 +34,6 @@ public class ModItemWithHoverText extends ModItem implements ITooltipProvider
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        tooltip.addLine(getDescriptionId()).apply();
+        tooltip.addLine(getDescriptionId()).styledAs(descriptionStyle, true).apply();
     }
 }
