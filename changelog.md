@@ -1,3 +1,9 @@
+## 📦 Version 2.9.2
+
+### 🐞 Fixes
+- Fixed tooltip formatting: some phrases that should be italicized were rendered in plain text.
+
+
 ## 📦 Version 2.9.1
 
 ### 🐞 Fixes
