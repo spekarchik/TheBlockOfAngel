@@ -1,3 +1,10 @@
+## 📦 Version 2.10.1
+
+### 📝 Improvements
+- When a player with full health puts on leggings that increase maximum health, their health bar will now remain full (with the bonus). Previously, it stayed at the original value.
+- If the player had missing health, the health value remains unchanged as before.
+
+
 ## 📦 Version 2.10.0
 
 ### 🛠️ Changed
