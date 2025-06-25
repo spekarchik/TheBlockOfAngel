@@ -1,3 +1,24 @@
+## 📦 Version 2.11.0
+
+### ⚒️ Structural Changes
+- The former **Block of Angel** has been split into two separate blocks:
+  - **The Dormant Block of Angel** – crafted item, inert by default.
+  - **The Block of Angel** – activated version, only obtainable by using an **Echo Shard**.
+- Functionality remains unchanged: once activated, the block despawns any monsters within a 70-block radius. Echo Shard is **still not consumed** on activation.
+
+### 🪄 Rod of Angel Crafting Adjusted
+- The **Smithing Table** recipe for **The Rod of Angel** now explicitly requires the **activated** version of the block.
+- This change **closes a progression loophole**:
+  - Previously, it was possible to craft the Rod using an unactivated block and bypass the need to explore an Ancient City.
+  - Now, players must obtain an **Echo Shard** before crafting the Rod, ensuring **intended progression** through all major danger zones.
+
+### 🎯 Intent
+This refactor reinforces the original vision:
+- The **Echo Shard** is a required milestone;
+- The **Rod of Angel** is a reward for completing key encounters, not a shortcut through them;
+- **Crafting is no longer a bypass — it's a culmination.**
+
+
 ## 📦 Version 2.10.1
 
 ### 📝 Improvements
