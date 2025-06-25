@@ -10,4 +10,9 @@ public class ModBlockItem extends BlockItem
     {
         super(block, properties);
     }
+
+    protected String getItemDescriptionId()
+    {
+        return getDescriptionId();
+    }
 }

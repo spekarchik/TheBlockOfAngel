@@ -49,6 +49,8 @@ public class BlockRegistry
     public static final DeferredBlock<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", Block::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
 
+    public static final DeferredBlock<Block> INACTIVE_ANGEL_BLOCK = register("inactive_angel_block", InactiveAngelBlock::new, InactiveAngelBlockItem::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 1200F));
     public static final DeferredBlock<Block> ANGEL_BLOCK = register("angel_block", AngelBlock::new, AngelBlockItem::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 1200F)
                     .lightLevel(state -> 15));

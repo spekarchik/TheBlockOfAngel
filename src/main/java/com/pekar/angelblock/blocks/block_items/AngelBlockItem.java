@@ -41,7 +41,7 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
         {
             for (int i = 1; i <= 20; i++)
             {
-                tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 3).styledAs(TextStyle.Notice, i == 18).styledAs(TextStyle.DarkGray, i == 19).apply();
+                tooltip.addLine(getItemDescriptionId(), i).styledAs(TextStyle.Header, i == 3).styledAs(TextStyle.Notice, i == 18).styledAs(TextStyle.DarkGray, i == 19).apply();
             }
 
             tooltip.addEmptyLine();
@@ -51,7 +51,7 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
         {
             for (int i = 21; i <= 28; i++)
             {
-                tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 21).styledAs(TextStyle.DarkGray, i == 28).apply();
+                tooltip.addLine(getItemDescriptionId(), i).styledAs(TextStyle.Header, i == 21).styledAs(TextStyle.DarkGray, i == 28).apply();
             }
 
             tooltip.addEmptyLine();
