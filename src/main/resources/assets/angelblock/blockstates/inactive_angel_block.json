@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "":
+    {
+      "model": "angelblock:block/angel_block_inactive"
+    }
+  }
+}
