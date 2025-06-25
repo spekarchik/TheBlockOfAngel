@@ -6,7 +6,7 @@
   - **The Block of Angel** – activated version, only obtainable by using an **Echo Shard**.
 - Functionality remains unchanged: once activated, the block despawns any monsters within a 70-block radius. Echo Shard is **still not consumed** on activation.
 
-### 🪄 Rod of Angel Crafting Adjusted
+### ⚙️ Rod of Angel Crafting Adjusted
 - The **Smithing Table** recipe for **The Rod of Angel** now explicitly requires the **activated** version of the block.
 - This change **closes a progression loophole**:
   - Previously, it was possible to craft the Rod using an unactivated block and bypass the need to explore an Ancient City.
