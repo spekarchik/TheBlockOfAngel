@@ -25,7 +25,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:angel_block"
+                                                                        "items":  "angelblock:inactive_angel_block"
                                                                     }
                                                                 ]
                                                   }
@@ -54,7 +54,7 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:angel_block"
+                                    "angelblock:inactive_angel_block"
                                 ]
                 },
     "requirements":  [

@@ -25,14 +25,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class AngelBlock extends ModBlock implements EntityBlock
 {
-    public static final int MaxMonstersFilterValue = 5;
+    public static final int MaxMonstersFilterValue = 4;
     public static final IntegerProperty MONSTERS_IN_FILTER = IntegerProperty.create("monsters_in_filter", 0, MaxMonstersFilterValue);
 
     public AngelBlock(Properties properties)
     {
         super(properties);
 
-        registerDefaultState(this.stateDefinition.any().setValue(MONSTERS_IN_FILTER, MaxMonstersFilterValue));
+        registerDefaultState(this.stateDefinition.any().setValue(MONSTERS_IN_FILTER, 0));
     }
 
     @Override
@@ -41,12 +41,11 @@ public class AngelBlock extends ModBlock implements EntityBlock
         var blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof AngelBlockEntity angelBlockEntity)
         {
-            var interactionItemStack = player.getItemInHand(hand);
-            if (interactionItemStack.isEmpty()) return InteractionResult.FAIL;
+            if (stack.isEmpty()) return InteractionResult.FAIL;
 
             var isClientSide = level.isClientSide();
 
-            var interactionItem = interactionItemStack.getItem();
+            var interactionItem = stack.getItem();
             if (interactionItem == Items.ECHO_SHARD)
             {
                 var isReset = angelBlockEntity.resetFilter(player);
@@ -98,9 +97,14 @@ public class AngelBlock extends ModBlock implements EntityBlock
 
     public void setBlockStateValue(Level level, BlockPos pos, int value)
     {
-        var stateValue = Math.min(value, MaxMonstersFilterValue);
-        BlockState state = level.getBlockState(pos);
-        level.setBlock(pos, state.setValue(MONSTERS_IN_FILTER, stateValue), Block.UPDATE_ALL_IMMEDIATE);
+        if (value > MaxMonstersFilterValue)
+        {
+            level.setBlock(pos, BlockRegistry.INACTIVE_ANGEL_BLOCK.get().defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+            return;
+        }
+
+        var state = level.getBlockState(pos);
+        level.setBlock(pos, state.setValue(MONSTERS_IN_FILTER, value), Block.UPDATE_ALL_IMMEDIATE);
     }
 
     @Override

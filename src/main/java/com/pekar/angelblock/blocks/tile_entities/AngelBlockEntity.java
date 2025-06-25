@@ -1,7 +1,6 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.blocks.AngelBlock;
 import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
@@ -14,7 +13,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.HashMap;
@@ -25,12 +23,10 @@ import java.util.Set;
 public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity>
 {
     private static final String MonsterFilterTagName = Main.MODID + ":MonsterFilter";
-    private static final String IsActivatedTagName = Main.MODID + ":IsActive";
 
     private final Set<IMonster> monstersToIgnore = new HashSet<>();
     private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
     private final Map<Byte, IMonster> monstersById = new HashMap<>();
-    private boolean isActivated;
 
     public AngelBlockEntity(BlockPos blockPos, BlockState blockState)
     {
@@ -70,7 +66,7 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
 
     public boolean addMonsterToFilter(Item item, Player player)
     {
-        if (!monstersByActionItem.containsKey(item) || isInactive()) return false;
+        if (!monstersByActionItem.containsKey(item)) return false;
 
         var monster = monstersByActionItem.get(item);
         if (monstersToIgnore.contains(monster))
@@ -90,9 +86,8 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
 
     public boolean resetFilter(Player player)
     {
-        if (isActivated && monstersInFilter() == 0) return false;
+        if (monstersInFilter() == 0) return false;
 
-        isActivated = true;
         monstersToIgnore.clear();
 
         if (player instanceof ServerPlayer serverPlayer)
@@ -108,13 +103,6 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     public int monstersInFilter()
     {
         return monstersToIgnore.size();
-    }
-
-    @Override
-    public void tick(Level level, BlockPos pos, BlockState blockState, AngelBlockEntity entity)
-    {
-        if (isInactive()) return;
-        super.tick(level, pos, blockState, entity);
     }
 
     @Override
@@ -134,8 +122,8 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     {
         monstersToIgnore.clear();
 
-        isActivated = tag.getBoolean(IsActivatedTagName);
         byte[] array = tag.getByteArray(MonsterFilterTagName);
+
         for (var monsterId : array)
         {
             monstersToIgnore.add(monstersById.get(monsterId));
@@ -145,8 +133,6 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     @Override
     protected void saveModTag(CompoundTag tag)
     {
-        tag.putBoolean(IsActivatedTagName, isActivated);
-
         byte[] array = new byte[monstersToIgnore.size()];
 
         int i = 0;
@@ -162,10 +148,5 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     {
         monstersByActionItem.put(monster.getActionItem(), monster);
         monstersById.put(monster.getId(), monster);
-    }
-
-    private boolean isInactive()
-    {
-        return !isActivated || monstersInFilter() >= AngelBlock.MaxMonstersFilterValue;
     }
 }
