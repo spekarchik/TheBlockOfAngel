@@ -1,6 +1,6 @@
 package com.pekar.angelblock.network.packets;
 
-import com.pekar.angelblock.events.block_cleaner.LightCleaner;
+import com.pekar.angelblock.events.cleaners.LightCleaner;
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.Packet;
 import net.minecraft.network.FriendlyByteBuf;
