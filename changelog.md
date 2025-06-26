@@ -1,3 +1,9 @@
+## 📦 Version 2.11.2
+
+### 🐞 Fixes
+- Fixed a bug where the **Saltpeter Block** didn't drop anything when broken.
+
+
 ## 📦 Version 2.11.1
 
 ### 🐞 Fixes
