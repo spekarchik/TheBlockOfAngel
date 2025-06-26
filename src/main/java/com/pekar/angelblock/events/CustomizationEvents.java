@@ -25,7 +25,7 @@ public class CustomizationEvents implements IEventHandler
         if (state.getBlock() == Blocks.SMITHING_TABLE)
         {
             event.setCanceled(true); // Not the standard menu to be shown
-            event.setCancellationResult(level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
+            event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
 
             if (!level.isClientSide && player instanceof ServerPlayer serverPlayer)
             {
