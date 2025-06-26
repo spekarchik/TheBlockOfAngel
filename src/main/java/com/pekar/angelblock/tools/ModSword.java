@@ -1,7 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.utils.Utils;
-import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
+import com.pekar.angelblock.events.cleaners.BlockCleaner;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

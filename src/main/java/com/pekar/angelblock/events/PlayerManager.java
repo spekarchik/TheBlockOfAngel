@@ -3,7 +3,7 @@ package com.pekar.angelblock.events;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IArmorEvents;
-import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
+import com.pekar.angelblock.events.cleaners.BlockCleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.items.ItemRegistry;
