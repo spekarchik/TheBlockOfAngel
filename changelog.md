@@ -1,3 +1,9 @@
+## 📦 Version 2.11.1-beta
+
+### 🐞 Fixes
+- Fixed a bug where right-clicking the Smithing Table with armor in hand could accidentally equip the armor while also opening the custom menu.
+
+
 ## 📦 Version 2.11.0-beta
 
 ### ⚒️ Structural Changes
