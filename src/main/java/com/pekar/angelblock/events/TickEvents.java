@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.events.block_cleaner.BlockCleaner;
+import com.pekar.angelblock.events.cleaners.BlockCleaner;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
