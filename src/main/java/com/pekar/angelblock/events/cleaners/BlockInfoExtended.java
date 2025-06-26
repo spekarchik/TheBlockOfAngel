@@ -1,4 +1,4 @@
-package com.pekar.angelblock.events.block_cleaner;
+package com.pekar.angelblock.events.cleaners;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
