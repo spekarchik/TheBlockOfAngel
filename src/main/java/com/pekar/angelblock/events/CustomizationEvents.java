@@ -3,6 +3,7 @@ package com.pekar.angelblock.events;
 import com.pekar.angelblock.menus.CustomSmithingMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.Level;
@@ -24,6 +25,7 @@ public class CustomizationEvents implements IEventHandler
         if (state.getBlock() == Blocks.SMITHING_TABLE)
         {
             event.setCanceled(true); // Not the standard menu to be shown
+            event.setCancellationResult(level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
 
             if (!level.isClientSide && player instanceof ServerPlayer serverPlayer)
             {
