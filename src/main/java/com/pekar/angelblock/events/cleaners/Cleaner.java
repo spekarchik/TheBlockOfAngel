@@ -2,7 +2,6 @@ package com.pekar.angelblock.events.cleaners;
 
 import net.minecraft.world.entity.player.Player;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,11 +18,13 @@ public abstract class Cleaner
     {
         if (targets.isEmpty()) return;
 
-        Set<ITrackedTarget> targetsToRemove = new HashSet<>();
+        var iterator = targets.iterator();
 
-        for (var target : targets)
+        while (iterator.hasNext())
         {
+            var target = iterator.next();
             var targetBehavior = target.getBehavior();
+
             if (targetBehavior.shouldDecrement())
             {
                 target.decrementTick();
@@ -37,13 +38,8 @@ public abstract class Cleaner
             if (targetBehavior.shouldRemove())
             {
                 target.remove();
-                targetsToRemove.add(target);
+                iterator.remove();
             }
-        }
-
-        for (var target : targetsToRemove)
-        {
-            targets.remove(target);
         }
     }
 
@@ -51,23 +47,24 @@ public abstract class Cleaner
     {
         if (targets.isEmpty()) return;
 
-        Set<ITrackedTarget> targetsToRemove = new HashSet<>();
+        var iterator = targets.iterator();
 
-        for (var target : targets)
+        while (iterator.hasNext())
         {
+            var target = iterator.next();
+
             if (target.getOwner().getUUID().equals(player.getUUID()))
             {
                 if (target.getBehavior().canBeRemovedOnClean())
                 {
                     target.remove();
-                    targetsToRemove.add(target);
+                    iterator.remove();
+                }
+                else
+                {
+
                 }
             }
-        }
-
-        for (var target : targetsToRemove)
-        {
-            targets.remove(target);
         }
     }
 }
