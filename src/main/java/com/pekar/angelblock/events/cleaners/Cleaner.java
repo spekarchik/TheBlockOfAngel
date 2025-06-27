@@ -9,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class Cleaner
 {
     private static final Set<ITrackedTarget> targets = ConcurrentHashMap.newKeySet();
-    private static final double CloseDistanceToRemoveImmediately = 4.0;
 
     public static void add(ITrackedTarget trackedTarget)
     {
@@ -24,19 +23,21 @@ public abstract class Cleaner
 
         for (var target : targets)
         {
-            var pos = target.getPos();
-            double distance = target.getOwner().distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
-
-            if (distance > target.getDistanceToDecreaseSqr())
+            var targetBehavior = target.getBehavior();
+            if (targetBehavior.shouldDecrement())
             {
                 target.decrementTick();
             }
 
-            if (target.canBeRemoved() || distance > target.getDistanceToRemoveImmediatelySqr() ||
-                (target.needToRemoveWhenClosely() && distance <= CloseDistanceToRemoveImmediately))
+            if (targetBehavior.shouldReset())
             {
-                if (target.remove())
-                    targetsToRemove.add(target);
+                target.resetTick();
+            }
+
+            if (targetBehavior.shouldRemove())
+            {
+                target.remove();
+                targetsToRemove.add(target);
             }
         }
 
@@ -56,8 +57,11 @@ public abstract class Cleaner
         {
             if (target.getOwner().getUUID().equals(player.getUUID()))
             {
-                if (target.remove())
+                if (target.getBehavior().canBeRemovedOnClean())
+                {
+                    target.remove();
                     targetsToRemove.add(target);
+                }
             }
         }
 

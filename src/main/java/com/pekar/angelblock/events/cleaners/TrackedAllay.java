@@ -1,27 +1,30 @@
 package com.pekar.angelblock.events.cleaners;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
 
 public class TrackedAllay extends TrackedTarget<Allay>
 {
-    public TrackedAllay(Allay allay, BlockPos pos, Player owner)
+    public TrackedAllay(Allay allay, Player owner)
     {
-        super(allay, pos, owner, 6000, false, TrackedAllay::removeTarget, 10.0, 60.0);
+        super(allay, owner, 6000);
     }
 
-    private static boolean removeTarget(ITrackedTarget target)
+    @Override
+    public void remove()
     {
-        if (!(target instanceof TrackedAllay allayTarget)) return false;
+        getTargetInstance().discard();
+    }
 
-        var allay = allayTarget.getTargetInstance();
+    @Override
+    public String getId()
+    {
+        return "Allay:" + getTargetInstance().getUUID();
+    }
 
-        if (allay.isHolding(stack -> !stack.isEmpty())
-            || allay.hasCustomName()
-            || allay.isPersistenceRequired()) return false;
-
-        allay.discard();
-        return true;
+    @Override
+    protected ITargetBehavior createBehavior()
+    {
+        return new AllayTargetBehavior(this);
     }
 }
