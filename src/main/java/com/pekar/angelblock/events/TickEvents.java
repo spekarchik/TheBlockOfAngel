@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.events.cleaners.BlockCleaner;
+import com.pekar.angelblock.events.cleaners.Cleaner;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
@@ -12,7 +12,7 @@ public class TickEvents implements IEventHandler
         var level = event.getLevel();
         if (level.isClientSide) return;
 
-        BlockCleaner.decrementOrRemove();
+        Cleaner.decrementOrRemove();
 //        LightCleaner.decrementOrRemove();
     }
 
