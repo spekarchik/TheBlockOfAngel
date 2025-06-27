@@ -45,13 +45,13 @@ public class BlockInfo
         }
         else
         {
-            if (!(obj instanceof BlockInfoExtended))
+            if (!(obj instanceof BlockInfo))
             {
                 return false;
             }
         }
 
-        BlockInfoExtended other = (BlockInfoExtended) obj;
+        var other = (BlockInfo) obj;
         return pos.equals(other.pos);
     }
 
