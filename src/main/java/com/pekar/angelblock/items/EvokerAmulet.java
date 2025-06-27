@@ -1,5 +1,7 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.events.cleaners.Cleaner;
+import com.pekar.angelblock.events.cleaners.TrackedAllay;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,9 +36,14 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
 
             if (allays.size() < 3)
             {
-                var allay = EntityType.ALLAY.spawn(serverLevel, itemStack, player, player.getOnPos().above(5), EntitySpawnReason.NATURAL, true, true);
+                var allay = EntityType.ALLAY.spawn(serverLevel, itemStack, player, player.blockPosition().relative(player.getDirection(), 2).above(), EntitySpawnReason.SPAWN_ITEM_USE, true, true);
                 if (allay != null)
+                {
                     level.getChunk(player.getOnPos()).addEntity(allay);
+
+                    var targetToTrack = new TrackedAllay(allay, player);
+                    Cleaner.add(targetToTrack);
+                }
 
                 if (player instanceof ServerPlayer serverPlayer)
                     new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);

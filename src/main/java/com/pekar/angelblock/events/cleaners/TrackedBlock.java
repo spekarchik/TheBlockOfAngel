@@ -6,20 +6,45 @@ import net.minecraft.world.level.block.Block;
 
 public class TrackedBlock extends TrackedTarget<Block>
 {
+    private final boolean removeWhenClosely;
+    private final BlockPos pos;
+
     public TrackedBlock(Block block, BlockPos pos, Player owner, int ticksBeforeRemoving, boolean removeWhenClosely)
     {
-        super(block, pos, owner, ticksBeforeRemoving, removeWhenClosely, TrackedBlock::removeTarget, 10.0, 60.0);
+        super(block, owner, ticksBeforeRemoving);
+        this.pos = pos;
+        this.removeWhenClosely = removeWhenClosely;
     }
 
-    private static boolean removeTarget(ITrackedTarget target)
+    @Override
+    protected ITargetBehavior createBehavior()
     {
-        var level = target.getLevel();
-        var pos = target.getPos();
+        return new BlockTargetBehavior(this);
+    }
+
+    @Override
+    public void remove()
+    {
+        var level = getLevel();
         if (!level.isEmptyBlock(pos))
         {
             level.destroyBlock(pos, false /*drop items*/);
         }
+    }
 
-        return true;
+    @Override
+    public String getId()
+    {
+        return getTargetInstance().getDescriptionId() + pos.asLong();
+    }
+
+    public BlockPos getPos()
+    {
+        return pos;
+    }
+
+    public boolean needToRemoveWhenClosely()
+    {
+        return removeWhenClosely;
     }
 }

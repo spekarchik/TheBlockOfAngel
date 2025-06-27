@@ -1,20 +1,18 @@
 package com.pekar.angelblock.events.cleaners;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public interface ITrackedTarget
 {
-    BlockPos getPos();
+    ITargetBehavior getBehavior();
     Player getOwner();
     Level getLevel();
-    int getTicksBeforeRemoving();
-    boolean needToRemoveWhenClosely();
-    boolean remove();
-    void decrementTick();
-    boolean canBeRemoved();
+    int getTicksLeft();
 
-    double getDistanceToDecreaseSqr();
-    double getDistanceToRemoveImmediatelySqr();
+    void decrementTick();
+    void resetTick();
+    void remove();
+
+    String getId();
 }
