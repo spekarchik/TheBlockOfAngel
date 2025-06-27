@@ -28,8 +28,9 @@ public class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
     @Override
     public boolean shouldRemove()
     {
-        if (target.getTicksLeft() <= 0)
-            return true;
+        if (isPersistent()) return false;
+
+        if (target.getTicksLeft() <= 0) return true;
 
         var distanceToOwner = getDistanceToOwner();
 
