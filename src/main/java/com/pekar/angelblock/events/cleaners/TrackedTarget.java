@@ -1,41 +1,37 @@
 package com.pekar.angelblock.events.cleaners;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-
-import java.util.function.Predicate;
 
 public abstract class TrackedTarget<T> implements ITrackedTarget
 {
     private final T targetInstance;
-    private final BlockPos pos;
     private final Player owner;
-    private int ticksBeforeRemoving;
-    private final boolean removeWhenClosely;
-    private final Predicate<ITrackedTarget> doOnRemove;
+    private int ticksLeftBeforeRemoving;
+    private final int ticksBeforeRemoving;
     private final Level level;
-    private final double distanceToDecreaseSqr;
-    private final double distanceToRemoveImmediatelySqr;
+    private ITargetBehavior behavior;
 
-    public TrackedTarget(T targetInstance, BlockPos pos, Player owner, int ticksBeforeRemoving, boolean removeWhenClosely,
-                         Predicate<ITrackedTarget> doOnRemove, double distanceToDecrease, double distanceToRemoveImmediately)
+    public TrackedTarget(T targetInstance,
+                         Player owner,
+                         int ticksBeforeRemoving)
     {
         this.targetInstance = targetInstance;
-        this.pos = pos;
         this.owner = owner;
         this.ticksBeforeRemoving = ticksBeforeRemoving;
-        this.removeWhenClosely = removeWhenClosely;
-        this.doOnRemove = doOnRemove;
+        this.ticksLeftBeforeRemoving = ticksBeforeRemoving;
         this.level = owner.level();
-        this.distanceToDecreaseSqr = distanceToDecrease * distanceToDecrease;
-        this.distanceToRemoveImmediatelySqr = distanceToRemoveImmediately * distanceToRemoveImmediately;
     }
 
     @Override
-    public BlockPos getPos()
+    public final ITargetBehavior getBehavior()
     {
-        return pos;
+        if (behavior == null)
+        {
+            behavior = createBehavior();
+        }
+
+        return behavior;
     }
 
     @Override
@@ -51,33 +47,21 @@ public abstract class TrackedTarget<T> implements ITrackedTarget
     }
 
     @Override
-    public int getTicksBeforeRemoving()
+    public int getTicksLeft()
     {
-        return ticksBeforeRemoving;
-    }
-
-    @Override
-    public boolean needToRemoveWhenClosely()
-    {
-        return removeWhenClosely;
-    }
-
-    @Override
-    public boolean remove()
-    {
-        return doOnRemove.test(this);
+        return ticksLeftBeforeRemoving;
     }
 
     @Override
     public void decrementTick()
     {
-        --ticksBeforeRemoving;
+        --ticksLeftBeforeRemoving;
     }
 
     @Override
-    public boolean canBeRemoved()
+    public void resetTick()
     {
-        return ticksBeforeRemoving <= 0;
+        ticksLeftBeforeRemoving = ticksBeforeRemoving;
     }
 
     @Override
@@ -99,31 +83,16 @@ public abstract class TrackedTarget<T> implements ITrackedTarget
         return getId().equals(other.getId());
     }
 
-    private String getId()
-    {
-        return targetInstance.getClass().getName() + pos.asLong();
-    }
-
     @Override
     public int hashCode()
     {
-        return pos.hashCode();
-    }
-
-    @Override
-    public double getDistanceToDecreaseSqr()
-    {
-        return distanceToDecreaseSqr;
-    }
-
-    @Override
-    public double getDistanceToRemoveImmediatelySqr()
-    {
-        return distanceToRemoveImmediatelySqr;
+        return getId().hashCode();
     }
 
     protected final T getTargetInstance()
     {
         return targetInstance;
     }
+
+    protected abstract ITargetBehavior createBehavior();
 }
