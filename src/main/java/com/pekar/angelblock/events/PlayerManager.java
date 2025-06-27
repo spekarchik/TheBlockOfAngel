@@ -3,7 +3,7 @@ package com.pekar.angelblock.events;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IArmorEvents;
-import com.pekar.angelblock.events.cleaners.BlockCleaner;
+import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.items.ItemRegistry;
@@ -72,7 +72,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event)
     {
         var player = event.getEntity();
-        BlockCleaner.clean(player);
+        Cleaner.clean(player);
 //        LightCleaner.clean(player);
         players.remove(event.getEntity().getUUID());
     }
@@ -85,7 +85,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         if (player == null) return;
 
         var playerEntity = player.getEntity();
-        BlockCleaner.clean(playerEntity);
+        Cleaner.clean(playerEntity);
 //        LightCleaner.clean(playerEntity);
 
         for (IArmorEvents armor : player.getArmorTypesUsed())

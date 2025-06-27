@@ -1,7 +1,8 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.events.cleaners.Cleaner;
+import com.pekar.angelblock.events.cleaners.TrackedBlock;
 import com.pekar.angelblock.utils.Utils;
-import com.pekar.angelblock.events.cleaners.BlockCleaner;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,7 +16,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -245,7 +248,8 @@ public class ModSword extends Item implements IModTool
 
         level.setBlock(pos, Blocks.COBWEB.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         int increment = Utils.random.nextInt(TimeThreshold);
-        BlockCleaner.add(player, pos, WebLifeTime + increment, false, true);
+        var targetToRemove = new TrackedBlock(Blocks.COBWEB, pos, player, WebLifeTime + increment, true);
+        Cleaner.add(targetToRemove);
 
         // no need to call `damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);`
     }
@@ -307,9 +311,12 @@ public class ModSword extends Item implements IModTool
 
         int increment = Utils.random.nextInt(TimeThreshold);
 
-        BlockCleaner.add(player, pos.above(3), CactusLifeTime + increment, false, false);
-        BlockCleaner.add(player, pos.above(2), CactusLifeTime + increment + 1, false, false);
-        BlockCleaner.add(player, pos.above(), CactusLifeTime + increment + 2, false, false);
+        var targetToRemove1 = new TrackedBlock(Blocks.CACTUS, pos.above(3), player, CactusLifeTime + increment, false);
+        var targetToRemove2 = new TrackedBlock(Blocks.CACTUS, pos.above(2), player, CactusLifeTime + increment + 1, false);
+        var targetToRemove3 = new TrackedBlock(Blocks.CACTUS, pos.above(), player, CactusLifeTime + increment + 2, false);
+        Cleaner.add(targetToRemove1);
+        Cleaner.add(targetToRemove2);
+        Cleaner.add(targetToRemove3);
 
         return true;
     }
