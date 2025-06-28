@@ -3,6 +3,10 @@ package com.pekar.angelblock.items;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.cleaners.TrackedAllay;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
+import com.pekar.angelblock.tooltip.TextStyle;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -13,9 +17,14 @@ import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 
-public class EvokerAmulet extends ModItemWithDoubleHoverText
+import java.util.function.Consumer;
+
+public class EvokerAmulet extends ModItem implements ITooltipProvider
 {
     private static final double EFFECTIVE_RADIUS = 120.0;
 
@@ -51,5 +60,25 @@ public class EvokerAmulet extends ModItemWithDoubleHoverText
         }
 
         return sidedSuccess(level.isClientSide());
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
+    {
+        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
+
+        for (int i = 1; i <= 3; i++)
+        {
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.DarkGray, i == 2)
+                    .styledAs(TextStyle.Notice, i == 3)
+                    .apply();
+        }
     }
 }
