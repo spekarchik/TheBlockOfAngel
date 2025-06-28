@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-class TrackedAllaysData extends SavedData
+public class TrackedAllaysData extends SavedData
 {
     private final HashSet<TrackedAllayData> saved;
 
