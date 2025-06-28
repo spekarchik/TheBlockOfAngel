@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.cleaners;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 
@@ -23,9 +24,15 @@ public class TrackedBlock extends TrackedTarget<Block>
     }
 
     @Override
+    public ServerLevel getTargetLevel()
+    {
+        return (ServerLevel) getOwner().level();
+    }
+
+    @Override
     public void remove()
     {
-        var level = getLevel();
+        var level = getTargetLevel();
         if (!level.isEmptyBlock(pos))
         {
             level.destroyBlock(pos, false /*drop items*/);
