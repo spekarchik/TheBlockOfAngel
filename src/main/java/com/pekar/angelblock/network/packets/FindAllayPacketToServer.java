@@ -5,6 +5,7 @@ import com.pekar.angelblock.events.cleaners.TrackedAllaysData;
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.IPacket;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
 public class FindAllayPacketToServer extends ClientToServerPacket
@@ -12,7 +13,7 @@ public class FindAllayPacketToServer extends ClientToServerPacket
     @Override
     public void onReceive(ServerPlayer player)
     {
-        var level = player.level();
+        var level = (ServerLevel) player.level();
         var storage = TrackedAllaysData.get(level);
         var trackedAllays = TrackedAllaysData.restoreAllays(level, storage);
         for (var target : trackedAllays)
