@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events.cleaners;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
 
@@ -11,9 +12,18 @@ public class TrackedAllay extends TrackedTarget<Allay>
     }
 
     @Override
+    public ServerLevel getTargetLevel()
+    {
+        return (ServerLevel) getTargetInstance().level();
+    }
+
+    @Override
     public void remove()
     {
-        getTargetInstance().discard();
+        var targetInstance = getTargetInstance();
+
+        if (!targetInstance.isRemoved())
+            targetInstance.discard();
     }
 
     @Override

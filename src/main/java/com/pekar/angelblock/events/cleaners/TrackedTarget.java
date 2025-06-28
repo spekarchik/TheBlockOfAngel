@@ -1,7 +1,6 @@
 package com.pekar.angelblock.events.cleaners;
 
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 
 public abstract class TrackedTarget<T> implements ITrackedTarget
 {
@@ -9,7 +8,6 @@ public abstract class TrackedTarget<T> implements ITrackedTarget
     private final Player owner;
     private int ticksLeftBeforeRemoving;
     private final int ticksBeforeRemoving;
-    private final Level level;
     private ITargetBehavior behavior;
 
     public TrackedTarget(T targetInstance,
@@ -20,7 +18,6 @@ public abstract class TrackedTarget<T> implements ITrackedTarget
         this.owner = owner;
         this.ticksBeforeRemoving = ticksBeforeRemoving;
         this.ticksLeftBeforeRemoving = ticksBeforeRemoving;
-        this.level = owner.level();
     }
 
     @Override
@@ -38,12 +35,6 @@ public abstract class TrackedTarget<T> implements ITrackedTarget
     public Player getOwner()
     {
         return owner;
-    }
-
-    @Override
-    public Level getLevel()
-    {
-        return level;
     }
 
     @Override

@@ -6,4 +6,6 @@ public interface ITargetBehavior
     boolean shouldReset();
     boolean shouldRemove();
     boolean canBeRemovedOnClean();
+    void onRemove();
+    void onUnableToRemove();
 }

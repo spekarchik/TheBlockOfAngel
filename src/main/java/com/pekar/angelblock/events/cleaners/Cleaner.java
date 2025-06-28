@@ -55,14 +55,16 @@ public abstract class Cleaner
 
             if (target.getOwner().getUUID().equals(player.getUUID()))
             {
-                if (target.getBehavior().canBeRemovedOnClean())
+                var behavior = target.getBehavior();
+                if (behavior.canBeRemovedOnClean())
                 {
                     target.remove();
                     iterator.remove();
+                    behavior.onRemove();
                 }
                 else
                 {
-
+                    behavior.onUnableToRemove();
                 }
             }
         }
