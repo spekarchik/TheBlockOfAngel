@@ -30,7 +30,6 @@ class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
     @Override
     public boolean shouldRemove()
     {
-        var targetInstance = target.getTargetInstance();
         if (isDied(target.getTargetInstance())) return true;
 
         if (isPersistent()) return false;
