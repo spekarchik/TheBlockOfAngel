@@ -1,14 +1,14 @@
 package com.pekar.angelblock.events.cleaners;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.level.saveddata.SavedDataType;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +24,20 @@ public class TrackedAllaysData extends SavedData
     public TrackedAllaysData()
     {
         this.saved = new HashSet<>();
+    }
+
+    @Override
+    public CompoundTag save(CompoundTag tag, HolderLookup.Provider provider)
+    {
+        ListTag list = new ListTag();
+
+        for (TrackedAllayData data : saved)
+        {
+            list.add(data.save());
+        }
+
+        tag.put("Tracked", list);
+        return tag;
     }
 
     public void store(TrackedAllay allay)
@@ -54,7 +68,7 @@ public class TrackedAllaysData extends SavedData
 
     public static TrackedAllaysData get(ServerLevel level)
     {
-        return level.getDataStorage().computeIfAbsent(TYPE);
+        return level.getDataStorage().computeIfAbsent(TYPE, "tracked_allays");
     }
 
     public static Set<TrackedAllay> restoreAllays(ServerPlayer player, TrackedAllaysData data)
@@ -83,18 +97,20 @@ public class TrackedAllaysData extends SavedData
         return result;
     }
 
-    public static final Codec<TrackedAllaysData> CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    Codec.list(TrackedAllayDataCodec.CODEC)
-                            .xmap(HashSet::new, ArrayList::new)
-                            .fieldOf("Tracked")
-                            .forGetter(data -> data.saved)
-            ).apply(instance, TrackedAllaysData::new)
-    );
+    public static final SavedData.Factory<TrackedAllaysData> TYPE = new SavedData.Factory<>(
+            TrackedAllaysData::new,
+            (compound, provider) -> {
+                ListTag list = compound.getList("Tracked", Tag.TAG_COMPOUND);
+                HashSet<TrackedAllayData> loaded = new HashSet<>();
 
-    public static final SavedDataType<TrackedAllaysData> TYPE = new SavedDataType<>(
-            "tracked_allays",
-            ctx -> new TrackedAllaysData(),
-            ctx -> CODEC
+                for (Tag tag : list) {
+                    if (tag instanceof CompoundTag entry) {
+                        loaded.add(TrackedAllayData.load(entry));
+                    }
+                }
+
+                return new TrackedAllaysData(loaded);
+            },
+            null
     );
 }

@@ -21,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class EvokerAmulet extends ModItem implements ITooltipProvider
 {
@@ -57,9 +57,9 @@ public class EvokerAmulet extends ModItem implements ITooltipProvider
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> component, TooltipFlag flag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag flag)
     {
-        ITooltipProvider.appendHoverText(this, stack, context, display, component, flag);
+        ITooltipProvider.appendHoverText(this, stack, context, components, flag);
     }
 
     @Override
