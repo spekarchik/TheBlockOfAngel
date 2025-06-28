@@ -1,6 +1,8 @@
 package com.pekar.angelblock.events.cleaners;
 
-public class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
+import net.minecraft.world.entity.animal.allay.Allay;
+
+class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
 {
     private static final double DistanceToDecrease = 16.0;
     private static final double DistanceToRemoveImmediately = 60.0;
@@ -28,11 +30,12 @@ public class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
     @Override
     public boolean shouldRemove()
     {
+        var targetInstance = target.getTargetInstance();
+        if (isDied(target.getTargetInstance())) return true;
+
         if (isPersistent()) return false;
 
         if (target.getTicksLeft() <= 0) return true;
-
-        if (target.getTargetInstance().isRemoved()) return true;
 
         var distanceToOwner = getDistanceToOwner();
 
@@ -42,19 +45,21 @@ public class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
     @Override
     public boolean canBeRemovedOnClean()
     {
+        if (isDied(target.getTargetInstance())) return true;
+
         return !isPersistent();
     }
 
     @Override
     public void onRemove()
     {
-        TrackedAllaysData.get(target.getTargetLevel()).untrack(target);
+        AllayManager.removeFromStorage(target);
     }
 
     @Override
     public void onUnableToRemove()
     {
-        TrackedAllaysData.get(target.getTargetLevel()).track(target);
+        AllayManager.store(target);
     }
 
     private double getDistanceToOwner()
@@ -65,8 +70,18 @@ public class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
     private boolean isPersistent()
     {
         var allay = target.getTargetInstance();
+        var removalReason = allay.getRemovalReason();
+        if (allay.isRemoved() && removalReason != null && !removalReason.shouldDestroy()) return true;
 
         return allay.isHolding(stack -> !stack.isEmpty())
                 || allay.hasCustomName();
+    }
+
+    private static boolean isDied(Allay targetInstance)
+    {
+        var removalReason = targetInstance.getRemovalReason();
+
+        if (targetInstance.isRemoved() && removalReason != null && removalReason.shouldDestroy()) return true;
+        return false;
     }
 }

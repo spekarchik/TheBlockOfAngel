@@ -11,39 +11,44 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TrackedAllaysData extends SavedData
+class TrackedAllaysData extends SavedData
 {
-    private final HashSet<TrackedAllayData> tracked;
+    private final HashSet<TrackedAllayData> saved;
 
-    public TrackedAllaysData(HashSet<TrackedAllayData> tracked)
+    public TrackedAllaysData(HashSet<TrackedAllayData> saved)
     {
-        this.tracked = tracked;
+        this.saved = saved;
     }
 
     public TrackedAllaysData()
     {
-        this.tracked = new HashSet<>();
+        this.saved = new HashSet<>();
     }
 
-    public void track(TrackedAllay allay)
+    public void store(TrackedAllay allay)
     {
-        tracked.add(new TrackedAllayData(allay.getTargetInstance().getUUID(), allay.getOwner().getUUID()));
+        saved.add(new TrackedAllayData(allay.getTargetInstance().getUUID(), allay.getOwner().getUUID()));
         setDirty();
     }
 
-    public void untrack(TrackedAllay allay)
+    public void remove(TrackedAllay allay)
     {
         var allayData = new TrackedAllayData(allay.getTargetInstance().getUUID(), allay.getOwner().getUUID());
 
-        if (!tracked.contains(allayData)) return;
+        remove(allayData);
+    }
 
-        tracked.remove(allayData);
+    private void remove(TrackedAllayData data)
+    {
+        if (!saved.contains(data)) return;
+
+        saved.remove(data);
         setDirty();
     }
 
-    public Set<TrackedAllayData> getTracked()
+    public Set<TrackedAllayData> getSaved()
     {
-        return tracked;
+        return saved;
     }
 
     public static TrackedAllaysData get(ServerLevel level)
@@ -55,13 +60,17 @@ public class TrackedAllaysData extends SavedData
     {
         Set<TrackedAllay> result = new HashSet<>();
 
-        for (TrackedAllayData dto : data.getTracked())
+        for (TrackedAllayData dto : data.getSaved())
         {
             var owner = level.getPlayerByUUID(dto.ownerUuid());
             if (owner == null) continue;
 
             var entity = level.getEntity(dto.allayUuid());
-            if (!(entity instanceof Allay allay)) continue;
+            if (!(entity instanceof Allay allay))
+            {
+                get(level).remove(dto);
+                continue;
+            }
 
             var tracked = new TrackedAllay(allay, owner);
             result.add(tracked);
@@ -75,7 +84,7 @@ public class TrackedAllaysData extends SavedData
                     Codec.list(TrackedAllayDataCodec.CODEC)
                             .xmap(HashSet::new, ArrayList::new)
                             .fieldOf("Tracked")
-                            .forGetter(data -> data.tracked)
+                            .forGetter(data -> data.saved)
             ).apply(instance, TrackedAllaysData::new)
     );
 
@@ -84,5 +93,4 @@ public class TrackedAllaysData extends SavedData
             ctx -> new TrackedAllaysData(),
             ctx -> CODEC
     );
-
 }
