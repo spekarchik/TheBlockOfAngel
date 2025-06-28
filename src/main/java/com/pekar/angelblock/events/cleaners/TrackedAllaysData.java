@@ -3,6 +3,7 @@ package com.pekar.angelblock.events.cleaners;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
@@ -56,12 +57,15 @@ public class TrackedAllaysData extends SavedData
         return level.getDataStorage().computeIfAbsent(TYPE);
     }
 
-    public static Set<TrackedAllay> restoreAllays(ServerLevel level, TrackedAllaysData data)
+    public static Set<TrackedAllay> restoreAllays(ServerPlayer player, TrackedAllaysData data)
     {
         Set<TrackedAllay> result = new HashSet<>();
+        var level = (ServerLevel) player.level();
 
         for (TrackedAllayData dto : data.getSaved())
         {
+            if (!player.getUUID().equals(dto.ownerUuid())) continue;
+
             var owner = level.getPlayerByUUID(dto.ownerUuid());
             if (owner == null) continue;
 

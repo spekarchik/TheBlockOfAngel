@@ -15,7 +15,7 @@ public class FindAllayPacketToServer extends ClientToServerPacket
     {
         var level = (ServerLevel) player.level();
         var storage = TrackedAllaysData.get(level);
-        var trackedAllays = TrackedAllaysData.restoreAllays(level, storage);
+        var trackedAllays = TrackedAllaysData.restoreAllays(player, storage);
         for (var target : trackedAllays)
         {
             Cleaner.add(target);
