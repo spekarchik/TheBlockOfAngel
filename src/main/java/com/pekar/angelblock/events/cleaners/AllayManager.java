@@ -1,20 +1,14 @@
 package com.pekar.angelblock.events.cleaners;
 
-import net.minecraft.server.level.ServerLevel;
+import com.pekar.angelblock.network.packets.FindAllayPacketToClient;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 public abstract class AllayManager
 {
     public static void restoreSavedAllays(Player player)
     {
-        var level = (ServerLevel) player.level();
-        var storage = TrackedAllaysData.get(level);
-        var trackedAllays = TrackedAllaysData.restoreAllays(level, storage);
-        for (var target : trackedAllays)
-        {
-            Cleaner.add(target);
-            storage.remove(target);
-        }
+        new FindAllayPacketToClient().sendToPlayer((ServerPlayer) player);
     }
 
     public static void removeFromStorage(TrackedAllay allay)
