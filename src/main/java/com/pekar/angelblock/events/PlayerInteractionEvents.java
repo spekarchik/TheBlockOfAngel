@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.cleaners.AllayManager;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
@@ -188,7 +189,7 @@ public class PlayerInteractionEvents implements IEventHandler
                 if (p instanceof LivingEntity livingEntity)
                     protectPlayer(livingEntity);
                 if (p instanceof Player player)
-                    PlayerManager.restoreTrackedAllays(player);
+                    AllayManager.restoreSavedAllays(player);
             };
 
             TeleportTransition transition = serverPlayer.findRespawnPositionAndUseSpawnBlock(true, postTeleportTransition);

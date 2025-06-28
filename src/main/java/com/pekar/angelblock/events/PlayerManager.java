@@ -3,8 +3,8 @@ package com.pekar.angelblock.events;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IArmorEvents;
+import com.pekar.angelblock.events.cleaners.AllayManager;
 import com.pekar.angelblock.events.cleaners.Cleaner;
-import com.pekar.angelblock.events.cleaners.TrackedAllaysData;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.items.ItemRegistry;
@@ -12,7 +12,6 @@ import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
@@ -51,7 +50,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
         var entity = event.getEntity();
 
-        restoreTrackedAllays(entity);
+        AllayManager.restoreSavedAllays(entity);
 
         IPlayer player = new Player(entity);
         players.put(player.getEntity().getUUID(), player);
@@ -98,7 +97,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
         var entity = event.getEntity();
 
-        restoreTrackedAllays(entity);
+        AllayManager.restoreSavedAllays(entity);
 
         IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
@@ -109,18 +108,6 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         }
     }
 
-    public static void restoreTrackedAllays(net.minecraft.world.entity.player.Player entity)
-    {
-        var level = (ServerLevel) entity.level();
-        var data = TrackedAllaysData.get(level);
-        var trackedAllays = TrackedAllaysData.restoreAllays(level, data);
-        for (var target : trackedAllays)
-        {
-            Cleaner.add(target);
-            data.untrack(target);
-        }
-    }
-
     @SubscribeEvent
     public void onPlayerClone(PlayerEvent.Clone event)
     {
@@ -128,7 +115,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
         if (entity.level().isClientSide()) return;
 
-        restoreTrackedAllays(entity);
+        AllayManager.restoreSavedAllays(entity);
 
         IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
