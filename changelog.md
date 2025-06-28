@@ -1,3 +1,24 @@
+## 📦 Version 2.12.0
+
+### 📝 Improvements
+
+- **Allays** spawned by **Evoker's Amulet** now despawn (if they’re not holding an item and haven’t been renamed):
+  - after 5 minutes of being farther than 16 blocks from the player;
+  - immediately if they fly farther than 60 blocks;
+  - immediately when the player changes dimension, teleports, or exits the world.
+
+- **Allays** spawned by **Evoker's Amulet** that *are holding an item*:
+  - cannot be despawned, but are tracked to be removed later (once they are no longer holding an item);
+  - remain tracked even after the player who summoned them leaves and rejoins the game (tracked allays are saved to disk in the `tracked_allays.dat` file);
+  - can be excluded from the tracking system and remain in the world forever under certain conditions:
+    - if the player changed dimension (even if they returned afterward);
+    - if the allay was unreachable (in an unloaded chunk) when the player’s world was loaded.
+
+- Tooltip updated: **Evoker Amulet** has been renamed to **Evoker's Amulet**.
+
+- Improved Belarusian localization: **Allays** are now called **Спакаёўка**, as originally intended.
+
+
 ## 📦 Version 2.11.2
 
 ### 🐞 Fixes
