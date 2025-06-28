@@ -71,7 +71,6 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
         var player = event.getEntity();
         Cleaner.clean(player);
-//        LightCleaner.clean(player);
         players.remove(event.getEntity().getUUID());
     }
 
@@ -84,7 +83,6 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
         var playerEntity = player.getEntity();
         Cleaner.clean(playerEntity);
-//        LightCleaner.clean(playerEntity);
 
         for (IArmorEvents armor : player.getArmorTypesUsed())
         {
