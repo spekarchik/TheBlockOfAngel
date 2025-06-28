@@ -59,13 +59,14 @@ public abstract class Cleaner
                 if (behavior.canBeRemovedOnClean())
                 {
                     target.remove();
-                    iterator.remove();
                     behavior.onRemove();
                 }
                 else
                 {
                     behavior.onUnableToRemove();
                 }
+
+                iterator.remove();
             }
         }
     }

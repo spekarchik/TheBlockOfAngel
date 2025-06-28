@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.cleaners;
 
-public class BlockTargetBehavior extends TargetBehavior<TrackedBlock>
+class BlockTargetBehavior extends TargetBehavior<TrackedBlock>
 {
     private static final double DistanceToDecreaseSqr = 100.0;
     private static final double DistanceToRemoveImmediatelySqr = 3600.0;
