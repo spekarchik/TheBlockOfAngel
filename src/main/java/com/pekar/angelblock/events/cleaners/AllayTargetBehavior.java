@@ -32,6 +32,8 @@ public class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
 
         if (target.getTicksLeft() <= 0) return true;
 
+        if (target.getTargetInstance().isRemoved()) return true;
+
         var distanceToOwner = getDistanceToOwner();
 
         return distanceToOwner > DistanceToRemoveImmediately;
@@ -41,6 +43,18 @@ public class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
     public boolean canBeRemovedOnClean()
     {
         return !isPersistent();
+    }
+
+    @Override
+    public void onRemove()
+    {
+        TrackedAllaysData.get(target.getTargetLevel()).untrack(target);
+    }
+
+    @Override
+    public void onUnableToRemove()
+    {
+        TrackedAllaysData.get(target.getTargetLevel()).track(target);
     }
 
     private double getDistanceToOwner()

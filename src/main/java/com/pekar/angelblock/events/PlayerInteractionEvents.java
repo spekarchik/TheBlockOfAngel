@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -17,6 +18,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Relative;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -155,6 +157,9 @@ public class PlayerInteractionEvents implements IEventHandler
 
         if (!entity.level().isClientSide())
         {
+            if (entity instanceof Player player)
+                Cleaner.clean(player);
+
             for (var handler : livingDeathEventListeners.values())
             {
                 handler.onLivingDeathEvent(event);
@@ -182,6 +187,8 @@ public class PlayerInteractionEvents implements IEventHandler
             TeleportTransition.PostTeleportTransition postTeleportTransition = p -> {
                 if (p instanceof LivingEntity livingEntity)
                     protectPlayer(livingEntity);
+                if (p instanceof Player player)
+                    PlayerManager.restoreTrackedAllays(player);
             };
 
             TeleportTransition transition = serverPlayer.findRespawnPositionAndUseSpawnBlock(true, postTeleportTransition);

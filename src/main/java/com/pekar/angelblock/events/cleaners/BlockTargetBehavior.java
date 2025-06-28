@@ -41,6 +41,18 @@ public class BlockTargetBehavior extends TargetBehavior<TrackedBlock>
         return true;
     }
 
+    @Override
+    public void onRemove()
+    {
+        // do nothing
+    }
+
+    @Override
+    public void onUnableToRemove()
+    {
+        // do nothing
+    }
+
     private double getDistanceToOwnerSqr()
     {
         var pos = target.getPos();
