@@ -40,6 +40,11 @@ public abstract class Cleaner
                 target.remove();
                 iterator.remove();
             }
+
+            if (targetBehavior.shouldUntrack())
+            {
+                iterator.remove();
+            }
         }
     }
 
