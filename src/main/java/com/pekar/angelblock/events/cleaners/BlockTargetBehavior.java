@@ -36,6 +36,12 @@ class BlockTargetBehavior extends TargetBehavior<TrackedBlock>
     }
 
     @Override
+    public boolean shouldUntrack()
+    {
+        return false;
+    }
+
+    @Override
     public boolean canBeRemovedOnClean()
     {
         return true;
