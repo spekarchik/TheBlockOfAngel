@@ -131,7 +131,7 @@ public class ModArmorMaterial
             float knockbackResistance,
             TagKey<Item> repairIngredient)
     {
-        var modelId = Utils.instance.resources.createEquipmentResourceKey(Main.MODID, armorName);
+        var modelId = Utils.instance.resources.createResourceLocation(Main.MODID, armorName);
         return new ArmorMaterial(durability, defence, enchantmentValue, equipSound, toughness, knockbackResistance, repairIngredient, modelId);
     }
 
