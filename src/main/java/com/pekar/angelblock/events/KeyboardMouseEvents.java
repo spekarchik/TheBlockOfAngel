@@ -14,7 +14,7 @@ import java.time.Clock;
 import java.util.HashMap;
 import java.util.Map;
 
-@EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
 public class KeyboardMouseEvents
 {
     private static final Map<String, Long> lastTime = new HashMap<>();
