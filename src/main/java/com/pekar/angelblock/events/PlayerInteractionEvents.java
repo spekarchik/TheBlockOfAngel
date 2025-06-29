@@ -1,9 +1,10 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.cleaners.AllayManager;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.events.scheduler.PlayerScheduler;
+import com.pekar.angelblock.events.scheduler.allay.RestoreAllaysTask;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.IModTool;
@@ -188,8 +189,8 @@ public class PlayerInteractionEvents implements IEventHandler
             TeleportTransition.PostTeleportTransition postTeleportTransition = p -> {
                 if (p instanceof LivingEntity livingEntity)
                     protectPlayer(livingEntity);
-                if (p instanceof Player player)
-                    AllayManager.restoreSavedAllays(player);
+                if (p instanceof ServerPlayer player)
+                    PlayerScheduler.add(new RestoreAllaysTask(player, 20));
             };
 
             TeleportTransition transition = serverPlayer.findRespawnPositionAndUseSpawnBlock(true, postTeleportTransition);
