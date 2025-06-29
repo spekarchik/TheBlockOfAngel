@@ -7,6 +7,7 @@ import com.pekar.angelblock.events.cleaners.AllayManager;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
+import com.pekar.angelblock.events.scheduler.PlayerScheduler;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
@@ -69,8 +70,9 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @SubscribeEvent
     public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event)
     {
-        var player = event.getEntity();
+        var player = (ServerPlayer) event.getEntity();
         Cleaner.clean(player);
+        PlayerScheduler.cancelAll(player);
         players.remove(event.getEntity().getUUID());
     }
 
