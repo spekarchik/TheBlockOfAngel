@@ -11,8 +11,9 @@
   - cannot be despawned, but are tracked to be removed later (once they are no longer holding an item);
   - remain tracked even after the player who summoned them leaves and rejoins the game (tracked allays are saved to disk in the `tracked_allays.dat` file);
   - can be excluded from the tracking system and remain in the world forever under certain conditions:
-    - if the player changed dimension (even if they returned afterward);
-    - if the allay was unreachable (in an unloaded chunk) when the player’s world was loaded.
+    - if the allay was unreachable (in an unloaded chunk of the same dimension) when the player’s world was loaded.
+    - if the allay wasn't loaded within 1 second after the player joined the world.
+    - or potentially, in other rare cases.
 
 - Tooltip updated: **Evoker Amulet** has been renamed to **Evoker's Amulet**.
 
