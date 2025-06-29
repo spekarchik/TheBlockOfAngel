@@ -3,11 +3,11 @@ package com.pekar.angelblock.events;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IArmorEvents;
-import com.pekar.angelblock.events.cleaners.AllayManager;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
 import com.pekar.angelblock.events.scheduler.PlayerScheduler;
+import com.pekar.angelblock.events.scheduler.allay.RestoreAllaysTask;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
@@ -51,7 +51,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
         var entity = event.getEntity();
 
-        AllayManager.restoreSavedAllays(entity);
+        PlayerScheduler.add(new RestoreAllaysTask((ServerPlayer) entity, 20));
+        //AllayManager.restoreSavedAllays(entity);
 
         IPlayer player = new Player(entity);
         players.put(player.getEntity().getUUID(), player);
@@ -97,7 +98,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
         var entity = event.getEntity();
 
-        AllayManager.restoreSavedAllays(entity);
+        PlayerScheduler.add(new RestoreAllaysTask((ServerPlayer) entity, 20));
 
         IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
@@ -115,7 +116,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
         if (entity.level().isClientSide()) return;
 
-        AllayManager.restoreSavedAllays(entity);
+        PlayerScheduler.add(new RestoreAllaysTask((ServerPlayer) entity, 20));
 
         IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
