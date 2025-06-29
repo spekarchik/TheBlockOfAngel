@@ -42,6 +42,12 @@ class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
     }
 
     @Override
+    public boolean shouldUntrack()
+    {
+        return target.getTargetInstance().hasCustomName();
+    }
+
+    @Override
     public boolean canBeRemovedOnClean()
     {
         if (isDied(target.getTargetInstance())) return true;
@@ -58,7 +64,8 @@ class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
     @Override
     public void onUnableToRemove()
     {
-        AllayManager.store(target);
+        if (!target.getTargetInstance().hasCustomName())
+            AllayManager.store(target);
     }
 
     private double getDistanceToOwner()
