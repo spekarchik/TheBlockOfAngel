@@ -1,6 +1,8 @@
 package com.pekar.angelblock.network;
 
-import net.neoforged.neoforge.network.PacketDistributor;
+import com.pekar.angelblock.Main;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.handling.ServerPayloadContext;
 
@@ -11,7 +13,16 @@ public abstract class ClientToServerPacket extends Packet implements IClientToSe
 
     public final void sendToServer()
     {
-        PacketDistributor.sendToServer(this);
+        var connection = Minecraft.getInstance().getConnection();
+        if (connection != null)
+        {
+            var wrapper = new ServerboundCustomPayloadPacket(this);
+            connection.getConnection().send(wrapper);
+        }
+        else
+        {
+            Main.LOGGER.warn("Unable to send packet to server: connection is null");
+        }
     }
 
     @Override
