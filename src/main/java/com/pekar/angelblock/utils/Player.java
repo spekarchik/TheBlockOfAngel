@@ -2,12 +2,15 @@ package com.pekar.angelblock.utils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
@@ -17,7 +20,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -92,6 +94,7 @@ public class Player
 //                exp = applyFortuneBonus(exp, fortuneLevel, 1.7);
 //                block.popExperience((ServerLevel) level, pos, exp);
         final int recursionLeft = 512;
+        //return level.destroyBlock(pos, true, entityLiving, recursionLeft);
         return destroyBlock(pos, true, entityLiving, level, entityLiving.getMainHandItem(), blockState, recursionLeft);
     }
 
@@ -123,10 +126,14 @@ public class Player
             {
                 if (entity instanceof ServerPlayer)
                 {
-                    int exp = blockState.getExpDrop(level, pos, blockEntity, entity, tool);
-                    if (exp > 0)
+                    var server = level.getServer();
+                    if (server != null && !hasSilkTouch(tool, (ServerLevel) level))
                     {
-                        blockState.getBlock().popExperience((ServerLevel) level, pos, exp);
+                        int exp = blockState.getExpDrop(level, pos, blockEntity, entity, tool);
+                        if (exp > 0)
+                        {
+                            blockState.getBlock().popExperience((ServerLevel) level, pos, exp);
+                        }
                     }
                 }
 
@@ -135,5 +142,14 @@ public class Player
 
             return flag;
         }
+    }
+
+    public static boolean hasSilkTouch(ItemStack stack, ServerLevel level)
+    {
+        return level.getServer().registryAccess()
+                .lookup(Registries.ENCHANTMENT)
+                .flatMap(lookup -> lookup.get(Enchantments.SILK_TOUCH))
+                .map(holder -> EnchantmentHelper.getItemEnchantmentLevel(holder, stack) > 0)
+                .orElse(false); // если чара нет — вернуть false
     }
 }
