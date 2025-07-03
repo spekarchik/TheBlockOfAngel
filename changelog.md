@@ -1,4 +1,4 @@
-## 📦 Version 2.12.1-beta
+## 📦 Version 2.12.1
 
 ### 🐞 Fixed
 - Blocks no longer drop experience when broken by enhanced tools with *Silk Touch* enchantment (e.g. tools that break multiple blocks at once).
