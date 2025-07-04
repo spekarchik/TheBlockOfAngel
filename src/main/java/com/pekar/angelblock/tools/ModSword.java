@@ -16,7 +16,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -220,9 +219,9 @@ public class ModSword extends Item implements IModTool
         // nothing by default
     }
 
-    protected boolean allowsApplyEffect(Level level, BlockPos clickedPos)
+    protected boolean allowsApplyEffect(Level level, BlockPos pos)
     {
-        var posAbove = clickedPos.above();
+        var posAbove = pos.above();
         if (level.isEmptyBlock(posAbove)) return true;
 
         var blockStateAbove = level.getBlockState(posAbove);
@@ -298,8 +297,7 @@ public class ModSword extends Item implements IModTool
     private boolean tryPlantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
     {
         BlockState state = level.getBlockState(pos);
-        Block block = state.getBlock();
-        if (block != Blocks.SAND || !allowsApplyEffect(level, pos)
+        if (!state.is(BlockTags.SAND) || !allowsApplyEffect(level, pos)
                 || !level.isEmptyBlock(pos.above(2)) || !level.isEmptyBlock(pos.above(3)))
         {
             return false;
