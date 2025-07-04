@@ -257,7 +257,7 @@ public class ModSword extends SwordItem implements IModTool
         if (hasCriticalDamage(mainHandItemStack)) return false;
 
         var offHandItemStack = player.getOffhandItem();
-        return offHandItemStack.isEmpty() || !(offHandItemStack.getItem() instanceof BlockItem);
+        return offHandItemStack.isEmpty() || offHandItemStack.is(Items.TOTEM_OF_UNDYING);
     }
 
     private boolean tryPlantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
