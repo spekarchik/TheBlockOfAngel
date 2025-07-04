@@ -117,13 +117,15 @@ public class LimoniteSword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 13; i++)
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 14; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1 || i == 5)
                     .styledAs(TextStyle.Subheader, i == 6)
                     .styledAs(TextStyle.Notice, i == 8 || i == 10)
-                    .styledAs(TextStyle.DarkGray, i == 11 || i == 12)
+                    .styledAs(TextStyle.DarkGray, i >= 11 && i <= 13)
                     .apply();
         }
     }

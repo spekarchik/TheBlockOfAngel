@@ -177,13 +177,13 @@ public class SuperSword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 18; i++)
+        for (int i = 0; i <= 19; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1 || i == 7)
                     .styledAs(TextStyle.Subheader, i == 8 || i == 10 || i == 14)
                     .styledAs(TextStyle.Notice, i == 13)
-                    .styledAs(TextStyle.DarkGray, i == 16 || i == 17)
+                    .styledAs(TextStyle.DarkGray, i >= 16 && i <= 18)
                     .apply();
         }
     }

@@ -73,11 +73,11 @@ public class DiamithicSword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 7; i++)
+        for (int i = 0; i <= 8; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1 || i == 3)
-                    .styledAs(TextStyle.DarkGray, i == 5 || i == 6)
+                    .styledAs(TextStyle.DarkGray, i >= 5 && i <= 7)
                     .apply();
         }
     }
