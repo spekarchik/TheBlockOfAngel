@@ -3,8 +3,12 @@
 ### 📝 Improvements
 - Refined **Limonite Sword** behavior for better predictability:
   - Now **cacti spawn only when the sword is used on sand while sneaking**  
-  - In all other cases, the sword places **cobwebs**, avoiding unexpected cactus spawning  
-- Updated tooltip text to clearly explain the new conditional behavior  
+  - In all other cases, the sword places **cobwebs**, avoiding unexpected cactus spawning
+- Updated tooltip text to clearly explain the new conditional behavior.
+- Improved sword effects behavior:
+  - *Cacti* do **not** generate if there are adjacent blocks, preventing block overlap.
+  - *Cactus* self-destruction timer now runs slower, ensuring no item drops are left behind as intended.
+  - *Cobweb* and *fire* effects are now generated considering height differences within ±1 block, avoiding generation in mid-air or invalid positions.
 - Changed sword effect activation rules regarding the offhand:
   - Effects now activate only if the second hand is empty or holds a Totem of Undying
   - Prevents accidental activation when holding other items (e.g. blocks or tools) in the offhand
