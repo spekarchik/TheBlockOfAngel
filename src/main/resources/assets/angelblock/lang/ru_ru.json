@@ -1279,6 +1279,8 @@
   "effect.angelblock.rod_magnetic_mode_effect": "Магнитный посох",
   "effect.angelblock.armor_super_jump_mode_effect": "Суперпрыжки",
   "effect.angelblock.armor_heavy_jump_effect": "Тяжесть",
+  "effect.angelblock.bios_diamond_cooldown_effect": "Сила камня восстанавливается",
+  "effect.angelblock.end_sapphire_cooldown_effect": "Сила камня восстанавливается",
 
   "trim_material.angelblock.bios_diamond": "Зеленый алмаз",
   "container.custom_smithing": "Улучшить/разобрать снаряжение",
