@@ -2,6 +2,7 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.cleaners.TrackedBlock;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -18,6 +19,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -25,7 +28,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
-public class ModSword extends Item implements IModTool
+import java.util.List;
+
+public abstract class ModSword extends Item implements IModTool, ITooltipProvider
 {
     private static final int[] dx = { 3, -3, 2, 2, -2, -2, 0, 0, 1, 1, -1, -1 };
     private static final int[] dz = { 0, 0, 1, -1, 1, -1, 3, -3, 2, -2, 2, -2 };
@@ -370,6 +375,12 @@ public class ModSword extends Item implements IModTool
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
         else
             damageOffHandItemIfSurvivalIgnoreClient(player, level);
+    }
+
+    @Override
+    public final void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    {
+        ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
     }
 
     @Override

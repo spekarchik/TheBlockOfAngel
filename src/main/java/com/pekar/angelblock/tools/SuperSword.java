@@ -3,8 +3,9 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,8 +19,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.List;
 
 public class SuperSword extends ModSword
 {
@@ -137,17 +136,6 @@ public class SuperSword extends ModSword
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
-
-        for (int i = 0; i <= 18; i++)
-        {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 7, i == 8 || i == 10 || i == 14, i == 13, false, i == 16 || i == 17));
-        }
-    }
-
-    @Override
     protected void processBlock(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         if (player.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
@@ -182,5 +170,21 @@ public class SuperSword extends ModSword
     public boolean hasWebMode()
     {
         return true;
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
+
+        for (int i = 0; i <= 19; i++)
+        {
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1 || i == 7)
+                    .styledAs(TextStyle.Subheader, i == 8 || i == 10 || i == 14)
+                    .styledAs(TextStyle.Notice, i == 13)
+                    .styledAs(TextStyle.DarkGray, i >= 16 && i <= 18)
+                    .apply();
+        }
     }
 }

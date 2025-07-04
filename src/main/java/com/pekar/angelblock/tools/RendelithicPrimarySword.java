@@ -1,13 +1,12 @@
 package com.pekar.angelblock.tools;
 
-import net.minecraft.network.chat.Component;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-
-import java.util.List;
 
 public class RendelithicPrimarySword extends ModSword
 {
@@ -23,13 +22,16 @@ public class RendelithicPrimarySword extends ModSword
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 4; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1, false, false, false, i == 3));
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.DarkGray, i == 3)
+                    .apply();
         }
     }
 }
