@@ -28,6 +28,10 @@ public class PotionRegistry
 
     public static final Holder<MobEffect> ARMOR_HEAVY_JUMP_EFFECT = registerMobEffect("armor_heavy_jump_effect", HeavyJumpEffect::new);
 
+    public static final Holder<MobEffect> BIOS_DIAMOND_COOLDOWN_EFFECT = registerMobEffect("bios_diamond_cooldown_effect", CooldownEffect::new);
+
+    public static final Holder<MobEffect> END_SAPPHIRE_COOLDOWN_EFFECT = registerMobEffect("end_sapphire_cooldown_effect", CooldownEffect::new);
+
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownPotion>> BLOCK_BREAKER_POTION =
             registerThrownPotion("block_breaker_potion", BlockBreakerPotion::new);
 
