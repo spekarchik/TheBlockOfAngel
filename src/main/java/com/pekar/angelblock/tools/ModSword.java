@@ -185,9 +185,9 @@ public class ModSword extends SwordItem implements IModTool
         // nothing by default
     }
 
-    protected boolean allowsApplyEffect(Level level, BlockPos clickedPos)
+    protected boolean allowsApplyEffect(Level level, BlockPos pos)
     {
-        var posAbove = clickedPos.above();
+        var posAbove = pos.above();
         if (level.isEmptyBlock(posAbove)) return true;
 
         var blockStateAbove = level.getBlockState(posAbove);
@@ -263,8 +263,7 @@ public class ModSword extends SwordItem implements IModTool
     private boolean tryPlantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
     {
         BlockState state = level.getBlockState(pos);
-        Block block = state.getBlock();
-        if (block != Blocks.SAND || !allowsApplyEffect(level, pos)
+        if (!state.is(BlockTags.SAND) || !allowsApplyEffect(level, pos)
                 || !level.isEmptyBlock(pos.above(2)) || !level.isEmptyBlock(pos.above(3)))
         {
             return false;

@@ -44,7 +44,8 @@ public class LimoniteSword extends ModSword
             if (!level.isClientSide())
             {
                 var hand = context.getHand();
-                if (level.getBlockState(pos).getBlock() == Blocks.SAND)
+                var blockState = level.getBlockState(pos);
+                if (player.isShiftKeyDown() && utils.blocks.types.isCactiPlantableOn(blockState))
                 {
                     plantCacti(player, level, pos, hand, context.getClickedFace());
                     new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);

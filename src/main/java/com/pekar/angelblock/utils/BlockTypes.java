@@ -39,6 +39,11 @@ public class BlockTypes
         return block instanceof LiquidBlock;
     }
 
+    public boolean isCactiPlantableOn(BlockState blockState)
+    {
+        return blockState.is(BlockTags.SAND);
+    }
+
     public boolean isGlassBlock(Block block)
     {
         return block == Blocks.GLASS || block == Blocks.TINTED_GLASS || block instanceof StainedGlassBlock;

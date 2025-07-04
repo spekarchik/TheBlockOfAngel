@@ -68,7 +68,8 @@ public class SuperSword extends ModSword
         {
             if (!level.isClientSide())
             {
-                if (level.getBlockState(pos).getBlock() == Blocks.SAND)
+                var blockState = level.getBlockState(pos);
+                if (player.isShiftKeyDown() && utils.blocks.types.isCactiPlantableOn(blockState))
                 {
                     plantCacti(player, level, pos, context.getHand(), context.getClickedFace());
                     new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
