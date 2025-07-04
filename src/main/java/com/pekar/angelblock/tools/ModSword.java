@@ -187,6 +187,9 @@ public class ModSword extends SwordItem implements IModTool
 
     protected boolean allowsApplyEffect(Level level, BlockPos pos)
     {
+        var blockState = level.getBlockState(pos);
+        if (level.isEmptyBlock(pos) || !blockState.isSolidRender()) return false;
+
         var posAbove = pos.above();
         if (level.isEmptyBlock(posAbove)) return true;
 
@@ -196,24 +199,35 @@ public class ModSword extends SwordItem implements IModTool
                 && !blockStateAbove2.is(Blocks.WATER) && !blockStateAbove2.is(Blocks.LAVA);
     }
 
+    private BlockPos calculateCorrectYPosForPlacement(Level level, BlockPos pos)
+    {
+        if (allowsApplyEffect(level, pos)) return pos;
+        else if (allowsApplyEffect(level, pos.below())) return pos.below();
+        else if (allowsApplyEffect(level, pos.above())) return pos.above();
+
+        return null;
+    }
+
     protected final void trySetFire(Level level, BlockPos pos)
     {
-        if (!allowsApplyEffect(level, pos)) return;
+        var correctPos = calculateCorrectYPosForPlacement(level, pos);
+        if (correctPos == null) return;
 
         if (!level.isClientSide)
         {
-            level.setBlock(pos.above(), Blocks.FIRE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+            level.setBlock(correctPos.above(), Blocks.FIRE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
     }
 
     protected final void setWeb(Player player, Level level, BlockPos pos)
     {
         if (level.isClientSide) return;
-        if (!allowsApplyEffect(level, pos.below())) return;
+        var correctPos = calculateCorrectYPosForPlacement(level, pos.below());
+        if (correctPos == null) return;
 
-        level.setBlock(pos, Blocks.COBWEB.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+        level.setBlock(correctPos.above(), Blocks.COBWEB.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         int increment = Utils.random.nextInt(TimeThreshold);
-        var targetToRemove = new TrackedBlock(Blocks.COBWEB, pos, player, WebLifeTime + increment, true);
+        var targetToRemove = new TrackedBlock(Blocks.COBWEB, correctPos.above(), player, WebLifeTime + increment, true);
         Cleaner.add(targetToRemove);
 
         // no need to call `damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);`
@@ -264,7 +278,8 @@ public class ModSword extends SwordItem implements IModTool
     {
         BlockState state = level.getBlockState(pos);
         if (!state.is(BlockTags.SAND) || !allowsApplyEffect(level, pos)
-                || !level.isEmptyBlock(pos.above(2)) || !level.isEmptyBlock(pos.above(3)))
+                || !level.isEmptyBlock(pos.above(2)) || !level.isEmptyBlock(pos.above(3))
+            || !hasEnoughSpace(level, pos.above()))
         {
             return false;
         }
@@ -276,13 +291,19 @@ public class ModSword extends SwordItem implements IModTool
         int increment = Utils.random.nextInt(TimeThreshold);
 
         var targetToRemove1 = new TrackedBlock(Blocks.CACTUS, pos.above(3), player, CactusLifeTime + increment, false);
-        var targetToRemove2 = new TrackedBlock(Blocks.CACTUS, pos.above(2), player, CactusLifeTime + increment + 1, false);
-        var targetToRemove3 = new TrackedBlock(Blocks.CACTUS, pos.above(), player, CactusLifeTime + increment + 2, false);
+        var targetToRemove2 = new TrackedBlock(Blocks.CACTUS, pos.above(2), player, CactusLifeTime + increment + 15, false);
+        var targetToRemove3 = new TrackedBlock(Blocks.CACTUS, pos.above(), player, CactusLifeTime + increment + 30, false);
         Cleaner.add(targetToRemove1);
         Cleaner.add(targetToRemove2);
         Cleaner.add(targetToRemove3);
 
         return true;
+    }
+
+    private boolean hasEnoughSpace(Level level, BlockPos pos)
+    {
+        return level.isEmptyBlock(pos.east()) && level.isEmptyBlock(pos.west())
+                && level.isEmptyBlock(pos.north()) && level.isEmptyBlock(pos.south());
     }
 
     private boolean plantCactus(Player player, Level level, BlockPos pos, InteractionHand hand, Direction facing)
