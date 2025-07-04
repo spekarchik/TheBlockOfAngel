@@ -1278,6 +1278,8 @@
   "effect.angelblock.rod_magnetic_mode_effect": "Rod Magnet Mode",
   "effect.angelblock.armor_super_jump_mode_effect": "Super Jump Mode",
   "effect.angelblock.armor_heavy_jump_effect": "Heaviness",
+  "effect.angelblock.bios_diamond_cooldown_effect": "Stone Power Recovery",
+  "effect.angelblock.end_sapphire_cooldown_effect": "Stone Power Recovery",
 
   "trim_material.angelblock.bios_diamond": "Green Diamond Material",
   "container.custom_smithing": "Upgrade/Downgrade Gear",
