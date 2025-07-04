@@ -3,8 +3,9 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,8 +19,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.List;
 
 public class LimoniteSword extends ModSword
 {
@@ -96,17 +95,6 @@ public class LimoniteSword extends ModSword
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
-
-        for (int i = 0; i <= 13; i++)
-        {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 5, i == 6, i == 8 || i == 10, false, i == 11 || i == 12));
-        }
-    }
-
-    @Override
     protected void processBlock(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         setWeb(player, level, pos.above());
@@ -122,5 +110,23 @@ public class LimoniteSword extends ModSword
     public boolean hasWebMode()
     {
         return true;
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
+
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 14; i++)
+        {
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1 || i == 5)
+                    .styledAs(TextStyle.Subheader, i == 6)
+                    .styledAs(TextStyle.Notice, i == 8 || i == 10)
+                    .styledAs(TextStyle.DarkGray, i >= 11 && i <= 13)
+                    .apply();
+        }
     }
 }
