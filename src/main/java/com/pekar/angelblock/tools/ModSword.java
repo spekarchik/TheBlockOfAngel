@@ -2,11 +2,13 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.cleaners.TrackedBlock;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
@@ -20,7 +22,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
 
-public class ModSword extends SwordItem implements IModTool
+import java.util.List;
+
+public abstract class ModSword extends SwordItem implements IModTool, ITooltipProvider
 {
     private static final int[] dx = { 3, -3, 2, 2, -2, -2, 0, 0, 1, 1, -1, -1 };
     private static final int[] dz = { 0, 0, 1, -1, 1, -1, 3, -3, 2, -2, 2, -2 };
@@ -188,7 +192,7 @@ public class ModSword extends SwordItem implements IModTool
     protected boolean allowsApplyEffect(Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
-        if (level.isEmptyBlock(pos) || !blockState.isSolidRender()) return false;
+        if (level.isEmptyBlock(pos) || !blockState.isSolidRender(level, pos)) return false;
 
         var posAbove = pos.above();
         if (level.isEmptyBlock(posAbove)) return true;
@@ -336,6 +340,12 @@ public class ModSword extends SwordItem implements IModTool
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
         else
             damageOffHandItemIfSurvivalIgnoreClient(player, level);
+    }
+
+    @Override
+    public final void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    {
+        ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
     }
 
     @Override

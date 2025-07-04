@@ -1,8 +1,9 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,8 +15,6 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-
-import java.util.List;
 
 public class RendelithicSword extends ModSword
 {
@@ -64,17 +63,6 @@ public class RendelithicSword extends ModSword
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
-
-        for (int i = 0; i <= 7; i++)
-        {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 3, false, false, false, i == 5 || i == 6));
-        }
-    }
-
-    @Override
     protected void processBlock(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
         trySetFire(level, pos);
@@ -90,5 +78,19 @@ public class RendelithicSword extends ModSword
     public boolean isEnhanced()
     {
         return true;
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
+
+        for (int i = 0; i <= 8; i++)
+        {
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1 || i == 3)
+                    .styledAs(TextStyle.DarkGray, i >= 5 && i <= 7)
+                    .apply();
+        }
     }
 }
