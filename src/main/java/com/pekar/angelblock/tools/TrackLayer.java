@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tooltip.ITooltip;
@@ -11,7 +12,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -59,8 +62,7 @@ public class TrackLayer extends WorkRod
     {
         if (hasCriticalDamage(itemStack)) return false;
 
-        var block = blockState.getBlock();
-        if (!level.isClientSide() && isTrackLayerCompatible(block) && livingEntity instanceof Player player)
+        if (!level.isClientSide() && isTrackLayerCompatible(blockState) && livingEntity instanceof Player player)
         {
             dropBlocks(player, level, pos);
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
@@ -74,13 +76,13 @@ public class TrackLayer extends WorkRod
     {
         if (hasCriticalDamage(itemStack)) return 1F;
 
-        return isTrackLayerCompatible(blockState.getBlock()) ? 10F : 1F;
+        return isTrackLayerCompatible(blockState) ? 10F : 1F;
     }
 
     @Override
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
-        return isTrackLayerCompatible(state.getBlock());
+        return isTrackLayerCompatible(state);
     }
 
     @Override
@@ -154,7 +156,7 @@ public class TrackLayer extends WorkRod
 
         var placingBlock = blockItem.getBlock();
 
-        if (!isTrackLayerCompatible(placingBlock))
+        if (!isTrackLayerCompatible(placingBlock.defaultBlockState()))
             return false;
 
         final int MAX_PLACEMENT_LENGTH = 65;
@@ -262,12 +264,9 @@ public class TrackLayer extends WorkRod
         return originPos;
     }
 
-    private boolean isTrackLayerCompatible(Block block)
+    private boolean isTrackLayerCompatible(BlockState blockState)
     {
-        return block instanceof BaseRailBlock
-                || block instanceof FenceBlock
-                || block instanceof WallBlock
-                || block == Blocks.REDSTONE_WIRE;
+        return blockState.is(BlockRegistry.TRACK_LAYER_COMPATIBLE);
     }
 
     private boolean dropBlock(Player player, Level level, Block originBlock, BlockPos pos, ItemStack toolItemStack, boolean shouldDrop)
