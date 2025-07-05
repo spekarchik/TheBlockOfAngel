@@ -992,7 +992,7 @@
   "item.angelblock.track_layer.desc2": " Sequence of blocks drop towards the player direction",
   "item.angelblock.track_layer.desc3": "Using:",
   "item.angelblock.track_layer.desc4": " Places blocks a player holds in second hand towards the player direction",
-  "item.angelblock.track_layer.desc5": "Second hand: any rails, redstone wire, fences, walls",
+  "item.angelblock.track_layer.desc5": "Second hand: redstone, any rails, fences, walls, slabs, carpets",
   "item.angelblock.track_layer.desc6": "",
   "item.angelblock.track_layer.desc7": "Using the rod drains the player. At 0 durability, the rod does not break but loses its abilities",
   "item.angelblock.track_layer.desc8": "§a Durability: 2000",
