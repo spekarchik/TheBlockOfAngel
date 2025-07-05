@@ -1003,8 +1003,8 @@
   "item.angelblock.builder.desc3": "  Places blocks a player holds in second hand towards the player direction",
   "item.angelblock.builder.desc4": " Magnet Mode ON:",
   "item.angelblock.builder.desc5": "  Blocks are placed to a cube 3x3x3 with an empty space in the center (to use a destroying potion)",
-  "item.angelblock.builder.desc6": "Second hand: any non-falling solid blocks that are not entities",
-  "item.angelblock.builder.desc7": "",
+  "item.angelblock.builder.desc6": "Second hand: any solid blocks that are not entities",
+  "item.angelblock.builder.desc7": "Falling blocks can only be placed on top of other blocks",
   "item.angelblock.builder.desc8": "Using the rod drains the player. At 0 durability, the rod does not break but loses its abilities",
   "item.angelblock.builder.desc9": "§a Durability: 5000",
 

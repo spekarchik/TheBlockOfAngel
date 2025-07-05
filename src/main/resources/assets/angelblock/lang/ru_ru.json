@@ -1003,8 +1003,8 @@
   "item.angelblock.builder.desc3": "  Размещает блоки, которые игрок держит во второй руке, вдоль направления игрока",
   "item.angelblock.builder.desc4": " Режим Магнита ВКЛ:",
   "item.angelblock.builder.desc5": "  Блоки размещаются кубами 3x3x3 с пустым пространством внутри (для использования разрушающего зелья)",
-  "item.angelblock.builder.desc6": "Вторая рука: любые полные непадающие блоки, кроме сущностей",
-  "item.angelblock.builder.desc7": "",
+  "item.angelblock.builder.desc6": "Вторая рука: любые полные блоки, кроме сущностей",
+  "item.angelblock.builder.desc7": "Падающие блоки размещаются только на других блоках",
   "item.angelblock.builder.desc8": "Использование посоха истощает игрока. При прочности 0 посох не ломается, но теряет свои способности",
   "item.angelblock.builder.desc9": "§a Запас прочности: 5000",
 
