@@ -1003,8 +1003,8 @@
   "item.angelblock.builder.desc3": "  Размяшчае блокі, якія гулец трымае ў другой руцэ, уздоўж напрамку гульца",
   "item.angelblock.builder.desc4": " Рэжым Магніта УКЛ:",
   "item.angelblock.builder.desc5": "  Блокі размяшчаюцца кубамі 3x3x3 з пустой прасторай ўнутры (для выкарыстання Разбуральнага зельля)",
-  "item.angelblock.builder.desc6": "Другая рука: любыя поўныя непадаючыя блокі, акрамя істот",
-  "item.angelblock.builder.desc7": "",
+  "item.angelblock.builder.desc6": "Другая рука: любыя поўныя блокі, акрамя істот",
+  "item.angelblock.builder.desc7": "Падаючыя блокі размяшчаюцца толькі на іншых блоках",
   "item.angelblock.builder.desc8": "Выкарыстанне посаха знясільвае гульца. Пры трываласці 0 посах не ламаецца, але губляе здольнасці",
   "item.angelblock.builder.desc9": "§a Запас трываласці: 5000",
 
