@@ -1,3 +1,13 @@
+## 📦 Version 2.13.1
+
+### 📝 Improvements
+- Enhanced the **Track Layer** staff:
+  - Now supports placing *wool carpets* and *slabs* from the offhand.
+  - Updated tooltip to reflect the expanded list of compatible blocks.
+- Enhanced the **Builder** staff:
+  - Can now place *falling blocks*, as long as there is a solid block beneath them.
+
+
 ## 📦 Version 2.13.0
 
 ### 📝 Improvements
