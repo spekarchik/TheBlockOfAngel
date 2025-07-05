@@ -6,6 +6,7 @@
   - Updated tooltip to reflect the expanded list of compatible blocks.
 - Enhanced the **Builder** staff:
   - Can now place *falling blocks*, as long as there is a solid block beneath them.
+  - Updated tooltip to reflect the expanded list of compatible blocks.
 
 
 ## 📦 Version 2.13.0
