@@ -992,7 +992,7 @@
   "item.angelblock.track_layer.desc2": " Разрушаются последующие совместимые блоки вдоль направления игрока",
   "item.angelblock.track_layer.desc3": "Использование:",
   "item.angelblock.track_layer.desc4": " Укладывает блоки, которые игрок держит во второй руке, вдоль направления игрока",
-  "item.angelblock.track_layer.desc5": "Вторая рука: любые рельсы, пыль красного камня, заборы, стены",
+  "item.angelblock.track_layer.desc5": "Вторая рука: рэдстоуновая пыль, любые рельсы, заборы, стены, плиты, ковры",
   "item.angelblock.track_layer.desc6": "",
   "item.angelblock.track_layer.desc7": "Использование посоха истощает игрока. При прочности 0 посох не ломается, но теряет свои способности",
   "item.angelblock.track_layer.desc8": "§a Запас прочности: 2000",
