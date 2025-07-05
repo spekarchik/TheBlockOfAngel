@@ -7,6 +7,7 @@ import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -167,21 +168,22 @@ public class Builder extends WorkRod
         if (pos.equals(clickedPos)) return true;
 
         var blockState = level.getBlockState(pos);
-        var block = blockState.getBlock();
 
-        boolean isPlant = isPlant(block);
-        if (!isAirOrWater(blockState) && !isPlant) return false;
+        var isReplaceable = isBuilderReplaceable(blockState);
+        if (!isReplaceable) return false;
+
+        if (placingBlock instanceof FallingBlock && level.isEmptyBlock(pos.below())) return false;
 
         if (!level.isClientSide())
         {
-            if (isPlant)
+            if (!blockState.isAir())
             {
                 level.destroyBlock(pos, false);
                 if (isPlant(level.getBlockState(pos.above()).getBlock()))
                     level.destroyBlock(pos.above(), false);
             }
 
-            level.setBlock(pos, placingBlock.defaultBlockState(), 11);
+            level.setBlock(pos, placingBlock.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
             level.updateNeighborsAt(pos, placingBlock);
 
             if (player instanceof ServerPlayer serverPlayer)
@@ -207,17 +209,25 @@ public class Builder extends WorkRod
         for (int i = 0; i <= 9; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
-                            .styledAs(TextStyle.Header, i == 1)
-                            .styledAs(TextStyle.Subheader, i == 4 || i == 2)
-                            .styledAs(TextStyle.ImportantNotice, i == 6)
-                            .styledAs(TextStyle.DarkGray, i == 8)
-                            .apply();
+                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.Subheader, i == 4 || i == 2)
+                    .styledAs(TextStyle.ImportantNotice, i == 6)
+                    .styledAs(TextStyle.DarkGray, i >= 7 && i <= 8)
+                    .apply();
+
+            if (i == 6)
+                tooltip.addEmptyLine();
         }
     }
 
     protected boolean isPlant(Block block)
     {
         return block instanceof BushBlock || block instanceof GrowingPlantBlock;
+    }
+
+    private boolean isBuilderReplaceable(BlockState blockState)
+    {
+        return blockState.is(BlockTags.REPLACEABLE) && !blockState.is(Blocks.LAVA);
     }
 
     protected boolean isAirOrWater(BlockState blockState)
@@ -228,7 +238,7 @@ public class Builder extends WorkRod
     protected boolean isBlockCompatible(Level level, BlockState blockState, BlockPos pos)
     {
         var block = blockState.getBlock();
-        return !blockState.hasBlockEntity() && !(block instanceof FallingBlock)
+        return !blockState.hasBlockEntity()
                 && (blockState.isSolidRender(level, pos) || utils.blocks.types.isGlassBlock(block));
     }
 
