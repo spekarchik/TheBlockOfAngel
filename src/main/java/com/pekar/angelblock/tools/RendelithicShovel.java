@@ -24,7 +24,7 @@ public final class RendelithicShovel extends EnhancedShovel
         for (int i = 0; i <= 8; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
-                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.Header, i == 1 || i == 5)
                     .styledAs(TextStyle.Notice, i == 3)
                     .styledAs(TextStyle.DarkGray, i == 7)
                     .apply();
