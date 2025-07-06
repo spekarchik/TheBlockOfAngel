@@ -21,12 +21,12 @@ public class SuperShovel extends EnhancedShovel
 
         tooltip.ignoreEmptyLines();
 
-        for (int i = 0; i <= 11; i++)
+        for (int i = 0; i <= 13; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
-                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.Header, i == 1 || i == 9)
                     .styledAs(TextStyle.Notice, i == 7)
-                    .styledAs(TextStyle.DarkGray, i == 10)
+                    .styledAs(TextStyle.DarkGray, i == 12)
                     .apply();
         }
     }
