@@ -1,9 +1,7 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
@@ -40,8 +38,6 @@ public class EndstonePowder extends ModItemWithDoubleHoverText
 
         if (level.getBlockState(startPos).getBlock() == Blocks.LAVA)
         {
-            if (isClientSide) return InteractionResult.SUCCESS;
-
             int X = pos.getX(), Y = startPos.getY(), Z = pos.getZ();
             var blocksToTransform = new ArrayList<BlockPos>();
 
@@ -57,21 +53,24 @@ public class EndstonePowder extends ModItemWithDoubleHoverText
                     }
                 }
 
-            for (var ps : blocksToTransform)
+            if (!level.isClientSide())
             {
-                level.setBlock(ps, Blocks.END_STONE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+                for (var ps : blocksToTransform)
+                {
+                    level.setBlock(ps, Blocks.END_STONE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+                }
+
+                if (player != null)
+                {
+                    var itemStack = player.getItemInHand(context.getHand());
+                    itemStack.shrink(1);
+                }
             }
 
-            if (player instanceof ServerPlayer serverPlayer)
-            {
-                if (!blocksToTransform.isEmpty())
-                    new PlaySoundPacket(SoundType.STEAM).sendToPlayer(serverPlayer);
+            if (!blocksToTransform.isEmpty())
+                utils.sound.playSoundByBlock(player, pos, SoundType.STEAM);
 
-                var itemStack = player.getItemInHand(context.getHand());
-                itemStack.shrink(1);
-            }
-
-            return InteractionResult.CONSUME;
+            return isClientSide ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
         }
 
         return super.useOn(context);

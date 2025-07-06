@@ -3,12 +3,12 @@ package com.pekar.angelblock.items;
 import com.pekar.angelblock.mixins.AxolotlAccessor;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -18,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.Consumer;
@@ -49,8 +50,8 @@ public class BlueAxolotlBucket extends ModItem implements ITooltipProvider
 
                 if (result)
                 {
-                    new PlaySoundPacket(SoundEvents.BUCKET_EMPTY_AXOLOTL, 1.0F).sendToPlayer(serverPlayer);
-                    level.setBlock(pos, Blocks.WATER.defaultBlockState(), 11);
+                    level.playSound(null, pos, SoundEvents.BUCKET_EMPTY_AXOLOTL, SoundSource.BLOCKS);
+                    level.setBlock(pos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
                     player.setItemInHand(context.getHand(), new ItemStack(Items.BUCKET));
                 }
             }
