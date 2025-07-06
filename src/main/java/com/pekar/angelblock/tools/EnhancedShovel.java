@@ -136,30 +136,6 @@ public class EnhancedShovel extends ModShovel
         return haveAnyTransformed;
     }
 
-    protected boolean onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
-    {
-        if (!level.isEmptyBlock(pos.above())) return false;
-
-        var blockState = level.getBlockState(pos);
-        Block block = blockState.getBlock();
-
-        if (FLATTENABLES.containsKey(block))
-        {
-            if (!level.isClientSide)
-            {
-                BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
-                level.setBlock(pos, newBlockState, 11);
-                new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
-
-                damageMainHandItemIfSurvivalIgnoreClient(player, level);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
     protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
