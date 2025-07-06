@@ -54,7 +54,7 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
     public InteractionResult useOn(UseOnContext context)
     {
         var result = useOnBasic(context);
-        if (result.consumesAction()) return result;
+        if (result == InteractionResult.FAIL) return result;
 
         var player = context.getPlayer();
         var level = player.level();
