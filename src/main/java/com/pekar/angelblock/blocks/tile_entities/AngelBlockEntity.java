@@ -3,7 +3,7 @@ package com.pekar.angelblock.blocks.tile_entities;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,7 +17,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity>
 {
@@ -75,10 +78,10 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
 
         if (player instanceof ServerPlayer serverPlayer)
         {
-            new PlaySoundPacket(SoundEvents.DRIPSTONE_BLOCK_PLACE).sendToPlayer(serverPlayer);
-
             setChanged();
         }
+
+        Utils.instance.sound.playSoundByBlock(player, getBlockPos(), SoundEvents.DRIPSTONE_BLOCK_PLACE);
 
         return true;
     }
@@ -91,10 +94,10 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
 
         if (player instanceof ServerPlayer serverPlayer)
         {
-            new PlaySoundPacket(SoundEvents.MAGMA_CUBE_DEATH_SMALL).sendToPlayer(serverPlayer);
-
             setChanged();
         }
+
+        Utils.instance.sound.playSoundByBlock(player, getBlockPos(), SoundEvents.MAGMA_CUBE_DEATH_SMALL);
 
         return true;
     }

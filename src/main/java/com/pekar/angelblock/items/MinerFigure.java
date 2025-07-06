@@ -1,9 +1,8 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -39,6 +38,8 @@ public class MinerFigure extends ModItemWithDoubleHoverText
             {
                 eraseMobMemory(piglin, player);
             }
+
+            utils.sound.playSoundByLivingEntity(player, player, SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
 
             return getToolInteractionResult(level.isClientSide());
         }
@@ -81,6 +82,9 @@ public class MinerFigure extends ModItemWithDoubleHoverText
                 //else if (entity instanceof ZombifiedPiglin zombifiedPiglin) eraseMobMemory(zombifiedPiglin, player);
             }
 
+            if (!monsters.isEmpty())
+                level.playSound(player, player, SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
+
             return !monsters.isEmpty();
         }
         return false;
@@ -88,9 +92,6 @@ public class MinerFigure extends ModItemWithDoubleHoverText
 
     private void eraseMobMemory(Mob mob, Player player)
     {
-        if (player instanceof ServerPlayer serverPlayer)
-            new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
-
         mob.setLastHurtByMob(null);
         mob.setTarget(null);
 

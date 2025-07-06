@@ -1,4 +1,4 @@
-package com.pekar.angelblock.network.packets;
+package com.pekar.angelblock.utils;
 
 public enum SoundType
 {

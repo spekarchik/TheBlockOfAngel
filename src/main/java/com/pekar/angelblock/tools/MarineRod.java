@@ -1,14 +1,15 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
+import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
@@ -59,9 +60,10 @@ public class MarineRod extends AncientRod
                     if (!isClientSide)
                     {
                         level.setBlock(upPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
-                        new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
                         damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
                     }
+
+                    utils.sound.playSoundByBlock(player, pos, SoundType.WATER_PLACED);
 
                     return getToolInteractionResult(true, isClientSide);
                 }
@@ -176,13 +178,13 @@ public class MarineRod extends AncientRod
     }
 
     @Override
-    protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
+    protected void oreFoundEvent(ServerPlayer player, BlockPos pos, DetectorFlags detectorFlags)
     {
         if (detectorFlags.isDiamondOreFound())
-            new PlaySoundPacket(SoundType.DIAMOND_FOUND).sendToPlayer(player);
+            utils.sound.playSoundOnBothSides(player, pos, SoundType.DIAMOND_FOUND, SoundSource.BLOCKS, 5F);
         else if (detectorFlags.isAmethystFound())
-            new PlaySoundPacket(SoundType.AMETHYST_FOUND).sendToPlayer(player);
+            utils.sound.playSoundOnBothSides(player, pos, SoundType.AMETHYST_FOUND, SoundSource.BLOCKS, 5F);
         else if (detectorFlags.isShiftingOreFound())
-            new PlaySoundPacket(SoundType.ORE_FOUND).sendToPlayer(player);
+            utils.sound.playSoundOnBothSides(player, pos, SoundType.ORE_FOUND, SoundSource.BLOCKS, 5F);
     }
 }

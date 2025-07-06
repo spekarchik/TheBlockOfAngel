@@ -1,9 +1,9 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -31,8 +31,9 @@ public class EndSapphire extends ModItemWithDoubleHoverText
                 int effectLevel = level.getRandom().nextIntBetweenInclusive(0, 20);
                 player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, duration, effectLevel, true, true));
                 player.addEffect(new MobEffectInstance(PotionRegistry.END_SAPPHIRE_COOLDOWN_EFFECT, duration + COOLDOWN_TIME, 0, true, false, true));
-                new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
             }
+
+            utils.sound.playSound(player, player.blockPosition(), SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
 
             return sidedSuccess(level.isClientSide());
         }

@@ -2,13 +2,12 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.utils.SoundType;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -326,17 +325,14 @@ public class TrackLayer extends WorkRod
 
             level.setBlock(upPos, placingBlock.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
 
-            if (player instanceof ServerPlayer serverPlayer)
-            {
-                var soundType = getSoundType(placingBlock);
-                new PlaySoundPacket(soundType).sendToPlayer(serverPlayer);
-            }
-
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
 
             if (!player.isCreative())
                 offHandItemStack.setCount(itemCount - 1);
         }
+
+        var soundType = getSoundType(placingBlock);
+        utils.sound.playSoundByBlock(player, upPos, soundType);
 
         return true;
     }

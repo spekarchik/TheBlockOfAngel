@@ -1,15 +1,16 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
+import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -137,7 +138,7 @@ public class AmethystRod extends FireRod
     }
 
     @Override
-    protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
+    protected void oreFoundEvent(ServerPlayer player, BlockPos pos, DetectorFlags detectorFlags)
     {
         SoundType soundType;
 
@@ -166,7 +167,7 @@ public class AmethystRod extends FireRod
             return;
         }
 
-        new PlaySoundPacket(soundType).sendToPlayer(player);
+        utils.sound.playSoundOnBothSides(player, pos, soundType, SoundSource.BLOCKS, 5F);
     }
 
     @Override
@@ -189,11 +190,12 @@ public class AmethystRod extends FireRod
         if (!level.isEmptyBlock(pos)) return InteractionResult.FAIL;
 
         var isClientSide = context.getLevel().isClientSide();
-        if (!isClientSide)
+        if (!isClientSide && state != null)
         {
-            new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) context.getPlayer());
-            level.setBlock(pos, state, 11);
+            level.setBlock(pos, state, Block.UPDATE_ALL_IMMEDIATE);
         }
+
+        utils.sound.playSoundByBlock(context.getPlayer(), pos, SoundType.BLOCK_CHANGED);
 
         return getToolInteractionResult(true, isClientSide);
     }

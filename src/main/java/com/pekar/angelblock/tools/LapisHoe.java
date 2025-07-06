@@ -1,13 +1,11 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.tools.properties.LapisHoeProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
-import com.pekar.angelblock.tools.properties.LapisHoeProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -35,9 +33,11 @@ public class LapisHoe extends EnhancedHoe
             if (!level.isClientSide())
             {
                 level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
-                new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
+
+            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL);
+
             return true;
         }
         else if (block == Blocks.COARSE_DIRT)
@@ -47,6 +47,9 @@ public class LapisHoe extends EnhancedHoe
                 setBlock(player, pos, Blocks.DIRT);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
+
+            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL);
+
             return true;
         }
         else

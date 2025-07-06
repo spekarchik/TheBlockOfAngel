@@ -1,12 +1,10 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -185,17 +183,14 @@ public class Builder extends WorkRod
             level.setBlock(pos, placingBlock.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
             level.updateNeighborsAt(pos, placingBlock);
 
-            if (player instanceof ServerPlayer serverPlayer)
-            {
-                var soundEvent = placingBlock.defaultBlockState().getSoundType(level, pos, player).getPlaceSound();
-                new PlaySoundPacket(soundEvent).sendToPlayer(serverPlayer);
-            }
-
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
 
             if (!player.isCreative())
                 offHandItemStack.setCount(itemCount - 1);
         }
+
+        var soundEvent = placingBlock.defaultBlockState().getSoundType(level, pos, player).getPlaceSound();
+        utils.sound.playSoundByBlock(player, pos, soundEvent);
 
         return true;
     }
