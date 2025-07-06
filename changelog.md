@@ -1,3 +1,11 @@
+## 📦 Version 2.13.2
+
+### 🐞 Fixed
+- Changes regarding the following shovels behavior: using *shovels* on **Farmland** now correctly transforms it into **Dirt Path**.
+  - The sound effect when performing the action is now played globally.
+  - The behavior has been added to the tooltip of affected *shovels*.
+
+
 ## 📦 Version 2.13.1
 
 ### 📝 Improvements
