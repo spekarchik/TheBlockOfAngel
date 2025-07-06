@@ -144,14 +144,11 @@ public class ModShovel extends ModTool implements IModToolEnhanceable, ITooltipP
             {
                 BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
                 level.setBlock(pos, newBlockState, Block.UPDATE_ALL_IMMEDIATE);
-                level.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS);
 
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
-            else
-            {
-                level.playLocalSound(player, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1F, 1F);
-            }
+
+            utils.sound.playSoundByBlock(player, pos, SoundEvents.SHOVEL_FLATTEN);
 
             return true;
         }

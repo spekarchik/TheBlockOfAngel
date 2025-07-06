@@ -2,13 +2,15 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.utils.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -206,7 +208,7 @@ public class MagneticRod extends ModRod
         if (shifted || isDiamondOreFound || isAmethystFound || areRailsFound || isSculkVeinFound)
         {
             if (player instanceof ServerPlayer serverPlayer)
-                oreFoundEvent(serverPlayer, new DetectorFlags(shifted, isDiamondOreFound, isAmethystFound, areRailsFound, isSculkVeinFound));
+                oreFoundEvent(serverPlayer, pos, new DetectorFlags(shifted, isDiamondOreFound, isAmethystFound, areRailsFound, isSculkVeinFound));
 
             return shifted;
         }
@@ -214,10 +216,10 @@ public class MagneticRod extends ModRod
         return false;
     }
 
-    protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
+    protected void oreFoundEvent(ServerPlayer player, BlockPos pos, DetectorFlags detectorFlags)
     {
         if (detectorFlags.isShiftingOreFound())
-            new PlaySoundPacket(SoundType.ORE_FOUND).sendToPlayer(player);
+            utils.sound.playSoundOnBothSides(player, pos, SoundType.ORE_FOUND, SoundSource.BLOCKS, 5F);
     }
 
     private boolean tryExchange(Level level, BlockPos currentPos, BlockPos closerPos)

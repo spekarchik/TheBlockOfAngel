@@ -1,12 +1,12 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,7 +38,7 @@ public class MarineCrystal extends ModItem implements ITooltipProvider
         {
             boolean result = entity.removeAllEffects();
             if (result)
-                new PlaySoundPacket(SoundEvents.ENCHANTMENT_TABLE_USE).sendToPlayer(serverPlayer);
+                level.playSound(null, entity, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.NEUTRAL, 1F, 1F);
         }
 
         return sidedSuccess(isClientSide);

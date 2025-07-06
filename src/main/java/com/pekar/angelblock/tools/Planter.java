@@ -2,7 +2,7 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.utils.SoundType;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
@@ -386,17 +386,14 @@ public class Planter extends WorkRod
 
                 if (bonemealableBlock.isBonemealSuccess(level, level.random, posToBonemeal, blockStateAtPosToBonemeal))
                 {
-                    if (player instanceof ServerPlayer serverPlayer)
-                    {
-                        new PlaySoundPacket(SoundType.BONEMEAL).sendToPlayer(serverPlayer);
-                    }
-
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
 
                     if (!player.isCreative())
                         itemStack.setCount(itemCount - 1);
                 }
             }
+
+            utils.sound.playSoundByBlock(player, posToBonemeal, SoundType.BONEMEAL);
         }
 
         return true;
