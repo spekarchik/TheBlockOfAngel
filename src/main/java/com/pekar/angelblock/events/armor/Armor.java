@@ -5,7 +5,6 @@ import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.utils.TriPredicate;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
@@ -13,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -22,7 +22,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
@@ -35,7 +34,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 abstract class Armor implements IArmor
 {
@@ -63,15 +62,15 @@ abstract class Armor implements IArmor
     protected final TriPredicate<Block, BlockPos, Level> isNetherrackPredicate = (block, pos, level) ->
             block == Blocks.NETHERRACK;
 
-    protected final Consumer<ServerPlayer> playIceBreakSound = (player) ->
+    protected final BiConsumer<ServerPlayer, BlockPos> playIceBreakSound = (player, pos) ->
     {
-        new PlaySoundPacket(SoundEvents.GLASS_BREAK).sendToPlayer(player);
-        new PlaySoundPacket(SoundEvents.GENERIC_SPLASH).sendToPlayer(player);
+        player.level().playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS);
+        player.level().playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS);
     };
 
-    protected final Consumer<ServerPlayer> playCrackedBlockBreakSound = (player) ->
+    protected final BiConsumer<ServerPlayer, BlockPos> playCrackedBlockBreakSound = (player, pos) ->
     {
-        new PlaySoundPacket(SoundEvents.TURTLE_EGG_BREAK, 2.0F).sendToPlayer(player);
+        player.level().playSound(null, pos, SoundEvents.TURTLE_EGG_BREAK, SoundSource.BLOCKS, 1F, 2F);
     };
 
     protected Armor(IPlayer player)
@@ -281,7 +280,7 @@ abstract class Armor implements IArmor
         }
     }
 
-    protected void breakBlockUnderPlayer(ServerPlayer player, boolean doRandomly, TriPredicate<Block, BlockPos, Level> blockUnderPlayer, BlockState stateToTransformTo, Consumer<ServerPlayer> runOnSucceeded, int chanceToAvoidBreaking)
+    protected void breakBlockUnderPlayer(ServerPlayer player, boolean doRandomly, TriPredicate<Block, BlockPos, Level> blockUnderPlayer, BlockState stateToTransformTo, BiConsumer<ServerPlayer, BlockPos> runOnSucceeded, int chanceToAvoidBreaking)
     {
         var level = player.level();
         if (level.isClientSide()) return;
@@ -314,11 +313,11 @@ abstract class Armor implements IArmor
                     if (stateToTransformTo.isAir())
                         level.destroyBlock(currentPos, true, player);
                     else
-                        level.setBlock(currentPos, stateToTransformTo, 11);
+                        level.setBlock(currentPos, stateToTransformTo, Block.UPDATE_ALL_IMMEDIATE);
                 }
             }
 
-        runOnSucceeded.accept(player);
+        runOnSucceeded.accept(player, posBelow);
     }
 
     // for tests

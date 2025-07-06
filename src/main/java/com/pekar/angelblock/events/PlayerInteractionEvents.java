@@ -14,6 +14,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -216,7 +217,7 @@ public class PlayerInteractionEvents implements IEventHandler
                     50, 0.5, 1, 0.5, 0.1
             );
 
-            new PlaySoundPacket(SoundEvents.PORTAL_TRAVEL).sendToPlayer(serverPlayer);
+            serverPlayer.level().playSound(null, serverPlayer.blockPosition(), SoundEvents.PORTAL_TRAVEL, SoundSource.PLAYERS);
         }
     }
 

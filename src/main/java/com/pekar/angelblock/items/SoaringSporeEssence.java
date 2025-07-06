@@ -1,9 +1,9 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -36,12 +36,13 @@ public class SoaringSporeEssence extends ModItemWithMultipleHoverText
             {
                 entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, MobEffectInstance.INFINITE_DURATION, 0, true, true));
                 entity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, MobEffectInstance.INFINITE_DURATION, 0, true, true));
-                new PlaySoundPacket(SoundEvents.ENCHANTMENT_TABLE_USE).sendToPlayer(serverPlayer);
 
                 if (!player.isCreative())
                     stack.shrink(1);
             }
         }
+
+        utils.sound.playSoundByLivingEntity(player, entity, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.NEUTRAL, 1F, 1F);
 
         return sidedSuccess(isClientSide);
     }

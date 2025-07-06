@@ -2,14 +2,13 @@ package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.cleaners.TrackedAllay;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -53,8 +52,7 @@ public class EvokerAmulet extends ModItem implements ITooltipProvider
                     Cleaner.add(targetToTrack);
                 }
 
-                if (player instanceof ServerPlayer serverPlayer)
-                    new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
+                level.playSound(null, player, SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
             }
         }
 
