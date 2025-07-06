@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.core.BlockPos;
