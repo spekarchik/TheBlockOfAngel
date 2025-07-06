@@ -1,8 +1,8 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
-import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
