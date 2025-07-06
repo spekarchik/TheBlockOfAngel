@@ -2,7 +2,6 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.ChatFormatting;
