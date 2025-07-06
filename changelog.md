@@ -4,6 +4,12 @@
 - Changes regarding the following shovels behavior: using *shovels* on **Farmland** now correctly transforms it into **Dirt Path**.
   - The sound effect when performing the action is now played globally.
   - The behavior has been added to the tooltip of affected *shovels*.
+  
+### 🔊 Sound Improvements
+- Many sound effects that were previously local (audible only to the player) are now global and can be heard by nearby players.
+
+### 🛠️ Other Changes
+- Default **Jump Boost** key *KEY_J* has been changed to *KEY_C*
 
 
 ## 📦 Version 2.13.1
