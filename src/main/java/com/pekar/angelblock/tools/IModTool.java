@@ -1,7 +1,8 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.utils.SoundType;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -124,8 +125,8 @@ public interface IModTool extends IModDescriptionItem, IToolService
 
     default void setBlock(Player player, BlockPos pos, Block block)
     {
-        player.level().setBlock(pos, block.defaultBlockState(), 11);
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+        player.level().setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+        Utils.instance.sound.playSoundByBlock(player, pos, SoundType.BLOCK_CHANGED);
     }
 
     @Override

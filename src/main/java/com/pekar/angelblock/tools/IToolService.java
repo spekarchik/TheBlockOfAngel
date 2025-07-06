@@ -1,9 +1,8 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.utils.SoundType;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
@@ -13,14 +12,13 @@ public interface IToolService
 {
     default void setBlock(Player player, BlockPos pos, Block block)
     {
-        player.level().setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+        setBlock(player, pos, block.defaultBlockState());
     }
 
     default void setBlock(Player player, BlockPos pos, BlockState blockState)
     {
         player.level().setBlock(pos, blockState, Block.UPDATE_ALL_IMMEDIATE);
-        new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
+        Utils.instance.sound.playSoundByBlock(player, pos, SoundType.BLOCK_CHANGED);
     }
 
     default InteractionResult getToolInteractionResult(boolean applied, boolean isClientSide)

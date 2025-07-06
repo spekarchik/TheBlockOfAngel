@@ -2,23 +2,21 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
@@ -287,7 +285,7 @@ public class FireRod extends MarineRod
     }
 
     @Override
-    protected void oreFoundEvent(ServerPlayer player, DetectorFlags detectorFlags)
+    protected void oreFoundEvent(ServerPlayer player, BlockPos pos, DetectorFlags detectorFlags)
     {
         SoundType soundType;
 
@@ -312,6 +310,6 @@ public class FireRod extends MarineRod
             return;
         }
 
-        new PlaySoundPacket(soundType).sendToPlayer(player);
+        utils.sound.playSoundOnBothSides(player, pos, soundType, SoundSource.BLOCKS, 5F);
     }
 }

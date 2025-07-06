@@ -1,7 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
+import com.pekar.angelblock.utils.SoundType;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
@@ -65,25 +65,28 @@ public class SuperSword extends ModSword
         }
         else if (player.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
         {
-            if (!level.isClientSide())
+            var blockState = level.getBlockState(pos);
+            if (player.isShiftKeyDown() && utils.blocks.types.isCactiPlantableOn(blockState))
             {
-                var blockState = level.getBlockState(pos);
-                if (player.isShiftKeyDown() && utils.blocks.types.isCactiPlantableOn(blockState))
-                {
+                if (!level.isClientSide())
                     plantCacti(player, level, pos, context.getHand(), context.getClickedFace());
-                    new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
-                }
-                else if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
-                        && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
-                {
+
+                utils.sound.playSoundByBlock(player, pos, SoundType.PLANT);
+            }
+            else if (Math.abs(player.blockPosition().getX() - pos.getX()) < 2
+                    && Math.abs(player.blockPosition().getZ() - pos.getZ()) < 2)
+            {
+                if (!level.isClientSide())
                     setEffectAround(player, hand, level, pos);
-                    new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
-                }
-                else
-                {
+
+                utils.sound.playSoundByBlock(player, pos, SoundType.BLOCK_CHANGED);
+            }
+            else
+            {
+                if (!level.isClientSide())
                     setEffectAhead(player, hand, level, pos);
-                    new PlaySoundPacket(SoundType.BLOCK_CHANGED).sendToPlayer((ServerPlayer) player);
-                }
+
+                utils.sound.playSoundByBlock(player, pos, SoundType.BLOCK_CHANGED);
             }
 
             return getToolInteractionResult(true, level.isClientSide());

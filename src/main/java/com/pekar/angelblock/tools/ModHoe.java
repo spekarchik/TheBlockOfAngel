@@ -1,15 +1,14 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
-import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
+import com.pekar.angelblock.utils.SoundType;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -61,10 +60,10 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
             if (!level.isClientSide)
             {
                 level.setBlock(upPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
-                new PlaySoundPacket(SoundType.WATER_PLACED).sendToPlayer((ServerPlayer) player);
-
                 damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
             }
+
+            utils.sound.playSoundByBlock(player, pos, SoundType.WATER_PLACED);
 
             return getToolInteractionResult(true, level.isClientSide());
         }
@@ -113,6 +112,9 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
                 setBlock(player, pos, Blocks.DIRT);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
+
+            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL);
+
             return true;
         }
 

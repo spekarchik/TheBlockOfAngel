@@ -99,10 +99,11 @@ public class AngelRod extends EndRod
 
                     if (player instanceof ServerPlayer serverPlayer)
                     {
-                        new PlaySoundPacket(SoundEvents.STONE_PLACE).sendToPlayer(serverPlayer);
                         CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos.above(), itemStack);
                     }
                 }
+
+                utils.sound.playSoundByBlock(player, pos, SoundEvents.STONE_PLACE);
 
                 var itemCount = itemStack.getCount();
                 if (itemCount > 0)
