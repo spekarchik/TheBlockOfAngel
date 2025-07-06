@@ -123,9 +123,9 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 2; i++)
+        for (int i = 0; i <= 3; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 1).apply();
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 2).apply();
         }
     }
 
