@@ -7,6 +7,8 @@ import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -149,10 +151,14 @@ public class EnhancedShovel extends ModShovel
             if (!level.isClientSide)
             {
                 BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
-                level.setBlock(pos, newBlockState, 11);
-                new PlaySoundPacket(SoundType.PLANT).sendToPlayer((ServerPlayer) player);
+                level.setBlock(pos, newBlockState, Block.UPDATE_ALL_IMMEDIATE);
+                level.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS);
 
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
+            }
+            else
+            {
+                level.playLocalSound(player, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1F, 1F);
             }
 
             return true;
