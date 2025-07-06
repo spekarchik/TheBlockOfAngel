@@ -3,7 +3,7 @@ package com.pekar.angelblock.blocks.tile_entities;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -76,10 +76,10 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
 
         if (player instanceof ServerPlayer serverPlayer)
         {
-            new PlaySoundPacket(SoundEvents.DRIPSTONE_BLOCK_PLACE).sendToPlayer(serverPlayer);
-
             setChanged();
         }
+
+        Utils.instance.sound.playSoundByBlock(player, getBlockPos(), SoundEvents.DRIPSTONE_BLOCK_PLACE);
 
         return true;
     }
@@ -92,10 +92,10 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
 
         if (player instanceof ServerPlayer serverPlayer)
         {
-            new PlaySoundPacket(SoundEvents.MAGMA_CUBE_DEATH_SMALL).sendToPlayer(serverPlayer);
-
             setChanged();
         }
+
+        Utils.instance.sound.playSoundByBlock(player, getBlockPos(), SoundEvents.MAGMA_CUBE_DEATH_SMALL);
 
         return true;
     }

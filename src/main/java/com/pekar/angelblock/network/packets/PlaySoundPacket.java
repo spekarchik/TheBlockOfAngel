@@ -2,6 +2,7 @@ package com.pekar.angelblock.network.packets;
 
 import com.pekar.angelblock.network.Packet;
 import com.pekar.angelblock.network.ServerToClientPacket;
+import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvent;
@@ -10,28 +11,21 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PlaySoundPacket extends ServerToClientPacket
 {
-    private final SoundType soundType;
     private final SoundEvent soundEvent;
     private final float pitch;
 
-    public PlaySoundPacket(SoundType soundType)
+    public PlaySoundPacket()
     {
-        this(soundType, null, 5.0F);
+        this(null, 1.0F);
     }
 
     public PlaySoundPacket(SoundEvent soundEvent)
     {
-        this(SoundType.MINECRAFT, soundEvent, 1.0F);
+        this(soundEvent, 1.0F);
     }
 
     public PlaySoundPacket(SoundEvent soundEvent, float pitch)
     {
-        this(SoundType.MINECRAFT, soundEvent, pitch);
-    }
-
-    private PlaySoundPacket(SoundType soundType, SoundEvent soundEvent, float pitch)
-    {
-        this.soundType = soundType;
         this.soundEvent = soundEvent;
         this.pitch = pitch;
     }
@@ -45,16 +39,14 @@ public class PlaySoundPacket extends ServerToClientPacket
     @Override
     public Packet decode(FriendlyByteBuf buffer)
     {
-        var soundType = SoundType.getByIndex(buffer.readInt());
         var soundEvent = SoundEvent.createVariableRangeEvent(buffer.readResourceLocation());
         var pitch = buffer.readFloat();
-        return new PlaySoundPacket(soundType, soundEvent, pitch);
+        return new PlaySoundPacket(soundEvent, pitch);
     }
 
     @Override
     public void encode(FriendlyByteBuf buffer)
     {
-        buffer.writeInt(SoundType.getIndex(soundType));
         buffer.writeResourceLocation(soundEvent != null ? soundEvent.location() : SoundEvents.BONE_MEAL_USE.location());
         buffer.writeFloat(pitch);
     }
@@ -62,12 +54,9 @@ public class PlaySoundPacket extends ServerToClientPacket
     @Override
     public void onReceive(IPayloadContext context)
     {
-        var sound = getSound(soundType);
-        if (sound == null) return;
-
         var player = Minecraft.getInstance().player;
         if (player != null)
-            player.playSound(sound, 1.0F, pitch);
+            player.playSound(soundEvent, 1.0F, pitch);
     }
 
     private SoundEvent getSound(SoundType soundType)
