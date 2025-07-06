@@ -2,6 +2,8 @@ package com.pekar.angelblock.tools;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.pekar.angelblock.network.packets.PlaySoundPacket;
+import com.pekar.angelblock.network.packets.SoundType;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
@@ -10,6 +12,7 @@ import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -67,7 +70,11 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
 
         if (FLATTENABLES.containsKey(block) || (block instanceof CampfireBlock && blockState.getValue(CampfireBlock.LIT)))
         {
-            return useOnBasic(context); // to prevent putting a block it needs both: return SUCCESS on client side AND return CONSUME on server side
+            var result = useOnBasic(context); // to prevent putting a block it needs both: return SUCCESS on client side AND return CONSUME on server side
+            if (result == InteractionResult.PASS)
+            {
+                onBlockProcessing(player, level, pos, pos, context.getHorizontalDirection());
+            }
         }
 
         return InteractionResult.PASS;
@@ -126,6 +133,34 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
     public final IMaterialProperties getMaterialProperties()
     {
         return materialProperties;
+    }
+
+    protected boolean onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
+    {
+        if (!level.isEmptyBlock(pos.above())) return false;
+
+        var blockState = level.getBlockState(pos);
+        Block block = blockState.getBlock();
+
+        if (FLATTENABLES.containsKey(block))
+        {
+            if (!level.isClientSide)
+            {
+                BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
+                level.setBlock(pos, newBlockState, Block.UPDATE_ALL_IMMEDIATE);
+                level.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS);
+
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
+            }
+            else
+            {
+                level.playPlayerSound(SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1F, 1F);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     private InteractionResult useOnBasic(UseOnContext context)
