@@ -7,7 +7,6 @@ import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -101,18 +100,10 @@ public class DiamithicArmor extends Armor
     @Override
     protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        if (event.getSlot() == EquipmentSlot.LEGS && player.isArmorElementPutOn(this, EquipmentSlot.LEGS) && player.areLeggingsModifiedWithHealthRegenerator(this))
+        var entityPlayer = player.getEntity();
+        if (playerNeedsToRestoreHealth(entityPlayer, event.getSlot(), event.getFrom(), event.getTo()))
         {
-            var entityPlayer = player.getEntity();
-            var maxHealthAttr = entityPlayer.getAttribute(Attributes.MAX_HEALTH);
-            if (maxHealthAttr != null)
-            {
-                var maxBaseHealth = maxHealthAttr.getBaseValue();
-                if (entityPlayer.getHealth() >= maxBaseHealth)
-                {
-                    entityPlayer.setHealth(entityPlayer.getMaxHealth());
-                }
-            }
+            restorePlayerHealth(entityPlayer);
         }
     }
 
