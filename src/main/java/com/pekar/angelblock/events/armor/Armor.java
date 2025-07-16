@@ -341,6 +341,8 @@ abstract class Armor implements IArmor
     {
         if (entityPlayer.isCreative()) return false;
 
+        if (itemFrom.getItem().equals(itemTo.getItem())) return false;
+
         if (!player.isArmorElementPutOn(this, EquipmentSlot.LEGS) || !player.areLeggingsModifiedWithHealthRegenerator(this))
             return false;
 
