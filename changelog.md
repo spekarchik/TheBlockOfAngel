@@ -1,3 +1,10 @@
+## 📦 Version 2.13.3
+
+### 📝 Improvements
+- Drinking milk no longer resets extra hearts from *Health Boost* armor.
+  - Extra hearts now remain filled (if your main health is full).
+
+
 ## 📦 Version 2.13.2
 
 ### 🐞 Fixed
