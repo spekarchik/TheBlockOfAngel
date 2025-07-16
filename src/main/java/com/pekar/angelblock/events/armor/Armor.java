@@ -22,9 +22,13 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -318,6 +322,31 @@ abstract class Armor implements IArmor
             }
 
         runOnSucceeded.accept(player, posBelow);
+    }
+
+    protected void restorePlayerHealth(Player entityPlayer)
+    {
+        var maxHealthAttr = entityPlayer.getAttribute(Attributes.MAX_HEALTH);
+        if (maxHealthAttr != null)
+        {
+            var maxBaseHealth = maxHealthAttr.getBaseValue();
+            if (entityPlayer.getHealth() >= maxBaseHealth)
+            {
+                entityPlayer.setHealth(entityPlayer.getMaxHealth());
+            }
+        }
+    }
+
+    protected boolean playerNeedsToRestoreHealth(Player entityPlayer, EquipmentSlot slotChanged, ItemStack itemFrom, ItemStack itemTo)
+    {
+        if (entityPlayer.isCreative()) return false;
+
+        if (!player.isArmorElementPutOn(this, EquipmentSlot.LEGS) || !player.areLeggingsModifiedWithHealthRegenerator(this))
+            return false;
+
+        if (slotChanged == EquipmentSlot.LEGS) return true;
+
+        return itemFrom.is(Items.MILK_BUCKET) && itemTo.is(Items.BUCKET);
     }
 
     // for tests
