@@ -21,12 +21,12 @@ public class SuperPickaxe extends EnhancedPickaxe
 
         tooltip.ignoreEmptyLines();
 
-        for (int i = 0; i <= 12; i++)
+        for (int i = 0; i <= 13; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1)
-                    .styledAs(TextStyle.Notice, i == 7)
-                    .styledAs(TextStyle.DarkGray, i == 11)
+                    .styledAs(TextStyle.Notice, i == 8)
+                    .styledAs(TextStyle.DarkGray, i == 12)
                     .apply();
         }
     }
