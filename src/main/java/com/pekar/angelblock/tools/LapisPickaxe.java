@@ -18,12 +18,12 @@ public class LapisPickaxe extends EnhancedPickaxe
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 6; i++)
+        for (int i = 0; i <= 7; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1)
-                    .styledAs(TextStyle.Notice, i == 3)
-                    .styledAs(TextStyle.DarkGray, i == 5)
+                    .styledAs(TextStyle.Notice, i == 4)
+                    .styledAs(TextStyle.DarkGray, i == 6)
                     .apply();
         }
     }
