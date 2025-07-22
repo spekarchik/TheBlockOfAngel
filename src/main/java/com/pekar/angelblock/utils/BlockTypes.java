@@ -52,7 +52,7 @@ public class BlockTypes
             }
             else
             {
-                if (posToCheck.getY() > pos.getY() && blockState.isSolidRender()) return false;
+                if (posToCheck.getY() > pos.getY() && blockState.isSolidRender(level, posToCheck)) return false;
             }
         }
 
