@@ -9,8 +9,10 @@ public class SuperMaterialProperties implements IMaterialProperties
     @Override
     public boolean isSafeToBreak(LivingEntity entity, BlockPos pos)
     {
+        var blockUtils = Utils.instance.blocks;
         return !Utils.instance.player.conditions.isNearLavaOrWaterOrUnsafe(entity, pos)
-                && !Utils.instance.blocks.types.isInfested(entity.level().getBlockState(pos).getBlock())
-                && !Utils.instance.blocks.types.isSuspicious(entity.level().getBlockState(pos).getBlock());
+                && !blockUtils.types.isInfested(entity.level().getBlockState(pos).getBlock())
+                && !blockUtils.types.isSuspicious(entity.level().getBlockState(pos).getBlock())
+                && !blockUtils.types.holdsSuspiciousOrLiquid(entity.level(), pos, true, true);
     }
 }
