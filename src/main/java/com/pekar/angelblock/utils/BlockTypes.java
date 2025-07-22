@@ -28,6 +28,37 @@ public class BlockTypes
         return block instanceof BrushableBlock;
     }
 
+    public boolean holdsSuspiciousOrLiquid(Level level, BlockPos pos, boolean checkForWaterAndSuspicious, boolean checkForLava)
+    {
+        BlockPos posToCheck = pos;
+
+        for (int i = 0; i < 16; posToCheck = posToCheck.above(), i++)
+        {
+            var blockState = level.getBlockState(posToCheck);
+            if (blockState.isAir()) return false;
+
+            if (checkForWaterAndSuspicious && blockState.is(Blocks.WATER)) return true;
+            if (checkForLava && blockState.is(Blocks.LAVA)) return true;
+
+            var block = blockState.getBlock();
+            if (checkForWaterAndSuspicious && isSuspicious(block)) return true;
+
+            var isFallingBlock = block instanceof FallingBlock;
+            if (isFallingBlock)
+            {
+                var blockUtils = Utils.instance.blocks;
+                if (checkForWaterAndSuspicious && blockUtils.conditions.isNearWater(level, posToCheck)) return true;
+                if (checkForLava && blockUtils.conditions.isNearLava(level, posToCheck)) return true;
+            }
+            else
+            {
+                if (posToCheck.getY() > pos.getY() && blockState.isSolidRender()) return false;
+            }
+        }
+
+        return true;
+    }
+
     public boolean isOre(BlockState blockState)
     {
         var ores = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "ores"));
