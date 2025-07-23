@@ -351,36 +351,48 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
+            boolean isLevitationInfinite = levitationEffect.isAnyActive() && levitationEffect.isInfinite();
+
+            if (!levitationEffect.isActive() && isLevitationInfinite)
+                levitationEffect.forceRemove();
+
             if (!jumpNegativeEffect.isAnyActive())
             {
                 jumpEffect.trySwitch();
             }
 
-            if (jumpEffect.isMasterActive() && slowFallingEffect.isActive() && player.getEntity().onGround())
+            if (jumpEffect.isMasterActive() && slowFallingEffect.isActive() && player.getEntity().onGround() && !levitationEffect.isAnyActive())
             {
                 slowFallingEffect.trySwitchOff();
                 levitationEffect.trySwitchOn();
             }
-            else if (!jumpEffect.isMasterActive() && levitationEffect.isActive())
+            else
             {
-                levitationEffect.trySwitchOff();
-
-                if (slowFallingEffect.isAvailable())
+                if (!jumpEffect.isMasterActive() && levitationEffect.isActive())
                 {
-                    slowFallingEffect.trySwitchOn();
-                    isSlowFallingActivatedOnGround = playerEntity.onGround();
+                    levitationEffect.trySwitchOff();
+
+                    if (slowFallingEffect.isAvailable())
+                    {
+                        slowFallingEffect.trySwitchOn();
+                        isSlowFallingActivatedOnGround = playerEntity.onGround();
+                    }
                 }
             }
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
+            boolean isLevitationInfinite = levitationEffect.isAnyActive() && levitationEffect.isInfinite();
+
+            if (!levitationEffect.isActive() && isLevitationInfinite)
+                levitationEffect.forceRemove();
+
             if (!jumpNegativeEffect.isAnyActive())
             {
                 if (jumpEffect.isMasterAvailable() && jumpEffect.isOn())
                 {
-                    boolean isArmorOrInfiniteLevitationActive = levitationEffect.isActive() || (levitationEffect.isAnyActive() && levitationEffect.isInfinite());
-                    if (levitationEffect.isAvailable() && isArmorOrInfiniteLevitationActive)
+                    if (levitationEffect.isAvailable() && levitationEffect.isActive())
                     {
                         jumpEffect.trySwitchOff();
                         levitationEffect.trySwitchOff();
@@ -399,7 +411,7 @@ public class SuperArmor extends Armor
                             isSlowFallingActivatedOnGround = false;
                         }
                     }
-                    else if (!playerEntity.isInLava())
+                    else if (!playerEntity.isInLava() && !levitationEffect.isAnyActive())
                     {
                         levitationEffect.trySwitch(LEVITATION_UP_AMPLIFIER);
                     }
