@@ -130,11 +130,11 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
         updateActivity(amplifier, duration);
     }
 
-    protected void tryRemove()
+    private void tryRemove(boolean forceRemove)
     {
         if (canClearEffect())
         {
-            if (isActive())
+            if (isActive() || (isAnyActive() && forceRemove))
             {
                 player.clearEffect(effectType);
                 effectInstance = null;
@@ -142,6 +142,17 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
 
             if (state.isOn()) setState(State.OFF);
         }
+    }
+
+    protected void tryRemove()
+    {
+        tryRemove(false);
+    }
+
+    @Override
+    public final void forceRemove()
+    {
+        tryRemove(true);
     }
 
     protected boolean canClearEffect()
