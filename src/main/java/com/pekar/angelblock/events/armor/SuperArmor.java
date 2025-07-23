@@ -372,7 +372,8 @@ public class SuperArmor extends Armor
             {
                 if (jumpEffect.isMasterAvailable() && jumpEffect.isOn())
                 {
-                    if (levitationEffect.isAvailable() && levitationEffect.isActive())
+                    boolean isArmorOrInfiniteLevitationActive = levitationEffect.isActive() || (levitationEffect.isAnyActive() && levitationEffect.isInfinite());
+                    if (levitationEffect.isAvailable() && isArmorOrInfiniteLevitationActive)
                     {
                         jumpEffect.trySwitchOff();
                         levitationEffect.trySwitchOff();
