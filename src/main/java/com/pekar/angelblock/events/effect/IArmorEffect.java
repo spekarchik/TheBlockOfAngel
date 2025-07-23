@@ -7,4 +7,5 @@ public interface IArmorEffect extends IArmorEffectBase
     boolean isAnyActive();
     boolean isAvailable();
     boolean isUnavailable();
+    boolean isInfinite();
 }
