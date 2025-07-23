@@ -188,4 +188,10 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     {
         return unavailabilityPredicate;
     }
+
+    @Override
+    public final boolean isInfinite()
+    {
+        return player.getEffectInstance(effectType).isInfiniteDuration();
+    }
 }
