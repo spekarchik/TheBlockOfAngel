@@ -2,7 +2,8 @@
 
 ### 🐞 Fixed
 - Fixed an issue where players wearing **Superyte Armor** could get stuck with an infinite *Levitation* effect when hit by a shulker.
-  - The armor now correctly disables infinite *Levitation* effects, even if they were not applied by the armor itself.
+  - This situation should no longer occur.
+  - If it does, the armor now correctly disables infinite *Levitation* effects, even if they were not applied by the armor itself.
 
 
 ## 📦 Version 2.14.0
