@@ -95,7 +95,7 @@ public class PlayerConditions
                     if (z != posZ && (x != posX || y != posY)) continue;
 
                     Block block = level.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block == Blocks.LAVA || (block == Blocks.WATER && !entityPlayer.isInWater()))
+                    if ((block == Blocks.LAVA && !entityPlayer.isInLava()) || (block == Blocks.WATER && !entityPlayer.isInWater()))
                     {
                         return true;
                     }
