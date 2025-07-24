@@ -351,11 +351,6 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
-            boolean isLevitationInfinite = levitationEffect.isAnyActive() && levitationEffect.isInfinite();
-
-            if (!levitationEffect.isActive() && isLevitationInfinite)
-                levitationEffect.forceRemove();
-
             if (!jumpNegativeEffect.isAnyActive())
             {
                 jumpEffect.trySwitch();
@@ -383,9 +378,7 @@ public class SuperArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
         {
-            boolean isLevitationInfinite = levitationEffect.isAnyActive() && levitationEffect.isInfinite();
-
-            if (!levitationEffect.isActive() && isLevitationInfinite)
+            if (!levitationEffect.isOn() && levitationEffect.isAnyActive() && levitationEffect.isInfinite())
                 levitationEffect.forceRemove();
 
             if (!jumpNegativeEffect.isAnyActive())
