@@ -17,29 +17,15 @@ public class BlockConditions
 
     public boolean isNearLava(Level level, BlockPos pos)
     {
-        final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
-
-        for (int x = posX - 1; x <= posX + 1; x++)
-        {
-            for (int y = posY; y <= posY + 1; y++)
-            {
-                if (x != posX && y != posY) continue;
-
-                for (int z = posZ - 1; z <= posZ + 1; z++)
-                {
-                    if (z != posZ && (x != posX || y != posY)) continue;
-
-                    Block block = level.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block == Blocks.LAVA)
-                        return true;
-                }
-            }
-        }
-
-        return false;
+        return isNearBlock(level, pos, Blocks.LAVA);
     }
 
     public boolean isNearWater(Level level, BlockPos pos)
+    {
+        return isNearBlock(level, pos, Blocks.WATER);
+    }
+
+    public boolean isNearBlock(Level level, BlockPos pos, Block blockToCheck)
     {
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
@@ -53,9 +39,8 @@ public class BlockConditions
                 {
                     if (z != posZ && (x != posX || y != posY)) continue;
 
-                    Block block = level.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block == Blocks.WATER)
-                        return true;
+                    var blockState = level.getBlockState(new BlockPos(x, y, z));
+                    if (blockState.is(blockToCheck)) return true;
                 }
             }
         }
