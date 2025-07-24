@@ -216,7 +216,7 @@ public class Player implements IPlayer
     public boolean hasArmorEffect(Holder<MobEffect> effect)
     {
         var effectInstance = entity.getEffect(effect);
-        return effectInstance != null && !effectInstance.isVisible();
+        return effectInstance != null && (!effectInstance.isVisible() || effectInstance.isInfiniteDuration());
     }
 
     @Override
