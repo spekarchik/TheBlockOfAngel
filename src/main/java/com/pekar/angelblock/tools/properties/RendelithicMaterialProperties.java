@@ -10,7 +10,7 @@ public class RendelithicMaterialProperties implements IMaterialProperties
     public boolean isSafeToBreak(LivingEntity entity, BlockPos pos)
     {
         var blockUtils = Utils.instance.blocks;
-        return !blockUtils.conditions.isNearLava(entity.level(), pos)
-                && !blockUtils.types.holdsSuspiciousOrLiquid(entity.level(), pos, false, true);
+        return (entity.isInLava() || !blockUtils.conditions.isNearLava(entity.level(), pos))
+                && !blockUtils.types.holdsSuspiciousOrLiquid(entity, pos, false, true);
     }
 }

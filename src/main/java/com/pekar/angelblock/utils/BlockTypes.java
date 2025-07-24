@@ -7,6 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,17 +29,18 @@ public class BlockTypes
         return block instanceof BrushableBlock;
     }
 
-    public boolean holdsSuspiciousOrLiquid(Level level, BlockPos pos, boolean checkForWaterAndSuspicious, boolean checkForLava)
+    public boolean holdsSuspiciousOrLiquid(LivingEntity livingEntity, BlockPos pos, boolean checkForWaterAndSuspicious, boolean checkForLava)
     {
-        BlockPos posToCheck = pos;
+        var posToCheck = pos;
+        var level = livingEntity.level();
 
         for (int i = 0; i < 16; posToCheck = posToCheck.above(), i++)
         {
             var blockState = level.getBlockState(posToCheck);
             if (blockState.isAir()) return false;
 
-            if (checkForWaterAndSuspicious && blockState.is(Blocks.WATER)) return true;
-            if (checkForLava && blockState.is(Blocks.LAVA)) return true;
+            if (checkForWaterAndSuspicious && blockState.is(Blocks.WATER) && !livingEntity.isInWater()) return true;
+            if (checkForLava && blockState.is(Blocks.LAVA) && !livingEntity.isInLava()) return true;
 
             var block = blockState.getBlock();
             if (checkForWaterAndSuspicious && isSuspicious(block)) return true;
@@ -47,8 +49,8 @@ public class BlockTypes
             if (isFallingBlock)
             {
                 var blockUtils = Utils.instance.blocks;
-                if (checkForWaterAndSuspicious && blockUtils.conditions.isNearWater(level, posToCheck)) return true;
-                if (checkForLava && blockUtils.conditions.isNearLava(level, posToCheck)) return true;
+                if (checkForWaterAndSuspicious && blockUtils.conditions.isNearWater(level, posToCheck) && !livingEntity.isInWater()) return true;
+                if (checkForLava && blockUtils.conditions.isNearLava(level, posToCheck) && !livingEntity.isInLava()) return true;
             }
             else
             {
@@ -56,7 +58,7 @@ public class BlockTypes
             }
         }
 
-        return true;
+        return false;
     }
 
     public boolean isOre(BlockState blockState)
