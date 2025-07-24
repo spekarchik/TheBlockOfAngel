@@ -12,6 +12,6 @@ public class LapisMaterialProperties implements IMaterialProperties
         var blockUtils = Utils.instance.blocks;
         return (entity.isInWater() || !blockUtils.conditions.isNearWater(entity.level(), pos))
                 && !blockUtils.types.isSuspicious(entity.level().getBlockState(pos).getBlock())
-                && !blockUtils.types.holdsSuspiciousOrLiquid(entity.level(), pos, true, false);
+                && !blockUtils.types.holdsSuspiciousOrLiquid(entity, pos, true, false);
     }
 }
