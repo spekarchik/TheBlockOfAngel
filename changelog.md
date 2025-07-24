@@ -1,3 +1,12 @@
+## 📦 Version 2.14.2
+
+### 🐞 Fixed
+- Fixed overly restrictive logic that prevented dropping blocks adjacent to water when the player was inside it.
+
+### 📝 Improvements
+- Players can now drop blocks holding back lava while inside lava.
+
+
 ## 📦 Version 2.14.1
 
 ### 🐞 Fixed
