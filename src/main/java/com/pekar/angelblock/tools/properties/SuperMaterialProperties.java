@@ -13,6 +13,6 @@ public class SuperMaterialProperties implements IMaterialProperties
         return !Utils.instance.player.conditions.isNearLavaOrWaterOrUnsafe(entity, pos)
                 && !blockUtils.types.isInfested(entity.level().getBlockState(pos).getBlock())
                 && !blockUtils.types.isSuspicious(entity.level().getBlockState(pos).getBlock())
-                && !blockUtils.types.holdsSuspiciousOrLiquid(entity.level(), pos, true, true);
+                && !blockUtils.types.holdsSuspiciousOrLiquid(entity, pos, true, true);
     }
 }
