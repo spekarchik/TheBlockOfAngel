@@ -1,3 +1,9 @@
+## 📦 Version 2.14.3
+
+### 🐞 Fixed
+- Fixed armor effect toggles not disabling infinite-duration status effects other than *Levitation*.
+
+
 ## 📦 Version 2.14.2
 
 ### 🐞 Fixed
