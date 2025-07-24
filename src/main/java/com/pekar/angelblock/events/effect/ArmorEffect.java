@@ -3,6 +3,7 @@ package com.pekar.angelblock.events.effect;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.events.player.ModMobEffectInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -40,7 +41,19 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     @Override
     public final boolean isActive()
     {
-        return player.hasArmorEffect(effectType) && effectInstance != null && effectInstance.equals(player.getEffectInstance(effectType));
+        if (!player.hasArmorEffect(effectType)) return false;
+
+        var effectInstance = player.getEffectInstance(effectType);
+
+        if (this.effectInstance != null && this.effectInstance.equals(effectInstance)) return true;
+
+        var hasUnrecognizedInfiniteEffect = this.effectInstance == null && effectInstance.isInfiniteDuration();
+        if (hasUnrecognizedInfiniteEffect && effectInstance instanceof ModMobEffectInstance modEffectInstance)
+        {
+            this.effectInstance = modEffectInstance;
+        }
+
+        return hasUnrecognizedInfiniteEffect;
     }
 
     @Override
