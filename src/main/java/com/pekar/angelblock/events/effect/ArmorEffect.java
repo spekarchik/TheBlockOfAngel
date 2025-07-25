@@ -41,19 +41,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     @Override
     public final boolean isActive()
     {
-        if (!player.hasArmorEffect(effectType)) return false;
-
-        var effectInstance = player.getEffectInstance(effectType);
-
-        if (this.effectInstance != null && this.effectInstance.equals(effectInstance)) return true;
-
-        var hasUnrecognizedInfiniteEffect = this.effectInstance == null && effectInstance.isInfiniteDuration();
-        if (hasUnrecognizedInfiniteEffect && effectInstance instanceof ModMobEffectInstance modEffectInstance)
-        {
-            this.effectInstance = modEffectInstance;
-        }
-
-        return hasUnrecognizedInfiniteEffect;
+        return player.hasArmorEffect(effectType) && effectInstance != null && effectInstance.equals(player.getEffectInstance(effectType));
     }
 
     @Override
@@ -147,7 +135,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     {
         if (canClearEffect())
         {
-            if (isActive() || (isAnyActive() && forceRemove))
+            if (isActive() || (isAnyActive() && (forceRemove || (isAvailable() && isInfinite()))))
             {
                 player.clearEffect(effectType);
                 effectInstance = null;
