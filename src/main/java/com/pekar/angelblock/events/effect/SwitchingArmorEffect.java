@@ -42,7 +42,12 @@ class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements
     @Override
     public void trySwitchOn(int amplifier)
     {
-        if (isAnotherActive()) return;
+        if (isAnotherActive())
+        {
+            if (isInfinite()) updateActivity(amplifier);
+            return;
+        }
+
         tryActivateInternal(amplifier, MobEffectInstance.INFINITE_DURATION);
     }
 
