@@ -1,3 +1,9 @@
+## 📦 Version 2.14.4
+
+### 🐞 Fixed
+- Fixed a bug where breaking an *Amethyst Cluster* with any pickaxe from the mod always dropped 2 *Amethyst Shards*, as if it was broken without a pickaxe.
+
+
 ## 📦 Version 2.14.3
 
 ### 🐞 Fixed
