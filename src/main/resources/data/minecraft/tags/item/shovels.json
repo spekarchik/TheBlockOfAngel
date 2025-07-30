@@ -1,11 +1,6 @@
 {
   "replace": false,
   "values": [
-    "angelblock:rendelithic_primary_shovel",
-    "angelblock:rendelithic_shovel",
-    "angelblock:lapis_primary_shovel",
-    "angelblock:lapis_shovel",
-    "angelblock:super_primary_shovel",
-    "angelblock:super_shovel"
+    "#angelblock:shovels"
   ]
 }
