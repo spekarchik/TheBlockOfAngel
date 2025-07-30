@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "angelblock:lapis_primary_hoe",
-    "angelblock:lapis_hoe"
+    "#angelblock:hoes"
   ]
 }
