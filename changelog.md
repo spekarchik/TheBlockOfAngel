@@ -1,3 +1,9 @@
+## 📦 Version 2.14.5
+
+### 🐞 Fixed
+- Fixed a conflict where the **Energy Crystal** failed to apply the *Speed* effect if the player was wearing boots with built-in togglable *Speed*, even when the effect was turned off.
+
+
 ## 📦 Version 2.14.4
 
 ### 🐞 Fixed
