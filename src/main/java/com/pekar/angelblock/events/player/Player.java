@@ -216,6 +216,9 @@ public class Player implements IPlayer
     public boolean hasArmorEffect(Holder<MobEffect> effect)
     {
         var effectInstance = entity.getEffect(effect);
+        if (effectInstance instanceof ModMobEffectInstance modMobEffectInstance && modMobEffectInstance.isCrystalEffect())
+            return false;
+
         return effectInstance != null && (!effectInstance.isVisible() || effectInstance.isInfiniteDuration());
     }
 
@@ -247,7 +250,15 @@ public class Player implements IPlayer
     @Override
     public IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
     {
-        var effectInstance = new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/);
+        var effectInstance = new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon, false);
+        entity.addEffect(effectInstance);
+        return effectInstance;
+    }
+
+    @Override
+    public IModMobEffectInstance setCrystalEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
+    {
+        var effectInstance = new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon, true);
         entity.addEffect(effectInstance);
         return effectInstance;
     }
@@ -262,7 +273,7 @@ public class Player implements IPlayer
     public IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon)
     {
         var effectInstance = new ModMobEffectInstance(armorEffect.getEffect(), duration, amplifier, false /*ambient*/, false /*visible*/, showIcon /*showIcon*/,
-                armorEffect::onDurationEnd);
+                false, armorEffect::onDurationEnd);
         entity.addEffect(effectInstance);
         return effectInstance;
     }
