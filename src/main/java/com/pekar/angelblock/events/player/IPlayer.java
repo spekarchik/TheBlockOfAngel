@@ -36,6 +36,7 @@ public interface IPlayer extends IPlayerEvents
     IModMobEffectInstance setEffect(Holder<MobEffect> effect, int amplifier, boolean showIcon);
     IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier);
     IModMobEffectInstance setEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon);
+    IModMobEffectInstance setCrystalEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon);
     IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier);
     IModMobEffectInstance setEffect(ITemporaryBaseArmorEffect armorEffect, int duration, int amplifier, boolean showIcon);
     MobEffectInstance getEffectInstance(Holder<MobEffect> effect);
