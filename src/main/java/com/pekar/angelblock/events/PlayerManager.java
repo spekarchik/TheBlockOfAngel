@@ -11,6 +11,7 @@ import com.pekar.angelblock.events.scheduler.allay.RestoreAllaysTask;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
@@ -148,9 +149,9 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         {
             if (event.getTo().is(ItemRegistry.ENERGY_CRYSTAL))
             {
-                if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) && !entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))
+                if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) && !entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN) && !entity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
                 {
-                    player.setEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 3);
+                    player.setCrystalEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 3, true);
                     new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
                 }
             }

@@ -8,16 +8,23 @@ import net.minecraft.world.entity.LivingEntity;
 public class ModMobEffectInstance extends MobEffectInstance implements IModMobEffectInstance
 {
     private final Runnable onEffectEnded;
+    private final boolean isCrystalEffect;
 
-    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon, Runnable onEffectEnded)
+    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon, boolean isCrystalEffect, Runnable onEffectEnded)
     {
         super(effect, duration, amplifier, ambient, visible, showIcon);
         this.onEffectEnded = onEffectEnded;
+        this.isCrystalEffect = isCrystalEffect;
     }
 
-    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon)
+    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon, boolean isCrystalEffect)
     {
-        this(effect, duration, amplifier, ambient, visible, showIcon, null);
+        this(effect, duration, amplifier, ambient, visible, showIcon, isCrystalEffect, null);
+    }
+
+    public boolean isCrystalEffect()
+    {
+        return isCrystalEffect;
     }
 
     @Override
