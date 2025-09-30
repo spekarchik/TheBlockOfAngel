@@ -27,7 +27,7 @@ public class NetherBarsBlockItem extends ModBlockItem implements ITooltipProvide
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!Utils.instance.text.showExtendedDescription(tooltip)) return;
+        if (!Utils.instance.text.showExtendedDescription(tooltip, flag)) return;
 
         tooltip.addLine(getDescriptionId(), 1).asNotice().apply();
         tooltip.addLine(getDescriptionId(), 2).asDarkGrey().apply();

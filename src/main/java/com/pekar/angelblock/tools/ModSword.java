@@ -249,7 +249,7 @@ public abstract class ModSword extends Item implements IModTool
         var correctPos = calculateCorrectYPosForPlacement(level, pos);
         if (correctPos == null) return;
 
-        if (!level.isClientSide)
+        if (!level.isClientSide())
         {
             level.setBlock(correctPos.above(), Blocks.FIRE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
@@ -257,7 +257,7 @@ public abstract class ModSword extends Item implements IModTool
 
     protected final void setWeb(Player player, Level level, BlockPos pos)
     {
-        if (level.isClientSide) return;
+        if (level.isClientSide()) return;
         var correctPos = calculateCorrectYPosForPlacement(level, pos.below());
         if (correctPos == null) return;
 

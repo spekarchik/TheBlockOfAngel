@@ -110,7 +110,7 @@ public class AngelBlock extends ModBlock implements EntityBlock
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston)
     {
-        if (!level.isClientSide)
+        if (!level.isClientSide())
         {
             level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 1.0f, 1.0f);
         }

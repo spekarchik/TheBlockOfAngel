@@ -26,7 +26,7 @@ public class ModItemWithDoubleHoverText extends ModItem implements ITooltipProvi
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltip)) return;
+        if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
         for (int i = 1; i <= 2; i++)
         {

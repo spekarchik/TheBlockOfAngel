@@ -67,7 +67,7 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
                 && ((utils.blocks.types.isFarmTypeBlock(level, upPos.north()) && utils.blocks.types.isFarmTypeBlock(level, upPos.south()))
                 || (utils.blocks.types.isFarmTypeBlock(level, upPos.east()) && utils.blocks.types.isFarmTypeBlock(level, upPos.west())))))
         {
-            if (!level.isClientSide)
+            if (!level.isClientSide())
             {
                 level.setBlock(upPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
@@ -102,7 +102,7 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltip)) return;
+        if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
         for (int i = 0; i <= 5; i++)
         {
@@ -117,7 +117,7 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
 
         if (block == Blocks.PODZOL)
         {
-            if (!level.isClientSide)
+            if (!level.isClientSide())
             {
                 setBlock(player, pos, Blocks.DIRT);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
@@ -181,12 +181,13 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
             {
                 Player player = context.getPlayer();
                 level.playSound(player, blockpos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-                if (!level.isClientSide)
+                if (!level.isClientSide())
                 {
                     consumer.accept(context);
                     if (player != null)
                     {
-                        context.getItemInHand().hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
+                        var slot = context.getHand() == net.minecraft.world.InteractionHand.MAIN_HAND ? net.minecraft.world.entity.EquipmentSlot.MAINHAND : net.minecraft.world.entity.EquipmentSlot.OFFHAND;
+                        context.getItemInHand().hurtAndBreak(1, player, slot);
                     }
                 }
 

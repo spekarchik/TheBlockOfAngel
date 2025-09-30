@@ -2,7 +2,6 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tooltip.ITooltip;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -14,6 +13,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -93,9 +93,9 @@ public abstract class ModRod extends ModTool implements IModTool
         super.damageOffHandItem(amount, livingEntity);
     }
 
-    protected boolean showExtendedDescription(ITooltip tooltip)
+    protected boolean showExtendedDescription(ITooltip tooltip, TooltipFlag flag)
     {
-        if (!Screen.hasShiftDown() && !Screen.hasAltDown() && !Screen.hasControlDown())
+        if (!flag.hasShiftDown() && !flag.hasAltDown() && !flag.hasControlDown())
         {
             tooltip.addLineById("description.rods.press_shift_alt_or_ctrl").apply();
             return false;

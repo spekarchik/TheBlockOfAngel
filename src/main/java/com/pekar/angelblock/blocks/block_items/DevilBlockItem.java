@@ -3,7 +3,6 @@ package com.pekar.angelblock.blocks.block_items;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +22,7 @@ public class DevilBlockItem extends ModBlockItem implements ITooltipProvider
     @Override
     public void addTooltip(ItemStack stack, Item.TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!Screen.hasShiftDown() && !Screen.hasAltDown())
+        if (!flag.hasShiftDown() && !flag.hasAltDown())
         {
             tooltip.addLineById("description.common.press_shift_or_alt").apply();
             return;
@@ -31,7 +30,7 @@ public class DevilBlockItem extends ModBlockItem implements ITooltipProvider
 
         tooltip.ignoreEmptyLines();
 
-        if (Screen.hasShiftDown())
+        if (flag.hasShiftDown())
         {
             for (int i = 1; i <= 18; i++)
             {
@@ -41,7 +40,7 @@ public class DevilBlockItem extends ModBlockItem implements ITooltipProvider
             tooltip.addEmptyLine();
             tooltip.addLineById("description.common.press_alt").apply();
         }
-        else if (Screen.hasAltDown())
+        else if (flag.hasAltDown())
         {
             for (int i = 19; i <= 37; i++)
             {

@@ -90,7 +90,7 @@ public class DevilBlock extends ModBlock implements EntityBlock
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston)
     {
-        if (!level.isClientSide)
+        if (!level.isClientSide())
         {
             level.playSound(null, pos, SoundEvents.AMBIENT_CAVE.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
         }

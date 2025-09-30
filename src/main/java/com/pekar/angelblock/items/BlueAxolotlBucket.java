@@ -81,7 +81,7 @@ public class BlueAxolotlBucket extends ModItem implements ITooltipProvider
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltip)) return;
+        if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
         tooltip.addLine(getDescriptionId()).asNotice().apply();
     }

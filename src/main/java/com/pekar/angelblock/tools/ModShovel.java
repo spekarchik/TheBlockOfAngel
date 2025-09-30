@@ -14,8 +14,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -119,7 +120,7 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltip)) return;
+        if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
         for (int i = 0; i <= 3; i++)
         {
@@ -142,7 +143,7 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
 
         if (FLATTENABLES.containsKey(block))
         {
-            if (!level.isClientSide)
+            if (!level.isClientSide())
             {
                 BlockState newBlockState = Blocks.DIRT_PATH.defaultBlockState();
                 level.setBlock(pos, newBlockState, Block.UPDATE_ALL_IMMEDIATE);
@@ -184,13 +185,14 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
 
             if (blockstate2 != null)
             {
-                if (!level.isClientSide)
+                if (!level.isClientSide())
                 {
                     level.setBlock(blockpos, blockstate2, 11);
                     level.gameEvent(GameEvent.BLOCK_CHANGE, blockpos, GameEvent.Context.of(player, blockstate2));
                     if (player != null)
                     {
-                        context.getItemInHand().hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
+                        var slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+                        context.getItemInHand().hurtAndBreak(1, player, slot);
                     }
                 }
 

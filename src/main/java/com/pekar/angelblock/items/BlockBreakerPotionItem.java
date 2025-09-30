@@ -62,7 +62,7 @@ public class BlockBreakerPotionItem extends ModItem implements ProjectileItem, I
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltip)) return;
+        if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
         for (int i = 0; i <= 20; i++)
         {

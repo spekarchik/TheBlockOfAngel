@@ -1,7 +1,7 @@
 package com.pekar.angelblock.utils;
 
 import com.pekar.angelblock.tooltip.ITooltip;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.item.TooltipFlag;
 
 public class Text
 {
@@ -10,9 +10,9 @@ public class Text
 
     }
 
-    public boolean showExtendedDescription(ITooltip tooltip)
+    public boolean showExtendedDescription(ITooltip tooltip, TooltipFlag flag)
     {
-        if (!Screen.hasShiftDown())
+        if (!flag.hasShiftDown())
         {
             tooltip.addLineById("description.press_shift").apply();
             return false;

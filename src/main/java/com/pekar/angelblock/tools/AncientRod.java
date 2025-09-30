@@ -255,24 +255,24 @@ public class AncientRod extends MagneticRod
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!showExtendedDescription(tooltip)) return;
+        if (!showExtendedDescription(tooltip, flag)) return;
 
         // Common
         appendCommonPreInfo(tooltip);
 
-        if (Screen.hasShiftDown())
+        if (flag.hasShiftDown())
         {
             // Placing
             appendPlacingBlockInfo(tooltip, true);
             tooltip.addEmptyLine();
         }
-        else if (Screen.hasAltDown())
+        else if (flag.hasAltDown())
         {
             // Transformations
             appendBlockTransformInfo(tooltip, true);
             tooltip.addEmptyLine();
         }
-        else if (Screen.hasControlDown())
+        else if (flag.hasControlDown())
         {
             // Magnetic
             if (!isEnhanced())
@@ -289,19 +289,19 @@ public class AncientRod extends MagneticRod
         appendCommonPostInfo(tooltip);
         tooltip.addEmptyLine();
 
-        if (Screen.hasShiftDown())
+        if (flag.hasShiftDown())
         {
             // Placing
             tooltip.addLineById("description.rods.press_alt").apply();
             tooltip.addLineById("description.rods.press_ctrl").apply();
         }
-        else if (Screen.hasAltDown())
+        else if (flag.hasAltDown())
         {
             // Transformations
             tooltip.addLineById("description.rods.press_shift").apply();
             tooltip.addLineById("description.rods.press_ctrl").apply();
         }
-        else if (Screen.hasControlDown())
+        else if (flag.hasControlDown())
         {
             // Magnetic
             tooltip.addLineById("description.rods.press_shift").apply();

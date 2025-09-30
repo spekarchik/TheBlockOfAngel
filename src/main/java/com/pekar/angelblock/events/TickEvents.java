@@ -13,7 +13,7 @@ public class TickEvents implements IEventHandler
     public void onWorldTickEvent(LevelTickEvent.Post event)
     {
         var level = event.getLevel();
-        if (level.isClientSide) return;
+        if (level.isClientSide()) return;
 
         Cleaner.decrementOrRemove();
 //        LightCleaner.decrementOrRemove();

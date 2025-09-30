@@ -27,7 +27,7 @@ public class EnhancedPickaxe extends ModPickaxe
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        if (!level.isClientSide)
+        if (!level.isClientSide())
             mineAdditionalBlocks(level, pos, livingEntity);
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }

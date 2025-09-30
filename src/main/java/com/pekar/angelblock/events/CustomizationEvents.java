@@ -25,9 +25,9 @@ public class CustomizationEvents implements IEventHandler
         if (state.getBlock() == Blocks.SMITHING_TABLE)
         {
             event.setCanceled(true); // Not the standard menu to be shown
-            event.setCancellationResult(level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
+            event.setCancellationResult(level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
 
-            if (!level.isClientSide && player instanceof ServerPlayer serverPlayer)
+            if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer)
             {
                 var accessLevel = ContainerLevelAccess.create(level, pos);
                 serverPlayer.openMenu(new CustomSmithingMenuProvider(accessLevel));

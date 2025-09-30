@@ -29,7 +29,7 @@ public class InactiveAngelBlockItem extends ModBlockItem implements ITooltipProv
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!Utils.instance.text.showExtendedDescription(tooltip)) return;
+        if (!Utils.instance.text.showExtendedDescription(tooltip, flag)) return;
 
         for (int i = 1; i <= 3; i++)
         {
