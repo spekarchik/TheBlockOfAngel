@@ -1,3 +1,10 @@
+## 📦 Version 2.14.7
+
+### 📝 Improvements
+- **Cracked Obsidian** texture updated, now appears more violet
+- Helmets with **Creeper detector** improved: the *Glowing* effect disappears much faster after the detection conditions are no longer met
+
+
 ## 📦 Version 2.14.6
 
 ### 🐞 Fixed
