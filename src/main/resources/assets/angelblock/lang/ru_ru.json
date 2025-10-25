@@ -1226,7 +1226,7 @@
   "item.angelblock.devil_block.desc34": "На деревьях разрушает листву",
   "item.angelblock.devil_block.desc35": "",
   "item.angelblock.devil_block.desc36": "Меняются блоки в радиусе 18 блоков по горизонтали, над которыми находится воздух, вода или растение",
-  "item.angelblock.devil_block.desc37": "",
+  "item.angelblock.devil_block.desc37": "На сложности «Мирная» окружающие блоки не изменяются",
   "item.angelblock.angel_rod_block": "§dПосох Ангела",
   "item.angelblock.angel_rod_block.desc1": "Когда игрок держит в руке или установлен на блоке, очищает от монстров область в радиусе 20 блоков",
   "item.angelblock.angel_rod_block.desc2": "Блок может быть разрушен на исходные компоненты - игрок должен приседать при разрушении",
