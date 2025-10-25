@@ -117,14 +117,14 @@ public class BlockRegistry
 
     private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> blockSupplier, BlockBehaviour.Properties properties)
     {
-        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, properties);
+        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, () -> properties);
         Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
         return blockObject;
     }
 
     private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> blockSupplier, BiFunction<Block, Item.Properties, ? extends ModBlockItem> blockItemSupplier, BlockBehaviour.Properties blockProperties)
     {
-        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, blockProperties);
+        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, () -> blockProperties);
         Main.ITEMS.registerItem(name, p -> blockItemSupplier.apply(blockObject.get(), p));
         return blockObject;
     }
@@ -141,6 +141,6 @@ public class BlockRegistry
 
     private static <T extends Block> DeferredBlock<T> registerSkipTab(String name, Function<BlockBehaviour.Properties, T> supplier, BlockBehaviour.Properties properties)
     {
-        return Main.BLOCKS.registerBlock(name, supplier, properties);
+        return Main.BLOCKS.registerBlock(name, supplier, () -> properties);
     }
 }

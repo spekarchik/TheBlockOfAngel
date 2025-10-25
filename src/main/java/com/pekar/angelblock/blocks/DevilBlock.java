@@ -73,10 +73,10 @@ public class DevilBlock extends ModBlock implements EntityBlock
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack toolStack, boolean willHarvest, FluidState fluid)
     {
-        disposeBlockEntity(world, pos);
-        return super.onDestroyedByPlayer(state, world, pos, player, willHarvest, fluid);
+        disposeBlockEntity(level, pos);
+        return super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
     }
 
     @Override

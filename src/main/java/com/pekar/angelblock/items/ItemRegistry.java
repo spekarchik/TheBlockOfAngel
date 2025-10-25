@@ -77,7 +77,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> ENERGY_CRYSTAL = Main.ITEMS.registerItem("energy_crystal", ModItemWithHoverText::new);
     public static final DeferredItem<Item> ARMOR_FIBER = Main.ITEMS.registerItem("armor_fiber", ModItem::new);
     public static final DeferredItem<Item> ENERGY_FIBER = Main.ITEMS.registerItem("energy_fiber", ModItemWithHoverText::new);
-    public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.registerItem("bios_diamond", BiosDiamond::new, new Item.Properties().trimMaterial(BIOS_DIAMOND_TRIM_MATERIAL));
+    public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.registerItem("bios_diamond", BiosDiamond::new, p -> p.trimMaterial(BIOS_DIAMOND_TRIM_MATERIAL));
     public static final DeferredItem<Item> END_SAPPHIRE = Main.ITEMS.registerItem("end_sapphire", EndSapphire::new);
     public static final DeferredItem<Item> FLAME_STONE = Main.ITEMS.registerItem("flame_stone", ModItemWithDoubleHoverText::new);
     public static final DeferredItem<Item> MARINE_CRYSTAL = Main.ITEMS.registerItem("marine_crystal", MarineCrystal::new);
@@ -89,13 +89,13 @@ public class ItemRegistry
     public static final DeferredItem<Item> EVOKER_AMULET = Main.ITEMS.registerItem("evoker_amulet", EvokerAmulet::new);
 //    public static final DeferredItem<Item> NETHER_BARS = Main.ITEMS.registerItem("nether_bars", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.registerItem("ancient_scroll", p -> new ModItemWithHoverText(TextStyle.Notice, p));
-    public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.registerItem("blue_axolotl_bucket", BlueAxolotlBucket::new, new Item.Properties().rarity(Rarity.EPIC));
+    public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.registerItem("blue_axolotl_bucket", BlueAxolotlBucket::new, p -> p.rarity(Rarity.EPIC));
     public static final DeferredItem<Item> ROD_SENSOR = Main.ITEMS.registerItem("rod_sensor", ModItem::new);
 
     public static final DeferredItem<Item> BLOCK_BREAKER_POTION_ITEM = Main.ITEMS.registerItem("block_breaker_potion_item", BlockBreakerPotionItem::new,
-            new Item.Properties().stacksTo(4));
+            p -> p.stacksTo(4));
     public static final DeferredItem<Item> SOARING_SPORE_ESSENCE = Main.ITEMS.registerItem("soaring_spore_essence", SoaringSporeEssence::new,
-            new Item.Properties().stacksTo(4));
+            p -> p.stacksTo(4));
 
     public static void initStatic()
     {
