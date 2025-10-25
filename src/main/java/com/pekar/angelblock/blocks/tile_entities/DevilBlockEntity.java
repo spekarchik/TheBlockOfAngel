@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Enemy;
@@ -160,6 +161,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
     @Override
     public void tick(Level level, BlockPos pos, BlockState blockState, DevilBlockEntity devilBlockEntity)
     {
+        if (level.getDifficulty() == Difficulty.PEACEFUL) return;
         if (level.isClientSide() || level.getGameTime() % 20 != 0) return;
 
         final int horizRadius = 18;
