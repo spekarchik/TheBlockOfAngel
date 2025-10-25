@@ -1227,7 +1227,7 @@
   "item.angelblock.devil_block.desc34": "Destroys leaves on trees",
   "item.angelblock.devil_block.desc35": "",
   "item.angelblock.devil_block.desc36": "Affects blocks within a 18-block horizontal radius, provided there is air, water or a plant above them",
-  "item.angelblock.devil_block.desc37": "",
+  "item.angelblock.devil_block.desc37": "On Peaceful difficulty, surrounding blocks are not affected",
   "item.angelblock.angel_rod_block": "§dThe Rod of Angel",
   "item.angelblock.angel_rod_block.desc1": "When hold in a hand or placed on a block it despawns any monsters in 20 block radius",
   "item.angelblock.angel_rod_block.desc2": "The block can be dropped as source items - player should be sitting when drops",
