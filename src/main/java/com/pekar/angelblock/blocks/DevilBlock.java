@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -62,9 +63,11 @@ public class DevilBlock extends ModBlock implements EntityBlock
         super.onBlockExploded(state, level, pos, explosion);
     }
 
-    private void disposeBlockEntity(Level world, BlockPos pos)
+    private void disposeBlockEntity(LevelAccessor level, BlockPos pos)
     {
-        var blockEntity = world.getBlockEntity(pos);
+        if (level.isClientSide()) return;
+
+        var blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof DevilBlockEntity)
         {
             var devilBlockEntity = (DevilBlockEntity) blockEntity;
@@ -73,10 +76,17 @@ public class DevilBlock extends ModBlock implements EntityBlock
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
+    public void destroy(LevelAccessor level, BlockPos pos, BlockState state)
     {
-        disposeBlockEntity(world, pos);
-        return super.onDestroyedByPlayer(state, world, pos, player, willHarvest, fluid);
+        disposeBlockEntity(level, pos);
+        super.destroy(level, pos, state);
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
+    {
+        disposeBlockEntity(level, pos);
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     @Override
