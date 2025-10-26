@@ -1,3 +1,12 @@
+## 📦 Version 2.14.8
+
+### 🐞 Fixed
+- Monsters stayed undead if the **Block of Devil** was destroyed in any way other than by a player or an explosion.
+
+### 📝 Improvements
+- The **Block of Devil** no longer affects surrounding blocks on *Peaceful* difficulty.
+
+
 ## 📦 Version 2.14.7
 
 ### 📝 Improvements
