@@ -44,6 +44,11 @@ public class ModArmor extends Item implements ITooltipProvider
         return material;
     }
 
+    public ArmorType getArmorType()
+    {
+        return armorItemType;
+    }
+
     public String getArmorFamilyName()
     {
         return material.getMaterialName() + "_armor";
