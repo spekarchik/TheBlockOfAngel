@@ -41,6 +41,16 @@ public class Player
         );
     }
 
+    public List<EquipmentSlot> getArmorSlots()
+    {
+        return Arrays.asList(
+                EquipmentSlot.HEAD,
+                EquipmentSlot.CHEST,
+                EquipmentSlot.LEGS,
+                EquipmentSlot.FEET
+        );
+    }
+
     public Direction getDirection(LivingEntity entityLiving, BlockPos pos)
     {
         BlockPos entityPos = entityLiving.blockPosition();

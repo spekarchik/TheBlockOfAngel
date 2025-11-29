@@ -5,7 +5,6 @@ import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.scheduler.PlayerScheduler;
 import com.pekar.angelblock.events.scheduler.allay.RestoreAllaysTask;
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.IModTool;
 import com.pekar.angelblock.tools.IModToolEnhanceable;
@@ -89,6 +88,19 @@ public class PlayerInteractionEvents implements IEventHandler
         for (IArmor armor : player.getArmorTypesUsed())
         {
             armor.onLivingDamageEvent(event);
+        }
+    }
+
+    @SubscribeEvent
+    public void onArmorHurtEvent(ArmorHurtEvent event)
+    {
+        LivingEntity entity = event.getEntity();
+        IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
+        if (player == null) return;
+
+        for (IArmor armor : player.getArmorTypesUsed())
+        {
+            armor.onArmorHurtEvent(event);
         }
     }
 
