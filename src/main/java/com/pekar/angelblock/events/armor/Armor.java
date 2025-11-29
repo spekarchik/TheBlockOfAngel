@@ -356,6 +356,8 @@ abstract class Armor implements IArmor
     @Override
     public void onArmorHurtEvent(ArmorHurtEvent event)
     {
+        utils.attributeModifiers.updateArmorAttributeModifier(player.getEntity());
+
         for (var slot : utils.player.getArmorSlots())
         {
             var stack = player.getEntity().getItemBySlot(slot);
@@ -363,8 +365,6 @@ abstract class Armor implements IArmor
             {
                 continue;
             }
-
-            utils.attributeModifiers.updateArmorAttributeModifier(player.getEntity());
 
             var maxDamage = stack.getMaxDamage();
             var durability = maxDamage - stack.getDamageValue();
