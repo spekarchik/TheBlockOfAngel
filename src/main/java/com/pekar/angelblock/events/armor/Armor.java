@@ -33,6 +33,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
@@ -47,6 +48,7 @@ abstract class Armor implements IArmor
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter = 0;
     private boolean needUpdateStatesAfterLogin = false;
+    protected Utils utils = new Utils();
 
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final double CREEPER_AGRY_DISTANCE = 3.0;
@@ -57,7 +59,7 @@ abstract class Armor implements IArmor
     protected final TriPredicate<Block, BlockPos, Level> isIcePredicate = (block, pos, level) ->
     {
         var belowBlockState = level.getBlockState(pos.below());
-        return block == Blocks.ICE && (belowBlockState.isAir() || Utils.instance.blocks.types.isLiquid(belowBlockState.getBlock()));
+        return block == Blocks.ICE && (belowBlockState.isAir() || utils.blocks.types.isLiquid(belowBlockState.getBlock()));
     };
 
     protected final TriPredicate<Block, BlockPos, Level> isCrackedBlockPredicate = (block, pos, level) ->
@@ -298,7 +300,7 @@ abstract class Armor implements IArmor
 
         var randomSource = RandomSource.create();
         int heavyArmorSlots = 0;
-        for (var slot : Utils.instance.player.getArmorInSlots(player))
+        for (var slot : utils.player.getArmorInSlots(player))
         {
             if (slot.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
                 heavyArmorSlots++;
@@ -351,10 +353,34 @@ abstract class Armor implements IArmor
         return itemFrom.is(Items.MILK_BUCKET) && itemTo.is(Items.BUCKET);
     }
 
+    @Override
+    public void onArmorHurtEvent(ArmorHurtEvent event)
+    {
+        for (var slot : utils.player.getArmorSlots())
+        {
+            var stack = player.getEntity().getItemBySlot(slot);
+            if (stack.isEmpty() || !(stack.getItem() instanceof ModArmor modArmor) || !modArmor.getArmorFamilyName().equals(getFamilyName()))
+            {
+                continue;
+            }
+
+            utils.attributeModifiers.updateArmorAttributeModifier(player.getEntity());
+
+            var maxDamage = stack.getMaxDamage();
+            var durability = maxDamage - stack.getDamageValue();
+            float amount = event.getNewDamage(slot);
+
+            if (amount >= durability)
+            {
+                event.setNewDamage(slot, durability - 1);
+            }
+        }
+    }
+
     // for tests
     protected void damageArmor(boolean damage)
     {
-        for (var item : Utils.instance.player.getArmorInSlots(player.getEntity()))
+        for (var item : utils.player.getArmorInSlots(player.getEntity()))
         {
             var damageValue = damage ? item.getMaxDamage() - 1 : 0;
             item.setDamageValue(damageValue);
@@ -372,7 +398,7 @@ abstract class Armor implements IArmor
     protected void switchArmorDamage()
     {
         boolean isDamaged = false;
-        for (var slot : Utils.instance.player.getArmorInSlots(player.getEntity()))
+        for (var slot : utils.player.getArmorInSlots(player.getEntity()))
         {
             if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
             {
@@ -380,7 +406,7 @@ abstract class Armor implements IArmor
             }
         }
 
-        for (var slot : Utils.instance.player.getArmorInSlots(player.getEntity()))
+        for (var slot : utils.player.getArmorInSlots(player.getEntity()))
         {
             if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
             {

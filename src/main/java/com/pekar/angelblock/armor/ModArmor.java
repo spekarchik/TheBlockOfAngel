@@ -5,7 +5,6 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -55,6 +54,11 @@ public class ModArmor extends Item implements ITooltipProvider
         return this;
     }
 
+    public boolean isFlying()
+    {
+        return canFly;
+    }
+
     private boolean isAutoFlightDamage(ItemStack stack, @Nullable LivingEntity entity, int amount)
     {
         if (!canFly) return false;
@@ -66,17 +70,6 @@ public class ModArmor extends Item implements ITooltipProvider
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken)
     {
         if (isAutoFlightDamage(stack, entity, amount)) return 0;
-
-        var durability = stack.getMaxDamage() - stack.getDamageValue();
-
-        if (entity != null)
-            utils.attributeModifiers.updateArmorAttributeModifier(entity);
-
-        if (amount >= durability)
-        {
-            stack.setDamageValue(stack.getMaxDamage() - 1);
-            return 0;
-        }
 
         return super.damageItem(stack, amount, entity, onBroken);
     }
