@@ -1,3 +1,9 @@
+## 📦 Version 2.14.9
+
+### 🐞 Fixed
+- Now armor defense is calculated correctly based on its durability.
+
+
 ## 📦 Version 2.14.8
 
 ### 🐞 Fixed
