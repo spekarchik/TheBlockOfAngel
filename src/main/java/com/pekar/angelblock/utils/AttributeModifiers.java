@@ -17,23 +17,33 @@ public class AttributeModifiers
 
         if (armorAttribute != null)
         {
-            int damageSum = 0, maxDamageSum = 0;
+            double correctionSum = 0.0;
 
-            for (var slot : Utils.instance.player.getArmorInSlots(entity))
+            for (var stack : Utils.instance.player.getArmorInSlots(entity))
             {
-                if (slot.isEmpty()) continue;
-                boolean isModArmor = slot.getItem() instanceof ModArmor;
-                damageSum += isModArmor ? slot.getDamageValue() : 0;
-                maxDamageSum += slot.getMaxDamage();
-            }
+                if (stack.isEmpty()) continue;
+                boolean isModArmor = stack.getItem() instanceof ModArmor;
 
-            var durabilitySum = maxDamageSum - damageSum;
+                double maxDamage = stack.getMaxDamage();
+                if (maxDamage <= 0) continue;
+
+                double damage = isModArmor ? stack.getDamageValue() : 0.0;
+
+                if (!(stack.getItem() instanceof ModArmor modArmor)) continue;
+
+                double defense = modArmor.getArmorMaterial().getMaterial().defense().get(modArmor.getArmorType());
+                double durability = maxDamage - damage;
+
+                double durabilityPercent = durability / maxDamage;
+                double correction = defense * (durabilityPercent - 1.0);
+                correctionSum += correction;
+            }
 
             var armorModifierId = ResourceLocation.fromNamespaceAndPath(Main.MODID, getArmorAttributeMofifierId(entity));
             armorAttribute.removeModifier(armorModifierId);
-            double durabilityPercent = (double) (durabilitySum) / (double) maxDamageSum;
-            double correction = armorAttribute.getValue() * (durabilityPercent - 1.0);
-            armorAttribute.addTransientModifier(new AttributeModifier(armorModifierId, correction, AttributeModifier.Operation.ADD_VALUE));
+
+            if (Math.abs(correctionSum) > 1e-12)
+                armorAttribute.addTransientModifier(new AttributeModifier(armorModifierId, correctionSum, AttributeModifier.Operation.ADD_VALUE));
         }
     }
 
