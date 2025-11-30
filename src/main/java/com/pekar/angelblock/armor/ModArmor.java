@@ -5,7 +5,6 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
