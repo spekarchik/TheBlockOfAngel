@@ -31,7 +31,7 @@ public class AttributeModifiers
 
                 if (!(stack.getItem() instanceof ModArmor modArmor)) continue;
 
-                double defense = modArmor.getArmorMaterial().getMaterial().defense().get(modArmor.getArmorType());
+                double defense = modArmor.getDefense();
                 double durability = maxDamage - damage;
 
                 double durabilityPercent = durability / maxDamage;
