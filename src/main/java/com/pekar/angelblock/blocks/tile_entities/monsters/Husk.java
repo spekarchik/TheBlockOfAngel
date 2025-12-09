@@ -18,7 +18,7 @@ public class Husk extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.Husk;
+        return livingEntity instanceof net.minecraft.world.entity.monster.zombie.Husk;
     }
 
     @Override

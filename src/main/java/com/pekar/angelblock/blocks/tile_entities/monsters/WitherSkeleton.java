@@ -18,7 +18,7 @@ public class WitherSkeleton extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.WitherSkeleton;
+        return livingEntity instanceof net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
     }
 
     @Override

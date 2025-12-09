@@ -18,7 +18,7 @@ public class CaveSpider extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.CaveSpider;
+        return livingEntity instanceof net.minecraft.world.entity.monster.spider.CaveSpider;
     }
 
     @Override

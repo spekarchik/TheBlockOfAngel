@@ -1,7 +1,7 @@
 package com.pekar.angelblock.potions;
 
 import com.pekar.angelblock.Main;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -9,8 +9,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class HeavyJumpEffect extends MobEffect
 {
-    private static final ResourceLocation JUMP_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(Main.MODID, "heavy_jump_modifier");
-    private static final ResourceLocation SLOW_MOTION_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(Main.MODID, "slow_motion_modifier");
+    private static final Identifier JUMP_MODIFIER_ID = Identifier.fromNamespaceAndPath(Main.MODID, "heavy_jump_modifier");
+    private static final Identifier SLOW_MOTION_MODIFIER_ID = Identifier.fromNamespaceAndPath(Main.MODID, "slow_motion_modifier");
 
     protected HeavyJumpEffect()
     {

@@ -3,7 +3,7 @@ package com.pekar.angelblock.blocks;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.block_items.*;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -20,10 +20,10 @@ import java.util.function.Supplier;
 
 public class BlockRegistry
 {
-    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_MINE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_mine"));
-    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_plant"));
-    public static final TagKey<Block> REPLACEABLE_BY_PLANTER = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_replaceables"));
-    public static final TagKey<Block> TRACK_LAYER_COMPATIBLE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "track_layer_compatible"));
+    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_MINE = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_mine"));
+    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_plant"));
+    public static final TagKey<Block> REPLACEABLE_BY_PLANTER = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "planter_replaceables"));
+    public static final TagKey<Block> TRACK_LAYER_COMPATIBLE = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "track_layer_compatible"));
 
     public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SNOW).requiresCorrectToolForDrops());

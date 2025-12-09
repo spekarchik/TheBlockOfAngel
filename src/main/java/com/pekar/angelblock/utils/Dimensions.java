@@ -12,16 +12,16 @@ public class Dimensions
 
     public boolean isOverworld(ResourceKey<Level> dimension)
     {
-        return dimension.location().equals(Level.OVERWORLD.location());
+        return dimension.identifier().equals(Level.OVERWORLD.identifier());
     }
 
     public boolean isNether(ResourceKey<Level> dimension)
     {
-        return dimension.location().equals(Level.NETHER.location());
+        return dimension.identifier().equals(Level.NETHER.identifier());
     }
 
     public boolean isEnd(ResourceKey<Level> dimension)
     {
-        return dimension.location().equals(Level.END.location());
+        return dimension.identifier().equals(Level.END.identifier());
     }
 }

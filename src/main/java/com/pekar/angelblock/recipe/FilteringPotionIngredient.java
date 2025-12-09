@@ -35,8 +35,8 @@ public abstract class FilteringPotionIngredient implements ICustomIngredient
             }
 
             PotionContents contents = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
-            return contents.potion().flatMap(holder -> holder.unwrapKey().map(ResourceKey::location))
-                    .equals(potionType.unwrapKey().map(ResourceKey::location));
+            return contents.potion().flatMap(holder -> holder.unwrapKey().map(ResourceKey::identifier))
+                    .equals(potionType.unwrapKey().map(ResourceKey::identifier));
         }, potionGroup, potionType);
     }
 

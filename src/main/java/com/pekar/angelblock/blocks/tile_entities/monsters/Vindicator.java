@@ -18,7 +18,7 @@ public class Vindicator extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.AbstractIllager;
+        return livingEntity instanceof net.minecraft.world.entity.monster.illager.AbstractIllager;
     }
 
     @Override

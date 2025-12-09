@@ -5,9 +5,10 @@ import com.pekar.angelblock.blocks.tile_entities.spawn.OnGroundMonsterSpawnStrat
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
+import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
 
 public class Skeleton extends Monster
 {
@@ -19,7 +20,7 @@ public class Skeleton extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.AbstractSkeleton
+        return livingEntity instanceof AbstractSkeleton
                 && !(livingEntity instanceof WitherSkeleton);
     }
 

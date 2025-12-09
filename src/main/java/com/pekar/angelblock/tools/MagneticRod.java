@@ -6,7 +6,7 @@ import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
@@ -270,14 +270,14 @@ public abstract class MagneticRod extends ModRod
     protected boolean canBeReplaced(Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
-        var replaceables = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "overworld_replaceables"));
+        var replaceables = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "overworld_replaceables"));
         return blockState.is(replaceables);
     }
 
     protected boolean isShiftingOre(Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
-        var shiftingOres = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "overworld_shifting_ores"));
+        var shiftingOres = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "overworld_shifting_ores"));
         return blockState.is(shiftingOres);
     }
 

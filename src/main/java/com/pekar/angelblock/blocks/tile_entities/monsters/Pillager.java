@@ -18,7 +18,7 @@ public class Pillager extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.Pillager;
+        return livingEntity instanceof net.minecraft.world.entity.monster.illager.Pillager;
     }
 
     @Override

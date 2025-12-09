@@ -18,7 +18,7 @@ public class Evoker extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.Evoker;
+        return livingEntity instanceof net.minecraft.world.entity.monster.illager.Evoker;
     }
 
     @Override

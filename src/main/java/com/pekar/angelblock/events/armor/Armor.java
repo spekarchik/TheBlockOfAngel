@@ -9,7 +9,7 @@ import com.pekar.angelblock.utils.TriPredicate;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,9 +23,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Bee;
-import net.minecraft.world.entity.animal.Pufferfish;
+import net.minecraft.world.entity.animal.bee.Bee;
+import net.minecraft.world.entity.animal.fish.Pufferfish;
 import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.illager.AbstractIllager;
+import net.minecraft.world.entity.monster.skeleton.Skeleton;
+import net.minecraft.world.entity.monster.spider.Spider;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -417,7 +421,7 @@ abstract class Armor implements IArmor
 
     protected final boolean isVulnerable(DamageSource damageSource)
     {
-        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Main.MODID, getVulnerabilitiesTagName()));
+        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(Main.MODID, getVulnerabilitiesTagName()));
         return damageSource.is(vulnerabilities);
     }
 

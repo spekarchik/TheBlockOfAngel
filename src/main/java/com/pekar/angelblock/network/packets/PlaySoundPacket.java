@@ -39,7 +39,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     @Override
     public Packet decode(FriendlyByteBuf buffer)
     {
-        var soundEvent = SoundEvent.createVariableRangeEvent(buffer.readResourceLocation());
+        var soundEvent = SoundEvent.createVariableRangeEvent(buffer.readIdentifier());
         var pitch = buffer.readFloat();
         return new PlaySoundPacket(soundEvent, pitch);
     }
@@ -47,7 +47,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     @Override
     public void encode(FriendlyByteBuf buffer)
     {
-        buffer.writeResourceLocation(soundEvent != null ? soundEvent.location() : SoundEvents.BONE_MEAL_USE.location());
+        buffer.writeIdentifier(soundEvent != null ? soundEvent.location() : SoundEvents.BONE_MEAL_USE.location());
         buffer.writeFloat(pitch);
     }
 

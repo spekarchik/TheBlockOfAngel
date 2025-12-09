@@ -18,7 +18,7 @@ public class ZombieVillager extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.ZombieVillager;
+        return livingEntity instanceof net.minecraft.world.entity.monster.zombie.ZombieVillager;
     }
 
     @Override

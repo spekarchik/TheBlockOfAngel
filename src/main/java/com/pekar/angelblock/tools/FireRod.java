@@ -10,7 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
@@ -263,7 +263,7 @@ public class FireRod extends MarineRod
     protected boolean canBeReplaced(Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
-        var replaceables = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "nether_replaceables"));
+        var replaceables = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "nether_replaceables"));
         return blockState.is(replaceables) || super.canBeReplaced(level, pos);
     }
 
@@ -271,7 +271,7 @@ public class FireRod extends MarineRod
     protected boolean isShiftingOre(Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
-        var netherShiftingOres = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Main.MODID, "nether_shifting_ores"));
+        var netherShiftingOres = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "nether_shifting_ores"));
         return blockState.is(netherShiftingOres) || super.isShiftingOre(level, pos);
     }
 
