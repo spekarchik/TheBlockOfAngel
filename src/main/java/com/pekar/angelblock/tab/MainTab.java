@@ -27,7 +27,7 @@ public class MainTab extends ModTab
     @Override
     protected ItemStack getIconItem()
     {
-        return BlockRegistry.ANGEL_BLOCK.asItem().getDefaultInstance();
+        return BlockRegistry.INACTIVE_ANGEL_BLOCK.asItem().getDefaultInstance();
     }
 
     @Override
