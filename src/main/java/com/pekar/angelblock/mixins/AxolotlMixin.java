@@ -5,6 +5,7 @@ import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -61,7 +62,8 @@ public abstract class AxolotlMixin extends Animal
         {
             if (isWearingSpecialArmor(entity))
             {
-                return random.nextInt(100) == 0;
+                int chance = level.getDifficulty() == Difficulty.PEACEFUL ? 1 : 100;
+                return random.nextInt(chance) == 0;
             }
         }
 
