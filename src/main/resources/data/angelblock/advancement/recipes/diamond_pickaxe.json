@@ -35,7 +35,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "minecraft:diamond_pickaxe"
+                                                                        "items":  "minecraft:copper_pickaxe"
                                                                     }
                                                                 ]
                                                   }
@@ -44,7 +44,8 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:diamond_pickaxe"
+                                    "angelblock:diamond_pickaxe",
+                                    "angelblock:diamond_from_copper_pickaxe"
                                 ]
                 },
     "requirements":  [

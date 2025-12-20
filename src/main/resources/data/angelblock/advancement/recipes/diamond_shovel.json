@@ -35,7 +35,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "minecraft:diamond_shovel"
+                                                                        "items":  "minecraft:copper_shovel"
                                                                     }
                                                                 ]
                                                   }
@@ -44,7 +44,8 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:diamond_shovel"
+                                    "angelblock:diamond_shovel",
+                                    "angelblock:diamond_from_copper_shovel"
                                 ]
                 },
     "requirements":  [
