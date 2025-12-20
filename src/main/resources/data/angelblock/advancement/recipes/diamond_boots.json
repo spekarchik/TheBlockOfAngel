@@ -35,7 +35,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "minecraft:diamond_boots"
+                                                                        "items":  "minecraft:copper_boots"
                                                                     }
                                                                 ]
                                                   }
@@ -44,7 +44,8 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:diamond_boots"
+                                    "angelblock:diamond_boots",
+                                    "angelblock:diamond_from_copper_boots"
                                 ]
                 },
     "requirements":  [

@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:copper_axe",
+    "addition": "minecraft:diamond_axe",
+    "result": {
+        "id": "minecraft:diamond_axe"
+    },
+    "template": "angelblock:diamond_tool_upgrade_kit"
+}

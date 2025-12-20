@@ -35,7 +35,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "minecraft:diamond_chestplate"
+                                                                        "items":  "minecraft:copper_chestplate"
                                                                     }
                                                                 ]
                                                   }
@@ -44,7 +44,8 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:diamond_chestplate"
+                                    "angelblock:diamond_chestplate",
+                                    "angelblock:diamond_from_copper_chestplate"
                                 ]
                 },
     "requirements":  [

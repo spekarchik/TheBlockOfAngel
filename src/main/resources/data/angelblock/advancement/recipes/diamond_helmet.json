@@ -35,7 +35,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "minecraft:diamond_helmet"
+                                                                        "items":  "minecraft:copper_helmet"
                                                                     }
                                                                 ]
                                                   }
@@ -44,7 +44,8 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:diamond_helmet"
+                                    "angelblock:diamond_helmet",
+                                    "angelblock:diamond_from_copper_helmet"
                                 ]
                 },
     "requirements":  [
