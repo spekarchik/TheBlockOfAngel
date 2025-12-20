@@ -1,7 +1,7 @@
 ﻿{
     "criteria":  {
                      "item2":  {
-                                   "trigger":  "minecraft:inventory_changed",
+                                   "trigger":  "minecraft:impossible",
                                    "conditions":  {
                                                       "items":  [
                                                                     {
@@ -31,17 +31,17 @@
                                                   }
                                },
                      "item0":  {
-                                   "trigger":  "minecraft:inventory_changed",
+                                   "trigger":  "minecraft:impossible",
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:diamond_tool_upgrade_kit"
+                                                                        "items":  "minecraft:diamond"
                                                                     }
                                                                 ]
                                                   }
                                },
                      "item1":  {
-                                   "trigger":  "minecraft:inventory_changed",
+                                   "trigger":  "minecraft:impossible",
                                    "conditions":  {
                                                       "items":  [
                                                                     {
