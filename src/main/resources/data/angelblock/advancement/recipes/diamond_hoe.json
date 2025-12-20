@@ -35,7 +35,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "minecraft:diamond_hoe"
+                                                                        "items":  "minecraft:copper_hoe"
                                                                     }
                                                                 ]
                                                   }
@@ -44,7 +44,8 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:diamond_hoe"
+                                    "angelblock:diamond_hoe",
+                                    "angelblock:diamond_from_copper_hoe"
                                 ]
                 },
     "requirements":  [
