@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:copper_helmet",
+    "addition": "minecraft:iron_helmet",
+    "result": {
+        "id": "minecraft:iron_helmet"
+    },
+    "template": "angelblock:iron_armor_upgrade_kit"
+}
