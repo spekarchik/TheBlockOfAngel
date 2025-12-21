@@ -1,0 +1,69 @@
+﻿{
+    "criteria":  {
+                     "item2":  {
+                                   "trigger":  "minecraft:impossible",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:copper_ingot"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item3":  {
+                                   "trigger": "minecraft:impossible",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:flint"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item4":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "angelblock:iron_tool_upgrade_kit"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item0":  {
+                                   "trigger":  "minecraft:impossible",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "angelblock:iron_ingot"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item1":  {
+                                   "trigger":  "minecraft:impossible",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:iron_ingot"
+                                                                    }
+                                                                ]
+                                                  }
+                               }
+                 },
+    "parent":  "minecraft:recipes/root",
+    "rewards":  {
+                    "recipes":  [
+                                    "angelblock:iron_tool_upgrade_kits"
+                                ]
+                },
+    "requirements":  [
+                         [
+                             "item2",
+                             "item3",
+                             "item4",
+                             "item0",
+                             "item1"
+                         ]
+                     ]
+}

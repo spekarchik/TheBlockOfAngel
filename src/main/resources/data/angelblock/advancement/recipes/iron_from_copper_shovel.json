@@ -1,0 +1,58 @@
+﻿{
+    "criteria":  {
+                     "item2":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "angelblock:iron_tool_upgrade_kit"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item3":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:iron_shovel"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item0":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:iron_shovel"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item1":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:copper_shovel"
+                                                                    }
+                                                                ]
+                                                  }
+                               }
+                 },
+    "parent":  "minecraft:recipes/root",
+    "rewards":  {
+                    "recipes":  [
+                                    "angelblock:iron_from_copper_shovel"
+                                ]
+                },
+    "requirements":  [
+                         [
+                             "item2",
+                             "item3",
+                             "item0",
+                             "item1"
+                         ]
+                     ]
+}
