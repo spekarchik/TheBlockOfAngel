@@ -1,3 +1,20 @@
+## 📦 Version 2.15.0
+
+### 📝 Improvements
+- **Diamond Armor Upgrade Kit** and **Diamond Tool Upgrade Kit** now allow upgrading *iron* and *copper* gear to its diamond version.
+
+### ✨ New
+- Added **Iron Armor Upgrade Kit** and **Iron Tool Upgrade Kit**, allowing upgrades of *copper gear* to its iron version.
+- Upgraded gear preserves its enchantments.
+
+
+## 📦 Version 2.14.10
+
+### 📝 Improvements
+- Creative mode inventory: the mod tab icon was changed to **Inactivated Block of Angel**.
+- The chance to breed a *rare axolotl* is now 100% on *Peacful difficulty* when the player worn in **Aquarite Armor**.
+
+
 ## 📦 Version 2.14.9
 
 ### 🐞 Fixed
