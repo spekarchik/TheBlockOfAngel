@@ -1,3 +1,16 @@
+## 📦 Version 2.15.0
+
+### 📝 Improvements
+- **Diamond Armor Upgrade Kit** and **Diamond Tool Upgrade Kit** now allow upgrading *iron* and *copper* gear to its diamond version.
+
+### ✨ New
+- Added **Iron Armor Upgrade Kit** and **Iron Tool Upgrade Kit**, allowing upgrades of *copper gear* to its iron version.
+- Upgraded gear preserves its enchantments.
+
+### 🛠️ Updates
+- *Spears* are now included in upgrade and downgrade recipes.
+
+
 ## 📦 Version 2.14.10-beta
 
 ### 📝 Improvements
