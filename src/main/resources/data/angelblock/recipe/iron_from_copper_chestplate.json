@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:copper_chestplate",
+    "addition": "minecraft:iron_chestplate",
+    "result": {
+        "id": "minecraft:iron_chestplate"
+    },
+    "template": "angelblock:iron_armor_upgrade_kit"
+}

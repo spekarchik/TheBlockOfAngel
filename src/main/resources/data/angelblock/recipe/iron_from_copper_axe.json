@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:copper_axe",
+    "addition": "minecraft:iron_axe",
+    "result": {
+        "id": "minecraft:iron_axe"
+    },
+    "template": "angelblock:iron_tool_upgrade_kit"
+}
