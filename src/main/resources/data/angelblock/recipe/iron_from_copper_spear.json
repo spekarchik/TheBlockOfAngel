@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:copper_spear",
+    "addition": "minecraft:iron_spear",
+    "result": {
+        "id": "minecraft:iron_spear"
+    },
+    "template": "angelblock:iron_tool_upgrade_kit"
+}
