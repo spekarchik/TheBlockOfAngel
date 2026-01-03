@@ -1,4 +1,4 @@
-## 📦 Version 2.14.10
+## 📦 Version 2.15.1
 
 ### 🐞 Fixed
 - Fixed an issue where the **Planter** failed to continue planting on partially filled rows if the seed stack was smaller than the remaining farmland length.
