@@ -1,3 +1,10 @@
+## 📦 Version 2.14.10
+
+### 🐞 Fixed
+- Fixed an issue where the **Planter** failed to continue planting on partially filled rows if the seed stack was smaller than the remaining farmland length.
+  Planting range is now evaluated independently of seed count and stops only when seeds run out or a blocking block is encountered.
+
+
 ## 📦 Version 2.14.9
 
 ### 🐞 Fixed
