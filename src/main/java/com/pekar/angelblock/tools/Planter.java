@@ -170,6 +170,8 @@ public class Planter extends WorkRod
 
     protected boolean plantOffHandItems(Player player, Level level, BlockPos clickedPos, Direction facing)
     {
+        final int MAX_PLANTABLE_LENGTH = 64;
+
         if (facing != Direction.UP) return false;
 
         var seedInHand = player.getItemInHand(InteractionHand.OFF_HAND);
@@ -180,7 +182,6 @@ public class Planter extends WorkRod
         if (!isPlanterCompatible(plantableBlock))
             return false;
 
-        int seedCount = seedInHand.getCount();
         final int posX = clickedPos.getX(), posY = clickedPos.getY(), posZ = clickedPos.getZ();
 
         int shiftX = 0, shiftZ = 0, increment = 0;
@@ -188,16 +189,16 @@ public class Planter extends WorkRod
         switch (player.getDirection())
         {
             case NORTH:
-                shiftX = -1; shiftZ = -seedCount; increment = -1; break;
+                shiftX = -1; shiftZ = -MAX_PLANTABLE_LENGTH; increment = -1; break;
 
             case SOUTH:
-                shiftX = 1; shiftZ = seedCount; increment = 1; break;
+                shiftX = 1; shiftZ = MAX_PLANTABLE_LENGTH; increment = 1; break;
 
             case EAST:
-                shiftX = seedCount; shiftZ = 1; increment = 1; break;
+                shiftX = MAX_PLANTABLE_LENGTH; shiftZ = 1; increment = 1; break;
 
             case WEST:
-                shiftX = -seedCount; shiftZ = -1; increment = -1; break;
+                shiftX = -MAX_PLANTABLE_LENGTH; shiftZ = -1; increment = -1; break;
         }
 
         boolean haveAnyTransformed = false;
@@ -210,6 +211,9 @@ public class Planter extends WorkRod
         for (int x = posX; x != posX + shiftX; x += increment)
             for (int z = posZ; z != posZ + shiftZ; z += increment)
             {
+                int seedCount = player.getItemInHand(InteractionHand.OFF_HAND).getCount();
+                if (seedCount < 1) return haveAnyTransformed;
+
                 boolean hasTransformed = plantOffHandItem(player, level, clickedBlock, originSoilBlock, new BlockPos(x, y, z), facing, toolItemStack, plantableBlock);
                 if (hasTransformed)
                     haveAnyTransformed = true;
