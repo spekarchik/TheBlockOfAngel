@@ -33,7 +33,7 @@ public class GuardianEye extends ModItem implements ITooltipProvider
         {
             if (player instanceof ServerPlayer serverPlayer)
             {
-                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0, true, true));
+                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, true, true));
             }
 
             utils.sound.playSound(player, player.blockPosition(), SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
@@ -57,7 +57,10 @@ public class GuardianEye extends ModItem implements ITooltipProvider
 
         for (int i = 1; i <= 3; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Notice, i == 3).apply();
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.DarkGray, i == 2)
+                    .styledAs(TextStyle.Notice, i == 3)
+                    .apply();
         }
     }
 }
