@@ -1,3 +1,11 @@
+## 📦 Version 2.15.2
+
+### 📝 Improvements
+- Improved **Elder Guardian Eye** usability:
+  - *Night Vision* no longer uses a timer.
+  - The effect is maintained while the **Eye** is held in either hand.
+
+
 ## 📦 Version 2.15.1
 
 ### 🐞 Fixed
