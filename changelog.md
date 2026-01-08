@@ -1,4 +1,4 @@
-## 📦 Version 2.15.2
+## 📦 Version 2.16.0
 
 ### 📝 Improvements
 - Improved **Elder Guardian Eye** usability:
