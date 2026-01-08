@@ -141,9 +141,9 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         var oldSlotItem = event.getFrom();
         var offHandItemStack = playerEntity.getOffhandItem();
 
-        removeEffectIfHoldItem(playerEntity, MobEffects.NIGHT_VISION, oldSlotItem, offHandItemStack, ItemRegistry.GUARDIAN_EYE.get());
-//        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, offHandItemStack, ItemRegistry.END_SAPPHIRE.get());
-//        removeEffectIfHoldItem(playerEntity, MobEffects.ABSORPTION, oldSlotItem, offHandItemStack, ItemRegistry.BIOS_DIAMOND.get());
+        removeEffectIfHoldItem(playerEntity, MobEffects.NIGHT_VISION, oldSlotItem, ItemRegistry.GUARDIAN_EYE.get());
+//        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, ItemRegistry.END_SAPPHIRE.get());
+//        removeEffectIfHoldItem(playerEntity, MobEffects.ABSORPTION, oldSlotItem, ItemRegistry.BIOS_DIAMOND.get());
 
         if (entity instanceof ServerPlayer serverPlayer)
         {
@@ -244,12 +244,14 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         }
     }
 
-    private void removeEffectIfHoldItem(net.minecraft.world.entity.player.Player player, Holder<MobEffect> effect, ItemStack slotItemStack, ItemStack offHandItemStack, Item holdItemToCheck)
+    private void removeEffectIfHoldItem(net.minecraft.world.entity.player.Player player, Holder<MobEffect> effect, ItemStack oldItemStack, Item holdItemToCheck)
     {
         if (!(player instanceof ServerPlayer serverPlayer) || !player.hasEffect(effect)) return;
 
-        if ((!slotItemStack.isEmpty() && slotItemStack.getItem() == holdItemToCheck)
-                || (!offHandItemStack.isEmpty() && offHandItemStack.getItem() == holdItemToCheck))
+        if (!oldItemStack.isEmpty() && oldItemStack.getItem() == holdItemToCheck
+                && !player.getMainHandItem().is(holdItemToCheck)
+                && !player.getOffhandItem().is(holdItemToCheck)
+                /*|| (!offHandItemStack.isEmpty() && offHandItemStack.getItem() == holdItemToCheck)*/)
         {
             player.removeEffect(effect);
             new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
