@@ -29,7 +29,7 @@ public class GuardianEye extends ModItemWithMultipleHoverText
 
         for (int i = 1; i <= 3; i++)
         {
-            tooltipComponents.add(getDescription(i, false, false, i == 3, false));
+            tooltipComponents.add(getDescription(i, false, false, i == 3, false, i == 2));
         }
     }
 
@@ -40,7 +40,7 @@ public class GuardianEye extends ModItemWithMultipleHoverText
         {
             if (player instanceof ServerPlayer serverPlayer)
             {
-                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0, true, true));
+                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, true, true));
             }
 
             utils.sound.playSound(player, player.blockPosition(), SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
