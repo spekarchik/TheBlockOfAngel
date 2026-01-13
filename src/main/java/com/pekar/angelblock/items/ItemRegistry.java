@@ -54,7 +54,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> LAPIS_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("lapis_armor_upgrade_kit", ModArmorUpgradeKit::new);
     public static final DeferredItem<Item> LIMONITE_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("limonite_armor_upgrade_kit", ModArmorUpgradeKit::new);
     public static final DeferredItem<Item> SUPER_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("super_armor_upgrade_kit", ModArmorUpgradeKit::new);
-    public static final DeferredItem<Item> DIAMOND_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("diamond_armor_upgrade_kit", DiamondArmorUpgradeKit::new);
+    public static final DeferredItem<Item> DIAMOND_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("diamond_armor_upgrade_kit", VanillaArmorUpgradeKit::new);
     public static final DeferredItem<Item> FLYING_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("flying_armor_upgrade_kit", ModArmorUpgradeKit::new);
 
     public static final DeferredItem<Item> RENDELITHIC_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("rendelithic_tool_upgrade_kit", ModToolUpgradeKit::new);
@@ -62,7 +62,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> LAPIS_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("lapis_tool_upgrade_kit", ModToolUpgradeKit::new);
     public static final DeferredItem<Item> LIMONITE_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("limonite_tool_upgrade_kit", ModToolUpgradeKit::new);
     public static final DeferredItem<Item> SUPER_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("super_tool_upgrade_kit", ModToolUpgradeKit::new);
-    public static final DeferredItem<Item> DIAMOND_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("diamond_tool_upgrade_kit", DiamondToolUpgradeKit::new);
+    public static final DeferredItem<Item> DIAMOND_TOOL_UPGRADE_KIT = Main.ITEMS.registerItem("diamond_tool_upgrade_kit", VanillaToolUpgradeKit::new);
 
     public static final DeferredItem<Item> ROD_UPGRADE_KIT = Main.ITEMS.registerItem("rod_upgrade_kit", RodUpgradeKit::new);
     public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.registerItem("downgrade_kit", DowngradeKit::new);
