@@ -110,9 +110,6 @@ public class CustomSmithingMenu extends SmithingMenu
 
                 if (tool instanceof ModRod rod)
                 {
-                    boolean isResultModRod = result.getItem() instanceof ModRod;
-                    var resultAsModRod = isResultModRod ? (ModRod)result.getItem() : null;
-
                     ItemStack dropItem1, dropItem2 = new ItemStack(Items.AIR);
 
                     switch (rod)
@@ -157,7 +154,9 @@ public class CustomSmithingMenu extends SmithingMenu
                         player.getInventory().add(dropItem2);
                     }
 
-                    if (rod.isEnhanced() && (!isResultModRod || !resultAsModRod.isEnhanced()))
+                    boolean isResultModRod = result.getItem() instanceof ModRod;
+
+                    if (new ItemStack(rod).is(ItemRegistry.RODS_MODIFIED_BY_ROD_SENSOR) && (!isResultModRod || !result.is(ItemRegistry.RODS_MODIFIED_BY_ROD_SENSOR)))
                     {
                         player.getInventory().add(new ItemStack(ItemRegistry.ROD_SENSOR.get()));
                     }
