@@ -25,6 +25,7 @@ public class ItemRegistry
     public static final TagKey<Item> DIAMOND_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "diamond_tool"));
     public static final TagKey<Item> NETHERITE_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_tool"));
     public static final TagKey<Item> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_plant"));
+    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rods_modified_by_rod_sensor"));
 
     public static final ResourceKey<TrimMaterial> BIOS_DIAMOND_TRIM_MATERIAL = ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath(Main.MODID, "bios_diamond"));
 
