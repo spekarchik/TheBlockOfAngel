@@ -22,6 +22,7 @@ public class ItemRegistry
     public static final TagKey<Item> NETHERITE_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_armor"));
     public static final TagKey<Item> DIAMOND_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "diamond_tool"));
     public static final TagKey<Item> NETHERITE_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_tool"));
+    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rods_modified_by_rod_sensor"));
 
     public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.registerItem("obsidian_powder", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ENDSTONE_POWDER = Main.ITEMS.registerItem("endstone_powder", EndstonePowder::new);
