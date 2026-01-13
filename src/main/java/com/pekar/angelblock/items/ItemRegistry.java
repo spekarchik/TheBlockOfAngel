@@ -2,8 +2,10 @@ package com.pekar.angelblock.items;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.TextStyle;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ItemRegistry
@@ -18,6 +20,8 @@ public class ItemRegistry
     public static final DeferredItem<Item> LIMONITE_POWDER = Main.ITEMS.register("limonite_powder", () -> new ModItem());
     public static final DeferredItem<Item> SUPER_POWDER = Main.ITEMS.register("super_powder", () -> new ModItem());
     public static final DeferredItem<Item> FLYING_POWDER = Main.ITEMS.register("flying_powder", () -> new ModItem());
+
+    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rods_modified_by_rod_sensor"));
 
     public static final DeferredItem<Item> RENDELITHIC_INGOT = Main.ITEMS.register("rendelithic_ingot", () -> new ModItem());
     public static final DeferredItem<Item> DIAMITHIC_INGOT = Main.ITEMS.register("diamithic_ingot", () -> new ModItem());
