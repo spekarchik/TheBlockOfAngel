@@ -10,9 +10,9 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class ModToolUpgradeKit extends ModItem implements ITooltipProvider
+public class VanillaToolUpgradeKit extends ModItem implements ITooltipProvider
 {
-    public ModToolUpgradeKit(Properties properties)
+    public VanillaToolUpgradeKit(Properties properties)
     {
         super(properties);
     }
@@ -36,11 +36,11 @@ public class ModToolUpgradeKit extends ModItem implements ITooltipProvider
 
         if (flag.hasShiftDown())
         {
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 2; i++)
             {
                 tooltip.addLine(getDescriptionId(), i)
                         .withFormatting(ChatFormatting.GOLD, i == 1)
-                        .styledAs(TextStyle.Notice, i == 2 || i == 3)
+                        .styledAs(TextStyle.Notice, i == 2)
                         .apply();
             }
 
