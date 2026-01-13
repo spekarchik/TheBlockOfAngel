@@ -3,6 +3,7 @@ package com.pekar.angelblock.blocks.block_items;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -42,6 +43,16 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
             for (int i = 1; i <= 20; i++)
             {
                 tooltip.addLine(getItemDescriptionId(), i).styledAs(TextStyle.Header, i == 3).styledAs(TextStyle.Notice, i == 18).styledAs(TextStyle.DarkGray, i == 19).apply();
+            }
+
+            tooltip.addEmptyLine();
+
+            for (int i = 29; i <= 32; i++)
+            {
+                tooltip.addLine(getItemDescriptionId(), i)
+                        .withFormatting(ChatFormatting.AQUA, i == 30)
+                        .withFormatting(ChatFormatting.DARK_AQUA, i == 31)
+                        .apply();
             }
 
             tooltip.addEmptyLine();
