@@ -27,14 +27,59 @@ public class RodUpgradeKit extends ModItem implements ITooltipProvider
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltip, flag)) return;
-
-        for (int i = 1; i <= 3; i++)
+        if (!flag.hasShiftDown() && !flag.hasAltDown())
         {
-            tooltip.addLine(getDescriptionId(), i)
-                    .withFormatting(ChatFormatting.GOLD, i == 1)
-                    .styledAs(TextStyle.Notice, i > 1)
+            tooltip.addLineById("description.common.press_shift_or_alt").apply();
+            return;
+        }
+
+        tooltip.ignoreEmptyLines();
+
+        if (flag.hasShiftDown())
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                tooltip.addLine(getDescriptionId(), i)
+                        .withFormatting(ChatFormatting.GOLD, i == 1)
+                        .styledAs(TextStyle.Notice, i > 1)
+                        .apply();
+            }
+
+            tooltip.addEmptyLine();
+            tooltip.addLineById("description.upgrade_kit.press_alt").apply();
+        }
+        else if (flag.hasAltDown())
+        {
+            tooltip.addLine(getDescriptionId(), 11)
+                    .withFormatting(ChatFormatting.DARK_AQUA, true)
                     .apply();
+
+            tooltip.addEmptyLine();
+
+            for (int i = 12; i <= 15; i++)
+            {
+                tooltip.addLine(getDescriptionId(), i)
+                        .apply();
+            }
+
+            tooltip.addEmptyLine();
+
+            for (int i = 16; i <= 19; i++)
+            {
+                tooltip.addLine(getDescriptionId(), i)
+                        .apply();
+            }
+
+            tooltip.addEmptyLine();
+
+            for (int i = 20; i <= 27; i++)
+            {
+                tooltip.addLine(getDescriptionId(), i)
+                        .apply();
+            }
+
+            tooltip.addEmptyLine();
+            tooltip.addLineById("description.common.press_shift").apply();
         }
     }
 }
