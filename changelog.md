@@ -1,3 +1,15 @@
+## 📦 Version 2.17.0
+
+### 📝 Improvements
+- Tooltips for **Upgrade and Downgrade Kits** have been extended with related *Smithing Table recipes*.
+- The **Rod of Angel** recipe has been added to the **Block of Angel** tooltips.
+- Information on how to upgrade **rods** to their *magnetic* versions has been added.
+- Other tooltip improvements for better clarity.
+
+### 🐞 Fixed
+- Fixed an issue where the **Rod Sensor** could drop unexpectedly during **Builder** downgrading.
+
+
 ## 📦 Version 2.16.0
 
 ### 📝 Improvements
