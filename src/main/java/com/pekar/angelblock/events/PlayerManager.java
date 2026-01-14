@@ -12,6 +12,7 @@ import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
 import com.pekar.angelblock.potions.ElderGuardianEyeEffect;
+import com.pekar.angelblock.potions.ModMobEffect;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
@@ -149,19 +150,15 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         {
             if (event.getTo().is(ItemRegistry.ENERGY_CRYSTAL))
             {
-                if (!entity.hasEffect(MobEffects.SPEED) && !entity.hasEffect(MobEffects.SLOWNESS) && !entity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
+                if (!entity.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT) && !entity.hasEffect(MobEffects.SLOWNESS) && !entity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
                 {
-                    player.setMagicItemEffect(MobEffects.SPEED, MobEffectInstance.INFINITE_DURATION, 3, true);
+                    player.setMagicItemEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT, MobEffectInstance.INFINITE_DURATION, 0, true);
                     new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
                 }
             }
-            else if (oldSlotItem.is(ItemRegistry.ENERGY_CRYSTAL) && !entity.getMainHandItem().is(ItemRegistry.ENERGY_CRYSTAL) && !entity.getOffhandItem().is(ItemRegistry.ENERGY_CRYSTAL))
+            else
             {
-                if (entity.hasEffect(MobEffects.SPEED))
-                {
-                    player.clearEffect(MobEffects.SPEED);
-                    new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
-                }
+                removeEffectIfHoldItem(playerEntity, PotionRegistry.ENERGY_CRYSTAL_EFFECT, oldSlotItem, ItemRegistry.ENERGY_CRYSTAL.get());
             }
         }
 
@@ -252,9 +249,9 @@ public class PlayerManager implements IEventHandler, IPlayerManager
                 && !player.getMainHandItem().is(holdItemToCheck)
                 && !player.getOffhandItem().is(holdItemToCheck))
         {
-            if (effect.value() instanceof ElderGuardianEyeEffect elderGuardianEyeEffect)
+            if (effect.value() instanceof ModMobEffect modEffect)
             {
-                elderGuardianEyeEffect.removeEffectFor(player);
+                modEffect.removeEffectFor(player);
             }
 
             player.removeEffect(effect);
