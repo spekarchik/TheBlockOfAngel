@@ -9,4 +9,6 @@ public interface IArmorEffect extends IArmorEffectBase
     boolean isUnavailable();
     boolean isInfinite();
     void forceRemove();
+    void onActivated();
+    void onDeactivated();
 }
