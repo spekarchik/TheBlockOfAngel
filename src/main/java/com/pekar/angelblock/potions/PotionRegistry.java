@@ -34,6 +34,8 @@ public class PotionRegistry
 
     public static final Holder<MobEffect> END_SAPPHIRE_COOLDOWN_EFFECT = registerMobEffect("end_sapphire_cooldown_effect", CooldownEffect::new);
 
+    public static final Holder<MobEffect> ELDER_GUARDIAN_EYE_EFFECT = registerMobEffect("elder_guardian_eye_effect", ElderGuardianEyeEffect::new);
+
     public static final DeferredHolder<EntityType<?>, EntityType<BlockBreakerPotion>> BLOCK_BREAKER_POTION =
             registerThrownPotion("block_breaker_potion", BlockBreakerPotion::new);
 
