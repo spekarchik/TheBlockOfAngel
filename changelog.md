@@ -5,12 +5,12 @@
 - The **Rod of Angel** recipe has been added to the **Block of Angel** tooltips.
 - Information on how to upgrade **rods** to their *magnetic* versions has been added.
 - Other tooltip improvements for better clarity.
+- The effects applied by the **Elder Guardian Eye** and the **Energy Crystal** now have their own icons.
 
 ### 🐞 Fixed
 - Fixed an issue where the **Rod Sensor** could drop unexpectedly during **Builder** downgrading.
 - Resolved a conflict between *Night Vision* effects applied by the **Elder Guardian Eye** and helmets.
 - Improved behavior related to a conflict between *Speed* effects applied by the **Energy Crystal** and boots.
-- The effects applied by the **Elder Guardian Eye** and the **Energy Crystal** now have their own icons.
 
 
 ## 📦 Version 2.16.0
