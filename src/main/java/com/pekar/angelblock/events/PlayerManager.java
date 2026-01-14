@@ -11,7 +11,6 @@ import com.pekar.angelblock.events.scheduler.allay.RestoreAllaysTask;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
-import com.pekar.angelblock.potions.ElderGuardianEyeEffect;
 import com.pekar.angelblock.potions.ModMobEffect;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.Utils;
@@ -22,6 +21,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -150,11 +150,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         {
             if (event.getTo().is(ItemRegistry.ENERGY_CRYSTAL))
             {
-                if (!entity.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT) && !entity.hasEffect(MobEffects.SLOWNESS) && !entity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
-                {
-                    player.setMagicItemEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT, MobEffectInstance.INFINITE_DURATION, 0, true);
-                    new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
-                }
+                trySetEnergyCrystalEffect(player);
             }
             else
             {
@@ -181,6 +177,16 @@ public class PlayerManager implements IEventHandler, IPlayerManager
             {
                 armor.onLivingEquipmentChangeEvent(event);
             }
+        }
+    }
+
+    private void trySetEnergyCrystalEffect(IPlayer player)
+    {
+        var serverPlayer = (ServerPlayer) player.getEntity();
+        if (!serverPlayer.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT) && !serverPlayer.hasEffect(MobEffects.SLOWNESS) && !serverPlayer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
+        {
+            player.setMagicItemEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT, MobEffectInstance.INFINITE_DURATION, 0, true);
+            new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
         }
     }
 
@@ -251,7 +257,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         {
             if (effect.value() instanceof ModMobEffect modEffect)
             {
-                modEffect.removeEffectFor(player);
+                modEffect.removeUnderlyingEffectFor(player);
             }
 
             player.removeEffect(effect);
