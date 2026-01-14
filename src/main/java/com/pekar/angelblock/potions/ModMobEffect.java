@@ -11,5 +11,5 @@ public abstract class ModMobEffect extends MobEffect
         super(category, color);
     }
 
-    public abstract void removeEffectFor(LivingEntity entity);
+    public abstract void removeUnderlyingEffectFor(LivingEntity entity);
 }
