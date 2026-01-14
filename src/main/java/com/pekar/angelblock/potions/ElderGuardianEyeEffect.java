@@ -38,7 +38,7 @@ public class ElderGuardianEyeEffect extends ModMobEffect
     }
 
     @Override
-    public void removeEffectFor(LivingEntity entity)
+    public void removeUnderlyingEffectFor(LivingEntity entity)
     {
         if (entity.hasEffect(MobEffects.NIGHT_VISION))
         {

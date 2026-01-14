@@ -40,7 +40,7 @@ public class EnergyCrystalEffect extends ModMobEffect
     }
 
     @Override
-    public void removeEffectFor(LivingEntity entity)
+    public void removeUnderlyingEffectFor(LivingEntity entity)
     {
         if (entity.hasEffect(MobEffects.MOVEMENT_SPEED))
         {
