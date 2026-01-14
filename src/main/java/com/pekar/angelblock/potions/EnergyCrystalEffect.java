@@ -7,11 +7,13 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 
-public class ElderGuardianEyeEffect extends ModMobEffect
+public class EnergyCrystalEffect extends ModMobEffect
 {
-    protected ElderGuardianEyeEffect()
+    private final int SPEED_AMPLIFIER = 3;
+
+    public EnergyCrystalEffect()
     {
-        super(MobEffectCategory.NEUTRAL, 0);
+        super(MobEffectCategory.NEUTRAL, 0xFFFF00); // Yellow color
     }
 
     @Override
@@ -29,9 +31,9 @@ public class ElderGuardianEyeEffect extends ModMobEffect
     @Override
     public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier)
     {
-        if (entity.hasEffect(MobEffects.NIGHT_VISION)) return true;
+        if (entity.hasEffect(MobEffects.SPEED) && entity.getEffect(MobEffects.SPEED).getAmplifier() >= SPEED_AMPLIFIER) return true;
 
-        var nightVisionEffectInstance = new ModMobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, false, false, false);
+        var nightVisionEffectInstance = new ModMobEffectInstance(MobEffects.SPEED, MobEffectInstance.INFINITE_DURATION, SPEED_AMPLIFIER, false, false, false);
         entity.addEffect(nightVisionEffectInstance, entity);
 
         return true;
@@ -40,9 +42,9 @@ public class ElderGuardianEyeEffect extends ModMobEffect
     @Override
     public void removeEffectFor(LivingEntity entity)
     {
-        if (entity.hasEffect(MobEffects.NIGHT_VISION))
+        if (entity.hasEffect(MobEffects.SPEED))
         {
-            entity.removeEffect(MobEffects.NIGHT_VISION);
+            entity.removeEffect(MobEffects.SPEED);
         }
     }
 }
