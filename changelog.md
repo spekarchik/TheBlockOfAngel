@@ -8,6 +8,8 @@
 
 ### 🐞 Fixed
 - Fixed an issue where the **Lodestone** could drop unexpectedly during **Builder** downgrading.
+- Resolved a conflict between *Night Vision* effects applied by the **Elder Guardian Eye** and helmets.
+- The effect applied by the **Elder Guardian Eye** now has its own icon.
 
 
 ## 📦 Version 2.16.0
