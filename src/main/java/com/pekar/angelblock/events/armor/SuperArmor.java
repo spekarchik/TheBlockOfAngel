@@ -4,6 +4,7 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -44,7 +45,7 @@ public class SuperArmor extends Armor
     public SuperArmor(IPlayer player)
     {
         super(player);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.HEAD);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).setupAvailability(this::isNightVisionAvailable);
         glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotsSet(EquipmentSlot.CHEST);
 
         luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
@@ -534,5 +535,10 @@ public class SuperArmor extends Armor
             slowFallingEffect.trySwitchOff();
             isSlowFallingActivatedOnGround = true;
         }
+    }
+
+    private boolean isNightVisionAvailable(IPlayer player, IArmor armor)
+    {
+        return player.isArmorElementPutOn(this, EquipmentSlot.HEAD) && !player.isEffectActive(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT);
     }
 }

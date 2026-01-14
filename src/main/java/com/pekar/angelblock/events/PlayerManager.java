@@ -11,6 +11,7 @@ import com.pekar.angelblock.events.scheduler.allay.RestoreAllaysTask;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import com.pekar.angelblock.network.packets.UpdateArmorDurabilityPacketToClient;
+import com.pekar.angelblock.potions.ElderGuardianEyeEffect;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.Holder;
@@ -139,9 +140,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
         var playerEntity = player.getEntity();
         var oldSlotItem = event.getFrom();
-        var offHandItemStack = playerEntity.getOffhandItem();
 
-        removeEffectIfHoldItem(playerEntity, MobEffects.NIGHT_VISION, oldSlotItem, ItemRegistry.GUARDIAN_EYE.get());
+        removeEffectIfHoldItem(playerEntity, PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT, oldSlotItem, ItemRegistry.GUARDIAN_EYE.get());
 //        removeEffectIfHoldItem(playerEntity, MobEffects.LEVITATION, oldSlotItem, ItemRegistry.END_SAPPHIRE.get());
 //        removeEffectIfHoldItem(playerEntity, MobEffects.ABSORPTION, oldSlotItem, ItemRegistry.BIOS_DIAMOND.get());
 
@@ -151,7 +151,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
             {
                 if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) && !entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN) && !entity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
                 {
-                    player.setCrystalEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 3, true);
+                    player.setMagicItemEffect(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, 3, true);
                     new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
                 }
             }
@@ -250,9 +250,13 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
         if (!oldItemStack.isEmpty() && oldItemStack.getItem() == holdItemToCheck
                 && !player.getMainHandItem().is(holdItemToCheck)
-                && !player.getOffhandItem().is(holdItemToCheck)
-                /*|| (!offHandItemStack.isEmpty() && offHandItemStack.getItem() == holdItemToCheck)*/)
+                && !player.getOffhandItem().is(holdItemToCheck))
         {
+            if (effect.value() instanceof ElderGuardianEyeEffect elderGuardianEyeEffect)
+            {
+                elderGuardianEyeEffect.removeEffectFor(player);
+            }
+
             player.removeEffect(effect);
             new PlaySoundPacket(SoundEvents.LEVER_CLICK, 2.0F).sendToPlayer(serverPlayer);
         }
