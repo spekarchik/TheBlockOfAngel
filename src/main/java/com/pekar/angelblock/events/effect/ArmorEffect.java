@@ -209,6 +209,6 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
 
     private boolean isCrystalEffect()
     {
-        return player.getEffectInstance(effectType) instanceof ModMobEffectInstance modMobEffectInstance && modMobEffectInstance.isCrystalEffect();
+        return player.getEffectInstance(effectType) instanceof ModMobEffectInstance modMobEffectInstance && modMobEffectInstance.isMagicItemEffect();
     }
 }
