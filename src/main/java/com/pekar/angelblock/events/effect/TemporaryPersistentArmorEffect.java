@@ -60,5 +60,6 @@ class TemporaryPersistentArmorEffect extends TemporaryBaseArmorEffect<ITemporary
     {
         setState(State.OFF);
         clearEffectInstance();
+        onDeactivated();
     }
 }
