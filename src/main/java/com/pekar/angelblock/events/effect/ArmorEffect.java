@@ -135,7 +135,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     {
         if (canClearEffect())
         {
-            if (isActive() || (isAnyActive() && (forceRemove || (isAvailable() && isInfinite() && !isCrystalEffect()))))
+            if (isActive() || (isAnyActive() && (forceRemove || (isAvailable() && isInfinite() && !isMagicItemEffect()))))
             {
                 player.clearEffect(effectType);
                 effectInstance = null;
@@ -207,7 +207,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
         return player.getEffectInstance(effectType).isInfiniteDuration();
     }
 
-    private boolean isCrystalEffect()
+    private boolean isMagicItemEffect()
     {
         return player.getEffectInstance(effectType) instanceof ModMobEffectInstance modMobEffectInstance && modMobEffectInstance.isMagicItemEffect();
     }
