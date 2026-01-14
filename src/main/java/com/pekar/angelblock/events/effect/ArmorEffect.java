@@ -105,6 +105,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
             if (!isActive() || shouldPersist())
             {
                 effectInstance = setEffect(amplifier, duration);
+                onActivated();
             }
         }
         else //if (isUnavailable())
@@ -119,6 +120,16 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     }
 
     protected abstract IModMobEffectInstance setEffect(int amplifier, int duration);
+
+    @Override
+    public void onActivated()
+    {
+    }
+
+    @Override
+    public void onDeactivated()
+    {
+    }
 
     protected final void setState(State state)
     {
@@ -139,6 +150,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
             {
                 player.clearEffect(effectType);
                 effectInstance = null;
+                onDeactivated();
             }
 
             if (state.isOn()) setState(State.OFF);

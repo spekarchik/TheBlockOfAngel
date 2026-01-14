@@ -29,6 +29,8 @@ public final class NetworkingEventHandler implements IEventHandler
         registerPacket(registrar, new UpdateArmorDurabilityPacketToClient());
         registerPacket(registrar, new FindAllayPacketToClient());
         registerPacket(registrar, new FindAllayPacketToServer());
+        registerPacket(registrar, new ForceLivingEquipmentChangeToClient());
+        registerPacket(registrar, new ForceLivingEquipmentChangeToServer());
     }
 
     private <T extends Packet> void registerPacket(PayloadRegistrar registrar, T packet)
