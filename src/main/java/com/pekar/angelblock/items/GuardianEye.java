@@ -1,5 +1,6 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -36,11 +37,11 @@ public class GuardianEye extends ModItemWithMultipleHoverText
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand interactionHand)
     {
-        if (!player.hasEffect(MobEffects.NIGHT_VISION))
+        if (!player.hasEffect(MobEffects.NIGHT_VISION) && !player.hasEffect(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT))
         {
             if (player instanceof ServerPlayer serverPlayer)
             {
-                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, true, true));
+                player.addEffect(new MobEffectInstance(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT, MobEffectInstance.INFINITE_DURATION, 0, true, true));
             }
 
             utils.sound.playSound(player, player.blockPosition(), SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
