@@ -258,7 +258,7 @@ public class Player implements IPlayer
     @Override
     public IModMobEffectInstance setMagicItemEffect(Holder<MobEffect> effect, int duration, int amplifier, boolean showIcon)
     {
-        var effectInstance = new ModMobEffectInstance(effect, duration, amplifier, false /*ambient*/, false /*visible*/, showIcon, true);
+        var effectInstance = new ModMobEffectInstance(effect, duration, amplifier, true /*ambient*/, true /*visible*/, showIcon, true);
         entity.addEffect(effectInstance);
         return effectInstance;
     }
