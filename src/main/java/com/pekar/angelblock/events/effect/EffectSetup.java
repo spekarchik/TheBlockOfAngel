@@ -3,6 +3,7 @@ package com.pekar.angelblock.events.effect;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.function.BiPredicate;
@@ -53,13 +54,13 @@ interface EffectSetup<T extends IArmorEffect> extends IEffectSetup<T>
 
     default T availableOnHelmetWithDetector()
     {
-        setAvailabilityPredicate(IPlayer::isHelmetModifiedWithDetector);
+        setAvailabilityPredicate((player, armor) -> player.isHelmetModifiedWithDetector(armor) && !player.getEntity().hasEffect(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT));
         return getSelf();
     }
 
     default T availableOnHelmetWithNightVision()
     {
-        setAvailabilityPredicate(IPlayer::isHelmetModifiedWithNightVision);
+        setAvailabilityPredicate((player, armor) -> player.isHelmetModifiedWithNightVision(armor) && !player.getEntity().hasEffect(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT));
         return getSelf();
     }
 

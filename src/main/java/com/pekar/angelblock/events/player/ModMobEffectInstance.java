@@ -9,23 +9,28 @@ import net.minecraft.world.entity.LivingEntity;
 public class ModMobEffectInstance extends MobEffectInstance implements IModMobEffectInstance
 {
     private final Runnable onEffectEnded;
-    private final boolean isCrystalEffect;
+    private final boolean isMagicItemEffect;
 
-    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon, boolean isCrystalEffect, Runnable onEffectEnded)
+    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon, boolean isMagicItemEffect, Runnable onEffectEnded)
     {
         super(effect, duration, amplifier, ambient, visible, showIcon);
         this.onEffectEnded = onEffectEnded;
-        this.isCrystalEffect = isCrystalEffect;
+        this.isMagicItemEffect = isMagicItemEffect;
     }
 
-    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon, boolean isCrystalEffect)
+    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon, boolean isMagicItemEffect)
     {
-        this(effect, duration, amplifier, ambient, visible, showIcon, isCrystalEffect, null);
+        this(effect, duration, amplifier, ambient, visible, showIcon, isMagicItemEffect, null);
     }
 
-    public boolean isCrystalEffect()
+    public ModMobEffectInstance(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon)
     {
-        return isCrystalEffect;
+        this(effect, duration, amplifier, ambient, visible, showIcon, false, null);
+    }
+
+    public boolean isMagicItemEffect()
+    {
+        return isMagicItemEffect;
     }
 
     @Override
