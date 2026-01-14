@@ -1497,6 +1497,7 @@
   "effect.angelblock.bios_diamond_cooldown_effect": "Stone Power Recovery",
   "effect.angelblock.end_sapphire_cooldown_effect": "Stone Power Recovery",
   "effect.angelblock.elder_guardian_eye_effect": "Guardian Vision",
+  "effect.angelblock.energy_crystal_effect": "Speed Charge",
 
   "trim_material.angelblock.bios_diamond": "Green Diamond Material",
   "container.custom_smithing": "Upgrade/Downgrade Gear",
