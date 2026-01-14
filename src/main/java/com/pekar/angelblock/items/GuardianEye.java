@@ -1,5 +1,6 @@
 package com.pekar.angelblock.items;
 
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
@@ -29,11 +30,11 @@ public class GuardianEye extends ModItem implements ITooltipProvider
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand interactionHand)
     {
-        if (!player.hasEffect(MobEffects.NIGHT_VISION))
+        if (!player.hasEffect(MobEffects.NIGHT_VISION) && !player.hasEffect(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT))
         {
             if (player instanceof ServerPlayer serverPlayer)
             {
-                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, true, true));
+                player.addEffect(new MobEffectInstance(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT, MobEffectInstance.INFINITE_DURATION, 0, true, true));
             }
 
             utils.sound.playSound(player, player.blockPosition(), SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
