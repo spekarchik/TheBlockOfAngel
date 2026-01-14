@@ -148,7 +148,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
         if (entity instanceof ServerPlayer serverPlayer)
         {
-            if (event.getTo().is(ItemRegistry.ENERGY_CRYSTAL))
+            if (playerEntity.getMainHandItem().is(ItemRegistry.ENERGY_CRYSTAL) || playerEntity.getOffhandItem().is(ItemRegistry.ENERGY_CRYSTAL))
             {
                 trySetEnergyCrystalEffect(player);
             }
