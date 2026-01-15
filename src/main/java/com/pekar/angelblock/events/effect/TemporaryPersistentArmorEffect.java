@@ -50,7 +50,7 @@ class TemporaryPersistentArmorEffect extends TemporaryBaseArmorEffect<ITemporary
     }
 
     @Override
-    public ITemporaryPersistentArmorEffect getSelf()
+    public ITemporaryPersistentArmorEffect asArmorEffect()
     {
         return this;
     }
