@@ -184,7 +184,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
         var serverPlayer = (ServerPlayer) player.getEntity();
         if (!serverPlayer.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT) && !serverPlayer.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)
-                && !serverPlayer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT) && !serverPlayer.hasEffect(MobEffects.DIG_SPEED))
+                && !serverPlayer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT) && !serverPlayer.hasEffect(MobEffects.DIG_SLOWDOWN))
         {
             player.setMagicItemEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT, MobEffectInstance.INFINITE_DURATION, 0, true);
             new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
