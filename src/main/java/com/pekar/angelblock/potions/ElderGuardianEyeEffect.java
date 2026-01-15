@@ -31,7 +31,7 @@ public class ElderGuardianEyeEffect extends ModMobEffect
     {
         if (entity.hasEffect(MobEffects.NIGHT_VISION)) return true;
 
-        var nightVisionEffectInstance = new ModMobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, false, false, false);
+        var nightVisionEffectInstance = new ModMobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, false, true, false);
         entity.addEffect(nightVisionEffectInstance, entity);
 
         return true;
