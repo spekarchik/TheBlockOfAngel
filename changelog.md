@@ -1,3 +1,11 @@
+## 📦 Version 2.18.0
+
+### 📝 Improvements
+- **Aeryte Armor**: *Speed* and *Super Jump* effects can now be toggled independently.
+- **Superite Armor**: *Strength* and *Water Breathing* effects are now always active and no longer disabled by *Jump Boost*.
+- **Energy Crystal** now applies *Speed IV* and *Haste I*.
+
+
 ## 📦 Version 2.17.0
 
 ### 📝 Improvements
