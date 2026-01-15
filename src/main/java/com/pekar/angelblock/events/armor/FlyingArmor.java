@@ -4,6 +4,7 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +17,7 @@ public class FlyingArmor extends Armor
 {
     private final ISwitchingEffectSynchronizer jumpBoostEffect;
     private final ISwitchingArmorEffect slowFallingEffect;
+    private final ISwitchingArmorEffect speedEffect;
     private static final int JUMP_BOOST_AMPLIFIER = 24;
     private boolean isSlowFallingActivatedOnGround = true;
 
@@ -23,16 +25,14 @@ public class FlyingArmor extends Armor
     {
         super(player);
 
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
 
-        var speedEffect = new SpeedSwitchingEffect(player, this, 1);
-        speedEffect.setupAvailability(this::isJumpEffectAvailable);
+        speedEffect = new SpeedSwitchingEffect(player, this, 1).showIcon().setupAvailability(this::isSpeedAvailable).asArmorEffect();
         var jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_BOOST_AMPLIFIER);
         jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable);
         var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
         superJumpEffect.setupAvailability(this::isJumpEffectAvailable);
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
-        this.jumpBoostEffect.addDependentEffect(speedEffect);
         this.jumpBoostEffect.addDependentEffect(superJumpEffect);
     }
 
@@ -46,6 +46,7 @@ public class FlyingArmor extends Armor
     protected void updateAvailability()
     {
         jumpBoostEffect.updateAvailability();
+        speedEffect.updateAvailability();
         slowFallingEffect.updateAvailability();
     }
 
@@ -53,6 +54,7 @@ public class FlyingArmor extends Armor
     protected void updateEffectStates()
     {
         jumpBoostEffect.updateSwitchState();
+        speedEffect.updateSwitchState();
 
         if (!player.isNether())
         {
@@ -85,6 +87,7 @@ public class FlyingArmor extends Armor
     protected void updateActivity(EquipmentSlot slot)
     {
         jumpBoostEffect.updateActivity();
+        speedEffect.updateActivity();
     }
 
     @Override
@@ -142,7 +145,12 @@ public class FlyingArmor extends Armor
     @Override
     public void onKeyInputEvent(String pressedKeyDescription)
     {
-        if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()) || pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
+        if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
+        {
+            speedEffect.trySwitch();
+        }
+
+        if (pressedKeyDescription.equals(KeyRegistry.SUPER_JUMP.getName()))
         {
             jumpBoostEffect.trySwitch();
         }
@@ -176,16 +184,18 @@ public class FlyingArmor extends Armor
     public void onPlayerChangedDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event)
     {
         jumpBoostEffect.updateAvailability();
+        speedEffect.updateAvailability();
         slowFallingEffect.updateAvailability();
 
         jumpBoostEffect.updateActivity();
+        speedEffect.updateActivity();
         slowFallingEffect.updateActivity();
     }
 
     @Override
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        if (player.getEntity().isInWaterOrRain() || jumpBoostEffect.isOn())
+        if (player.getEntity().isInWaterOrRain() || jumpBoostEffect.isOn() || speedEffect.isOn())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.2f);
         }
@@ -265,5 +275,15 @@ public class FlyingArmor extends Armor
             slowFallingEffect.trySwitchOff();
             isSlowFallingActivatedOnGround = true;
         }
+    }
+
+    private boolean isSpeedAvailable(IPlayer player, IArmor armor)
+    {
+        var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
+
+        return player.isArmorElementPutOn(this, EquipmentSlot.FEET)
+                && !player.isEffectActive(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT)
+//                && !player.isEffectActive(PotionRegistry.ENERGY_CRYSTAL_EFFECT)
+                && boots.getDamageValue() < boots.getMaxDamage() / 2;
     }
 }
