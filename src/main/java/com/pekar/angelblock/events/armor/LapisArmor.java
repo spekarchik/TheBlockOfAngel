@@ -30,15 +30,15 @@ public class LapisArmor extends Armor
     public LapisArmor(IPlayer player)
     {
         super(player);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithNightVision();
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithNightVision().asArmorEffect();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
         waterBreathingEffect = new WaterBreathingPermanentEffect(player, this);
         hasteEffect = new HastePermanentArmorEffect(player, this);
-        luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
+        luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
-        blindnessEffect = new BlindnessNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION).showIcon();
-        witherEffect = new WitherNegativeEffect(player, this, 0, 600).showIcon();
-        strengthEffect = new StrengthPermanentArmorEffect(player, this, 0).availableOnChestPlateWithStrengthBooster();
+        blindnessEffect = new BlindnessNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION).showIcon().asArmorEffect();
+        witherEffect = new WitherNegativeEffect(player, this, 0, 600).showIcon().asArmorEffect();
+        strengthEffect = new StrengthPermanentArmorEffect(player, this, 0).availableOnChestPlateWithStrengthBooster().asArmorEffect();
         dolphinsGrace = new DolphinsGraceSwitchingEffect(player, this);
     }
 

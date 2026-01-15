@@ -31,14 +31,14 @@ public class DiamithicArmor extends Armor
     {
         super(player);
         strengthEffect = new StrengthPermanentArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithDetector();
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithDetector().asArmorEffect();
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 2);
         hasteEffect = new HastePermanentArmorEffect(player, this);
-        slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable);
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling();
+        slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable).asArmorEffect();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
 
         jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, 2);
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
     }
 
     @Override

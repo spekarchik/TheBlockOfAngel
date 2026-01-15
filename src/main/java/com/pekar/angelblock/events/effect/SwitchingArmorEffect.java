@@ -82,7 +82,7 @@ class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements
     }
 
     @Override
-    public ISwitchingArmorEffect getSelf()
+    public ISwitchingArmorEffect asArmorEffect()
     {
         return this;
     }

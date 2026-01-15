@@ -39,9 +39,9 @@ public class LimoniteArmor extends Armor
     {
         super(player);
 
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithDetector();
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
-        luckEffect = new LuckPermanentArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithDetector().asArmorEffect();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
+        luckEffect = new LuckPermanentArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable).asArmorEffect();
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 1);
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, 0, HEAL_REGENERATION_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
