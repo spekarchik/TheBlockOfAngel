@@ -9,7 +9,8 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class EnergyCrystalEffect extends ModMobEffect
 {
-    private final int MOVEMENT_SPEED_AMPLIFIER = 3;
+    private final int SPEED_AMPLIFIER = 3;
+    private final int HASTE_AMPLIFIER = 0;
 
     public EnergyCrystalEffect()
     {
@@ -31,10 +32,17 @@ public class EnergyCrystalEffect extends ModMobEffect
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier)
     {
-        if (entity.hasEffect(MobEffects.MOVEMENT_SPEED) && entity.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier() >= MOVEMENT_SPEED_AMPLIFIER) return true;
+        if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) || entity.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier() < SPEED_AMPLIFIER)
+        {
+            var speedEffectInstance = new ModMobEffectInstance(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, SPEED_AMPLIFIER, false, true, false);
+            entity.addEffect(speedEffectInstance, entity);
+        }
 
-        var nightVisionEffectInstance = new ModMobEffectInstance(MobEffects.MOVEMENT_SPEED, MobEffectInstance.INFINITE_DURATION, MOVEMENT_SPEED_AMPLIFIER, false, false, false);
-        entity.addEffect(nightVisionEffectInstance, entity);
+        if (!entity.hasEffect(MobEffects.DIG_SPEED) || entity.getEffect(MobEffects.DIG_SPEED).getAmplifier() < HASTE_AMPLIFIER)
+        {
+            var hasteEffectInstance = new ModMobEffectInstance(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, HASTE_AMPLIFIER, false, true, false);
+            entity.addEffect(hasteEffectInstance);
+        }
 
         return true;
     }
@@ -44,7 +52,16 @@ public class EnergyCrystalEffect extends ModMobEffect
     {
         if (entity.hasEffect(MobEffects.MOVEMENT_SPEED))
         {
-            entity.removeEffect(MobEffects.MOVEMENT_SPEED);
+            var speedEffect = entity.getEffect(MobEffects.MOVEMENT_SPEED);
+            if (speedEffect.getAmplifier() == SPEED_AMPLIFIER && speedEffect.isVisible())
+                entity.removeEffect(MobEffects.MOVEMENT_SPEED);
+        }
+
+        if (entity.hasEffect(MobEffects.DIG_SPEED))
+        {
+            var hasteEffect = entity.getEffect(MobEffects.DIG_SPEED);
+            if (hasteEffect.getAmplifier() == HASTE_AMPLIFIER && hasteEffect.isVisible())
+                entity.removeEffect(MobEffects.DIG_SPEED);
         }
     }
 }
