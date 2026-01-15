@@ -45,15 +45,15 @@ public class SuperArmor extends Armor
     public SuperArmor(IPlayer player)
     {
         super(player);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).setupAvailability(this::isNightVisionAvailable);
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotsSet(EquipmentSlot.CHEST);
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).setupAvailability(this::isNightVisionAvailable).asArmorEffect();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotsSet(EquipmentSlot.CHEST).asArmorEffect();
 
-        luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
+        luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, REGENERATION_EFFECT_HEAL_AMPLIFIER, HEAL_REGENERATION_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION);
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 2);
-        levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableIfSlotSet(EquipmentSlot.CHEST);
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST);
+        levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
 
         var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
         superJumpEffect.setupAvailability(this::isSuperJumpEffectAvailable);
