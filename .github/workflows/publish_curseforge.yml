@@ -1,0 +1,54 @@
+name: Publish to CurseForge
+
+# Запускается после успешного завершения workflow "Build NeoForge Mod"
+on:
+  workflow_run:
+    workflows: ["Build NeoForge Mod"]
+    types:
+      - completed
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Скачиваем репозиторий
+      - uses: actions/checkout@v4
+
+      # Скачиваем JAR из CI
+      - name: Download artifact from CI
+        uses: actions/download-artifact@v4
+        with:
+          name: neoforge-mod
+          path: ./build/libs
+
+      # Берём весь changelog.md
+      - name: Read full changelog
+        id: changelog
+        run: |
+          CHANGELOG=$(cat changelog.md)
+          echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
+
+      # Публикуем на CurseForge
+      - name: Publish to CurseForge
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CF_PROJECT_ID: 1256129
+          MOD_VERSION: ${{ github.event.workflow_run.head_commit.message }}
+          CHANGELOG: ${{ env.CHANGELOG }}
+        run: |
+          JAR_FILE=$(ls ./build/libs/*.jar | head -n 1)
+          if [ -z "$JAR_FILE" ]; then
+            echo "JAR file not found!"
+            exit 1
+          fi
+
+          curl -X POST "https://minecraft.curseforge.com/api/projects/$CF_PROJECT_ID/files" \
+            -H "x-api-token: $CURSEFORGE_TOKEN" \
+            -F "file=@$JAR_FILE" \
+            -F "releaseType=release" \
+            -F "displayName=$MOD_VERSION" \
+            --form-string "changelog=$CHANGELOG" \
+            -F "gameVersions[]=1.21.10" \
+            -F "modLoaders[]=neoForge"
