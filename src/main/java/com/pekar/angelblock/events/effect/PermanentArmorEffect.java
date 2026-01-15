@@ -45,7 +45,7 @@ class PermanentArmorEffect extends ArmorEffect<IPermanentArmorEffect> implements
     }
 
     @Override
-    public IPermanentArmorEffect getSelf()
+    public IPermanentArmorEffect asArmorEffect()
     {
         return this;
     }
