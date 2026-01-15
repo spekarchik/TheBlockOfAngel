@@ -46,7 +46,7 @@ class TemporaryArmorEffect extends TemporaryBaseArmorEffect<ITemporaryArmorEffec
     }
 
     @Override
-    public ITemporaryArmorEffect getSelf()
+    public ITemporaryArmorEffect asArmorEffect()
     {
         return this;
     }
