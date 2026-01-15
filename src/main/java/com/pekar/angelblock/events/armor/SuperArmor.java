@@ -23,6 +23,8 @@ public class SuperArmor extends Armor
     private final ISwitchingEffectSynchronizer jumpEffect;
     private final ISwitchingArmorEffect glowingEffect;
     private final IPermanentArmorEffect luckEffect;
+    private final IPermanentArmorEffect strengthEffect;
+    private final IPermanentArmorEffect hasteEffect;
     private final ITemporaryArmorEffect regenerationEffect;
     private final IPermanentArmorEffect healthBoostEffect;
     private final ITemporaryPersistentArmorEffect jumpNegativeEffect;
@@ -64,17 +66,14 @@ public class SuperArmor extends Armor
         var jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, 5);
         jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
-        var strengthEffect = new StrengthSwitchingEffect(player, this, 2);
+        strengthEffect = new StrengthPermanentArmorEffect(player, this, 2);
         var waterBreathingEffect = new WaterBreathingSwitchingEffect(player, this);
         waterBreathingEffect.availableIfSlotSet(EquipmentSlot.HEAD);
-        var hasteEffect = new HasteSwitchingEffect(player, this, 1);
-        hasteEffect.availableIfSlotSet(EquipmentSlot.CHEST);
+        hasteEffect = new HastePermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
-        this.jumpEffect.addDependentInvertedEffect(strengthEffect);
         this.jumpEffect.addDependentInvertedEffect(waterBreathingEffect);
-        this.jumpEffect.addDependentInvertedEffect(hasteEffect);
     }
 
     @Override
@@ -87,6 +86,8 @@ public class SuperArmor extends Armor
     protected void updateAvailability()
     {
         jumpNegativeEffect.updateAvailability();
+        strengthEffect.updateAvailability();
+        hasteEffect.updateAvailability();
 
         slowFallingEffect.updateAvailability();
         glowingEffect.updateAvailability();
@@ -105,6 +106,8 @@ public class SuperArmor extends Armor
     {
         nightVisionEffect.updateSwitchState();
         glowingEffect.updateSwitchState();
+        strengthEffect.updateSwitchState();
+        hasteEffect.updateSwitchState();
 
         if (!jumpNegativeEffect.isAnyActive())
         {
@@ -141,6 +144,8 @@ public class SuperArmor extends Armor
         glowingEffect.updateActivity();
         levitationEffect.updateActivity(LEVITATION_UP_AMPLIFIER);
         luckEffect.updateActivity();
+        strengthEffect.updateActivity();
+        hasteEffect.updateActivity();
     }
 
     @Override
