@@ -1,0 +1,54 @@
+name: Publish to Modrinth
+
+# Запускается после успешного завершения workflow "Build NeoForge Mod"
+on:
+  workflow_run:
+    workflows: ["Build NeoForge Mod"]
+    types:
+      - completed
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Скачиваем репозиторий, чтобы иметь доступ к workflow и скриптам
+      - uses: actions/checkout@v4
+
+      # Скачиваем JAR из artifact CI
+      - name: Download artifact from CI
+        uses: actions/download-artifact@v4
+        with:
+          name: neoforge-mod
+          path: ./build/libs
+
+      - name: Extract latest changelog
+        id: changelog
+        run: |
+          # Берём текст до следующей версии, исключая саму строку с версией
+          CHANGELOG=$(awk '/^## 📦 Version /{if(!f){f=1;next}} f{print}' changelog.md | sed '/^## 📦/,$d')
+          
+          # Экспортируем только changelog
+          echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
+
+      # Публикация на Modrinth
+      - name: Publish to Modrinth
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MODRINTH_PROJECT_ID: 7X4T4qK0
+          MOD_VERSION: ${{ github.event.workflow_run.head_commit.message }}
+        run: |
+          JAR_FILE=$(ls ./build/libs/*.jar | head -n 1)
+          if [ -z "$JAR_FILE" ]; then
+            echo "JAR file not found!"
+            exit 1
+          fi
+
+          curl -X POST "https://api.modrinth.com/v2/project/$MODRINTH_PROJECT_ID/version" \
+            -H "Authorization: $MODRINTH_TOKEN" \
+            -F "version_number=$MOD_VERSION" \
+            -F "changelog=$CHANGELOG" \
+            -F "game_versions[]=1.21.1" \
+            -F "loaders[]=neoForge" \
+            -F "file=@$JAR_FILE"
