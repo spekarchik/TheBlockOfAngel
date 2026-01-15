@@ -8,26 +8,28 @@ import java.util.function.BiPredicate;
 
 public interface IEffectSetup<T extends IArmorEffect>
 {
-    T setupAvailability(BiPredicate<IPlayer, IArmor> predicate);
-    T setupUnavailability(BiPredicate<IPlayer, IArmor> predicate);
-    T setupAvailability(IEffectSetup<T> copyFrom);
-    T setupUnavailability(IEffectSetup<T> copyFrom);
+    IEffectSetup<T> setupAvailability(BiPredicate<IPlayer, IArmor> predicate);
+    IEffectSetup<T> setupUnavailability(BiPredicate<IPlayer, IArmor> predicate);
+    IEffectSetup<T> setupAvailability(IEffectSetup<T> copyFrom);
+    IEffectSetup<T> setupUnavailability(IEffectSetup<T> copyFrom);
 
-    T alwaysAvailable();
-    T availableOnHelmetWithDetector();
-    T availableOnHelmetWithNightVision();
-    T availableOnBootsWithJumpBooster();
-    T availableOnBootsWithSeaPower();
-    T availableOnChestPlateWithStrengthBooster();
-    T availableOnChestPlateWithSlowFalling();
-    T availableOnLeggingsWithHealthRegenerator();
-    T availableOnFullArmorSet();
-    T availableOnAnyArmorElement();
-    T availableIfSlotSet(EquipmentSlot slot);
-    T availableIfSlotsSet(EquipmentSlot... slot);
+    IEffectSetup<T> alwaysAvailable();
+    IEffectSetup<T> availableOnHelmetWithDetector();
+    IEffectSetup<T> availableOnHelmetWithNightVision();
+    IEffectSetup<T> availableOnBootsWithJumpBooster();
+    IEffectSetup<T> availableOnBootsWithSeaPower();
+    IEffectSetup<T> availableOnChestPlateWithStrengthBooster();
+    IEffectSetup<T> availableOnChestPlateWithSlowFalling();
+    IEffectSetup<T> availableOnLeggingsWithHealthRegenerator();
+    IEffectSetup<T> availableOnFullArmorSet();
+    IEffectSetup<T> availableOnAnyArmorElement();
+    IEffectSetup<T> availableIfSlotSet(EquipmentSlot slot);
+    IEffectSetup<T> availableIfSlotsSet(EquipmentSlot... slot);
 
-    T unavailableIfNotModArmor(EquipmentSlot slot);
+    IEffectSetup<T> unavailableIfNotModArmor(EquipmentSlot slot);
 
-    T showIcon();
-    T hideIcon();
+    IEffectSetup<T> showIcon();
+    IEffectSetup<T> hideIcon();
+
+    T asArmorEffect();
 }

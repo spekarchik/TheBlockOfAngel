@@ -20,126 +20,124 @@ interface EffectSetup<T extends IArmorEffect> extends IEffectSetup<T>
 
     BiPredicate<IPlayer, IArmor> getUnavailabilityPredicate();
 
-    T getSelf();
-
-    default T alwaysAvailable()
+    default IEffectSetup<T> alwaysAvailable()
     {
         setAvailabilityPredicate((player, armor) -> true);
-        return getSelf();
+        return this;
     }
 
-    default T setupAvailability(IEffectSetup<T> copyFrom)
+    default IEffectSetup<T> setupAvailability(IEffectSetup<T> copyFrom)
     {
         setAvailabilityPredicate(((EffectSetup<T>) copyFrom).getAvailabilityPredicate());
-        return getSelf();
+        return this;
     }
 
-    default T setupUnavailability(IEffectSetup<T> copyFrom)
+    default IEffectSetup<T> setupUnavailability(IEffectSetup<T> copyFrom)
     {
         setUnavailabilityPredicate(((EffectSetup<T>) copyFrom).getUnavailabilityPredicate());
-        return getSelf();
+        return this;
     }
 
-    default T setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
+    default IEffectSetup<T> setupAvailability(BiPredicate<IPlayer, IArmor> predicate)
     {
         setAvailabilityPredicate(predicate);
-        return getSelf();
+        return this;
     }
 
-    default T setupUnavailability(BiPredicate<IPlayer, IArmor> predicate)
+    default IEffectSetup<T> setupUnavailability(BiPredicate<IPlayer, IArmor> predicate)
     {
         setUnavailabilityPredicate(predicate);
-        return getSelf();
+        return this;
     }
 
-    default T availableOnHelmetWithDetector()
+    default IEffectSetup<T> availableOnHelmetWithDetector()
     {
         setAvailabilityPredicate((player, armor) -> player.isHelmetModifiedWithDetector(armor) && !player.getEntity().hasEffect(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT));
-        return getSelf();
+        return this;
     }
 
-    default T availableOnHelmetWithNightVision()
+    default IEffectSetup<T> availableOnHelmetWithNightVision()
     {
         setAvailabilityPredicate((player, armor) -> player.isHelmetModifiedWithNightVision(armor) && !player.getEntity().hasEffect(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT));
-        return getSelf();
+        return this;
     }
 
-    default T availableOnBootsWithJumpBooster()
+    default IEffectSetup<T> availableOnBootsWithJumpBooster()
     {
         setAvailabilityPredicate(IPlayer::areBootsModifiedWithJumpBooster);
-        return getSelf();
+        return this;
     }
 
-    default T availableOnBootsWithSeaPower()
+    default IEffectSetup<T> availableOnBootsWithSeaPower()
     {
         setAvailabilityPredicate(IPlayer::areBootsModifiedWithSeaPower);
-        return getSelf();
+        return this;
     }
 
-    default T availableOnChestPlateWithStrengthBooster()
+    default IEffectSetup<T> availableOnChestPlateWithStrengthBooster()
     {
         setAvailabilityPredicate(IPlayer::isChestPlateModifiedWithStrengthBooster);
-        return getSelf();
+        return this;
     }
 
-    default T availableOnChestPlateWithSlowFalling()
+    default IEffectSetup<T> availableOnChestPlateWithSlowFalling()
     {
         setAvailabilityPredicate(IPlayer::isChestPlateModifiedWithSlowFalling);
-        return getSelf();
+        return this;
     }
 
-    default T availableOnLeggingsWithHealthRegenerator()
+    default IEffectSetup<T> availableOnLeggingsWithHealthRegenerator()
     {
         setAvailabilityPredicate(IPlayer::areLeggingsModifiedWithHealthRegenerator);
-        return getSelf();
+        return this;
     }
 
-    default T availableOnFullArmorSet()
+    default IEffectSetup<T> availableOnFullArmorSet()
     {
         setAvailabilityPredicate(IPlayer::isFullArmorSetPutOn);
-        return getSelf();
+        return this;
     }
 
-    default T availableOnAnyArmorElement()
+    default IEffectSetup<T> availableOnAnyArmorElement()
     {
         setAvailabilityPredicate(IPlayer::isAnyArmorElementPutOn);
-        return getSelf();
+        return this;
     }
 
-    default T availableIfSlotSet(EquipmentSlot slot)
+    default IEffectSetup<T> availableIfSlotSet(EquipmentSlot slot)
     {
         setAvailabilityPredicate((player1, armor1) -> player1.isArmorElementPutOn(armor1, slot));
-        return getSelf();
+        return this;
     }
 
-    default T availableIfSlotsSet(EquipmentSlot... slots)
+    default IEffectSetup<T> availableIfSlotsSet(EquipmentSlot... slots)
     {
         setAvailabilityPredicate((player1, armor1) -> player1.isAllArmorElementsPutOn(armor1, slots));
-        return getSelf();
+        return this;
     }
 
     @Override
-    default T unavailableIfNotModArmor(EquipmentSlot slot)
+    default IEffectSetup<T> unavailableIfNotModArmor(EquipmentSlot slot)
     {
         setUnavailabilityPredicate(((player, armor) -> {
             var stack = player.getEntity().getItemBySlot(slot);
             return stack.isEmpty() || !(stack.getItem() instanceof ModArmor);
         }));
 
-        return getSelf();
+        return this;
     }
 
     @Override
-    default T showIcon()
+    default IEffectSetup<T> showIcon()
     {
         setShowIcon(true);
-        return getSelf();
+        return this;
     }
 
     @Override
-    default T hideIcon()
+    default IEffectSetup<T> hideIcon()
     {
         setShowIcon(false);
-        return getSelf();
+        return this;
     }
 }
