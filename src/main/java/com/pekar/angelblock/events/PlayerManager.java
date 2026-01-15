@@ -183,7 +183,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     private void trySetEnergyCrystalEffect(IPlayer player)
     {
         var serverPlayer = (ServerPlayer) player.getEntity();
-        if (!serverPlayer.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT) && !serverPlayer.hasEffect(MobEffects.SLOWNESS) && !serverPlayer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
+        if (!serverPlayer.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT) && !serverPlayer.hasEffect(MobEffects.SLOWNESS)
+                && !serverPlayer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT) && !serverPlayer.hasEffect(MobEffects.MINING_FATIGUE))
         {
             player.setMagicItemEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT, MobEffectInstance.INFINITE_DURATION, 0, true);
             new PlaySoundPacket(SoundEvents.NOTE_BLOCK_HAT.value(), 2.0F).sendToPlayer(serverPlayer);
