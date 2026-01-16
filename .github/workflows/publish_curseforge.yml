@@ -150,7 +150,7 @@ jobs:
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             -F "metadata=$METADATA" \
             -F "file=@${{ env.JAR_FILE }}" \
-            --fail-with-body
+            --fail-with-body \
             --retry 3 \
             --retry-delay 5 \
             --retry-all-errors
