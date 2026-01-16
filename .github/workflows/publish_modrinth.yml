@@ -128,6 +128,31 @@ jobs:
             echo "PUBLISH=true" >> $GITHUB_ENV
           fi
           
+      - name: Create mod version
+        if: env.PUBLISH == 'true'
+        run: |
+          RESPONSE=$(curl -s -X POST "https://api.modrinth.com/v2/version" \
+            -H "Authorization: $MODRINTH_TOKEN" \
+            -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "project_id": "'"$MODRINTH_PROJECT_ID"'",
+              "version_number": "'"$FULL_VERSION"'",
+              "version_type": "'"$RELEASE_TYPE"'",
+              "changelog": "'"$CHANGELOG"'",
+              "game_versions": ["'"$GAME_VERSION"'"],
+              "loaders": ["neoforge"]
+            }')
+
+          VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
+            if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
+              echo "Failed to create version"
+              echo "$RESPONSE"
+              exit 1
+            fi
+
+          echo "VERSION_ID=$VERSION_ID" >> $GITHUB_ENV
+
       - name: Read changelog section
         if: env.PUBLISH == 'true'
         run: |
@@ -145,10 +170,22 @@ jobs:
         if: env.PUBLISH == 'true'
         run: |
           FULL_VERSION="${MOD_VERSION}${SUFFIX_FOR_VERSION}"
+          
+          if [ -z "$FULL_VERSION" ]; then
+            echo "FULL_VERSION is empty!"
+            exit 1
+          fi
+
+          if [ ! -f "$JAR_FILE" ]; then
+            echo "JAR file not found: $JAR_FILE"
+            exit 1
+          fi
 
           echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
+          
+          SAFE_CHANGELOG=$(echo "$CHANGELOG" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read().rstrip()))')
 
-          curl -s -X POST "https://api.modrinth.com/v2/version" \
+          RESPONSE=$(curl -i -s -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "data={
@@ -156,9 +193,18 @@ jobs:
                 \"version_number\": \"$FULL_VERSION\",
                 \"version_type\": \"$RELEASE_TYPE\",
                 \"game_versions\": [\"$GAME_VERSION\"],
-                \"loaders\": [\"neoforge\"]
+                \"loaders\": [\"neoforge\"],
+                \"changelog\": $SAFE_CHANGELOG,
+                \"file_parts\": [\"file\"]
               }" \
             -F "file=@$JAR_FILE" \
-            -F "file_parts=[\"file\"]" \
             -F "primary_file=file" \
             --fail-with-body
+          )
+
+          VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
+          if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
+            echo "Failed to create version"
+            echo "$RESPONSE"
+            exit 1
+          fi
