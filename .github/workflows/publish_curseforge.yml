@@ -111,8 +111,8 @@ jobs:
 
           if [ -z "$GAME_VERSION_ID" ]; then
             echo "ID for version ${{ env.GAME_VERSION }} not found"
-            exit 1
             echo "GAME_VERSION_ID=" >> $GITHUB_ENV
+            exit 1
           else
             echo "GAME_VERSION_ID=$GAME_VERSION_ID" >> $GITHUB_ENV
           fi
@@ -147,7 +147,7 @@ jobs:
             }')
 
           curl -X POST "https://api.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
-            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            -H "x-api-key: $CURSEFORGE_TOKEN" \
             -F "metadata=$METADATA" \
             -F "file=@${{ env.JAR_FILE }}" \
             --fail-with-body \
