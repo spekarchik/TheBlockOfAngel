@@ -104,8 +104,8 @@ jobs:
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
         run: |
           RESPONSE=$(curl -X GET "https://api.curseforge.com/v1/games/432/versions" \
-            -H 'Accept: application/json' \
-            -H 'x-api-key: $CURSEFORGE_TOKEN' \
+            -H "Accept: application/json" \
+            -H "x-api-key: $CURSEFORGE_TOKEN" \
             )
 
           GAME_VERSION_ID=$(echo "$RESPONSE" | jq -r --arg ver "${{ env.GAME_VERSION }}" '

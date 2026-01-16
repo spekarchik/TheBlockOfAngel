@@ -154,14 +154,12 @@ jobs:
           curl -s -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
-            -F "project_id=$MODRINTH_PROJECT_ID" \
-            -F "version_number=$FULL_VERSION" \
-            -F "version_type=$RELEASE_TYPE" \
-            -F "changelog=$CHANGELOG" \
-            -F "game_versions[]=$GAME_VERSION" \
-            -F "loaders[]=neoforge" \
-            -F "file=@$JAR_FILE" \
-            --fail-with-body \
-            --retry 3 \
-            --retry-delay 5 \
-            --retry-all-errors
+            -H "Content-Type: application/json" \
+            -d '{
+              "project_id": "'"$MODRINTH_PROJECT_ID"'",
+              "version_number": "'"$FULL_VERSION"'",
+              "version_type": "'"$RELEASE_TYPE"'",
+              "changelog": "'"$CHANGELOG"'",
+              "game_versions": ["'"$GAME_VERSION"'"],
+              "loaders": ["neoforge"]
+            }'
