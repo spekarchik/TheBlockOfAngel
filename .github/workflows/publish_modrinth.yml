@@ -1,6 +1,5 @@
 name: Publish to Modrinth
 
-# Запускается после успешного завершения workflow "Build NeoForge Mod"
 on:
   workflow_run:
     workflows: ["Build NeoForge Mod"]
@@ -11,44 +10,148 @@ jobs:
   publish:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-
     steps:
-      # Скачиваем репозиторий, чтобы иметь доступ к workflow и скриптам
       - uses: actions/checkout@v4
 
-      # Скачиваем JAR из artifact CI
+      - name: Install jq
+        run: |
+          if ! command -v jq >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends jq
+          fi
+
       - name: Download artifact from CI
+        if: env.PUBLISH == 'true'
         uses: actions/download-artifact@v4
         with:
           name: neoforge-mod
+          run-id: ${{ github.event.workflow_run.id }}
           path: ./build/libs
 
-      - name: Extract latest changelog
-        id: changelog
+      - name: Determine JAR, version and release type
         run: |
-          # Берём текст до следующей версии, исключая саму строку с версией
-          CHANGELOG=$(awk '/^## 📦 Version /{if(!f){f=1;next}} f{print}' changelog.md | sed '/^## 📦/,$d')
-          
-          # Экспортируем только changelog
-          echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
-
-      # Публикация на Modrinth
-      - name: Publish to Modrinth
-        env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-          MODRINTH_PROJECT_ID: 7X4T4qK0
-          MOD_VERSION: ${{ github.event.workflow_run.head_commit.message }}
-        run: |
-          JAR_FILE=$(ls ./build/libs/*.jar | head -n 1)
+          JAR_FILE=$(
+            ls ./build/libs/*.jar 2>/dev/null \
+            | grep -Ev '(sources|javadoc|dev)' \
+            | sort -V \
+            | tail -n1
+          )
           if [ -z "$JAR_FILE" ]; then
             echo "JAR file not found!"
             exit 1
           fi
 
-          curl -X POST "https://api.modrinth.com/v2/project/$MODRINTH_PROJECT_ID/version" \
+          FILENAME=$(basename "$JAR_FILE")
+
+          # Формат: <modid>-<game_version>-<mod_version>[-beta|-alpha].jar
+          # Примеры:
+          # mymod-1.21.1-2.14.7.jar
+          # mymod-1.20.1-2.14.7-beta.jar
+          # mymod-1.21.3-1.0.0-alpha.jar
+
+          # 1. game version — второй кусок
+          GAME_VERSION=$(echo "$FILENAME" | cut -d'-' -f2)
+
+          # 2. Всё после второго - и до последнего .
+          #    Затем убираем возможные -beta / -alpha в конце
+          VERSION_PART=$(echo "$FILENAME" | sed -E 's/^[^-]*-[^-]*-(.*)\.jar$/\1/')
+
+          # 3. Определяем суффикс и чистую версию мода
+          if [[ "$VERSION_PART" =~ ^(.+?)(-(beta|alpha))?$ ]]; then
+            MOD_VERSION="${BASH_REMATCH[1]}"
+            SUFFIX="${BASH_REMATCH[2]:-}"           # -beta, -alpha или пусто
+          else
+            echo "Cannot parse version from filename: $FILENAME"
+            exit 1
+          fi
+
+          # 4. Определяем release type и суффикс для version_number
+          case "$SUFFIX" in
+            "")     
+              RELEASE_TYPE="release"
+              SUFFIX_FOR_VERSION=""
+              ;;
+            "-beta") 
+              RELEASE_TYPE="beta"
+              SUFFIX_FOR_VERSION="-beta"
+              ;;
+            "-alpha")
+              RELEASE_TYPE="alpha"
+              SUFFIX_FOR_VERSION="-alpha"
+              ;;
+            *)
+              echo "Unknown version suffix '$SUFFIX' in $FILENAME → skipping publish"
+              echo "PUBLISH=false" >> $GITHUB_ENV
+              exit 0
+              ;;
+          esac
+
+          # Записываем в окружение
+          echo "GAME_VERSION=$GAME_VERSION" >> $GITHUB_ENV
+          echo "MOD_VERSION=$MOD_VERSION" >> $GITHUB_ENV
+          echo "RELEASE_TYPE=$RELEASE_TYPE" >> $GITHUB_ENV
+          echo "DISPLAY_NAME=${MOD_VERSION}${SUFFIX_FOR_VERSION}" >> $GITHUB_ENV
+          echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
+          echo "PUBLISH=true" >> $GITHUB_ENV  # по умолчанию true, дальше проверим
+
+      - name: Check if version already exists on Modrinth
+        if: env.PUBLISH == 'true'
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MODRINTH_PROJECT_ID: 7X4T4qK0
+        run: |
+          FULL_VERSION="${MOD_VERSION}${SUFFIX_FOR_VERSION}"
+
+          DATA=$(curl -s -H "Authorization: $MODRINTH_TOKEN" \
+            "https://api.modrinth.com/v2/project/$MODRINTH_PROJECT_ID/version")
+
+          EXISTS=$(echo "$DATA" | jq -r \
+            --arg ver "$FULL_VERSION" \
+            --arg gv "$GAME_VERSION" \
+            '.[] | select(.version_number == $ver)
+                  | select(.game_versions | index($gv))
+                  | .id')
+
+          if [ -n "$EXISTS" ]; then
+            echo "Version $FULL_VERSION for $GAME_VERSION already exists → skipping"
+            echo "PUBLISH=false" >> $GITHUB_ENV
+          else
+            echo "Version $FULL_VERSION for $GAME_VERSION not found → will publish"
+            echo "PUBLISH=true" >> $GITHUB_ENV
+          fi
+
+      - name: Read changelog section
+        if: env.PUBLISH == 'true'
+        run: |
+          if [ -f changelog.md ]; then
+            {
+              echo "CHANGELOG<<EOF"
+              awk '/^## 📦 Version /{if(!f){f=1;next}} f{print}' changelog.md | sed '/^## 📦/,$d'
+              echo "EOF"
+            } >> $GITHUB_ENV
+          else
+            echo "CHANGELOG=No changelog provided" >> $GITHUB_ENV
+          fi
+
+      - name: Publish to Modrinth
+        if: env.PUBLISH == 'true'
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MODRINTH_PROJECT_ID: 7X4T4qK0
+        run: |
+          FULL_VERSION="${MOD_VERSION}${SUFFIX_FOR_VERSION}"
+
+          echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
+
+          curl -s -X POST "https://api.modrinth.com/v2/project/$MODRINTH_PROJECT_ID/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
-            -F "version_number=$MOD_VERSION" \
+            -F "version_number=$FULL_VERSION" \
+            -F "version_type=$RELEASE_TYPE" \
             -F "changelog=$CHANGELOG" \
-            -F "game_versions[]=1.21.1" \
-            -F "loaders[]=neoForge" \
+            -F "game_versions[]=$GAME_VERSION" \
+            -F "loaders[]=neoforge" \
             -F "file=@$JAR_FILE"
+            --fail-with-body \
+            --retry 3 \
+            --retry-delay 5 \
+            --retry-all-errors
