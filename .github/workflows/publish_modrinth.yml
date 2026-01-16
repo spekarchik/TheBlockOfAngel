@@ -151,8 +151,10 @@ jobs:
 
           echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
 
-          curl -s -X POST "https://api.modrinth.com/v2/project/$MODRINTH_PROJECT_ID/version" \
-            -H "Authorization: Bearer $MODRINTH_TOKEN" \
+          curl -s -X POST "https://api.modrinth.com/v2/version" \
+            -H "Authorization: $MODRINTH_TOKEN" \
+            -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
+            -F "project_id=$MODRINTH_PROJECT_ID" \
             -F "version_number=$FULL_VERSION" \
             -F "version_type=$RELEASE_TYPE" \
             -F "changelog=$CHANGELOG" \

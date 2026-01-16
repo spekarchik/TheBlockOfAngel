@@ -103,11 +103,13 @@ jobs:
         env:
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
         run: |
-          RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
-            "https://api.curseforge.com/api/game/versions?gameId=432")
+          RESPONSE=$(curl -X GET "https://api.curseforge.com/v1/games/432/versions" \
+            -H 'Accept: application/json' \
+            -H 'x-api-key: $CURSEFORGE_TOKEN' \
+            )
 
-          GAME_VERSION_ID=$(echo "$RESPONSE" | jq -r --arg ver "${{ env.GAME_VERSION }}" \
-            '.data[] | select(.name == $ver or .slug == $ver) | .id // empty' | head -n1)
+          GAME_VERSION_ID=$(echo "$RESPONSE" | jq -r --arg ver "${{ env.GAME_VERSION }}" '
+            .data[] | select(.name == $ver or .slug == ($ver | gsub("\\.";"-"))) | .id // empty' | head -n1)
 
           if [ -z "$GAME_VERSION_ID" ]; then
             echo "ID for version ${{ env.GAME_VERSION }} not found"
