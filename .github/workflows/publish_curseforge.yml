@@ -100,13 +100,13 @@ jobs:
           
       - name: Get game version ID for ${{ env.GAME_VERSION }}
         if: env.PUBLISH == 'true'
-        env:
-          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
         run: |
           RESPONSE=$(curl -X GET "https://api.curseforge.com/v1/games/432/versions" \
             -H "Accept: application/json" \
-            -H "x-api-key: $CURSEFORGE_TOKEN" \
+            -H "x-api-key: ${{ secrets.CURSEFORGE_TOKEN }}" \
             )
+            
+          echo "$RESPONSE"
 
           GAME_VERSION_ID=$(echo "$RESPONSE" | jq -r --arg ver "${{ env.GAME_VERSION }}" '
             .data[] | select(.name == $ver or .slug == ($ver | gsub("\\.";"-"))) | .id // empty' | head -n1)
