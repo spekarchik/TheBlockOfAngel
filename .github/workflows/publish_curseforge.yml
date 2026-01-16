@@ -1,0 +1,149 @@
+name: Publish to CurseForge
+
+on:
+  workflow_run:
+    workflows: ["Build NeoForge Mod"]
+    types:
+      - completed
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Скачиваем репозиторий
+      - uses: actions/checkout@v4
+
+      - name: Install jq
+        run: |
+          if ! command -v jq >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends jq
+          fi
+          
+      # Скачиваем JAR
+      - name: Download artifact from CI
+        uses: actions/download-artifact@v4
+        with:
+          name: neoforge-mod
+          run-id: ${{ github.event.workflow_run.id }}
+          path: ./build/libs
+
+      - name: Determine JAR, version and release type
+        run: |
+          JAR_FILE=$(
+            ls ./build/libs/*.jar 2>/dev/null \
+            | grep -Ev '(sources|javadoc|dev)' \
+            | sort -V \
+            | tail -n1
+          )
+          if [ -z "$JAR_FILE" ]; then
+            echo "JAR file not found!"
+            exit 1
+          fi
+
+          FILENAME=$(basename "$JAR_FILE")
+          GAME_VERSION=$(echo "$FILENAME" | cut -d'-' -f2)
+          VERSION_PART=$(echo "$FILENAME" | sed -E 's/^[^-]*-[^-]*-(.*)\.jar$/\1/')
+
+          if [[ "$VERSION_PART" =~ ^(.+?)(-(beta|alpha))?$ ]]; then
+            MOD_VERSION="${BASH_REMATCH[1]}"
+            SUFFIX="${BASH_REMATCH[2]:-}"           # -beta, -alpha или пусто
+          else
+            echo "Cannot parse version from filename: $FILENAME"
+            exit 1
+          fi
+
+          # А дальше case только для известных, остальные → skip
+          case "$SUFFIX" in
+            "")     RELEASE_TYPE="release" ; SUFFIX_FOR_VERSION="" ;;
+            "-beta") RELEASE_TYPE="beta"   ; SUFFIX_FOR_VERSION="-beta" ;;
+            "-alpha") RELEASE_TYPE="alpha" ; SUFFIX_FOR_VERSION="-alpha" ;;
+            *)
+              echo "Unknown suffix '$SUFFIX' in $FILENAME — skipping publish"
+              echo "PUBLISH=false" >> $GITHUB_ENV
+              exit 0
+              ;;
+          esac
+          
+          echo "GAME_VERSION=$GAME_VERSION" >> $GITHUB_ENV
+          echo "MOD_VERSION=$MOD_VERSION" >> $GITHUB_ENV
+          echo "RELEASE_TYPE=$RELEASE_TYPE" >> $GITHUB_ENV
+          echo "DISPLAY_NAME=${MOD_VERSION}${SUFFIX_FOR_VERSION}" >> $GITHUB_ENV
+          echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
+          echo "PUBLISH=true" >> $GITHUB_ENV  # по умолчанию true, дальше проверим
+
+      - name: Check if version already exists on CurseForge
+        if: env.PUBLISH == 'true'
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CF_PROJECT_ID: 1256129
+        run: |
+          RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files?gameVersion=${{ env.GAME_VERSION }}")
+
+          EXISTS=$(echo "$RESPONSE" | jq -r --arg disp "${{ env.DISPLAY_NAME }}" \
+            '.data[] | select(.displayName == $disp) | .id // empty')
+
+          if [ -n "$EXISTS" ]; then
+            echo "Version ${{ env.DISPLAY_NAME }} for ${{ env.GAME_VERSION }} already exists → skipping"
+            echo "PUBLISH=false" >> $GITHUB_ENV
+          fi
+          
+      - name: Get game version ID for ${{ env.GAME_VERSION }}
+        if: env.PUBLISH == 'true'
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+        run: |
+          RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            "https://api.curseforge.com/api/game/versions?gameId=432")
+
+          GAME_VERSION_ID=$(echo "$RESPONSE" | jq -r --arg ver "${{ env.GAME_VERSION }}" \
+            '.data[] | select(.name == $ver or .slug == $ver) | .id // empty' | head -n1)
+
+          if [ -z "$GAME_VERSION_ID" ]; then
+            echo "ID for version ${{ env.GAME_VERSION }} not found"
+            exit 1
+            echo "GAME_VERSION_ID=" >> $GITHUB_ENV
+          else
+            echo "GAME_VERSION_ID=$GAME_VERSION_ID" >> $GITHUB_ENV
+          fi
+
+      - name: Read full changelog
+        if: env.PUBLISH == 'true'
+        run: |
+          {
+            echo "CHANGELOG<<EOF"
+            cat changelog.md || echo "No changelog.md found"
+            echo "EOF"
+          } >> $GITHUB_ENV
+
+      - name: Publish to CurseForge
+        if: env.PUBLISH == 'true'
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CF_PROJECT_ID: 1256129
+        run: |
+          METADATA=$(jq -n \
+            --arg changelog "${{ env.CHANGELOG }}" \
+            --arg changelogType "markdown" \
+            --arg displayName "${{ env.DISPLAY_NAME }}" \
+            --arg releaseType "${{ env.RELEASE_TYPE }}" \
+            --argjson gameVersions "[${{ env.GAME_VERSION_ID }}]" \
+            '{
+              changelog: $changelog,
+              changelogType: $changelogType,
+              displayName: $displayName,
+              releaseType: $releaseType,
+              gameVersions: $gameVersions
+            }')
+
+          curl -X POST "https://api.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            -F "metadata=$METADATA" \
+            -F "file=@${{ env.JAR_FILE }}" \
+            --fail-with-body
+            --retry 3 \
+            --retry-delay 5 \
+            --retry-all-errors
