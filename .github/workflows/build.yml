@@ -22,10 +22,10 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build mod
-        run: ./gradlew build
+        run: ./gradlew clean build
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: neoforge-mod
-          path: build/libs/*.jar
+          path: build/libs/*[^sources][^javadoc].jar
