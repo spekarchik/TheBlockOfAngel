@@ -160,21 +160,22 @@ jobs:
           
           SAFE_CHANGELOG=$(echo "$CHANGELOG" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read().rstrip()))')
 
-          RESPONSE=$(curl -X POST "https://api.modrinth.com/v2/version" \
+          RESPONSE=$(curl -S -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
-            -F "data={
-                \"project_id\": \"$MODRINTH_PROJECT_ID\",
-                \"version_number\": \"$FULL_VERSION\",
-                \"version_type\": \"$RELEASE_TYPE\",
-                \"game_versions\": [\"$GAME_VERSION\"],
-                \"loaders\": [\"neoforge\"],
-                \"changelog\": $SAFE_CHANGELOG,
-                \"file_parts\": [\"file\"]
-              }" \
-            -F "file=@$JAR_FILE" \
-            -F "primary_file=file" \
-            --fail-with-body
+            -F "data=@-;type=application/json" <<EOF
+            {
+              "project_id": "$MODRINTH_PROJECT_ID",
+              "version_number": "$FULL_VERSION",
+              "version_type": "$RELEASE_TYPE",
+              "game_versions": ["$GAME_VERSION"],
+              "loaders": ["neoforge"],
+              "changelog": $SAFE_CHANGELOG,
+              "file_parts": ["file"]
+            }
+            EOF
+            -F "file=@$JAR_FILE"
+            #--fail-with-body
           )
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
