@@ -137,7 +137,7 @@ jobs:
           done
 
           # формируем JSON-массив для metadata
-          GAME_VERSION_IDS_JSON=$(printf '%s\n' "${GAME_VERSION_IDS[@]}" | jq -R . | jq -s -c .)
+          GAME_VERSION_IDS_JSON=$(printf '%s\n' "${GAME_VERSION_IDS[@]}" | jq -s -c 'map(tonumber)')
 
           echo "GAME_VERSION_IDS_JSON=$GAME_VERSION_IDS_JSON" >> $GITHUB_ENV
           echo "All version IDs: $GAME_VERSION_IDS_JSON"
@@ -169,7 +169,8 @@ jobs:
               changelogType: $changelogType,
               displayName: $displayName,
               releaseType: $releaseType,
-              gameVersions: $gameVersions
+              gameVersions: $gameVersions,
+              isMarkedForManualRelease: true
             }' | jq -c .) # -c делает JSON в одну строку
             
           echo "=== METADATA preview ==="

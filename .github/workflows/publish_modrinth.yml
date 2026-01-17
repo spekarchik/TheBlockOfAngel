@@ -167,41 +167,37 @@ jobs:
 
           echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
 
-          TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
+          # Формируем JSON через jq, полностью в одну строку
+          METADATA=$(jq -nc \
+            --arg project_id "$MODRINTH_PROJECT_ID" \
+            --arg version_number "$FULL_VERSION" \
+            --arg version_type "$RELEASE_TYPE" \
+            --arg game_version "$GAME_VERSION" \
+            --arg changelog "$CHANGELOG" \
+            '{
+              project_id: $project_id,
+              version_number: $version_number,
+              version_type: $version_type,
+              game_versions: [$game_version],
+              loaders: ["neoforge"],
+              changelog: $changelog,
+              file_parts: ["file"]
+            }' | jq -c .)
 
-          export FULL_VERSION
-          export MODRINTH_PROJECT_ID
-          export RELEASE_TYPE
-          export GAME_VERSION
-          export CHANGELOG
-
-          python3 -c "
-          import json, os, sys
-          data = {
-              'project_id': os.environ['MODRINTH_PROJECT_ID'],
-              'version_number': os.environ['FULL_VERSION'],
-              'version_type': os.environ['RELEASE_TYPE'],
-              'game_versions': [os.environ['GAME_VERSION']],
-              'loaders': ['neoforge'],
-              'changelog': os.environ['CHANGELOG'],
-              'file_parts': ['file']
-          }
-          json.dump(data, sys.stdout, ensure_ascii=False)
-          " > "$TMP_JSON"
-          
-          # Собираем JSON в одну строку
-          METADATA=$(jq -c . "$TMP_JSON")
-
-          echo "-------------------"
+          echo "=== METADATA preview ==="
           echo "$METADATA"
-          echo "-------------------"
+          echo "========================"
 
           # Загружаем через multipart
           RESPONSE=$(curl -v -S -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            -F "data=$METADATA"
+            -F "data=$METADATA" \
+            --fail-with-body \
+            --retry 3 \
+            --retry-delay 5 \
+            --retry-all-errors
           )
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
@@ -212,5 +208,3 @@ jobs:
           fi
 
           echo "Published version id: $VERSION_ID"
-
-          rm -f "$TMP_JSON"
