@@ -158,18 +158,13 @@ jobs:
 
           echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
 
-          # Преобразуем changelog в безопасный JSON
-          SAFE_CHANGELOG=$(echo "$CHANGELOG" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read().rstrip()))')
-
-          # Создаём временный JSON файл без heredoc
           TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
-          echo "{\"project_id\":\"$MODRINTH_PROJECT_ID\",\"version_number\":\"$FULL_VERSION\",\"version_type\":\"$RELEASE_TYPE\",\"game_versions\":[\"$GAME_VERSION\"],\"loaders\":[\"neoforge\"],\"changelog\":$SAFE_CHANGELOG,\"file_parts\":[\"file\"]}" > "$TMP_JSON"
 
-          echo "-------------------"
-          cat "$TMP_JSON"
-          echo "-------------------"
-          
-          TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
+          export FULL_VERSION
+          export MODRINTH_PROJECT_ID
+          export RELEASE_TYPE
+          export GAME_VERSION
+          export CHANGELOG
 
           python3 -c "
           import json, os, sys
@@ -184,6 +179,10 @@ jobs:
           }
           json.dump(data, sys.stdout, ensure_ascii=False)
           " > "$TMP_JSON"
+
+          echo "-------------------"
+          cat "$TMP_JSON"
+          echo "-------------------"
 
           # Загружаем через multipart
           RESPONSE=$(curl -S -X POST "https://api.modrinth.com/v2/version" \

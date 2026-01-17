@@ -123,14 +123,18 @@ jobs:
             echo "GAME_VERSION_ID=$GAME_VERSION_ID" >> $GITHUB_ENV
           fi
 
-      - name: Read full changelog
+      - name: Read changelog section
         if: env.PUBLISH == 'true'
         run: |
-          {
-            echo "CHANGELOG<<EOF"
-            cat changelog.md || echo "No changelog.md found"
-            echo "EOF"
-          } >> $GITHUB_ENV
+          if [ -f changelog.md ]; then
+            {
+              echo "CHANGELOG<<EOF"
+              awk '/^## 📦 Version /{if(!f){f=1;next}} f{print}' changelog.md | sed '/^## 📦/,$d'
+              echo "EOF"
+            } >> $GITHUB_ENV
+          else
+            echo "CHANGELOG=No changelog provided" >> $GITHUB_ENV
+          fi
 
       - name: Publish to CurseForge
         if: env.PUBLISH == 'true'
