@@ -193,7 +193,7 @@ jobs:
           METADATA=$(jq -c . "$TMP_JSON")
 
           echo "-------------------"
-          cat "$METADATA"
+          echo "$METADATA"
           echo "-------------------"
 
           # Загружаем через multipart
