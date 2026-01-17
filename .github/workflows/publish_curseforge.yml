@@ -13,6 +13,7 @@ jobs:
     env:
       CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
       CF_PROJECT_ID: 1256129
+      TAGS: "Java 21|Server|Client|NeoForge"
 
     steps:
       - name: Checkout CI branch
@@ -54,6 +55,7 @@ jobs:
           fi
 
           FILENAME=$(basename "$JAR_FILE")
+          echo "FILENAME=$FILENAME" >> "$GITHUB_ENV"
           GAME_VERSION=$(echo "$FILENAME" | cut -d'-' -f2)
           VERSION_PART=$(echo "$FILENAME" | sed -E 's/^[^-]*-[^-]*-(.*)\.jar$/\1/')
 
@@ -80,7 +82,7 @@ jobs:
           echo "GAME_VERSION=$GAME_VERSION" >> $GITHUB_ENV
           echo "MOD_VERSION=$MOD_VERSION" >> $GITHUB_ENV
           echo "RELEASE_TYPE=$RELEASE_TYPE" >> $GITHUB_ENV
-          echo "DISPLAY_NAME=${MOD_VERSION}${SUFFIX_FOR_VERSION}" >> $GITHUB_ENV
+          echo "FULL_VERSION=${MOD_VERSION}${SUFFIX_FOR_VERSION}" >> $GITHUB_ENV
           echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
           echo "PUBLISH=true" >> $GITHUB_ENV  # по умолчанию true, дальше проверим
 
@@ -90,38 +92,55 @@ jobs:
           RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files?gameVersion=${{ env.GAME_VERSION }}")
 
-          EXISTS=$(echo "$RESPONSE" | jq -r --arg disp "${{ env.DISPLAY_NAME }}" \
+          EXISTS=$(echo "$RESPONSE" | jq -r --arg disp "${{ env.FULL_VERSION }}" \
             '.data[] | select(.displayName == $disp) | .id // empty')
 
           if [ -n "$EXISTS" ]; then
-            echo "Version ${{ env.DISPLAY_NAME }} for ${{ env.GAME_VERSION }} already exists → skipping"
+            echo "Version ${{ env.FULL_VERSION }} for ${{ env.GAME_VERSION }} already exists → skipping"
             echo "PUBLISH=false" >> $GITHUB_ENV
           fi
           
-      - name: Get game version ID for ${{ env.GAME_VERSION }}
+      - name: Get all version IDs
         if: env.PUBLISH == 'true'
         run: |
+          # разбиваем env.TAGS по |
+          IFS='|' read -r -a TAG_ARRAY <<< "$TAGS"
+
+          # добавляем версию игры в начало массива
+          TAG_ARRAY=("$GAME_VERSION" "${TAG_ARRAY[@]}")
+
+          echo "All tags to process: ${TAG_ARRAY[@]}"
+
+          # получаем полный список версий из CurseForge API
           RESPONSE=$(curl -s -X GET https://minecraft.curseforge.com/api/game/versions \
             -H "Accept: application/json" \
             -H "X-Api-Token: ${{ secrets.CURSEFORGE_TOKEN }}" \
-            -H "User-Agent: GitHub-Actions" \
-            )
-            
-          echo "$RESPONSE" | head -c 100
-          
+            -H "User-Agent: GitHub-Actions"
+          )
+
           echo "$RESPONSE" > response.json
 
-          GAME_VERSION_ID=$(jq -r --arg ver "${{ env.GAME_VERSION }}" '
-            .[] | select(.name == $ver or .slug == ($ver | gsub("\\.";"-"))) | .id // empty
-          ' response.json | head -n1)
+          # создаём массив ID
+          GAME_VERSION_IDS=()
 
-          if [ -z "$GAME_VERSION_ID" ]; then
-            echo "ID for version ${{ env.GAME_VERSION }} not found"
-            echo "GAME_VERSION_ID=" >> $GITHUB_ENV
-            exit 1
-          else
-            echo "GAME_VERSION_ID=$GAME_VERSION_ID" >> $GITHUB_ENV
-          fi
+          for TAG in "${TAG_ARRAY[@]}"; do
+            ID=$(jq -r --arg t "$TAG" '
+              .[] | select(.name == $t or .slug == ($t | gsub("\\.";"-"))) | .id // empty
+            ' response.json | head -n1)
+
+            if [ -z "$ID" ]; then
+              echo "ID for tag '$TAG' not found!"
+            else
+              GAME_VERSION_IDS+=("$ID")
+              echo "Found ID $ID for tag '$TAG'"
+            fi
+          done
+
+          # формируем JSON-массив для metadata
+          GAME_VERSION_IDS_JSON=$(printf '%s\n' "${GAME_VERSION_IDS[@]}" | jq -R . | jq -s .)
+
+          echo "GAME_VERSION_IDS_JSON=$GAME_VERSION_IDS_JSON" >> $GITHUB_ENV
+          echo "All version IDs: $GAME_VERSION_IDS_JSON"
 
       - name: Read changelog section
         if: env.PUBLISH == 'true'
@@ -142,9 +161,9 @@ jobs:
           METADATA=$(jq -nc \
             --arg changelog "$CHANGELOG" \
             --arg changelogType "markdown" \
-            --arg displayName "$DISPLAY_NAME" \
+            --arg displayName "$FILENAME" \
             --arg releaseType "$RELEASE_TYPE" \
-            --argjson gameVersions "[$GAME_VERSION_ID]" \
+            --argjson gameVersions "$GAME_VERSION_IDS_JSON" \
             '{
               changelog: $changelog,
               changelogType: $changelogType,

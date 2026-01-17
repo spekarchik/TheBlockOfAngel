@@ -188,17 +188,20 @@ jobs:
           }
           json.dump(data, sys.stdout, ensure_ascii=False)
           " > "$TMP_JSON"
+          
+          # Собираем JSON в одну строку
+          METADATA=$(jq -c . "$TMP_JSON")
 
           echo "-------------------"
-          cat "$TMP_JSON"
+          cat "$METADATA"
           echo "-------------------"
 
           # Загружаем через multipart
-          RESPONSE=$(curl -S -X POST "https://api.modrinth.com/v2/version" \
+          RESPONSE=$(curl -v -S -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            -F "data=@$TMP_JSON;type=application/json"
+            -F "data=$METADATA"
           )
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
