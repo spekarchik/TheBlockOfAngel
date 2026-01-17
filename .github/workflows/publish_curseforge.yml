@@ -151,19 +151,15 @@ jobs:
               displayName: $displayName,
               releaseType: $releaseType,
               gameVersions: $gameVersions
-            }')
+            }' | jq -c .) # -c делает JSON в одну строку
             
-          echo "$METADATA" > metadata.json
-          
           echo "=== METADATA preview ==="
-          head -n 5 metadata.json
-          echo "..."
-          tail -n 5 metadata.json
+          echo "$METADATA"
           echo "======================="
 
           curl -X POST "https://minecraft.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
-            -F "metadata=@metadata.json" \
+            -F "metadata=$METADATA" \
             -F "file=@$JAR_FILE" \
             --fail-with-body \
             --retry 3 \

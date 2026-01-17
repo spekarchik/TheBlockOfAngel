@@ -112,6 +112,15 @@ jobs:
 
           DATA=$(curl -s -H "Authorization: $MODRINTH_TOKEN" \
             "https://api.modrinth.com/v2/project/$MODRINTH_PROJECT_ID/version")
+            
+          # Проверка, что DATA не пустой и начинается с '['
+          if [[ -z "$DATA" ]] || [[ ! "$DATA" =~ ^\[ ]]; then
+            echo "Failed to fetch versions or invalid JSON:"
+            echo "$DATA"
+            echo "Assuming version does not exist → will publish"
+            echo "PUBLISH=true" >> $GITHUB_ENV
+            exit 0
+          fi
 
           EXISTS=$(echo "$DATA" | jq -r \
             --arg ver "$FULL_VERSION" \
