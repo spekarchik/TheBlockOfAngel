@@ -174,7 +174,7 @@ jobs:
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            --form-string "data=$(cat "$TMP_JSON")"
+            -F "data=$(cat "$TMP_JSON");type=application/json"
           )
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
