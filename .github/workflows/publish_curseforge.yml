@@ -108,9 +108,12 @@ jobs:
             )
             
           echo "$RESPONSE" | head -c 100
+          
+          echo "$RESPONSE" > response.json
 
-          GAME_VERSION_ID=$(echo "$RESPONSE" | jq -r --arg ver "${{ env.GAME_VERSION }}" '
-            .[] | select(.name == $ver or .slug == ($ver | gsub("\\.";"-"))) | .id // empty' | head -n1)
+          GAME_VERSION_ID=$(jq -r --arg ver "${{ env.GAME_VERSION }}" '
+            .[] | select(.name == $ver or .slug == ($ver | gsub("\\.";"-"))) | .id // empty
+          ' response.json | head -n1)
 
           if [ -z "$GAME_VERSION_ID" ]; then
             echo "ID for version ${{ env.GAME_VERSION }} not found"
@@ -135,7 +138,7 @@ jobs:
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
           CF_PROJECT_ID: 1256129
         run: |
-          METADATA=$(jq -n \
+          METADATA=$(jq -nc \
             --arg changelog "${{ env.CHANGELOG }}" \
             --arg changelogType "markdown" \
             --arg displayName "${{ env.DISPLAY_NAME }}" \
