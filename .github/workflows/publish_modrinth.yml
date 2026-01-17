@@ -165,12 +165,16 @@ jobs:
           TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
           echo "{\"project_id\":\"$MODRINTH_PROJECT_ID\",\"version_number\":\"$FULL_VERSION\",\"version_type\":\"$RELEASE_TYPE\",\"game_versions\":[\"$GAME_VERSION\"],\"loaders\":[\"neoforge\"],\"changelog\":$SAFE_CHANGELOG,\"file_parts\":[\"file\"]}" > "$TMP_JSON"
 
+          echo "-------------------"
+          cat "$TMP_JSON"
+          echo "-------------------"
+
           # Загружаем через multipart
           RESPONSE=$(curl -S -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            -F "data=@$TMP_JSON;type=application/json"
+            --form-string "data=$(cat "$TMP_JSON")"
           )
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')

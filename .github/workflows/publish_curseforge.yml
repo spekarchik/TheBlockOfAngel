@@ -139,7 +139,7 @@ jobs:
           CF_PROJECT_ID: 1256129
         run: |
           METADATA=$(jq -nc \
-            --arg changelog "${{ env.CHANGELOG }}" \
+            --arg changelog "$CHANGELOG" \
             --arg changelogType "markdown" \
             --arg displayName "${{ env.DISPLAY_NAME }}" \
             --arg releaseType "${{ env.RELEASE_TYPE }}" \
