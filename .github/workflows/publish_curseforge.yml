@@ -101,13 +101,13 @@ jobs:
       - name: Get game version ID for ${{ env.GAME_VERSION }}
         if: env.PUBLISH == 'true'
         run: |
-          RESPONSE=$(curl -i -X GET https://minecraft.curseforge.com/api/game/versions \
+          RESPONSE=$(curl -s -X GET https://minecraft.curseforge.com/api/game/versions \
             -H "Accept: application/json" \
             -H "X-Api-Token: ${{ secrets.CURSEFORGE_TOKEN }}" \
             -H "User-Agent: GitHub-Actions" \
             )
             
-          echo "$RESPONSE"
+          echo "$RESPONSE" | head -c 100
 
           GAME_VERSION_ID=$(echo "$RESPONSE" | jq -r --arg ver "${{ env.GAME_VERSION }}" '
             .[] | select(.name == $ver or .slug == ($ver | gsub("\\.";"-"))) | .id // empty' | head -n1)

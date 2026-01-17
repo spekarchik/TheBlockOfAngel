@@ -158,25 +158,29 @@ jobs:
 
           echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
           
+          # Создаём временный JSON файл для data
+          TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
           SAFE_CHANGELOG=$(echo "$CHANGELOG" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read().rstrip()))')
 
+          cat > "$TMP_JSON" <<EOF
+{
+  "project_id": "$MODRINTH_PROJECT_ID",
+  "version_number": "$FULL_VERSION",
+  "version_type": "$RELEASE_TYPE",
+  "game_versions": ["$GAME_VERSION"],
+  "loaders": ["neoforge"],
+  "changelog": $SAFE_CHANGELOG,
+  "file_parts": ["file"]
+}
+EOF
+
+          # Загружаем через multipart
           RESPONSE=$(curl -S -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
-            -F "file=@$JAR_FILE"
-            -F "data=@-;type=application/json" <<-EOF
-            {
-              "project_id": "$MODRINTH_PROJECT_ID",
-              "version_number": "$FULL_VERSION",
-              "version_type": "$RELEASE_TYPE",
-              "game_versions": ["$GAME_VERSION"],
-              "loaders": ["neoforge"],
-              "changelog": $SAFE_CHANGELOG,
-              "file_parts": ["file"]
-            }
-EOF
+            -F "file=@$JAR_FILE" \
+            -F "data=@$TMP_JSON;type=application/json"
           )
-            #--fail-with-body
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
           if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
@@ -184,3 +188,8 @@ EOF
             echo "$RESPONSE"
             exit 1
           fi
+          
+          echo "Published version id: $VERSION_ID"
+
+          # Удаляем временный JSON
+          rm -f "$TMP_JSON"
