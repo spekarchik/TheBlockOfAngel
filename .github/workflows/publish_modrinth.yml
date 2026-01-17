@@ -167,8 +167,9 @@ jobs:
 
           echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
 
-          # Формируем JSON через jq, полностью в одну строку
-          METADATA=$(jq -nc \
+          # Формируем JSON и сразу сохраняем в файл
+          TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
+          jq -nc \
             --arg project_id "$MODRINTH_PROJECT_ID" \
             --arg version_number "$FULL_VERSION" \
             --arg version_type "$RELEASE_TYPE" \
@@ -182,18 +183,18 @@ jobs:
               loaders: ["neoforge"],
               changelog: $changelog,
               file_parts: ["file"]
-            }' | jq -c .)
+            }' > "$TMP_JSON"
 
           echo "=== METADATA preview ==="
-          echo "$METADATA"
+          cat "$TMP_JSON"
           echo "========================"
 
-          # Загружаем через multipart
+          # Передаём JSON как файл, чтобы curl не экранировал кавычки
           RESPONSE=$(curl -v -S -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            -F "data=$METADATA" \
+            -F "data=@$TMP_JSON" \
             --fail-with-body \
             --retry 3 \
             --retry-delay 5 \
@@ -208,3 +209,4 @@ jobs:
           fi
 
           echo "Published version id: $VERSION_ID"
+          rm -f "$TMP_JSON"
