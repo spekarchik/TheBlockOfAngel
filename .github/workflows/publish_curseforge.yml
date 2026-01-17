@@ -150,6 +150,12 @@ jobs:
             }')
             
           echo "$METADATA" > metadata.json
+          
+          echo "=== METADATA preview ==="
+          head -n 5 metadata.json
+          echo "..."
+          tail -n 5 metadata.json
+          echo "======================="
 
           curl -X POST "https://minecraft.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
