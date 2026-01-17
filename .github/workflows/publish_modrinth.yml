@@ -194,7 +194,7 @@ jobs:
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            -F "data=@$TMP_JSON" \
+            -F "data=@$TMP_JSON;type=application/json" \
             --fail-with-body \
             --retry 3 \
             --retry-delay 5 \
