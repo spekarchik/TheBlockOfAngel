@@ -168,13 +168,29 @@ jobs:
           echo "-------------------"
           cat "$TMP_JSON"
           echo "-------------------"
+          
+          TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
+
+          python3 -c "
+          import json, os, sys
+          data = {
+              'project_id': os.environ['MODRINTH_PROJECT_ID'],
+              'version_number': os.environ['FULL_VERSION'],
+              'version_type': os.environ['RELEASE_TYPE'],
+              'game_versions': [os.environ['GAME_VERSION']],
+              'loaders': ['neoforge'],
+              'changelog': os.environ['CHANGELOG'],
+              'file_parts': ['file']
+          }
+          json.dump(data, sys.stdout, ensure_ascii=False)
+          " > "$TMP_JSON"
 
           # Загружаем через multipart
           RESPONSE=$(curl -S -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            -F "data=$(cat "$TMP_JSON");type=application/json"
+            -F "data=@$TMP_JSON;type=application/json"
           )
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
