@@ -13,6 +13,7 @@ jobs:
     env:
       MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
       MODRINTH_PROJECT_ID: 7X4T4qK0
+      MOD_LOADER: NeoForge
     steps:
       - name: Checkout CI branch
         uses: actions/checkout@v4
@@ -102,14 +103,13 @@ jobs:
           echo "MOD_VERSION=$MOD_VERSION" >> $GITHUB_ENV
           echo "RELEASE_TYPE=$RELEASE_TYPE" >> $GITHUB_ENV
           echo "DISPLAY_NAME=${MOD_VERSION}${SUFFIX_FOR_VERSION}" >> $GITHUB_ENV
+          echo "FULL_VERSION=${GAME_VERSION}-${MOD_VERSION}${SUFFIX_FOR_VERSION}" >> $GITHUB_ENV
           echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
           echo "PUBLISH=true" >> $GITHUB_ENV  # по умолчанию true, дальше проверим
 
       - name: Check if version already exists on Modrinth
         if: env.PUBLISH == 'true'
         run: |
-          FULL_VERSION="${MOD_VERSION}${SUFFIX_FOR_VERSION}"
-
           DATA=$(curl -s -H "Authorization: $MODRINTH_TOKEN" \
             "https://api.modrinth.com/v2/project/$MODRINTH_PROJECT_ID/version")
             
@@ -170,8 +170,6 @@ jobs:
       - name: Publish to Modrinth
         if: env.PUBLISH == 'true'
         run: |
-          FULL_VERSION="${MOD_VERSION}${SUFFIX_FOR_VERSION}"
-
           if [ -z "$FULL_VERSION" ]; then
             echo "FULL_VERSION is empty!"
             exit 1
@@ -184,24 +182,25 @@ jobs:
           
           ls -lh "$JAR_FILE"
 
-          echo "Publishing $GAME_VERSION-$FULL_VERSION → $RELEASE_TYPE"
+          echo "Publishing $FULL_VERSION → $RELEASE_TYPE"
 
           # Формируем JSON и сразу сохраняем в файл
           TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
           jq -nc \
             --arg project_id "$MODRINTH_PROJECT_ID" \
-            --arg version_number "$GAME_VERSION-$FULL_VERSION" \
+            --arg version_number "$FULL_VERSION" \
             --arg version_type "$RELEASE_TYPE" \
             --arg game_version "$GAME_VERSION" \
             --arg changelog "$CHANGELOG" \
-            --arg name "$MOD_NAME $GAME_VERSION-$FULL_VERSION" \
+            --arg modloader "$MOD_LOADER" \
+            --arg name "$MOD_NAME $FULL_VERSION" \
             '{
               name: $name,
               project_id: $project_id,
               version_number: $version_number,
               version_type: $version_type,
               game_versions: [$game_version],
-              loaders: ["neoforge"],
+              loaders: [$modloader],
               changelog: $changelog,
               file_parts: ["file"],
               "featured": false,
