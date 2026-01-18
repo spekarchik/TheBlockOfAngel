@@ -184,13 +184,13 @@ jobs:
           
           ls -lh "$JAR_FILE"
 
-          echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
+          echo "Publishing $GAME_VERSION-$FULL_VERSION → $RELEASE_TYPE"
 
           # Формируем JSON и сразу сохраняем в файл
           TMP_JSON=$(mktemp /tmp/modrinth_data.XXXXXX.json)
           jq -nc \
             --arg project_id "$MODRINTH_PROJECT_ID" \
-            --arg version_number "$FULL_VERSION" \
+            --arg version_number "$GAME_VERSION-$FULL_VERSION" \
             --arg version_type "$RELEASE_TYPE" \
             --arg game_version "$GAME_VERSION" \
             --arg changelog "$CHANGELOG" \
