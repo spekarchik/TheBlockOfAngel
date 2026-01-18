@@ -85,20 +85,6 @@ jobs:
           echo "FULL_VERSION=${MOD_VERSION}${SUFFIX_FOR_VERSION}" >> $GITHUB_ENV
           echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
           echo "PUBLISH=true" >> $GITHUB_ENV  # по умолчанию true, дальше проверим
-
-      - name: Check if version already exists on CurseForge
-        if: env.PUBLISH == 'true'
-        run: |
-          RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
-            "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files?gameVersion=${{ env.GAME_VERSION }}")
-
-          EXISTS=$(echo "$RESPONSE" | jq -r --arg disp "${{ env.FULL_VERSION }}" \
-            '.data[] | select(.displayName == $disp) | .id // empty')
-
-          if [ -n "$EXISTS" ]; then
-            echo "Version ${{ env.FULL_VERSION }} for ${{ env.GAME_VERSION }} already exists → skipping"
-            echo "PUBLISH=false" >> $GITHUB_ENV
-          fi
           
       - name: Get all version IDs
         if: env.PUBLISH == 'true'
@@ -141,6 +127,29 @@ jobs:
 
           echo "GAME_VERSION_IDS_JSON=$GAME_VERSION_IDS_JSON" >> $GITHUB_ENV
           echo "All version IDs: $GAME_VERSION_IDS_JSON"
+
+      - name: Check if version already exists on CurseForge
+        if: env.PUBLISH == 'true'
+        run: |
+          # разбиваем все теги
+          IFS='|' read -r -a TAG_ARRAY <<< "$TAGS"
+          TAG_ARRAY=("$GAME_VERSION" "${TAG_ARRAY[@]}")
+
+          EXISTS=""
+
+          for TAG in "${TAG_ARRAY[@]}"; do
+            RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+              "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files?gameVersion=$TAG")
+
+            EXISTS=$(echo "$RESPONSE" | jq -r --arg disp "$FULL_VERSION" \
+              '.data[] | select(.displayName == $disp) | .id // empty')
+
+            if [ -n "$EXISTS" ]; then
+              echo "Version $FULL_VERSION for $TAG already exists → skipping"
+              echo "PUBLISH=false" >> $GITHUB_ENV
+              break
+            fi
+          done
 
       - name: Read changelog section
         if: env.PUBLISH == 'true'

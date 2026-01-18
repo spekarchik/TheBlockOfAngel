@@ -164,6 +164,8 @@ jobs:
             echo "JAR file not found: $JAR_FILE"
             exit 1
           fi
+          
+          ls -lh "$JAR_FILE"
 
           echo "Publishing $FULL_VERSION ($GAME_VERSION) → $RELEASE_TYPE"
 
@@ -175,7 +177,9 @@ jobs:
             --arg version_type "$RELEASE_TYPE" \
             --arg game_version "$GAME_VERSION" \
             --arg changelog "$CHANGELOG" \
+            --arg name "$FULL_VERSION ($GAME_VERSION)" \
             '{
+              name: $name,
               project_id: $project_id,
               version_number: $version_number,
               version_type: $version_type,
@@ -190,16 +194,18 @@ jobs:
           echo "========================"
 
           # Передаём JSON как файл, чтобы curl не экранировал кавычки
-          RESPONSE=$(curl -v -S -X POST "https://api.modrinth.com/v2/version" \
+          RESPONSE=$(curl -sS -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
             -F "data=@$TMP_JSON;type=application/json" \
-            --fail-with-body \
-            --retry 3 \
-            --retry-delay 5 \
-            --retry-all-errors
+            || true
           )
+          
+          #  --retry 3 \
+          #  --retry-delay 5 \
+          #  --retry-all-errors
+          #  --fail-with-body \
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
           if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
