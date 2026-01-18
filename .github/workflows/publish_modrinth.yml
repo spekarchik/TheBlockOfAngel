@@ -13,7 +13,6 @@ jobs:
     env:
       MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
       MODRINTH_PROJECT_ID: 7X4T4qK0
-      MOD_LOADER: NeoForge
     steps:
       - name: Checkout CI branch
         uses: actions/checkout@v4
@@ -153,6 +152,21 @@ jobs:
             echo "CHANGELOG=No changelog provided" >> $GITHUB_ENV
           fi
 
+      - name: Fetch Modrinth project name
+        if: env.PUBLISH == 'true'
+        run: |
+          # Достаём название проекта через API Modrinth
+          MOD_NAME=$(curl -s -H "Authorization: $MODRINTH_TOKEN" \
+            "https://api.modrinth.com/v2/project/$MODRINTH_PROJECT_ID" \
+            | jq -r '.title')
+
+          if [ -z "$MOD_NAME" ] || [ "$MOD_NAME" = "null" ]; then
+            echo "Failed to fetch project name"
+            exit 1
+          fi
+
+          echo "MOD_NAME=$MOD_NAME" >> $GITHUB_ENV
+
       - name: Publish to Modrinth
         if: env.PUBLISH == 'true'
         run: |
@@ -180,7 +194,7 @@ jobs:
             --arg version_type "$RELEASE_TYPE" \
             --arg game_version "$GAME_VERSION" \
             --arg changelog "$CHANGELOG" \
-            --arg name "$FULL_VERSION ($GAME_VERSION)" \
+            --arg name "$MOD_NAME $GAME_VERSION-$FULL_VERSION" \
             '{
               name: $name,
               project_id: $project_id,
@@ -203,7 +217,11 @@ jobs:
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "data=<$TMP_JSON" \
-            -F "file=@$JAR_FILE"
+            -F "file=@$JAR_FILE" \
+            --retry 3 \
+            --retry-delay 5 \
+            --fail-with-body \
+            --retry-all-errors
           )
           
           CURL_EXIT=$?
@@ -211,11 +229,6 @@ jobs:
           echo "=== CURL RESPONSE ==="
           echo "$RESPONSE"
           echo "====================="
-          
-          #  --retry 3 \
-          #  --retry-delay 5 \
-          #  --retry-all-errors
-          #  --fail-with-body \
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
           if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
