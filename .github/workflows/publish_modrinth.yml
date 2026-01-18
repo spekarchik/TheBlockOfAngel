@@ -193,12 +193,14 @@ jobs:
           jq . "$TMP_JSON"   # красиво форматируем, чтобы было видно все спецсимволы
           echo "========================"
 
-          RESPONSE=$(curl -v -S -X POST "https://api.modrinth.com/v2/version" \
+          RESPONSE=$(curl -v -S --http1.1 \
+            -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
-            -F "file=@$JAR_FILE" \
-            -F "data=<$TMP_JSON"
+            -F "data=<$TMP_JSON" \
+            -F "file=@$JAR_FILE"
           )
+          
           CURL_EXIT=$?
           echo "=== CURL EXIT CODE: $CURL_EXIT ==="
           echo "=== CURL RESPONSE ==="

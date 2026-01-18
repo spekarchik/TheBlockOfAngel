@@ -142,10 +142,16 @@ jobs:
             -H "Accept: application/json" \
             "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files"
           )
+          
+          FILES_COUNT=$(echo "$RESPONSE" | jq '.data | length')
+          echo "=== DEBUG: Files count on CurseForge: $FILES_COUNT ==="
 
           # --- выводим в лог ключевые поля всех файлов для дебага ---
           echo "=== DEBUG: Files on CurseForge ==="
           echo "$RESPONSE" | jq '.data[] | {id, displayName, gameVersions, gameVersionTypeIds}'
+
+          echo "=== DEBUG: Full API response ==="
+          echo "$RESPONSE" | jq .
 
           # --- проверяем существование ---
           EXISTS=$(echo "$RESPONSE" | jq -r \
