@@ -186,7 +186,8 @@ jobs:
               game_versions: [$game_version],
               loaders: ["neoforge"],
               changelog: $changelog,
-              file_parts: ["file"]
+              file_parts: ["file"],
+              "dependencies": []
             }' > "$TMP_JSON"
 
           echo "=== METADATA preview ==="
