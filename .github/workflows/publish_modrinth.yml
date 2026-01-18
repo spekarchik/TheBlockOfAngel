@@ -223,12 +223,6 @@ jobs:
             --fail-with-body \
             --retry-all-errors
           )
-          
-          CURL_EXIT=$?
-          echo "=== CURL EXIT CODE: $CURL_EXIT ==="
-          echo "=== CURL RESPONSE ==="
-          echo "$RESPONSE"
-          echo "====================="
 
           VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
           if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
