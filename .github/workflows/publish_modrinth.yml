@@ -44,7 +44,7 @@ jobs:
         run: |
           JAR_FILE=$(
             ls ./build/libs/*.jar 2>/dev/null \
-            | grep -Ev '(sources|javadoc|dev)' \
+            | grep -Ev '(sources|javadoc)' \
             | sort -V \
             | tail -n1
           )
