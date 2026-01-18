@@ -56,21 +56,36 @@ jobs:
           FILENAME=$(basename "$JAR_FILE")
           echo "FILENAME=$FILENAME" >> "$GITHUB_ENV"
           GAME_VERSION=$(echo "$FILENAME" | cut -d'-' -f2)
-          VERSION_PART=$(echo "$FILENAME" | sed -E 's/^[^-]*-[^-]*-(.*)\.jar$/\1/')
-          if [[ "$VERSION_PART" =~ ^(.+?)(-(beta|alpha))?$ ]]; then
+          
+          if [[ "$VERSION_PART" =~ ^([0-9]+\.[0-9]+\.[0-9]+)(-(beta|alpha))?$ ]]; then
             MOD_VERSION="${BASH_REMATCH[1]}"
-            SUFFIX="${BASH_REMATCH[2]:-}"           # -beta, -alpha или пусто
+            SUFFIX="${BASH_REMATCH[2]:-}"
+            echo "Suffix: $SUFFIX"
           else
-            echo "Cannot parse version from filename: $FILENAME"
-            exit 1
+            echo "Unrecognized version format '$VERSION_PART' → skipping publish"
+            echo "PUBLISH=false" >> $GITHUB_ENV
+            exit 0
           fi
+          
           # А дальше case только для известных, остальные → skip
           case "$SUFFIX" in
-            "")     RELEASE_TYPE="release" ; SUFFIX_FOR_VERSION="" ;;
-            "-beta") RELEASE_TYPE="beta"   ; SUFFIX_FOR_VERSION="-beta" ;;
-            "-alpha") RELEASE_TYPE="alpha" ; SUFFIX_FOR_VERSION="-alpha" ;;
+            "")     
+              RELEASE_TYPE="release"
+              SUFFIX_FOR_VERSION=""
+              echo "Recognized as: release"
+              ;;
+            "-beta") 
+              RELEASE_TYPE="beta"
+              SUFFIX_FOR_VERSION="-beta"
+              echo "Recognized as: beta"
+              ;;
+            "-alpha")
+              RELEASE_TYPE="alpha"
+              SUFFIX_FOR_VERSION="-alpha"
+              echo "Recognized as: alpha"
+              ;;
             *)
-              echo "Unknown suffix '$SUFFIX' in $FILENAME — skipping publish"
+              echo "Unknown version suffix '$SUFFIX' in $FILENAME → skipping publish"
               echo "PUBLISH=false" >> $GITHUB_ENV
               exit 0
               ;;
