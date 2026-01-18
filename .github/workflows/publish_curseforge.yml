@@ -113,7 +113,7 @@ jobs:
           fi
 
           # --- создаём массив ID для остальных тегов ---
-          GAME_VERSION_IDS=()
+          GAME_VERSION_IDS=($MOD_LOADER_ID)
           # добавляем версию игры в начало массива
           TAG_ARRAY=("$GAME_VERSION" "${TAG_ARRAY[@]}")
 
@@ -140,20 +140,25 @@ jobs:
           RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files")
 
+          # --- выводим в лог ключевые поля всех файлов для дебага ---
+          echo "=== DEBUG: Files on CurseForge ==="
+          echo "$RESPONSE" | jq '.data[] | {id, displayName, gameVersions, gameVersionTypeIds}'
+
+          # --- проверяем существование ---
           EXISTS=$(echo "$RESPONSE" | jq -r \
-            --arg disp "${{ env.FULL_VERSION }}" \
-            --arg loader_id "$MOD_LOADER_ID" '
+            --argjson loader_id $MOD_LOADER_ID \
+            --arg disp "${FULL_VERSION}" '
             .data[]
             | select(.displayName == $disp)
-            | select(.gameVersionTypeIds | map(tostring) | index($loader_id))
+            | select(.gameVersionTypeIds | index($loader_id))
             | .id // empty
           ')
 
           if [ -n "$EXISTS" ]; then
-            echo "Version ${{ env.FULL_VERSION }} for ${{ env.GAME_VERSION }} with loader $MOD_LOADER already exists → skipping"
+            echo "Version ${FULL_VERSION} for ${GAME_VERSION} with loader $MOD_LOADER already exists → skipping"
             echo "PUBLISH=false" >> $GITHUB_ENV
           else
-            echo "Version ${{ env.FULL_VERSION }} for ${{ env.GAME_VERSION }} with loader $MOD_LOADER does not exist → publish"
+            echo "Version ${FULL_VERSION} for ${GAME_VERSION} with loader $MOD_LOADER does not exist → publish"
           fi
           
       - name: Read changelog section
