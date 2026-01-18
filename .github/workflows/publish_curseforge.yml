@@ -137,8 +137,10 @@ jobs:
       - name: Check if version already exists on CurseForge
         if: env.PUBLISH == 'true'
         run: |
-          RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
-            "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files")
+          RESPONSE=$(curl -s \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            -H "Accept: application/json" \
+            "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files"
 
           # --- выводим в лог ключевые поля всех файлов для дебага ---
           echo "=== DEBUG: Files on CurseForge ==="
@@ -146,11 +148,11 @@ jobs:
 
           # --- проверяем существование ---
           EXISTS=$(echo "$RESPONSE" | jq -r \
-            --argjson loader_id $MOD_LOADER_ID \
-            --arg disp "${FULL_VERSION}" '
+            --arg disp "${FULL_VERSION}" \
+            --arg loader_id "$MOD_LOADER_ID" '
             .data[]
             | select(.displayName == $disp)
-            | select(.gameVersionTypeIds | index($loader_id))
+            | select(.gameVersionTypeIds | map(tostring) | index($loader_id))
             | .id // empty
           ')
 
