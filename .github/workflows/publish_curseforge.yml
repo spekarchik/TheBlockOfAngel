@@ -137,21 +137,15 @@ jobs:
       - name: Check if version already exists on CurseForge
         if: env.PUBLISH == 'true'
         run: |
-          RESPONSE=$(curl -sS -D \
-            -H "X-Api-Key: $CURSEFORGE_TOKEN" \
+          RESPONSE=$(curl -s \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             -H "Accept: application/json" \
             "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files"
           )
-          
-          FILES_COUNT=$(echo "$RESPONSE" | jq '.data | length')
-          echo "=== DEBUG: Files count on CurseForge: $FILES_COUNT ==="
 
           # --- выводим в лог ключевые поля всех файлов для дебага ---
           echo "=== DEBUG: Files on CurseForge ==="
           echo "$RESPONSE" | jq '.data[] | {id, displayName, gameVersions, gameVersionTypeIds}'
-
-          echo "=== DEBUG: Full API response ==="
-          echo "$RESPONSE" | jq .
 
           # --- проверяем существование ---
           EXISTS=$(echo "$RESPONSE" | jq -r \
@@ -204,3 +198,11 @@ jobs:
           echo "=== METADATA preview ==="
           echo "$METADATA"
           echo "======================="
+          curl -X POST "https://minecraft.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            -F "metadata=$METADATA" \
+            -F "file=@$JAR_FILE" \
+            --fail-with-body \
+            --retry 3 \
+            --retry-delay 5 \
+            --retry-all-errors
