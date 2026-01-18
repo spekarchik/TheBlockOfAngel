@@ -141,6 +141,7 @@ jobs:
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             -H "Accept: application/json" \
             "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files"
+          )
 
           # --- выводим в лог ключевые поля всех файлов для дебага ---
           echo "=== DEBUG: Files on CurseForge ==="
