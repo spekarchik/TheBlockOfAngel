@@ -83,46 +83,40 @@ jobs:
           echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
           echo "PUBLISH=true" >> $GITHUB_ENV  # по умолчанию true, дальше проверим
           
-      - name: Check if version already exists on CurseForge
-        if: env.PUBLISH == 'true'
-        run: |
-          RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
-            "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files")
-          EXISTS=$(echo "$RESPONSE" | jq -r \
-            --arg disp "${{ env.FULL_VERSION }}" \
-            --arg loader "$MOD_LOADER" '
-            .data[]
-            | select(.displayName == $disp)
-            | select(
-                .gameVersions
-                | map(ascii_downcase)
-                | index($loader | ascii_downcase)
-              )
-            | .id // empty
-          ')
-          if [ -n "$EXISTS" ]; then
-            echo "Version ${{ env.FULL_VERSION }} for ${{ env.GAME_VERSION }} already exists → skipping"
-            echo "PUBLISH=false" >> $GITHUB_ENV
-          fi
-          
       - name: Get all version IDs
         if: env.PUBLISH == 'true'
         run: |
           # разбиваем env.COMMON_TAGS по |
           IFS='|' read -r -a TAG_ARRAY <<< "$COMMON_TAGS"
-          # добавляем версию игры и loader в начало массива
-          TAG_ARRAY=("$GAME_VERSION" "$MOD_LOADER" "${TAG_ARRAY[@]}")
 
           echo "All tags to process: ${TAG_ARRAY[@]}"
+
           # получаем полный список версий из CurseForge API
           RESPONSE=$(curl -s -X GET https://minecraft.curseforge.com/api/game/versions \
             -H "Accept: application/json" \
-            -H "X-Api-Token: ${{ secrets.CURSEFORGE_TOKEN }}" \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             -H "User-Agent: GitHub-Actions"
           )
           echo "$RESPONSE" > response.json
-          # создаём массив ID
+
+          # --- получаем ID для MOD_LOADER отдельно ---
+          MOD_LOADER_ID=$(jq -r --arg t "$MOD_LOADER" '
+            .[] | select(.name == $t or .slug == ($t | gsub("\\.";"-"))) | .id // empty
+          ' response.json | head -n1)
+
+          if [ -z "$MOD_LOADER_ID" ]; then
+            echo "ERROR: MOD_LOADER ID for '$MOD_LOADER' not found!"
+            exit 1
+          else
+            echo "MOD_LOADER_ID=$MOD_LOADER_ID" >> $GITHUB_ENV
+            echo "Found MOD_LOADER_ID: $MOD_LOADER_ID"
+          fi
+
+          # --- создаём массив ID для остальных тегов ---
           GAME_VERSION_IDS=()
+          # добавляем версию игры в начало массива
+          TAG_ARRAY=("$GAME_VERSION" "${TAG_ARRAY[@]}")
+
           for TAG in "${TAG_ARRAY[@]}"; do
             ID=$(jq -r --arg t "$TAG" '
               .[] | select(.name == $t or .slug == ($t | gsub("\\.";"-"))) | .id // empty
@@ -134,10 +128,33 @@ jobs:
               echo "Found ID $ID for tag '$TAG'"
             fi
           done
+
           # формируем JSON-массив для metadata
           GAME_VERSION_IDS_JSON=$(printf '%s\n' "${GAME_VERSION_IDS[@]}" | jq -s -c 'map(tonumber)')
           echo "GAME_VERSION_IDS_JSON=$GAME_VERSION_IDS_JSON" >> $GITHUB_ENV
           echo "All version IDs: $GAME_VERSION_IDS_JSON"
+
+      - name: Check if version already exists on CurseForge
+        if: env.PUBLISH == 'true'
+        run: |
+          RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files")
+
+          EXISTS=$(echo "$RESPONSE" | jq -r \
+            --arg disp "${{ env.FULL_VERSION }}" \
+            --arg loader_id "$MOD_LOADER_ID" '
+            .data[]
+            | select(.displayName == $disp)
+            | select(.gameVersionTypeIds | map(tostring) | index($loader_id))
+            | .id // empty
+          ')
+
+          if [ -n "$EXISTS" ]; then
+            echo "Version ${{ env.FULL_VERSION }} for ${{ env.GAME_VERSION }} with loader $MOD_LOADER already exists → skipping"
+            echo "PUBLISH=false" >> $GITHUB_ENV
+          else
+            echo "Version ${{ env.FULL_VERSION }} for ${{ env.GAME_VERSION }} with loader $MOD_LOADER does not exist → publish"
+          fi
           
       - name: Read changelog section
         if: env.PUBLISH == 'true'
