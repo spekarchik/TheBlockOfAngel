@@ -13,7 +13,8 @@ jobs:
     env:
       CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
       CF_PROJECT_ID: 1256129
-      TAGS: "Java 21|Server|Client|NeoForge"
+      COMMON_TAGS: "Java 21|Server|Client"
+      MOD_LOADER: "NeoForge"
 
     steps:
       - name: Checkout CI branch
@@ -27,7 +28,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y --no-install-recommends jq
           fi
-
       # Сборка мода прямо в CD
       - name: Set up Java 21
         uses: actions/setup-java@v4
@@ -53,12 +53,10 @@ jobs:
             echo "JAR file not found!"
             exit 1
           fi
-
           FILENAME=$(basename "$JAR_FILE")
           echo "FILENAME=$FILENAME" >> "$GITHUB_ENV"
           GAME_VERSION=$(echo "$FILENAME" | cut -d'-' -f2)
           VERSION_PART=$(echo "$FILENAME" | sed -E 's/^[^-]*-[^-]*-(.*)\.jar$/\1/')
-
           if [[ "$VERSION_PART" =~ ^(.+?)(-(beta|alpha))?$ ]]; then
             MOD_VERSION="${BASH_REMATCH[1]}"
             SUFFIX="${BASH_REMATCH[2]:-}"           # -beta, -alpha или пусто
@@ -66,7 +64,6 @@ jobs:
             echo "Cannot parse version from filename: $FILENAME"
             exit 1
           fi
-
           # А дальше case только для известных, остальные → skip
           case "$SUFFIX" in
             "")     RELEASE_TYPE="release" ; SUFFIX_FOR_VERSION="" ;;
@@ -86,38 +83,50 @@ jobs:
           echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
           echo "PUBLISH=true" >> $GITHUB_ENV  # по умолчанию true, дальше проверим
           
-      - name: Prepare tags array
+      - name: Check if version already exists on CurseForge
         if: env.PUBLISH == 'true'
         run: |
-          # разбиваем env.TAGS по |
-          IFS='|' read -r -a TAG_ARRAY <<< "$TAGS"
-          # добавляем версию игры в начало массива
-          TAG_ARRAY=("$GAME_VERSION" "${TAG_ARRAY[@]}")
-          echo "TAG_ARRAY=${TAG_ARRAY[*]}" >> $GITHUB_ENV
-          echo "All tags to process: ${TAG_ARRAY[@]}"
-
+          RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files")
+          EXISTS=$(echo "$RESPONSE" | jq -r \
+            --arg disp "${{ env.FULL_VERSION }}" \
+            --arg loader "$MOD_LOADER" '
+            .data[]
+            | select(.displayName == $disp)
+            | select(
+                .gameVersions
+                | map(ascii_downcase)
+                | index($loader | ascii_downcase)
+              )
+            | .id // empty
+          ')
+          if [ -n "$EXISTS" ]; then
+            echo "Version ${{ env.FULL_VERSION }} for ${{ env.GAME_VERSION }} already exists → skipping"
+            echo "PUBLISH=false" >> $GITHUB_ENV
+          fi
+          
       - name: Get all version IDs
         if: env.PUBLISH == 'true'
         run: |
-          source $GITHUB_ENV
+          # разбиваем env.COMMON_TAGS по |
+          IFS='|' read -r -a TAG_ARRAY <<< "$COMMON_TAGS"
+          # добавляем версию игры и loader в начало массива
+          TAG_ARRAY=("$GAME_VERSION" "$MOD_LOADER" "${TAG_ARRAY[@]}")
 
+          echo "All tags to process: ${TAG_ARRAY[@]}"
           # получаем полный список версий из CurseForge API
           RESPONSE=$(curl -s -X GET https://minecraft.curseforge.com/api/game/versions \
             -H "Accept: application/json" \
             -H "X-Api-Token: ${{ secrets.CURSEFORGE_TOKEN }}" \
             -H "User-Agent: GitHub-Actions"
           )
-
           echo "$RESPONSE" > response.json
-
           # создаём массив ID
           GAME_VERSION_IDS=()
-
           for TAG in "${TAG_ARRAY[@]}"; do
             ID=$(jq -r --arg t "$TAG" '
-              .[] | select(.name == $t or .slug == ($t | gsub("[ .]";"-"))) | .id // empty
+              .[] | select(.name == $t or .slug == ($t | gsub("\\.";"-"))) | .id // empty
             ' response.json | head -n1)
-            
             if [ -z "$ID" ]; then
               echo "ID for tag '$TAG' not found!"
             else
@@ -125,62 +134,11 @@ jobs:
               echo "Found ID $ID for tag '$TAG'"
             fi
           done
-
           # формируем JSON-массив для metadata
           GAME_VERSION_IDS_JSON=$(printf '%s\n' "${GAME_VERSION_IDS[@]}" | jq -s -c 'map(tonumber)')
           echo "GAME_VERSION_IDS_JSON=$GAME_VERSION_IDS_JSON" >> $GITHUB_ENV
           echo "All version IDs: $GAME_VERSION_IDS_JSON"
-
-      - name: Check if version already exists on CurseForge
-        if: env.PUBLISH == 'true'
-        run: |
-          source $GITHUB_ENV
-
-          EXISTS=""
-
-          for TAG in "${TAG_ARRAY[@]}"; do
-            echo "--------------------------------------"
-            echo "Checking version $FULL_VERSION for game version '$TAG'..."
-            
-            if [ -z "$TAG" ]; then
-              echo "[!] Empty TAG, skipping..."
-              continue
-            fi
-
-            RESPONSE=$(curl -s -w "%{http_code}" -H "X-Api-Token: ${{ secrets.CURSEFORGE_TOKEN }}" \
-              "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files?gameVersion=$TAG")
-            
-            HTTP_CODE="${RESPONSE: -3}"
-            BODY="${RESPONSE::-3}"
-
-            echo "HTTP code: $HTTP_CODE"
-            if [ "$HTTP_CODE" -ne 200 ]; then
-              echo "[!] Curl returned $HTTP_CODE for tag '$TAG'"
-              echo "$BODY"
-              continue
-            fi
-
-            # проверяем JSON
-            if ! echo "$BODY" | jq empty >/dev/null 2>&1; then
-              echo "[!] Invalid JSON for tag '$TAG'"
-              echo "$BODY"
-              continue
-            fi
-
-            EXISTS=$(echo "$BODY" | jq -r --arg disp "$FULL_VERSION" \
-                     '.data[]? | select(.displayName == $disp) | .id // empty')
-
-            if [ -n "$EXISTS" ]; then
-              echo "[!] Version $FULL_VERSION for '$TAG' already exists → skipping publishing"
-              echo "PUBLISH=false" >> $GITHUB_ENV
-              break
-            else
-              FILE_COUNT=$(echo "$BODY" | jq '.data | length')
-              echo "[+] Version $FULL_VERSION for '$TAG' not found → OK to publish"
-              echo "    Found $FILE_COUNT files for tag '$TAG'"
-            fi
-          done
-
+          
       - name: Read changelog section
         if: env.PUBLISH == 'true'
         run: |
@@ -193,7 +151,7 @@ jobs:
           else
             echo "CHANGELOG=No changelog provided" >> $GITHUB_ENV
           fi
-
+          
       - name: Publish to CurseForge
         if: env.PUBLISH == 'true'
         run: |
@@ -215,7 +173,6 @@ jobs:
           echo "=== METADATA preview ==="
           echo "$METADATA"
           echo "======================="
-
           curl -X POST "https://minecraft.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             -F "metadata=$METADATA" \
