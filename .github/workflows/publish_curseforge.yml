@@ -86,16 +86,20 @@ jobs:
           echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
           echo "PUBLISH=true" >> $GITHUB_ENV  # по умолчанию true, дальше проверим
           
-      - name: Get all version IDs
+      - name: Prepare tags array
         if: env.PUBLISH == 'true'
         run: |
           # разбиваем env.TAGS по |
           IFS='|' read -r -a TAG_ARRAY <<< "$TAGS"
-
           # добавляем версию игры в начало массива
           TAG_ARRAY=("$GAME_VERSION" "${TAG_ARRAY[@]}")
-
+          echo "TAG_ARRAY=${TAG_ARRAY[*]}" >> $GITHUB_ENV
           echo "All tags to process: ${TAG_ARRAY[@]}"
+
+      - name: Get all version IDs
+        if: env.PUBLISH == 'true'
+        run: |
+          source $GITHUB_ENV
 
           # получаем полный список версий из CurseForge API
           RESPONSE=$(curl -s -X GET https://minecraft.curseforge.com/api/game/versions \
@@ -111,9 +115,9 @@ jobs:
 
           for TAG in "${TAG_ARRAY[@]}"; do
             ID=$(jq -r --arg t "$TAG" '
-              .[] | select(.name == $t or .slug == ($t | gsub("\\.";"-"))) | .id // empty
+              .[] | select(.name == $t or .slug == ($t | gsub("[ .]";"-"))) | .id // empty
             ' response.json | head -n1)
-
+            
             if [ -z "$ID" ]; then
               echo "ID for tag '$TAG' not found!"
             else
@@ -124,25 +128,31 @@ jobs:
 
           # формируем JSON-массив для metadata
           GAME_VERSION_IDS_JSON=$(printf '%s\n' "${GAME_VERSION_IDS[@]}" | jq -s -c 'map(tonumber)')
-
           echo "GAME_VERSION_IDS_JSON=$GAME_VERSION_IDS_JSON" >> $GITHUB_ENV
           echo "All version IDs: $GAME_VERSION_IDS_JSON"
 
       - name: Check if version already exists on CurseForge
         if: env.PUBLISH == 'true'
         run: |
-          # разбиваем все теги
-          IFS='|' read -r -a TAG_ARRAY <<< "$TAGS"
-          TAG_ARRAY=("$GAME_VERSION" "${TAG_ARRAY[@]}")
+          source $GITHUB_ENV
 
           EXISTS=""
 
           for TAG in "${TAG_ARRAY[@]}"; do
-            RESPONSE=$(curl -s -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            echo "Checking version $FULL_VERSION for game version '$TAG'..."
+
+            RESPONSE=$(curl -s -H "X-Api-Token: ${{ secrets.CURSEFORGE_TOKEN }}" \
               "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files?gameVersion=$TAG")
 
+            # проверяем JSON
+            if ! echo "$RESPONSE" | jq empty >/dev/null 2>&1; then
+              echo "Warning: Invalid JSON for tag '$TAG', skipping..."
+              echo "$RESPONSE"
+              continue
+            fi
+
             EXISTS=$(echo "$RESPONSE" | jq -r --arg disp "$FULL_VERSION" \
-              '.data[] | select(.displayName == $disp) | .id // empty')
+              '.data[]? | select(.displayName == $disp) | .id // empty')
 
             if [ -n "$EXISTS" ]; then
               echo "Version $FULL_VERSION for $TAG already exists → skipping"

@@ -190,17 +190,20 @@ jobs:
             }' > "$TMP_JSON"
 
           echo "=== METADATA preview ==="
-          cat "$TMP_JSON"
+          jq . "$TMP_JSON"   # красиво форматируем, чтобы было видно все спецсимволы
           echo "========================"
 
-          # Передаём JSON как файл, чтобы curl не экранировал кавычки
-          RESPONSE=$(curl -sS -X POST "https://api.modrinth.com/v2/version" \
+          RESPONSE=$(curl -v -S -X POST "https://api.modrinth.com/v2/version" \
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            -F "data=@$TMP_JSON;type=application/json" \
-            || true
+            -F "data=@$TMP_JSON"
           )
+          CURL_EXIT=$?
+          echo "=== CURL EXIT CODE: $CURL_EXIT ==="
+          echo "=== CURL RESPONSE ==="
+          echo "$RESPONSE"
+          echo "====================="
           
           #  --retry 3 \
           #  --retry-delay 5 \
