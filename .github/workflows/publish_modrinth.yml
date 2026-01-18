@@ -13,7 +13,7 @@ jobs:
     env:
       MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
       MODRINTH_PROJECT_ID: 7X4T4qK0
-      MOD_LOADER: NeoForge
+      MOD_LOADER: neoforge
     steps:
       - name: Checkout CI branch
         uses: actions/checkout@v4
