@@ -197,7 +197,7 @@ jobs:
             -H "Authorization: $MODRINTH_TOKEN" \
             -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
             -F "file=@$JAR_FILE" \
-            -F "data=@$TMP_JSON"
+            --form-string "data=$(<"$TMP_JSON")"
           )
           CURL_EXIT=$?
           echo "=== CURL EXIT CODE: $CURL_EXIT ==="

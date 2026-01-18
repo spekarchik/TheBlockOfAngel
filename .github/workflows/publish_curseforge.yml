@@ -139,25 +139,45 @@ jobs:
           EXISTS=""
 
           for TAG in "${TAG_ARRAY[@]}"; do
+            echo "--------------------------------------"
             echo "Checking version $FULL_VERSION for game version '$TAG'..."
-
-            RESPONSE=$(curl -s -H "X-Api-Token: ${{ secrets.CURSEFORGE_TOKEN }}" \
-              "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files?gameVersion=$TAG")
-
-            # проверяем JSON
-            if ! echo "$RESPONSE" | jq empty >/dev/null 2>&1; then
-              echo "Warning: Invalid JSON for tag '$TAG', skipping..."
-              echo "$RESPONSE"
+            
+            if [ -z "$TAG" ]; then
+              echo "[!] Empty TAG, skipping..."
               continue
             fi
 
-            EXISTS=$(echo "$RESPONSE" | jq -r --arg disp "$FULL_VERSION" \
-              '.data[]? | select(.displayName == $disp) | .id // empty')
+            RESPONSE=$(curl -s -w "%{http_code}" -H "X-Api-Token: ${{ secrets.CURSEFORGE_TOKEN }}" \
+              "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files?gameVersion=$TAG")
+            
+            HTTP_CODE="${RESPONSE: -3}"
+            BODY="${RESPONSE::-3}"
+
+            echo "HTTP code: $HTTP_CODE"
+            if [ "$HTTP_CODE" -ne 200 ]; then
+              echo "[!] Curl returned $HTTP_CODE for tag '$TAG'"
+              echo "$BODY"
+              continue
+            fi
+
+            # проверяем JSON
+            if ! echo "$BODY" | jq empty >/dev/null 2>&1; then
+              echo "[!] Invalid JSON for tag '$TAG'"
+              echo "$BODY"
+              continue
+            fi
+
+            EXISTS=$(echo "$BODY" | jq -r --arg disp "$FULL_VERSION" \
+                     '.data[]? | select(.displayName == $disp) | .id // empty')
 
             if [ -n "$EXISTS" ]; then
-              echo "Version $FULL_VERSION for $TAG already exists → skipping"
+              echo "[!] Version $FULL_VERSION for '$TAG' already exists → skipping publishing"
               echo "PUBLISH=false" >> $GITHUB_ENV
               break
+            else
+              FILE_COUNT=$(echo "$BODY" | jq '.data | length')
+              echo "[+] Version $FULL_VERSION for '$TAG' not found → OK to publish"
+              echo "    Found $FILE_COUNT files for tag '$TAG'"
             fi
           done
 
