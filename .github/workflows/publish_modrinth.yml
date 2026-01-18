@@ -122,8 +122,8 @@ jobs:
             exit 0
           fi
 
-          echo "Fetched versions data:"
-          echo "$DATA" | jq -r '.[] | "ID: \(.id), Version: \(.version_number), Game Versions: \(.game_versions), Loaders: \(.loaders)"'
+          #echo "Fetched versions data:"
+          #echo "$DATA" | jq -r '.[] | "ID: \(.id), Version: \(.version_number), Game Versions: \(.game_versions), Loaders: \(.loaders)"'
 
           EXISTS=$(echo "$DATA" | jq -r \
             --arg ver "$FULL_VERSION" \
