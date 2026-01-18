@@ -137,7 +137,7 @@ jobs:
       - name: Check if version already exists on CurseForge
         if: env.PUBLISH == 'true'
         run: |
-          RESPONSE=$(curl -s \
+          RESPONSE=$(curl -sS -D \
             -H "X-Api-Key: $CURSEFORGE_TOKEN" \
             -H "Accept: application/json" \
             "https://api.curseforge.com/v1/mods/$CF_PROJECT_ID/files"

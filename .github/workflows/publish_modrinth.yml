@@ -13,6 +13,7 @@ jobs:
     env:
       MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
       MODRINTH_PROJECT_ID: 7X4T4qK0
+      MOD_LOADER: NeoForge
     steps:
       - name: Checkout CI branch
         uses: actions/checkout@v4
@@ -125,15 +126,17 @@ jobs:
           EXISTS=$(echo "$DATA" | jq -r \
             --arg ver "$FULL_VERSION" \
             --arg gv "$GAME_VERSION" \
+            --arg ml "$MOD_LOADER" \
             '.[] | select(.version_number == $ver)
                   | select(.game_versions | index($gv))
+                  | select(.loaders | index($ml))
                   | .id')
 
           if [ -n "$EXISTS" ]; then
-            echo "Version $FULL_VERSION for $GAME_VERSION already exists → skipping"
+            echo "Version $FULL_VERSION for $GAME_VERSION and loader $MOD_LOADER already exists → skipping"
             echo "PUBLISH=false" >> $GITHUB_ENV
           else
-            echo "Version $FULL_VERSION for $GAME_VERSION not found → will publish"
+            echo "Version $FULL_VERSION for $GAME_VERSION and loader $MOD_LOADER not found → will publish"
             echo "PUBLISH=true" >> $GITHUB_ENV
           fi
 
@@ -187,6 +190,7 @@ jobs:
               loaders: ["neoforge"],
               changelog: $changelog,
               file_parts: ["file"],
+              "featured": false,
               "dependencies": []
             }' > "$TMP_JSON"
 
