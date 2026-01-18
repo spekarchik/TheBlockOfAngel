@@ -214,24 +214,6 @@ jobs:
           jq . "$TMP_JSON"   # красиво форматируем, чтобы было видно все спецсимволы
           echo "========================"
 
-          RESPONSE=$(curl -v -S --http1.1 \
-            -X POST "https://api.modrinth.com/v2/version" \
-            -H "Authorization: $MODRINTH_TOKEN" \
-            -H "User-Agent: spekarchik/$MODRINTH_PROJECT_ID" \
-            -F "data=<$TMP_JSON" \
-            -F "file=@$JAR_FILE" \
-            --retry 3 \
-            --retry-delay 5 \
-            --fail-with-body \
-            --retry-all-errors
-          )
-
-          VERSION_ID=$(echo "$RESPONSE" | jq -r '.id')
-          if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
-            echo "Failed to create version"
-            echo "$RESPONSE"
-            exit 1
-          fi
 
           echo "Published version id: $VERSION_ID"
           rm -f "$TMP_JSON"
