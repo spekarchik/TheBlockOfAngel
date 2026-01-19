@@ -3,7 +3,11 @@
 ### 📝 Improvements
 - **Fire Rod**: *Glowstone* now drops Blaze Powder on left-click instead of requiring right-click.
 - **End Rod**: *Tuff* now drops Saltpeter on left-click instead of requiring right-click.
+- **End Rod**: Changing the weather now consumes saturation and adds exhaustion.
 - Tooltips updated to reflect the new behavior.
+
+### 🐞 Fixed
+- Fixed block interaction sounds not playing for the player in single-player mode when using magic rods.
 
 
 ## 📦 Version 2.18.0
