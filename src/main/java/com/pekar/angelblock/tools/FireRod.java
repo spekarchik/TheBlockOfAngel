@@ -80,12 +80,8 @@ public class FireRod extends MarineRod
             {
                 if (block == Blocks.END_STONE)
                 {
-                    if (!isClientSide)
-                    {
-                        setBlock(player, pos, Blocks.NETHERRACK);
-                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                    }
-
+                    setBlockWithClientSound(player, pos, Blocks.NETHERRACK);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return getToolInteractionResult(true, isClientSide);
                 }
             }
@@ -117,44 +113,29 @@ public class FireRod extends MarineRod
 
             if (block == Blocks.MAGMA_BLOCK)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.GLOWSTONE);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
+                setBlockWithClientSound(player, pos, Blocks.GLOWSTONE);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.BASALT)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.BLACKSTONE);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
+                setBlockWithClientSound(player, pos, Blocks.BLACKSTONE);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.SHROOMLIGHT);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
+                setBlockWithClientSound(player, pos, Blocks.SHROOMLIGHT);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.CLAY) // it's important to check CLAY near WATER (MarineRod) earlier
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.TERRACOTTA);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
+                setBlockWithClientSound(player, pos, Blocks.TERRACOTTA);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 

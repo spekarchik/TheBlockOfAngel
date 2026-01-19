@@ -75,8 +75,6 @@ public class EndRod extends AmethystRod
             var hand = context.getHand();
             var facing = context.getClickedFace();
 
-            boolean isClientSide = level.isClientSide();
-
             if (facing == Direction.UP)
             {
                 if (block == Blocks.END_STONE && level.isEmptyBlock(pos.above()))
@@ -113,6 +111,7 @@ public class EndRod extends AmethystRod
                 levelData.setRaining(false);
                 levelData.setThundering(false);
                 damageMainHandItem(1, player);
+                causePlayerExhaustion(player);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
@@ -138,6 +137,7 @@ public class EndRod extends AmethystRod
                 }
                 levelData.setThunderTime(0);
                 damageMainHandItem(1, player);
+                causePlayerExhaustion(player);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
@@ -166,6 +166,7 @@ public class EndRod extends AmethystRod
                     levelData.setThunderTime(weatherLasts);
                 }
                 damageMainHandItem(1, player);
+                causePlayerExhaustion(player);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
