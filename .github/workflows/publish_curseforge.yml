@@ -214,3 +214,11 @@ jobs:
           echo "=== METADATA preview ==="
           echo "$METADATA"
           echo "======================="
+          curl -X POST "https://minecraft.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            -F "metadata=$METADATA" \
+            -F "file=@$JAR_FILE" \
+            --fail-with-body \
+            --retry 3 \
+            --retry-delay 5 \
+            --retry-all-errors
