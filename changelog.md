@@ -1,3 +1,11 @@
+## 📦 Version 2.19.0
+
+### 📝 Improvements
+- **Fire Rod**: *Glowstone* now drops Blaze Powder on left-click instead of requiring right-click.
+- **End Rod**: *Tuff* now drops Saltpeter on left-click instead of requiring right-click.
+- Tooltips updated to reflect the new behavior.
+
+
 ## 📦 Version 2.18.0
 
 ### 📝 Improvements
