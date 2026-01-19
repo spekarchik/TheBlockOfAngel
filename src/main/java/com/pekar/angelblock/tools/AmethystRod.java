@@ -98,6 +98,12 @@ public class AmethystRod extends FireRod
     }
 
     @Override
+    protected void appendDestroyingBlockInfo(ITooltip tooltip, boolean selectAsNew)
+    {
+        super.appendDestroyingBlockInfo(tooltip, false);
+    }
+
+    @Override
     protected void appendPlacingBlockInfo(ITooltip tooltip, boolean selectAsNew)
     {
         super.appendPlacingBlockInfo(tooltip, false);

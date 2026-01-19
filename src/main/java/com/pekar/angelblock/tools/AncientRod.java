@@ -212,11 +212,19 @@ public class AncientRod extends MagneticRod
         return "item." + rodId.replace(':', '.');
     }
 
+    protected void appendDestroyingBlockInfo(ITooltip tooltip, boolean selectAsNew)
+    {
+        for (int i = 1; i <= 2; i++)
+        {
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 1).apply();
+        }
+    }
+
     protected void appendPlacingBlockInfo(ITooltip tooltip, boolean selectAsNew)
     {
-        for (int i = 1; i <= 8; i++)
+        for (int i = 3; i <= 8; i++)
         {
-            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 1 || i == 3).apply();
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 3).apply();
         }
     }
 
@@ -262,6 +270,8 @@ public class AncientRod extends MagneticRod
 
         if (flag.hasShiftDown())
         {
+            // Destroying
+            appendDestroyingBlockInfo(tooltip, true);
             // Placing
             appendPlacingBlockInfo(tooltip, true);
             tooltip.addEmptyLine();
