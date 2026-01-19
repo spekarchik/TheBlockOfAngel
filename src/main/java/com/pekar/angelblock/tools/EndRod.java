@@ -7,16 +7,20 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ServerLevelData;
 
 public class EndRod extends AmethystRod
@@ -24,6 +28,31 @@ public class EndRod extends AmethystRod
     public EndRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
+    {
+        if (blockState.getBlock() == Blocks.TUFF)
+            return 25.0F;
+
+        return super.getDestroySpeed(itemStack, blockState);
+    }
+
+    @Override
+    protected void additionalActionOnMineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
+    {
+        super.additionalActionOnMineBlock(itemStack, level, blockState, pos, entity);
+
+        if (blockState.getBlock() == Blocks.TUFF)
+        {
+            if (!level.isClientSide() && entity instanceof Player player)
+            {
+                level.setBlock(pos, BlockRegistry.DESTROYING_SALTPETER.get().defaultBlockState(), 0);
+                level.destroyBlock(pos, true, player, 1);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
+            }
+        }
     }
 
     @Override
@@ -55,18 +84,6 @@ public class EndRod extends AmethystRod
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, hand, facing, Blocks.CHORUS_FLOWER);
                 }
-            }
-
-            if (block == Blocks.TUFF)
-            {
-                if (!isClientSide)
-                {
-                    level.setBlock(pos, BlockRegistry.DESTROYING_SALTPETER.get().defaultBlockState(), 0);
-                    level.destroyBlock(pos, true, player, 1);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
-                return getToolInteractionResult(true, isClientSide);
             }
         }
 
@@ -184,10 +201,15 @@ public class EndRod extends AmethystRod
     {
         super.appendPlacingBlockInfo(tooltip, false);
 
-        for (int i = 2; i <= 3; i++)
-        {
-            tooltip.addLine(getRodDescriptionId(), i).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
-        }
+        tooltip.addLine(getRodDescriptionId(), 3).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
+    }
+
+    @Override
+    protected void appendDestroyingBlockInfo(ITooltip tooltip, boolean selectAsNew)
+    {
+        super.appendDestroyingBlockInfo(tooltip, false);
+
+        tooltip.addLine(getRodDescriptionId(), 1).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
     }
 
     @Override
