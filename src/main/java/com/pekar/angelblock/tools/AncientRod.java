@@ -3,14 +3,15 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.GreenDiamondBlock;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
+import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.SoundType;
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -201,112 +202,122 @@ public class AncientRod extends MagneticRod
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public final void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (!showExtendedDescription(tooltipComponents)) return;
-
-        // Common
-        appendCommonPreInfo(tooltipComponents);
-
-        if (Screen.hasControlDown())
-        {
-            // Magnetic
-            if (!isEnhanced())
-                tooltipComponents.add(Component.translatable("description.rods.no_magnet_mode").withStyle(ChatFormatting.DARK_RED));
-            else if (this instanceof FireRod)
-                tooltipComponents.add(Component.translatable("description.rods.magnet_mode.fire_rod").withStyle(ChatFormatting.DARK_GRAY));
-            else
-                tooltipComponents.add(Component.translatable("description.rods.magnet_mode.ancient_rod").withStyle(ChatFormatting.DARK_GRAY));
-
-            appendMagneticInfo(tooltipComponents);
-        }
-        else if (Screen.hasShiftDown())
-        {
-            // Placing
-            appendPlacingBlockInfo(tooltipComponents, true);
-            tooltipComponents.add(Component.empty());
-        }
-        else if (Screen.hasAltDown())
-        {
-            // Transformations
-            appendBlockTransformInfo(tooltipComponents, true);
-            tooltipComponents.add(Component.empty());
-        }
-
-        // Common
-        appendCommonPostInfo(tooltipComponents);
-        tooltipComponents.add(Component.empty());
-
-        if (Screen.hasControlDown())
-        {
-            // Magnetic
-            tooltipComponents.add(Component.translatable("description.rods.press_shift"));
-            tooltipComponents.add(Component.translatable("description.rods.press_alt"));
-        }
-        else if (Screen.hasShiftDown())
-        {
-            // Placing
-            tooltipComponents.add(Component.translatable("description.rods.press_alt"));
-            tooltipComponents.add(Component.translatable("description.rods.press_ctrl"));
-        }
-        else if (Screen.hasAltDown())
-        {
-            // Transformations
-            tooltipComponents.add(Component.translatable("description.rods.press_shift"));
-            tooltipComponents.add(Component.translatable("description.rods.press_ctrl"));
-        }
+        ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
     }
 
+    // Should not be virtual!
     private String getRodId()
     {
         return ToolRegistry.ANCIENT_ROD.getRegisteredName();
     }
 
-    protected MutableComponent getDescription(String rodId, int lineNumber, boolean isHeader, boolean isSubHeader, boolean isNotice, boolean isImportantNotice, boolean isSelectedText, boolean isDarkGray)
+    // Should not be virtual!
+    private String getUnenhancedRodDescriptionId()
     {
-        var descriptionId = "item." + rodId.replace(':', '.');
-        var component = Component.translatable(descriptionId + ".desc" + lineNumber);
-        var formattedComponent = Utils.instance.text.getFormattedTextComponent(component, isHeader, isSubHeader, isNotice, isImportantNotice, isDarkGray);
-        return isSelectedText ? formattedComponent.withStyle(ChatFormatting.WHITE) : formattedComponent;
+        return formatDescriptionId(getRodId());
     }
 
-    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    protected final String formatDescriptionId(String rodId)
+    {
+        return "item." + rodId.replace(':', '.');
+    }
+
+    protected void appendPlacingBlockInfo(ITooltip tooltip, boolean selectAsNew)
     {
         for (int i = 1; i <= 8; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, i == 1 || i == 3, false, false, false, false, false));
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 1 || i == 3).apply();
         }
     }
 
-    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    protected void appendBlockTransformInfo(ITooltip tooltip, boolean selectAsNew)
     {
         for (int i = 9; i <= 12; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, i == 9, false, false, false, false, false));
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 9).apply();
         }
     }
 
-    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    protected void appendMagneticInfo(ITooltip tooltip)
     {
         for (int i = 13; i <= 21; i++)
         {
-            if (i == 21) tooltipComponents.add(Component.empty());
-            tooltipComponents.add(getDescription(getRodId(), i, i == 13, false, false, false, false, i == 21));
+            if (i == 21) tooltip.addEmptyLine();
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 13).styledAs(TextStyle.DarkGray, i == 21).apply();
         }
     }
 
-    protected void appendCommonPreInfo(List<Component> tooltipComponents)
+    protected void appendCommonPreInfo(ITooltip tooltip)
     {
-        tooltipComponents.add(getDescription(0, false));
+        tooltip.addLine(getDescriptionId(), 0).apply();
         if (isEnhanced())
-            tooltipComponents.add(getDescription(1, false));
+            tooltip.addLine(getDescriptionId(), 1).apply();
     }
 
-    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    protected void appendCommonPostInfo(ITooltip tooltip)
     {
         for (int i = 22; i <= 23; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, false, false, false, false, false, i == 22));
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 22).apply();
+        }
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!showExtendedDescription(tooltip)) return;
+
+        // Common
+        appendCommonPreInfo(tooltip);
+
+        if (Screen.hasShiftDown())
+        {
+            // Placing
+            appendPlacingBlockInfo(tooltip, true);
+            tooltip.addEmptyLine();
+        }
+        else if (Screen.hasAltDown())
+        {
+            // Transformations
+            appendBlockTransformInfo(tooltip, true);
+            tooltip.addEmptyLine();
+        }
+        else if (Screen.hasControlDown())
+        {
+            // Magnetic
+            if (!isEnhanced())
+                tooltip.addLineById("description.rods.no_magnet_mode").withFormatting(ChatFormatting.DARK_RED, true).apply();
+            else if (this instanceof FireRod)
+                tooltip.addLineById("description.rods.magnet_mode.fire_rod").asDarkGrey().apply();
+            else
+                tooltip.addLineById("description.rods.magnet_mode.ancient_rod").asDarkGrey().apply();
+
+            appendMagneticInfo(tooltip);
+        }
+
+        // Common
+        appendCommonPostInfo(tooltip);
+        tooltip.addEmptyLine();
+
+        if (Screen.hasShiftDown())
+        {
+            // Placing
+            tooltip.addLineById("description.rods.press_alt").apply();
+            tooltip.addLineById("description.rods.press_ctrl").apply();
+        }
+        else if (Screen.hasAltDown())
+        {
+            // Transformations
+            tooltip.addLineById("description.rods.press_shift").apply();
+            tooltip.addLineById("description.rods.press_ctrl").apply();
+        }
+        else if (Screen.hasControlDown())
+        {
+            // Magnetic
+            tooltip.addLineById("description.rods.press_shift").apply();
+            tooltip.addLineById("description.rods.press_alt").apply();
         }
     }
 

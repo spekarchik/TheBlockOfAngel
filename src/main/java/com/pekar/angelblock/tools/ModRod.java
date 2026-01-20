@@ -1,11 +1,12 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,9 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.common.ItemAbility;
 
-import java.util.List;
-
-public class ModRod extends ModRodTool implements IModTool
+public abstract class ModRod extends ModRodTool implements IModTool, ITooltipProvider
 {
     private final boolean isMagnetic;
 
@@ -100,11 +99,11 @@ public class ModRod extends ModRodTool implements IModTool
         super.damageOffHandItem(amount, livingEntity);
     }
 
-    protected boolean showExtendedDescription(List<Component> tooltipComponents)
+    protected boolean showExtendedDescription(ITooltip tooltip)
     {
         if (!Screen.hasShiftDown() && !Screen.hasAltDown() && !Screen.hasControlDown())
         {
-            tooltipComponents.add(Component.translatable("description.rods.press_shift_alt_or_ctrl"));
+            tooltip.addLineById("description.rods.press_shift_alt_or_ctrl").apply();
             return false;
         }
 

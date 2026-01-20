@@ -22,7 +22,7 @@ import org.apache.commons.lang3.function.TriFunction;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class MagneticRod extends ModRod
+public abstract class MagneticRod extends ModRod
 {
     public MagneticRod(Tier material, boolean isMagnetic, Properties properties)
     {
