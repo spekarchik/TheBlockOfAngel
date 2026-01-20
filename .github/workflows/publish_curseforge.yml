@@ -216,7 +216,7 @@ jobs:
           echo "======================="
           curl -X POST "https://minecraft.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
-            -F "metadata=$METADATA" \
+            --form-string "metadata=$METADATA" \
             -F "file=@$JAR_FILE" \
             --fail-with-body \
             --retry 3 \
