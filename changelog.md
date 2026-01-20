@@ -1,3 +1,21 @@
+## 📦 Version 2.19.2
+
+### 📝 Improvements
+- **Fire Rod**: *Glowstone* now drops Blaze Powder on left-click instead of requiring right-click.
+- **End Rod**: *Tuff* now drops Saltpeter on left-click instead of requiring right-click.
+- **End Rod**: Changing the weather now consumes saturation and adds exhaustion.
+- Tooltips updated to reflect the new behavior.
+- Removed unnecessary Jump icon when **Aeryte Armor's** Super Jump effect is active.
+- Improved ore handling for area mining.
+  - In Enhanced Mode, pickaxes now treat regular and deepslate variants of the same ore as the same ore.
+    - When mining ores near Y=0, mixed regular and deepslate ore veins are now mined more naturally.
+    - Mining a deepslate ore will also mine matching regular ore blocks in the area.
+    - Mining a regular ore still only mines regular ore blocks; deepslate variants remain untouched, since deepslate ore is harder than regular ore.
+
+### 🐞 Fixed
+- Fixed block interaction sounds not playing for the player in single-player mode when using magic rods.
+
+
 ## 📦 Version 2.18.0
 
 ### 📝 Improvements

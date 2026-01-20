@@ -1,6 +1,5 @@
 package com.pekar.angelblock.utils;
 
-import com.pekar.angelblock.network.packets.PlaySoundPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -18,73 +17,57 @@ public class BlockTransformations
 
     public boolean mossyTransforming(Player player, BlockPos pos, Block block)
     {
-        boolean isClientSide = player.level().isClientSide();
-
         // stones
         if (block == Blocks.STONE || block == Blocks.COBBLESTONE || block == Blocks.COBBLED_DEEPSLATE
                 || block == Blocks.DEEPSLATE)
         {
-            if (!isClientSide)
-                setBlock(player, pos, Blocks.MOSSY_COBBLESTONE);
+            setBlock(player, pos, Blocks.MOSSY_COBBLESTONE);
             return true;
         }
 
         if (block == Blocks.MOSSY_COBBLESTONE)
         {
-            if (!isClientSide)
-            {
-                var resultBlock = pos.getY() > 4 ? Blocks.COBBLESTONE : Blocks.COBBLED_DEEPSLATE;
-                setBlock(player, pos, resultBlock);
-            }
+            var resultBlock = pos.getY() > 4 ? Blocks.COBBLESTONE : Blocks.COBBLED_DEEPSLATE;
+            setBlock(player, pos, resultBlock);
             return true;
         }
 
         if (block == Blocks.COBBLESTONE_SLAB || block == Blocks.STONE_SLAB)
         {
-            if (!isClientSide)
-                setBlock(player, pos, Blocks.MOSSY_COBBLESTONE_SLAB);
+            setBlock(player, pos, Blocks.MOSSY_COBBLESTONE_SLAB);
             return true;
         }
 
         if (block == Blocks.MOSSY_COBBLESTONE_SLAB)
         {
-            if (!isClientSide)
-                setBlock(player, pos, Blocks.COBBLESTONE_SLAB);
+            setBlock(player, pos, Blocks.COBBLESTONE_SLAB);
             return true;
         }
 
         // bricks
         if (block == Blocks.STONE_BRICKS || block == Blocks.DEEPSLATE_BRICKS)
         {
-            if (!isClientSide)
-                setBlock(player, pos, Blocks.MOSSY_STONE_BRICKS);
+            setBlock(player, pos, Blocks.MOSSY_STONE_BRICKS);
             return true;
         }
 
         if (block == Blocks.MOSSY_STONE_BRICKS)
         {
-            if (!isClientSide)
-            {
-                var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICKS : Blocks.DEEPSLATE_BRICKS;
-                setBlock(player, pos, resultBlock);
-            }
+            var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICKS : Blocks.DEEPSLATE_BRICKS;
+            setBlock(player, pos, resultBlock);
             return true;
         }
 
         if (block == Blocks.STONE_BRICK_SLAB || block == Blocks.DEEPSLATE_BRICK_SLAB)
         {
-            if (!isClientSide)
-                setBlock(player, pos, Blocks.MOSSY_STONE_BRICK_SLAB);
+            setBlock(player, pos, Blocks.MOSSY_STONE_BRICK_SLAB);
             return true;
         }
 
         if (block == Blocks.MOSSY_STONE_BRICK_SLAB)
         {
-            if (!isClientSide)
-            {
-                var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICK_SLAB : Blocks.DEEPSLATE_BRICK_SLAB;
-                setBlock(player, pos, resultBlock);
-            }
+            var resultBlock = pos.getY() > 4 ? Blocks.STONE_BRICK_SLAB : Blocks.DEEPSLATE_BRICK_SLAB;
+            setBlock(player, pos, resultBlock);
             return true;
         }
 
@@ -141,9 +124,16 @@ public class BlockTransformations
         }
     }
 
+    public void setBlockWithClientSound(Player player, BlockPos pos, BlockState blockState)
+    {
+        if (player instanceof ServerPlayer)
+            player.level().setBlock(pos, blockState, Block.UPDATE_ALL_IMMEDIATE);
+
+        Utils.instance.sound.playSoundByBlock(player, pos, SoundType.BLOCK_CHANGED);
+    }
+
     private void setBlock(Player player, BlockPos pos, Block block)
     {
-        player.level().setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
-        Utils.instance.sound.playSoundByBlock(player, pos, SoundType.BLOCK_CHANGED);
+        setBlockWithClientSound(player, pos, block.defaultBlockState());
     }
 }
