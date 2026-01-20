@@ -29,7 +29,7 @@ public class FlyingArmor extends Armor
 
         speedEffect = new SpeedSwitchingEffect(player, this, 1).showIcon().setupAvailability(this::isSpeedAvailable).asArmorEffect();
         var jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_BOOST_AMPLIFIER);
-        jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable);
+        jumpBoostEffect.setupAvailability(this::isJumpEffectAvailable).hideIcon();
         var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
         superJumpEffect.setupAvailability(this::isJumpEffectAvailable);
         this.jumpBoostEffect = new SwitchingEffectSynchronizer(jumpBoostEffect);
