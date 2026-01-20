@@ -2,9 +2,11 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.AngelRodBlockEntity;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -14,13 +16,16 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 
-import java.util.List;
-
 public class AngelRod extends EndRod
 {
     public AngelRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
+    }
+
+    private String getRodDescriptionId()
+    {
+        return formatDescriptionId(getRodId());
     }
 
     private String getRodId()
@@ -29,34 +34,34 @@ public class AngelRod extends EndRod
     }
 
     @Override
-    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    protected void appendPlacingBlockInfo(ITooltip tooltip, boolean selectAsNew)
     {
-        super.appendPlacingBlockInfo(tooltipComponents, false);
+        super.appendPlacingBlockInfo(tooltip, false);
     }
 
     @Override
-    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    protected void appendBlockTransformInfo(ITooltip tooltip, boolean selectAsNew)
     {
-        super.appendBlockTransformInfo(tooltipComponents, false);
+        super.appendBlockTransformInfo(tooltip, false);
 
         for (int i = 2; i <= 5; i++)
         {
             if (i == 3) continue;
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
+            tooltip.addLine(getRodDescriptionId(), i).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
         }
     }
 
     @Override
-    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    protected void appendMagneticInfo(ITooltip tooltip)
     {
-        super.appendMagneticInfo(tooltipComponents);
+        super.appendMagneticInfo(tooltip);
     }
 
-    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    protected void appendCommonPostInfo(ITooltip tooltip)
     {
         for (int i = 7; i <= 8; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, false, false, false, false, false, i == 7));
+            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 7).apply();
         }
     }
 

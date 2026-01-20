@@ -3,24 +3,21 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.ServerLevelData;
-
-import java.util.List;
 
 public class EndRod extends AmethystRod
 {
@@ -172,48 +169,53 @@ public class EndRod extends AmethystRod
         serverPlayer.level().playSound(null, serverPlayer.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.MASTER);
     }
 
+    private String getRodDescriptionId()
+    {
+        return formatDescriptionId(getRodId());
+    }
+
     private String getRodId()
     {
         return ToolRegistry.END_ROD.getRegisteredName();
     }
 
     @Override
-    protected void appendPlacingBlockInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    protected void appendPlacingBlockInfo(ITooltip tooltip, boolean selectAsNew)
     {
-        super.appendPlacingBlockInfo(tooltipComponents, false);
+        super.appendPlacingBlockInfo(tooltip, false);
 
         for (int i = 2; i <= 3; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,false, false, false, false, selectAsNew, false));
+            tooltip.addLine(getRodDescriptionId(), i).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
         }
     }
 
     @Override
-    protected void appendBlockTransformInfo(List<Component> tooltipComponents, boolean selectAsNew)
+    protected void appendBlockTransformInfo(ITooltip tooltip, boolean selectAsNew)
     {
-        super.appendBlockTransformInfo(tooltipComponents, false);
+        super.appendBlockTransformInfo(tooltip, false);
 
         for (int i = 4; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i,i == 4, false, false, false, selectAsNew, false));
+            tooltip.addLine(getRodDescriptionId(), i).withFormatting(ChatFormatting.WHITE, selectAsNew).styledAs(TextStyle.Header, i == 4).apply();
         }
     }
 
     @Override
-    protected void appendMagneticInfo(List<Component> tooltipComponents)
+    protected void appendMagneticInfo(ITooltip tooltip)
     {
         for (int i = 7; i <= 15; i++)
         {
-            if (i == 15) tooltipComponents.add(Component.empty());
-            tooltipComponents.add(getDescription(getRodId(), i, i == 7, false, false, false, false, i == 15));
+            if (i == 15) tooltip.addEmptyLine();
+            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.Header, i == 7).styledAs(TextStyle.DarkGray, i == 15).apply();
         }
     }
 
-    protected void appendCommonPostInfo(List<Component> tooltipComponents)
+    protected void appendCommonPostInfo(ITooltip tooltip)
     {
         for (int i = 16; i <= 17; i++)
         {
-            tooltipComponents.add(getDescription(getRodId(), i, false, false, false, false, false, i == 16));
+            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 16).apply();
         }
     }
 
