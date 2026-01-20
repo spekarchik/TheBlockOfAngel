@@ -119,7 +119,7 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
         {
             if (!level.isClientSide)
             {
-                setBlock(player, pos, Blocks.DIRT);
+                setBlockWithClientSound(player, pos, Blocks.DIRT);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
 

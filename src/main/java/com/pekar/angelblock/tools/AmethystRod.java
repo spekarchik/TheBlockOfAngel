@@ -45,11 +45,8 @@ public class AmethystRod extends FireRod
 
             if (block == Blocks.OBSIDIAN && upBlock != Blocks.LAVA)
             {
-                if (!isClientSide)
-                {
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                    setBlock(player, pos, Blocks.CRYING_OBSIDIAN);
-                }
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
+                setBlockWithClientSound(player, pos, Blocks.CRYING_OBSIDIAN);
 
                 return getToolInteractionResult(true, isClientSide);
             }
@@ -63,22 +60,16 @@ public class AmethystRod extends FireRod
 
             if (block == Blocks.DIAMOND_BLOCK)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.BUDDING_AMETHYST);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
+                setBlockWithClientSound(player, pos, Blocks.BUDDING_AMETHYST);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
 
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.BONE_BLOCK)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.CALCITE);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
+                setBlockWithClientSound(player, pos, Blocks.CALCITE);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
 
                 return getToolInteractionResult(true, isClientSide);
             }
@@ -95,6 +86,12 @@ public class AmethystRod extends FireRod
     private String getRodId()
     {
         return ToolRegistry.AMETHYST_ROD.getRegisteredName();
+    }
+
+    @Override
+    protected void appendDestroyingBlockInfo(ITooltip tooltip, boolean selectAsNew)
+    {
+        super.appendDestroyingBlockInfo(tooltip, false);
     }
 
     @Override
