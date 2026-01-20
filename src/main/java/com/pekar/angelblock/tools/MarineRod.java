@@ -71,23 +71,15 @@ public class MarineRod extends AncientRod
 
             if (block == Blocks.MELON)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.SLIME_BLOCK);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
+                setBlockWithClientSound(player, pos, Blocks.SLIME_BLOCK);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.POWDER_SNOW)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.SNOW_BLOCK);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
+                setBlockWithClientSound(player, pos, Blocks.SNOW_BLOCK);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
         }

@@ -90,12 +90,23 @@ public class EnhancedPickaxe extends ModPickaxe
         if (hardness <= originHardness && isToolEffective(entityLiving, pos)
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
-            var originBlock = originBlockState.getBlock();
-            if (!utils.blocks.types.isOre(originBlockState) || originBlock == block)
+            boolean areTheSameOres = isSameOre(originBlockState, blockState);
+            if (!utils.blocks.types.isOre(originBlockState) || areTheSameOres)
             {
                 if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
                     damageMainHandItem(1, entityLiving);
             }
         }
+    }
+
+    private static boolean isSameOre(BlockState a, BlockState b)
+    {
+        if (a.getBlock() == b.getBlock()) return true;
+
+        var aTags = a.getTags()
+                .filter(tag -> tag.location().getNamespace().equals("minecraft") && tag.location().getPath().endsWith("_ores"))
+                .toList();
+
+        return aTags.stream().anyMatch(b::is);
     }
 }

@@ -15,16 +15,35 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class FireRod extends MarineRod
 {
     public FireRod(Tier material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
+    }
+
+    @Override
+    protected void additionalActionOnMineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity entity)
+    {
+        super.additionalActionOnMineBlock(itemStack, level, blockState, pos, entity);
+        if (blockState.getBlock() == Blocks.GLOWSTONE)
+        {
+            if (!level.isClientSide() && entity instanceof Player player)
+            {
+                level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
+                level.destroyBlock(pos, true, entity, 1);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
+            }
+        }
     }
 
     @Override
@@ -57,31 +76,13 @@ public class FireRod extends MarineRod
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return plant(player, level, pos, interactionHand, facing, Blocks.NETHER_WART);
                 }
-
-//                var upPos = pos.above();
-//                var upBlock = level.getBlockState(upPos).getBlock();
-//                if (block == Blocks.OBSIDIAN && upBlock == Blocks.LAVA && level.getFluidState(upPos).getAmount() < FluidState.AMOUNT_FULL)
-//                {
-//                    if (!isClientSide)
-//                    {
-//                        level.setBlock(upPos, Blocks.LAVA.defaultBlockState(), 11);
-//                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
-//                        new PlaySoundPacket(SoundType.LAVA_PLACED).sendToPlayer((ServerPlayer) player);
-//                    }
-//
-//                    return getToolInteractionResult(true, isClientSide);
-//                }
             }
             else
             {
                 if (block == Blocks.END_STONE)
                 {
-                    if (!isClientSide)
-                    {
-                        setBlock(player, pos, Blocks.NETHERRACK);
-                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                    }
-
+                    setBlockWithClientSound(player, pos, Blocks.NETHERRACK);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
                     return getToolInteractionResult(true, isClientSide);
                 }
             }
@@ -113,56 +114,29 @@ public class FireRod extends MarineRod
 
             if (block == Blocks.MAGMA_BLOCK)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.GLOWSTONE);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
-                return getToolInteractionResult(true, isClientSide);
-            }
-
-            if (block == Blocks.GLOWSTONE)
-            {
-                if (!isClientSide)
-                {
-                    level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
-                    level.destroyBlock(pos, true, player, 1);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
+                setBlockWithClientSound(player, pos, Blocks.GLOWSTONE);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.BASALT)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.BLACKSTONE);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
+                setBlockWithClientSound(player, pos, Blocks.BLACKSTONE);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.WARPED_STEM || block == Blocks.CRIMSON_STEM)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.SHROOMLIGHT);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
+                setBlockWithClientSound(player, pos, Blocks.SHROOMLIGHT);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.CLAY) // it's important to check CLAY near WATER (MarineRod) earlier
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, Blocks.TERRACOTTA);
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
-
+                setBlockWithClientSound(player, pos, Blocks.TERRACOTTA);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
@@ -214,15 +188,21 @@ public class FireRod extends MarineRod
     }
 
     @Override
+    protected void appendDestroyingBlockInfo(ITooltip tooltip, boolean selectAsNew)
+    {
+        tooltip.includeEmptyLines();
+        super.appendDestroyingBlockInfo(tooltip, false);
+
+        tooltip.addLine(getRodDescriptionId(), 1).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
+    }
+
+    @Override
     protected void appendPlacingBlockInfo(ITooltip tooltip, boolean selectAsNew)
     {
         tooltip.includeEmptyLines();
         super.appendPlacingBlockInfo(tooltip, false);
 
-        for (int i = 2; i <= 3; i++)
-        {
-            tooltip.addLine(getRodDescriptionId(), i).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
-        }
+        tooltip.addLine(getRodDescriptionId(), 5).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
     }
 
     @Override
