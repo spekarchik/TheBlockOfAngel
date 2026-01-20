@@ -7,7 +7,6 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -70,49 +69,42 @@ public class AncientRod extends MagneticRod
             return result;
 
         var level = player.level();
-        boolean isClientSide = level.isClientSide();
-
         var pos = context.getClickedPos();
         BlockState blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
-
-        if (block != Blocks.STONE || context.getClickedFace() == Direction.UP)
-        {
-            if (utils.blocks.transformations.mossyTransforming(player, pos, block))
-            {
-                return getToolInteractionResult(true, isClientSide);
-            }
-        }
 
         var itemStack = player.getItemInHand(context.getHand());
 
         if (!hasCriticalDamage(itemStack))
         {
+            boolean isClientSide = level.isClientSide();
+
+            if (block != Blocks.STONE || context.getClickedFace() == Direction.UP)
+            {
+                if (utils.blocks.transformations.mossyTransforming(player, pos, block))
+                {
+                    return getToolInteractionResult(true, isClientSide);
+                }
+            }
+
             if (block instanceof InfestedBlock infestedBlock)
             {
-                if (!isClientSide)
-                {
-                    setBlock(player, pos, infestedBlock.getHostBlock());
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
+                setBlockWithClientSound(player, pos, infestedBlock.getHostBlock());
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
             {
-                if (!isClientSide)
-                {
-                    boolean isDark = block == Blocks.DEEPSLATE_DIAMOND_ORE;
-                    setBlock(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState().setValue(GreenDiamondBlock.IS_DARK, isDark));
-                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                }
+                boolean isDark = block == Blocks.DEEPSLATE_DIAMOND_ORE;
+                setBlockWithClientSound(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState().setValue(GreenDiamondBlock.IS_DARK, isDark));
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
 
             if (block instanceof LeavesBlock)
             {
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
-
                 return setOnBlockSide(context, this::setVine);
             }
 
@@ -175,11 +167,8 @@ public class AncientRod extends MagneticRod
 
                 if (block == Blocks.DIRT_PATH)
                 {
-                    if (!isClientSide)
-                    {
-                        damageMainHandItemIfSurvivalIgnoreClient(player, level);
-                        setBlock(player, pos, Blocks.GRASS_BLOCK);
-                    }
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
+                    setBlockWithClientSound(player, pos, Blocks.GRASS_BLOCK);
                     return getToolInteractionResult(true, isClientSide);
                 }
             }
@@ -212,11 +201,19 @@ public class AncientRod extends MagneticRod
         return "item." + rodId.replace(':', '.');
     }
 
+    protected void appendDestroyingBlockInfo(ITooltip tooltip, boolean selectAsNew)
+    {
+        for (int i = 1; i <= 2; i++)
+        {
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 1).apply();
+        }
+    }
+
     protected void appendPlacingBlockInfo(ITooltip tooltip, boolean selectAsNew)
     {
-        for (int i = 1; i <= 8; i++)
+        for (int i = 3; i <= 8; i++)
         {
-            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 1 || i == 3).apply();
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.Header, i == 3).apply();
         }
     }
 
@@ -262,6 +259,8 @@ public class AncientRod extends MagneticRod
 
         if (Screen.hasShiftDown())
         {
+            // Destroying
+            appendDestroyingBlockInfo(tooltip, true);
             // Placing
             appendPlacingBlockInfo(tooltip, true);
             tooltip.addEmptyLine();
