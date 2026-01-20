@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.Tool;
@@ -66,15 +67,9 @@ public class ModToolMaterial implements Tier
     }
 
     @Override
-    public Tool createToolProperties(TagKey<Block> tagKey)
-    {
-        return new Tool(List.of(Tool.Rule.minesAndDrops(tagKey, this.getSpeed())), getSpeed(), 1);
-    }
-
-    @Override
     public TagKey<Block> getIncorrectBlocksForDrops()
     {
-        throw new NotImplementedException("Not implemented [AngelBlock].ModToolMaterial.getIncorrectBlocksForDrops().");
+        return BlockTags.INCORRECT_FOR_DIAMOND_TOOL;
     }
 
     public int getLevel()
