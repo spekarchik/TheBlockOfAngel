@@ -1,5 +1,7 @@
 package com.pekar.angelblock.events;
 
+import com.pekar.angelblock.menus.CustomCraftingMenu;
+import com.pekar.angelblock.menus.CustomCraftingMenuProvider;
 import com.pekar.angelblock.menus.CustomSmithingMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,6 +33,17 @@ public class CustomizationEvents implements IEventHandler
             {
                 var accessLevel = ContainerLevelAccess.create(level, pos);
                 serverPlayer.openMenu(new CustomSmithingMenuProvider(accessLevel));
+            }
+        }
+        else if (state.getBlock() == Blocks.CRAFTING_TABLE)
+        {
+            event.setCanceled(true); // Not the standard menu to be shown
+            event.setCancellationResult(level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
+
+            if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer)
+            {
+                var accessLevel = ContainerLevelAccess.create(level, pos);
+                serverPlayer.openMenu(new CustomCraftingMenuProvider(accessLevel));
             }
         }
     }
