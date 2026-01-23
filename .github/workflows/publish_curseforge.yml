@@ -180,13 +180,14 @@ jobs:
           #  echo "Version ${FULL_VERSION} for ${GAME_VERSION} with loader $MOD_LOADER does not exist → publish"
           #fi
           
-      - name: Read changelog section
+      - name: Read entire changelog
         if: env.PUBLISH == 'true'
         run: |
           if [ -f changelog.md ]; then
+            # Используем here-doc для безопасной передачи многострочного текста
             {
               echo "CHANGELOG<<EOF"
-              awk '/^## 📦 Version /{if(!f){f=1;next}} f{print}' changelog.md | sed '/^## 📦/,$d'
+              cat changelog.md
               echo "EOF"
             } >> $GITHUB_ENV
           else
