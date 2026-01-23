@@ -186,7 +186,13 @@ jobs:
           if [ -f changelog.md ]; then
             {
               echo "CHANGELOG<<EOF"
-              awk '/^## 📦 Version /{if(!f){f=1;next}} f{print}' changelog.md | sed '/^## 📦/,$d'
+              awk '
+                /^## 📦 Version / {
+                  if (!f) { f=1 }
+                  else { exit }
+                }
+                f
+              ' changelog.md
               echo "EOF"
             } >> $GITHUB_ENV
           else
