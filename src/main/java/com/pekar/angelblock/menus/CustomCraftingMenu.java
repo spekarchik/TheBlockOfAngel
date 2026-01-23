@@ -25,36 +25,38 @@ public class CustomCraftingMenu extends CraftingMenu
     {
         super.slotsChanged(inventory);
 
-        var result = resultSlots.getItem(0);
+        var resultSlot = getSlot(getResultSlotIndex());
+        var result = resultSlot.getItem();
 
         if (!result.isEmpty() && result.is(ToolRegistry.BUILDER.get()))
         {
             if (hasDamagedRod(ToolRegistry.AMETHYST_ROD.get()))
             {
-                resultSlots.setItem(0, ItemStack.EMPTY);
+                resultSlot.set(ItemStack.EMPTY);
             }
         }
         else if (!result.isEmpty() && result.is(ToolRegistry.TRACK_LAYER.get()))
         {
             if (hasDamagedRod(ToolRegistry.MARINE_ROD.get()))
             {
-                resultSlots.setItem(0, ItemStack.EMPTY);
+                resultSlot.set(ItemStack.EMPTY);
             }
         }
         else if (!result.isEmpty() && result.is(ToolRegistry.PLANTER.get()))
         {
             if (hasDamagedRod(ToolRegistry.ANCIENT_ROD.get()))
             {
-                resultSlots.setItem(0, ItemStack.EMPTY);
+                resultSlot.set(ItemStack.EMPTY);
             }
         }
     }
 
     private boolean hasDamagedRod(Item rodItem)
     {
-        for (int i = 0; i < this.craftSlots.getContainerSize(); i++)
+        for (int i = 0; i < slots.size(); i++)
         {
-            var stack = this.craftSlots.getItem(i);
+            var slot = slots.get(i);
+            var stack = slot.getItem();
             if (stack.is(rodItem) && stack.isDamaged())
             {
                 return true;
