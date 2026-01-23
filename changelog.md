@@ -1,3 +1,9 @@
+## 📦 Version 2.19.3
+
+### 📝 Improvements
+- **Builder**, **Planter**, and **Track Layer** recipes now only work if the source rod is undamaged.
+
+
 ## 📦 Version 2.19.2
 
 ### 📝 Improvements
