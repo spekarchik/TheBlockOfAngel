@@ -185,9 +185,11 @@ jobs:
         run: |
           if [ -f changelog.md ]; then
             # Используем here-doc для безопасной передачи многострочного текста
-            echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-            cat changelog.md >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
+            {
+              echo "CHANGELOG<<EOF"
+              cat changelog.md
+              echo "EOF"
+            } >> $GITHUB_ENV
           else
             echo "CHANGELOG=No changelog provided" >> $GITHUB_ENV
           fi
