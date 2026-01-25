@@ -3,7 +3,15 @@
 ### 📝 Improvements
 - Reduced the average amount of **Diamond Powder** obtained from Diamond armor when destroyed with a **Splash Destroying Potion**.  
   This change makes Diamond recovery less efficient and better balanced.
-
+- Improved the magic exhaustion system:
+  - Exhaustion from using the **Builder**, **Track Layer**, and **Planter** has been increased by 2×.
+  - **Rod of Terra**, **Fire Rod**, **End Rod**, and **The Rod of Angel** now also cause exhaustion when destroying *Cobwebs*, *Glowstone*, and *Tuff*.
+  - **End Rod** and **The Rod of Angel** now cause exhaustion when changing *the weather*.
+  - Exhaustion from sword effects (generation of *cobwebs*, *cacti*, and *fire*) has been increased by 4×.
+    Exhaustion caused by *explosion* generation remains unchanged.
+  - **The Rod of Angel** now causes exhaustion for each despawned monster when the rod is held in the player’s hand.
+  - All magic exhaustion effects are disabled when the player’s *food level* is **0**.
+  
 
 ## 📦 Version 2.19.3
 
