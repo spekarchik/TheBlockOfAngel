@@ -24,14 +24,4 @@ public interface IToolService
         if (!applied) return InteractionResult.PASS;
         return isClientSide ? InteractionResult.SUCCESS: InteractionResult.SUCCESS_SERVER;
     }
-
-    default void causePlayerExhaustion(Player player)
-    {
-        if (player != null && !player.level().isClientSide())
-        {
-            var foodData = player.getFoodData();
-            foodData.setSaturation(foodData.getSaturationLevel() * 0.5F);
-            player.causeFoodExhaustion(0.5F);
-        }
-    }
 }

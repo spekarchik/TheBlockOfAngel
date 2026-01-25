@@ -25,6 +25,7 @@ import net.minecraft.world.level.storage.ServerLevelData;
 
 public class EndRod extends AmethystRod
 {
+
     public EndRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
@@ -46,11 +47,12 @@ public class EndRod extends AmethystRod
 
         if (blockState.getBlock() == Blocks.TUFF)
         {
-            if (!level.isClientSide() && entity instanceof Player player)
+            if (!level.isClientSide() && entity instanceof Player player && !hasCriticalDamage(itemStack) && player.getFoodData().getFoodLevel() > 0)
             {
                 level.setBlock(pos, BlockRegistry.DESTROYING_SALTPETER.get().defaultBlockState(), 0);
                 level.destroyBlock(pos, true, player, 1);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
+                causeMinePlayerExhaustion(player);
             }
         }
     }
@@ -65,7 +67,7 @@ public class EndRod extends AmethystRod
 
         var itemStack = player.getItemInHand(context.getHand());
 
-        if (!hasCriticalDamage(itemStack))
+        if (!hasCriticalDamage(itemStack) && player.getFoodData().getFoodLevel() > 0)
         {
             var pos = context.getClickedPos();
             var level = player.level();
@@ -93,13 +95,17 @@ public class EndRod extends AmethystRod
     {
         var offHandItemStack = player.getOffhandItem();
 
-        if (offHandItemStack.isEmpty() || hasCriticalDamage(player.getMainHandItem()) || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)))
+        if (offHandItemStack.isEmpty() || hasCriticalDamage(player.getMainHandItem())
+                || (isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
+                || player.getFoodData().getFoodLevel() <= 0)
             return InteractionResult.PASS;
 
         if (!utils.dimension.isOverworld(level.dimension()))
             return InteractionResult.FAIL;
 
         var offHandItem = offHandItemStack.getItem();
+
+        final int WEATHER_CHANGE_EXHAUSTION_MULTIPLIER = 16;
 
         if (offHandItem == ItemRegistry.FLAME_STONE.get())
         {
@@ -111,7 +117,7 @@ public class EndRod extends AmethystRod
                 levelData.setRaining(false);
                 levelData.setThundering(false);
                 damageMainHandItem(1, player);
-                causePlayerExhaustion(player);
+                utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
@@ -137,7 +143,7 @@ public class EndRod extends AmethystRod
                 }
                 levelData.setThunderTime(0);
                 damageMainHandItem(1, player);
-                causePlayerExhaustion(player);
+                utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
@@ -166,7 +172,7 @@ public class EndRod extends AmethystRod
                     levelData.setThunderTime(weatherLasts);
                 }
                 damageMainHandItem(1, player);
-                causePlayerExhaustion(player);
+                utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
             else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
             {
