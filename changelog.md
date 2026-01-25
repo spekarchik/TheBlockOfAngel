@@ -1,3 +1,10 @@
+## 📦 Version 2.20.0
+
+### 📝 Improvements
+- Reduced the average amount of **Diamond Powder** obtained from Diamond armor when destroyed with a **Splash Destroying Potion**.  
+  This change makes Diamond recovery less efficient and better balanced.
+
+
 ## 📦 Version 2.19.3
 
 ### 📝 Improvements
