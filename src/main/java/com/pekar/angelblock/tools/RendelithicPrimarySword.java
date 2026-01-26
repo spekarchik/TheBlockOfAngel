@@ -20,7 +20,7 @@ public class RendelithicPrimarySword extends ModSword
     protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, ServerPlayer attacker)
     {
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0, true, true));
-        causePlayerMultiEffectExhaustion(attacker);
+        causePlayerSingleEffectExhaustion(attacker);
     }
 
     @Override

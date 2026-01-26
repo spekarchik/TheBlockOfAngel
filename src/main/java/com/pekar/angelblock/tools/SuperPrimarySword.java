@@ -35,7 +35,7 @@ public class SuperPrimarySword extends ModSword
         }
 
         target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 0, true, true));
-        causePlayerMultiEffectExhaustion(attacker);
+        causePlayerSingleEffectExhaustion(attacker);
     }
 
     @Override

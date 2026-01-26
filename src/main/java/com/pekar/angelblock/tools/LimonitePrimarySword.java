@@ -23,7 +23,7 @@ public class LimonitePrimarySword extends ModSword
     {
         target.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0, true, true));
         target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 0, true, true));
-        causePlayerMultiEffectExhaustion(attacker);
+        causePlayerSingleEffectExhaustion(attacker);
     }
 
     @Override

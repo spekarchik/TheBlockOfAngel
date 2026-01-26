@@ -50,7 +50,7 @@ public class DiamithicSword extends ModSword
             var mainHandItem = attacker.getMainHandItem();
             var interactionHand = !mainHandItem.isEmpty() && mainHandItem.getItem().equals(this) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
             damageProperHandItemIfSurvivalIgnoreClient(attacker, interactionHand, attacker.level());
-            causePlayerMultiEffectExhaustion(attacker);
+            causePlayerSingleEffectExhaustion(attacker);
         }
     }
 

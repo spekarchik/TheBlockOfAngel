@@ -61,7 +61,7 @@ public class RendelithicSword extends ModSword
         if (attacker.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
         {
             target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));
-            causePlayerMultiEffectExhaustion(attacker);
+            causePlayerSingleEffectExhaustion(attacker);
         }
     }
 
