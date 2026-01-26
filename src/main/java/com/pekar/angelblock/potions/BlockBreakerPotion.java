@@ -151,7 +151,7 @@ public class BlockBreakerPotion extends ThrowableItemProjectile
                         default -> 0;
                     };
 
-                    var dropsNumber = random.nextIntBetweenInclusive(itemCount / 5, itemCount);
+                    var dropsNumber = random.nextIntBetweenInclusive(1, itemCount);
                     entity.spawnAtLocation(serverLevel, new ItemStack(ItemRegistry.DIAMOND_POWDER.get(), dropsNumber), 1.0F);
                 }
             }
