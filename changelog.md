@@ -12,6 +12,7 @@
   - Regular attacks with modded swords now also cause additional minor exhaustion.
   - **The Rod of Angel** now causes exhaustion for each monster it despawns while being held in the player’s hand.
   - All magic exhaustion effects are disabled when the player’s *food level* is **0**.
+- **Cracked Obsidian** and **Cracked End Stone** now use smelting instead of blasting.
   
 
 ## 📦 Version 2.19.3
