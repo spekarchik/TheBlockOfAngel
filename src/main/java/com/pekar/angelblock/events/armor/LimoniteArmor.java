@@ -166,7 +166,9 @@ public class LimoniteArmor extends Armor
             float distance = player.getEntity().distanceTo(entityAttackedBy);
             if (!isWitch && distance > 2f)
             {
-                entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
+                var random = player.getEntity().getRandom();
+                if (random.nextFloat() < 0.4f)
+                    entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
             }
             else
             {
