@@ -1,6 +1,6 @@
 {
     "type": "minecraft:smelting",
-    "category": "building",
+    "category": "blocks",
     "ingredient": "minecraft:obsidian",
     "result": {
         "id": "angelblock:cracked_obsidian_block"
