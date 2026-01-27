@@ -13,7 +13,7 @@
   - **The Rod of Angel** now causes exhaustion for each monster it despawns while being held in the player’s hand.
   - All magic exhaustion effects are disabled when the player’s *food level* is **0**.
 - **Cracked Obsidian** and **Cracked End Stone** now use smelting instead of blasting.
-- **Lymonite armor** and **Superyte armor** now restore health under rain only up to 10 HP.
+- **Lymonite armor** and **Superyte armor** now restore health under rain only up to 10 HP and now causes higher exhaustion (**1.6** vs **1.0** per second).
 - **Lymonite armor** and **Superyte armor** now ignite attackers with a 40% chance instead of 100%.
   
 
