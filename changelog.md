@@ -1,4 +1,4 @@
-## 📦 Version 2.20.0
+## 📦 Version 2.20.5
 
 ### 📝 Improvements
 - Reduced the average amount of **Diamond Powder** obtained from Diamond armor when destroyed with a **Splash Destroying Potion**.  
@@ -13,6 +13,8 @@
   - **The Rod of Angel** now causes exhaustion for each monster it despawns while being held in the player’s hand.
   - All magic exhaustion effects are disabled when the player’s *food level* is **0**.
 - **Cracked Obsidian** and **Cracked End Stone** now use smelting instead of blasting.
+- **Lymonite armor** and **Superyte armor** now restore health under rain only up to 10 HP.
+- **Lymonite armor** and **Superyte armor** now ignite attackers with a 40% chance instead of 100%.
   
 
 ## 📦 Version 2.19.3
