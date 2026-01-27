@@ -487,7 +487,7 @@ public class SuperArmor extends Armor
         if (!player.isFullArmorSetPutOn(this)) return;
         var entityPlayer = player.getEntity();
 
-        if (entityPlayer.getHealth() < entityPlayer.getMaxHealth())
+        if (entityPlayer.getHealth() < 10F)
         {
             regenerationEffect.tryActivate(REGENERATION_EFFECT_UNDER_RAIN_AMPLIFIER, UNDER_RAIN_REGENERATION_EFFECT_DURATION);
             entityPlayer.causeFoodExhaustion(EXHAUSTION_INCREMENT);
