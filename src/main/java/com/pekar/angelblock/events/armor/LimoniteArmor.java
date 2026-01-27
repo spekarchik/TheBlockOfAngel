@@ -314,7 +314,7 @@ public class LimoniteArmor extends Armor
         if (!player.isFullArmorSetPutOn(this)) return;
         var entityPlayer = player.getEntity();
 
-        if (entityPlayer.getHealth() < 10F)
+        if (entityPlayer.getHealth() < 10F && entityPlayer.getFoodData().getFoodLevel() > 0)
         {
             regenerationEffect.tryActivate(UNDER_RAIN_REGENERATION_EFFECT_DURATION);
             entityPlayer.causeFoodExhaustion(EXHAUSTION_INCREMENT);
