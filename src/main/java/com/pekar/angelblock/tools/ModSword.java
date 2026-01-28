@@ -101,8 +101,8 @@ public abstract class ModSword extends Item implements IModTool
     @Override
     public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
     {
-        if (!hasCriticalDamage(stack))
-            additionalActionOnHurtEnemy(stack, target, attacker);
+        if (!hasCriticalDamage(stack) && attacker instanceof ServerPlayer player && player.getFoodData().getFoodLevel() > 0)
+            additionalActionOnHurtEnemy(stack, target, player);
     }
 
     @Override
@@ -111,12 +111,14 @@ public abstract class ModSword extends Item implements IModTool
         itemStack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 
-    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, ServerPlayer player)
     {
     }
 
     protected final void setEffectAround(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
+        if (player.getFoodData().getFoodLevel() <= 0) return;
+
         var blockState = level.getBlockState(pos);
 
         final int posX = pos.getX(), posZ = pos.getZ();
@@ -133,11 +135,13 @@ public abstract class ModSword extends Item implements IModTool
             }
 
         damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
-        causePlayerExhaustion(player);
+        causePlayerMultiEffectExhaustion(player);
     }
 
     protected final void setEffectAhead(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
+        if (player.getFoodData().getFoodLevel() <= 0) return;
+
         var blockState = level.getBlockState(pos);
 
         final int posX = pos.getX(), posZ = pos.getZ();
@@ -213,7 +217,17 @@ public abstract class ModSword extends Item implements IModTool
             }
 
         damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
-        causePlayerExhaustion(player);
+        causePlayerMultiEffectExhaustion(player);
+    }
+
+    protected void causePlayerSingleEffectExhaustion(Player player)
+    {
+        utils.player.causePlayerExhaustion(player, 1);
+    }
+
+    protected void causePlayerMultiEffectExhaustion(Player player)
+    {
+        utils.player.causePlayerExhaustion(player, 4);
     }
 
     protected void processBlock(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
@@ -271,6 +285,8 @@ public abstract class ModSword extends Item implements IModTool
 
     protected void explode(Player player, InteractionHand interactionHand, Level level, BlockPos pos)
     {
+        if (player.getFoodData().getFoodLevel() <= 0) return;
+
         level.explode(player, pos.getX(), pos.getY() + 0.5, pos.getZ(), 0.8f, false /*fire*/, Level.ExplosionInteraction.NONE /*influences on explosion particles?*/);
         level.explode(player, pos.getX() + 0.8, pos.getY() + 0.2, pos.getZ() + 0.8, 0.8f, Level.ExplosionInteraction.NONE);
         level.explode(player, pos.getX() + 0.8, pos.getY() + 0.7, pos.getZ() - 0.8, 0.8f, Level.ExplosionInteraction.NONE);
@@ -278,11 +294,13 @@ public abstract class ModSword extends Item implements IModTool
         level.explode(player, pos.getX() - 0.8, pos.getY() + 1.5, pos.getZ() - 0.8, 0.8f, Level.ExplosionInteraction.NONE);
 
         damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
-        causePlayerExhaustion(player);
+        causePlayerSingleEffectExhaustion(player);
     }
 
     protected final void plantCacti(Player player, Level level, BlockPos pos, InteractionHand interactionHand, Direction facing)
     {
+        if (player.getFoodData().getFoodLevel() <= 0) return;
+
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
         boolean succeeded = false;
@@ -296,7 +314,7 @@ public abstract class ModSword extends Item implements IModTool
         if (succeeded)
         {
             damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, level);
-            causePlayerExhaustion(player);
+            causePlayerMultiEffectExhaustion(player);
         }
     }
 

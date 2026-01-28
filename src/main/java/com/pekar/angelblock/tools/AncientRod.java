@@ -38,10 +38,11 @@ public class AncientRod extends MagneticRod
     {
         if (blockState.getBlock() == Blocks.COBWEB)
         {
-            if (!level.isClientSide() && entity instanceof Player player)
+            if (!level.isClientSide() && entity instanceof Player player && !hasCriticalDamage(itemStack) && player.getFoodData().getFoodLevel() > 0)
             {
                 destroyWebBlocks(level, pos);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
+                causeMinePlayerExhaustion(player);
             }
         }
     }
@@ -70,12 +71,12 @@ public class AncientRod extends MagneticRod
 
         var level = player.level();
         var pos = context.getClickedPos();
-        BlockState blockState = level.getBlockState(pos);
+        var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
         var itemStack = player.getItemInHand(context.getHand());
 
-        if (!hasCriticalDamage(itemStack))
+        if (!hasCriticalDamage(itemStack) && player.getFoodData().getFoodLevel() > 0)
         {
             boolean isClientSide = level.isClientSide();
 

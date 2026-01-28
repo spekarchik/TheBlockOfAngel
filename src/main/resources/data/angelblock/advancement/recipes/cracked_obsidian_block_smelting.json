@@ -5,7 +5,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "minecraft:end_stone"
+                                                                        "items":  "minecraft:obsidian"
                                                                     }
                                                                 ]
                                                   }
@@ -15,7 +15,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:cracked_endstone_block"
+                                                                        "items":  "angelblock:cracked_obsidian_block"
                                                                     }
                                                                 ]
                                                   }
@@ -24,7 +24,7 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:cracked_endstone_block_blasting"
+                                    "angelblock:cracked_obsidian_block_smelting"
                                 ]
                 },
     "requirements":  [

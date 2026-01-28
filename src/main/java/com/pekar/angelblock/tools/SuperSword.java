@@ -5,6 +5,7 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -93,29 +94,30 @@ public class SuperSword extends ModSword
     }
 
     @Override
-    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, ServerPlayer attacker)
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT))
         {
             attacker.level().explode(attacker, target.getX() + 0.1, target.getY() + 0.9, target.getZ() + 0.1, 1.8f, false, Level.ExplosionInteraction.NONE);
+            causePlayerSingleEffectExhaustion(attacker);
         }
         else if (attacker.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
         {
             target.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0, true, true));
+            causePlayerSingleEffectExhaustion(attacker);
         }
         else if (attacker.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
         {
             target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));
+            causePlayerSingleEffectExhaustion(attacker);
         }
 
         target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 400, 0, true, true));
 
-        if (attacker instanceof Player player)
-        {
-            var mainHandItem = attacker.getMainHandItem();
-            var interactionHand = !mainHandItem.isEmpty() && mainHandItem.getItem().equals(this) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-            damageProperHandItemIfSurvivalIgnoreClient(player, interactionHand, attacker.level());
-        }
+        var mainHandItem = attacker.getMainHandItem();
+        var interactionHand = !mainHandItem.isEmpty() && mainHandItem.getItem().equals(this) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        damageProperHandItemIfSurvivalIgnoreClient(attacker, interactionHand, attacker.level());
+        causePlayerSingleEffectExhaustion(attacker);
     }
 
     @Override
