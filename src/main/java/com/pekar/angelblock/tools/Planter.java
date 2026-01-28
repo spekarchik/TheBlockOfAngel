@@ -41,25 +41,29 @@ public class Planter extends WorkRod
         var level = player.level();
         var offHandItemStack = player.getItemInHand(InteractionHand.OFF_HAND);
         int offHandItemCountBeforeUse = offHandItemStack.getCount();
-        var pos = context.getClickedPos();
 
-        var offHandItem = offHandItemStack.getItem();
         var success = false;
 
-        if (offHandItem == Items.BONE_MEAL)
+        if (player.getFoodData().getFoodLevel() > 0)
         {
-            success = bonemealPlants(player, level, pos, context.getClickedFace());
-        }
-        else if (offHandItem instanceof BlockItem)
-        {
-            success = plantOffHandItems(player, level, pos, context.getClickedFace());
-        }
-        else if (offHandItem instanceof ShearsItem)
-        {
-            success = grabPlants(player, level, pos, 5, false);
-            if (success)
+            var offHandItem = offHandItemStack.getItem();
+            var pos = context.getClickedPos();
+
+            if (offHandItem == Items.BONE_MEAL)
             {
-                damageOffHandItemIfSurvivalIgnoreClient(player, level);
+                success = bonemealPlants(player, level, pos, context.getClickedFace());
+            }
+            else if (offHandItem instanceof BlockItem)
+            {
+                success = plantOffHandItems(player, level, pos, context.getClickedFace());
+            }
+            else if (offHandItem instanceof ShearsItem)
+            {
+                success = grabPlants(player, level, pos, 5, false);
+                if (success)
+                {
+                    damageOffHandItemIfSurvivalIgnoreClient(player, level);
+                }
             }
         }
 

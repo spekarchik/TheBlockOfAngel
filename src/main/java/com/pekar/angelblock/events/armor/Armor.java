@@ -51,7 +51,7 @@ abstract class Armor implements IArmor
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final double CREEPER_AGRY_DISTANCE = 3.0;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 20;
-    protected static final float EXHAUSTION_INCREMENT = 0.5F;
+    protected static final float EXHAUSTION_INCREMENT = 0.8F;
     protected static final int UNDER_RAIN_REGENERATION_EFFECT_DURATION = 100;
 
     protected final TriPredicate<Block, BlockPos, Level> isIcePredicate = (block, pos, level) ->
