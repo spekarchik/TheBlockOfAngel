@@ -1,3 +1,22 @@
+## 📦 Version 2.20.5
+
+### 📝 Improvements
+- Reduced the average amount of **Diamond Powder** obtained from Diamond armor when destroyed with a **Splash Destroying Potion**.  
+  This change makes Diamond recovery less efficient and better balanced.
+- Improved the magic exhaustion system:
+  - Exhaustion from using the **Builder**, **Track Layer**, and **Planter** has been increased by 2×.
+  - **Rod of Terra**, **Fire Rod**, **End Rod**, and **The Rod of Angel** now also cause exhaustion when destroying *Cobwebs*, *Glowstone*, and *Tuff*.
+  - **End Rod** and **The Rod of Angel** now cause exhaustion when changing *the weather*.
+  - Exhaustion from modded sword effects (generation of *cobwebs*, *cacti*, and *fire*) has been increased by 4×.
+    Exhaustion caused by *explosion* generation remains unchanged.
+  - Regular attacks with modded swords now also cause additional minor exhaustion.
+  - **The Rod of Angel** now causes exhaustion for each monster it despawns while being held in the player’s hand.
+  - All magic exhaustion effects are disabled when the player’s *food level* is **0**.
+- **Cracked Obsidian** and **Cracked End Stone** now use smelting instead of blasting.
+- **Lymonite armor** and **Superyte armor** now restore health under rain only up to 10 HP and now causes higher exhaustion (**1.6** vs **1.0** per second).
+- **Lymonite armor** and **Superyte armor** now ignite attackers with a 40% chance instead of 100%.
+  
+
 ## 📦 Version 2.19.3
 
 ### 📝 Improvements
