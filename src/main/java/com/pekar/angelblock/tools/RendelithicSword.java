@@ -4,6 +4,7 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -55,10 +56,13 @@ public class RendelithicSword extends ModSword
     }
 
     @Override
-    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, ServerPlayer attacker)
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_FIRE_MODE_EFFECT))
+        {
             target.addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 0, true, true));
+            causePlayerSingleEffectExhaustion(attacker);
+        }
     }
 
     @Override
