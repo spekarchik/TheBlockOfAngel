@@ -2,6 +2,7 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,9 +17,10 @@ public class RendelithicPrimarySword extends ModSword
     }
 
     @Override
-    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, ServerPlayer attacker)
     {
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0, true, true));
+        causePlayerSingleEffectExhaustion(attacker);
     }
 
     @Override
@@ -26,9 +28,9 @@ public class RendelithicPrimarySword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 4; i++)
+        for (int i = 0; i <= 5; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1).styledAs(TextStyle.DarkGray, i == 3).apply();
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1).styledAs(TextStyle.DarkGray, i == 3 || i == 4).apply();
         }
     }
 }

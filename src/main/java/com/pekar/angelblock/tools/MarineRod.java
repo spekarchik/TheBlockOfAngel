@@ -38,13 +38,13 @@ public class MarineRod extends AncientRod
         var block = blockState.getBlock();
 
         var itemStack = player.getItemInHand(context.getHand());
-        boolean isBroken = hasCriticalDamage(itemStack);
+        boolean isBrokenOrPlayerExhausted = hasCriticalDamage(itemStack) || player.getFoodData().getFoodLevel() <= 0;
 
         var hand = context.getHand();
         var facing = context.getClickedFace();
         var itemRand = new Random();
 
-        if (!isBroken)
+        if (!isBrokenOrPlayerExhausted)
         {
             boolean isClientSide = level.isClientSide();
 
@@ -86,7 +86,7 @@ public class MarineRod extends AncientRod
         var result = super.useOnInternal(context);
         if (result != InteractionResult.PASS) return result;
 
-        if (!isBroken && facing == Direction.UP)
+        if (!isBrokenOrPlayerExhausted && facing == Direction.UP)
         {
             if (block == Blocks.PODZOL || block == Blocks.MYCELIUM)
             {
