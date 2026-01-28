@@ -24,6 +24,10 @@ import java.util.function.Function;
 
 public abstract class MagneticRod extends ModRod
 {
+    private static final int MAGNETIC_USE_EXHAUSTION_MULTIPLIER = 1;
+    private static final int NORMAL_USE_EXHAUSTION_MULTIPLIER = 16;
+    private static final int MINE_EXHAUSTION_MULTIPLIER = 2;
+
     public MagneticRod(Tier material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
@@ -39,7 +43,11 @@ public abstract class MagneticRod extends ModRod
             if (!context.getLevel().isClientSide())
             {
                 var player = context.getPlayer();
-                causePlayerExhaustion(player);
+                var exhaustionMultiplier = isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)
+                        ? MAGNETIC_USE_EXHAUSTION_MULTIPLIER
+                        : NORMAL_USE_EXHAUSTION_MULTIPLIER;
+
+                utils.player.causePlayerExhaustion(player, exhaustionMultiplier);
             }
         }
         return result;
@@ -50,7 +58,7 @@ public abstract class MagneticRod extends ModRod
         var player = context.getPlayer();
         var itemStack = player.getItemInHand(context.getHand());
 
-        if (hasCriticalDamage(itemStack)) return InteractionResult.FAIL;
+        if (hasCriticalDamage(itemStack) || player.getFoodData().getFoodLevel() <= 0) return InteractionResult.FAIL;
 
         if (!isEnhanced() || !player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT))
         {
@@ -282,5 +290,10 @@ public abstract class MagneticRod extends ModRod
     private boolean isAmethystGeode(Block block)
     {
         return block == Blocks.SMOOTH_BASALT || block == Blocks.CALCITE;
+    }
+
+    protected void causeMinePlayerExhaustion(Player player)
+    {
+        utils.player.causePlayerExhaustion(player, MINE_EXHAUSTION_MULTIPLIER);
     }
 }

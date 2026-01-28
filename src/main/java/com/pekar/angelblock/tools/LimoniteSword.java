@@ -5,6 +5,7 @@ import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -70,12 +71,16 @@ public class LimoniteSword extends ModSword
     }
 
     @Override
-    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker)
+    protected void additionalActionOnHurtEnemy(ItemStack stack, LivingEntity target, ServerPlayer attacker)
     {
         if (attacker.hasEffect(PotionRegistry.SWORD_WEB_MODE_EFFECT))
+        {
             target.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0, true, true));
+            causePlayerSingleEffectExhaustion(attacker);
+        }
 
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 400, 0, true, true));
+        causePlayerSingleEffectExhaustion(attacker);
     }
 
     @Override

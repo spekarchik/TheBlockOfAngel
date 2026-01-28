@@ -3,6 +3,7 @@ package com.pekar.angelblock.tools;
 import net.minecraft.world.item.Tier;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
@@ -19,5 +20,10 @@ public abstract class WorkRod extends ModRod implements ITooltipProvider
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    protected void causePlayerExhaustion(Player player)
+    {
+        utils.player.causePlayerExhaustion(player, 2);
     }
 }

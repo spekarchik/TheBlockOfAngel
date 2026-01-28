@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Player
 {
+
     public final PlayerConditions conditions = new PlayerConditions();
 
     Player()
@@ -137,5 +138,24 @@ public class Player
                 .flatMap(lookup -> lookup.get(Enchantments.SILK_TOUCH))
                 .map(holder -> EnchantmentHelper.getItemEnchantmentLevel(holder, stack) > 0)
                 .orElse(false); // если чара нет — вернуть false
+    }
+
+    public void causePlayerExhaustion(net.minecraft.world.entity.player.Player player, int multiplier)
+    {
+        final float SATURATION_FACTOR = 0.5F;
+        final float EXHAUSTION = 0.5F;
+
+        if (player != null && !player.level().isClientSide())
+        {
+            var foodData = player.getFoodData();
+
+            if (foodData.getSaturationLevel() > 0)
+            {
+                float sat = foodData.getSaturationLevel();
+                foodData.setSaturation(sat * (float)Math.pow(SATURATION_FACTOR, multiplier));
+            }
+
+            player.causeFoodExhaustion(EXHAUSTION * multiplier);
+        }
     }
 }

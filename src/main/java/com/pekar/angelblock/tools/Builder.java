@@ -37,7 +37,7 @@ public class Builder extends WorkRod
         var offHandItem = offHandItemStack.getItem();
         var success = false;
 
-        if (offHandItem instanceof BlockItem)
+        if (offHandItem instanceof BlockItem && player.getFoodData().getFoodLevel() > 0)
         {
             boolean isMagneticMode = this.isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT);
             success = isMagneticMode

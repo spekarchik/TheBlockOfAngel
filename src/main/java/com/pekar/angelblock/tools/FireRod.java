@@ -37,11 +37,12 @@ public class FireRod extends MarineRod
         super.additionalActionOnMineBlock(itemStack, level, blockState, pos, entity);
         if (blockState.getBlock() == Blocks.GLOWSTONE)
         {
-            if (!level.isClientSide() && entity instanceof Player player)
+            if (!level.isClientSide() && entity instanceof Player player && !hasCriticalDamage(itemStack) && player.getFoodData().getFoodLevel() > 0)
             {
                 level.setBlock(pos, BlockRegistry.DESTROYING_BLAZE_POWDER.get().defaultBlockState(), 0);
                 level.destroyBlock(pos, true, entity, 1);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
+                causeMinePlayerExhaustion(player);
             }
         }
     }
@@ -57,7 +58,7 @@ public class FireRod extends MarineRod
 
         var interactionHand = context.getHand();
         var itemStack = player.getItemInHand(interactionHand);
-        boolean isBroken = hasCriticalDamage(itemStack);
+        boolean isBrokenOrPlayerExhausted = hasCriticalDamage(itemStack) || player.getFoodData().getFoodLevel() <= 0;
 
         boolean isClientSide = level.isClientSide();
 
@@ -65,7 +66,7 @@ public class FireRod extends MarineRod
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
 
-        if (!isBroken)
+        if (!isBrokenOrPlayerExhausted)
         {
             var facing = context.getClickedFace();
 
@@ -91,7 +92,7 @@ public class FireRod extends MarineRod
         var result = super.useOnInternal(context);
         if (result != InteractionResult.PASS) return result;
 
-        if (!isBroken)
+        if (!isBrokenOrPlayerExhausted)
         {
 //            Block woolBlock = null;
 //

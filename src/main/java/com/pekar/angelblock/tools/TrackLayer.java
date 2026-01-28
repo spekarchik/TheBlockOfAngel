@@ -39,7 +39,7 @@ public class TrackLayer extends WorkRod
         var offHandItem = offHandItemStack.getItem();
         var success = false;
 
-        if (offHandItem instanceof BlockItem)
+        if (offHandItem instanceof BlockItem && player.getFoodData().getFoodLevel() > 0)
         {
             success = placeBlocks(player, level, pos, context.getClickedFace());
         }
