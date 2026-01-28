@@ -2,6 +2,7 @@ package com.pekar.angelblock.network.packets;
 
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.Packet;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -21,7 +22,11 @@ public class HoldingAngelRodPacket extends ClientToServerPacket
 
         for (Entity entity : monsters)
         {
-            entity.discard();
+            if (serverPlayer.getFoodData().getFoodLevel() > 0)
+            {
+                entity.discard();
+                Utils.instance.player.causePlayerExhaustion(serverPlayer, 2);
+            }
         }
     }
 
