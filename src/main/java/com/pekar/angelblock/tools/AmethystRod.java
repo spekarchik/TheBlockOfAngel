@@ -34,7 +34,7 @@ public class AmethystRod extends FireRod
 
         boolean isClientSide = level.isClientSide();
 
-        if (!hasCriticalDamage(itemStack))
+        if (!hasCriticalDamage(itemStack) && player.getFoodData().getFoodLevel() > 0)
         {
             var pos = context.getClickedPos();
             var blockState = level.getBlockState(pos);

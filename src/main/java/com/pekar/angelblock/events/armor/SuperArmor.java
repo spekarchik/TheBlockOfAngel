@@ -224,7 +224,9 @@ public class SuperArmor extends Armor
                 float distance = player.getEntity().distanceTo(entityAttackedBy);
                 if (!isWitch && distance > 2f)
                 {
-                    entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
+                    var random = player.getEntity().getRandom();
+                    if (random.nextFloat() < 0.4f)
+                        entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
                 }
                 else
                 {
@@ -487,7 +489,7 @@ public class SuperArmor extends Armor
         if (!player.isFullArmorSetPutOn(this)) return;
         var entityPlayer = player.getEntity();
 
-        if (entityPlayer.getHealth() < entityPlayer.getMaxHealth())
+        if (entityPlayer.getHealth() < 10F && entityPlayer.getFoodData().getFoodLevel() > 0)
         {
             regenerationEffect.tryActivate(REGENERATION_EFFECT_UNDER_RAIN_AMPLIFIER, UNDER_RAIN_REGENERATION_EFFECT_DURATION);
             entityPlayer.causeFoodExhaustion(EXHAUSTION_INCREMENT);
