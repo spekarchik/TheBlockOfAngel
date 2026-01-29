@@ -1,3 +1,9 @@
+## 📦 Version 2.21.0
+
+### 📝 Improvements
+- **Aeryte armor**: *Slow Falling* and *Super Jump* switcheable effects now require the full armor set.
+
+
 ## 📦 Version 2.20.5
 
 ### 📝 Improvements
