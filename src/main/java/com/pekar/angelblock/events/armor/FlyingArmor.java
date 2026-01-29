@@ -25,7 +25,7 @@ public class FlyingArmor extends Armor
     {
         super(player);
 
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnFullArmorSet().asArmorEffect();
 
         speedEffect = new SpeedSwitchingEffect(player, this, 1).showIcon().setupAvailability(this::isSpeedAvailable).asArmorEffect();
         var jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_BOOST_AMPLIFIER);
@@ -244,7 +244,7 @@ public class FlyingArmor extends Armor
         int bootsDamage = boots.getDamageValue();
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
 
-        return player.isArmorElementPutOn(this, EquipmentSlot.FEET)
+        return player.isFullArmorSetPutOn(this)
                 && bootsDamage < maxBootsDamageToJump;
     }
 
