@@ -1,0 +1,59 @@
+﻿{
+    "criteria":  {
+                     "item2":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "angelblock:diamond_tool_upgrade_kit"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item3":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:diamond_hoe"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item0":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:iron_hoe"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item1":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:copper_hoe"
+                                                                    }
+                                                                ]
+                                                  }
+                               }
+                 },
+    "parent":  "minecraft:recipes/root",
+    "rewards":  {
+                    "recipes":  [
+                                    "angelblock:diamond_hoe",
+                                    "angelblock:diamond_from_copper_hoe"
+                                ]
+                },
+    "requirements":  [
+                         [
+                             "item2",
+                             "item3",
+                             "item0",
+                             "item1"
+                         ]
+                     ]
+}

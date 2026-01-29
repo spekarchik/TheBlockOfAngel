@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:super_chestplate",
+    "addition": "minecraft:elytra",
+    "result": {
+        "id": "angelblock:super_chestplate_flying"
+    },
+    "template": "angelblock:super_armor_upgrade_kit"
+}

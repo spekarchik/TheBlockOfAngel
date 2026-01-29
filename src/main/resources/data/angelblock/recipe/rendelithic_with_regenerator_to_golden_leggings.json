@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:rendelithic_leggings_with_regenerator",
+    "addition": "minecraft:flint",
+    "result": {
+        "id": "minecraft:golden_leggings"
+    },
+    "template": "angelblock:downgrade_kit"
+}

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "pattern": [
+        "#",
+        "/",
+        "?"
+    ],
+    "key": {
+        "#": "minecraft:piston",
+        "/": "minecraft:fishing_rod",
+        "?": "angelblock:marine_rod"
+    },
+    "result": {
+        "id": "angelblock:track_layer",
+        "count": 1
+    }
+}

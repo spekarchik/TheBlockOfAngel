@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values":
+		[
+			"angelblock:cracked_obsidian_block",
+			"angelblock:green_diamond_ore",
+			"angelblock:nether_bars_block"
+		]
+}

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#minecraft:coal_ores",
+    "#minecraft:iron_ores",
+    "minecraft:gold_ore",
+    "minecraft:deepslate_gold_ore",
+    "#minecraft:copper_ores",
+    "#minecraft:emerald_ores",
+    "#minecraft:redstone_ores",
+    "#minecraft:lapis_ores",
+    "angelblock:green_diamond_ore"
+  ]
+}

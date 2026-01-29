@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "A A",
+    "ECE",
+    " D "
+  ],
+  "key": {
+    "A":
+    "angelblock:evoker_amulet",
+    "C":
+    "angelblock:devil_block",
+    "D":
+    "angelblock:ancient_scroll",
+    "E":
+    "angelblock:miner_figure"
+  },
+  "result": {
+    "id": "angelblock:inactive_angel_block",
+    "count": 1
+  }
+}

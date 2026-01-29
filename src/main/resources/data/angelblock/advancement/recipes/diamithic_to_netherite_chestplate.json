@@ -1,0 +1,58 @@
+﻿{
+    "criteria":  {
+                     "item2":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "angelblock:downgrade_kit"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item3":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:netherite_chestplate"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item0":  {
+                                   "trigger":  "minecraft:inventory_changed",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "angelblock:diamithic_chestplate"
+                                                                    }
+                                                                ]
+                                                  }
+                               },
+                     "item1":  {
+                                   "trigger": "minecraft:impossible",
+                                   "conditions":  {
+                                                      "items":  [
+                                                                    {
+                                                                        "items":  "minecraft:flint"
+                                                                    }
+                                                                ]
+                                                  }
+                               }
+                 },
+    "parent":  "minecraft:recipes/root",
+    "rewards":  {
+                    "recipes":  [
+                                    "angelblock:diamithic_to_netherite_chestplate"
+                                ]
+                },
+    "requirements":  [
+                         [
+                             "item2",
+                             "item3",
+                             "item0",
+                             "item1"
+                         ]
+                     ]
+}

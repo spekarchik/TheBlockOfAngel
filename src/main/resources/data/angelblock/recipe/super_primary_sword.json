@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "minecraft:netherite_sword",
+  "addition": "angelblock:super_ingot",
+  "result": {
+    "id": "angelblock:super_primary_sword"
+  },
+  "template": "angelblock:super_tool_upgrade_kit"
+}

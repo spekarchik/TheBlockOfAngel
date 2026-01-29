@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:smelting",
+    "category": "misc",
+    "ingredient": "angelblock:limonite_powder",
+    "result": {
+        "id": "angelblock:limonite_ingot"
+    },
+    "experience": 1.2,
+    "cookingtime": 200
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    "angelblock:super_ingot",
+    "B":
+    "angelblock:energy_fiber",
+    "C":
+    "angelblock:energy_crystal"
+  },
+  "result": {
+    "id": "angelblock:super_plate",
+    "count": 5
+  }
+}

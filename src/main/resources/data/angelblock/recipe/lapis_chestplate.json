@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:diamond_chestplate",
+    "addition": "angelblock:lapis_plate",
+    "result": {
+        "id": "angelblock:lapis_chestplate"
+    },
+    "template": "angelblock:lapis_armor_upgrade_kit"
+}

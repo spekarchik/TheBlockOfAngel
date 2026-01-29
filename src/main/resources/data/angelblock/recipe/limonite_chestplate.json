@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:chainmail_chestplate",
+    "addition": "angelblock:limonite_plate",
+    "result": {
+        "id": "angelblock:limonite_chestplate"
+    },
+    "template": "angelblock:limonite_armor_upgrade_kit"
+}

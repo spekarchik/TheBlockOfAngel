@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "angelblock:diamond_powder_block"
+  ],
+  "result": {
+    "id": "angelblock:diamond_powder",
+    "count": 9
+  }
+}

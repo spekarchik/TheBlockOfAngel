@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:limonite_boots",
+    "addition": "angelblock:strength_pearl",
+    "result": {
+        "id": "angelblock:limonite_boots_with_strength"
+    },
+    "template": "angelblock:limonite_armor_upgrade_kit"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    "angelblock:flying_ingot"
+  },
+  "result": {
+    "id": "angelblock:flying_material_block",
+    "count": 1
+  }
+}

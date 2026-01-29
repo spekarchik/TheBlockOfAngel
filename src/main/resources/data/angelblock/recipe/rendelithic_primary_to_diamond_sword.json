@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:rendelithic_primary_sword",
+    "addition": "minecraft:flint",
+    "result": {
+        "id": "minecraft:diamond_sword"
+    },
+    "template": "angelblock:downgrade_kit"
+}

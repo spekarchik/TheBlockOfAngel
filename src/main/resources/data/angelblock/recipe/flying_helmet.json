@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:leather_helmet",
+    "addition": "angelblock:flying_plate",
+    "result": {
+        "id": "angelblock:flying_helmet"
+    },
+    "template": "angelblock:flying_armor_upgrade_kit"
+}

@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:limonite_primary_sword",
+    "addition": "angelblock:bios_diamond",
+    "result": {
+        "id": "angelblock:limonite_sword"
+    },
+    "template": "angelblock:limonite_tool_upgrade_kit"
+}

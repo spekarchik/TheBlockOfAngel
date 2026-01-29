@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:diamithic_chestplate",
+    "addition": "angelblock:soaring_spore_essence",
+    "result": {
+        "id": "angelblock:diamithic_chestplate_with_levitation"
+    },
+    "template": "angelblock:diamithic_armor_upgrade_kit"
+}

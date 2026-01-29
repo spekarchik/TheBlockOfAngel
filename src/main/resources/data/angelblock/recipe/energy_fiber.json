@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "energy_fiber",
+  "category": "misc",
+  "pattern": [
+    "III",
+    "BBB",
+    "RRR"
+  ],
+  "key": {
+    "I":
+    "minecraft:end_rod",
+    "R":
+    "minecraft:redstone",
+    "B":
+    "angelblock:basalt_fiber"
+  },
+  "result": {
+    "id": "angelblock:energy_fiber",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.pekar.angelblock.mixins",
+  "compatibilityLevel": "JAVA_13",
+  "mixins": [
+    "AxolotlAccessor",
+    "AxolotlMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "verbose": true,
+  "loggingLevel": "DEBUG"
+}

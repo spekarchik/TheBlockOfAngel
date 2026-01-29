@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:lapis_leggings",
+    "addition": "angelblock:bios_diamond",
+    "result": {
+        "id": "angelblock:lapis_leggings_with_regenerator"
+    },
+    "template": "angelblock:lapis_armor_upgrade_kit"
+}

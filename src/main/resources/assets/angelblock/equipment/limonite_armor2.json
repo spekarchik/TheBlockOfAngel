@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "angelblock:limonite_armor2"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "angelblock:limonite_armor2"
+      }
+    ]
+  }
+}

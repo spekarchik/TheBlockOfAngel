@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    "angelblock:rendelithic_ingot",
+    "B":
+    "angelblock:armor_fiber",
+    "C":
+    "angelblock:vesicular_terracotta"
+  },
+  "result": {
+    "id": "angelblock:rendelithic_plate",
+    "count": 5
+  }
+}

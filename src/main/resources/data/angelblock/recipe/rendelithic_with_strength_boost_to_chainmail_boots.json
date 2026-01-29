@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:rendelithic_boots_with_strength_boost",
+    "addition": "minecraft:flint",
+    "result": {
+        "id": "minecraft:chainmail_boots"
+    },
+    "template": "angelblock:downgrade_kit"
+}

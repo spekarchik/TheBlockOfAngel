@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:smelting",
+    "category": "blocks",
+    "ingredient": "minecraft:end_stone",
+    "result": {
+        "id": "angelblock:cracked_endstone_block"
+    },
+    "experience": 0.5,
+    "cookingtime": 100
+}

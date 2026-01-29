@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:track_layer",
+    "addition": "minecraft:flint",
+    "result": {
+        "id": "angelblock:marine_rod"
+    },
+    "template": "angelblock:downgrade_kit"
+}

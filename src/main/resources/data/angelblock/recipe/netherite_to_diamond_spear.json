@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "minecraft:netherite_spear",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:diamond_spear"
+  },
+  "template": "angelblock:downgrade_kit"
+}

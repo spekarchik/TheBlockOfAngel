@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "angelblock:diamithic_chestplate_with_levitation",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:netherite_chestplate"
+  },
+  "template": "angelblock:downgrade_kit"
+}

@@ -1,0 +1,13 @@
+{
+  "variants":
+  {
+    "is_dark=false":
+    {
+      "model": "angelblock:block/green_diamond_ore"
+    },
+    "is_dark=true":
+    {
+      "model": "angelblock:block/green_diamond_ore_dark"
+    }
+  }
+}

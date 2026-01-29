@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:super_primary_shovel",
+    "addition": "angelblock:super_crystal",
+    "result": {
+        "id": "angelblock:super_shovel"
+    },
+    "template": "angelblock:super_tool_upgrade_kit"
+}

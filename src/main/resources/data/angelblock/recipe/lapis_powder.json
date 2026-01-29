@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "angelblock:obsidian_powder",
+    "angelblock:endstone_powder",
+    "minecraft:lapis_lazuli",
+    "minecraft:slime_ball"
+  ],
+  "result": {
+    "id": "angelblock:lapis_powder",
+    "count": 3
+  }
+}

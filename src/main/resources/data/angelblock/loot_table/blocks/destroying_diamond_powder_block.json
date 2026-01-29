@@ -1,0 +1,41 @@
+{
+	"type": "minecraft:block",
+	"pools":
+	[
+		{
+			"rolls": 1.0,
+			"bonus_rolls": 0.0,
+			"entries":
+			[
+				{
+					"type": "minecraft:alternatives",
+					"children":
+					[
+						{
+							"type": "minecraft:item",
+							"conditions":
+							[
+								{
+									"condition": "minecraft:survives_explosion"
+								}
+							],
+							"functions":
+							[
+								{
+									"function": "minecraft:set_count",
+									"count": 9.0,
+									"add": false
+								},
+								{
+									"function": "minecraft:explosion_decay"
+								}
+							],
+							"name": "angelblock:diamond_powder"
+						}
+					]
+				}
+			]
+		}
+	],
+	"random_sequence": "angelblock:blocks/destroying_diamond_powder_block"
+}

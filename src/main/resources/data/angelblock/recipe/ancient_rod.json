@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "pattern": [
+        "#",
+        "/",
+        "/"
+    ],
+    "key": {
+        "#": "angelblock:bios_diamond",
+        "/": "minecraft:bamboo"
+    },
+    "result": {
+        "id": "angelblock:ancient_rod",
+        "count": 1
+    }
+}

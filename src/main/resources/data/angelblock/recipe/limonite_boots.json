@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:leather_boots",
+    "addition": "angelblock:limonite_plate",
+    "result": {
+        "id": "angelblock:limonite_boots"
+    },
+    "template": "angelblock:limonite_armor_upgrade_kit"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "angelblock:item/lapis_armor_upgrade_kit"
+  }
+}

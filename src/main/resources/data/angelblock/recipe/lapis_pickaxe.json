@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:lapis_primary_pickaxe",
+    "addition": "angelblock:marine_crystal",
+    "result": {
+        "id": "angelblock:lapis_pickaxe"
+    },
+    "template": "angelblock:lapis_tool_upgrade_kit"
+}

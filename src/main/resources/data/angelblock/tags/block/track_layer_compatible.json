@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#minecraft:walls",
+    "#minecraft:rails",
+    "#minecraft:fences",
+    "#minecraft:slabs",
+    "#minecraft:wool_carpets",
+    "minecraft:redstone_wire"
+  ]
+}

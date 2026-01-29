@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "angelblock:lapis_primary_shovel",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:diamond_shovel"
+  },
+  "template": "angelblock:downgrade_kit"
+}

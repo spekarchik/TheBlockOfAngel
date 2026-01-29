@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "angelblock:lapis_leggings",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:diamond_leggings"
+  },
+  "template": "angelblock:downgrade_kit"
+}

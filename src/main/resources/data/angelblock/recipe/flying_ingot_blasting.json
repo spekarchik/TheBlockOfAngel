@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:blasting",
+    "category": "misc",
+    "ingredient": "angelblock:flying_powder",
+    "result": {
+        "id": "angelblock:flying_ingot"
+    },
+    "experience": 1.2,
+    "cookingtime": 100
+}

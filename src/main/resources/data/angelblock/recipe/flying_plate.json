@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+        "@@@",
+        "APA",
+        "@@@"
+    ],
+    "key": {
+        "@": "angelblock:flying_ingot",
+        "A": "angelblock:armor_fiber",
+        "P": "minecraft:phantom_membrane"
+    },
+    "result": {
+        "id": "angelblock:flying_plate",
+        "count": 5
+    }
+}

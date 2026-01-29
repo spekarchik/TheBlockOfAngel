@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:super_boots",
+    "addition": "minecraft:heart_of_the_sea",
+    "result": {
+        "id": "angelblock:super_boots_with_sea_power"
+    },
+    "template": "angelblock:super_armor_upgrade_kit"
+}

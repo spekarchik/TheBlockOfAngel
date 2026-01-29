@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:limonite_helmet",
+    "addition": "minecraft:calibrated_sculk_sensor",
+    "result": {
+        "id": "angelblock:limonite_helmet_with_detector"
+    },
+    "template": "angelblock:limonite_armor_upgrade_kit"
+}

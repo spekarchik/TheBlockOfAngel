@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "angelblock:super_chestplate",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "angelblock:diamithic_chestplate_with_strength_and_levitation"
+  },
+  "template": "angelblock:downgrade_kit"
+}

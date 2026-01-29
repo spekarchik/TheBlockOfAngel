@@ -1,0 +1,77 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:rendelithic_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:diamithic_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:lapis_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:limonite_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:super_tool_upgrade_kit"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 39.0,
+                "min": 20.0
+              },
+              "options": "#minecraft:on_good_loot"
+            }
+          ],
+          "name": "minecraft:stone_axe"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 39.0,
+                "min": 20.0
+              },
+              "options": "#minecraft:on_good_loot"
+            }
+          ],
+          "name": "minecraft:golden_axe"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 39.0,
+                "min": 20.0
+              },
+              "options": "#minecraft:on_good_loot"
+            }
+          ],
+          "name": "minecraft:iron_axe"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "minecraft:gameplay/hero_of_the_village/weaponsmith_gift"
+}

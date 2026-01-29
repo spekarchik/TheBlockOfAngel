@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:end_rod",
+    "addition": "angelblock:rod_sensor",
+    "result": {
+        "id": "angelblock:end_magnetic_rod"
+    },
+    "template": "angelblock:rod_upgrade_kit"
+}

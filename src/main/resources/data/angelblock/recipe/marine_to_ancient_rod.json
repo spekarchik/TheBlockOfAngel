@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:marine_rod",
+    "addition": "minecraft:flint",
+    "result": {
+        "id": "angelblock:ancient_rod"
+    },
+    "template": "angelblock:downgrade_kit"
+}

@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:marine_rod",
+    "addition": "angelblock:rod_sensor",
+    "result": {
+        "id": "angelblock:marine_magnetic_rod"
+    },
+    "template": "angelblock:rod_upgrade_kit"
+}

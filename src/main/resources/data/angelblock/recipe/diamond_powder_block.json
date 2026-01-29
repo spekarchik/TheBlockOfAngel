@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A":
+    "angelblock:diamond_powder"
+  },
+  "result": {
+    "id": "angelblock:diamond_powder_block",
+    "count": 1
+  }
+}

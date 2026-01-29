@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "minecraft:netherite_axe",
+  "addition": "angelblock:diamithic_ingot",
+  "result": {
+    "id": "angelblock:diamithic_primary_axe"
+  },
+  "template": "angelblock:diamithic_tool_upgrade_kit"
+}

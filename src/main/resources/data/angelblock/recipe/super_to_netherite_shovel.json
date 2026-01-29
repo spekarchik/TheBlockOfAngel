@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "angelblock:super_shovel",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:netherite_shovel"
+  },
+  "template": "angelblock:downgrade_kit"
+}

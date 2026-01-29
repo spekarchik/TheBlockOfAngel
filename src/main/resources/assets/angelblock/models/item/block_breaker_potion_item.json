@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "angelblock:item/block_breaker_potion_item"
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:netherite_boots",
+    "addition": "angelblock:diamithic_plate",
+    "result": {
+        "id": "angelblock:diamithic_boots"
+    },
+    "template": "angelblock:diamithic_armor_upgrade_kit"
+}

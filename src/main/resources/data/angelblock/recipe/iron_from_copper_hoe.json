@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:copper_hoe",
+    "addition": "minecraft:iron_hoe",
+    "result": {
+        "id": "minecraft:iron_hoe"
+    },
+    "template": "angelblock:iron_tool_upgrade_kit"
+}

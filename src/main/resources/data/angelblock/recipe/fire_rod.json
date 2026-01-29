@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:marine_rod",
+    "addition": "angelblock:flame_stone",
+    "result": {
+        "id": "angelblock:fire_rod"
+    },
+    "template": "angelblock:rod_upgrade_kit"
+}

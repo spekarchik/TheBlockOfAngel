@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "facing_along_x=true": { "model": "angelblock:block/angel_rod_block" },
+    "facing_along_x=false": { "model": "angelblock:block/angel_rod_block_z" }
+  }
+}

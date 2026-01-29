@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:iron_leggings",
+    "addition": "minecraft:diamond_leggings",
+    "result": {
+        "id": "minecraft:diamond_leggings"
+    },
+    "template": "angelblock:diamond_armor_upgrade_kit"
+}

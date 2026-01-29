@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "angelblock:flying_armor"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "angelblock:flying_armor"
+      }
+    ]
+  }
+}

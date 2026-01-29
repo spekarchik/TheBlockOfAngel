@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:iron_boots",
+    "addition": "minecraft:diamond_boots",
+    "result": {
+        "id": "minecraft:diamond_boots"
+    },
+    "template": "angelblock:diamond_armor_upgrade_kit"
+}

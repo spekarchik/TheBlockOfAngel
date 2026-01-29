@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "angelblock:limonite_primary_pickaxe",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:diamond_pickaxe"
+  },
+  "template": "angelblock:downgrade_kit"
+}

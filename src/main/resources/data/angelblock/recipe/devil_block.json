@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "A A",
+    "BDB",
+    "CCC"
+  ],
+  "key": {
+    "A":
+    "angelblock:guardian_eye",
+    "B":
+    "angelblock:ancient_canine",
+    "C":
+    "angelblock:nether_bars_block",
+    "D":
+    "minecraft:dragon_head"
+  },
+  "result": {
+    "id": "angelblock:devil_block",
+    "count": 1
+  }
+}

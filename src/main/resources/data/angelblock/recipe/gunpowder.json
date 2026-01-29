@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "gunpowder",
+  "category": "misc",
+  "ingredients": [
+    "angelblock:gunpowder_block"
+  ],
+  "result": {
+    "id": "minecraft:gunpowder",
+    "count": 9
+  }
+}

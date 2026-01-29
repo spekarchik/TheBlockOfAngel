@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "angelblock:diamithic_primary_axe",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:netherite_axe"
+  },
+  "template": "angelblock:downgrade_kit"
+}

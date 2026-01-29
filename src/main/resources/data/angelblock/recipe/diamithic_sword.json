@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:diamithic_primary_sword",
+    "addition": "angelblock:strength_pearl",
+    "result": {
+        "id": "angelblock:diamithic_sword"
+    },
+    "template": "angelblock:diamithic_tool_upgrade_kit"
+}

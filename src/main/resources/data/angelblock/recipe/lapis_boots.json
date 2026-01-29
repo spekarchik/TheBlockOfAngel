@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "minecraft:diamond_boots",
+    "addition": "angelblock:lapis_plate",
+    "result": {
+        "id": "angelblock:lapis_boots"
+    },
+    "template": "angelblock:lapis_armor_upgrade_kit"
+}

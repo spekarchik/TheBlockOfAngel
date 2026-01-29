@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "angelblock:flying_helmet",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:leather_helmet"
+  },
+  "template": "angelblock:downgrade_kit"
+}

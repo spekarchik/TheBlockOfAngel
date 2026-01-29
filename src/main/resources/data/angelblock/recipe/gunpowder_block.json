@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": "minecraft:gunpowder"
+  },
+  "result": {
+    "id": "angelblock:gunpowder_block",
+    "count": 1
+  }
+}
