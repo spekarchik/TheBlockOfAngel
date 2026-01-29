@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:blasting",
-    "ingredient": {
-        "item": "minecraft:obsidian"
-    },
-    "result": "angelblock:cracked_obsidian_block",
-    "experience": 0.5,
-    "cookingtime": 100
-}

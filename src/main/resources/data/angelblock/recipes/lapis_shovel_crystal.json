@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "angelblock:lapis_shovel"
-    },
-    "result": "angelblock:marine_crystal",
-    "group": "tools",
-    "count": 1
-}

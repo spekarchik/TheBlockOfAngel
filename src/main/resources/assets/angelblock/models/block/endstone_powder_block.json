@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures":
-  {
-    "all": "angelblock:blocks/endstone_powder_block"
-  }
-}

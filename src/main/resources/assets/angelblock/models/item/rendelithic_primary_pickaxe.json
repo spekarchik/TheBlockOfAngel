@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "angelblock:items/rendelithic_primary_pickaxe"
-  }
-}

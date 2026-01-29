@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:blasting",
-    "ingredient": {
-        "item": "minecraft:end_stone"
-    },
-    "result": "angelblock:cracked_endstone_block",
-    "experience": 0.5,
-    "cookingtime": 100
-}

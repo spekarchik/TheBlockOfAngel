@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "angelblock:diamithic_pickaxe"
-    },
-    "result": "angelblock:strength_pearl",
-    "group": "tools",
-    "count": 1
-}

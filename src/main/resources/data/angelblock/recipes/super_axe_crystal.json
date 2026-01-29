@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "angelblock:super_axe"
-    },
-    "result": "angelblock:super_crystal",
-    "group": "tools",
-    "count": 1
-}
