@@ -1,3 +1,11 @@
+## 📦 Version 2.21.1
+
+### 🐞 Fixed
+- Placing water by the **Aquarite Hoe**:
+  - now also causes *exhaustion*, the same way as for **Marine Rod**.
+  - the hoe does not place water again if the water source already exists in the position.
+
+
 ## 📦 Version 2.21.0
 
 ### 📝 Improvements
