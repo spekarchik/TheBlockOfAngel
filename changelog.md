@@ -1,9 +1,15 @@
-## 📦 Version 2.21.1
+## 📦 Version 2.21.2
 
 ### 🐞 Fixed
 - Placing water by the **Aquarite Hoe**:
   - now also causes *exhaustion*, the same way as for **Marine Rod**.
   - the hoe does not place water again if the water source already exists in the position.
+
+### 📝 Improvements
+- **Lymonite armor**:
+  - Bite damage from *spiders*, *silverfish*, and *bees* reduced to 50% (was 80%).
+  - Wind Charge damage vulnerability increased to +200% (was +50%).
+  - Wither and blast damage vulnerability remains unchanged (+50%).
 
 
 ## 📦 Version 2.21.0
