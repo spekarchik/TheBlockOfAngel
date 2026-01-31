@@ -10,6 +10,8 @@
   - Bite damage resistance from *spiders*, *silverfish*, and *bees* reduced to 50% (was 80%).
   - Wind Charge damage vulnerability increased to +200% (was +50%).
   - Wither and blast damage vulnerability remains unchanged (+50%).
+- **Superyte armor**:
+  - Bite damage resistance from *spiders*, *silverfish*, and *bees* has been removed.
 
 
 ## 📦 Version 2.21.0
