@@ -53,8 +53,8 @@
   "angelblock.lapis_armor.desc14": "",
 
   "angelblock.limonite_armor.desc1": "§f§lPurpose:§r§7 Universal armor. Moderate protection, average durability, wide range of abilities. Suitable for forests, jungles, snowy biomes, mountains, and caves",
-  "angelblock.limonite_armor.desc2": "§f§lWeaknesses:§r§7 Wither, Wind Charge, and explosions: +50% damage",
-  "angelblock.limonite_armor.desc3": "§f§lTraits:§r§7 Restores health under rain up to 10 HP. 80% bite protection (spiders, silverfish, bees). 100% freezing protection. Invisible to creepers beyond 3 blocks",
+  "angelblock.limonite_armor.desc2": "§f§lWeaknesses:§r§7 Wither and explosions: +50% damage; Wind Charge: +200% damage",
+  "angelblock.limonite_armor.desc3": "§f§lTraits:§r§7 Restores health under rain up to 10 HP. 50% bite protection (spiders, silverfish, bees). 100% freezing protection. Invisible to creepers beyond 3 blocks",
   "angelblock.limonite_armor.desc4": "§6§lRepair:§r§6 Lymonite Ingot",
   "angelblock.limonite_armor.desc5": "Armor general stats",
   "angelblock.limonite_armor.desc6": " Fire and lava protection: -",
@@ -67,9 +67,9 @@
   "angelblock.limonite_armor.desc13": "",
   "angelblock.limonite_armor.desc14": "",
 
-  "angelblock.super_armor.desc1": "§f§lPurpose:§r§7 Replaces any armor by combining all its advantages. The best choice for boss fights and as a universal set",
+  "angelblock.super_armor.desc1": "§f§lPurpose:§r§7 Replaces any armor by combining almost all its advantages. The best choice for boss fights and as a universal set",
   "angelblock.super_armor.desc2": "§f§lWeaknesses:§r§7 Normal visibility to creepers (unlike Lymonite armor)",
-  "angelblock.super_armor.desc3": "§f§lTraits:§r§7 Restores health under rain up to 10 HP. 80% bite protection (spiders, silverfish, bees). 100% freezing protection",
+  "angelblock.super_armor.desc3": "§f§lTraits:§r§7 Restores health under rain up to 10 HP. 100% freezing protection",
   "angelblock.super_armor.desc4": "§6§lRepair:§r§6 Superyte Ingot",
   "angelblock.super_armor.desc5": "Armor general stats",
   "angelblock.super_armor.desc6": " Fire and lava protection: + (100% fire, 95% lava)",
@@ -78,7 +78,7 @@
   "angelblock.super_armor.desc9": "§a Durability resistance: 43",
   "angelblock.super_armor.desc10": "Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
   "angelblock.super_armor.desc11": "Slows nearby attackers; ignites distant ones with 40% chance",
-  "angelblock.super_armor.desc12": "When the player is standing on the ground, activating Slow Fall together with Jump Boost grants the Levitation effect. Reactivating Slow Fall disables Levitation",
+  "angelblock.super_armor.desc12": "When the player is standing on the ground, activating Slow Falling together with Jump Boost grants the Levitation effect. Reactivating Slow Falling disables Levitation",
   "angelblock.super_armor.desc13": "Super Jump activates on a second jump within 1 second after the first. The first jump is normal, allowing you to clear low obstacles without triggering the Super Jump.",
   "angelblock.super_armor.desc14": "Luck may prevent death (25% chance per level), teleporting to saved respawn point with regen and damage protection",
 
