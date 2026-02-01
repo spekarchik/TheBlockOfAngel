@@ -32,6 +32,8 @@ import java.util.function.Predicate;
 
 public class ModHoe extends ModTool implements IModToolEnhanceable
 {
+    private static final int USE_MAGIC_EXHAUSTION_MULTIPLIER = 16;
+
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
     private final ModToolMaterial material;
@@ -62,19 +64,25 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
         var pos = context.getClickedPos();
         BlockPos upPos = pos.above();
 
-        if (level.isWaterAt(upPos) || ((level.isEmptyBlock(upPos))
+        if ((level.isWaterAt(upPos) && !level.getBlockState(upPos).getFluidState().isSource()) || ((level.isEmptyBlock(upPos))
                 && ((utils.blocks.types.isFarmTypeBlock(level, upPos.north()) && utils.blocks.types.isFarmTypeBlock(level, upPos.south()))
                 || (utils.blocks.types.isFarmTypeBlock(level, upPos.east()) && utils.blocks.types.isFarmTypeBlock(level, upPos.west())))))
         {
-            if (!level.isClientSide())
+            boolean isBrokenOrPlayerExhausted = hasCriticalDamage(context.getItemInHand()) || player.getFoodData().getFoodLevel() <= 0;
+
+            if (!isBrokenOrPlayerExhausted)
             {
-                level.setBlock(upPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
-                damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
+                if (!level.isClientSide())
+                {
+                    level.setBlock(upPos, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level); // pos, not upPos
+                    utils.player.causePlayerExhaustion(player, USE_MAGIC_EXHAUSTION_MULTIPLIER);
+                }
+
+                utils.sound.playSoundByBlock(player, pos, SoundType.WATER_PLACED);
             }
 
-            utils.sound.playSoundByBlock(player, pos, SoundType.WATER_PLACED);
-
-            return getToolInteractionResult(true, level.isClientSide());
+            return getToolInteractionResult(!isBrokenOrPlayerExhausted, level.isClientSide());
         }
         else
         {
