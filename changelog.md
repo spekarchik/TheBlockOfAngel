@@ -1,9 +1,10 @@
-## 📦 Version 2.21.2
+## 📦 Version 2.21.3
 
 ### 🐞 Fixed
 - Placing water by the **Aquarite Hoe**:
   - now also causes *exhaustion*, the same way as for **Marine Rod**.
   - the hoe does not place water again if the water source already exists in the position.
+- Minor tooltip fixes for **Superyte armor**.
 
 ### 📝 Improvements
 - **Lymonite armor**:

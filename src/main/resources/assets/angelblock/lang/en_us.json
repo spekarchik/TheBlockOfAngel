@@ -78,7 +78,7 @@
   "angelblock.super_armor.desc9": "§a Durability resistance: 43",
   "angelblock.super_armor.desc10": "Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
   "angelblock.super_armor.desc11": "Slows nearby attackers; ignites distant ones with 40% chance",
-  "angelblock.super_armor.desc12": "When the player is standing on the ground, activating Slow Fall together with Jump Boost grants the Levitation effect. Reactivating Slow Fall disables Levitation",
+  "angelblock.super_armor.desc12": "When the player is standing on the ground, activating Slow Falling together with Jump Boost grants the Levitation effect. Reactivating Slow Falling disables Levitation",
   "angelblock.super_armor.desc13": "Super Jump activates on a second jump within 1 second after the first. The first jump is normal, allowing you to clear low obstacles without triggering the Super Jump.",
   "angelblock.super_armor.desc14": "Luck may prevent death (25% chance per level), teleporting to saved respawn point with regen and damage protection",
 
