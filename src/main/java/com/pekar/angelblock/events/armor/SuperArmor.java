@@ -262,14 +262,6 @@ public class SuperArmor extends Armor
             if (player.isChestPlateModifiedWithStrengthBooster(this))
                 event.setNewDamage(event.getNewDamage() * 0.5f);
         }
-        else if (isBiting(damageSource.getEntity()))
-        {
-            if (isFullArmorSet)
-            {
-                float damageAmount = event.getNewDamage();
-                event.setNewDamage(damageAmount * 0.2F);
-            }
-        }
     }
 
     @Override
