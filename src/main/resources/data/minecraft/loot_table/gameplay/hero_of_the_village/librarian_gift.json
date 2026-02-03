@@ -9,7 +9,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "options": "#minecraft:on_good_loot",
+              "options": "#angelblock:on_good_loot",
               "levels": {
                 "type": "minecraft:uniform",
                 "max": 39.0,
