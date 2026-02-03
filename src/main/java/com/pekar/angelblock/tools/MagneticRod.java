@@ -39,7 +39,8 @@ public abstract class MagneticRod extends ModRod
         if (result == InteractionResult.PASS) return InteractionResult.FAIL;
         if (result == InteractionResult.SUCCESS || result == InteractionResult.SUCCESS_SERVER)
         {
-            if (!context.getLevel().isClientSide())
+            var level = context.getLevel();
+            if (!level.isClientSide())
             {
                 var player = context.getPlayer();
                 var exhaustionMultiplier = isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)
@@ -47,6 +48,7 @@ public abstract class MagneticRod extends ModRod
                         : NORMAL_USE_EXHAUSTION_MULTIPLIER;
 
                 utils.player.causePlayerExhaustion(player, exhaustionMultiplier);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
         }
         return result;
