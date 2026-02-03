@@ -34,7 +34,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "options": "#minecraft:on_good_loot"
+              "options": "#angelblock:on_good_loot"
             }
           ],
           "name": "minecraft:stone_axe"
@@ -49,7 +49,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "options": "#minecraft:on_good_loot"
+              "options": "#angelblock:on_good_loot"
             }
           ],
           "name": "minecraft:golden_axe"
@@ -64,7 +64,7 @@
                 "max": 39.0,
                 "min": 20.0
               },
-              "options": "#minecraft:on_good_loot"
+              "options": "#angelblock:on_good_loot"
             }
           ],
           "name": "minecraft:iron_axe"

@@ -55,7 +55,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_good_loot"
+              "options": "#angelblock:on_good_loot"
             }
           ],
           "name": "minecraft:book",
