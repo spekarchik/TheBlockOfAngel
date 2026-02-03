@@ -3,13 +3,13 @@
     "category": "misc",
     "ingredients": [
         {
-            "tag": "minecraft:fire_corals"
+            "tag": "angelblock:fire_corals"
         },
         {
             "item": "minecraft:rabbit_foot"
         },
         {
-            "tag": "minecraft:horn_corals"
+            "tag": "angelblock:horn_corals"
         },
         {
             "item": "minecraft:slime_ball"
