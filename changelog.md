@@ -1,3 +1,9 @@
+## 📦 Version 2.21.4
+
+### 📝 Improvements
+- Using any type of **magnetic rods** in *magnetic mode* now increases damage.
+
+
 ## 📦 Version 2.21.3
 
 ### 🐞 Fixed
