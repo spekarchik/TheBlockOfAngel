@@ -50,7 +50,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:weaponsmith_specific"
+              "options": "#angelblock:weaponsmith_specific"
             }
           ],
           "name": "minecraft:book"
