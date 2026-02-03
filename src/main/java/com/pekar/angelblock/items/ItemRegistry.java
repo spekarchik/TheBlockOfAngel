@@ -19,11 +19,11 @@ public class ItemRegistry
     public static final TagKey<Item> LIMONITE_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "limonite_ingot_tag"));
     public static final TagKey<Item> SUPER_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "super_ingot_tag"));
     public static final TagKey<Item> FLYING_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "flying_ingot_tag"));
-    public static final TagKey<Item> BAMBOO_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "bamboo_tag"));
-    public static final TagKey<Item> DIAMOND_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "diamond_armor"));
-    public static final TagKey<Item> NETHERITE_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_armor"));
-    public static final TagKey<Item> DIAMOND_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "diamond_tool"));
-    public static final TagKey<Item> NETHERITE_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.VANILLAID, "netherite_tool"));
+    public static final TagKey<Item> BAMBOO_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "bamboo_tag"));
+    public static final TagKey<Item> DIAMOND_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "diamond_armor"));
+    public static final TagKey<Item> NETHERITE_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "netherite_armor"));
+    public static final TagKey<Item> DIAMOND_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "diamond_tool"));
+    public static final TagKey<Item> NETHERITE_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "netherite_tool"));
     public static final TagKey<Item> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_plant"));
     public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rods_modified_by_rod_sensor"));
 
