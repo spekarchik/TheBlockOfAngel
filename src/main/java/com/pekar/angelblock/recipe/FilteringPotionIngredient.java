@@ -51,7 +51,7 @@ public abstract class FilteringPotionIngredient implements ICustomIngredient
     {
         var itemStack = new ItemStack(potionGroup);
         itemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(potionType));
-        return Stream.of(itemStack.getItemHolder());
+        return Stream.of(itemStack.typeHolder());
     }
 
     @Override

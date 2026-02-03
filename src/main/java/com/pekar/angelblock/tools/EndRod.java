@@ -138,7 +138,7 @@ public class EndRod extends AmethystRod
                 level.setThunderLevel(0);
                 if (levelData.getRainTime() == 0)
                 {
-                    var weatherLasts = level.random.nextIntBetweenInclusive(1200, 24000);
+                    var weatherLasts = level.getRandom().nextIntBetweenInclusive(1200, 24000);
                     levelData.setRainTime(weatherLasts);
                 }
                 levelData.setThunderTime(0);
@@ -167,7 +167,7 @@ public class EndRod extends AmethystRod
                 level.setRainLevel(1.0F);
                 if (levelData.getRainTime() == 0 || levelData.getThunderTime() == 0)
                 {
-                    var weatherLasts = level.random.nextIntBetweenInclusive(1200, 24000);
+                    var weatherLasts = level.getRandom().nextIntBetweenInclusive(1200, 24000);
                     levelData.setRainTime(weatherLasts);
                     levelData.setThunderTime(weatherLasts);
                 }

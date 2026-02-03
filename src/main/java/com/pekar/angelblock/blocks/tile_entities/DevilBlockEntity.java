@@ -91,8 +91,8 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
         for (int i = 0; i < 5; i++)
         {
-            int shiftX = level.random.nextIntBetweenInclusive(-MONSTER_SPAWN_RADIUS, MONSTER_SPAWN_RADIUS);
-            int shiftZ = level.random.nextIntBetweenInclusive(-MONSTER_SPAWN_RADIUS, MONSTER_SPAWN_RADIUS);
+            int shiftX = level.getRandom().nextIntBetweenInclusive(-MONSTER_SPAWN_RADIUS, MONSTER_SPAWN_RADIUS);
+            int shiftZ = level.getRandom().nextIntBetweenInclusive(-MONSTER_SPAWN_RADIUS, MONSTER_SPAWN_RADIUS);
 
             var startPos = getBlockPos().offset(shiftX, 0, shiftZ);
 

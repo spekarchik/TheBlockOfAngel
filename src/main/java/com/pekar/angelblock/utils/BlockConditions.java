@@ -72,7 +72,7 @@ public class BlockConditions
     public final boolean canSustainBamboo(Level level, BlockPos pos)
     {
         var soilBlockState = level.getBlockState(pos);
-        return soilBlockState.is(BlockTags.BAMBOO_PLANTABLE_ON) && !soilBlockState.is(Blocks.BAMBOO) && !soilBlockState.is(Blocks.BAMBOO_SAPLING);
+        return soilBlockState.is(BlockTags.SUPPORTS_BAMBOO) && !soilBlockState.is(Blocks.BAMBOO) && !soilBlockState.is(Blocks.BAMBOO_SAPLING);
     }
 
     public final boolean canSustainPlant(Level level, BlockPos soilPos, BlockState plantBlockState)

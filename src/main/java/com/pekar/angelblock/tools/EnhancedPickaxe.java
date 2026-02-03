@@ -102,7 +102,7 @@ public class EnhancedPickaxe extends ModPickaxe
     {
         if (a.getBlock() == b.getBlock()) return true;
 
-        var aTags = a.getTags()
+        var aTags = a.tags()
                 .filter(tag -> tag.location().getNamespace().equals("minecraft") && tag.location().getPath().endsWith("_ores"))
                 .toList();
 

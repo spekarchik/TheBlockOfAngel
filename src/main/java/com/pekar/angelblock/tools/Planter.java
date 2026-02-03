@@ -375,9 +375,9 @@ public class Planter extends WorkRod
         {
             if (!level.isClientSide())
             {
-                bonemealableBlock.performBonemeal((ServerLevel) level, level.random, posToBonemeal, blockStateAtPosToBonemeal);
+                bonemealableBlock.performBonemeal((ServerLevel) level, level.getRandom(), posToBonemeal, blockStateAtPosToBonemeal);
 
-                if (bonemealableBlock.isBonemealSuccess(level, level.random, posToBonemeal, blockStateAtPosToBonemeal))
+                if (bonemealableBlock.isBonemealSuccess(level, level.getRandom(), posToBonemeal, blockStateAtPosToBonemeal))
                 {
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
 
