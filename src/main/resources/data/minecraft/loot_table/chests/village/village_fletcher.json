@@ -15,7 +15,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:fletcher_specific"
+              "options": "#angelblock:fletcher_specific"
             }
           ],
           "name": "minecraft:book"

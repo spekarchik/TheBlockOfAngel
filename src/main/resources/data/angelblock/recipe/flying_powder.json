@@ -2,9 +2,9 @@
     "type": "minecraft:crafting_shapeless",
     "category": "misc",
     "ingredients": [
-        "#minecraft:fire_corals",
+        "#angelblock:fire_corals",
         "minecraft:rabbit_foot",
-        "#minecraft:horn_corals",
+        "#angelblock:horn_corals",
         "minecraft:slime_ball"
     ],
     "result": {
