@@ -50,7 +50,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:armorer_specific"
+              "options": "#angelblock:armorer_specific"
             }
           ],
           "name": "minecraft:book"

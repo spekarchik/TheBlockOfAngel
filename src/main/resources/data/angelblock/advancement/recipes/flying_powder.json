@@ -5,7 +5,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "#minecraft:horn_corals"
+                                                                        "items":  "#angelblock:horn_corals"
                                                                     }
                                                                 ]
                                                   }
@@ -35,7 +35,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "#minecraft:fire_corals"
+                                                                        "items":  "#angelblock:fire_corals"
                                                                     }
                                                                 ]
                                                   }
