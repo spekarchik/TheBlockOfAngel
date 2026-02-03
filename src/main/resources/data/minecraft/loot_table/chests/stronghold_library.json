@@ -66,7 +66,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 30.0,
-              "options": "#minecraft:on_good_loot"
+              "options": "#angelblock:on_good_loot"
             }
           ],
           "name": "minecraft:book",

@@ -15,7 +15,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_good_loot"
+              "options": "#angelblock:on_good_loot"
             }
           ],
           "name": "minecraft:fishing_rod"
@@ -25,7 +25,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:fisher_specific"
+              "options": "#angelblock:fisher_specific"
             }
           ],
           "name": "minecraft:book"
