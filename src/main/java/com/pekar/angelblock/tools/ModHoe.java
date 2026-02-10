@@ -16,6 +16,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
@@ -101,9 +102,9 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
+    public boolean canPerformAction(ItemInstance itemInstance, ItemAbility itemAbility)
     {
-        return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_HOE_ACTIONS.contains(itemAbility);
+        return !hasCriticalDamage(itemInstance) && ItemAbilities.DEFAULT_HOE_ACTIONS.contains(itemAbility);
     }
 
     @Override

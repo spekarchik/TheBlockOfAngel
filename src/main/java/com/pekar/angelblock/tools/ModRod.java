@@ -12,6 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -48,7 +49,7 @@ public abstract class ModRod extends ModTool implements IModTool
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
+    public boolean canPerformAction(ItemInstance itemInstance, ItemAbility itemAbility)
     {
         return false;
     }

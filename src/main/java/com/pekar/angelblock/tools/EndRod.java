@@ -109,46 +109,50 @@ public class EndRod extends AmethystRod
 
         if (offHandItem == ItemRegistry.FLAME_STONE.get())
         {
-            if (level.getLevelData() instanceof ServerLevelData levelData && player instanceof ServerPlayer serverPlayer)
+            if (player instanceof ServerPlayer serverPlayer)
             {
+                var serverLevel = serverPlayer.level();
+                var weatherData = serverLevel.getWeatherData();
+
                 playWeatherSound(serverPlayer);
-                levelData.setRainTime(0);
-                levelData.setThunderTime(0);
-                levelData.setRaining(false);
-                levelData.setThundering(false);
+                weatherData.setRaining(false);
+                weatherData.setThundering(false);
+                weatherData.setRainTime(0);
+                weatherData.setThunderTime(0);
                 damageMainHandItem(1, player);
                 utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
-            else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
+            else
             {
                 player.swing(interactionHand);
-                levelData.setRaining(false);
             }
 
             return InteractionResult.CONSUME;
         }
         else if (offHandItem == ItemRegistry.MARINE_CRYSTAL.get())
         {
-            if (level.getLevelData() instanceof ServerLevelData levelData && player instanceof ServerPlayer serverPlayer)
+            if (player instanceof ServerPlayer serverPlayer)
             {
+                var serverLevel = serverPlayer.level();
+                var weatherData = serverLevel.getWeatherData();
+
                 playWeatherSound(serverPlayer);
-                levelData.setRaining(true);
-                levelData.setThundering(false);
+                weatherData.setRaining(true);
+                weatherData.setThundering(false);
                 level.setRainLevel(0.3F);
                 level.setThunderLevel(0);
-                if (levelData.getRainTime() == 0)
+                if (weatherData.getRainTime() == 0)
                 {
                     var weatherLasts = level.getRandom().nextIntBetweenInclusive(1200, 24000);
-                    levelData.setRainTime(weatherLasts);
+                    weatherData.setRainTime(weatherLasts);
                 }
-                levelData.setThunderTime(0);
+                weatherData.setThunderTime(0);
                 damageMainHandItem(1, player);
                 utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
-            else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
+            else
             {
                 player.swing(interactionHand);
-                levelData.setRaining(true);
                 level.setRainLevel(0.3F);
                 level.setThunderLevel(0);
             }
@@ -157,27 +161,29 @@ public class EndRod extends AmethystRod
         }
         else if (offHandItem == ItemRegistry.STRENGTH_PEARL.get())
         {
-            if (level.getLevelData() instanceof ServerLevelData levelData && player instanceof ServerPlayer serverPlayer)
+            if (player instanceof ServerPlayer serverPlayer)
             {
+                var serverLevel = serverPlayer.level();
+                var weatherData = serverLevel.getWeatherData();
+
                 playWeatherSound(serverPlayer);
-                levelData.setClearWeatherTime(0);
-                levelData.setRaining(true);
-                levelData.setThundering(true);
+                weatherData.setClearWeatherTime(0);
+                weatherData.setRaining(true);
+                weatherData.setThundering(true);
                 level.setThunderLevel(1.0F);
                 level.setRainLevel(1.0F);
-                if (levelData.getRainTime() == 0 || levelData.getThunderTime() == 0)
+                if (weatherData.getRainTime() == 0 || weatherData.getThunderTime() == 0)
                 {
                     var weatherLasts = level.getRandom().nextIntBetweenInclusive(1200, 24000);
-                    levelData.setRainTime(weatherLasts);
-                    levelData.setThunderTime(weatherLasts);
+                    weatherData.setRainTime(weatherLasts);
+                    weatherData.setThunderTime(weatherLasts);
                 }
                 damageMainHandItem(1, player);
                 utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
-            else if (level.getLevelData() instanceof ClientLevel.ClientLevelData levelData)
+            else
             {
                 player.swing(interactionHand);
-                levelData.setRaining(true);
                 level.setThunderLevel(1.0F);
                 level.setRainLevel(1.0F);
             }

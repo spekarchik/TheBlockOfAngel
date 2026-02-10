@@ -1,18 +1,22 @@
 package com.pekar.angelblock.tools;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public interface IDamageable
 {
-    default boolean hasCriticalDamage(ItemStack stack)
+    default boolean hasCriticalDamage(ItemInstance itemInstance)
     {
-        return stack.getMaxDamage() - stack.getDamageValue() <= getCriticalDurability();
+        var damage = itemInstance.getOrDefault(DataComponents.DAMAGE, 0);
+        var maxDamage = itemInstance.getOrDefault(DataComponents.MAX_DAMAGE, 0);
+        return maxDamage - damage <= getCriticalDurability();
     }
 
     default boolean hasLowEfficiencyDamage(ItemStack stack)

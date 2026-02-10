@@ -69,9 +69,9 @@ public class ModPickaxe extends ModTool implements IModToolEnhanceable
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
+    public boolean canPerformAction(ItemInstance itemInstance, ItemAbility itemAbility)
     {
-        return !hasCriticalDamage(stack) && false;
+        return false;
     }
 
     @Override

@@ -18,6 +18,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
@@ -112,9 +113,9 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
+    public boolean canPerformAction(ItemInstance itemInstance, ItemAbility itemAbility)
     {
-        return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility);
+        return !hasCriticalDamage(itemInstance) && ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility);
     }
 
     @Override

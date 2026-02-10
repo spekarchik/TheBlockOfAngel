@@ -124,9 +124,9 @@ public class ModAxe extends ModTool implements IModToolEnhanceable
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
+    public boolean canPerformAction(ItemInstance itemInstance, ItemAbility itemAbility)
     {
-        return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility);
+        return !hasCriticalDamage(itemInstance) && ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.pekar.angelblock.events.cleaners;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.pekar.angelblock.Main;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.animal.allay.Allay;
@@ -92,9 +94,9 @@ public class TrackedAllaysData extends SavedData
             ).apply(instance, TrackedAllaysData::new)
     );
 
-    public static final SavedDataType<TrackedAllaysData> TYPE = new SavedDataType<>(
-            "tracked_allays",
-            ctx -> new TrackedAllaysData(),
-            ctx -> CODEC
+    public static final SavedDataType<TrackedAllaysData> TYPE = new SavedDataType<TrackedAllaysData>(
+            Identifier.fromNamespaceAndPath(Main.MODID, "tracked_allays"),
+            TrackedAllaysData::new,
+            CODEC
     );
 }
