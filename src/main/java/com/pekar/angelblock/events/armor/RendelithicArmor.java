@@ -4,6 +4,7 @@ import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
@@ -39,7 +40,7 @@ public class RendelithicArmor extends Armor
         glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
 
         JumpBoostSwitchingArmorEffect jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
-        jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
+        jumpEffect.setupAvailability(this::availableOnBootsWithNoHeavyJump);
         SpeedSwitchingEffect speedEffect = new SpeedSwitchingEffect(player, this, 0);
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -176,7 +177,10 @@ public class RendelithicArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.JUMP_BOOST.getName()))
         {
-            jumpEffect.trySwitch(getJumpBoostAmplifier());
+            if (!jumpNegativeEffect.isAnyActive())
+            {
+                jumpEffect.trySwitch(getJumpBoostAmplifier());
+            }
         }
 
         if (pressedKeyDescription.equals(KeyRegistry.LEVITATION.getName()))
@@ -270,17 +274,27 @@ public class RendelithicArmor extends Armor
 
     private void checkForNausea()
     {
-        Player entity = player.getEntity();
-        if (entity.isInWaterOrRain())
+        Player playerEntity = player.getEntity();
+        if (playerEntity.isInWaterOrRain())
         {
             if (!jumpNegativeEffect.isActive())
             {
                 nauseaEffect.tryActivate();
                 jumpNegativeEffect.tryActivate();
 
-                if (slowFallingEffect.isOn())
+                if (slowFallingEffect.isOn() && playerEntity.onGround())
                 {
                     slowFallingEffect.trySwitchOff();
+                }
+
+                if (jumpEffect.isOn())
+                {
+                    jumpEffect.trySwitchOff();
+                }
+
+                if (player.hasArmorEffect(MobEffects.JUMP_BOOST))
+                {
+                    player.getEntity().removeEffect(MobEffects.JUMP_BOOST);
                 }
             }
         }
