@@ -13,7 +13,7 @@ jobs:
     env:
       CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
       CF_PROJECT_ID: 1256129
-      COMMON_TAGS: "Java 21|Server|Client"
+      COMMON_TAGS: "Server|Client"
       MOD_LOADER: "NeoForge"
 
     steps:
@@ -64,6 +64,18 @@ jobs:
           GAME_VERSION=$(echo "$FILENAME" | cut -d'-' -f2)
           VERSION_PART=$(echo "$FILENAME" | sed -E 's/^[^-]*-[^-]*-(.*)\.jar$/\1/')
           
+          # Определяем JAVA_VERSION
+          if [[ "$GAME_VERSION" == 1.21.* ]]; then
+            JAVA_VERSION="Java 21"
+          elif [[ "$GAME_VERSION" == 26.* ]]; then
+            JAVA_VERSION="Java 25"
+          else
+            echo "Unsupported GAME_VERSION: $GAME_VERSION"
+            exit 1
+          fi
+
+          echo "JAVA_VERSION=$JAVA_VERSION" >> "$GITHUB_ENV"
+          
           if [[ "$VERSION_PART" =~ ^([0-9]+\.[0-9]+\.[0-9]+)(-(beta|alpha))?$ ]]; then
             MOD_VERSION="${BASH_REMATCH[1]}"
             SUFFIX="${BASH_REMATCH[2]:-}"
@@ -110,6 +122,9 @@ jobs:
         run: |
           # разбиваем env.COMMON_TAGS по |
           IFS='|' read -r -a TAG_ARRAY <<< "$COMMON_TAGS"
+          
+          # добавляем JAVA_VERSION в массив
+          TAG_ARRAY+=("$JAVA_VERSION")
 
           echo "All tags to process: ${TAG_ARRAY[@]}"
 
