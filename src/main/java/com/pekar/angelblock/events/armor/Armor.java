@@ -5,6 +5,7 @@ import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.TriPredicate;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
@@ -423,6 +424,15 @@ abstract class Armor implements IArmor
     {
         var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(Main.MODID, getVulnerabilitiesTagName()));
         return damageSource.is(vulnerabilities);
+    }
+
+    protected boolean availableOnBootsWithNoHeavyJump(IPlayer player, IArmor armor)
+    {
+        var playerEntity = player.getEntity();
+        if (playerEntity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
+            return false;
+
+        return player.isArmorElementPutOn(armor, EquipmentSlot.FEET);
     }
 
     protected String getVulnerabilitiesTagName()
