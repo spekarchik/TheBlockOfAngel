@@ -64,7 +64,7 @@ public class SuperArmor extends Armor
         this.superJumpEffect.addDependentEffect(dolphinsGraceEffect);
 
         var jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, 5);
-        jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
+        jumpEffect.setupAvailability(this::availableOnBootsWithNoHeavyJump);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
         var strengthEffect = new StrengthSwitchingEffect(player, this, 2);
         waterBreathingEffect = new WaterBreathingPermanentEffect(player, this);
@@ -518,6 +518,7 @@ public class SuperArmor extends Armor
     private boolean isSuperJumpEffectAvailable(IPlayer player, IArmor armor)
     {
         if (!player.areBootsModifiedWithJumpBooster(this)) return false;
+        if (player.getEntity().hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT)) return false;
 
         var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
         int bootsDamage = boots.getDamageValue();
