@@ -239,7 +239,11 @@ public class FlyingArmor extends Armor
 
     private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)
     {
-        var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
+        var playerEntity = player.getEntity();
+        if (playerEntity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
+            return false;
+        
+        var boots = playerEntity.getItemBySlot(EquipmentSlot.FEET);
 
         int bootsDamage = boots.getDamageValue();
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
