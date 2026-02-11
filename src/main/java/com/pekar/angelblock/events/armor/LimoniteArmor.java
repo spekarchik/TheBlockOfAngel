@@ -49,7 +49,7 @@ public class LimoniteArmor extends Armor
         waterBreathingEffect = new WaterBreathingTemporaryEffect(player, this, 0, WATER_BREATHING_EFFECT_DURATION);
 
         var jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
-        jumpEffect.availableIfSlotSet(EquipmentSlot.FEET);
+        jumpEffect.setupAvailability(this::availableOnBootsWithNoHeavyJump);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
         var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
         slowFallingEffect.availableIfSlotSet(EquipmentSlot.CHEST);

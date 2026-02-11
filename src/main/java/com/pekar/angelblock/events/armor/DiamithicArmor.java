@@ -37,7 +37,7 @@ public class DiamithicArmor extends Armor
         slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable).asArmorEffect();
         glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
 
-        jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, 2);
+        jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, 2).setupAvailability(this::isJumpBoostAvailable).asArmorEffect();
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
     }
 
@@ -246,6 +246,11 @@ public class DiamithicArmor extends Armor
     public int getPriority()
     {
         return 3;
+    }
+
+    private boolean isJumpBoostAvailable(IPlayer player, IArmor armor)
+    {
+        return availableOnBootsWithNoHeavyJump(player, armor) && player.areBootsModifiedWithJumpBooster(armor);
     }
 
     private int getStrengthEffectAmplifier()
