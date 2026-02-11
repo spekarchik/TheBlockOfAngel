@@ -1,3 +1,12 @@
+## 📦 Version 2.21.5
+
+### 📝 Improvements
+- When a player wearing **Rendelite Armor** comes into contact with water (directly or in rain):
+  - *Nausea* and *Heavy Jump* effects now remove the armor’s *Jump Boost* effect (if active) and prevent it from being activated.
+  - *Nausea* and *Heavy Jump* effects now remove the armor’s *Slow Falling* effect only while the player is on the ground.
+- Minor **Rendelite Armor** tooltip correction.
+
+
 ## 📦 Version 2.21.4
 
 ### 📝 Improvements
