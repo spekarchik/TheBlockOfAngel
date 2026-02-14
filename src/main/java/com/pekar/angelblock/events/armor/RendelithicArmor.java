@@ -292,9 +292,9 @@ public class RendelithicArmor extends Armor
                     jumpEffect.trySwitchOff();
                 }
 
-                if (player.hasArmorEffect(MobEffects.JUMP_BOOST))
+                if (player.hasArmorEffect(MobEffects.JUMP))
                 {
-                    player.getEntity().removeEffect(MobEffects.JUMP_BOOST);
+                    player.getEntity().removeEffect(MobEffects.JUMP);
                 }
             }
         }
