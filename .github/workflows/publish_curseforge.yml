@@ -10,14 +10,6 @@ jobs:
   publish:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - mc-version: "1.21.x"
-            java-version: 21
-          - mc-version: "26.1"
-            java-version: 25
-
     env:
       CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
       CF_PROJECT_ID: 1256129
@@ -36,13 +28,18 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y --no-install-recommends jq
           fi
-
-      # Ставим нужную Java в зависимости от версии MC
-      - name: Set up Java
+      # Сборка мода прямо в CD
+      - name: Set up Java 25
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: ${{ matrix.java-version }}
+          java-version: 25
+    
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
