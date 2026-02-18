@@ -1,3 +1,14 @@
+## 📦 Version 2.21.6
+
+### 📝 Improvements
+- Many items are now fire resistant:
+  - **Rendelite**, **Diamite** and **Superyte** gear and all related materials (powders, ingots, plates and blocks).
+  - All crystals and **Vesicular Terracotta**.
+  - **Fire Rod** and all upgraded variants, including magnetic versions and the **Builder Rod**.
+  - **The Block of Angel** (both *dormant* and *activated* versions) and **The Block of Devil**.
+  - **Nether Bars**.
+
+
 ## 📦 Version 2.21.5
 
 ### 📝 Improvements

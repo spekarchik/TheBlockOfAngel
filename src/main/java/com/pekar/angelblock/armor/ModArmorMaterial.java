@@ -55,7 +55,7 @@ public class ModArmorMaterial
             10, 0F, 0F,40, SoundEvents.ARMOR_EQUIP_DIAMOND, ItemRegistry.LAPIS_INGOT_TAG, false);
     protected static final ModArmorMaterial DIAMITHIC = new ModArmorMaterial(DIAMITHIC_MATERIAL_NAME, "diamithic_armor",
             createArmorTypeMap(3, 7, 9, 3, 11),
-            14, 3F, 0.2F, 45, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.DIAMITHIC_INGOT_TAG, false);
+            14, 3F, 0.2F, 45, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.DIAMITHIC_INGOT_TAG, true);
     protected static final ModArmorMaterial SUPER = new ModArmorMaterial(SUPER_MATERIAL_NAME, "super_armor",
             createArmorTypeMap(5, 9, 11, 5, 15),
             1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.SUPER_INGOT_TAG, true);
