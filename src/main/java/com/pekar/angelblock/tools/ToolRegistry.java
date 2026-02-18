@@ -123,7 +123,7 @@ public class ToolRegistry
             p -> new TrackLayer(ToolMaterials.ROD_MATERIAL6, p), new Item.Properties().rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> BUILDER = Main.ITEMS.registerItem("builder",
-            p -> new Builder(ToolMaterials.ROD_MATERIAL7, p), new Item.Properties().rarity(Rarity.UNCOMMON));
+            p -> new Builder(ToolMaterials.ROD_MATERIAL7, p), new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant());
 
     // Swords
     public static final DeferredItem<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.registerItem("diamithic_primary_sword",
