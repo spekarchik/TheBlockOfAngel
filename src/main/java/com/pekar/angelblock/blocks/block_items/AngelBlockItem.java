@@ -16,7 +16,7 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
 {
     public AngelBlockItem(Block block, Properties properties)
     {
-        super(block, properties);
+        super(block, properties.fireResistant());
     }
 
     @Override

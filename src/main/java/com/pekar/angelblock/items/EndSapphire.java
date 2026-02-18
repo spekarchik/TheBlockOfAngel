@@ -16,9 +16,9 @@ public class EndSapphire extends ModItemWithDoubleHoverText
 {
     private static final int COOLDOWN_TIME = 100;
 
-    public EndSapphire()
+    public EndSapphire(Properties properties)
     {
-        super(new Properties());
+        super(properties);
     }
 
     @Override

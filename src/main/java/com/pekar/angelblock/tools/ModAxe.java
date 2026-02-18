@@ -1,12 +1,15 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
 
@@ -17,14 +20,17 @@ public class ModAxe extends AxeItem implements IModToolEnhanceable
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
 
-    public static ModAxe createPrimary(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    public static ModAxe createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         return new ModAxe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
     }
 
-    public ModAxe(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public ModAxe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.attributes(AxeItem.createAttributes(material, attackDamage, attackSpeed)));
+        super(material, material.isFireResistant()
+                ? properties.attributes(AxeItem.createAttributes(material, attackDamage, attackSpeed)).fireResistant()
+                : properties.attributes(AxeItem.createAttributes(material, attackDamage, attackSpeed)));
+
         this.materialProperties = materialProperties;
     }
 

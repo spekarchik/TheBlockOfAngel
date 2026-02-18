@@ -29,7 +29,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class Planter extends WorkRod
 {
-    public Planter(Tier material, Properties properties)
+    public Planter(ModToolMaterial material, Properties properties)
     {
         super(material, properties);
     }

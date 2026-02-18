@@ -39,12 +39,12 @@ public class ToolMaterials
     public static final String ROD_MATERIAL7_NAME = "rod7";
 
     static final ModToolMaterial RENDELITHIC = new ModToolMaterial(RENDELITHIC_MATERIAL_NAME, 600, 8F, 4.8F, 3, 25,
-            Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get())); // damagePerSecond = 15, singleDamage = 8.8; Axe: damagePerSecond = 12, singleDamage = 10.8
+            Ingredient.of(ItemRegistry.RENDELITHIC_INGOT.get())).fireResistant(); // damagePerSecond = 15, singleDamage = 8.8; Axe: damagePerSecond = 12, singleDamage = 10.8
     
     static final ModToolMaterial RENDELITHIC_SWORD = RENDELITHIC.clone(RENDELITHIC_MATERIAL_NAME, 150);
 
     static final ModToolMaterial DIAMITHIC = new ModToolMaterial(DIAMITHIC_MATERIAL_NAME, 2100, 7F, 8.3F, 4, 14,
-            Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get())); // damagePerSecond = 16, singleDamage = 12.3;  Axe: damagePerSecond = 11.4, singleDamage = 14.3
+            Ingredient.of(ItemRegistry.DIAMITHIC_INGOT.get())).fireResistant(); // damagePerSecond = 16, singleDamage = 12.3;  Axe: damagePerSecond = 11.4, singleDamage = 14.3
 
     static final ModToolMaterial DIAMITHIC_SWORD = DIAMITHIC.clone(DIAMITHIC_MATERIAL_NAME, 525);
 
@@ -59,7 +59,7 @@ public class ToolMaterials
     static final ModToolMaterial LIMONITE_SWORD = LIMONITE.clone(LIMONITE_MATERIAL_NAME, 250);
 
     static final ModToolMaterial SUPER = new ModToolMaterial(SUPER_MATERIAL_NAME, 2100, 11.0F, 8.5F, 4, 1,
-            Ingredient.of(ItemRegistry.SUPER_INGOT.get())); // damagePerSecond = 25, singleDamage = 12.5;  Axe: damagePerSecond = 20.3, singleDamage = 14.5
+            Ingredient.of(ItemRegistry.SUPER_INGOT.get())).fireResistant(); // damagePerSecond = 25, singleDamage = 12.5;  Axe: damagePerSecond = 20.3, singleDamage = 14.5
 
     static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_NAME, 525);
 
@@ -68,11 +68,11 @@ public class ToolMaterials
 
     static final ModToolMaterial ROD_MATERIAL2 = ROD_MATERIAL1.clone(ROD_MATERIAL2_NAME, 120);
 
-    static final ModToolMaterial ROD_MATERIAL3 = ROD_MATERIAL1.clone(ROD_MATERIAL3_NAME, 200);
+    static final ModToolMaterial ROD_MATERIAL3 = ROD_MATERIAL1.clone(ROD_MATERIAL3_NAME, 200).fireResistant();
 
-    static final ModToolMaterial ROD_MATERIAL4 = ROD_MATERIAL1.clone(ROD_MATERIAL4_NAME, 500);
+    static final ModToolMaterial ROD_MATERIAL4 = ROD_MATERIAL1.clone(ROD_MATERIAL4_NAME, 500).fireResistant();
 
-    static final ModToolMaterial ROD_MATERIAL5 = ROD_MATERIAL1.clone(ROD_MATERIAL5_NAME, 1000);
+    static final ModToolMaterial ROD_MATERIAL5 = ROD_MATERIAL1.clone(ROD_MATERIAL5_NAME, 1000).fireResistant();
 
     static final ModToolMaterial ROD_MATERIAL6 = ROD_MATERIAL1.clone(ROD_MATERIAL6_NAME, 2000);
 

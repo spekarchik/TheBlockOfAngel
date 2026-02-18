@@ -4,12 +4,11 @@ import com.pekar.angelblock.tools.properties.LapisMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 
 public class LapisShovel extends EnhancedShovel
 {
-    public LapisShovel(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    public LapisShovel(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         super(material, attackDamage, attackSpeed, properties, new LapisMaterialProperties());
     }

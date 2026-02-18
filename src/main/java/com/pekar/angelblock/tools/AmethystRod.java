@@ -9,7 +9,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
@@ -18,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AmethystRod extends FireRod
 {
-    public AmethystRod(Tier material, boolean isMagnetic, Item.Properties properties)
+    public AmethystRod(ModToolMaterial material, boolean isMagnetic, Item.Properties properties)
     {
         super(material, isMagnetic, properties);
     }

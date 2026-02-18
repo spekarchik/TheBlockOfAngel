@@ -19,6 +19,11 @@ import java.util.List;
 
 public class BiosDiamond extends ModItemWithDoubleHoverText
 {
+    public BiosDiamond(Properties properties)
+    {
+        super(properties);
+    }
+
     private static final int COOLDOWN_TIME = 100;
 
     @Override

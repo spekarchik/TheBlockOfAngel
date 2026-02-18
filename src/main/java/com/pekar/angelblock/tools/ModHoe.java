@@ -12,7 +12,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -29,14 +32,17 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
 
-    public static ModHoe createPrimary(Tier material, int attackDamage, float attackSpeed, Properties properties)
+    public static ModHoe createPrimary(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties)
     {
         return new ModHoe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
     }
 
-    public ModHoe(Tier material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public ModHoe(ModToolMaterial material, int attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.attributes(HoeItem.createAttributes(material, attackDamage, attackSpeed)));
+        super(material, material.isFireResistant()
+                ? properties.attributes(HoeItem.createAttributes(material, attackDamage, attackSpeed)).fireResistant()
+                : properties.attributes(HoeItem.createAttributes(material, attackDamage, attackSpeed)));
+
         this.materialProperties = materialProperties;
     }
 

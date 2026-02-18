@@ -3,12 +3,8 @@ package com.pekar.angelblock.tools;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
-import org.apache.commons.lang3.NotImplementedException;
-
-import java.util.List;
 
 public class ModToolMaterial implements Tier
 {
@@ -19,6 +15,7 @@ public class ModToolMaterial implements Tier
     private final int level;
     private final int enchantability;
     private final Ingredient repairIngredient;
+    private boolean isFireResistant;
 
     protected ModToolMaterial(String name, int uses, float speed, float attackDamageBonus, int level, int enchantability, Ingredient repairIngredient)
     {
@@ -77,8 +74,21 @@ public class ModToolMaterial implements Tier
         return level;
     }
 
+    public boolean isFireResistant()
+    {
+        return isFireResistant;
+    }
+
+    public ModToolMaterial fireResistant()
+    {
+        this.isFireResistant = true;
+        return this;
+    }
+
     public ModToolMaterial clone(String name, int uses)
     {
-        return new ModToolMaterial(name, uses, getSpeed(), getAttackDamageBonus(), getLevel(), getEnchantmentValue(), getRepairIngredient());
+        var copy = new ModToolMaterial(name, uses, getSpeed(), getAttackDamageBonus(), getLevel(), getEnchantmentValue(), getRepairIngredient());
+        if (isFireResistant()) copy.fireResistant();
+        return copy;
     }
 }

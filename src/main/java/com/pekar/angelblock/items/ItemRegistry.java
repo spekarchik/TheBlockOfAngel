@@ -10,32 +10,32 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ItemRegistry
 {
-    public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.register("obsidian_powder", () -> new ModItemWithHoverText(TextStyle.Notice));
+    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rods_modified_by_rod_sensor"));
+
+    public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.registerItem("obsidian_powder", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ENDSTONE_POWDER = Main.ITEMS.register("endstone_powder", EndstonePowder::new);
     public static final DeferredItem<Item> DIAMOND_POWDER = Main.ITEMS.register("diamond_powder", DiamondPowder::new);
     public static final DeferredItem<Item> SALTPETER = Main.ITEMS.register("saltpeter", SaltPeter::new);
-    public static final DeferredItem<Item> RENDELITHIC_POWDER = Main.ITEMS.register("rendelithic_powder", () -> new ModItem());
-    public static final DeferredItem<Item> DIAMITHIC_POWDER = Main.ITEMS.register("diamithic_powder", () -> new ModItem());
-    public static final DeferredItem<Item> LAPIS_POWDER = Main.ITEMS.register("lapis_powder", () -> new ModItem());
-    public static final DeferredItem<Item> LIMONITE_POWDER = Main.ITEMS.register("limonite_powder", () -> new ModItem());
-    public static final DeferredItem<Item> SUPER_POWDER = Main.ITEMS.register("super_powder", () -> new ModItem());
-    public static final DeferredItem<Item> FLYING_POWDER = Main.ITEMS.register("flying_powder", () -> new ModItem());
+    public static final DeferredItem<Item> RENDELITHIC_POWDER = Main.ITEMS.registerItem("rendelithic_powder", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> DIAMITHIC_POWDER = Main.ITEMS.registerItem("diamithic_powder", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> LAPIS_POWDER = Main.ITEMS.registerItem("lapis_powder", ModItem::new);
+    public static final DeferredItem<Item> LIMONITE_POWDER = Main.ITEMS.registerItem("limonite_powder", ModItem::new);
+    public static final DeferredItem<Item> SUPER_POWDER = Main.ITEMS.registerItem("super_powder", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> FLYING_POWDER = Main.ITEMS.registerItem("flying_powder", ModItem::new);
 
-    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rods_modified_by_rod_sensor"));
+    public static final DeferredItem<Item> RENDELITHIC_INGOT = Main.ITEMS.registerItem("rendelithic_ingot", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> DIAMITHIC_INGOT = Main.ITEMS.registerItem("diamithic_ingot", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> LAPIS_INGOT = Main.ITEMS.registerItem("lapis_ingot", ModItem::new);
+    public static final DeferredItem<Item> LIMONITE_INGOT = Main.ITEMS.registerItem("limonite_ingot", ModItem::new);
+    public static final DeferredItem<Item> SUPER_INGOT = Main.ITEMS.registerItem("super_ingot", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> FLYING_INGOT = Main.ITEMS.registerItem("flying_ingot", ModItem::new);
 
-    public static final DeferredItem<Item> RENDELITHIC_INGOT = Main.ITEMS.register("rendelithic_ingot", () -> new ModItem());
-    public static final DeferredItem<Item> DIAMITHIC_INGOT = Main.ITEMS.register("diamithic_ingot", () -> new ModItem());
-    public static final DeferredItem<Item> LAPIS_INGOT = Main.ITEMS.register("lapis_ingot", () -> new ModItem());
-    public static final DeferredItem<Item> LIMONITE_INGOT = Main.ITEMS.register("limonite_ingot", () -> new ModItem());
-    public static final DeferredItem<Item> SUPER_INGOT = Main.ITEMS.register("super_ingot", () -> new ModItem());
-    public static final DeferredItem<Item> FLYING_INGOT = Main.ITEMS.register("flying_ingot", () -> new ModItem());
-
-    public static final DeferredItem<Item> RENDELITHIC_PLATE = Main.ITEMS.register("rendelithic_plate", () -> new ModItem());
-    public static final DeferredItem<Item> DIAMITHIC_PLATE = Main.ITEMS.register("diamithic_plate", () -> new ModItem());
-    public static final DeferredItem<Item> LAPIS_PLATE = Main.ITEMS.register("lapis_plate", () -> new ModItem());
-    public static final DeferredItem<Item> LIMONITE_PLATE = Main.ITEMS.register("limonite_plate", () -> new ModItem());
-    public static final DeferredItem<Item> SUPER_PLATE = Main.ITEMS.register("super_plate", () -> new ModItem());
-    public static final DeferredItem<Item> FLYING_PLATE = Main.ITEMS.register("flying_plate", () -> new ModItem());
+    public static final DeferredItem<Item> RENDELITHIC_PLATE = Main.ITEMS.registerItem("rendelithic_plate", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> DIAMITHIC_PLATE = Main.ITEMS.registerItem("diamithic_plate", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> LAPIS_PLATE = Main.ITEMS.registerItem("lapis_plate", ModItem::new);
+    public static final DeferredItem<Item> LIMONITE_PLATE = Main.ITEMS.registerItem("limonite_plate", ModItem::new);
+    public static final DeferredItem<Item> SUPER_PLATE = Main.ITEMS.registerItem("super_plate", ModItem::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> FLYING_PLATE = Main.ITEMS.registerItem("flying_plate", ModItem::new);
 
     public static final DeferredItem<Item> RENDELITHIC_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("rendelithic_armor_upgrade_kit", ModArmorUpgradeKit::new);
     public static final DeferredItem<Item> DIAMITHIC_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("diamithic_armor_upgrade_kit", ModArmorUpgradeKit::new);
@@ -55,23 +55,23 @@ public class ItemRegistry
     public static final DeferredItem<Item> ROD_UPGRADE_KIT = Main.ITEMS.registerItem("rod_upgrade_kit", RodUpgradeKit::new);
     public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.registerItem("downgrade_kit", DowngradeKit::new);
 
-    public static final DeferredItem<Item> VESICULAR_TERRACOTTA = Main.ITEMS.register("vesicular_terracotta", () -> new ModItemWithHoverText(TextStyle.Notice));
-    public static final DeferredItem<Item> BASALT_FIBER = Main.ITEMS.register("basalt_fiber", () -> new ModItem());
+    public static final DeferredItem<Item> VESICULAR_TERRACOTTA = Main.ITEMS.registerItem("vesicular_terracotta", p -> new ModItemWithHoverText(TextStyle.Notice, p), new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> BASALT_FIBER = Main.ITEMS.registerItem("basalt_fiber", ModItem::new);
     public static final DeferredItem<Item> FLAX_FIBRE = Main.ITEMS.register("flax_fibre", () -> new ModItemWithHoverText(TextStyle.Notice));
-    public static final DeferredItem<Item> ENERGY_CRYSTAL = Main.ITEMS.register("energy_crystal", () -> new ModItemWithHoverText());
-    public static final DeferredItem<Item> ARMOR_FIBER = Main.ITEMS.register("armor_fiber", () -> new ModItem());
-    public static final DeferredItem<Item> ENERGY_FIBER = Main.ITEMS.register("energy_fiber", () -> new ModItemWithHoverText());
-    public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.register("bios_diamond", BiosDiamond::new);
-    public static final DeferredItem<Item> END_SAPPHIRE = Main.ITEMS.register("end_sapphire", EndSapphire::new);
-    public static final DeferredItem<Item> FLAME_STONE = Main.ITEMS.register("flame_stone", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> MARINE_CRYSTAL = Main.ITEMS.register("marine_crystal", MarineCrystal::new);
-    public static final DeferredItem<Item> STRENGTH_PEARL = Main.ITEMS.register("strength_pearl", () -> new ModItemWithDoubleHoverText());
-    public static final DeferredItem<Item> SUPER_CRYSTAL = Main.ITEMS.register("super_crystal", () -> new ModItem());
+    public static final DeferredItem<Item> ENERGY_CRYSTAL = Main.ITEMS.registerItem("energy_crystal", ModItemWithHoverText::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> ARMOR_FIBER = Main.ITEMS.registerItem("armor_fiber", ModItem::new);
+    public static final DeferredItem<Item> ENERGY_FIBER = Main.ITEMS.registerItem("energy_fiber", ModItemWithHoverText::new);
+    public static final DeferredItem<Item> BIOS_DIAMOND = Main.ITEMS.registerItem("bios_diamond", BiosDiamond::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> END_SAPPHIRE = Main.ITEMS.registerItem("end_sapphire", EndSapphire::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> FLAME_STONE = Main.ITEMS.registerItem("flame_stone", ModItemWithDoubleHoverText::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> MARINE_CRYSTAL = Main.ITEMS.registerItem("marine_crystal", MarineCrystal::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> STRENGTH_PEARL = Main.ITEMS.registerItem("strength_pearl", ModItemWithDoubleHoverText::new, new Item.Properties().fireResistant());
+    public static final DeferredItem<Item> SUPER_CRYSTAL = Main.ITEMS.registerItem("super_crystal", ModItem::new, new Item.Properties().fireResistant());
     public static final DeferredItem<Item> GUARDIAN_EYE = Main.ITEMS.register("guardian_eye", GuardianEye::new);
     public static final DeferredItem<Item> MINER_FIGURE = Main.ITEMS.register("miner_figure", MinerFigure::new);
     public static final DeferredItem<Item> ANCIENT_CANINE = Main.ITEMS.register("ancient_canine", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> EVOKER_AMULET = Main.ITEMS.register("evoker_amulet", EvokerAmulet::new);
-//    public static final DeferredItem<Item> NETHER_BARS = Main.ITEMS.register("nether_bars", () -> new ModItemWithHoverText(TextStyle.Notice));
+//    public static final DeferredItem<Item> NETHER_BARS = Main.ITEMS.registerItem("nether_bars", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.register("ancient_scroll", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.register("blue_axolotl_bucket", BlueAxolotlBucket::new);
 

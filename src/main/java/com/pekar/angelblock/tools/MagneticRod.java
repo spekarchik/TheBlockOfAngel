@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -28,7 +27,7 @@ public abstract class MagneticRod extends ModRod
     private static final int NORMAL_USE_EXHAUSTION_MULTIPLIER = 16;
     private static final int MINE_EXHAUSTION_MULTIPLIER = 2;
 
-    public MagneticRod(Tier material, boolean isMagnetic, Properties properties)
+    public MagneticRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
     }

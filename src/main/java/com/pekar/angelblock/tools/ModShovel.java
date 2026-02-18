@@ -24,12 +24,12 @@ public class ModShovel extends ShovelItem implements IModToolEnhanceable, IToolt
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
 
-    public static ModShovel createPrimary(Tier material, float attackDamage, float attackSpeed, Properties properties)
+    public static ModShovel createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         return new ModShovel(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
     }
 
-    public ModShovel(Tier material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
+    public ModShovel(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
         super(material, properties.attributes(ShovelItem.createAttributes(material, attackDamage, attackSpeed)));
         this.materialProperties = materialProperties;

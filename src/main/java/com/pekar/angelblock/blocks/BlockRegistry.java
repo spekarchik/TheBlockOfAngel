@@ -27,26 +27,26 @@ public class BlockRegistry
             BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SNOW).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedObsidianBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.of().strength(10f).sound(SoundType.METAL).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> DIAMOND_POWDER_BLOCK = register("diamond_powder_block", () ->
-            new ModBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
-    public static final DeferredBlock<Block> OBSIDIAN_POWDER_BLOCK = register("obsidian_powder_block", () ->
-            new ModBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> ENDSTONE_POWDER_BLOCK = register("endstone_powder_block", () ->
-            new ModBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
-    public static final DeferredBlock<Block> SALTPETER_BLOCK = register("saltpeter_block", () ->
-            new ModBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW)));
-    public static final DeferredBlock<Block> DIAMITHIC_MATERIAL_BLOCK = register("diamithic_material_block", () ->
-            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> RENDELITHIC_MATERIAL_BLOCK = register("rendelithic_material_block", () ->
-            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> LIMONITE_MATERIAL_BLOCK = register("limonite_material_block", () ->
-            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> LAPIS_MATERIAL_BLOCK = register("lapis_material_block", () ->
-            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> SUPER_MATERIAL_BLOCK = register("super_material_block", () ->
-            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
-    public static final DeferredBlock<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", () ->
-            new ModBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f)));
+    public static final DeferredBlock<Block> DIAMOND_POWDER_BLOCK = register("diamond_powder_block", ModBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
+    public static final DeferredBlock<Block> OBSIDIAN_POWDER_BLOCK = register("obsidian_powder_block", ModBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> ENDSTONE_POWDER_BLOCK = register("endstone_powder_block", ModBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
+    public static final DeferredBlock<Block> SALTPETER_BLOCK = register("saltpeter_block", ModBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
+    public static final DeferredBlock<Block> DIAMITHIC_MATERIAL_BLOCK = register("diamithic_material_block", ModBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f), true);
+    public static final DeferredBlock<Block> RENDELITHIC_MATERIAL_BLOCK = register("rendelithic_material_block", ModBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f), true);
+    public static final DeferredBlock<Block> LIMONITE_MATERIAL_BLOCK = register("limonite_material_block", ModBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> LAPIS_MATERIAL_BLOCK = register("lapis_material_block", ModBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+    public static final DeferredBlock<Block> SUPER_MATERIAL_BLOCK = register("super_material_block", ModBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f), true);
+    public static final DeferredBlock<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", ModBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
 
     public static final DeferredBlock<Block> INACTIVE_ANGEL_BLOCK = register("inactive_angel_block", InactiveAngelBlock::new, InactiveAngelBlockItem::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 1200F));
@@ -117,6 +117,13 @@ public class BlockRegistry
     {
         var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, properties);
         Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
+        return blockObject;
+    }
+
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> blockSupplier, BlockBehaviour.Properties properties, boolean isFireResistant)
+    {
+        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, properties);
+        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), isFireResistant ? p.fireResistant() : p));
         return blockObject;
     }
 

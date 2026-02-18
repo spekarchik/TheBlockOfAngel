@@ -20,6 +20,11 @@ import static net.minecraft.world.InteractionResult.sidedSuccess;
 
 public class MarineCrystal extends ModItem implements ITooltipProvider
 {
+    public MarineCrystal(Properties properties)
+    {
+        super(properties);
+    }
+
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand usedHand)
     {

@@ -1,7 +1,8 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.Main;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ToolRegistry
@@ -147,7 +148,7 @@ public class ToolRegistry
             () -> new TrackLayer(ToolMaterials.ROD_MATERIAL6, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<ModRod> BUILDER = Main.ITEMS.register("builder",
-            () -> new Builder(ToolMaterials.ROD_MATERIAL7, new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new Builder(ToolMaterials.ROD_MATERIAL7, new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
 
     // Swords
     public static final DeferredItem<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.register("diamithic_primary_sword",

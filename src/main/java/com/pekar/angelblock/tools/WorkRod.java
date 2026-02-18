@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import net.minecraft.world.item.Tier;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public abstract class WorkRod extends ModRod implements ITooltipProvider
 {
-    public WorkRod(Tier material, Properties properties)
+    public WorkRod(ModToolMaterial material, Properties properties)
     {
         super(material, false, properties);
     }
