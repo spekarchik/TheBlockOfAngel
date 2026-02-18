@@ -3,7 +3,7 @@ name: Build NeoForge Mod
 on:
   push:
     branches:
-      - 'Neo/1.21.*'
+      - 'Neo/26.*'
 
 jobs:
   build:
@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Java 21
+      - name: Set up Java 25
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 25
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
