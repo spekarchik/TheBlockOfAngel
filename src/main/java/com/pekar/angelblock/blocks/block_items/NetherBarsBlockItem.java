@@ -15,7 +15,7 @@ public class NetherBarsBlockItem extends ModBlockItem implements ITooltipProvide
 {
     public NetherBarsBlockItem(Block block, Properties properties)
     {
-        super(block, properties);
+        super(block, properties.fireResistant());
     }
 
     @Override
