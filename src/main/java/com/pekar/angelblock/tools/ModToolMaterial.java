@@ -16,6 +16,7 @@ public class ModToolMaterial
     private final TagKey<Item> repairIngredient;
     private final ToolMaterial vanillaMaterial;
     private final TagKey<Block> incorrectBlocksForDrops;
+    private boolean isFireResistant;
 
     protected ModToolMaterial(String name, TagKey<Block> incorrectBlocksForDrops, int durability, float speed, float attackDamageBonus, int level, int enchantmentValue, TagKey<Item> repairItems)
     {
@@ -76,8 +77,21 @@ public class ModToolMaterial
         return vanillaMaterial;
     }
 
+    public boolean isFireResistant()
+    {
+        return isFireResistant;
+    }
+
+    public ModToolMaterial fireResistant()
+    {
+        this.isFireResistant = true;
+        return this;
+    }
+
     public ModToolMaterial clone(String name, int durability)
     {
-        return new ModToolMaterial(name, getIncorrectBlocksForDrops(), durability, getSpeed(), getAttackDamageBonus(), getLevel(), getEnchantmentValue(), getRepairItems());
+        var copy = new ModToolMaterial(name, getIncorrectBlocksForDrops(), durability, getSpeed(), getAttackDamageBonus(), getLevel(), getEnchantmentValue(), getRepairItems());
+        if (isFireResistant()) copy.fireResistant();
+        return copy;
     }
 }
