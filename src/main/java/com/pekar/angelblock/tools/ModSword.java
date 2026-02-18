@@ -42,7 +42,7 @@ public abstract class ModSword extends Item implements IModTool, ITooltipProvide
 
     public ModSword(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
-        super(material.getVanillaMaterial().applySwordProperties(properties, attackDamage, attackSpeed));
+        super(material.getVanillaMaterial().applySwordProperties(material.isFireResistant() ? properties.fireResistant() : properties, attackDamage, attackSpeed));
         this.material = material;
     }
 
