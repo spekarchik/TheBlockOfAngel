@@ -5,6 +5,7 @@
   - **Rendelite**, **Diamite** and **Superyte** gear and all related materials (powders, ingots, plates and blocks).
   - All crystals and **Vesicular Terracotta**.
   - **Fire Rod** and all upgraded variants, including magnetic versions and the **Builder Rod**.
+  - **Rod Sensor**.
   - **The Block of Angel** (both *dormant* and *activated* versions) and **The Block of Devil**.
   - **Nether Bars**.
 
