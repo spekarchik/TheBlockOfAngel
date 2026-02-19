@@ -1,7 +1,7 @@
 package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
@@ -303,7 +303,7 @@ abstract class Armor implements IArmor
         int heavyArmorSlots = 0;
         for (var slot : utils.player.getArmorInSlots(player))
         {
-            if (slot.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
+            if (slot.getItem() instanceof ModHumanoidArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
                 heavyArmorSlots++;
         }
         int rnd = randomSource.nextInt(chanceToAvoidBreaking);
@@ -362,7 +362,7 @@ abstract class Armor implements IArmor
         for (var slot : utils.player.getArmorSlots())
         {
             var stack = player.getEntity().getItemBySlot(slot);
-            if (stack.isEmpty() || !(stack.getItem() instanceof ModArmor modArmor) || !modArmor.getArmorFamilyName().equals(getFamilyName()))
+            if (stack.isEmpty() || !(stack.getItem() instanceof ModHumanoidArmor modArmor) || !modArmor.getArmorFamilyName().equals(getFamilyName()))
             {
                 continue;
             }
@@ -401,7 +401,7 @@ abstract class Armor implements IArmor
         boolean isDamaged = false;
         for (var slot : utils.player.getArmorInSlots(player.getEntity()))
         {
-            if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
+            if (!slot.isEmpty() && slot.getItem() instanceof ModHumanoidArmor modArmor)
             {
                 if (modArmor.isDamaged(slot)) isDamaged = true;
             }
@@ -409,7 +409,7 @@ abstract class Armor implements IArmor
 
         for (var slot : utils.player.getArmorInSlots(player.getEntity()))
         {
-            if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
+            if (!slot.isEmpty() && slot.getItem() instanceof ModHumanoidArmor modArmor)
             {
                 damageArmor(!isDamaged);
             }

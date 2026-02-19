@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IArmorEvents;
 import com.pekar.angelblock.events.cleaners.Cleaner;
@@ -21,7 +21,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -197,7 +196,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         var to = event.getTo();
         String fromItemName;
         String toItemName;
-        if (from.getItem() instanceof ModArmor modArmor)
+        if (from.getItem() instanceof ModHumanoidArmor modArmor)
         {
             fromItemName = modArmor.getArmorFamilyName();
         }
@@ -206,7 +205,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
             fromItemName = "";
         }
 
-        if (to.getItem() instanceof ModArmor modArmor)
+        if (to.getItem() instanceof ModHumanoidArmor modArmor)
         {
             toItemName = modArmor.getArmorFamilyName();
         }

@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.equipment.ArmorType;
 
-public class FlyingArmor extends ModArmor
+public class FlyingArmor extends ModHumanoidArmor
 {
     protected FlyingArmor(ModArmorMaterial material, ArmorType equipmentSlot, Properties properties)
     {
@@ -30,7 +30,7 @@ public class FlyingArmor extends ModArmor
     private String getModelName(LivingEntity entity, EquipmentSlot slot)
     {
         var item = entity.getItemBySlot(slot).getItem();
-        if (!(item instanceof ModArmor armorItem)) return "";
+        if (!(item instanceof ModHumanoidArmor armorItem)) return "";
         return armorItem.getArmorFamilyName();
     }
 }
