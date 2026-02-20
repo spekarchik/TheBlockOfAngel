@@ -46,14 +46,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-abstract class Armor implements IArmor
+abstract class Armor extends ArmorBase implements IArmor
 {
     protected final IPlayer player;
     private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter = 0;
     private boolean needUpdateStatesAfterLogin = false;
-    protected Utils utils = new Utils();
 
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final double CREEPER_AGRY_DISTANCE = 3.0;
@@ -158,86 +157,6 @@ abstract class Armor implements IArmor
 
         updateActivity(event.getSlot());
         onEquipmentChangeEvent(event);
-    }
-
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (!(obj instanceof Armor)) return false;
-        Armor armor = (Armor) obj;
-        return getFamilyName().equals(armor.getFamilyName());
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return getFamilyName().hashCode();
-    }
-
-    protected boolean isFreezeDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.FREEZE);
-    }
-
-    protected boolean isFireDamage(DamageSource damageSource)
-    {
-        boolean isDamagedByInFire = damageSource.is(DamageTypes.IN_FIRE);
-        boolean isDamagedByOnFire = damageSource.is(DamageTypes.ON_FIRE);
-        return isDamagedByInFire || isDamagedByOnFire;
-    }
-
-    protected boolean isStandingInSoulFire()
-    {
-        return false; // no ways to distinguish fire types for now
-    }
-
-    protected boolean isLavaDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.LAVA);
-    }
-
-    protected boolean isHotFloorDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.HOT_FLOOR);
-    }
-
-    protected boolean isFireOrLavaDamage(DamageSource damageSource)
-    {
-        return isFireDamage(damageSource) || isLavaDamage(damageSource);
-    }
-
-    protected boolean isFireOrLavaOrHotFloorDamage(DamageSource damageSource)
-    {
-        return isHotFloorDamage(damageSource) || isFireOrLavaDamage(damageSource);
-    }
-
-    protected boolean isThornOrMagicDamage(DamageSource damageSource)
-    {
-        boolean isCactus = damageSource.is(DamageTypes.CACTUS);
-        boolean isSweetBerryBush = damageSource.is(DamageTypes.SWEET_BERRY_BUSH);
-        boolean isPufferFish = damageSource.getEntity() instanceof Pufferfish;
-        boolean isMagic = damageSource.is(DamageTypes.MAGIC) || damageSource.is(DamageTypes.INDIRECT_MAGIC);
-
-        return isCactus || isSweetBerryBush || isMagic || isPufferFish;
-    }
-
-    protected boolean isLightningBoltDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.LIGHTNING_BOLT);
-    }
-
-    protected boolean isExplosionDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.EXPLOSION);
-    }
-
-    protected boolean isBiting(Entity entity)
-    {
-        boolean isSilverfish = entity instanceof Silverfish;
-        boolean isEndermite = entity instanceof Endermite;
-        boolean isSpider = entity instanceof Spider;
-        boolean isBee = entity instanceof Bee;
-        return isSilverfish || isEndermite || isSpider || isBee;
     }
 
     protected boolean isSlowMovementAffected(LivingEntity entity)
