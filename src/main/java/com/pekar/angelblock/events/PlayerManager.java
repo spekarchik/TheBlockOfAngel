@@ -227,7 +227,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     @Override
     public IPlayer getPlayerByUUID(UUID uuid)
     {
-        return players.values().stream().filter(p -> p.getEntity().getUUID().equals(uuid)).findAny().orElse(null);
+        return players.get(uuid);
     }
 
     @Override
