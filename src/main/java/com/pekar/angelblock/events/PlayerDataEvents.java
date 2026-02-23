@@ -1,7 +1,7 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.tools.IModTool;
 import net.minecraft.sounds.SoundEvents;
@@ -29,7 +29,7 @@ public class PlayerDataEvents implements IEventHandler
         IPlayer player = playerBasic.getPlayerByUUID(event.getEntity().getUUID());
         if (player == null) return;
 
-        for (IArmor armor : player.getArmorTypesUsed())
+        for (IPlayerArmor armor : player.getArmorTypesUsed())
         {
             armor.onBreakSpeed(event);
         }

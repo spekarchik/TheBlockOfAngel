@@ -1,8 +1,8 @@
 package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;

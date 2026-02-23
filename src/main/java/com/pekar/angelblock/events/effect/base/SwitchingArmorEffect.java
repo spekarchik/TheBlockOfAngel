@@ -1,15 +1,16 @@
-package com.pekar.angelblock.events.effect;
+package com.pekar.angelblock.events.effect.base;
 
-import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.player.IModMobEffectInstance;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
+import com.pekar.angelblock.events.effect.State;
+import com.pekar.angelblock.events.mob.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 
-class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements IExtendedSwitchingArmorEffect
+public class SwitchingArmorEffect extends ArmorEffect<IPlayer> implements IExtendedSwitchingArmorEffect
 {
-    protected SwitchingArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
+    protected SwitchingArmorEffect(IPlayer player, IPlayerArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
         super(player, armor, effectType, defaultAmplifier);
     }
@@ -17,7 +18,7 @@ class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements
     @Override
     protected IModMobEffectInstance setEffect(int amplifier, int duration)
     {
-        return player.setEffect(effectType, amplifier, getShowIcon());
+        return mob.setEffect(effectType, amplifier, getShowIcon());
     }
 
     @Override
@@ -79,12 +80,6 @@ class SwitchingArmorEffect extends ArmorEffect<ISwitchingArmorEffect> implements
     public final void trySwitchOn()
     {
         trySwitchOn(defaultAmplifier);
-    }
-
-    @Override
-    public ISwitchingArmorEffect asArmorEffect()
-    {
-        return this;
     }
 
     @Override

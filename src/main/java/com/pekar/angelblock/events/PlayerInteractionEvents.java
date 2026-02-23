@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.scheduler.PlayerScheduler;
@@ -61,7 +61,7 @@ public class PlayerInteractionEvents implements IEventHandler
         IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
         if (player == null) return;
 
-        for (IArmor armor : player.getArmorTypesUsed())
+        for (IPlayerArmor armor : player.getArmorTypesUsed())
         {
             armor.onLivingHurtEvent(event);
         }
@@ -89,7 +89,7 @@ public class PlayerInteractionEvents implements IEventHandler
         IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
         if (player == null) return;
 
-        for (IArmor armor : player.getArmorTypesUsed())
+        for (IPlayerArmor armor : player.getArmorTypesUsed())
         {
             armor.onLivingDamageEvent(event);
         }
@@ -102,7 +102,7 @@ public class PlayerInteractionEvents implements IEventHandler
         IPlayer player = playerBasic.getPlayerByUUID(entity.getUUID());
         if (player == null) return;
 
-        for (IArmor armor : player.getArmorTypesUsed())
+        for (IPlayerArmor armor : player.getArmorTypesUsed())
         {
             armor.onEffectAddedEvent(event);
         }
@@ -114,7 +114,7 @@ public class PlayerInteractionEvents implements IEventHandler
         IPlayer player = playerBasic.getPlayerByUUID(event.getEntity().getUUID());
         if (player == null) return;
 
-        for (IArmor armor : player.getArmorTypesUsed())
+        for (IPlayerArmor armor : player.getArmorTypesUsed())
         {
             armor.onLivingJumpEvent(event);
         }
@@ -126,7 +126,7 @@ public class PlayerInteractionEvents implements IEventHandler
         IPlayer player = playerBasic.getPlayerByUUID(event.getEntity().getUUID());
         if (player == null) return;
 
-        for (IArmor armor : player.getArmorTypesUsed())
+        for (IPlayerArmor armor : player.getArmorTypesUsed())
         {
             armor.onLivingFallEvent(event);
         }

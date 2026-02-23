@@ -1,18 +1,21 @@
-package com.pekar.angelblock.events.effect;
+package com.pekar.angelblock.events.effect.base;
 
 import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.player.IModMobEffectInstance;
+import com.pekar.angelblock.events.effect.PlayerArmorEffectSetup;
+import com.pekar.angelblock.events.effect.State;
+import com.pekar.angelblock.events.mob.IMob;
+import com.pekar.angelblock.events.mob.IModMobEffectInstance;
+import com.pekar.angelblock.events.mob.ModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
-import com.pekar.angelblock.events.player.ModMobEffectInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.BiPredicate;
 
-abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IArmorEffect
+abstract class ArmorEffect<M extends IMob> implements IArmorEffectWithOptions<M>
 {
-    protected final IPlayer player;
+    protected final M mob;
     protected final IArmor armor;
     protected final Holder<MobEffect> effectType;
     private State state = State.OFF;
@@ -21,12 +24,11 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     protected final int defaultAmplifier;
     private boolean showIcon;
     private IModMobEffectInstance effectInstance;
-    private BiPredicate<IPlayer, IArmor> availabilityPredicate = (p, a) -> false;
-    private BiPredicate<IPlayer, IArmor> unavailabilityPredicate = (p, a) -> !availabilityPredicate.test(p, a);
+    protected BiPredicate<M, IArmor> availabilityPredicate = (m, a) -> false;
 
-    protected ArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
+    protected ArmorEffect(M mob, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
-        this.player = player;
+        this.mob = mob;
         this.armor = armor;
         this.effectType = effectType;
         this.defaultAmplifier = defaultAmplifier;
@@ -39,21 +41,51 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     }
 
     @Override
+    public IPlayerArmorEffectSetup<IArmorEffectWithOptions<IPlayer>> setup()
+    {
+        if (mob instanceof IPlayer)
+            return new PlayerArmorEffectSetup<>((IArmorEffectWithOptions<IPlayer>)this);
+        else
+            return null;
+    }
+
+    @Override
+    public <E extends IArmorEffectWithOptions<IPlayer>> IPlayerArmorEffectSetup<E> setup(E effect)
+    {
+        if (mob instanceof IPlayer)
+            return new PlayerArmorEffectSetup<>(effect);
+        else
+            return null;
+    }
+
+    @Override
+    public <MM extends IMob> IArmorEffectSetup<IArmorEffectWithOptions<MM>, MM> setupBasic()
+    {
+        return new ArmorEffectSetup<>((IArmorEffectWithOptions<MM>)this);
+    }
+
+    @Override
+    public <E extends IArmorEffectWithOptions<MM>, MM extends IMob> IArmorEffectSetup<IArmorEffectWithOptions<MM>, MM> setupBasic(E effect)
+    {
+        return new ArmorEffectSetup<>(effect);
+    }
+
+    @Override
     public final boolean isActive()
     {
-        return player.hasArmorEffect(effectType) && effectInstance != null && effectInstance.equals(player.getEffectInstance(effectType));
+        return mob.hasArmorEffect(effectType) && effectInstance != null && effectInstance.equals(mob.getEffectInstance(effectType));
     }
 
     @Override
     public boolean isAnotherActive()
     {
-        return player.isEffectActive(effectType) && !isActive();
+        return mob.isEffectActive(effectType) && !isActive();
     }
 
     @Override
     public boolean isAnyActive()
     {
-        return player.isEffectActive(effectType);
+        return mob.isEffectActive(effectType);
     }
 
     @Override
@@ -63,16 +95,9 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     }
 
     @Override
-    public final boolean isUnavailable()
-    {
-        return isNotAvailable;
-    }
-
-    @Override
     public final void updateAvailability()
     {
-        isAvailable = availabilityPredicate.test(player, armor);
-        isNotAvailable = unavailabilityPredicate.test(player, armor);
+        isAvailable = availabilityPredicate.test(mob, armor);
     }
 
     @Override
@@ -84,7 +109,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     @Override
     public final void updateSwitchState()
     {
-        boolean canHandleEffect = isAvailable() && player.hasArmorEffect(effectType);
+        boolean canHandleEffect = isAvailable() && mob.hasArmorEffect(effectType);
         setSwitchState(canHandleEffect);
     }
 
@@ -148,7 +173,7 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
         {
             if (isActive() || (isAnyActive() && (forceRemove || (isAvailable() && isInfinite() && !isMagicItemEffect()))))
             {
-                player.clearEffect(effectType);
+                mob.clearEffect(effectType);
                 effectInstance = null;
                 onDeactivated();
             }
@@ -173,9 +198,16 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
         return true;
     }
 
-    protected boolean getShowIcon()
+    @Override
+    public boolean getShowIcon()
     {
         return showIcon;
+    }
+
+    @Override
+    public void setShowIcon(boolean showIcon)
+    {
+        this.showIcon = showIcon;
     }
 
     protected final void clearEffectInstance()
@@ -184,43 +216,19 @@ abstract class ArmorEffect<T extends IArmorEffect> implements EffectSetup<T>, IA
     }
 
     @Override
-    public final void setShowIcon(boolean value)
-    {
-        showIcon = value;
-    }
-
-    @Override
-    public final void setAvailabilityPredicate(BiPredicate<IPlayer, IArmor> value)
+    public final void setupAvailability(BiPredicate<M, IArmor> value)
     {
         availabilityPredicate = value;
     }
 
     @Override
-    public final BiPredicate<IPlayer, IArmor> getAvailabilityPredicate()
-    {
-        return availabilityPredicate;
-    }
-
-    @Override
-    public void setUnavailabilityPredicate(BiPredicate<IPlayer, IArmor> value)
-    {
-        unavailabilityPredicate = value;
-    }
-
-    @Override
-    public BiPredicate<IPlayer, IArmor> getUnavailabilityPredicate()
-    {
-        return unavailabilityPredicate;
-    }
-
-    @Override
     public final boolean isInfinite()
     {
-        return player.getEffectInstance(effectType).isInfiniteDuration();
+        return mob.getEffectInstance(effectType).isInfiniteDuration();
     }
 
     private boolean isMagicItemEffect()
     {
-        return player.getEffectInstance(effectType) instanceof ModMobEffectInstance modMobEffectInstance && modMobEffectInstance.isMagicItemEffect();
+        return mob.getEffectInstance(effectType) instanceof ModMobEffectInstance modMobEffectInstance && modMobEffectInstance.isMagicItemEffect();
     }
 }
