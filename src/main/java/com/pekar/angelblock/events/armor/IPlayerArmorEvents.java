@@ -4,7 +4,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public interface IArmorEvents
+public interface IPlayerArmorEvents
 {
     void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event);
     void onLivingHurtEvent(LivingIncomingDamageEvent event);

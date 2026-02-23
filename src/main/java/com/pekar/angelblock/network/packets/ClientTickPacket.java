@@ -1,7 +1,7 @@
 package com.pekar.angelblock.network.packets;
 
 import com.pekar.angelblock.events.PlayerManager;
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.Packet;
@@ -14,9 +14,9 @@ public class ClientTickPacket extends ClientToServerPacket
     public void onReceive(ServerPlayer serverPlayer)
     {
         IPlayer player = PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID());
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
 
-        for (IArmor armor : player.getArmorTypesUsed())
+        for (IPlayerArmor armor : player.getArmorTypesUsed())
         {
             armor.onCreeperCheck();
 

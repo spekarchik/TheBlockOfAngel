@@ -1,17 +1,17 @@
-package com.pekar.angelblock.events.effect;
+package com.pekar.angelblock.events.effect.base;
 
 import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.events.mob.IMob;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 
-abstract class TemporaryBaseArmorEffect<T extends IArmorEffect> extends ArmorEffect<T> implements ITemporaryBaseArmorEffect
+abstract class TemporaryBaseArmorEffect<M extends IMob> extends ArmorEffect<M> implements ITemporaryBaseArmorEffect
 {
     protected final int defaultDuration;
 
-    public TemporaryBaseArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
+    public TemporaryBaseArmorEffect(M mob, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
     {
-        super(player, armor, effectType, defaultAmplifier);
+        super(mob, armor, effectType, defaultAmplifier);
         this.defaultDuration = defaultDuration;
     }
 

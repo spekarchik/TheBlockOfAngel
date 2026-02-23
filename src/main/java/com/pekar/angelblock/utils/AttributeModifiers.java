@@ -1,7 +1,7 @@
 package com.pekar.angelblock.utils;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,14 +25,14 @@ public class AttributeModifiers
             for (var stack : Utils.instance.player.getArmorInSlots(entity))
             {
                 if (stack.isEmpty()) continue;
-                boolean isModArmor = stack.getItem() instanceof ModArmor;
+                boolean isModArmor = stack.getItem() instanceof ModHumanoidArmor;
 
                 double maxDamage = stack.getMaxDamage();
                 if (maxDamage <= 0) continue;
 
                 double damage = isModArmor ? stack.getDamageValue() : 0.0;
 
-                if (!(stack.getItem() instanceof ModArmor modArmor)) continue;
+                if (!(stack.getItem() instanceof ModHumanoidArmor modArmor)) continue;
 
                 double defense = modArmor.getDefense();
                 double durability = maxDamage - damage;
