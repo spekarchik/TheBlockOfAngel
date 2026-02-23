@@ -1,8 +1,8 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.armor.ModHumanoidArmor;
-import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.armor.IArmorEvents;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmorEvents;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.player.Player;
@@ -57,14 +57,14 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         //AllayManager.restoreSavedAllays(entity);
 
         IPlayer player = new Player(entity);
-        players.put(player.getEntity().getUUID(), player);
+        players.put(player.getPlayerEntity().getUUID(), player);
 
         player.updateArmorUsed();
 
         if (entity instanceof ServerPlayer serverPlayer)
             new UpdateArmorDurabilityPacketToClient().sendToPlayer(serverPlayer);
 
-        for (IArmorEvents armor : player.getArmorTypesUsed())
+        for (IPlayerArmorEvents armor : player.getArmorTypesUsed())
         {
             armor.onPlayerLoggedInEvent(event);
         }
@@ -86,10 +86,10 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
 
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
         Cleaner.clean(playerEntity);
 
-        for (IArmorEvents armor : player.getArmorTypesUsed())
+        for (IPlayerArmorEvents armor : player.getArmorTypesUsed())
         {
             armor.onEntityTravelToDimensionEvent(event);
         }
@@ -105,7 +105,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
 
-        for (IArmorEvents armor : player.getArmorTypesUsed())
+        for (IPlayerArmorEvents armor : player.getArmorTypesUsed())
         {
             armor.onPlayerChangedDimensionEvent(event);
         }
@@ -138,7 +138,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         IPlayer player = players.get(entity.getUUID());
         if (player == null) return;
 
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
         var oldSlotItem = event.getFrom();
 
         removeEffectIfHoldItem(playerEntity, PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT, oldSlotItem, ItemRegistry.GUARDIAN_EYE.get());
@@ -160,19 +160,19 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         var slot = event.getSlot();
         if (slot.isArmor() || slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND)
         {
-            Iterable<IArmor> armorUsed = player.getArmorTypesUsed();
-            Set<IArmor> armorAffected = new HashSet<>((Collection<IArmor>) armorUsed);
+            Iterable<IPlayerArmor> armorUsed = player.getArmorTypesUsed();
+            Set<IPlayerArmor> armorAffected = new HashSet<>((Collection<IPlayerArmor>) armorUsed);
             player.updateArmorUsed();
-            armorAffected.addAll((Collection<IArmor>) player.getArmorTypesUsed());
+            armorAffected.addAll((Collection<IPlayerArmor>) player.getArmorTypesUsed());
 
             if (armorAffected.isEmpty())
             {
                 Utils.instance.attributeModifiers.removeArmorAttributeModifier(playerEntity);
             }
 
-            ToIntFunction<IArmor> armorPriority = getArmorPriorityFunction(event);
+            ToIntFunction<IPlayerArmor> armorPriority = getArmorPriorityFunction(event);
 
-            for (IArmor armor : armorAffected.stream().sorted(Comparator.comparingInt(armorPriority)).toList())
+            for (IPlayerArmor armor : armorAffected.stream().sorted(Comparator.comparingInt(armorPriority)).toList())
             {
                 armor.onLivingEquipmentChangeEvent(event);
             }
@@ -181,7 +181,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
     private void trySetEnergyCrystalEffect(IPlayer player)
     {
-        var serverPlayer = (ServerPlayer) player.getEntity();
+        var serverPlayer = (ServerPlayer) player.getPlayerEntity();
         if (!serverPlayer.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT) && !serverPlayer.hasEffect(MobEffects.SLOWNESS)
                 && !serverPlayer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT) && !serverPlayer.hasEffect(MobEffects.MINING_FATIGUE))
         {
@@ -190,7 +190,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
         }
     }
 
-    private static @NotNull ToIntFunction<IArmor> getArmorPriorityFunction(LivingEquipmentChangeEvent event)
+    private static @NotNull ToIntFunction<IPlayerArmor> getArmorPriorityFunction(LivingEquipmentChangeEvent event)
     {
         var from = event.getFrom();
         var to = event.getTo();
@@ -214,7 +214,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
             toItemName = "";
         }
 
-        ToIntFunction<IArmor> armorPriority = a ->
+        ToIntFunction<IPlayerArmor> armorPriority = a ->
         {
             if (a.getFamilyName().equals(fromItemName)) return 0;
             if (a.getFamilyName().equals(toItemName)) return 100;
@@ -234,7 +234,7 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     public void addEntityPlayer(net.minecraft.world.entity.player.Player entity)
     {
         IPlayer player = new Player(entity);
-        players.put(player.getEntity().getUUID(), player);
+        players.put(player.getPlayerEntity().getUUID(), player);
         player.updateArmorUsed();
     }
 

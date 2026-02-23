@@ -2,6 +2,7 @@ package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
+import com.pekar.angelblock.events.effect.base.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -17,7 +18,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class SuperArmor extends Armor
+public class SuperArmor extends PlayerArmor
 {
     private final ISwitchingArmorEffect nightVisionEffect;
     private final ISwitchingEffectSynchronizer jumpEffect;
@@ -47,15 +48,20 @@ public class SuperArmor extends Armor
     public SuperArmor(IPlayer player)
     {
         super(player);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).setupAvailability(this::isNightVisionAvailable).asArmorEffect();
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotsSet(EquipmentSlot.CHEST).asArmorEffect();
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        nightVisionEffect.setup().setupAvailability(this::isNightVisionAvailable);
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this);
+        glowingEffect.setup().availableIfSlotsSet(EquipmentSlot.CHEST);
 
-        luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
+        luckEffect = new LuckPermanentArmorEffect(player, this);
+        luckEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, REGENERATION_EFFECT_HEAL_AMPLIFIER, HEAL_REGENERATION_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, 2, SLOWNESS_EFFECT_DURATION);
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 2);
-        levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
+        levitationEffect = new LevitationSwitchingEffect(player, this, LEVITATION_UP_AMPLIFIER);
+        levitationEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
+        slowFallingEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
 
         var superJumpEffect = new SuperJumpSwitchingEffect(player, this);
         superJumpEffect.setupAvailability(this::isSuperJumpEffectAvailable);
@@ -68,7 +74,8 @@ public class SuperArmor extends Armor
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
         var strengthEffect = new StrengthSwitchingEffect(player, this, 2);
         waterBreathingEffect = new WaterBreathingPermanentEffect(player, this);
-        hasteEffect = new HastePermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
+        hasteEffect = new HastePermanentArmorEffect(player, this);
+        hasteEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -78,7 +85,7 @@ public class SuperArmor extends Armor
     @Override
     protected void onLogin(PlayerEvent.PlayerLoggedInEvent event)
     {
-        isSlowFallingActivatedOnGround = player.getEntity().onGround();
+        isSlowFallingActivatedOnGround = player.getPlayerEntity().onGround();
     }
 
     @Override
@@ -162,7 +169,7 @@ public class SuperArmor extends Armor
     @Override
     protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        var entityPlayer = player.getEntity();
+        var entityPlayer = player.getPlayerEntity();
         if (playerNeedsToRestoreHealth(entityPlayer, event.getSlot(), event.getFrom(), event.getTo()))
         {
             restorePlayerHealth(entityPlayer);
@@ -200,7 +207,7 @@ public class SuperArmor extends Armor
             if (player.areLeggingsModifiedWithHealthRegenerator(this))
             {
                 event.setCanceled(true);
-                player.getEntity().removeEffect(MobEffects.WITHER);
+                player.getPlayerEntity().removeEffect(MobEffects.WITHER);
             }
         }
         else if (isLightningBoltDamage(damageSource))
@@ -221,10 +228,10 @@ public class SuperArmor extends Armor
             if (isSlowMovementAffected(entityAttackedBy))
             {
                 boolean isWitch = entityAttackedBy instanceof Witch;
-                float distance = player.getEntity().distanceTo(entityAttackedBy);
+                float distance = player.getPlayerEntity().distanceTo(entityAttackedBy);
                 if (!isWitch && distance > 2f)
                 {
-                    var random = player.getEntity().getRandom();
+                    var random = player.getPlayerEntity().getRandom();
                     if (random.nextFloat() < 0.4f)
                         entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
                 }
@@ -293,7 +300,7 @@ public class SuperArmor extends Armor
     {
         updateSlowFallingEffect();
 
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
         if (playerEntity.isFallFlying() && !canFly())
         {
             playerEntity.stopFallFlying();
@@ -312,7 +319,7 @@ public class SuperArmor extends Armor
     @Override
     public void onKeyInputEvent(String pressedKeyDescription)
     {
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
 
         if (pressedKeyDescription.equals(KeyRegistry.NIGHT_VISION.getName()))
         {
@@ -353,7 +360,7 @@ public class SuperArmor extends Armor
                 jumpEffect.trySwitch();
             }
 
-            if (jumpEffect.isMasterActive() && slowFallingEffect.isActive() && player.getEntity().onGround() && !levitationEffect.isAnyActive())
+            if (jumpEffect.isMasterActive() && slowFallingEffect.isActive() && player.getPlayerEntity().onGround() && !levitationEffect.isAnyActive())
             {
                 slowFallingEffect.trySwitchOff();
                 levitationEffect.trySwitchOn();
@@ -479,7 +486,7 @@ public class SuperArmor extends Armor
     public void onBeingUnderRain()
     {
         if (!player.isFullArmorSetPutOn(this)) return;
-        var entityPlayer = player.getEntity();
+        var entityPlayer = player.getPlayerEntity();
 
         if (entityPlayer.getHealth() < 10F && entityPlayer.getFoodData().getFoodLevel() > 0)
         {
@@ -518,9 +525,9 @@ public class SuperArmor extends Armor
     private boolean isSuperJumpEffectAvailable(IPlayer player, IArmor armor)
     {
         if (!player.areBootsModifiedWithJumpBooster(this)) return false;
-        if (player.getEntity().hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT)) return false;
+        if (player.getPlayerEntity().hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT)) return false;
 
-        var boots = player.getEntity().getItemBySlot(EquipmentSlot.FEET);
+        var boots = player.getPlayerEntity().getItemBySlot(EquipmentSlot.FEET);
         int bootsDamage = boots.getDamageValue();
         int maxBootsDamageToJump = boots.getMaxDamage() / 2;
 
@@ -529,7 +536,7 @@ public class SuperArmor extends Armor
 
     private boolean canFly()
     {
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
         var chestplate = playerEntity.getItemBySlot(EquipmentSlot.CHEST);
         int maxDamageToFly = chestplate.getMaxDamage() / 2;
         int chestDamage = chestplate.getDamageValue();
@@ -539,7 +546,7 @@ public class SuperArmor extends Armor
 
     private void updateSlowFallingEffect()
     {
-        if (!isSlowFallingActivatedOnGround && slowFallingEffect.isOn() && player.getEntity().onGround())
+        if (!isSlowFallingActivatedOnGround && slowFallingEffect.isOn() && player.getPlayerEntity().onGround())
         {
             slowFallingEffect.trySwitchOff();
             isSlowFallingActivatedOnGround = true;

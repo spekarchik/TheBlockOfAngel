@@ -1,16 +1,19 @@
-package com.pekar.angelblock.events.effect;
+package com.pekar.angelblock.events.effect.base;
 
 import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.player.IModMobEffectInstance;
-import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.events.effect.State;
+import com.pekar.angelblock.events.mob.IMob;
+import com.pekar.angelblock.events.mob.IModMobEffectInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 
-class TemporaryPersistentArmorEffect extends TemporaryBaseArmorEffect<ITemporaryPersistentArmorEffect> implements ITemporaryPersistentArmorEffect
+abstract class TemporaryPersistentArmorEffect<M extends IMob>
+        extends TemporaryBaseArmorEffect<M>
+        implements ITemporaryPersistentArmorEffect
 {
-    protected TemporaryPersistentArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
+    protected TemporaryPersistentArmorEffect(M mob, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
     {
-        super(player, armor, effectType, defaultAmplifier, defaultDuration);
+        super(mob, armor, effectType, defaultAmplifier, defaultDuration);
     }
 
     @Override
@@ -22,7 +25,7 @@ class TemporaryPersistentArmorEffect extends TemporaryBaseArmorEffect<ITemporary
     @Override
     protected IModMobEffectInstance setEffect(int amplifier, int duration)
     {
-        return player.setEffect(this, duration, amplifier, getShowIcon());
+        return mob.setEffect(this, duration, amplifier, getShowIcon());
     }
 
     @Override
@@ -47,12 +50,6 @@ class TemporaryPersistentArmorEffect extends TemporaryBaseArmorEffect<ITemporary
     public void updateActivity()
     {
         // ignore: super.updateActivity(p1, p2) should only be called from tryActivate()
-    }
-
-    @Override
-    public ITemporaryPersistentArmorEffect asArmorEffect()
-    {
-        return this;
     }
 
     @Override

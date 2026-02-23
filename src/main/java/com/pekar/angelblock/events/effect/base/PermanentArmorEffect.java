@@ -1,23 +1,25 @@
-package com.pekar.angelblock.events.effect;
+package com.pekar.angelblock.events.effect.base;
 
 import com.pekar.angelblock.events.armor.IArmor;
-import com.pekar.angelblock.events.player.IModMobEffectInstance;
-import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.events.mob.IMob;
+import com.pekar.angelblock.events.mob.IModMobEffectInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 
-class PermanentArmorEffect extends ArmorEffect<IPermanentArmorEffect> implements IPermanentArmorEffect
+class PermanentArmorEffect<M extends IMob>
+        extends ArmorEffect<M>
+        implements IPermanentArmorEffect
 {
-    protected PermanentArmorEffect(IPlayer player, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
+    protected PermanentArmorEffect(M mob, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
-        super(player, armor, effectType, defaultAmplifier);
+        super(mob, armor, effectType, defaultAmplifier);
     }
 
     @Override
     protected IModMobEffectInstance setEffect(int amplifier, int duration)
     {
-        return player.setEffect(effectType, amplifier, getShowIcon());
+        return mob.setEffect(effectType, amplifier, getShowIcon());
     }
 
     @Override
@@ -42,11 +44,5 @@ class PermanentArmorEffect extends ArmorEffect<IPermanentArmorEffect> implements
     protected boolean isOn()
     {
         return true;
-    }
-
-    @Override
-    public IPermanentArmorEffect asArmorEffect()
-    {
-        return this;
     }
 }
