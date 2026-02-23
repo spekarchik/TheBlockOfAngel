@@ -1,6 +1,6 @@
 package com.pekar.angelblock.menus;
 
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.armor.ModArmorMaterial;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.tools.*;
@@ -34,12 +34,12 @@ public class CustomSmithingMenu extends SmithingMenu
 
         if (template.is(ItemRegistry.DOWNGRADE_KIT) && secondaryItem.is(Items.FLINT))
         {
-            if (mainItem.getItem() instanceof ModArmor armor)
+            if (mainItem.getItem() instanceof ModHumanoidArmor armor)
             {
                 var materialName = armor.getArmorMaterial().getMaterialName();
 
-                boolean isResultModArmor = result.getItem() instanceof ModArmor;
-                var resultAsModArmor = isResultModArmor ? (ModArmor)result.getItem() : null;
+                boolean isResultModArmor = result.getItem() instanceof ModHumanoidArmor;
+                var resultAsModArmor = isResultModArmor ? (ModHumanoidArmor)result.getItem() : null;
 
                 if (!isResultModArmor || !armor.getArmorFamilyName().equals(resultAsModArmor.getArmorFamilyName()))
                 {

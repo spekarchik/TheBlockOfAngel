@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.effect;
 
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
+import com.pekar.angelblock.events.effect.base.NegativeTemporaryArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.ForceLivingEquipmentChangeToClient;
 import com.pekar.angelblock.potions.ModMobEffect;
@@ -9,10 +10,10 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class JumpNegativeArmorEffect extends NegativeTemporaryArmorEffect
 {
-    public JumpNegativeArmorEffect(IPlayer player, IArmor armor, int slownessAmplifier, int duration)
+    public JumpNegativeArmorEffect(IPlayer player, IPlayerArmor armor, int slownessAmplifier, int duration)
     {
         super(player, armor, PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT, slownessAmplifier, duration);
-        showIcon();
+        setup().showIcon();
     }
 
     @Override
@@ -20,7 +21,7 @@ public class JumpNegativeArmorEffect extends NegativeTemporaryArmorEffect
     {
         super.onActivated();
 
-        var playerEntity = player.getEntity();
+        var playerEntity = mob.getEntity();
         if (playerEntity.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT))
         {
             var energyEffect = playerEntity.getEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT);
@@ -38,7 +39,7 @@ public class JumpNegativeArmorEffect extends NegativeTemporaryArmorEffect
     {
         super.onDeactivated();
 
-        if (player.getEntity() instanceof ServerPlayer serverPlayer)
+        if (mob.getEntity() instanceof ServerPlayer serverPlayer)
         {
             new ForceLivingEquipmentChangeToClient().sendToPlayer(serverPlayer);
         }

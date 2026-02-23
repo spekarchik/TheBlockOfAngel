@@ -1,4 +1,4 @@
-package com.pekar.angelblock.events.player;
+package com.pekar.angelblock.events.mob;
 
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;

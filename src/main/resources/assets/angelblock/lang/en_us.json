@@ -8,7 +8,7 @@
   "itemGroup.angelblock_tab": "The Block of Angel",
 
   "angelblock.rendelithic_armor.desc1": "§f§lPurpose:§r§7 Nether. Good protection, a wide range of abilities, but low durability",
-  "angelblock.rendelithic_armor.desc2": "§f§lWeaknesses:§r§7 water, rain §o(Nausea 10 s, Slowness 20 s)",
+  "angelblock.rendelithic_armor.desc2": "§f§lWeaknesses:§r§7 water, rain §o(Nausea 10 s, Slowness VI for 20 s)",
   "angelblock.rendelithic_armor.desc3": "§f§lTraits:§r§7 Wearing the full Rendelite set provides complete protection against fire and lava. Chance to fall through Ice (jumping does not affect the probability)",
   "angelblock.rendelithic_armor.desc4": "§6§lRepair:§r§6 Rendelite Ingot",
   "angelblock.rendelithic_armor.desc5": "Armor general stats",
@@ -52,7 +52,7 @@
   "angelblock.lapis_armor.desc13": "",
   "angelblock.lapis_armor.desc14": "",
 
-  "angelblock.limonite_armor.desc1": "§f§lPurpose:§r§7 Universal armor. Moderate protection, average durability, wide range of abilities. Suitable for forests, jungles, snowy biomes, mountains, and caves",
+  "angelblock.limonite_armor.desc1": "§f§lPurpose:§r§7 All-purpose armor. Moderate protection, average durability, wide range of abilities. Suitable for forests, jungles, snowy biomes, mountains, and caves",
   "angelblock.limonite_armor.desc2": "§f§lWeaknesses:§r§7 Wither and explosions: +50% damage; Wind Charge: +200% damage",
   "angelblock.limonite_armor.desc3": "§f§lTraits:§r§7 Restores health under rain up to 10 HP. 50% bite protection (spiders, silverfish, bees). 100% freezing protection. Invisible to creepers beyond 3 blocks",
   "angelblock.limonite_armor.desc4": "§6§lRepair:§r§6 Lymonite Ingot",
@@ -67,7 +67,7 @@
   "angelblock.limonite_armor.desc13": "",
   "angelblock.limonite_armor.desc14": "",
 
-  "angelblock.super_armor.desc1": "§f§lPurpose:§r§7 Replaces any armor by combining almost all its advantages. The best choice for boss fights and as a universal set",
+  "angelblock.super_armor.desc1": "§f§lPurpose:§r§7 Replaces any armor by combining almost all its advantages. The best choice for boss fights and as an all-purpose set",
   "angelblock.super_armor.desc2": "§f§lWeaknesses:§r§7 Normal visibility to creepers (unlike Lymonite armor)",
   "angelblock.super_armor.desc3": "§f§lTraits:§r§7 Restores health under rain up to 10 HP. 100% freezing protection",
   "angelblock.super_armor.desc4": "§6§lRepair:§r§6 Superyte Ingot",

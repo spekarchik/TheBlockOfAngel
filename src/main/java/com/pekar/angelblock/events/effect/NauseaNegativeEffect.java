@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.effect;
 
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
+import com.pekar.angelblock.events.effect.base.NegativeTemporaryArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.ForceLivingEquipmentChangeToClient;
 import com.pekar.angelblock.potions.ModMobEffect;
@@ -10,7 +11,7 @@ import net.minecraft.world.effect.MobEffects;
 
 public class NauseaNegativeEffect extends NegativeTemporaryArmorEffect
 {
-    public NauseaNegativeEffect(IPlayer player, IArmor armor, int duration)
+    public NauseaNegativeEffect(IPlayer player, IPlayerArmor armor, int duration)
     {
         super(player, armor, MobEffects.CONFUSION, 12, duration);
     }
@@ -20,7 +21,7 @@ public class NauseaNegativeEffect extends NegativeTemporaryArmorEffect
     {
         super.onActivated();
 
-        var playerEntity = player.getEntity();
+        var playerEntity = mob.getEntity();
         if (playerEntity.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT))
         {
             var energyEffect = playerEntity.getEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT);
@@ -38,7 +39,7 @@ public class NauseaNegativeEffect extends NegativeTemporaryArmorEffect
     {
         super.onDeactivated();
 
-        if (player.getEntity() instanceof ServerPlayer serverPlayer)
+        if (mob.getEntity() instanceof ServerPlayer serverPlayer)
         {
             new ForceLivingEquipmentChangeToClient().sendToPlayer(serverPlayer);
         }
