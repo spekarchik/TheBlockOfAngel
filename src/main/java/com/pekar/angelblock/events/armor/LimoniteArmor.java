@@ -2,6 +2,7 @@ package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
+import com.pekar.angelblock.events.effect.base.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.utils.Utils;
@@ -15,7 +16,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class LimoniteArmor extends Armor
+public class LimoniteArmor extends PlayerArmor
 {
     private final IPermanentArmorEffect luckEffect;
     private final IPermanentArmorEffect healthBoostEffect;
@@ -40,9 +41,12 @@ public class LimoniteArmor extends Armor
     {
         super(player);
 
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithDetector().asArmorEffect();
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
-        luckEffect = new LuckPermanentArmorEffect(player, this).setupAvailability(this::isLuckEffectAvailable).asArmorEffect();
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        nightVisionEffect.setup().availableOnHelmetWithDetector();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this);
+        glowingEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
+        luckEffect = new LuckPermanentArmorEffect(player, this);
+        luckEffect.setup().setupAvailability(this::isLuckEffectAvailable);
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 1);
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, 0, HEAL_REGENERATION_EFFECT_DURATION);
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, 1, REGENERATION_NEGATIVE_EFFECT_DURATION);
@@ -52,7 +56,7 @@ public class LimoniteArmor extends Armor
         jumpEffect.setupAvailability(this::availableOnBootsWithNoHeavyJump);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
         var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
-        slowFallingEffect.availableIfSlotSet(EquipmentSlot.CHEST);
+        slowFallingEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
 
         this.jumpEffect = new SwitchingEffectSynchronizer(jumpEffect);
         this.jumpEffect.addDependentEffect(speedEffect);
@@ -129,7 +133,7 @@ public class LimoniteArmor extends Armor
     @Override
     protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        var entityPlayer = player.getEntity();
+        var entityPlayer = player.getPlayerEntity();
         if (playerNeedsToRestoreHealth(entityPlayer, event.getSlot(), event.getFrom(), event.getTo()))
         {
             restorePlayerHealth(entityPlayer);
@@ -164,10 +168,10 @@ public class LimoniteArmor extends Armor
         if (isSlowMovementAffected(entityAttackedBy))
         {
             boolean isWitch = entityAttackedBy instanceof Witch;
-            float distance = player.getEntity().distanceTo(entityAttackedBy);
+            float distance = player.getPlayerEntity().distanceTo(entityAttackedBy);
             if (!isWitch && distance > 2f)
             {
-                var random = player.getEntity().getRandom();
+                var random = player.getPlayerEntity().getRandom();
                 if (random.nextFloat() < 0.4f)
                     entityAttackedBy.setRemainingFireTicks(5 * Utils.TICKS_PER_SECOND);
             }
@@ -220,7 +224,7 @@ public class LimoniteArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
         if (!playerEntity.isUnderWater())
         {
             hasWaterBreathingBeenUsed = false;
@@ -245,7 +249,7 @@ public class LimoniteArmor extends Armor
     {
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+            if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && player.getPlayerEntity().getHealth() < player.getPlayerEntity().getMaxHealth())
             {
                 jumpEffect.trySwitchOff();
                 jumpNegativeEffect.tryActivate();
@@ -306,7 +310,7 @@ public class LimoniteArmor extends Armor
     @Override
     public void onBeingInWater()
     {
-        if (!hasWaterBreathingBeenUsed && !waterBreathingEffect.isAnyActive() && player.getEntity().isUnderWater())
+        if (!hasWaterBreathingBeenUsed && !waterBreathingEffect.isAnyActive() && player.getPlayerEntity().isUnderWater())
         {
             hasWaterBreathingBeenUsed = true;
             waterBreathingEffect.tryActivate();
@@ -317,7 +321,7 @@ public class LimoniteArmor extends Armor
     public void onBeingUnderRain()
     {
         if (!player.isFullArmorSetPutOn(this)) return;
-        var entityPlayer = player.getEntity();
+        var entityPlayer = player.getPlayerEntity();
 
         if (entityPlayer.getHealth() < 10F && entityPlayer.getFoodData().getFoodLevel() > 0)
         {
