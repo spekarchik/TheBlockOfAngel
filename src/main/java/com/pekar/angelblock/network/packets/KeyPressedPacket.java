@@ -1,7 +1,7 @@
 package com.pekar.angelblock.network.packets;
 
 import com.pekar.angelblock.events.PlayerManager;
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.network.ClientToServerPacket;
 import com.pekar.angelblock.network.Packet;
 import net.minecraft.network.FriendlyByteBuf;
@@ -23,7 +23,7 @@ public class KeyPressedPacket extends ClientToServerPacket
     @Override
     public void onReceive(ServerPlayer serverPlayer)
     {
-        for (IArmor armor : PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID()).getArmorTypesUsed())
+        for (IPlayerArmor armor : PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID()).getArmorTypesUsed())
         {
             armor.onKeyInputEvent(pressedKeyName);
         }

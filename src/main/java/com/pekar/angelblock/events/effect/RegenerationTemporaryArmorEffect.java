@@ -1,15 +1,15 @@
 package com.pekar.angelblock.events.effect;
 
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
+import com.pekar.angelblock.events.effect.base.TemporaryPlayerArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class RegenerationTemporaryArmorEffect extends TemporaryArmorEffect
+public class RegenerationTemporaryArmorEffect extends TemporaryPlayerArmorEffect
 {
-    public RegenerationTemporaryArmorEffect(IPlayer player, IArmor armor, int amplifier, int duration)
+    public RegenerationTemporaryArmorEffect(IPlayer player, IPlayerArmor armor, int amplifier, int duration)
     {
         super(player, armor, MobEffects.REGENERATION, amplifier, duration);
-        availableOnLeggingsWithHealthRegenerator();
-        showIcon();
+        setup().availableOnLeggingsWithHealthRegenerator().showIcon();
     }
 }
