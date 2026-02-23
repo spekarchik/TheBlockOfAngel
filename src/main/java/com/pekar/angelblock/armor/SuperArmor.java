@@ -7,11 +7,11 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-public class SuperArmor extends ModArmor
+public class SuperArmor extends ModHumanoidArmor
 {
-    protected SuperArmor(ModArmorMaterial material, Type equipmentSlot)
+    protected SuperArmor(ModArmorMaterial material, Type equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot);
+        super(material, equipmentSlot, properties);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class SuperArmor extends ModArmor
     {
         var itemStack = wearer.getItemBySlot(EquipmentSlot.LEGS);
         var leggingsItem = itemStack.getItem();
-        if (!(leggingsItem instanceof ModArmor leggings)) return false;
+        if (!(leggingsItem instanceof ModHumanoidArmor leggings)) return false;
         return leggings.getArmorFamilyName().equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorFamilyName());
     }
 
@@ -28,7 +28,7 @@ public class SuperArmor extends ModArmor
     {
         var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
         var helmetItem = itemStack.getItem();
-        if (!(helmetItem instanceof ModArmor helmet)) return false;
+        if (!(helmetItem instanceof ModHumanoidArmor helmet)) return false;
         return helmet.getArmorFamilyName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
     }
 
@@ -37,7 +37,7 @@ public class SuperArmor extends ModArmor
     {
         var itemStack = wearer.getItemBySlot(EquipmentSlot.FEET);
         var bootsItem = itemStack.getItem();
-        if (!(bootsItem instanceof ModArmor boots)) return false;
+        if (!(bootsItem instanceof ModHumanoidArmor boots)) return false;
         return boots.getArmorFamilyName().equals(ArmorRegistry.SUPER_BOOTS.get().getArmorFamilyName()) && !wearer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT);
     }
 }

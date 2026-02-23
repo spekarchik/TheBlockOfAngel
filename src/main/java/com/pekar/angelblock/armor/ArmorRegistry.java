@@ -1,115 +1,102 @@
 package com.pekar.angelblock.armor;
 
-import com.pekar.angelblock.Main;
+import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
+
+import static com.pekar.angelblock.Main.ITEMS;
 
 public class ArmorRegistry
 {
-    public static final DeferredItem<ModArmor> RENDELITHIC_HELMET = Main.ITEMS.register("rendelithic_helmet", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.HELMET));
-    public static final DeferredItem<ModArmor> RENDELITHIC_HELMET_WITH_NIGHT_VISION = Main.ITEMS.register("rendelithic_helmet_with_nv", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.HELMET).withNightVision());
-    public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE = Main.ITEMS.register("rendelithic_chestplate", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ModArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("rendelithic_chestplate_with_levitation", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.CHESTPLATE).withSlowFalling());
-    public static final DeferredItem<ModArmor> RENDELITHIC_LEGGINGS = Main.ITEMS.register("rendelithic_leggings", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.LEGGINGS));
-    public static final DeferredItem<ModArmor> RENDELITHIC_LEGGINGS_WITH_HEALTH_REGENERATOR = Main.ITEMS.register("rendelithic_leggings_with_regenerator", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.LEGGINGS).withHealthRegenerator());
-    public static final DeferredItem<ModArmor> RENDELITHIC_BOOTS = Main.ITEMS.register("rendelithic_boots", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC, ArmorItem.Type.BOOTS));
-    public static final DeferredItem<ModArmor> RENDELITHIC_BOOTS_WITH_STRENGTH_BOOST = Main.ITEMS.register("rendelithic_boots_with_strength_boost", () ->
-            new RendelithicArmor(ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.BOOTS).withJumpBooster());
+    public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_HELMET = registerHumanoidArmor("rendelithic_helmet",
+            ModArmorMaterial.RENDELITHIC, ArmorItem.Type.HELMET, RendelithicArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_HELMET_WITH_NIGHT_VISION = registerHumanoidArmor("rendelithic_helmet_with_nv",
+            ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.HELMET, (m, t, p) -> new RendelithicArmor(m, t, p).withNightVision());
+    public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_CHESTPLATE = registerHumanoidArmor("rendelithic_chestplate", ModArmorMaterial.RENDELITHIC, ArmorItem.Type.CHESTPLATE, RendelithicArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_CHESTPLATE_WITH_LEVITATION = registerHumanoidArmor("rendelithic_chestplate_with_levitation", ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.CHESTPLATE,
+            (m, t, p) -> new RendelithicArmor(m, t, p).withSlowFalling());
+    public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_LEGGINGS = registerHumanoidArmor("rendelithic_leggings", ModArmorMaterial.RENDELITHIC, ArmorItem.Type.LEGGINGS, RendelithicArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_LEGGINGS_WITH_HEALTH_REGENERATOR = registerHumanoidArmor("rendelithic_leggings_with_regenerator", ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.LEGGINGS,
+            (m, t, p) -> new RendelithicArmor(m, t, p).withHealthRegenerator());
+    public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_BOOTS = registerHumanoidArmor("rendelithic_boots", ModArmorMaterial.RENDELITHIC, ArmorItem.Type.BOOTS, RendelithicArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_BOOTS_WITH_STRENGTH_BOOST = registerHumanoidArmor("rendelithic_boots_with_strength_boost", ModArmorMaterial.RENDELITHIC2, ArmorItem.Type.BOOTS,
+            (m, t, p) -> new RendelithicArmor(m, t, p).withJumpBooster());
 
-    public static final DeferredItem<ModArmor> LAPIS_HELMET = Main.ITEMS.register("lapis_helmet", () ->
-            new ModArmor(ModArmorMaterial.LAPIS, ArmorItem.Type.HELMET));
-    public static final DeferredItem<ModArmor> LAPIS_HELMET_WITH_NIGHT_VISION = Main.ITEMS.register("lapis_helmet_with_detector", () ->
-            new ModArmor(ModArmorMaterial.LAPIS2, ArmorItem.Type.HELMET).withNightVision());
-    public static final DeferredItem<ModArmor> LAPIS_CHESTPLATE = Main.ITEMS.register("lapis_chestplate", () ->
-            new ModArmor(ModArmorMaterial.LAPIS, ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ModArmor> LAPIS_CHESTPLATE_WITH_STRENGTH = Main.ITEMS.register("lapis_chestplate_with_strength", () ->
-            new ModArmor(ModArmorMaterial.LAPIS2, ArmorItem.Type.CHESTPLATE).withStrengthBooster());
-    public static final DeferredItem<ModArmor> LAPIS_LEGGINGS = Main.ITEMS.register("lapis_leggings", () ->
-            new ModArmor(ModArmorMaterial.LAPIS, ArmorItem.Type.LEGGINGS));
-    public static final DeferredItem<ModArmor> LAPIS_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("lapis_leggings_with_regenerator", () ->
-            new ModArmor(ModArmorMaterial.LAPIS2, ArmorItem.Type.LEGGINGS).withHealthRegenerator());
-    public static final DeferredItem<ModArmor> LAPIS_BOOTS = Main.ITEMS.register("lapis_boots", () ->
-            new ModArmor(ModArmorMaterial.LAPIS, ArmorItem.Type.BOOTS));
-    public static final DeferredItem<ModArmor> LAPIS_BOOTS_WITH_SEA_POWER = Main.ITEMS.register("lapis_boots_with_sea_power", () ->
-            new ModArmor(ModArmorMaterial.LAPIS2, ArmorItem.Type.BOOTS).withSeaPower());
+    public static final DeferredItem<ModHumanoidArmor> LAPIS_HELMET = registerHumanoidArmor("lapis_helmet", ModArmorMaterial.LAPIS, ArmorItem.Type.HELMET, ModHumanoidArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> LAPIS_HELMET_WITH_NIGHT_VISION = registerHumanoidArmor("lapis_helmet_with_detector", ModArmorMaterial.LAPIS2, ArmorItem.Type.HELMET,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withNightVision());
+    public static final DeferredItem<ModHumanoidArmor> LAPIS_CHESTPLATE = registerHumanoidArmor("lapis_chestplate", ModArmorMaterial.LAPIS, ArmorItem.Type.CHESTPLATE, ModHumanoidArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> LAPIS_CHESTPLATE_WITH_STRENGTH = registerHumanoidArmor("lapis_chestplate_with_strength", ModArmorMaterial.LAPIS2, ArmorItem.Type.CHESTPLATE,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withStrengthBooster());
+    public static final DeferredItem<ModHumanoidArmor> LAPIS_LEGGINGS = registerHumanoidArmor("lapis_leggings", ModArmorMaterial.LAPIS, ArmorItem.Type.LEGGINGS, ModHumanoidArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> LAPIS_LEGGINGS_WITH_REGENERATOR = registerHumanoidArmor("lapis_leggings_with_regenerator", ModArmorMaterial.LAPIS2, ArmorItem.Type.LEGGINGS,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withHealthRegenerator());
+    public static final DeferredItem<ModHumanoidArmor> LAPIS_BOOTS = registerHumanoidArmor("lapis_boots", ModArmorMaterial.LAPIS, ArmorItem.Type.BOOTS, ModHumanoidArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> LAPIS_BOOTS_WITH_SEA_POWER = registerHumanoidArmor("lapis_boots_with_sea_power", ModArmorMaterial.LAPIS2, ArmorItem.Type.BOOTS,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withSeaPower());
 
-    public static final DeferredItem<ModArmor> LIMONITE_HELMET = Main.ITEMS.register("limonite_helmet", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.HELMET));
-    public static final DeferredItem<ModArmor> LIMONITE_HELMET_WITH_DETECTOR = Main.ITEMS.register("limonite_helmet_with_detector", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.HELMET).withDetector());
-    public static final DeferredItem<ModArmor> LIMONITE_CHESTPLATE = Main.ITEMS.register("limonite_chestplate", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ModArmor> LIMONITE_CHESTPLATE_WITH_LUCK = Main.ITEMS.register("limonite_chestplate_with_luck", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.CHESTPLATE).withLuck());
-    public static final DeferredItem<ModArmor> LIMONITE_LEGGINGS = Main.ITEMS.register("limonite_leggings", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.LEGGINGS));
-    public static final DeferredItem<ModArmor> LIMONITE_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("limonite_leggings_with_regenerator", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.LEGGINGS).withHealthRegenerator());
-    public static final DeferredItem<ModArmor> LIMONITE_BOOTS = Main.ITEMS.register("limonite_boots", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE, ArmorItem.Type.BOOTS));
-    public static final DeferredItem<ModArmor> LIMONITE_BOOTS_WITH_STRENGTH = Main.ITEMS.register("limonite_boots_with_strength", () ->
-            new LimoniteArmor(ModArmorMaterial.LIMONITE2, ArmorItem.Type.BOOTS).withJumpBooster());
+    public static final DeferredItem<ModHumanoidArmor> LIMONITE_HELMET = registerHumanoidArmor("limonite_helmet", ModArmorMaterial.LIMONITE, ArmorItem.Type.HELMET, LimoniteArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> LIMONITE_HELMET_WITH_DETECTOR = registerHumanoidArmor("limonite_helmet_with_detector", ModArmorMaterial.LIMONITE2, ArmorItem.Type.HELMET,
+            (m, t, p) -> new LimoniteArmor(m, t, p).withDetector());
+    public static final DeferredItem<ModHumanoidArmor> LIMONITE_CHESTPLATE = registerHumanoidArmor("limonite_chestplate", ModArmorMaterial.LIMONITE, ArmorItem.Type.CHESTPLATE, LimoniteArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> LIMONITE_CHESTPLATE_WITH_LUCK = registerHumanoidArmor("limonite_chestplate_with_luck", ModArmorMaterial.LIMONITE2, ArmorItem.Type.CHESTPLATE,
+            (m, t, p) -> new LimoniteArmor(m, t, p).withLuck());
+    public static final DeferredItem<ModHumanoidArmor> LIMONITE_LEGGINGS = registerHumanoidArmor("limonite_leggings", ModArmorMaterial.LIMONITE, ArmorItem.Type.LEGGINGS, LimoniteArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> LIMONITE_LEGGINGS_WITH_REGENERATOR = registerHumanoidArmor("limonite_leggings_with_regenerator", ModArmorMaterial.LIMONITE2, ArmorItem.Type.LEGGINGS,
+            (m, t, p) -> new LimoniteArmor(m, t, p).withHealthRegenerator());
+    public static final DeferredItem<ModHumanoidArmor> LIMONITE_BOOTS = registerHumanoidArmor("limonite_boots", ModArmorMaterial.LIMONITE, ArmorItem.Type.BOOTS, LimoniteArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> LIMONITE_BOOTS_WITH_STRENGTH = registerHumanoidArmor("limonite_boots_with_strength", ModArmorMaterial.LIMONITE2, ArmorItem.Type.BOOTS,
+            (m, t, p) -> new LimoniteArmor(m, t, p).withJumpBooster());
 
-    public static final DeferredItem<ModArmor> DIAMITHIC_HELMET = Main.ITEMS.register("diamithic_helmet", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC, ArmorItem.Type.HELMET));
-    public static final DeferredItem<ModArmor> DIAMITHIC_HELMET_WITH_DETECTOR = Main.ITEMS.register("diamithic_helmet_with_detector", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.HELMET).withDetector());
-    public static final DeferredItem<ModArmor> DIAMITHIC_CHESTPLATE = Main.ITEMS.register("diamithic_chestplate", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC, ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ModArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH = Main.ITEMS.register("diamithic_chestplate_with_strength", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE).withStrengthBooster());
-    public static final DeferredItem<ModArmor> DIAMITHIC_CHESTPLATE_WITH_LEVITATION = Main.ITEMS.register("diamithic_chestplate_with_levitation", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE).withSlowFalling());
-    public static final DeferredItem<ModArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH_AND_LEVITATION = Main.ITEMS.register("diamithic_chestplate_with_strength_and_levitation", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE).withStrengthBooster().withSlowFalling());
-    public static final DeferredItem<ModArmor> DIAMITHIC_LEGGINGS = Main.ITEMS.register("diamithic_leggings", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC, ArmorItem.Type.LEGGINGS));
-    public static final DeferredItem<ModArmor> DIAMITHIC_LEGGINGS_WITH_REGENERATOR = Main.ITEMS.register("diamithic_leggings_with_regenerator", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.LEGGINGS).withHealthRegenerator());
-    public static final DeferredItem<ModArmor> DIAMITHIC_BOOTS = Main.ITEMS.register("diamithic_boots", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC, ArmorItem.Type.BOOTS));
-    public static final DeferredItem<ModArmor> DIAMITHIC_BOOTS_WITH_STRENGTH = Main.ITEMS.register("diamithic_boots_with_strength", () ->
-            new ModArmor(ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.BOOTS).withJumpBooster());
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_HELMET = registerHumanoidArmor("diamithic_helmet", ModArmorMaterial.DIAMITHIC, ArmorItem.Type.HELMET, ModHumanoidArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_HELMET_WITH_DETECTOR = registerHumanoidArmor("diamithic_helmet_with_detector", ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.HELMET,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withDetector());
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_CHESTPLATE = registerHumanoidArmor("diamithic_chestplate", ModArmorMaterial.DIAMITHIC, ArmorItem.Type.CHESTPLATE, ModHumanoidArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH = registerHumanoidArmor("diamithic_chestplate_with_strength", ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withStrengthBooster());
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_CHESTPLATE_WITH_LEVITATION = registerHumanoidArmor("diamithic_chestplate_with_levitation", ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withSlowFalling());
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_CHESTPLATE_WITH_STRENGTH_AND_LEVITATION = registerHumanoidArmor("diamithic_chestplate_with_strength_and_levitation", ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.CHESTPLATE,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withStrengthBooster().withSlowFalling());
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_LEGGINGS = registerHumanoidArmor("diamithic_leggings", ModArmorMaterial.DIAMITHIC, ArmorItem.Type.LEGGINGS, ModHumanoidArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_LEGGINGS_WITH_REGENERATOR = registerHumanoidArmor("diamithic_leggings_with_regenerator", ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.LEGGINGS,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withHealthRegenerator());
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_BOOTS = registerHumanoidArmor("diamithic_boots", ModArmorMaterial.DIAMITHIC, ArmorItem.Type.BOOTS, ModHumanoidArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_BOOTS_WITH_STRENGTH = registerHumanoidArmor("diamithic_boots_with_strength", ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.BOOTS,
+            (m, t, p) -> new ModHumanoidArmor(m, t, p).withJumpBooster());
 
-    public static final DeferredItem<ModArmor> SUPER_HELMET = Main.ITEMS.register("super_helmet", () ->
-            new SuperArmor(ModArmorMaterial.SUPER, ArmorItem.Type.HELMET));
-    public static final DeferredItem<ModArmor> SUPER_HELMET_WITH_DETECTOR = Main.ITEMS.register("super_helmet_with_detector", () ->
-            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.HELMET).withDetector());
-    public static final DeferredItem<ModArmor> SUPER_CHESTPLATE = Main.ITEMS.register("super_chestplate", () ->
-            new SuperArmor(ModArmorMaterial.SUPER, ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ModArmor> SUPER_CHESTPLATE_FLYING = Main.ITEMS.register("super_chestplate_flying", () ->
-            new SuperArmorFlying(ModArmorMaterial.SUPER2, ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ModArmor> SUPER_LEGGINGS = Main.ITEMS.register("super_leggings", () ->
-            new SuperArmor(ModArmorMaterial.SUPER, ArmorItem.Type.LEGGINGS));
-    public static final DeferredItem<ModArmor> SUPER_LEGGINGS_WITH_REGENERATOR2 = Main.ITEMS.register("super_leggings_with_regenerator", () ->
-            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.LEGGINGS).withHealthRegenerator());
-    public static final DeferredItem<ModArmor> SUPER_BOOTS = Main.ITEMS.register("super_boots", () ->
-            new SuperArmor(ModArmorMaterial.SUPER, ArmorItem.Type.BOOTS));
-    public static final DeferredItem<ModArmor> SUPER_BOOTS_WITH_STRENGTH = Main.ITEMS.register("super_boots_with_strength", () ->
-            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS).withJumpBooster());
-    public static final DeferredItem<ModArmor> SUPER_BOOTS_WITH_SEA_POWER = Main.ITEMS.register("super_boots_with_sea_power", () ->
-            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS).withSeaPower());
-    public static final DeferredItem<ModArmor> SUPER_BOOTS_WITH_STRENGTH_AND_SEA_POWER = Main.ITEMS.register("super_boots_with_strength_and_sea_power", () ->
-            new SuperArmor(ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS).withSeaPower().withJumpBooster());
+    public static final DeferredItem<ModHumanoidArmor> SUPER_HELMET = registerHumanoidArmor("super_helmet", ModArmorMaterial.SUPER, ArmorItem.Type.HELMET, SuperArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> SUPER_HELMET_WITH_DETECTOR = registerHumanoidArmor("super_helmet_with_detector", ModArmorMaterial.SUPER2, ArmorItem.Type.HELMET,
+            (m, t, p) -> new SuperArmor(m, t, p).withDetector());
+    public static final DeferredItem<ModHumanoidArmor> SUPER_CHESTPLATE = registerHumanoidArmor("super_chestplate", ModArmorMaterial.SUPER, ArmorItem.Type.CHESTPLATE, SuperArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> SUPER_CHESTPLATE_FLYING = registerHumanoidArmor("super_chestplate_flying", ModArmorMaterial.SUPER2, ArmorItem.Type.CHESTPLATE,
+            (m, t, p) -> new SuperArmorFlying(m, t,  p).withElytra().canFly());
+    public static final DeferredItem<ModHumanoidArmor> SUPER_LEGGINGS = registerHumanoidArmor("super_leggings", ModArmorMaterial.SUPER, ArmorItem.Type.LEGGINGS, SuperArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> SUPER_LEGGINGS_WITH_REGENERATOR2 = registerHumanoidArmor("super_leggings_with_regenerator", ModArmorMaterial.SUPER2, ArmorItem.Type.LEGGINGS,
+            (m, t, p) -> new SuperArmor(m, t, p).withHealthRegenerator());
+    public static final DeferredItem<ModHumanoidArmor> SUPER_BOOTS = registerHumanoidArmor("super_boots", ModArmorMaterial.SUPER, ArmorItem.Type.BOOTS, SuperArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> SUPER_BOOTS_WITH_STRENGTH = registerHumanoidArmor("super_boots_with_strength", ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS,
+            (m, t, p) -> new SuperArmor(m, t, p).withJumpBooster());
+    public static final DeferredItem<ModHumanoidArmor> SUPER_BOOTS_WITH_SEA_POWER = registerHumanoidArmor("super_boots_with_sea_power", ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS,
+            (m, t, p) -> new SuperArmor(m, t, p).withSeaPower());
+    public static final DeferredItem<ModHumanoidArmor> SUPER_BOOTS_WITH_STRENGTH_AND_SEA_POWER = registerHumanoidArmor("super_boots_with_strength_and_sea_power", ModArmorMaterial.SUPER2, ArmorItem.Type.BOOTS,
+            (m, t, p) -> new SuperArmor(m, t, p).withSeaPower().withJumpBooster());
 
-    public static final DeferredItem<ModArmor> FLYING_HELMET = Main.ITEMS.register("flying_helmet", () ->
-            new FlyingArmor(ModArmorMaterial.FLYING, ArmorItem.Type.HELMET));
-    public static final DeferredItem<ModArmor> FLYING_CHESTPLATE = Main.ITEMS.register("flying_chestplate", () ->
-            new FlyingArmor(ModArmorMaterial.FLYING, ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ModArmor> FLYING_LEGGINGS = Main.ITEMS.register("flying_leggings", () ->
-            new FlyingArmor(ModArmorMaterial.FLYING, ArmorItem.Type.LEGGINGS));
-    public static final DeferredItem<ModArmor> FLYING_BOOTS = Main.ITEMS.register("flying_boots", () ->
-            new FlyingArmor(ModArmorMaterial.FLYING, ArmorItem.Type.BOOTS));
+    public static final DeferredItem<ModHumanoidArmor> FLYING_HELMET = registerHumanoidArmor("flying_helmet", ModArmorMaterial.FLYING, ArmorItem.Type.HELMET, FlyingArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> FLYING_CHESTPLATE = registerHumanoidArmor("flying_chestplate", ModArmorMaterial.FLYING, ArmorItem.Type.CHESTPLATE,
+            (m, t, p) -> new FlyingArmor(m, t, p).canFly());
+    public static final DeferredItem<ModHumanoidArmor> FLYING_LEGGINGS = registerHumanoidArmor("flying_leggings", ModArmorMaterial.FLYING, ArmorItem.Type.LEGGINGS, FlyingArmor::new);
+    public static final DeferredItem<ModHumanoidArmor> FLYING_BOOTS = registerHumanoidArmor("flying_boots", ModArmorMaterial.FLYING, ArmorItem.Type.BOOTS, FlyingArmor::new);
 
     public static void initStatic()
     {
         // just to initialize static members
+    }
+
+    private static DeferredItem<ModHumanoidArmor> registerHumanoidArmor(String name, ModArmorMaterial armorMaterial, ArmorItem.Type armorType,
+                                                                        PropertyDispatch.TriFunction<ModArmorMaterial, ArmorItem.Type, Item.Properties, ModHumanoidArmor> armorConstructor)
+    {
+        return ITEMS.register(name, () -> armorConstructor.apply(armorMaterial, armorType, new Item.Properties()));
     }
 }

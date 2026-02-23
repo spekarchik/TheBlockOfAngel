@@ -1,6 +1,6 @@
 package com.pekar.angelblock.potions;
 
-import com.pekar.angelblock.events.player.ModMobEffectInstance;
+import com.pekar.angelblock.events.mob.ModMobEffectInstance;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;

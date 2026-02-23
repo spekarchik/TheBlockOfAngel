@@ -7,9 +7,9 @@ import net.minecraft.world.item.ItemStack;
 
 public class SuperArmorFlying extends SuperArmor
 {
-    protected SuperArmorFlying(ModArmorMaterial material, Type equipmentSlot)
+    protected SuperArmorFlying(ModArmorMaterial material, Type equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot);
+        super(material, equipmentSlot, properties);
         withElytra();
     }
 
@@ -44,7 +44,7 @@ public class SuperArmorFlying extends SuperArmor
     private String getModelName(LivingEntity entity, EquipmentSlot slot)
     {
         var item = entity.getItemBySlot(slot).getItem();
-        if (!(item instanceof ModArmor armorItem)) return "";
+        if (!(item instanceof ModHumanoidArmor armorItem)) return "";
         return armorItem.getArmorFamilyName();
     }
 }

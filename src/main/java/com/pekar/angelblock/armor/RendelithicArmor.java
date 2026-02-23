@@ -4,11 +4,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public class RendelithicArmor extends ModArmor
+public class RendelithicArmor extends ModHumanoidArmor
 {
-    protected RendelithicArmor(ModArmorMaterial material, Type equipmentSlot)
+    protected RendelithicArmor(ModArmorMaterial material, Type equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot);
+        super(material, equipmentSlot, properties);
     }
 
     @Override
@@ -16,7 +16,7 @@ public class RendelithicArmor extends ModArmor
     {
         var itemStack = wearer.getItemBySlot(EquipmentSlot.LEGS);
         var leggingsItem = itemStack.getItem();
-        if (!(leggingsItem instanceof ModArmor leggings)) return false;
+        if (!(leggingsItem instanceof ModHumanoidArmor leggings)) return false;
         return leggings.getArmorFamilyName().equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getArmorFamilyName());
     }
 }

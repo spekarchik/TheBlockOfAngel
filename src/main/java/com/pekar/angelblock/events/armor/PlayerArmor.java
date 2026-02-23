@@ -1,13 +1,12 @@
 package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.TriPredicate;
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -17,15 +16,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Bee;
-import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +36,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-abstract class Armor implements IArmor
+abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
 {
     protected final IPlayer player;
     private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
@@ -58,7 +53,7 @@ abstract class Armor implements IArmor
     protected final TriPredicate<Block, BlockPos, Level> isIcePredicate = (block, pos, level) ->
     {
         var belowBlockState = level.getBlockState(pos.below());
-        return block == Blocks.ICE && (belowBlockState.isAir() || Utils.instance.blocks.types.isLiquid(belowBlockState.getBlock()));
+        return block == Blocks.ICE && (belowBlockState.isAir() || utils.blocks.types.isLiquid(belowBlockState.getBlock()));
     };
 
     protected final TriPredicate<Block, BlockPos, Level> isCrackedBlockPredicate = (block, pos, level) ->
@@ -78,7 +73,7 @@ abstract class Armor implements IArmor
         player.level().playSound(null, pos, SoundEvents.TURTLE_EGG_BREAK, SoundSource.BLOCKS, 1F, 2F);
     };
 
-    protected Armor(IPlayer player)
+    protected PlayerArmor(IPlayer player)
     {
         this.player = player;
 
@@ -154,86 +149,6 @@ abstract class Armor implements IArmor
         onEquipmentChangeEvent(event);
     }
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (!(obj instanceof Armor)) return false;
-        Armor armor = (Armor) obj;
-        return getFamilyName().equals(armor.getFamilyName());
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return getFamilyName().hashCode();
-    }
-
-    protected boolean isFreezeDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.FREEZE);
-    }
-
-    protected boolean isFireDamage(DamageSource damageSource)
-    {
-        boolean isDamagedByInFire = damageSource.is(DamageTypes.IN_FIRE);
-        boolean isDamagedByOnFire = damageSource.is(DamageTypes.ON_FIRE);
-        return isDamagedByInFire || isDamagedByOnFire;
-    }
-
-    protected boolean isStandingInSoulFire()
-    {
-        return false; // no ways to distinguish fire types for now
-    }
-
-    protected boolean isLavaDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.LAVA);
-    }
-
-    protected boolean isHotFloorDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.HOT_FLOOR);
-    }
-
-    protected boolean isFireOrLavaDamage(DamageSource damageSource)
-    {
-        return isFireDamage(damageSource) || isLavaDamage(damageSource);
-    }
-
-    protected boolean isFireOrLavaOrHotFloorDamage(DamageSource damageSource)
-    {
-        return isHotFloorDamage(damageSource) || isFireOrLavaDamage(damageSource);
-    }
-
-    protected boolean isThornOrMagicDamage(DamageSource damageSource)
-    {
-        boolean isCactus = damageSource.is(DamageTypes.CACTUS);
-        boolean isSweetBerryBush = damageSource.is(DamageTypes.SWEET_BERRY_BUSH);
-        boolean isPufferFish = damageSource.getEntity() instanceof Pufferfish;
-        boolean isMagic = damageSource.is(DamageTypes.MAGIC) || damageSource.is(DamageTypes.INDIRECT_MAGIC);
-
-        return isCactus || isSweetBerryBush || isMagic || isPufferFish;
-    }
-
-    protected boolean isLightningBoltDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.LIGHTNING_BOLT);
-    }
-
-    protected boolean isExplosionDamage(DamageSource damageSource)
-    {
-        return damageSource.is(DamageTypes.EXPLOSION);
-    }
-
-    protected boolean isBiting(Entity entity)
-    {
-        boolean isSilverfish = entity instanceof Silverfish;
-        boolean isEndermite = entity instanceof Endermite;
-        boolean isSpider = entity instanceof Spider;
-        boolean isBee = entity instanceof Bee;
-        return isSilverfish || isEndermite || isSpider || isBee;
-    }
-
     protected boolean isSlowMovementAffected(LivingEntity entity)
     {
         boolean isZombie = entity instanceof Zombie;
@@ -248,7 +163,7 @@ abstract class Armor implements IArmor
     {
         if (!detect && !makeNeutral) return;
 
-        var entityPlayer = player.getEntity();
+        var entityPlayer = player.getPlayerEntity();
         var level = entityPlayer.level();
 
         if (level.isClientSide()) return;
@@ -301,7 +216,7 @@ abstract class Armor implements IArmor
         int heavyArmorSlots = 0;
         for (var slot : player.getArmorSlots())
         {
-            if (slot.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
+            if (slot.getItem() instanceof ModHumanoidArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
                 heavyArmorSlots++;
         }
         int rnd = randomSource.nextInt(chanceToAvoidBreaking);
@@ -355,27 +270,35 @@ abstract class Armor implements IArmor
     // for tests
     protected void damageArmor(boolean damage)
     {
-        for (var item : player.getEntity().getArmorSlots())
+        for (var item : player.getPlayerEntity().getArmorSlots())
         {
             var damageValue = damage ? item.getMaxDamage() - 1 : 0;
             item.setDamageValue(damageValue);
         }
     }
 
+    protected void damageMainHandItem()
+    {
+        var itemStack = player.getPlayerEntity().getMainHandItem();
+        var maxDamage = itemStack.getMaxDamage();
+        var newDamage = maxDamage * 2 / 3 - 2;
+        itemStack.setDamageValue(newDamage);
+    }
+
     protected void switchArmorDamage()
     {
         boolean isDamaged = false;
-        for (var slot : player.getEntity().getArmorSlots())
+        for (var slot : player.getPlayerEntity().getArmorSlots())
         {
-            if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
+            if (!slot.isEmpty() && slot.getItem() instanceof ModHumanoidArmor modArmor)
             {
                 if (modArmor.isDamaged(slot)) isDamaged = true;
             }
         }
 
-        for (var slot : player.getEntity().getArmorSlots())
+        for (var slot : player.getPlayerEntity().getArmorSlots())
         {
-            if (!slot.isEmpty() && slot.getItem() instanceof ModArmor modArmor)
+            if (!slot.isEmpty() && slot.getItem() instanceof ModHumanoidArmor modArmor)
             {
                 damageArmor(!isDamaged);
             }
@@ -390,7 +313,7 @@ abstract class Armor implements IArmor
 
     protected boolean availableOnBootsWithNoHeavyJump(IPlayer player, IArmor armor)
     {
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
         if (playerEntity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
             return false;
 

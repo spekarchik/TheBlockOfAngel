@@ -1,42 +1,28 @@
 package com.pekar.angelblock.armor;
 
-import com.pekar.angelblock.Main;
-import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
-import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
 
-public class ModArmor extends ArmorItem implements ITooltipProvider
+public abstract class ModArmor extends ArmorItem implements ITooltipProvider
 {
     protected final ArmorItem.Type armorItemType;
     protected final int maxDamage;
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
-    private final Set<ArmorModifications> armorModificatorSet = new HashSet<>();
 
-    protected ModArmor(ModArmorMaterial material, Type armorItemType)
+    public ModArmor(ModArmorMaterial material, ArmorItem.Type armorItemType, Properties properties)
     {
-        super(material.getMaterial(), armorItemType,
-                material.isFireResistant()
-                ? new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())).fireResistant()
-                : new Properties().durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
-        this.material = material;
+        super(material.getMaterial(), armorItemType, material.isFireResistant() ? properties.fireResistant() : properties);
         this.armorItemType = armorItemType;
         this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
+        this.material = material;
     }
 
     public ModArmorMaterial getArmorMaterial()
@@ -49,125 +35,9 @@ public class ModArmor extends ArmorItem implements ITooltipProvider
         return material.getMaterialName() + "_armor";
     }
 
-    @Override
-    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken)
-    {
-        var durability = stack.getMaxDamage() - stack.getDamageValue();
-
-        if (entity != null)
-            utils.attributeModifiers.updateArmorAttributeModifier(entity);
-
-        if (amount >= durability)
-        {
-            stack.setDamageValue(stack.getMaxDamage() - 1);
-            return 0;
-        }
-
-        return super.damageItem(stack, amount, entity, onBroken);
-    }
-
     public boolean isBroken(ItemStack stack)
     {
         return stack.getMaxDamage() - stack.getDamageValue() <= 1;
-    }
-
-    public final boolean isModifiedWithDetector()
-    {
-        return armorModificatorSet.contains(ArmorModifications.Detector);
-    }
-
-    public final boolean isModifiedWithNightVision()
-    {
-        return armorModificatorSet.contains(ArmorModifications.NightVision);
-    }
-
-    public final boolean isModifiedWithHealthRegenerator()
-    {
-        return armorModificatorSet.contains(ArmorModifications.Regenerator);
-    }
-
-    public final boolean isModifiedWithStrengthBooster()
-    {
-        return armorModificatorSet.contains(ArmorModifications.StrengthBooster);
-    }
-
-    public final boolean isModifiedWithJumpBooster()
-    {
-        return armorModificatorSet.contains(ArmorModifications.JumpBooster);
-    }
-
-    public final boolean isModifiedWithSlowFalling()
-    {
-        return armorModificatorSet.contains(ArmorModifications.SlowFalling);
-    }
-
-    public final boolean isModifiedWithSeaPower()
-    {
-        return armorModificatorSet.contains(ArmorModifications.SeaPower);
-    }
-
-    public final boolean isModifiedWithElytra()
-    {
-        return armorModificatorSet.contains(ArmorModifications.Elytra);
-    }
-
-    public final boolean isModifiedWithLuck()
-    {
-        return armorModificatorSet.contains(ArmorModifications.Luck);
-    }
-
-    public final ModArmor withDetector()
-    {
-        armorModificatorSet.add(ArmorModifications.Detector);
-        return this;
-    }
-
-    public final ModArmor withNightVision()
-    {
-        armorModificatorSet.add(ArmorModifications.NightVision);
-        return this;
-    }
-
-    public final ModArmor withHealthRegenerator()
-    {
-        armorModificatorSet.add(ArmorModifications.Regenerator);
-        return this;
-    }
-
-    public final ModArmor withStrengthBooster()
-    {
-        armorModificatorSet.add(ArmorModifications.StrengthBooster);
-        return this;
-    }
-
-    public final ModArmor withJumpBooster()
-    {
-        armorModificatorSet.add(ArmorModifications.JumpBooster);
-        return this;
-    }
-
-    public final ModArmor withSlowFalling()
-    {
-        armorModificatorSet.add(ArmorModifications.SlowFalling);
-        return this;
-    }
-
-    public final ModArmor withSeaPower()
-    {
-        armorModificatorSet.add(ArmorModifications.SeaPower);
-        return this;
-    }
-
-    public final ModArmor withLuck()
-    {
-        armorModificatorSet.add(ArmorModifications.Luck);
-        return this;
-    }
-
-    public final ModArmor withElytra()
-    {
-        armorModificatorSet.add(ArmorModifications.Elytra);
-        return this;
     }
 
     public int getMaxDamage()
@@ -176,105 +46,8 @@ public class ModArmor extends ArmorItem implements ITooltipProvider
     }
 
     @Override
-    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
-    {
-        if (!flag.hasShiftDown() && !flag.hasAltDown() && !flag.hasControlDown())
-        {
-            tooltip.addLineById("description.common.press_shift_alt_or_ctrl").apply();
-            return;
-        }
-
-        if (flag.hasShiftDown())
-        {
-            tooltip.ignoreEmptyLines();
-
-            for (int i = 1; i <= 9; i++)
-            {
-                tooltip.addLine(getCommonDescriptionRoot(), i).styledAs(TextStyle.Header, i == 5).apply();
-            }
-
-            tooltip.addEmptyLine();
-            tooltip.addLineById("description.armor.press_alt").apply();
-            tooltip.addLineById("description.armor.press_ctrl").apply();
-            return;
-        }
-
-        if (flag.hasAltDown())
-        {
-            tooltip.includeEmptyLines();
-
-            for (int i = 1; i <= getDescriptionLineCount(); i++)
-            {
-                tooltip.addLine(getSpecificDescriptionRoot(), i)
-                        .styledAs(TextStyle.Header, i == 1)
-                        .styledAs(TextStyle.Notice, armorItemType.getSlot() == EquipmentSlot.FEET && i == 9)
-                        .apply();
-            }
-
-            tooltip.addEmptyLine();
-            tooltip.addLineById("description.armor.press_shift").apply();
-            tooltip.addLineById("description.armor.press_ctrl").apply();
-            return;
-        }
-
-        if (flag.hasControlDown())
-        {
-            tooltip.ignoreEmptyLines();
-
-            for (int i = 10; i <= 14; i++)
-            {
-                tooltip.addLine(getCommonDescriptionRoot(), i).styledAs(TextStyle.DarkGray, true).apply();
-            }
-
-            tooltip.addEmptyLine();
-            tooltip.addLineById("description.armor.press_shift").apply();
-            tooltip.addLineById("description.armor.press_alt").apply();
-            return;
-        }
-    }
-
-    @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> component, TooltipFlag flag)
     {
         ITooltipProvider.appendHoverText(this, stack, context, component, flag);
-    }
-
-    private int getDescriptionLineCount()
-    {
-        return switch (getEquipmentSlot())
-        {
-            case HEAD -> 6;
-            case CHEST -> 9;
-            case LEGS -> 6;
-            case FEET -> 9;
-            default -> 0;
-        };
-    }
-
-    @Override
-    public boolean isEnchantable(ItemStack stack)
-    {
-        return !isDamaged(stack);
-    }
-
-    @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book)
-    {
-        return true;
-    }
-
-    private String getSpecificDescriptionRoot()
-    {
-        return getDescriptionId();
-    }
-
-    private String getCommonDescriptionRoot()
-    {
-        return getFullArmorModelName(getArmorFamilyName()).replace(':', '.').replaceAll("[0-9]", "");
-    }
-
-    private String getFullArmorModelName(String armorModelName)
-    {
-        return Main.MODID + ":" + armorModelName;
     }
 }
