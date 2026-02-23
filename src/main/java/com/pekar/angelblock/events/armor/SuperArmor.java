@@ -208,10 +208,10 @@ public class SuperArmor extends Armor
             if (isFullArmorSet)
                 event.setCanceled(true);
         }
-        else if (player.isEffectActive(MobEffects.POISON) && player.areLeggingsModifiedWithHealthRegenerator(this))
+
+        if (player.isEffectActive(MobEffects.POISON) && player.areLeggingsModifiedWithHealthRegenerator(this))
         {
             player.clearEffect(MobEffects.POISON);
-            event.setCanceled(damageSource.getMsgId().equals("magic")); // Bee's poison
         }
 
         if (isFullArmorSet)
