@@ -2,6 +2,8 @@ package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
+import com.pekar.angelblock.events.effect.base.IPermanentArmorEffect;
+import com.pekar.angelblock.events.effect.base.ISwitchingArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +14,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class DiamithicArmor extends Armor
+public class DiamithicArmor extends PlayerArmor
 {
     private final IPermanentArmorEffect strengthEffect;
     private final IPermanentArmorEffect healthBoostEffect;
@@ -31,14 +33,19 @@ public class DiamithicArmor extends Armor
     {
         super(player);
         strengthEffect = new StrengthPermanentArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithDetector().asArmorEffect();
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        nightVisionEffect.setup().availableOnHelmetWithDetector();
         healthBoostEffect = new HealthBoostPermanentArmorEffect(player, this, 2);
         hasteEffect = new HastePermanentArmorEffect(player, this);
-        slownessEffect = new SlownessPermanentArmorEffect(player, this, 0).setupAvailability(this::isSlownessAvailable).asArmorEffect();
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
+        slownessEffect = new SlownessPermanentArmorEffect(player, this, 0);
+        slownessEffect.setup().setupAvailability(this::isSlownessAvailable);
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this);
+        glowingEffect.setup().availableOnChestPlateWithSlowFalling();
 
-        jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, 2).setupAvailability(this::isJumpBoostAvailable).asArmorEffect();
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
+        jumpBoostEffect = new JumpBoostSwitchingArmorEffect(player, this, 2);
+        jumpBoostEffect.setup().setupAvailability(this::isJumpBoostAvailable);
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
+        slowFallingEffect.setup().availableOnChestPlateWithSlowFalling();
     }
 
     @Override
@@ -100,7 +107,7 @@ public class DiamithicArmor extends Armor
     @Override
     protected void onEquipmentChangeEvent(LivingEquipmentChangeEvent event)
     {
-        var entityPlayer = player.getEntity();
+        var entityPlayer = player.getPlayerEntity();
         if (playerNeedsToRestoreHealth(entityPlayer, event.getSlot(), event.getFrom(), event.getTo()))
         {
             restorePlayerHealth(entityPlayer);
@@ -158,7 +165,7 @@ public class DiamithicArmor extends Armor
         boolean isHelmetModifiedWithDetector = player.isHelmetModifiedWithDetector(this);
         detectCreepers(isHelmetModifiedWithDetector,false);
 
-        if (player.getEntity() instanceof ServerPlayer playerEntity)
+        if (player.getPlayerEntity() instanceof ServerPlayer playerEntity)
         {
             breakBlockUnderPlayer(playerEntity, true, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound, 32);
             breakBlockUnderPlayer(playerEntity, true, isCrackedBlockPredicate, Blocks.AIR.defaultBlockState(), playCrackedBlockBreakSound, 32);
@@ -262,6 +269,6 @@ public class DiamithicArmor extends Armor
 
     private boolean isSlownessAvailable(IPlayer player, IArmor armor)
     {
-        return player.isAnyArmorElementInclBrokenPutOn(armor) && !player.getEntity().isInWater();
+        return player.isAnyArmorElementInclBrokenPutOn(armor) && !player.getPlayerEntity().isInWater();
     }
 }

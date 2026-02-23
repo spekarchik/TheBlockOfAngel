@@ -10,7 +10,7 @@ import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Silverfish;
 import net.minecraft.world.entity.monster.Spider;
 
-abstract class ArmorBase implements IArmorFamily
+abstract class ArmorBase implements IArmor
 {
     protected Utils utils = new Utils();
 
@@ -65,6 +65,13 @@ abstract class ArmorBase implements IArmorFamily
     protected boolean isFireOrLavaOrHotFloorDamage(DamageSource damageSource)
     {
         return isHotFloorDamage(damageSource) || isFireOrLavaDamage(damageSource);
+    }
+
+    protected boolean isPlantThornsDamage(DamageSource damageSource)
+    {
+        boolean isCactus = damageSource.is(DamageTypes.CACTUS);
+        boolean isSweetBerryBush = damageSource.is(DamageTypes.SWEET_BERRY_BUSH);
+        return isCactus || isSweetBerryBush;
     }
 
     protected boolean isThornOrMagicDamage(DamageSource damageSource)

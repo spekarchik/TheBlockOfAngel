@@ -1,15 +1,16 @@
 package com.pekar.angelblock.events.effect;
 
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
+import com.pekar.angelblock.events.effect.base.PermanentPlayerArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 
-public class StrengthPermanentArmorEffect extends PermanentArmorEffect
+public class StrengthPermanentArmorEffect extends PermanentPlayerArmorEffect
 {
-    public StrengthPermanentArmorEffect(IPlayer player, IArmor armor, int amplifier)
+    public StrengthPermanentArmorEffect(IPlayer player, IPlayerArmor armor, int amplifier)
     {
         super(player, armor, MobEffects.STRENGTH, amplifier);
-        availableIfSlotSet(EquipmentSlot.CHEST);
+        setup().availableIfSlotSet(EquipmentSlot.CHEST);
     }
 }

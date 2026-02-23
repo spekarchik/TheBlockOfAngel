@@ -1,4 +1,6 @@
-package com.pekar.angelblock.events.effect;
+package com.pekar.angelblock.events.effect.base;
+
+import com.pekar.angelblock.events.effect.State;
 
 public interface IArmorEffectBase
 {

@@ -7,7 +7,6 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.TriPredicate;
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -17,15 +16,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Bee;
-import net.minecraft.world.entity.animal.Pufferfish;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +37,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-abstract class Armor extends ArmorBase implements IArmor
+abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
 {
     protected final IPlayer player;
     private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
@@ -79,7 +74,7 @@ abstract class Armor extends ArmorBase implements IArmor
         player.level().playSound(null, pos, SoundEvents.TURTLE_EGG_BREAK, SoundSource.BLOCKS, 1F, 2F);
     };
 
-    protected Armor(IPlayer player)
+    protected PlayerArmor(IPlayer player)
     {
         this.player = player;
 
@@ -169,7 +164,7 @@ abstract class Armor extends ArmorBase implements IArmor
     {
         if (!detect && !makeNeutral) return;
 
-        var entityPlayer = player.getEntity();
+        var entityPlayer = player.getPlayerEntity();
         var level = entityPlayer.level();
 
         if (level.isClientSide()) return;
@@ -276,11 +271,11 @@ abstract class Armor extends ArmorBase implements IArmor
     @Override
     public void onArmorHurtEvent(ArmorHurtEvent event)
     {
-        utils.attributeModifiers.updateArmorAttributeModifier(player.getEntity());
+        utils.attributeModifiers.updateArmorAttributeModifier(player.getPlayerEntity());
 
         for (var slot : utils.player.getArmorSlots())
         {
-            var stack = player.getEntity().getItemBySlot(slot);
+            var stack = player.getPlayerEntity().getItemBySlot(slot);
             if (stack.isEmpty() || !(stack.getItem() instanceof ModHumanoidArmor modArmor) || !modArmor.getArmorFamilyName().equals(getFamilyName()))
             {
                 continue;
@@ -300,7 +295,7 @@ abstract class Armor extends ArmorBase implements IArmor
     // for tests
     protected void damageArmor(boolean damage)
     {
-        for (var item : utils.player.getArmorInSlots(player.getEntity()))
+        for (var item : utils.player.getArmorInSlots(player.getPlayerEntity()))
         {
             var damageValue = damage ? item.getMaxDamage() - 1 : 0;
             item.setDamageValue(damageValue);
@@ -309,7 +304,7 @@ abstract class Armor extends ArmorBase implements IArmor
 
     protected void damageMainHandItem()
     {
-        var itemStack = player.getEntity().getMainHandItem();
+        var itemStack = player.getPlayerEntity().getMainHandItem();
         var maxDamage = itemStack.getMaxDamage();
         var newDamage = maxDamage * 2 / 3 - 2;
         itemStack.setDamageValue(newDamage);
@@ -318,7 +313,7 @@ abstract class Armor extends ArmorBase implements IArmor
     protected void switchArmorDamage()
     {
         boolean isDamaged = false;
-        for (var slot : utils.player.getArmorInSlots(player.getEntity()))
+        for (var slot : utils.player.getArmorInSlots(player.getPlayerEntity()))
         {
             if (!slot.isEmpty() && slot.getItem() instanceof ModHumanoidArmor modArmor)
             {
@@ -326,7 +321,7 @@ abstract class Armor extends ArmorBase implements IArmor
             }
         }
 
-        for (var slot : utils.player.getArmorInSlots(player.getEntity()))
+        for (var slot : utils.player.getArmorInSlots(player.getPlayerEntity()))
         {
             if (!slot.isEmpty() && slot.getItem() instanceof ModHumanoidArmor modArmor)
             {
@@ -343,7 +338,7 @@ abstract class Armor extends ArmorBase implements IArmor
 
     protected boolean availableOnBootsWithNoHeavyJump(IPlayer player, IArmor armor)
     {
-        var playerEntity = player.getEntity();
+        var playerEntity = player.getPlayerEntity();
         if (playerEntity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
             return false;
 
