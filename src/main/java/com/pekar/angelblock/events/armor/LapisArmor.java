@@ -2,6 +2,10 @@ package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
+import com.pekar.angelblock.events.effect.base.IPermanentArmorEffect;
+import com.pekar.angelblock.events.effect.base.ISwitchingArmorEffect;
+import com.pekar.angelblock.events.effect.base.ITemporaryArmorEffect;
+import com.pekar.angelblock.events.effect.base.ITemporaryPersistentArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,7 +15,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class LapisArmor extends Armor
+public class LapisArmor extends PlayerArmor
 {
     private final IPermanentArmorEffect waterBreathingEffect;
     private final IPermanentArmorEffect hasteEffect;
@@ -30,15 +34,21 @@ public class LapisArmor extends Armor
     public LapisArmor(IPlayer player)
     {
         super(player);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithNightVision().asArmorEffect();
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        nightVisionEffect.setup().availableOnHelmetWithNightVision();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this);
+        glowingEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
         waterBreathingEffect = new WaterBreathingPermanentEffect(player, this);
         hasteEffect = new HastePermanentArmorEffect(player, this);
-        luckEffect = new LuckPermanentArmorEffect(player, this).availableIfSlotSet(EquipmentSlot.CHEST).asArmorEffect();
+        luckEffect = new LuckPermanentArmorEffect(player, this);
+        luckEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
         regenerationEffect = new RegenerationTemporaryArmorEffect(player, this, 0, REGENERATION_EFFECT_DURATION);
-        blindnessEffect = new BlindnessNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION).showIcon().asArmorEffect();
-        witherEffect = new WitherNegativeEffect(player, this, 0, 600).showIcon().asArmorEffect();
-        strengthEffect = new StrengthPermanentArmorEffect(player, this, 0).availableOnChestPlateWithStrengthBooster().asArmorEffect();
+        blindnessEffect = new BlindnessNegativeArmorEffect(player, this, REGENERATION_NEGATIVE_EFFECT_DURATION);
+        blindnessEffect.setup().showIcon();
+        witherEffect = new WitherNegativeEffect(player, this, 0, 600);
+        witherEffect.setup().showIcon();
+        strengthEffect = new StrengthPermanentArmorEffect(player, this, 0);
+        strengthEffect.setup().availableOnChestPlateWithStrengthBooster();
         dolphinsGrace = new DolphinsGraceSwitchingEffect(player, this);
     }
 
@@ -167,7 +177,7 @@ public class LapisArmor extends Armor
 
         if (pressedKeyDescription.equals(KeyRegistry.REGENERATION.getName()))
         {
-            if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && player.getEntity().getHealth() < player.getEntity().getMaxHealth())
+            if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && player.getPlayerEntity().getHealth() < player.getPlayerEntity().getMaxHealth())
             {
                 blindnessEffect.tryActivate();
                 regenerationEffect.tryActivate();

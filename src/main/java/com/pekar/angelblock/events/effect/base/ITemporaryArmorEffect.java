@@ -1,4 +1,4 @@
-package com.pekar.angelblock.events.effect;
+package com.pekar.angelblock.events.effect.base;
 
 public interface ITemporaryArmorEffect extends ITemporaryBaseArmorEffect, IArmorEffect
 {

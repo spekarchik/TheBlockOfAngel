@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.effect;
 
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
+import com.pekar.angelblock.events.effect.base.PermanentPlayerArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.ForceLivingEquipmentChangeToClient;
 import com.pekar.angelblock.potions.ModMobEffect;
@@ -8,9 +9,9 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 
-public class SlownessPermanentArmorEffect extends PermanentArmorEffect
+public class SlownessPermanentArmorEffect extends PermanentPlayerArmorEffect
 {
-    public SlownessPermanentArmorEffect(IPlayer player, IArmor armor, int defaultAmplifier)
+    public SlownessPermanentArmorEffect(IPlayer player, IPlayerArmor armor, int defaultAmplifier)
     {
         super(player, armor, MobEffects.SLOWNESS, defaultAmplifier);
     }
@@ -20,7 +21,7 @@ public class SlownessPermanentArmorEffect extends PermanentArmorEffect
     {
         super.onActivated();
 
-        var playerEntity = player.getEntity();
+        var playerEntity = mob.getEntity();
         if (playerEntity.hasEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT))
         {
             var energyEffect = playerEntity.getEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT);
@@ -38,7 +39,7 @@ public class SlownessPermanentArmorEffect extends PermanentArmorEffect
     {
         super.onDeactivated();
 
-        if (player.getEntity() instanceof ServerPlayer serverPlayer)
+        if (mob.getEntity() instanceof ServerPlayer serverPlayer)
         {
             new ForceLivingEquipmentChangeToClient().sendToPlayer(serverPlayer);
         }
