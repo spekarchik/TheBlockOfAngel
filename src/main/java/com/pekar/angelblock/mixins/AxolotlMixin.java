@@ -1,7 +1,7 @@
 package com.pekar.angelblock.mixins;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -73,7 +73,7 @@ public abstract class AxolotlMixin extends Animal
         for (var armor : Utils.instance.player.getArmorInSlots(player))
         {
             if (armor.isEmpty()) return false;
-            if (!(armor.getItem() instanceof ModArmor modArmor)) return false;
+            if (!(armor.getItem() instanceof ModHumanoidArmor modArmor)) return false;
             if (!modArmor.getArmorFamilyName().equals(ArmorRegistry.LAPIS_BOOTS.get().getArmorFamilyName())) return false;
         }
 

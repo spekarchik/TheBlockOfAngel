@@ -2,9 +2,12 @@ package com.pekar.angelblock.events.armor;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.events.effect.*;
+import com.pekar.angelblock.events.effect.base.ISwitchingArmorEffect;
+import com.pekar.angelblock.events.effect.base.ISwitchingEffectSynchronizer;
+import com.pekar.angelblock.events.effect.base.ITemporaryPersistentArmorEffect;
+import com.pekar.angelblock.events.effect.base.SwitchingEffectSynchronizer;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
-import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
@@ -15,7 +18,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class RendelithicArmor extends Armor
+public class RendelithicArmor extends PlayerArmor
 {
     private final ITemporaryPersistentArmorEffect nauseaEffect;
     private final ITemporaryPersistentArmorEffect jumpNegativeEffect;
@@ -33,11 +36,15 @@ public class RendelithicArmor extends Armor
     public RendelithicArmor(IPlayer player)
     {
         super(player);
-        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this).availableOnHelmetWithNightVision().asArmorEffect();
-        nauseaEffect = new NauseaNegativeEffect(player, this, NAUSEA_NEGATIVE_EFFECT_DURATION).showIcon().asArmorEffect();
+        nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
+        nightVisionEffect.setup().availableOnHelmetWithNightVision();
+        nauseaEffect = new NauseaNegativeEffect(player, this, NAUSEA_NEGATIVE_EFFECT_DURATION);
+        nauseaEffect.setup().showIcon();
         jumpNegativeEffect = new JumpNegativeArmorEffect(player, this, SLOWNESS_NEGATIVE_EFFECT_AMPLIFIER, SLOWNESS_NEGATIVE_EFFECT_DURATION);
-        slowFallingEffect = new SlowFallingSwitchingEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
-        glowingEffect = new GlowingSwitchingArmorEffect(player, this).availableOnChestPlateWithSlowFalling().asArmorEffect();
+        slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
+        slowFallingEffect.setup().availableOnChestPlateWithSlowFalling();
+        glowingEffect = new GlowingSwitchingArmorEffect(player, this);
+        glowingEffect.setup().availableOnChestPlateWithSlowFalling();
 
         JumpBoostSwitchingArmorEffect jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.setupAvailability(this::availableOnBootsWithNoHeavyJump);
@@ -126,7 +133,7 @@ public class RendelithicArmor extends Armor
             if (hasHealthRegeneration)
             {
                 event.setCanceled(true);
-                player.getEntity().removeEffect(MobEffects.WITHER);
+                player.getPlayerEntity().removeEffect(MobEffects.WITHER);
             }
         }
     }
@@ -158,7 +165,7 @@ public class RendelithicArmor extends Armor
     @Override
     public void onCreeperCheck()
     {
-        if (player.getEntity() instanceof ServerPlayer serverPlayer)
+        if (player.getPlayerEntity() instanceof ServerPlayer serverPlayer)
             breakBlockUnderPlayer(serverPlayer,true, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound, 32);
     }
 
@@ -225,7 +232,7 @@ public class RendelithicArmor extends Armor
     @Override
     public void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        if (player.getEntity().isInWater())
+        if (player.getPlayerEntity().isInWater())
         {
             event.setNewSpeed(event.getOriginalSpeed() * 0.02f);
         }
@@ -274,7 +281,7 @@ public class RendelithicArmor extends Armor
 
     private void checkForNausea()
     {
-        Player playerEntity = player.getEntity();
+        Player playerEntity = player.getPlayerEntity();
         if (playerEntity.isInWaterOrRain())
         {
             if (!jumpNegativeEffect.isActive())
@@ -294,7 +301,7 @@ public class RendelithicArmor extends Armor
 
                 if (player.hasArmorEffect(MobEffects.JUMP_BOOST))
                 {
-                    player.getEntity().removeEffect(MobEffects.JUMP_BOOST);
+                    player.getPlayerEntity().removeEffect(MobEffects.JUMP_BOOST);
                 }
             }
         }

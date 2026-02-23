@@ -14,7 +14,7 @@ public class SuperArmorFlying extends SuperArmor
     private String getModelName(LivingEntity entity, EquipmentSlot slot)
     {
         var item = entity.getItemBySlot(slot).getItem();
-        if (!(item instanceof ModArmor armorItem)) return "";
+        if (!(item instanceof ModHumanoidArmor armorItem)) return "";
         return armorItem.getArmorFamilyName();
     }
 }
