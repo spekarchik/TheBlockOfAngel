@@ -20,7 +20,6 @@ public final class NetworkingEventHandler implements IEventHandler
                 .executesOn(HandlerThread.NETWORK);
 
         registerPacket(registrar, new CreeperDetectedPacket());
-        registerPacket(registrar, new ClientTickPacket());
         registerPacket(registrar, new KeyPressedPacket());
         registerPacket(registrar, new ToolsModeChangePacket());
         registerPacket(registrar, new PlaySoundPacket());
