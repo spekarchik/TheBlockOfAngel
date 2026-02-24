@@ -110,11 +110,19 @@ public class LymoniteHorseArmor extends AnimalArmor
     @Override
     public void onBeingUnderRain()
     {
+        clearFreeze();
     }
 
     @Override
     public void onBeingInNormalEnvironment()
     {
+        clearFreeze();
+    }
+
+    private void clearFreeze()
+    {
+        if (isArmorPutOn(animal, this) && animal.getEntity().isFreezing())
+            animal.getEntity().clearFreeze();
     }
 
     @Override
