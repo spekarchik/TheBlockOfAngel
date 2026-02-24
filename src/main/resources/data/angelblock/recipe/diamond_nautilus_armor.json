@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:nautilus_armor_handbook",
+    "addition": "minecraft:diamond_block",
+    "result": {
+        "id": "minecraft:diamond_nautilus_armor"
+    },
+    "template": "angelblock:diamond_armor_upgrade_kit"
+}

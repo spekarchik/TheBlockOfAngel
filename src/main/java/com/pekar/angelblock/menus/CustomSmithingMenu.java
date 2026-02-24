@@ -1,5 +1,6 @@
 package com.pekar.angelblock.menus;
 
+import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.armor.ModArmorMaterial;
 import com.pekar.angelblock.items.ItemRegistry;
@@ -32,7 +33,22 @@ public class CustomSmithingMenu extends SmithingMenu
         var secondaryItem = getSlot(2).getItem();
         var result = stack;
 
-        if (template.is(ItemRegistry.DOWNGRADE_KIT) && secondaryItem.is(Items.FLINT))
+        if (result.is(ArmorRegistry.HORSE_LYMONITE_ARMOR) || result.is(ArmorRegistry.WOLF_RENDELITE_ARMOR) || result.is(Items.DIAMOND_NAUTILUS_ARMOR))
+        {
+            template.shrink(1);
+            secondaryItem.shrink(1);
+
+            access.execute((level, pos) ->
+                    level.levelEvent(1044, pos, 0)
+            );
+
+            inputSlots.setChanged();
+            slotsChanged(inputSlots);
+
+            return;
+        }
+
+        else if (template.is(ItemRegistry.DOWNGRADE_KIT) && secondaryItem.is(Items.FLINT))
         {
             if (mainItem.getItem() instanceof ModHumanoidArmor armor)
             {

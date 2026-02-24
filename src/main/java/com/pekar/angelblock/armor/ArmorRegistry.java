@@ -24,6 +24,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_BOOTS = registerHumanoidArmor("rendelithic_boots", ModArmorMaterial.RENDELITHIC, ArmorType.BOOTS, RendelithicArmor::new);
     public static final DeferredItem<ModHumanoidArmor> RENDELITHIC_BOOTS_WITH_STRENGTH_BOOST = registerHumanoidArmor("rendelithic_boots_with_strength_boost", ModArmorMaterial.RENDELITHIC2, ArmorType.BOOTS,
             (m, t, p) -> new RendelithicArmor(m, t, p).withJumpBooster());
+    public static final DeferredItem<ModWolfArmor> WOLF_RENDELITE_ARMOR = registerArmor("wolf_rendelite_armor", ModArmorMaterial.RENDELITHIC, ArmorType.BODY, ModWolfArmor::new);
 
     public static final DeferredItem<ModHumanoidArmor> LAPIS_HELMET = registerHumanoidArmor("lapis_helmet", ModArmorMaterial.LAPIS, ArmorType.HELMET, ModHumanoidArmor::new);
     public static final DeferredItem<ModHumanoidArmor> LAPIS_HELMET_WITH_NIGHT_VISION = registerHumanoidArmor("lapis_helmet_with_detector", ModArmorMaterial.LAPIS2, ArmorType.HELMET,
@@ -50,6 +51,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModHumanoidArmor> LIMONITE_BOOTS = registerHumanoidArmor("limonite_boots", ModArmorMaterial.LIMONITE, ArmorType.BOOTS, LimoniteArmor::new);
     public static final DeferredItem<ModHumanoidArmor> LIMONITE_BOOTS_WITH_STRENGTH = registerHumanoidArmor("limonite_boots_with_strength", ModArmorMaterial.LIMONITE2, ArmorType.BOOTS,
             (m, t, p) -> new LimoniteArmor(m, t, p).withJumpBooster());
+    public static final DeferredItem<ModHorseArmor> HORSE_LYMONITE_ARMOR = registerArmor("horse_lymonite_armor", ModArmorMaterial.LIMONITE, ArmorType.BODY, HorseLimoniteArmor::new);
 
     public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_HELMET = registerHumanoidArmor("diamithic_helmet", ModArmorMaterial.DIAMITHIC, ArmorType.HELMET, ModHumanoidArmor::new);
     public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_HELMET_WITH_DETECTOR = registerHumanoidArmor("diamithic_helmet_with_detector", ModArmorMaterial.DIAMITHIC2, ArmorType.HELMET,
@@ -98,6 +100,12 @@ public class ArmorRegistry
 
     private static DeferredItem<ModHumanoidArmor> registerHumanoidArmor(String name, ModArmorMaterial armorMaterial, ArmorType armorType,
                                                                         TriFunction<ModArmorMaterial, ArmorType, Item.Properties, ModHumanoidArmor> armorConstructor)
+    {
+        return ITEMS.registerItem(name, p -> armorConstructor.apply(armorMaterial, armorType, p));
+    }
+
+    private static <T extends ModArmor> DeferredItem<T> registerArmor(String name, ModArmorMaterial armorMaterial, ArmorType armorType,
+                                                                      TriFunction<ModArmorMaterial, ArmorType, Item.Properties, T> armorConstructor)
     {
         return ITEMS.registerItem(name, p -> armorConstructor.apply(armorMaterial, armorType, p));
     }
