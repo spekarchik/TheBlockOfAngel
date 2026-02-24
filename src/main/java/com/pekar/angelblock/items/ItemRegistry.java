@@ -67,6 +67,10 @@ public class ItemRegistry
     public static final DeferredItem<Item> ROD_UPGRADE_KIT = Main.ITEMS.registerItem("rod_upgrade_kit", RodUpgradeKit::new);
     public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.registerItem("downgrade_kit", DowngradeKit::new);
 
+    public static final DeferredItem<Item> HORSE_ARMOR_HANDBOOK = Main.ITEMS.registerItem("horse_armor_handbook", AnimalArmorHandbook::new, new Item.Properties().rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> WOLF_ARMOR_HANDBOOK = Main.ITEMS.registerItem("wolf_armor_handbook", AnimalArmorHandbook::new, new Item.Properties().rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> NAUTILUS_ARMOR_HANDBOOK = Main.ITEMS.registerItem("nautilus_armor_handbook", AnimalArmorHandbook::new, new Item.Properties().rarity(Rarity.UNCOMMON));
+
     public static final DeferredItem<Item> VESICULAR_TERRACOTTA = Main.ITEMS.registerItem("vesicular_terracotta", p -> new ModItemWithHoverText(TextStyle.Notice, p), new Item.Properties().fireResistant());
     public static final DeferredItem<Item> BASALT_FIBER = Main.ITEMS.registerItem("basalt_fiber", ModItem::new);
     public static final DeferredItem<Item> FLAX_FIBRE = Main.ITEMS.registerItem("flax_fibre", p -> new ModItemWithHoverText(TextStyle.Notice, p));
