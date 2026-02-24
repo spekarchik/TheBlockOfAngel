@@ -122,7 +122,11 @@ public class LymoniteHorseArmor extends AnimalArmor
     private void clearFreeze()
     {
         if (isArmorPutOn(animal, this) && animal.getEntity().isFreezing())
-            animal.getEntity().clearFreeze();
+        {
+            var entity = animal.getEntity();
+            var ticksFrozen = entity.getTicksFrozen();
+            entity.setTicksFrozen(Math.max(0, ticksFrozen - 4));
+        }
     }
 
     @Override
