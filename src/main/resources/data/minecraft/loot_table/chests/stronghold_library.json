@@ -18,6 +18,54 @@
 		]
 	},
     {
+        "rolls": 1.0,
+        "bonus_rolls": 0.0,
+        "entries":
+        [
+            {
+                "type": "minecraft:item",
+                "name": "angelblock:horse_armor_handbook",
+                "weight": 2
+            },
+            {
+              "type": "minecraft:empty",
+              "weight": 3
+            }
+        ]
+    },
+    {
+        "rolls": 1.0,
+        "bonus_rolls": 0.0,
+        "entries":
+        [
+            {
+                "type": "minecraft:item",
+                "name": "angelblock:wolf_armor_handbook",
+                "weight": 2
+            },
+            {
+              "type": "minecraft:empty",
+              "weight": 3
+            }
+        ]
+    },
+    {
+        "rolls": 1.0,
+        "bonus_rolls": 0.0,
+        "entries":
+        [
+            {
+                "type": "minecraft:item",
+                "name": "angelblock:nautilus_armor_handbook",
+                "weight": 2
+            },
+            {
+              "type": "minecraft:empty",
+              "weight": 3
+            }
+        ]
+    },
+    {
       "bonus_rolls": 0.0,
       "entries": [
         {
