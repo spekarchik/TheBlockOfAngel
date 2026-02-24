@@ -41,7 +41,7 @@ public class TickEvents implements IEventHandler
         if (event.getEntity() instanceof ServerPlayer serverPlayer)
         {
             IPlayer player = PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID());
-            boolean runHeavy = player.every(10);
+            boolean runHeavy = player.every(11);
 
             for (IPlayerArmor armor : player.getArmorTypesUsed())
             {
