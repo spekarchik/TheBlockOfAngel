@@ -9,6 +9,11 @@
       {
         "texture": "angelblock:limonite_armor"
       }
+    ],
+    "horse_body": [
+      {
+        "texture": "angelblock:horse_lymonite_armor"
+      }
     ]
   }
 }
