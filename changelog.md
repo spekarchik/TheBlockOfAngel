@@ -1,3 +1,42 @@
+## 📦 Version 3.0.0
+
+### ✨ New
+- Animal armor has been added:
+  - **Rendelite Wolf Armor**
+    - Designed to protect wolfs in *Nether*.
+    - Has properties similar to players' **Rendelite Armor**.
+    - Has immunity from *Lava*, *Fire*, *Magma* blocks and *Wither* effect.
+    - Behaves like **Armadillo Wolf Armor** (fully absorbs damage from most sources by losing durability).
+    - When fully broken, any damage taken by an animal applies Glowing for 5 minutes to allow the player know and react.
+    - Has almost 3 times higher durability than **Armadillo Wolf Armor** (11 vs 4).
+    - Applies *Slowness IV* and *Heavy Jump IV* effects to the animal when contacting with water (directly or in rain).
+    - Fully broken armor **does not disappear**: remains equipped but loses all protection and immunities.
+    - Does not burn in Lava when dropped as an item.
+  - **Lymonite Horse Armor**
+    - All-purpose armor. But designed for snowy mountains.
+    - Has properties similar to players' **Lymonite Armor**.
+    - Protects the horse from sinking in *Powder Snow*.
+    - Grants 100% freezing protection like **Leather Armor**.
+    - Grants immunity to Poison effect and thorns damage (Sweet Berry Bushes, Cacti).
+    - The defense is between **Diamond Horse Armor** and **Gold Horse Armor**: body defense 9 and toughness 1.
+    - Applies Health Boost +4 hearts.
+    - Weak against *Wither* effect and explosions: +50% damage, against *Wind Charge*: +200% damage.
+- New items:
+    - **Animal Armor Handbook: Horse** for crafting **Lymonite Horse Armor**.
+    - **Animal Armor Handbook: Wolf** for crafting **Rendelite Wolf Armor**.
+    - **Animal Armor Handbook: Marine – ?**
+      - Describes a mysterious marine creature, unknown in some worlds.
+      - In version 1.21.11 and later, it can be used to craft **Diamond Nautilus Armor**.
+    - All can be found in *Stronghold libraries*.
+    - Used in smithing recipes.
+    - Are not consumed in crafting.
+
+### 📝 Improvements
+- Interactions using **Marine Crystal** and **Soaring Spore Essence** have been improved: now ignore the default animal interactions.
+- Tooltip localizations improved.
+- Minor corrections for Lymonite and Superyte armor.
+
+
 ## 📦 Version 2.21.6
 
 ### 📝 Improvements
