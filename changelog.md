@@ -3,11 +3,11 @@
 ### ✨ New
 - Animal armor has been added:
   - **Rendelite Wolf Armor**
-    - Designed to protect wolfs in *Nether*.
+    - Designed to protect wolves in the *Nether*.
     - Has properties similar to players' **Rendelite Armor**.
     - Has immunity from *Lava*, *Fire*, *Magma* blocks and *Wither* effect.
     - Behaves like **Armadillo Wolf Armor** (fully absorbs damage from most sources by losing durability).
-    - When fully broken, any damage taken by an animal applies Glowing for 5 minutes to allow the player know and react.
+    - When fully broken, any damage taken by an animal applies Glowing for 5 minutes to allow the player to know and react.
     - Has almost 3 times higher durability than **Armadillo Wolf Armor** (11 vs 4).
     - Applies *Slowness IV* and *Heavy Jump IV* effects to the animal when contacting with water (directly or in rain).
     - Fully broken armor **does not disappear**: remains equipped but loses all protection and immunities.
