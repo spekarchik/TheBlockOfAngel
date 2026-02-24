@@ -237,12 +237,6 @@ public class ModHumanoidArmor extends ModArmor
     }
 
     @Override
-    public boolean isEnchantable(ItemStack stack)
-    {
-        return !isDamaged(stack);
-    }
-
-    @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book)
     {
         return true;
