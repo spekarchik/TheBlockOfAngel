@@ -9,6 +9,7 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
+import net.neoforged.neoforge.event.entity.living.AnimalTameEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 
 import java.util.*;
@@ -50,8 +51,20 @@ public class AnimalManager implements IAnimalManager, IEventHandler
         var entity = event.getEntity();
 
         boolean isTameAnimal = (entity instanceof TamableAnimal tamable && tamable.isTame());
-        boolean isTamedHorse = (entity instanceof AbstractHorse horse && horse.isWearingBodyArmor() && horse.isTamed());
+        boolean isTamedHorse = (entity instanceof AbstractHorse horse && horse.isTamed());
         if (entity instanceof Animal animal && (isTameAnimal || isTamedHorse))
+        {
+            addAnimal(animal);
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityTameEvent(AnimalTameEvent event)
+    {
+        if (event.getEntity().level().isClientSide()) return;
+
+        var entity = event.getEntity();
+        if (entity instanceof Animal animal)
         {
             addAnimal(animal);
         }
