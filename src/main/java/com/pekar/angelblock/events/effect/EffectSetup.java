@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.effect;
 
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.potions.PotionRegistry;
@@ -121,7 +121,7 @@ interface EffectSetup<T extends IArmorEffect> extends IEffectSetup<T>
     {
         setUnavailabilityPredicate(((player, armor) -> {
             var stack = player.getEntity().getItemBySlot(slot);
-            return stack.isEmpty() || !(stack.getItem() instanceof ModArmor);
+            return stack.isEmpty() || !(stack.getItem() instanceof ModHumanoidArmor);
         }));
 
         return this;

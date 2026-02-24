@@ -5,15 +5,18 @@ import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.scheduler.PlayerScheduler;
 import com.pekar.angelblock.events.scheduler.allay.RestoreAllaysTask;
+import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.IModTool;
 import com.pekar.angelblock.tools.IModToolEnhanceable;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,6 +27,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.LogicalSide;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -163,6 +167,44 @@ public class PlayerInteractionEvents implements IEventHandler
     //@SubscribeEvent
     public void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event)
     {
+    }
+
+    @SubscribeEvent
+    public void onLivingInteractionEvent(PlayerInteractEvent.EntityInteractSpecific event)
+    {
+        if (!(event.getTarget() instanceof LivingEntity target)) return;
+        if (target instanceof Player) return;
+
+        var itemStack = event.getItemStack();
+        if (itemStack.is(ItemRegistry.SOARING_SPORE_ESSENCE))
+        {
+            if (!target.hasEffect(MobEffects.GLOWING) || !target.hasEffect(MobEffects.SLOW_FALLING))
+            {
+                var player = event.getEntity();
+                if (event.getSide() == LogicalSide.SERVER)
+                {
+                    target.addEffect(new MobEffectInstance(MobEffects.GLOWING, MobEffectInstance.INFINITE_DURATION, 0, true, true));
+                    target.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, MobEffectInstance.INFINITE_DURATION, 0, true, true));
+
+                    if (!player.isCreative())
+                        itemStack.shrink(1);
+                }
+
+                Utils.instance.sound.playSoundByLivingEntity(player, target, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.NEUTRAL, 1F, 1F);
+
+                event.setCanceled(true);
+                event.setCancellationResult(event.getSide() == LogicalSide.CLIENT ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
+            }
+        }
+        else if (itemStack.is(ItemRegistry.MARINE_CRYSTAL))
+        {
+            target.removeAllEffects();
+            var player = event.getEntity();
+            Utils.instance.sound.playSoundByLivingEntity(player, target, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.NEUTRAL, 1F, 1F);
+
+            event.setCanceled(true);
+            event.setCancellationResult(event.getSide() == LogicalSide.CLIENT ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
+        }
     }
 
     @SubscribeEvent

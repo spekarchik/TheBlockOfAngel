@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.player;
 
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.events.armor.*;
 import com.pekar.angelblock.events.effect.ITemporaryBaseArmorEffect;
 import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
@@ -48,7 +48,7 @@ public class Player implements IPlayer
         var itemStack = getEntity().getItemBySlot(equipmentSlot);
         if (itemStack.isEmpty()) return false;
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
 
         return armor.getFamilyName().equals(armorItem.getArmorFamilyName());
     }
@@ -59,7 +59,7 @@ public class Player implements IPlayer
         var armorNamesPutOn = getSlotArmorNames();
         var armorStacks = Utils.instance.player.getArmorInSlots(getEntity());
         return armorNamesPutOn.stream().allMatch(x -> x.equals(armor.getFamilyName()))
-                && armorStacks.stream().allMatch(s -> !s.isEmpty() && s.getItem() instanceof ModArmor a && !a.isBroken(s));
+                && armorStacks.stream().allMatch(s -> !s.isEmpty() && s.getItem() instanceof ModHumanoidArmor a && !a.isBroken(s));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Player implements IPlayer
             var itemStack = getEntity().getItemBySlot(slot);
             if (itemStack.isEmpty()) return false;
             var item = itemStack.getItem();
-            if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+            if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
 
             if (!armor.getFamilyName().equals(armorItem.getArmorFamilyName())) return false;
         }
@@ -85,7 +85,7 @@ public class Player implements IPlayer
         {
             if (itemStack.isEmpty()) continue;
             var item = itemStack.getItem();
-            if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) continue;
+            if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) continue;
 
             if (armor.getFamilyName().equals(armorItem.getArmorFamilyName())) return true;
         }
@@ -100,7 +100,7 @@ public class Player implements IPlayer
         {
             if (itemStack.isEmpty()) continue;
             var item = itemStack.getItem();
-            if (!(item instanceof ModArmor armorItem)) continue;
+            if (!(item instanceof ModHumanoidArmor armorItem)) continue;
 
             if (armor.getFamilyName().equals(armorItem.getArmorFamilyName())) return true;
         }
@@ -113,7 +113,7 @@ public class Player implements IPlayer
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.HEAD);
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithDetector();
     }
@@ -123,7 +123,7 @@ public class Player implements IPlayer
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.HEAD);
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithNightVision();
     }
@@ -133,7 +133,7 @@ public class Player implements IPlayer
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.LEGS);
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithHealthRegenerator();
     }
@@ -143,7 +143,7 @@ public class Player implements IPlayer
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.FEET);
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithJumpBooster();
     }
@@ -153,7 +153,7 @@ public class Player implements IPlayer
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.CHEST);
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithStrengthBooster();
     }
@@ -163,7 +163,7 @@ public class Player implements IPlayer
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.CHEST);
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithSlowFalling();
     }
@@ -173,7 +173,7 @@ public class Player implements IPlayer
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.CHEST);
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithLuck();
     }
@@ -183,12 +183,12 @@ public class Player implements IPlayer
     {
         var itemStack = getEntity().getItemBySlot(EquipmentSlot.FEET);
         var item = itemStack.getItem();
-        if (!(item instanceof ModArmor armorItem) || armorItem.isBroken(itemStack)) return false;
+        if (!(item instanceof ModHumanoidArmor armorItem) || armorItem.isBroken(itemStack)) return false;
         if (!areTheSameFamily(armor, armorItem)) return false;
         return armorItem.isModifiedWithSeaPower();
     }
 
-    private boolean areTheSameFamily(IArmor armor, ModArmor model)
+    private boolean areTheSameFamily(IArmor armor, ModHumanoidArmor model)
     {
         return model.getArmorFamilyName().equals(armor.getFamilyName());
     }
@@ -349,7 +349,7 @@ public class Player implements IPlayer
         {
             var item = itemStack.getItem();
 
-            if (item instanceof ModArmor armorItem)
+            if (item instanceof ModHumanoidArmor armorItem)
             {
                 String name = armorItem.getArmorFamilyName();
                 armorNames.add(name);
@@ -363,16 +363,16 @@ public class Player implements IPlayer
         return armorNames;
     }
 
-    private Collection<ModArmor> getSlotArmorItems()
+    private Collection<ModHumanoidArmor> getSlotArmorItems()
     {
         Iterable<ItemStack> itemStacks = Utils.instance.player.getArmorInSlots(getEntity());
-        var armorItems = new ArrayList<ModArmor>();
+        var armorItems = new ArrayList<ModHumanoidArmor>();
 
         for (ItemStack itemStack : itemStacks)
         {
             var item = itemStack.getItem();
 
-            if (!(item instanceof ModArmor armorItem)) continue;
+            if (!(item instanceof ModHumanoidArmor armorItem)) continue;
 
             armorItems.add(armorItem);
         }
@@ -380,7 +380,7 @@ public class Player implements IPlayer
         return armorItems;
     }
 
-    private IArmor getArmorModel(ModArmor modArmor)
+    private IArmor getArmorModel(ModHumanoidArmor modArmor)
     {
         var modelName = modArmor.getArmorFamilyName();
 
