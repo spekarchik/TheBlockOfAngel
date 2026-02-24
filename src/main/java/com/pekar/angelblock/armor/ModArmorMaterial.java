@@ -5,8 +5,6 @@ import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
@@ -138,11 +136,7 @@ public class ModArmorMaterial
             enummap.put(armoritem$type, map.get(armoritem$type));
         }
 
-        return Registry.registerForHolder(
-                BuiltInRegistries.ARMOR_MATERIAL,
-                Utils.instance.resources.createResourceLocation(Main.MODID, armorName),
-                new ArmorMaterial(enummap, enchantmentValue, equipSound, repairIngredient, armorLayers, toughness, knockbackResistance)
-        );
+        return Main.ARMOR_MATERIALS.register(armorName, () -> new ArmorMaterial(enummap, enchantmentValue, equipSound, repairIngredient, armorLayers, toughness, knockbackResistance));
     }
 
     private static EnumMap<ArmorItem.Type, Integer> createArmorTypeMap(int bootsResistance, int leggingsResistance, int chestplateResistance, int helmetResistance, int bodyResistance)

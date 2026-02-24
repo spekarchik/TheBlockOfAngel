@@ -1,6 +1,7 @@
 package com.pekar.angelblock;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.armor.ModArmorMaterial;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.events.*;
@@ -47,6 +48,7 @@ public class Main
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, MODID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(Registries.POTION, MODID);
+    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, MODID);
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS = DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, Main.MODID);
 
@@ -57,14 +59,15 @@ public class Main
 
     public Main(IEventBus modEventBus, ModContainer modContainer)
     {
-        initializeRegistry();
-
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
         MOB_EFFECTS.register(modEventBus);
         POTIONS.register(modEventBus);
         ENTITY_TYPES.register(modEventBus);
+        ARMOR_MATERIALS.register(modEventBus);
+
+        initializeRegistry();
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
