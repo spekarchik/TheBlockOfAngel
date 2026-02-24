@@ -97,7 +97,6 @@ public class Main
 
         ClientSetupEvents.initStatic();
         KeyboardMouseEvents.initStatic();
-        ClientTickEvents.initStatic();
 
         RecipeRegistry.initStatic();
         MenuRegistry.initStatic();

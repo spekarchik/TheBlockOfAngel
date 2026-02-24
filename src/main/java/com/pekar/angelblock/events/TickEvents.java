@@ -1,7 +1,9 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.animal.IAnimal;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.cleaners.Cleaner;
+import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.events.scheduler.PlayerScheduler;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.TamableAnimal;
@@ -18,9 +20,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TickEvents implements IEventHandler
 {
-    // Track ticks per animal UUID so we only run armor environment callbacks once every 5 ticks
-    private static final Map<UUID, Integer> tickCounter = new ConcurrentHashMap<>();
-
     @SubscribeEvent
     public void onWorldTickEvent(LevelTickEvent.Post event)
     {
@@ -41,6 +40,35 @@ public class TickEvents implements IEventHandler
     }
 
     @SubscribeEvent
+    public void onPlayerTick(PlayerTickEvent.Post event)
+    {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer)
+        {
+            IPlayer player = PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID());
+            boolean runHeavy = player.every(11);
+
+            for (IPlayerArmor armor : player.getArmorTypesUsed())
+            {
+                if (runHeavy)
+                    armor.onCreeperCheck();
+
+                if (serverPlayer.isInWater())
+                {
+                    armor.onBeingInWater();
+                }
+                else if (serverPlayer.isInWaterOrRain())
+                {
+                    armor.onBeingUnderRain();
+                }
+                else if (serverPlayer.isInLava())
+                {
+                    armor.onBeingInLava();
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void onLivingTick(EntityTickEvent.Post event)
     {
         if (!(event.getEntity() instanceof Animal animalEntity)) return;
@@ -50,39 +78,19 @@ public class TickEvents implements IEventHandler
         boolean isTamedHorse = (animalEntity instanceof AbstractHorse horse && horse.isTamed());
         if (!isTameAnimal && !isTamedHorse) return;
 
-        UUID uuid = animalEntity.getUUID();
+        IAnimal animal = AnimalManager.instance().getAnimalByUUID(animalEntity.getUUID());
+        if (animal == null) return;
 
-        // initialize counter if missing
-        if (!tickCounter.containsKey(uuid))
+        for (var armor : animal.getArmorTypesUsed())
         {
-            tickCounter.put(uuid, 0);
-            return;
-        }
-
-        int count = tickCounter.get(uuid);
-        if (count >= 4)
-        {
-            // reset before running to avoid re-entrancy issues
-            tickCounter.put(uuid, 0);
-
-            IAnimal animal = AnimalManager.instance().getAnimalByUUID(uuid);
-            if (animal == null) return;
-
-            for (var armor : animal.getArmorTypesUsed())
-            {
-                if (animalEntity.isInWater())
-                    armor.onBeingInWater();
-                else if (animalEntity.isInWaterOrRain())
-                    armor.onBeingUnderRain();
-                else if (animalEntity.isInLava())
-                    armor.onBeingInLava();
-                else
-                    armor.onBeingInNormalEnvironment();
-            }
-        }
-        else
-        {
-            tickCounter.put(uuid, count + 1);
+            if (animalEntity.isInWater())
+                armor.onBeingInWater();
+            else if (animalEntity.isInWaterOrRain())
+                armor.onBeingUnderRain();
+            else if (animalEntity.isInLava())
+                armor.onBeingInLava();
+            else
+                armor.onBeingInNormalEnvironment();
         }
     }
 }

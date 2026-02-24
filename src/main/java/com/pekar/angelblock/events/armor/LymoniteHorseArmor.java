@@ -125,7 +125,7 @@ public class LymoniteHorseArmor extends AnimalArmor
         {
             var entity = animal.getEntity();
             var ticksFrozen = entity.getTicksFrozen();
-            entity.setTicksFrozen(Math.max(0, ticksFrozen - 6));
+            entity.setTicksFrozen(Math.max(0, ticksFrozen - 4));
         }
     }
 
