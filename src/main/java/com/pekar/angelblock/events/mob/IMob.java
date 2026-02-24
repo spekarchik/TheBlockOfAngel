@@ -10,6 +10,8 @@ public interface IMob
 {
     LivingEntity getEntity();
 
+    boolean every(int throttling);
+
     boolean isOverworld();
     boolean isNether();
     boolean isEnd();
