@@ -1,9 +1,12 @@
 package com.pekar.angelblock.events;
 
+import com.pekar.angelblock.events.animal.IAnimal;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.scheduler.PlayerScheduler;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.TamableAnimal;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -25,6 +28,28 @@ public class TickEvents implements IEventHandler
         if (event.getEntity() instanceof ServerPlayer player)
         {
             PlayerScheduler.doOnTick(player);
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingTick(EntityTickEvent.Post event)
+    {
+        if (!(event.getEntity() instanceof TamableAnimal animalEntity) || !animalEntity.isTame()) return;
+        if (animalEntity.level().isClientSide()) return;
+
+        IAnimal animal = AnimalManager.instance().getAnimalByUUID(animalEntity.getUUID());
+        if (animal == null) return;
+
+        for (var armor : animal.getArmorTypesUsed())
+        {
+            if (animalEntity.isInWater())
+                armor.onBeingInWater();
+            else if (animalEntity.isInWaterOrRain())
+                armor.onBeingUnderRain();
+            else if (animalEntity.isInLava())
+                armor.onBeingInLava();
+            else
+                armor.onBeingInNormalEnvironment();
         }
     }
 }
