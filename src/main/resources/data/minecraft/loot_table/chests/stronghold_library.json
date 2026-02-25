@@ -18,6 +18,22 @@
 		]
 	},
     {
+        "rolls": 1.0,
+        "bonus_rolls": 0.0,
+        "entries":
+        [
+            {
+                "type": "minecraft:item",
+                "name": "angelblock:horse_armor_handbook",
+                "weight": 3
+            },
+            {
+              "type": "minecraft:empty",
+              "weight": 2
+            }
+        ]
+    },
+    {
       "bonus_rolls": 0.0,
       "entries": [
         {

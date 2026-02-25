@@ -5,6 +5,8 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.function.BiFunction;
+
 import static com.pekar.angelblock.Main.ITEMS;
 
 public class ArmorRegistry
@@ -48,6 +50,7 @@ public class ArmorRegistry
     public static final DeferredItem<ModHumanoidArmor> LIMONITE_BOOTS = registerHumanoidArmor("limonite_boots", ModArmorMaterial.LIMONITE, ArmorItem.Type.BOOTS, LimoniteArmor::new);
     public static final DeferredItem<ModHumanoidArmor> LIMONITE_BOOTS_WITH_STRENGTH = registerHumanoidArmor("limonite_boots_with_strength", ModArmorMaterial.LIMONITE2, ArmorItem.Type.BOOTS,
             (m, t, p) -> new LimoniteArmor(m, t, p).withJumpBooster());
+    public static final DeferredItem<ModAnimalArmor> HORSE_LYMONITE_ARMOR = registerAnimalArmor("horse_lymonite_armor", ModArmorMaterial.LIMONITE, HorseLimoniteArmor::new);
 
     public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_HELMET = registerHumanoidArmor("diamithic_helmet", ModArmorMaterial.DIAMITHIC, ArmorItem.Type.HELMET, ModHumanoidArmor::new);
     public static final DeferredItem<ModHumanoidArmor> DIAMITHIC_HELMET_WITH_DETECTOR = registerHumanoidArmor("diamithic_helmet_with_detector", ModArmorMaterial.DIAMITHIC2, ArmorItem.Type.HELMET,
@@ -98,5 +101,11 @@ public class ArmorRegistry
                                                                         PropertyDispatch.TriFunction<ModArmorMaterial, ArmorItem.Type, Item.Properties, ModHumanoidArmor> armorConstructor)
     {
         return ITEMS.register(name, () -> armorConstructor.apply(armorMaterial, armorType, new Item.Properties()));
+    }
+
+    private static <T extends ModAnimalArmor> DeferredItem<T> registerAnimalArmor(String name, ModArmorMaterial armorMaterial,
+                                                                                 BiFunction<ModArmorMaterial, Item.Properties, T> armorConstructor)
+    {
+        return ITEMS.registerItem(name, p -> armorConstructor.apply(armorMaterial, p));
     }
 }

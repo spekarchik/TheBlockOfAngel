@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.effect.base;
 
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.IModArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.mob.IMob;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -36,7 +36,7 @@ public class ArmorEffectSetup<E extends IArmorEffectWithOptions<M>, M extends IM
         effect.setupAvailability((mob, armor) ->
         {
             var slotItemStack = mob.getEntity().getItemBySlot(slot);
-            return !slotItemStack.isEmpty() && slotItemStack.getItem() instanceof ModArmor;
+            return !slotItemStack.isEmpty() && slotItemStack.getItem() instanceof IModArmor;
         });
 
         return this;

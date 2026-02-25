@@ -5,25 +5,22 @@ import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AnimalArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public abstract class ModArmor extends ArmorItem implements ITooltipProvider, IModArmor
+public abstract class ModAnimalArmor extends AnimalArmorItem implements IModArmor, ITooltipProvider
 {
-    protected final ArmorItem.Type armorItemType;
     protected final int maxDamage;
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
 
-    public ModArmor(ModArmorMaterial material, ArmorItem.Type armorItemType, Properties properties)
+    public ModAnimalArmor(ModArmorMaterial material, BodyType bodyType, Properties properties)
     {
-        super(material.getMaterial(), armorItemType, material.isFireResistant() ? properties.fireResistant() : properties);
-        this.armorItemType = armorItemType;
-        this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
+        super(material.getMaterial(), bodyType, false, properties);
+        this.maxDamage = Type.BODY.getDurability(material.getDurabilityMultiplier());
         this.material = material;
     }
 
@@ -54,7 +51,7 @@ public abstract class ModArmor extends ArmorItem implements ITooltipProvider, IM
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
     {
-        return stack.is(Items.LEATHER_BOOTS);
+        return false;
     }
 
     @Override

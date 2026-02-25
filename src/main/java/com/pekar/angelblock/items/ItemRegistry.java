@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ItemRegistry
@@ -54,6 +55,8 @@ public class ItemRegistry
 
     public static final DeferredItem<Item> ROD_UPGRADE_KIT = Main.ITEMS.registerItem("rod_upgrade_kit", RodUpgradeKit::new);
     public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.registerItem("downgrade_kit", DowngradeKit::new);
+
+    public static final DeferredItem<Item> HORSE_ARMOR_HANDBOOK = Main.ITEMS.registerItem("horse_armor_handbook", AnimalArmorHandbook::new, new Item.Properties().rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<Item> VESICULAR_TERRACOTTA = Main.ITEMS.registerItem("vesicular_terracotta", p -> new ModItemWithHoverText(TextStyle.Notice, p), new Item.Properties().fireResistant());
     public static final DeferredItem<Item> BASALT_FIBER = Main.ITEMS.registerItem("basalt_fiber", ModItem::new);
