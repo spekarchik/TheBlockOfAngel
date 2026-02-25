@@ -2,6 +2,7 @@ package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
+import net.minecraft.core.HolderSet;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -10,7 +11,7 @@ public class ModWolfArmor extends ModAnimalArmor
 {
     public ModWolfArmor(ModArmorMaterial material, Properties properties)
     {
-        super(material, EntityType.WOLF, properties);
+        super(material, material.getMaterial().animalProperties(properties, HolderSet.direct(EntityType::builtInRegistryHolder, EntityType.WOLF)));
     }
 
     @Override
