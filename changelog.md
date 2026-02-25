@@ -1,3 +1,28 @@
+## 📦 Version 3.0.0
+
+### ✨ New
+- An animal armor has been added:
+  - **Lymonite Horse Armor**
+    - All-purpose armor. But designed for snowy mountains.
+    - Has properties similar to players' **Lymonite Armor**.
+    - Protects the horse from sinking in *Powder Snow*.
+    - Grants 100% freezing protection like **Leather Armor**.
+    - Grants immunity to Poison effect and thorns damage (Sweet Berry Bushes, Cacti).
+    - The defense is between **Diamond Horse Armor** and **Gold Horse Armor**: body defense 9 and toughness 1.
+    - Applies Health Boost +4 hearts.
+    - Weak against *Wither* effect and explosions: +50% damage, against *Wind Charge*: +200% damage.
+- A new item:
+    - **Animal Armor Handbook: Horse** for crafting **Lymonite Horse Armor**.
+    - Can be found in *Stronghold libraries*.
+    - Used in a smithing recipe.
+    - Is not consumed in crafting.
+
+### 📝 Improvements
+- Interactions using **Marine Crystal** and **Soaring Spore Essence** have been improved: now ignore the default animal interactions.
+- Tooltip localizations improved.
+- Minor corrections for Lymonite and Superyte armor.
+
+
 ## 📦 Version 2.21.6
 
 ### 📝 Improvements
