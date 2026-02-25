@@ -4,8 +4,10 @@ import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.equipment.ArmorType;
 
@@ -54,6 +56,12 @@ public abstract class ModArmor extends Item implements ITooltipProvider
     public int getMaxDamage()
     {
         return components().getOrDefault(DataComponents.MAX_DAMAGE, maxDamage);
+    }
+
+    @Override
+    public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
+    {
+        return stack.is(Items.LEATHER_BOOTS);
     }
 
     @Override

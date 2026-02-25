@@ -10,10 +10,12 @@ public class EventRegistry
     public static void registerEvents()
     {
         register((PlayerManager)PlayerManager.instance());
+        register((AnimalManager)AnimalManager.instance());
         register(new PlayerDataEvents());
         register(new PlayerInteractionEvents());
         register(new TickEvents());
         register(new CustomizationEvents());
+        register(new AnimalEvents());
     }
 
     public static void registerEventsOnModBus(IEventBus modEventBus)

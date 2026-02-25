@@ -9,6 +9,11 @@
       {
         "texture": "angelblock:rendelithic_armor"
       }
+    ],
+    "wolf_body": [
+      {
+        "texture": "angelblock:wolf_rendelite_armor"
+      }
     ]
   }
 }

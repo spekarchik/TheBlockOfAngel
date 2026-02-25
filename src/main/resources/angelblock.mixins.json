@@ -4,7 +4,8 @@
   "package": "com.pekar.angelblock.mixins",
   "compatibilityLevel": "JAVA_13",
   "mixins": [
-    "AxolotlMixin"
+    "AxolotlMixin",
+    "PowderSnowBlockMixin"
   ],
   "client": [],
   "injectors": {
