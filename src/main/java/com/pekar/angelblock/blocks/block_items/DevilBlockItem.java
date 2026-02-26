@@ -17,7 +17,7 @@ public class DevilBlockItem extends ModBlockItem implements ITooltipProvider
 {
     public DevilBlockItem(Block block, Properties properties)
     {
-        super(block, properties.fireResistant());
+        super(block, properties.fireResistant().stacksTo(1));
     }
 
     @Override
