@@ -16,7 +16,7 @@ public class InactiveAngelBlockItem extends ModBlockItem implements ITooltipProv
 {
     public InactiveAngelBlockItem(Block block, Properties properties)
     {
-        super(block, properties.fireResistant());
+        super(block, properties.fireResistant().stacksTo(1));
     }
 
     @Override

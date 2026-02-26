@@ -31,12 +31,12 @@ public class ItemRegistry
     public static final DeferredItem<Item> SUPER_INGOT = Main.ITEMS.registerItem("super_ingot", ModItem::new, new Item.Properties().fireResistant());
     public static final DeferredItem<Item> FLYING_INGOT = Main.ITEMS.registerItem("flying_ingot", ModItem::new);
 
-    public static final DeferredItem<Item> RENDELITHIC_PLATE = Main.ITEMS.registerItem("rendelithic_plate", ModItem::new, new Item.Properties().fireResistant());
-    public static final DeferredItem<Item> DIAMITHIC_PLATE = Main.ITEMS.registerItem("diamithic_plate", ModItem::new, new Item.Properties().fireResistant());
-    public static final DeferredItem<Item> LAPIS_PLATE = Main.ITEMS.registerItem("lapis_plate", ModItem::new);
-    public static final DeferredItem<Item> LIMONITE_PLATE = Main.ITEMS.registerItem("limonite_plate", ModItem::new);
-    public static final DeferredItem<Item> SUPER_PLATE = Main.ITEMS.registerItem("super_plate", ModItem::new, new Item.Properties().fireResistant());
-    public static final DeferredItem<Item> FLYING_PLATE = Main.ITEMS.registerItem("flying_plate", ModItem::new);
+    public static final DeferredItem<Item> RENDELITHIC_PLATE = Main.ITEMS.registerItem("rendelithic_plate", ModItem::new, new Item.Properties().fireResistant().stacksTo(16));
+    public static final DeferredItem<Item> DIAMITHIC_PLATE = Main.ITEMS.registerItem("diamithic_plate", ModItem::new, new Item.Properties().fireResistant().stacksTo(16));
+    public static final DeferredItem<Item> LAPIS_PLATE = Main.ITEMS.registerItem("lapis_plate", ModItem::new, new Item.Properties().stacksTo(16));
+    public static final DeferredItem<Item> LIMONITE_PLATE = Main.ITEMS.registerItem("limonite_plate", ModItem::new, new Item.Properties().stacksTo(16));
+    public static final DeferredItem<Item> SUPER_PLATE = Main.ITEMS.registerItem("super_plate", ModItem::new, new Item.Properties().fireResistant().stacksTo(16));
+    public static final DeferredItem<Item> FLYING_PLATE = Main.ITEMS.registerItem("flying_plate", ModItem::new, new Item.Properties().stacksTo(16));
 
     public static final DeferredItem<Item> RENDELITHIC_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("rendelithic_armor_upgrade_kit", ModArmorUpgradeKit::new);
     public static final DeferredItem<Item> DIAMITHIC_ARMOR_UPGRADE_KIT = Main.ITEMS.registerItem("diamithic_armor_upgrade_kit", ModArmorUpgradeKit::new);
@@ -56,7 +56,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> ROD_UPGRADE_KIT = Main.ITEMS.registerItem("rod_upgrade_kit", RodUpgradeKit::new);
     public static final DeferredItem<Item> DOWNGRADE_KIT = Main.ITEMS.registerItem("downgrade_kit", DowngradeKit::new);
 
-    public static final DeferredItem<Item> HORSE_ARMOR_HANDBOOK = Main.ITEMS.registerItem("horse_armor_handbook", AnimalArmorHandbook::new, new Item.Properties().rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> HORSE_ARMOR_HANDBOOK = Main.ITEMS.registerItem("horse_armor_handbook", AnimalArmorHandbook::new, new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(4));
 
     public static final DeferredItem<Item> VESICULAR_TERRACOTTA = Main.ITEMS.registerItem("vesicular_terracotta", p -> new ModItemWithHoverText(TextStyle.Notice, p), new Item.Properties().fireResistant());
     public static final DeferredItem<Item> BASALT_FIBER = Main.ITEMS.registerItem("basalt_fiber", ModItem::new);

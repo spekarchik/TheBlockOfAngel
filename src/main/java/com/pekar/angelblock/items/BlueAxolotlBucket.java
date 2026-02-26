@@ -23,7 +23,7 @@ public class BlueAxolotlBucket extends ModItemWithHoverText
 {
     public BlueAxolotlBucket()
     {
-        super(TextStyle.Notice, new Item.Properties().rarity(Rarity.EPIC));
+        super(TextStyle.Notice, new Item.Properties().rarity(Rarity.EPIC).stacksTo(1));
     }
 
     @Override
