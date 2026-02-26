@@ -1,3 +1,16 @@
+## 📦 Version 3.0.1
+
+### 📝 Improvements
+- **Bucket of Blue Axolotl** renamed to **Bucket of Rare Axolotl**.
+- Stack size adjustments:
+  - **The Dormant Block of Angel** - reduced from 64 to 1.
+  - **The Block of Angel** - reduced from 64 to 1.
+  - **The Block of Devil** - reduced from 64 to 1.
+  - **Bucket of Rare Axolotl** - reduced from 64 to 1.
+  - **Animal Armor Handbook** - reduced from 64 to 4.
+  - **Armor plates** - reduced from 64 to 16.
+
+
 ## 📦 Version 3.0.0
 
 ### ✨ New
