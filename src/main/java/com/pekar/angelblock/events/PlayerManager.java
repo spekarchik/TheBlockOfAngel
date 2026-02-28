@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.armor.ModHumanoidArmor;
+import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.armor.IPlayerArmorEvents;
 import com.pekar.angelblock.events.cleaners.Cleaner;
@@ -194,30 +195,30 @@ public class PlayerManager implements IEventHandler, IPlayerManager
     {
         var from = event.getFrom();
         var to = event.getTo();
-        String fromItemName;
-        String toItemName;
+        PlayerArmorType fromItemType;
+        PlayerArmorType toItemType;
         if (from.getItem() instanceof ModHumanoidArmor modArmor)
         {
-            fromItemName = modArmor.getArmorFamilyName();
+            fromItemType = modArmor.getArmorType();
         }
         else
         {
-            fromItemName = "";
+            fromItemType = PlayerArmorType.OTHER;
         }
 
         if (to.getItem() instanceof ModHumanoidArmor modArmor)
         {
-            toItemName = modArmor.getArmorFamilyName();
+            toItemType = modArmor.getArmorType();
         }
         else
         {
-            toItemName = "";
+            toItemType = PlayerArmorType.OTHER;
         }
 
         ToIntFunction<IPlayerArmor> armorPriority = a ->
         {
-            if (a.getFamilyName().equals(fromItemName)) return 0;
-            if (a.getFamilyName().equals(toItemName)) return 100;
+            if (a.getArmorType() == fromItemType) return 0;
+            if (a.getArmorType() == toItemType) return 100;
             return a.getPriority() + 2;
         };
 

@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
-import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.effect.base.IPermanentArmorEffect;
 import com.pekar.angelblock.events.effect.base.ISwitchingArmorEffect;
@@ -14,7 +14,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class DiamithicArmor extends PlayerArmor
+public class DiamiteArmorController extends PlayerArmor
 {
     private final IPermanentArmorEffect strengthEffect;
     private final IPermanentArmorEffect healthBoostEffect;
@@ -29,9 +29,10 @@ public class DiamithicArmor extends PlayerArmor
     private static final int STRENGTH_EFFECT_AMPLIFIER_DEFAULT = 0;
     private static final int STRENGTH_EFFECT_AMPLIFIER_IMPROVED = 1;
 
-    public DiamithicArmor(IPlayer player)
+    public DiamiteArmorController(IPlayer player)
     {
-        super(player);
+        super(player, PlayerArmorType.DIAMITE);
+
         strengthEffect = new StrengthPermanentArmorEffect(player, this, STRENGTH_EFFECT_AMPLIFIER_DEFAULT);
         nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
         nightVisionEffect.setup().availableOnHelmetWithDetector();
@@ -244,18 +245,12 @@ public class DiamithicArmor extends PlayerArmor
     }
 
     @Override
-    public String getFamilyName()
-    {
-        return ArmorRegistry.DIAMITHIC_BOOTS.get().getArmorFamilyName();
-    }
-
-    @Override
     public int getPriority()
     {
         return 3;
     }
 
-    private boolean isJumpBoostAvailable(IPlayer player, IArmor armor)
+    private boolean isJumpBoostAvailable(IPlayer player, IPlayerArmor armor)
     {
         return availableOnBootsWithNoHeavyJump(player, armor) && player.areBootsModifiedWithJumpBooster(armor);
     }
@@ -267,7 +262,7 @@ public class DiamithicArmor extends PlayerArmor
                 : STRENGTH_EFFECT_AMPLIFIER_DEFAULT;
     }
 
-    private boolean isSlownessAvailable(IPlayer player, IArmor armor)
+    private boolean isSlownessAvailable(IPlayer player, IPlayerArmor armor)
     {
         return player.isAnyArmorElementInclBrokenPutOn(armor) && !player.getPlayerEntity().isInWater();
     }

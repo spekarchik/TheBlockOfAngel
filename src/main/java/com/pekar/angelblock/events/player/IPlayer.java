@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.player;
 
-import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.mob.IMob;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -10,19 +10,19 @@ public interface IPlayer extends IMob, IPlayerEvents
 {
     Iterable<IPlayerArmor> getArmorTypesUsed();
 
-    boolean isArmorElementPutOn(IArmor armor, EquipmentSlot equipmentSlot);
-    boolean isFullArmorSetPutOn(IArmor armor);
-    boolean isAllArmorElementsPutOn(IArmor armor, EquipmentSlot ... equipmentSlots);
-    boolean isAnyArmorElementPutOn(IArmor armor);
-    boolean isAnyArmorElementInclBrokenPutOn(IArmor armor);
-    boolean isHelmetModifiedWithDetector(IArmor armor);
-    boolean isHelmetModifiedWithNightVision(IArmor armor);
-    boolean isChestPlateModifiedWithStrengthBooster(IArmor armor);
-    boolean isChestPlateModifiedWithLuck(IArmor armor);
-    boolean isChestPlateModifiedWithSlowFalling(IArmor armor);
-    boolean areLeggingsModifiedWithHealthRegenerator(IArmor armor);
-    boolean areBootsModifiedWithJumpBooster(IArmor armor);
-    boolean areBootsModifiedWithSeaPower(IArmor armor);
+    boolean isArmorElementPutOn(IPlayerArmor armor, EquipmentSlot equipmentSlot);
+    boolean isFullArmorSetPutOn(IPlayerArmor armor);
+    boolean isAllArmorElementsPutOn(IPlayerArmor armor, EquipmentSlot ... equipmentSlots);
+    boolean isAnyArmorElementPutOn(IPlayerArmor armor);
+    boolean isAnyArmorElementInclBrokenPutOn(IPlayerArmor armor);
+    boolean isHelmetModifiedWithDetector(IPlayerArmor armor);
+    boolean isHelmetModifiedWithNightVision(IPlayerArmor armor);
+    boolean isChestPlateModifiedWithStrengthBooster(IPlayerArmor armor);
+    boolean isChestPlateModifiedWithLuck(IPlayerArmor armor);
+    boolean isChestPlateModifiedWithSlowFalling(IPlayerArmor armor);
+    boolean areLeggingsModifiedWithHealthRegenerator(IPlayerArmor armor);
+    boolean areBootsModifiedWithJumpBooster(IPlayerArmor armor);
+    boolean areBootsModifiedWithSeaPower(IPlayerArmor armor);
     void updateArmorUsed();
 
     String getPlayerName();

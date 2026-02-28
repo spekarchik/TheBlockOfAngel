@@ -5,7 +5,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 
-public class NegativeTemporaryArmorEffect extends TemporaryPersistentArmorEffect<IPlayer>
+public class NegativeTemporaryArmorEffect extends TemporaryPersistentArmorEffect<IPlayer, IPlayerArmor>
 {
     public NegativeTemporaryArmorEffect(IPlayer player, IPlayerArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int duration)
     {
