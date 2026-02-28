@@ -10,7 +10,7 @@ public class LimoniteArmor extends ModHumanoidArmor
 {
     protected LimoniteArmor(ModArmorMaterial material, ArmorType equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot, properties);
+        super(material, equipmentSlot, PlayerArmorType.LYMONITE, properties);
     }
 
     @Override
@@ -19,6 +19,6 @@ public class LimoniteArmor extends ModHumanoidArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.FEET);
         var bootsItem = itemStack.getItem();
         if (!(bootsItem instanceof ModHumanoidArmor boots)) return false;
-        return boots.getArmorFamilyName().equals(ArmorRegistry.LIMONITE_BOOTS.get().getArmorFamilyName()) && !wearer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT);
+        return boots.getArmorType() == PlayerArmorType.LYMONITE && !wearer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT);
     }
 }

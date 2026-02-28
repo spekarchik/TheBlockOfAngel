@@ -1,6 +1,7 @@
 package com.pekar.angelblock.events.armor;
 
-import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.Main;
+import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.effect.base.IPermanentArmorEffect;
 import com.pekar.angelblock.events.effect.base.ISwitchingArmorEffect;
@@ -8,6 +9,9 @@ import com.pekar.angelblock.events.effect.base.ITemporaryArmorEffect;
 import com.pekar.angelblock.events.effect.base.ITemporaryPersistentArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,7 +19,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class LapisArmor extends PlayerArmor
+public class AquariteArmorController extends PlayerArmor
 {
     private final IPermanentArmorEffect waterBreathingEffect;
     private final IPermanentArmorEffect hasteEffect;
@@ -31,9 +35,10 @@ public class LapisArmor extends PlayerArmor
     private static final int REGENERATION_EFFECT_DURATION = 300;
     private static final int REGENERATION_NEGATIVE_EFFECT_DURATION = 200;
 
-    public LapisArmor(IPlayer player)
+    public AquariteArmorController(IPlayer player)
     {
-        super(player);
+        super(player, PlayerArmorType.AQUARITE);
+
         nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
         nightVisionEffect.setup().availableOnHelmetWithNightVision();
         glowingEffect = new GlowingSwitchingArmorEffect(player, this);
@@ -228,15 +233,15 @@ public class LapisArmor extends PlayerArmor
     }
 
     @Override
-    public String getFamilyName()
-    {
-        return ArmorRegistry.LAPIS_BOOTS.get().getArmorFamilyName();
-    }
-
-    @Override
     public int getPriority()
     {
         return 5;
+    }
+
+    private boolean isVulnerable(DamageSource damageSource)
+    {
+        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Main.MODID, "lapis_armor_vulnerabilities"));
+        return damageSource.is(vulnerabilities);
     }
 
     private boolean isFireOrMagmaDamage(DamageSource damageSource)

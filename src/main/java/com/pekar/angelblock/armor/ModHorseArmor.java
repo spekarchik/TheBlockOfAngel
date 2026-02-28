@@ -6,11 +6,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.equipment.ArmorType;
 
-public class ModHorseArmor extends ModArmor
+public class ModHorseArmor extends ModAnimalArmor
 {
-    public ModHorseArmor(ModArmorMaterial material, ArmorType armorItemType, Properties properties)
+    public ModHorseArmor(ModArmorMaterial material, ArmorType armorSlotType, AnimalArmorType armorType, Properties properties)
     {
-        super(material, armorItemType, properties.horseArmor(material.getMaterial()));
+        super(material, armorSlotType, armorType, properties.horseArmor(material.getMaterial()));
     }
 
     @Override

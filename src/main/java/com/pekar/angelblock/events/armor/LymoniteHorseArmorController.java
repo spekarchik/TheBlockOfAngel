@@ -1,6 +1,8 @@
 package com.pekar.angelblock.events.armor;
 
+import com.pekar.angelblock.armor.AnimalArmorType;
 import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.armor.ModAnimalArmor;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.animal.IAnimal;
 import com.pekar.angelblock.events.effect.HealthBoostAnimalPermanentArmorEffect;
@@ -12,22 +14,23 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 
-public class LymoniteHorseArmor extends AnimalArmor
+public class LymoniteHorseArmorController extends AnimalArmor
 {
     private final IPermanentArmorEffect healthBoostEffect;
 
-    public LymoniteHorseArmor(IAnimal animal)
+    public LymoniteHorseArmorController(IAnimal animal)
     {
-        super(animal);
+        super(animal, AnimalArmorType.LYMONITE_HORSE);
+
         healthBoostEffect = new HealthBoostAnimalPermanentArmorEffect(animal, this, 1);
-        healthBoostEffect.setupBasic().setupAvailability(this::isArmorPutOn);
+        healthBoostEffect.setupAnimal().setupAvailability(this::isArmorPutOn);
     }
 
-    private boolean isArmorPutOn(IMob mob, IArmor armor)
+    private boolean isArmorPutOn(IMob mob, IAnimalArmor armor)
     {
         var entity = mob.getEntity();
         var slotItem = entity.getItemBySlot(EquipmentSlot.BODY);
-        return !slotItem.isEmpty() && slotItem.getItem() instanceof ModArmor modArmor && modArmor.getArmorFamilyName().equals(armor.getFamilyName());
+        return !slotItem.isEmpty() && slotItem.getItem() instanceof ModAnimalArmor modArmor && modArmor.getArmorType() == armor.getArmorType();
     }
 
     @Override
@@ -136,11 +139,5 @@ public class LymoniteHorseArmor extends AnimalArmor
         {
             animal.getEntity().removeEffect(MobEffects.POISON);
         }
-    }
-
-    @Override
-    public String getFamilyName()
-    {
-        return ArmorRegistry.LIMONITE_BOOTS.get().getArmorFamilyName();
     }
 }
