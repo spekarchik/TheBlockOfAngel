@@ -1,22 +1,21 @@
 package com.pekar.angelblock.events.animal;
 
-import com.pekar.angelblock.armor.ModArmor;
+import com.pekar.angelblock.armor.AnimalArmorType;
+import com.pekar.angelblock.armor.ModAnimalArmor;
 import com.pekar.angelblock.events.armor.IAnimalArmor;
-import com.pekar.angelblock.events.armor.LymoniteHorseArmor;
-import com.pekar.angelblock.events.armor.RendeliteWolfArmor;
+import com.pekar.angelblock.events.armor.LymoniteHorseArmorController;
+import com.pekar.angelblock.events.armor.RendeliteWolfArmorController;
 import com.pekar.angelblock.events.mob.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class ModAnimal extends Mob implements IAnimal
 {
     private final Animal entity;
-    private final IAnimalArmor rendeliteArmorModel = new RendeliteWolfArmor(this);
-    private final IAnimalArmor lymoniteArmorModel = new LymoniteHorseArmor(this);
-    private final Set<IAnimalArmor> armorInUse = ConcurrentHashMap.newKeySet();
+    private final Map<AnimalArmorType, IAnimalArmor> armorInUse = new EnumMap<>(AnimalArmorType.class);
 
     public ModAnimal(Animal entity)
     {
@@ -27,17 +26,16 @@ public class ModAnimal extends Mob implements IAnimal
     {
         armorInUse.clear();
 
-        var armor = getArmor();
-        if (armor != null)
-        {
-            armorInUse.add(armor);
-        }
+        var itemStack = getAnimalEntity().getBodyArmorItem();
+        if (itemStack.isEmpty() || !(itemStack.getItem() instanceof ModAnimalArmor modArmor)) return;
+        var armorType = modArmor.getArmorType();
+        armorInUse.put(armorType, armorType.createBehavior(this));
     }
 
     @Override
     public Iterable<IAnimalArmor> getArmorTypesUsed()
     {
-        return armorInUse;
+        return armorInUse.values();
     }
 
     @Override
@@ -56,27 +54,9 @@ public class ModAnimal extends Mob implements IAnimal
     public IAnimalArmor getArmor()
     {
         var armor = entity.getBodyArmorItem();
-        if (armor.isEmpty() || !(armor.getItem() instanceof ModArmor modArmor))
+        if (armor.isEmpty() || !(armor.getItem() instanceof ModAnimalArmor modArmor))
             return null;
 
-        return getArmorModel(modArmor);
-    }
-
-    private IAnimalArmor getArmorModel(ModArmor modArmor)
-    {
-        var modelName = modArmor.getArmorFamilyName();
-
-        if (modelName.equals(rendeliteArmorModel.getFamilyName()))
-        {
-            return rendeliteArmorModel;
-        }
-        else if (modelName.equals(lymoniteArmorModel.getFamilyName()))
-        {
-            return lymoniteArmorModel;
-        }
-        else
-        {
-            return null;
-        }
+        return armorInUse.get(modArmor.getArmorType());
     }
 }
