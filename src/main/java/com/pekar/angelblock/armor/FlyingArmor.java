@@ -11,7 +11,7 @@ public class FlyingArmor extends ModHumanoidArmor
 {
     protected FlyingArmor(ModArmorMaterial material, Type equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot, properties);
+        super(material, equipmentSlot, PlayerArmorType.AERYTE, properties);
     }
 
     @Override
@@ -38,14 +38,14 @@ public class FlyingArmor extends ModHumanoidArmor
         var offHandItemStack = entity.getOffhandItem();
         if (offHandItemStack.is(Items.FIREWORK_ROCKET)) return false;
 
-        boolean isFlyingHelmet = getModelName(entity, EquipmentSlot.HEAD)
-                .equals(ArmorRegistry.FLYING_HELMET.get().getArmorFamilyName());
-        boolean isFlyingLeggings = getModelName(entity, EquipmentSlot.LEGS)
-                .equals(ArmorRegistry.FLYING_LEGGINGS.get().getArmorFamilyName());
-        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
-                .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
-        boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
-                .equals(ArmorRegistry.FLYING_CHESTPLATE.get().getArmorFamilyName());
+        boolean isFlyingHelmet = entity.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ModHumanoidArmor modArmor
+                && modArmor.getArmorType() == PlayerArmorType.AERYTE;
+        boolean isFlyingLeggings = entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof ModHumanoidArmor modArmor
+                && modArmor.getArmorType() == PlayerArmorType.AERYTE;
+        boolean isFlyingBoots = entity.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof ModHumanoidArmor modArmor
+                && modArmor.getArmorType() == PlayerArmorType.AERYTE;
+        boolean isFlyingChestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ModHumanoidArmor modArmor
+                && modArmor.getArmorType() == PlayerArmorType.AERYTE;
 
         int maxDamageToFly = stack.getMaxDamage() / 2;
         int chestDamage = stack.getDamageValue();
@@ -63,14 +63,7 @@ public class FlyingArmor extends ModHumanoidArmor
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
     {
-        return getModelName(wearer, EquipmentSlot.FEET)
-            .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
-    }
-
-    private String getModelName(LivingEntity entity, EquipmentSlot slot)
-    {
-        var item = entity.getItemBySlot(slot).getItem();
-        if (!(item instanceof ModHumanoidArmor armorItem)) return "";
-        return armorItem.getArmorFamilyName();
+        return wearer.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof ModHumanoidArmor modArmor
+                && modArmor.getArmorType() == PlayerArmorType.AERYTE;
     }
 }

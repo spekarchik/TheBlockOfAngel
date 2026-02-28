@@ -16,12 +16,19 @@ public abstract class ModAnimalArmor extends AnimalArmorItem implements IModArmo
     protected final int maxDamage;
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
+    protected final AnimalArmorType armorType;
 
-    public ModAnimalArmor(ModArmorMaterial material, BodyType bodyType, Properties properties)
+    public ModAnimalArmor(ModArmorMaterial material, AnimalArmorType armorType, BodyType bodyType, Properties properties)
     {
         super(material.getMaterial(), bodyType, false, properties);
         this.maxDamage = Type.BODY.getDurability(material.getDurabilityMultiplier());
         this.material = material;
+        this.armorType = armorType;
+    }
+
+    public AnimalArmorType getArmorType()
+    {
+        return armorType;
     }
 
     @Override

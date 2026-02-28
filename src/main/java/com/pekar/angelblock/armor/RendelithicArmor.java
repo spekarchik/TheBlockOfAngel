@@ -8,7 +8,7 @@ public class RendelithicArmor extends ModHumanoidArmor
 {
     protected RendelithicArmor(ModArmorMaterial material, Type equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot, properties);
+        super(material, equipmentSlot, PlayerArmorType.RENDELITE, properties);
     }
 
     @Override
@@ -17,6 +17,6 @@ public class RendelithicArmor extends ModHumanoidArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.LEGS);
         var leggingsItem = itemStack.getItem();
         if (!(leggingsItem instanceof ModHumanoidArmor leggings)) return false;
-        return leggings.getArmorFamilyName().equals(ArmorRegistry.RENDELITHIC_LEGGINGS.get().getArmorFamilyName());
+        return leggings.getArmorType() == PlayerArmorType.RENDELITE;
     }
 }

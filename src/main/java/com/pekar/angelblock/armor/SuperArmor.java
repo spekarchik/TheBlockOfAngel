@@ -11,7 +11,7 @@ public class SuperArmor extends ModHumanoidArmor
 {
     protected SuperArmor(ModArmorMaterial material, Type equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot, properties);
+        super(material, equipmentSlot, PlayerArmorType.SUPERYTE, properties);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class SuperArmor extends ModHumanoidArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.LEGS);
         var leggingsItem = itemStack.getItem();
         if (!(leggingsItem instanceof ModHumanoidArmor leggings)) return false;
-        return leggings.getArmorFamilyName().equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorFamilyName());
+        return leggings.getArmorType() == PlayerArmorType.SUPERYTE;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class SuperArmor extends ModHumanoidArmor
         var itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
         var helmetItem = itemStack.getItem();
         if (!(helmetItem instanceof ModHumanoidArmor helmet)) return false;
-        return helmet.getArmorFamilyName().equals(ArmorRegistry.SUPER_HELMET.get().getArmorFamilyName());
+        return helmet.getArmorType() == PlayerArmorType.SUPERYTE;
     }
 
     @Override
@@ -38,6 +38,6 @@ public class SuperArmor extends ModHumanoidArmor
         var itemStack = wearer.getItemBySlot(EquipmentSlot.FEET);
         var bootsItem = itemStack.getItem();
         if (!(bootsItem instanceof ModHumanoidArmor boots)) return false;
-        return boots.getArmorFamilyName().equals(ArmorRegistry.SUPER_BOOTS.get().getArmorFamilyName()) && !wearer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT);
+        return boots.getArmorType() == PlayerArmorType.SUPERYTE && !wearer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT);
     }
 }

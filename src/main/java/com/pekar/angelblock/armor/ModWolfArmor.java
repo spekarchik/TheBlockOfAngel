@@ -7,9 +7,9 @@ import net.minecraft.world.item.TooltipFlag;
 
 public class ModWolfArmor extends ModAnimalArmor
 {
-    public ModWolfArmor(ModArmorMaterial material, Properties properties)
+    public ModWolfArmor(ModArmorMaterial material, AnimalArmorType armorType, Properties properties)
     {
-        super(material, BodyType.CANINE, properties.durability(Type.BODY.getDurability(material.getDurabilityMultiplier())));
+        super(material, armorType, BodyType.CANINE, properties.durability(Type.BODY.getDurability(material.getDurabilityMultiplier())));
     }
 
     @Override

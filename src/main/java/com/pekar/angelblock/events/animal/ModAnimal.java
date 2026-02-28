@@ -1,20 +1,21 @@
 package com.pekar.angelblock.events.animal;
 
+import com.pekar.angelblock.armor.AnimalArmorType;
 import com.pekar.angelblock.armor.ModAnimalArmor;
 import com.pekar.angelblock.events.armor.IAnimalArmor;
-import com.pekar.angelblock.events.armor.LymoniteHorseArmor;
 import com.pekar.angelblock.events.mob.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.Map;
 
 public class ModAnimal extends Mob implements IAnimal
 {
     private final Animal entity;
-    private final IAnimalArmor lymoniteArmorModel = new LymoniteHorseArmor(this);
-    private final Set<IAnimalArmor> armorInUse = ConcurrentHashMap.newKeySet();
+    private final Map<AnimalArmorType, IAnimalArmor> armorControllers = new EnumMap<>(AnimalArmorType.class);
+    private final EnumSet<AnimalArmorType> armorInUse = EnumSet.noneOf(AnimalArmorType.class);
 
     public ModAnimal(Animal entity)
     {
@@ -25,17 +26,23 @@ public class ModAnimal extends Mob implements IAnimal
     {
         armorInUse.clear();
 
-        var armor = getArmor();
-        if (armor != null)
+        var itemStack = getAnimalEntity().getBodyArmorItem();
+        if (itemStack.isEmpty() || !(itemStack.getItem() instanceof ModAnimalArmor modArmor)) return;
+        var armorType = modArmor.getArmorType();
+        if (armorInUse.contains(armorType)) return;
+        var armorController = armorControllers.get(armorType);
+        if (armorController == null)
         {
-            armorInUse.add(armor);
+            armorController = armorType.createController(this);
+            armorControllers.put(armorType, armorController);
         }
+        armorInUse.add(armorType);
     }
 
     @Override
     public Iterable<IAnimalArmor> getArmorTypesUsed()
     {
-        return armorInUse;
+        return armorInUse.stream().map(armorControllers::get).toList();
     }
 
     @Override
@@ -57,20 +64,6 @@ public class ModAnimal extends Mob implements IAnimal
         if (armor.isEmpty() || !(armor.getItem() instanceof ModAnimalArmor modArmor))
             return null;
 
-        return getArmorModel(modArmor);
-    }
-
-    private IAnimalArmor getArmorModel(ModAnimalArmor modArmor)
-    {
-        var modelName = modArmor.getArmorFamilyName();
-
-        if (modelName.equals(lymoniteArmorModel.getFamilyName()))
-        {
-            return lymoniteArmorModel;
-        }
-        else
-        {
-            return null;
-        }
+        return armorControllers.get(modArmor.getArmorType());
     }
 }

@@ -7,12 +7,12 @@ import net.minecraft.world.item.TooltipFlag;
 
 public class ModHorseArmor extends ModAnimalArmor
 {
-    public ModHorseArmor(ModArmorMaterial material, Properties properties)
+    public ModHorseArmor(ModArmorMaterial material, AnimalArmorType armorType, Properties properties)
     {
-        super(material, BodyType.EQUESTRIAN, properties);
+        super(material, armorType, BodyType.EQUESTRIAN, properties);
     }
 
-//    @Override
+    @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
         if (!flag.hasShiftDown())

@@ -25,8 +25,8 @@ public class SuperArmorFlying extends SuperArmor
 //                .equals(ArmorRegistry.SUPER_LEGGINGS.get().getArmorFamilyName());
 //        boolean isFlyingBoots = getModelName(entity, EquipmentSlot.FEET)
 //                .equals(ArmorRegistry.SUPER_BOOTS.get().getArmorFamilyName());
-        boolean isFlyingChestplate = getModelName(entity, EquipmentSlot.CHEST)
-                .equals(ArmorRegistry.SUPER_CHESTPLATE_FLYING.get().getArmorFamilyName());
+        boolean isFlyingChestplate = entity.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof ModHumanoidArmor modArmor
+                && modArmor.getArmorType() == PlayerArmorType.SUPERYTE;
 //        boolean isFullArmorSet = isFlyingBoots && isFlyingChestplate && isFlyingHelmet && isFlyingLeggings;
 
         int maxDamageToFly = stack.getMaxDamage() / 2;
@@ -39,12 +39,5 @@ public class SuperArmorFlying extends SuperArmor
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks)
     {
         return canElytraFly(stack, entity);
-    }
-
-    private String getModelName(LivingEntity entity, EquipmentSlot slot)
-    {
-        var item = entity.getItemBySlot(slot).getItem();
-        if (!(item instanceof ModHumanoidArmor armorItem)) return "";
-        return armorItem.getArmorFamilyName();
     }
 }

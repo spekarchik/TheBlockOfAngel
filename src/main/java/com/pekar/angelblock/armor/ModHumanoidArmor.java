@@ -20,10 +20,17 @@ public class ModHumanoidArmor extends ModArmor
 {
     private final Set<ArmorModifications> armorModificatorSet = new HashSet<>();
     protected boolean canFly;
+    protected final PlayerArmorType armorType;
 
-    protected ModHumanoidArmor(ModArmorMaterial material, ArmorItem.Type armorItemType, Properties properties)
+    protected ModHumanoidArmor(ModArmorMaterial material, ArmorItem.Type armorItemType, PlayerArmorType armorType, Properties properties)
     {
         super(material, armorItemType, properties.durability(armorItemType.getDurability(material.getDurabilityMultiplier())));
+        this.armorType = armorType;
+    }
+
+    public PlayerArmorType getArmorType()
+    {
+        return armorType;
     }
 
     public ModHumanoidArmor canFly()
@@ -183,7 +190,7 @@ public class ModHumanoidArmor extends ModArmor
             {
                 tooltip.addLine(getSpecificDescriptionRoot(), i)
                         .styledAs(TextStyle.Header, i == 1)
-                        .styledAs(TextStyle.Notice, armorItemType.getSlot() == EquipmentSlot.FEET && i == 9)
+                        .styledAs(TextStyle.Notice, armorSlotType.getSlot() == EquipmentSlot.FEET && i == 9)
                         .apply();
             }
 
@@ -211,7 +218,7 @@ public class ModHumanoidArmor extends ModArmor
 
     private int getDescriptionLineCount()
     {
-        return switch (armorItemType.getSlot())
+        return switch (armorSlotType.getSlot())
         {
             case HEAD -> 6;
             case CHEST -> 9;

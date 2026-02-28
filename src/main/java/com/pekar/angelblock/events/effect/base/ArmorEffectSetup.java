@@ -7,7 +7,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.function.BiPredicate;
 
-public class ArmorEffectSetup<E extends IArmorEffectWithOptions<M>, M extends IMob> implements IArmorEffectSetup<E, M>
+public class ArmorEffectSetup<E extends IArmorEffectWithOptions<M, A>, M extends IMob, A extends IArmor> implements IArmorEffectSetup<E, M, A>
 {
     protected final E effect;
 
@@ -17,21 +17,21 @@ public class ArmorEffectSetup<E extends IArmorEffectWithOptions<M>, M extends IM
     }
 
     @Override
-    public IArmorEffectSetup<E, M> setupAvailability(BiPredicate<M, IArmor> predicate)
+    public IArmorEffectSetup<E, M, A> setupAvailability(BiPredicate<M, A> predicate)
     {
         effect.setupAvailability(predicate);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, M> alwaysAvailable()
+    public IArmorEffectSetup<E, M, A> alwaysAvailable()
     {
         effect.setupAvailability((mob, armor) -> true);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, M> unavailableIfNotModArmor(EquipmentSlot slot)
+    public IArmorEffectSetup<E, M, A> unavailableIfNotModArmor(EquipmentSlot slot)
     {
         effect.setupAvailability((mob, armor) ->
         {
@@ -43,14 +43,14 @@ public class ArmorEffectSetup<E extends IArmorEffectWithOptions<M>, M extends IM
     }
 
     @Override
-    public IArmorEffectSetup<E, M> showIcon()
+    public IArmorEffectSetup<E, M, A> showIcon()
     {
         effect.setShowIcon(true);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, M> hideIcon()
+    public IArmorEffectSetup<E, M, A> hideIcon()
     {
         effect.setShowIcon(false);
         return this;

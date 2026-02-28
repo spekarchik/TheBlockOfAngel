@@ -14,16 +14,16 @@ import java.util.List;
 
 public abstract class ModArmor extends ArmorItem implements ITooltipProvider, IModArmor
 {
-    protected final ArmorItem.Type armorItemType;
+    protected final ArmorItem.Type armorSlotType;
     protected final int maxDamage;
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
 
-    public ModArmor(ModArmorMaterial material, ArmorItem.Type armorItemType, Properties properties)
+    public ModArmor(ModArmorMaterial material, ArmorItem.Type armorSlotType, Properties properties)
     {
-        super(material.getMaterial(), armorItemType, material.isFireResistant() ? properties.fireResistant() : properties);
-        this.armorItemType = armorItemType;
-        this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
+        super(material.getMaterial(), armorSlotType, material.isFireResistant() ? properties.fireResistant() : properties);
+        this.armorSlotType = armorSlotType;
+        this.maxDamage = armorSlotType.getDurability(material.getDurabilityMultiplier());
         this.material = material;
     }
 
