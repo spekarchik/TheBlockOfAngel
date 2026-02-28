@@ -11,7 +11,7 @@ public class FlyingArmor extends ModHumanoidArmor
 {
     protected FlyingArmor(ModArmorMaterial material, ArmorType equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot, properties);
+        super(material, equipmentSlot, PlayerArmorType.AERYTE, properties);
     }
 
     @Override
@@ -23,14 +23,11 @@ public class FlyingArmor extends ModHumanoidArmor
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
     {
-        return getModelName(wearer, EquipmentSlot.FEET)
-            .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
-    }
+        if (wearer.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof ModHumanoidArmor armorItem)
+        {
+            return armorItem.getArmorType() == PlayerArmorType.AERYTE;
+        }
 
-    private String getModelName(LivingEntity entity, EquipmentSlot slot)
-    {
-        var item = entity.getItemBySlot(slot).getItem();
-        if (!(item instanceof ModHumanoidArmor armorItem)) return "";
-        return armorItem.getArmorFamilyName();
+        return false;
     }
 }
