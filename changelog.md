@@ -1,3 +1,12 @@
+## 📦 Version 3.0.2
+
+### 🐞 Fixed
+- Fixed an issue where mod armor disappeared when completely broken.
+
+### 📝 Improvements
+- Minor performance optimizations.
+
+
 ## 📦 Version 3.0.1
 
 ### 📝 Improvements
