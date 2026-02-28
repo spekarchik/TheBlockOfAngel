@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
+import com.pekar.angelblock.armor.AnimalArmorType;
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.armor.ModArmor;
 import com.pekar.angelblock.events.animal.IAnimal;
@@ -13,15 +14,15 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 
-public class RendeliteWolfArmor extends AnimalArmor
+public class RendeliteWolfArmorController extends AnimalArmor
 {
     private static final int SLOWNESS_NEGATIVE_EFFECT_AMPLIFIER = 3;
     private static final int SLOWNESS_NEGATIVE_EFFECT_DURATION = 600;
     private static final int GLOWING_EFFECT_DURATION = 6000;
 
-    public RendeliteWolfArmor(IAnimal animal)
+    public RendeliteWolfArmorController(IAnimal animal)
     {
-        super(animal);
+        super(animal, AnimalArmorType.RENDELITE_WOLF);
     }
 
     @Override
@@ -127,12 +128,6 @@ public class RendeliteWolfArmor extends AnimalArmor
         {
             animal.getEntity().removeEffect(MobEffects.WITHER);
         }
-    }
-
-    @Override
-    public String getFamilyName()
-    {
-        return ArmorRegistry.RENDELITHIC_BOOTS.get().getArmorFamilyName();
     }
 
     private void addSlownessEffect()

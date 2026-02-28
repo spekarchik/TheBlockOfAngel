@@ -7,11 +7,11 @@ import com.pekar.angelblock.events.mob.IModMobEffectInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 
-abstract class TemporaryPersistentArmorEffect<M extends IMob>
-        extends TemporaryBaseArmorEffect<M>
+abstract class TemporaryPersistentArmorEffect<M extends IMob, A extends IArmor>
+        extends TemporaryBaseArmorEffect<M, A>
         implements ITemporaryPersistentArmorEffect
 {
-    protected TemporaryPersistentArmorEffect(M mob, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
+    protected TemporaryPersistentArmorEffect(M mob, A armor, Holder<MobEffect> effectType, int defaultAmplifier, int defaultDuration)
     {
         super(mob, armor, effectType, defaultAmplifier, defaultDuration);
     }
