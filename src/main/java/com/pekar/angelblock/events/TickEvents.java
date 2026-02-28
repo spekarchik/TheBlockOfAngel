@@ -27,21 +27,16 @@ public class TickEvents implements IEventHandler
     }
 
     @SubscribeEvent
-    public void onTick(PlayerTickEvent.Post event)
-    {
-        if (event.getEntity() instanceof ServerPlayer player)
-        {
-            PlayerScheduler.doOnTick(player);
-        }
-    }
-
-    @SubscribeEvent
     public void onPlayerTick(PlayerTickEvent.Post event)
     {
         if (event.getEntity() instanceof ServerPlayer serverPlayer)
         {
+            PlayerScheduler.doOnTick(serverPlayer);
+
             IPlayer player = PlayerManager.instance().getPlayerByUUID(serverPlayer.getUUID());
             boolean runHeavy = player.every(11);
+
+            if (runHeavy) player.onPlayerTick();
 
             for (IPlayerArmor armor : player.getArmorTypesUsed())
             {
