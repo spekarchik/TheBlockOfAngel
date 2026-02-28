@@ -80,7 +80,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "add": false,
@@ -95,8 +95,13 @@
           "name": "angelblock:limonite_powder"
         },
         {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "angelblock:horse_lymonite_armor"
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 2
+          "weight": 4
         }
       ]
     },
