@@ -8,7 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 
-public class SwitchingArmorEffect extends ArmorEffect<IPlayer> implements IExtendedSwitchingArmorEffect
+public class SwitchingArmorEffect extends ArmorEffect<IPlayer, IPlayerArmor> implements IExtendedSwitchingArmorEffect
 {
     protected SwitchingArmorEffect(IPlayer player, IPlayerArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
