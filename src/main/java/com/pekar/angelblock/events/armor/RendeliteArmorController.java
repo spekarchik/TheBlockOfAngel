@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
-import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.effect.base.ISwitchingArmorEffect;
 import com.pekar.angelblock.events.effect.base.ISwitchingEffectSynchronizer;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class RendelithicArmor extends PlayerArmor
+public class RendeliteArmorController extends PlayerArmor
 {
     private final ITemporaryPersistentArmorEffect nauseaEffect;
     private final ITemporaryPersistentArmorEffect jumpNegativeEffect;
@@ -33,9 +33,10 @@ public class RendelithicArmor extends PlayerArmor
     private static final int SLOWNESS_NEGATIVE_EFFECT_DURATION = 400;
     private static final int NAUSEA_NEGATIVE_EFFECT_DURATION = 200;
 
-    public RendelithicArmor(IPlayer player)
+    public RendeliteArmorController(IPlayer player)
     {
-        super(player);
+        super(player, PlayerArmorType.RENDELITE);
+
         nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
         nightVisionEffect.setup().availableOnHelmetWithNightVision();
         nauseaEffect = new NauseaNegativeEffect(player, this, NAUSEA_NEGATIVE_EFFECT_DURATION);
@@ -258,12 +259,6 @@ public class RendelithicArmor extends PlayerArmor
     public void onBeingUnderRain()
     {
         checkForNausea();
-    }
-
-    @Override
-    public String getFamilyName()
-    {
-        return ArmorRegistry.RENDELITHIC_BOOTS.get().getArmorFamilyName();
     }
 
     @Override

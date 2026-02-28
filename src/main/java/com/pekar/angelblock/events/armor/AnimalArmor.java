@@ -1,16 +1,25 @@
 package com.pekar.angelblock.events.armor;
 
+import com.pekar.angelblock.armor.AnimalArmorType;
 import com.pekar.angelblock.events.animal.IAnimal;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 
-public abstract class AnimalArmor extends ArmorBase implements IAnimalArmor
+abstract class AnimalArmor extends ArmorBase implements IAnimalArmor
 {
     protected final IAnimal animal;
+    private final AnimalArmorType armorType;
 
-    public AnimalArmor(IAnimal animal)
+    protected AnimalArmor(IAnimal animal, AnimalArmorType armorType)
     {
         this.animal = animal;
+        this.armorType = armorType;
+    }
+
+    @Override
+    public final AnimalArmorType getArmorType()
+    {
+        return armorType;
     }
 
     @Override
@@ -25,5 +34,21 @@ public abstract class AnimalArmor extends ArmorBase implements IAnimalArmor
         {
             event.setNewDamage(EquipmentSlot.BODY, durability - 1);
         }
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof AnimalArmor armor))
+        {
+            return false;
+        }
+        return getArmorType() == armor.getArmorType();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return getArmorType().hashCode();
     }
 }

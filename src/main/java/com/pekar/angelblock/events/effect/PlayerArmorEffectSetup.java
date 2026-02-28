@@ -1,5 +1,6 @@
 package com.pekar.angelblock.events.effect;
 
+import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.effect.base.ArmorEffectSetup;
 import com.pekar.angelblock.events.effect.base.IArmorEffectSetup;
 import com.pekar.angelblock.events.effect.base.IArmorEffectWithOptions;
@@ -8,7 +9,7 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 
-public class PlayerArmorEffectSetup<E extends IArmorEffectWithOptions<IPlayer>> extends ArmorEffectSetup<E, IPlayer> implements IPlayerArmorEffectSetup<E>
+public class PlayerArmorEffectSetup<E extends IArmorEffectWithOptions<IPlayer, IPlayerArmor>> extends ArmorEffectSetup<E, IPlayer, IPlayerArmor> implements IPlayerArmorEffectSetup<E>
 {
     public PlayerArmorEffectSetup(E effect)
     {
@@ -16,77 +17,77 @@ public class PlayerArmorEffectSetup<E extends IArmorEffectWithOptions<IPlayer>> 
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnHelmetWithDetector()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnHelmetWithDetector()
     {
         effect.setupAvailability((player, armor) -> player.isHelmetModifiedWithDetector(armor) && !player.getPlayerEntity().hasEffect(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT));
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnHelmetWithNightVision()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnHelmetWithNightVision()
     {
         effect.setupAvailability((player, armor) -> player.isHelmetModifiedWithNightVision(armor) && !player.getPlayerEntity().hasEffect(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT));
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnBootsWithJumpBooster()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnBootsWithJumpBooster()
     {
         effect.setupAvailability(IPlayer::areBootsModifiedWithJumpBooster);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnBootsWithSeaPower()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnBootsWithSeaPower()
     {
         effect.setupAvailability(IPlayer::areBootsModifiedWithSeaPower);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnChestPlateWithStrengthBooster()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnChestPlateWithStrengthBooster()
     {
         effect.setupAvailability(IPlayer::isChestPlateModifiedWithStrengthBooster);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnChestPlateWithSlowFalling()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnChestPlateWithSlowFalling()
     {
         effect.setupAvailability(IPlayer::isChestPlateModifiedWithSlowFalling);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnLeggingsWithHealthRegenerator()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnLeggingsWithHealthRegenerator()
     {
         effect.setupAvailability(IPlayer::areLeggingsModifiedWithHealthRegenerator);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnFullArmorSet()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnFullArmorSet()
     {
         effect.setupAvailability(IPlayer::isFullArmorSetPutOn);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableOnAnyArmorElement()
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnAnyArmorElement()
     {
         effect.setupAvailability(IPlayer::isAnyArmorElementPutOn);
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableIfSlotSet(EquipmentSlot slot)
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableIfSlotSet(EquipmentSlot slot)
     {
         effect.setupAvailability((player1, armor1) -> player1.isArmorElementPutOn(armor1, slot));
         return this;
     }
 
     @Override
-    public IArmorEffectSetup<E, IPlayer> availableIfSlotsSet(EquipmentSlot... slots)
+    public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableIfSlotsSet(EquipmentSlot... slots)
     {
         effect.setupAvailability((player1, armor1) -> player1.isAllArmorElementsPutOn(armor1, slots));
         return this;
