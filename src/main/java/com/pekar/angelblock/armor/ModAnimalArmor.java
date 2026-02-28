@@ -4,8 +4,16 @@ import net.minecraft.world.item.equipment.ArmorType;
 
 public abstract class ModAnimalArmor extends ModArmor
 {
-    public ModAnimalArmor(ModArmorMaterial material, Properties properties)
+    protected final AnimalArmorType armorType;
+
+    public ModAnimalArmor(ModArmorMaterial material, AnimalArmorType armorType, Properties properties)
     {
         super(material, ArmorType.BODY, properties);
+        this.armorType = armorType;
+    }
+
+    public AnimalArmorType getArmorType()
+    {
+        return armorType;
     }
 }

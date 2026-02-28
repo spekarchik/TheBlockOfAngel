@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
-import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.effect.base.*;
 import com.pekar.angelblock.events.player.IPlayer;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class SuperArmor extends PlayerArmor
+public class SuperyteArmorController extends PlayerArmor
 {
     private final ISwitchingArmorEffect nightVisionEffect;
     private final ISwitchingEffectSynchronizer jumpEffect;
@@ -45,9 +45,10 @@ public class SuperArmor extends PlayerArmor
     private static final int LEVITATION_UP_AMPLIFIER = 3;
     private static final int SUPER_JUMP_AMPLIFIER = 30;
 
-    public SuperArmor(IPlayer player)
+    public SuperyteArmorController(IPlayer player)
     {
-        super(player);
+        super(player, PlayerArmorType.SUPERYTE);
+
         nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
         nightVisionEffect.setup().setupAvailability(this::isNightVisionAvailable);
         glowingEffect = new GlowingSwitchingArmorEffect(player, this);
@@ -496,12 +497,6 @@ public class SuperArmor extends PlayerArmor
     }
 
     @Override
-    public String getFamilyName()
-    {
-        return ArmorRegistry.SUPER_BOOTS.get().getArmorFamilyName();
-    }
-
-    @Override
     public int getPriority()
     {
         return 6;
@@ -553,7 +548,7 @@ public class SuperArmor extends PlayerArmor
         }
     }
 
-    private boolean isNightVisionAvailable(IPlayer player, IArmor armor)
+    private boolean isNightVisionAvailable(IPlayer player, IPlayerArmor armor)
     {
         return player.isArmorElementPutOn(this, EquipmentSlot.HEAD) && !player.isEffectActive(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT);
     }
