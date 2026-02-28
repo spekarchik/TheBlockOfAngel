@@ -49,6 +49,23 @@ public abstract class ModArmor extends Item implements ITooltipProvider
         return material.getMaterialName() + "_armor";
     }
 
+    @Override
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<Item> onBroken)
+    {
+        var durability = stack.getMaxDamage() - stack.getDamageValue();
+
+        if (entity != null)
+            utils.attributeModifiers.updateArmorAttributeModifier(entity);
+
+        if (amount >= durability)
+        {
+            stack.setDamageValue(stack.getMaxDamage() - 1);
+            return 0;
+        }
+
+        return super.damageItem(stack, amount, entity, onBroken);
+    }
+
     public boolean isBroken(ItemStack stack)
     {
         return stack.getMaxDamage() - stack.getDamageValue() <= 1;
