@@ -1,3 +1,9 @@
+## 📦 Version 3.0.2
+
+### 📝 Improvements
+- Minor performance optimizations.
+
+
 ## 📦 Version 3.0.1
 
 ### 📝 Improvements
