@@ -20,7 +20,7 @@ public enum AnimalArmorType
         this.armorBehaviorFactory = armorBehaviorFactory;
     }
 
-    public IAnimalArmor createBehavior(IAnimal animal)
+    public IAnimalArmor createController(IAnimal animal)
     {
         return armorBehaviorFactory.apply(animal);
     }
