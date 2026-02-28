@@ -1,3 +1,12 @@
+## 📦 Version 3.1.0
+
+### 🐞 Fixed
+- Fixed an issue where the Rod of Angel hold by the player didn't despawn monsters.
+
+### 📝 Improvements
+- **Horse Lymonite Armor** can now be found in *Jungle Temples* or *Woodland Mansions*.
+
+
 ## 📦 Version 3.0.2
 
 ### 📝 Improvements
