@@ -6,6 +6,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public interface IPlayerArmorEvents
 {
+    void onArmorHurtEvent(ArmorHurtEvent event);
     void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event);
     void onLivingHurtEvent(LivingIncomingDamageEvent event);
     void onLivingDamageEvent(LivingDamageEvent.Pre event);
