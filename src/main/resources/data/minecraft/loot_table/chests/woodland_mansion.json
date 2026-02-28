@@ -45,7 +45,7 @@
 	  [
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "add": false,
@@ -86,7 +86,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "add": false,
@@ -111,12 +111,17 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "name": "angelblock:flax_fibre"
         },
         {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "angelblock:horse_lymonite_armor"
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 1
+          "weight": 2
         }
 	  ]
 	},
