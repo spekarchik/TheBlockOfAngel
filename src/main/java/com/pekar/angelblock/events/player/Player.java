@@ -230,7 +230,7 @@ public class Player extends Mob implements IPlayer
     }
 
     @Override
-    public void onClientTick()
+    public void onPlayerTick()
     {
         if (generatePacketIfHoldsAngel(entity.getMainHandItem())) return;
         generatePacketIfHoldsAngel(entity.getOffhandItem());
