@@ -31,9 +31,10 @@
   "item.angelblock.wolf_rendelite_armor.desc21": "Полностью изношенная броня остаётся экипированной, но перестаёт защищать и теряет все иммунитеты",
 
   "item.angelblock.horse_lymonite_armor": "Лаймонитовая конская броня",
+  "item.angelblock.horse_lymonite_armor.desc0": "Встречается в Храмах в Джунглях или в Лесных Особняках",
   "item.angelblock.horse_lymonite_armor.desc1": "§f§lПредназначение:§r§7 Универсальная броня. Особенно полезна для снежных вершин гор",
   "item.angelblock.horse_lymonite_armor.desc2": "",
-  "item.angelblock.horse_lymonite_armor.desc3": "§f§lСвойства:§r§7 Защита 100% от замерзания. Не тонет в Рыхлом снегу. Иммунитет к Отравлению и колючим растениям (Куст сладких ягод, Кактусы)",
+  "item.angelblock.horse_lymonite_armor.desc3": "§f§lСвойства:§r§7 Защита 100% от замерзания. Не даёт провалиться в рыхлый снег. Иммунитет к Отравлению и колючим растениям (Куст сладких ягод, Кактусы)",
   "item.angelblock.horse_lymonite_armor.desc4": "",
   "item.angelblock.horse_lymonite_armor.desc5": "",
   "item.angelblock.horse_lymonite_armor.desc6": "",
