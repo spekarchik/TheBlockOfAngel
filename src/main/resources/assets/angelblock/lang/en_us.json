@@ -31,9 +31,10 @@
   "item.angelblock.wolf_rendelite_armor.desc21": "Fully broken armor remains equipped but loses all protection and immunities",
 
   "item.angelblock.horse_lymonite_armor": "Lymonite Horse Armor",
+  "item.angelblock.horse_lymonite_armor.desc0": "Can be found in Jungle Temples or Woodland Mansions",
   "item.angelblock.horse_lymonite_armor.desc1": "§f§lPurpose:§r§7 All-purpose armor. Especially good for snowy mountains",
   "item.angelblock.horse_lymonite_armor.desc2": "",
-  "item.angelblock.horse_lymonite_armor.desc3": "§f§lTraits:§r§7 100% freezing protection. Does not sink in Powder Snow. Grants immunity to Poison effect and thorns damage (Sweet Berry Bushes, Cacti)",
+  "item.angelblock.horse_lymonite_armor.desc3": "§f§lTraits:§r§7 100% freezing protection. Prevents sinking in Powder Snow. Grants immunity to Poison effect and thorns damage (Sweet Berry Bushes, Cacti)",
   "item.angelblock.horse_lymonite_armor.desc4": "",
   "item.angelblock.horse_lymonite_armor.desc5": "",
   "item.angelblock.horse_lymonite_armor.desc6": "",
