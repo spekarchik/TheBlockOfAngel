@@ -7,11 +7,11 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 
-class PermanentArmorEffect<M extends IMob>
-        extends ArmorEffect<M>
+class PermanentArmorEffect<M extends IMob, A extends IArmor>
+        extends ArmorEffect<M, A>
         implements IPermanentArmorEffect
 {
-    protected PermanentArmorEffect(M mob, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
+    protected PermanentArmorEffect(M mob, A armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
         super(mob, armor, effectType, defaultAmplifier);
     }

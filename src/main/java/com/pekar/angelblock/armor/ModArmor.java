@@ -15,16 +15,16 @@ import java.util.List;
 
 public abstract class ModArmor extends Item implements ITooltipProvider
 {
-    protected final ArmorType armorItemType;
+    protected final ArmorType armorSlotType;
     protected final int maxDamage;
     protected final ModArmorMaterial material;
     protected final Utils utils = new Utils();
 
-    public ModArmor(ModArmorMaterial material, ArmorType armorItemType, Properties properties)
+    public ModArmor(ModArmorMaterial material, ArmorType armorSlotType, Properties properties)
     {
         super(material.isFireResistant() ? properties.fireResistant() : properties);
-        this.armorItemType = armorItemType;
-        this.maxDamage = armorItemType.getDurability(material.getDurabilityMultiplier());
+        this.armorSlotType = armorSlotType;
+        this.maxDamage = armorSlotType.getDurability(material.getDurabilityMultiplier());
         this.material = material;
     }
 
@@ -33,14 +33,14 @@ public abstract class ModArmor extends Item implements ITooltipProvider
         return material;
     }
 
-    public ArmorType getArmorType()
+    public ArmorType getArmorSlotType()
     {
-        return armorItemType;
+        return armorSlotType;
     }
 
     public int getDefense()
     {
-        return getArmorMaterial().getMaterial().defense().get(getArmorType());
+        return getArmorMaterial().getMaterial().defense().get(getArmorSlotType());
     }
 
     public String getArmorFamilyName()

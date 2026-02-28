@@ -1,6 +1,9 @@
 package com.pekar.angelblock.events.effect.base;
 
+import com.pekar.angelblock.events.animal.IAnimal;
+import com.pekar.angelblock.events.armor.IAnimalArmor;
 import com.pekar.angelblock.events.armor.IArmor;
+import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.effect.PlayerArmorEffectSetup;
 import com.pekar.angelblock.events.effect.State;
 import com.pekar.angelblock.events.mob.IMob;
@@ -13,10 +16,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.BiPredicate;
 
-abstract class ArmorEffect<M extends IMob> implements IArmorEffectWithOptions<M>
+abstract class ArmorEffect<M extends IMob, A extends IArmor> implements IArmorEffectWithOptions<M, A>
 {
     protected final M mob;
-    protected final IArmor armor;
+    protected final A armor;
     protected final Holder<MobEffect> effectType;
     private State state = State.OFF;
     private boolean isAvailable;
@@ -24,9 +27,9 @@ abstract class ArmorEffect<M extends IMob> implements IArmorEffectWithOptions<M>
     protected final int defaultAmplifier;
     private boolean showIcon;
     private IModMobEffectInstance effectInstance;
-    protected BiPredicate<M, IArmor> availabilityPredicate = (m, a) -> false;
+    protected BiPredicate<M, A> availabilityPredicate = (m, a) -> false;
 
-    protected ArmorEffect(M mob, IArmor armor, Holder<MobEffect> effectType, int defaultAmplifier)
+    protected ArmorEffect(M mob, A armor, Holder<MobEffect> effectType, int defaultAmplifier)
     {
         this.mob = mob;
         this.armor = armor;
@@ -41,16 +44,16 @@ abstract class ArmorEffect<M extends IMob> implements IArmorEffectWithOptions<M>
     }
 
     @Override
-    public IPlayerArmorEffectSetup<IArmorEffectWithOptions<IPlayer>> setup()
+    public IPlayerArmorEffectSetup<IArmorEffectWithOptions<IPlayer, IPlayerArmor>> setup()
     {
         if (mob instanceof IPlayer)
-            return new PlayerArmorEffectSetup<>((IArmorEffectWithOptions<IPlayer>)this);
+            return new PlayerArmorEffectSetup<>((IArmorEffectWithOptions<IPlayer, IPlayerArmor>)this);
         else
             return null;
     }
 
     @Override
-    public <E extends IArmorEffectWithOptions<IPlayer>> IPlayerArmorEffectSetup<E> setup(E effect)
+    public <E extends IArmorEffectWithOptions<IPlayer, IPlayerArmor>> IPlayerArmorEffectSetup<E> setup(E effect)
     {
         if (mob instanceof IPlayer)
             return new PlayerArmorEffectSetup<>(effect);
@@ -59,13 +62,13 @@ abstract class ArmorEffect<M extends IMob> implements IArmorEffectWithOptions<M>
     }
 
     @Override
-    public <MM extends IMob> IArmorEffectSetup<IArmorEffectWithOptions<MM>, MM> setupBasic()
+    public IArmorEffectSetup<IArmorEffectWithOptions<IAnimal, IAnimalArmor>, IAnimal, IAnimalArmor> setupAnimal()
     {
-        return new ArmorEffectSetup<>((IArmorEffectWithOptions<MM>)this);
+        return new ArmorEffectSetup<>((IArmorEffectWithOptions<IAnimal, IAnimalArmor>)this);
     }
 
     @Override
-    public <E extends IArmorEffectWithOptions<MM>, MM extends IMob> IArmorEffectSetup<IArmorEffectWithOptions<MM>, MM> setupBasic(E effect)
+    public <E extends IArmorEffectWithOptions<IAnimal, IAnimalArmor>> IArmorEffectSetup<IArmorEffectWithOptions<IAnimal, IAnimalArmor>, IAnimal, IAnimalArmor> setupAnimal(E effect)
     {
         return new ArmorEffectSetup<>(effect);
     }
@@ -216,7 +219,7 @@ abstract class ArmorEffect<M extends IMob> implements IArmorEffectWithOptions<M>
     }
 
     @Override
-    public final void setupAvailability(BiPredicate<M, IArmor> value)
+    public final void setupAvailability(BiPredicate<M, A> value)
     {
         availabilityPredicate = value;
     }

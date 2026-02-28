@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events.armor;
 
-import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.effect.JumpBoostSwitchingArmorEffect;
 import com.pekar.angelblock.events.effect.SlowFallingSwitchingEffect;
 import com.pekar.angelblock.events.effect.SpeedSwitchingEffect;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class FlyingArmor extends PlayerArmor
+public class FlyingArmorController extends PlayerArmor
 {
     private final ISwitchingEffectSynchronizer jumpBoostEffect;
     private final ISwitchingArmorEffect slowFallingEffect;
@@ -27,9 +27,9 @@ public class FlyingArmor extends PlayerArmor
     private static final int JUMP_BOOST_AMPLIFIER = 24;
     private boolean isSlowFallingActivatedOnGround = true;
 
-    public FlyingArmor(IPlayer player)
+    public FlyingArmorController(IPlayer player)
     {
-        super(player);
+        super(player, PlayerArmorType.AERYTE);
 
         slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
         slowFallingEffect.setup().availableOnFullArmorSet();
@@ -105,12 +105,6 @@ public class FlyingArmor extends PlayerArmor
 
         if (event.getTo().is(Items.FIREWORK_ROCKET))
             player.getPlayerEntity().stopFallFlying();
-    }
-
-    @Override
-    public String getFamilyName()
-    {
-        return ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName();
     }
 
     @Override
@@ -245,7 +239,7 @@ public class FlyingArmor extends PlayerArmor
     {
     }
 
-    private boolean isJumpEffectAvailable(IPlayer player, IArmor armor)
+    private boolean isJumpEffectAvailable(IPlayer player, IPlayerArmor armor)
     {
         var playerEntity = player.getPlayerEntity();
         if (playerEntity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
@@ -289,7 +283,7 @@ public class FlyingArmor extends PlayerArmor
         }
     }
 
-    private boolean isSpeedAvailable(IPlayer player, IArmor armor)
+    private boolean isSpeedAvailable(IPlayer player, IPlayerArmor armor)
     {
         var boots = player.getPlayerEntity().getItemBySlot(EquipmentSlot.FEET);
 

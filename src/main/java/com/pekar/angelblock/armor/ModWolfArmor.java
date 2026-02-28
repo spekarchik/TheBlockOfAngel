@@ -9,9 +9,9 @@ import net.minecraft.world.item.TooltipFlag;
 
 public class ModWolfArmor extends ModAnimalArmor
 {
-    public ModWolfArmor(ModArmorMaterial material, Properties properties)
+    public ModWolfArmor(ModArmorMaterial material, AnimalArmorType armorType, Properties properties)
     {
-        super(material, material.getMaterial().animalProperties(properties, HolderSet.direct(EntityType::builtInRegistryHolder, EntityType.WOLF)));
+        super(material, armorType, material.getMaterial().animalProperties(properties, HolderSet.direct(EntityType::builtInRegistryHolder, EntityType.WOLF)));
     }
 
     @Override

@@ -10,9 +10,9 @@ import net.minecraft.world.item.TooltipFlag;
 
 public class ModHorseArmor extends ModAnimalArmor
 {
-    public ModHorseArmor(ModArmorMaterial material, Properties properties)
+    public ModHorseArmor(ModArmorMaterial material, AnimalArmorType armorType, Properties properties)
     {
-        super(material, material.getMaterial().animalProperties(properties, SoundEvents.HORSE_ARMOR, false, HolderSet.direct(EntityType::builtInRegistryHolder, EntityType.HORSE)));
+        super(material, armorType, material.getMaterial().animalProperties(properties, SoundEvents.HORSE_ARMOR, false, HolderSet.direct(EntityType::builtInRegistryHolder, EntityType.HORSE)));
     }
 
     @Override
