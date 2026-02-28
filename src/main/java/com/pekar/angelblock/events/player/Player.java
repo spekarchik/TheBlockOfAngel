@@ -42,7 +42,7 @@ public class Player extends Mob implements IPlayer
             var armorController = armorControllers.get(armorType);
             if (armorController == null)
             {
-                armorController = armor.getArmorType().createController(this);
+                armorController = armorType.createController(this);
                 armorControllers.put(armorType, armorController);
             }
             armorInUse.add(armorType);
