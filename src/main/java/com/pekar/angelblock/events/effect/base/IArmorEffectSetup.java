@@ -6,12 +6,12 @@ import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.function.BiPredicate;
 
-public interface IArmorEffectSetup<E extends IArmorEffectWithOptions<M>, M extends IMob>
+public interface IArmorEffectSetup<E extends IArmorEffectWithOptions<M, A>, M extends IMob, A extends IArmor>
 {
-    IArmorEffectSetup<E, M> setupAvailability(BiPredicate<M, IArmor> predicate);
-    IArmorEffectSetup<E, M> alwaysAvailable();
-    IArmorEffectSetup<E, M> unavailableIfNotModArmor(EquipmentSlot slot);
+    IArmorEffectSetup<E, M, A> setupAvailability(BiPredicate<M, A> predicate);
+    IArmorEffectSetup<E, M, A> alwaysAvailable();
+    IArmorEffectSetup<E, M, A> unavailableIfNotModArmor(EquipmentSlot slot);
 
-    IArmorEffectSetup<E, M> showIcon();
-    IArmorEffectSetup<E, M> hideIcon();
+    IArmorEffectSetup<E, M, A> showIcon();
+    IArmorEffectSetup<E, M, A> hideIcon();
 }

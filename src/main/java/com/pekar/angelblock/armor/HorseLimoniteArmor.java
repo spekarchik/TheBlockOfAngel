@@ -8,7 +8,7 @@ public class HorseLimoniteArmor extends ModHorseArmor
 {
     protected HorseLimoniteArmor(ModArmorMaterial material, ArmorType equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot, properties);
+        super(material, equipmentSlot, AnimalArmorType.LYMONITE_HORSE, properties);
     }
 
     @Override

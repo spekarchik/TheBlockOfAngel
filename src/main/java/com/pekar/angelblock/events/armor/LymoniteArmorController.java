@@ -1,11 +1,16 @@
 package com.pekar.angelblock.events.armor;
 
-import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.Main;
+import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.effect.base.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.utils.Utils;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -16,7 +21,7 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class LimoniteArmor extends PlayerArmor
+public class LymoniteArmorController extends PlayerArmor
 {
     private final IPermanentArmorEffect luckEffect;
     private final IPermanentArmorEffect healthBoostEffect;
@@ -37,9 +42,9 @@ public class LimoniteArmor extends PlayerArmor
     private static final int JUMP_EFFECT_AMPLIFIER_BOOSTED = 6;
     private static final int WATER_BREATHING_EFFECT_DURATION = 600;
 
-    public LimoniteArmor(IPlayer player)
+    public LymoniteArmorController(IPlayer player)
     {
-        super(player);
+        super(player, PlayerArmorType.LYMONITE);
 
         nightVisionEffect = new NightVisionSwitchingArmorEffect(player, this);
         nightVisionEffect.setup().availableOnHelmetWithDetector();
@@ -331,12 +336,6 @@ public class LimoniteArmor extends PlayerArmor
     }
 
     @Override
-    public String getFamilyName()
-    {
-        return ArmorRegistry.LIMONITE_BOOTS.get().getArmorFamilyName();
-    }
-
-    @Override
     public int getPriority()
     {
         return 4;
@@ -347,7 +346,13 @@ public class LimoniteArmor extends PlayerArmor
         return player.areBootsModifiedWithJumpBooster(this) ? JUMP_EFFECT_AMPLIFIER_BOOSTED : JUMP_EFFECT_AMPLIFIER_DEFAULT;
     }
 
-    private boolean isLuckEffectAvailable(IPlayer player, IArmor armor)
+    private boolean isVulnerable(DamageSource damageSource)
+    {
+        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(Main.MODID, "limonite_armor_vulnerabilities"));
+        return damageSource.is(vulnerabilities);
+    }
+
+    private boolean isLuckEffectAvailable(IPlayer player, IPlayerArmor armor)
     {
         return player.isChestPlateModifiedWithLuck(armor);
     }

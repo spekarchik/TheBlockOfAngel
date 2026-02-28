@@ -14,22 +14,6 @@ abstract class ArmorBase implements IArmor
 {
     protected Utils utils = new Utils();
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (!(obj instanceof ArmorBase armor))
-        {
-            return false;
-        }
-        return getFamilyName().equals(armor.getFamilyName());
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return getFamilyName().hashCode();
-    }
-
     protected boolean isFreezeDamage(DamageSource damageSource)
     {
         return damageSource.is(DamageTypes.FREEZE);

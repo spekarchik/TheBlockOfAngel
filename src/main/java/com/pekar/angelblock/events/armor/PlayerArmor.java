@@ -1,27 +1,24 @@
 package com.pekar.angelblock.events.armor;
 
-import com.pekar.angelblock.Main;
 import com.pekar.angelblock.armor.ModHumanoidArmor;
+import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.network.packets.CreeperDetectedPacket;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.TriPredicate;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Witch;
 import net.minecraft.world.entity.monster.illager.AbstractIllager;
 import net.minecraft.world.entity.monster.skeleton.Skeleton;
 import net.minecraft.world.entity.monster.zombie.Zombie;
@@ -36,17 +33,15 @@ import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.BiConsumer;
 
 abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
 {
     protected final IPlayer player;
-    private final Set<EquipmentSlot> equipmentSlots = new HashSet<>();
     private final CreeperDetectedPacket creeperDetectedPacket = new CreeperDetectedPacket();
     private int creeperDetectedCounter = 0;
     private boolean needUpdateStatesAfterLogin = false;
+    private final PlayerArmorType armorType;
 
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final double CREEPER_AGRY_DISTANCE = 3.0;
@@ -77,14 +72,10 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
         player.level().playSound(null, pos, SoundEvents.TURTLE_EGG_BREAK, SoundSource.BLOCKS, 1F, 2F);
     };
 
-    protected PlayerArmor(IPlayer player)
+    protected PlayerArmor(IPlayer player, PlayerArmorType armorType)
     {
         this.player = player;
-
-        equipmentSlots.add(EquipmentSlot.FEET);
-        equipmentSlots.add(EquipmentSlot.LEGS);
-        equipmentSlots.add(EquipmentSlot.CHEST);
-        equipmentSlots.add(EquipmentSlot.HEAD);
+        this.armorType = armorType;
     }
 
     protected abstract void updateAvailability();
@@ -104,6 +95,12 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
     protected void onLogin(PlayerEvent.PlayerLoggedInEvent event)
     {
         // can be overriden
+    }
+
+    @Override
+    public final PlayerArmorType getArmorType()
+    {
+        return armorType;
     }
 
     @Override
@@ -220,7 +217,7 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
         int heavyArmorSlots = 0;
         for (var slot : utils.player.getArmorInSlots(player))
         {
-            if (slot.getItem() instanceof ModHumanoidArmor modArmor && modArmor.getArmorFamilyName().equals(getFamilyName()))
+            if (slot.getItem() instanceof ModHumanoidArmor modArmor && modArmor.getArmorType() == getArmorType())
                 heavyArmorSlots++;
         }
         int rnd = randomSource.nextInt(chanceToAvoidBreaking);
@@ -279,7 +276,7 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
         for (var slot : utils.player.getArmorSlots())
         {
             var stack = player.getPlayerEntity().getItemBySlot(slot);
-            if (stack.isEmpty() || !(stack.getItem() instanceof ModHumanoidArmor modArmor) || !modArmor.getArmorFamilyName().equals(getFamilyName()))
+            if (stack.isEmpty() || !(stack.getItem() instanceof ModHumanoidArmor modArmor) || modArmor.getArmorType() != getArmorType())
             {
                 continue;
             }
@@ -333,13 +330,7 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
         }
     }
 
-    protected final boolean isVulnerable(DamageSource damageSource)
-    {
-        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(Main.MODID, getVulnerabilitiesTagName()));
-        return damageSource.is(vulnerabilities);
-    }
-
-    protected boolean availableOnBootsWithNoHeavyJump(IPlayer player, IArmor armor)
+    protected boolean availableOnBootsWithNoHeavyJump(IPlayer player, IPlayerArmor armor)
     {
         var playerEntity = player.getPlayerEntity();
         if (playerEntity.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT))
@@ -348,8 +339,19 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
         return player.isArmorElementPutOn(armor, EquipmentSlot.FEET);
     }
 
-    protected String getVulnerabilitiesTagName()
+    @Override
+    public boolean equals(Object obj)
     {
-        return getFamilyName() + "_armor_vulnerabilities";
+        if (!(obj instanceof PlayerArmor armor))
+        {
+            return false;
+        }
+        return getArmorType() == armor.getArmorType();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return getArmorType().hashCode();
     }
 }
