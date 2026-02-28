@@ -25,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
@@ -261,6 +262,30 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
         if (slotChanged == EquipmentSlot.LEGS) return true;
 
         return itemFrom.is(Items.MILK_BUCKET) && itemTo.is(Items.BUCKET);
+    }
+
+    @Override
+    public void onArmorHurtEvent(ArmorHurtEvent event)
+    {
+        utils.attributeModifiers.updateArmorAttributeModifier(player.getPlayerEntity());
+
+        for (var slot : utils.player.getArmorSlots())
+        {
+            var stack = player.getPlayerEntity().getItemBySlot(slot);
+            if (stack.isEmpty() || !(stack.getItem() instanceof ModHumanoidArmor modArmor) || modArmor.getArmorType() != getArmorType())
+            {
+                continue;
+            }
+
+            var maxDamage = stack.getMaxDamage();
+            var durability = maxDamage - stack.getDamageValue();
+            float amount = event.getNewDamage(slot);
+
+            if (amount >= durability)
+            {
+                event.setNewDamage(slot, durability - 1);
+            }
+        }
     }
 
     // for tests
