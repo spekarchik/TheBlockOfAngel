@@ -1,3 +1,11 @@
+## 📦 Version 3.1.1
+
+### 🐞 Fixed
+- Shift-crafting in the *Smithing Table* is now blocked for certain recipes to prevent unintended behavior:
+  - Crafting armor with **Animal Armor Handbooks** (the books were previously consumed during shift-crafting).
+  - Downgrading items with **Downgrade Kit** (upgrade ingredients were not delivered to the player's inventory during shift-crafting).
+  
+
 ## 📦 Version 3.1.0
 
 ### 🐞 Fixed
