@@ -50,16 +50,16 @@ public class DowngradeKit extends ModItem implements ITooltipProvider
         }
         else if (flag.hasAltDown())
         {
-            tooltip.addLine(getDescriptionId(), 11)
+            tooltip.addLine(getDescriptionId(), 6)
                     .withFormatting(ChatFormatting.DARK_AQUA, true)
                     .apply();
 
             tooltip.addEmptyLine();
 
-            for (int i = 12; i <= 30; i++)
+            for (int i = 7; i <= 30; i++)
             {
                 tooltip.addLine(getDescriptionId(), i)
-                        .styledAs(TextStyle.Header, i == 12 || i == 15 || i == 21)
+                        .styledAs(TextStyle.Header, i == 7 || i == 10 || i == 15 || i == 21)
                         .apply();
             }
 
