@@ -1,11 +1,11 @@
 package com.pekar.angelblock.menus;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.armor.ModAnimalArmor;
 import com.pekar.angelblock.armor.ModArmorMaterial;
 import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.tools.*;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -32,12 +32,7 @@ public class CustomSmithingMenu extends SmithingMenu
     {
         if (index == getResultSlot())
         {
-            var mainItem = getSlot(1).getItem();
-            if (isCraftingHandbookItem(mainItem))
-            {
-                return ItemStack.EMPTY;
-            }
-            else if (getSlot(0).getItem().is(ItemRegistry.DOWNGRADE_KIT))
+            if (getSlot(0).getItem().is(ItemRegistry.DOWNGRADE_KIT))
             {
                 return ItemStack.EMPTY;
             }
@@ -59,7 +54,7 @@ public class CustomSmithingMenu extends SmithingMenu
         var secondaryItem = getSlot(2).getItem();
         var result = stack;
 
-        if (result.is(ArmorRegistry.HORSE_LYMONITE_ARMOR) || result.is(ArmorRegistry.WOLF_RENDELITE_ARMOR) || result.is(Items.DIAMOND_NAUTILUS_ARMOR))
+        if (isCraftingHandbookItem(mainItem))
         {
             template.shrink(1);
             secondaryItem.shrink(1);
@@ -83,38 +78,35 @@ public class CustomSmithingMenu extends SmithingMenu
                 boolean isResultModArmor = result.getItem() instanceof ModHumanoidArmor;
                 var resultAsModArmor = isResultModArmor ? (ModHumanoidArmor)result.getItem() : null;
 
-                if (!isResultModArmor || !armor.getArmorFamilyName().equals(resultAsModArmor.getArmorFamilyName()))
+                Item plate;
+
+                switch (materialName)
                 {
-                    Item plate;
+                    case ModArmorMaterial.RENDELITHIC_MATERIAL_NAME:
+                        plate = ItemRegistry.RENDELITHIC_PLATE.get();
+                        break;
+                    case ModArmorMaterial.LIMONITE_MATERIAL_NAME:
+                        plate = ItemRegistry.LIMONITE_PLATE.get();
+                        break;
+                    case ModArmorMaterial.DIAMITHIC_MATERIAL_NAME:
+                        plate = ItemRegistry.DIAMITHIC_PLATE.get();
+                        break;
+                    case ModArmorMaterial.LAPIS_MATERIAL_NAME:
+                        plate = ItemRegistry.LAPIS_PLATE.get();
+                        break;
+                    case ModArmorMaterial.SUPER_MATERIAL_NAME:
+                        plate = ItemRegistry.SUPER_PLATE.get();
+                        break;
+                    case ModArmorMaterial.FLYING_MATERIAL_NAME:
+                        plate = ItemRegistry.FLYING_PLATE.get();
+                        break;
+                    default:
+                        plate = Items.AIR;
+                        break;
 
-                    switch (materialName)
-                    {
-                        case ModArmorMaterial.RENDELITHIC_MATERIAL_NAME:
-                            plate = ItemRegistry.RENDELITHIC_PLATE.get();
-                            break;
-                        case ModArmorMaterial.LIMONITE_MATERIAL_NAME:
-                            plate = ItemRegistry.LIMONITE_PLATE.get();
-                            break;
-                        case ModArmorMaterial.DIAMITHIC_MATERIAL_NAME:
-                            plate = ItemRegistry.DIAMITHIC_PLATE.get();
-                            break;
-                        case ModArmorMaterial.LAPIS_MATERIAL_NAME:
-                            plate = ItemRegistry.LAPIS_PLATE.get();
-                            break;
-                        case ModArmorMaterial.SUPER_MATERIAL_NAME:
-                            plate = ItemRegistry.SUPER_PLATE.get();
-                            break;
-                        case ModArmorMaterial.FLYING_MATERIAL_NAME:
-                            plate = ItemRegistry.FLYING_PLATE.get();
-                            break;
-                        default:
-                            plate = Items.AIR;
-                            break;
-
-                    }
-
-                    player.getInventory().add(new ItemStack(plate));
                 }
+
+                player.getInventory().add(new ItemStack(plate));
 
                 if (armor.isModifiedWithDetector() && (!isResultModArmor || !resultAsModArmor.isModifiedWithDetector()))
                     player.getInventory().add(new ItemStack(Blocks.CALIBRATED_SCULK_SENSOR));
@@ -245,14 +237,11 @@ public class CustomSmithingMenu extends SmithingMenu
                     }
                 }
             }
-            else if (mainItem.is(ItemTags.TRIMMABLE_ARMOR) && result.is(ItemTags.TRIMMABLE_ARMOR))
+            else if (mainItem.is(ItemRegistry.NETHERITE_ARMOR_TAG))
             {
-                if (mainItem.is(ItemRegistry.NETHERITE_ARMOR_TAG) && result.is(ItemRegistry.DIAMOND_ARMOR_TAG))
-                {
-                    player.getInventory().add(Items.NETHERITE_INGOT.getDefaultInstance());
-                }
+                player.getInventory().add(Items.NETHERITE_INGOT.getDefaultInstance());
             }
-            else if (mainItem.getItem().getDefaultInstance().is(ItemRegistry.NETHERITE_TOOL_TAG) && result.getItem().getDefaultInstance().is(ItemRegistry.DIAMOND_TOOL_TAG))
+            else if (mainItem.is(ItemRegistry.NETHERITE_TOOL_TAG))
             {
                 player.getInventory().add(Items.NETHERITE_INGOT.getDefaultInstance());
             }
