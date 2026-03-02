@@ -1,5 +1,8 @@
 ## 📦 Version 3.1.1
 
+### 📝 Improvements
+- **Lymonite Horse Armor** item texture adjusted: now aligned with vanilla horse armor.
+
 ### 🐞 Fixed
 - Shift-crafting in the *Smithing Table* is now blocked for certain recipes to prevent unintended behavior:
   - Crafting armor with **Animal Armor Handbook** (the book was previously consumed during shift-crafting).
