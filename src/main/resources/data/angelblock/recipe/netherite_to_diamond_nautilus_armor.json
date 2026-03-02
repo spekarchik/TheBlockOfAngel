@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "minecraft:netherite_nautilus_armor",
+  "addition": "minecraft:flint",
+  "result": {
+    "id": "minecraft:diamond_nautilus_armor"
+  },
+  "template": "angelblock:downgrade_kit"
+}
