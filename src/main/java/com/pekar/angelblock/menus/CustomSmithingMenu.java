@@ -1,15 +1,17 @@
 package com.pekar.angelblock.menus;
 
 import com.pekar.angelblock.armor.ArmorRegistry;
-import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.armor.ModArmorMaterial;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.tools.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SmithingMenu;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 public class CustomSmithingMenu extends SmithingMenu
@@ -22,6 +24,30 @@ public class CustomSmithingMenu extends SmithingMenu
     public CustomSmithingMenu(int containerId, Inventory playerInventory, ContainerLevelAccess access)
     {
         super(containerId, playerInventory, access);
+    }
+
+    @Override
+    public ItemStack quickMoveStack(Player player, int index)
+    {
+        if (index == getResultSlot())
+        {
+            var mainItem = getSlot(1).getItem();
+            if (isCraftingHandbookItem(mainItem))
+            {
+                return ItemStack.EMPTY;
+            }
+            else if (getSlot(0).getItem().is(ItemRegistry.DOWNGRADE_KIT))
+            {
+                return ItemStack.EMPTY;
+            }
+        }
+
+        return super.quickMoveStack(player, index);
+    }
+
+    private boolean isCraftingHandbookItem(ItemStack mainItem)
+    {
+        return mainItem.is(ItemRegistry.WOLF_ARMOR_HANDBOOK) || mainItem.is(ItemRegistry.HORSE_ARMOR_HANDBOOK) || mainItem.is(ItemRegistry.NAUTILUS_ARMOR_HANDBOOK);
     }
 
     @Override
