@@ -9,9 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SmithingMenu;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 
 public class CustomSmithingMenu extends SmithingMenu
@@ -47,7 +45,7 @@ public class CustomSmithingMenu extends SmithingMenu
 
     private boolean isCraftingHandbookItem(ItemStack mainItem)
     {
-        return mainItem.is(ItemRegistry.WOLF_ARMOR_HANDBOOK) || mainItem.is(ItemRegistry.HORSE_ARMOR_HANDBOOK) || mainItem.is(ItemRegistry.NAUTILUS_ARMOR_HANDBOOK);
+        return mainItem.is(ItemRegistry.HORSE_ARMOR_HANDBOOK);
     }
 
     @Override
