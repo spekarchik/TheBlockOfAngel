@@ -1,13 +1,17 @@
-## 📦 Version 3.1.1
+## 📦 Version 3.2.0
 
 ### 📝 Improvements
 - **Lymonite Horse Armor** item texture adjusted: now aligned with vanilla horse armor.
+- Downgrading recipes for animal armor have been added:
+  - **Lymonite Horse Armor**
+
 
 ### 🐞 Fixed
-- Shift-crafting in the *Smithing Table* is now blocked for certain recipes to prevent unintended behavior:
-  - Crafting armor with **Animal Armor Handbook** (the book was previously consumed during shift-crafting).
-  - Downgrading items with **Downgrade Kit** (upgrade ingredients were not delivered to the player's inventory during shift-crafting).
-  
+- Shift-crafting behavior in the *Smithing Table*:
+  - Shift-crafting is now blocked for downgrading recipes using the **Downgrade Kit** to prevent incorrect ingredient delivery.
+  - Shift-crafting no longer consumes **Animal Armor Handbook** when crafting armor.
+- **Lymonite Horse Armor** now stacks to 1.
+
 
 ## 📦 Version 3.1.0
 

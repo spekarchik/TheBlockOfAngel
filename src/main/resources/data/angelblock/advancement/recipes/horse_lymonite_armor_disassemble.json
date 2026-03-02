@@ -5,7 +5,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:rendelithic_armor_upgrade_kit"
+                                                                        "items":  "angelblock:downgrade_kit"
                                                                     }
                                                                 ]
                                                   }
@@ -15,7 +15,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:wolf_rendelite_armor"
+                                                                        "items":  "angelblock:limonite_plate"
                                                                     }
                                                                 ]
                                                   }
@@ -25,17 +25,17 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:wolf_armor_handbook"
+                                                                        "items":  "angelblock:horse_lymonite_armor"
                                                                     }
                                                                 ]
                                                   }
                                },
                      "item1":  {
-                                   "trigger":  "minecraft:inventory_changed",
+                                   "trigger":  "minecraft:impossible",
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:rendelithic_plate"
+                                                                        "items":  "minecraft:flint"
                                                                     }
                                                                 ]
                                                   }
@@ -44,7 +44,7 @@
     "parent":  "minecraft:recipes/root",
     "rewards":  {
                     "recipes":  [
-                                    "angelblock:wolf_rendelite_armor"
+                                    "angelblock:horse_lymonite_armor_disassemble"
                                 ]
                 },
     "requirements":  [

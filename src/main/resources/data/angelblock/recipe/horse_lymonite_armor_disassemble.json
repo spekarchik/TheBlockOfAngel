@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "angelblock:horse_lymonite_armor"
+    },
+    "addition": {
+        "item": "minecraft:flint"
+    },
+    "result": {
+        "id": "angelblock:limonite_plate"
+    },
+    "template": {
+        "item": "angelblock:downgrade_kit"
+    }
+}
