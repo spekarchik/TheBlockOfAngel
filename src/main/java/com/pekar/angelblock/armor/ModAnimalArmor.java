@@ -8,7 +8,7 @@ public abstract class ModAnimalArmor extends ModArmor
 
     public ModAnimalArmor(ModArmorMaterial material, AnimalArmorType armorType, Properties properties)
     {
-        super(material, ArmorType.BODY, properties);
+        super(material, ArmorType.BODY, properties.stacksTo(1));
         this.armorType = armorType;
     }
 

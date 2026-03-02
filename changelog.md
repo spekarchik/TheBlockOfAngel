@@ -11,6 +11,7 @@
 - Shift-crafting behavior in the *Smithing Table*:
   - Shift-crafting is now blocked for downgrading recipes using the **Downgrade Kit** to prevent incorrect ingredient delivery.
   - Shift-crafting no longer consumes **Animal Armor Handbooks** when crafting armor.
+- **Lymonite Horse Armor** now stacks to 1.
 
 
 ## 📦 Version 3.1.0
