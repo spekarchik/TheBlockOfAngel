@@ -3,15 +3,16 @@ package com.pekar.angelblock.items;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.TextStyle;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
+
 public class ItemRegistry
 {
-    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rods_modified_by_rod_sensor"));
+    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "rods_modified_by_rod_sensor"));
 
     public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.registerItem("obsidian_powder", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ENDSTONE_POWDER = Main.ITEMS.register("endstone_powder", EndstonePowder::new);

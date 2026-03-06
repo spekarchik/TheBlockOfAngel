@@ -3,7 +3,6 @@ package com.pekar.angelblock.recipe;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.items.ItemRegistry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,6 +13,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.brewing.BrewingRecipe;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
+
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
 
 @EventBusSubscriber(modid = Main.MODID)
 public class RecipeRegistry
@@ -49,7 +50,7 @@ public class RecipeRegistry
         //var input = new ItemStack(Items.POTION);
         //input.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.SLOW_FALLING));
         var output = new ItemStack(ItemRegistry.SOARING_SPORE_ESSENCE.get());
-        TagKey<Item> froglightsTag = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("minecraft", "froglights"));
+        TagKey<Item> froglightsTag = TagKey.create(Registries.ITEM, createResourceLocation("minecraft", "froglights"));
         var recipe = new BrewingRecipe(SLOW_FALLING_POTION, Ingredient.of(froglightsTag), output);
 
         builder.addRecipe(recipe);

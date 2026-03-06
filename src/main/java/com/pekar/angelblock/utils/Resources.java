@@ -9,7 +9,7 @@ public class Resources
 
     }
 
-    public ResourceLocation createResourceLocation(String namespace, String name)
+    public static ResourceLocation createResourceLocation(String namespace, String name)
     {
         return ResourceLocation.fromNamespaceAndPath(namespace, name); //was: new ResourceLocation(name),
     }

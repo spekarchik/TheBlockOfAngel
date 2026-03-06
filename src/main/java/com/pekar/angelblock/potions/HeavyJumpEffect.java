@@ -8,10 +8,12 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
+
 public class HeavyJumpEffect extends MobEffect
 {
-    private static final ResourceLocation JUMP_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(Main.MODID, "heavy_jump_modifier");
-    private static final ResourceLocation SLOW_MOTION_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(Main.MODID, "slow_motion_modifier");
+    private static final ResourceLocation JUMP_MODIFIER_ID = createResourceLocation(Main.MODID, "heavy_jump_modifier");
+    private static final ResourceLocation SLOW_MOTION_MODIFIER_ID = createResourceLocation(Main.MODID, "slow_motion_modifier");
 
     protected HeavyJumpEffect()
     {
