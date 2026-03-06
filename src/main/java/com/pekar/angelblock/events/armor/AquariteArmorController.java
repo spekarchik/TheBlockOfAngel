@@ -10,7 +10,6 @@ import com.pekar.angelblock.events.effect.base.ITemporaryPersistentArmorEffect;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -18,6 +17,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
 
 public class AquariteArmorController extends PlayerArmor
 {
@@ -240,7 +241,7 @@ public class AquariteArmorController extends PlayerArmor
 
     private boolean isVulnerable(DamageSource damageSource)
     {
-        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Main.MODID, "lapis_armor_vulnerabilities"));
+        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, createResourceLocation(Main.MODID, "lapis_armor_vulnerabilities"));
         return damageSource.is(vulnerabilities);
     }
 
