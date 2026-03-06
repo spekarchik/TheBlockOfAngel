@@ -3,26 +3,28 @@ package com.pekar.angelblock.items;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.TextStyle;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
+
 public class ItemRegistry
 {
-    public static final TagKey<Item> RENDELITHIC_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rendelithic_ingot_tag"));
-    public static final TagKey<Item> DIAMITHIC_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "diamithic_ingot_tag"));
-    public static final TagKey<Item> LAPIS_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "lapis_ingot_tag"));
-    public static final TagKey<Item> LIMONITE_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "limonite_ingot_tag"));
-    public static final TagKey<Item> SUPER_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "super_ingot_tag"));
-    public static final TagKey<Item> FLYING_INGOT_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "flying_ingot_tag"));
-    public static final TagKey<Item> BAMBOO_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "bamboo_tag"));
-    public static final TagKey<Item> DIAMOND_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "diamond_armor"));
-    public static final TagKey<Item> NETHERITE_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "netherite_armor"));
-    public static final TagKey<Item> DIAMOND_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "diamond_tool"));
-    public static final TagKey<Item> NETHERITE_TOOL_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "netherite_tool"));
-    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Main.MODID, "rods_modified_by_rod_sensor"));
+    public static final TagKey<Item> RENDELITHIC_INGOT_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "rendelithic_ingot_tag"));
+    public static final TagKey<Item> DIAMITHIC_INGOT_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "diamithic_ingot_tag"));
+    public static final TagKey<Item> LAPIS_INGOT_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "lapis_ingot_tag"));
+    public static final TagKey<Item> LIMONITE_INGOT_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "limonite_ingot_tag"));
+    public static final TagKey<Item> SUPER_INGOT_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "super_ingot_tag"));
+    public static final TagKey<Item> FLYING_INGOT_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "flying_ingot_tag"));
+    public static final TagKey<Item> BAMBOO_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "bamboo_tag"));
+    public static final TagKey<Item> DIAMOND_ARMOR_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "diamond_armor"));
+    public static final TagKey<Item> NETHERITE_ARMOR_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "netherite_armor"));
+    public static final TagKey<Item> DIAMOND_TOOL_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "diamond_tool"));
+    public static final TagKey<Item> NETHERITE_TOOL_TAG = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "netherite_tool"));
+    public static final TagKey<Item> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "planter_compatible_to_plant"));
+    public static final TagKey<Item> RODS_MODIFIED_BY_ROD_SENSOR = TagKey.create(Registries.ITEM, createResourceLocation(Main.MODID, "rods_modified_by_rod_sensor"));
 
     public static final DeferredItem<Item> OBSIDIAN_POWDER = Main.ITEMS.registerItem("obsidian_powder", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> ENDSTONE_POWDER = Main.ITEMS.registerItem("endstone_powder", EndstonePowder::new);
