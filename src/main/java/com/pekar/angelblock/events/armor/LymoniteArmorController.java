@@ -8,7 +8,6 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -348,7 +347,7 @@ public class LymoniteArmorController extends PlayerArmor
 
     private boolean isVulnerable(DamageSource damageSource)
     {
-        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(Main.MODID, "limonite_armor_vulnerabilities"));
+        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, Utils.instance.resources.createResourceLocation(Main.MODID, "limonite_armor_vulnerabilities"));
         return damageSource.is(vulnerabilities);
     }
 

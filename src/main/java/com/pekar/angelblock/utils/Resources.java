@@ -12,7 +12,7 @@ public class Resources
 
     }
 
-    public Identifier createResourceLocation(String namespace, String name)
+    public static Identifier createResourceLocation(String namespace, String name)
     {
         return Identifier.fromNamespaceAndPath(namespace, name); //was: new ResourceLocation(name),
     }
@@ -21,7 +21,7 @@ public class Resources
     {
         return ResourceKey.create(
                 EquipmentAssets.ROOT_ID,
-                Identifier.fromNamespaceAndPath(namespace, armorName));
+                createResourceLocation(namespace, armorName));
     }
 
 }

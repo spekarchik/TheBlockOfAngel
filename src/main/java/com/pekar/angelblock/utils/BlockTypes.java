@@ -4,7 +4,6 @@ import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
@@ -63,7 +62,7 @@ public class BlockTypes
 
     public boolean isOre(BlockState blockState)
     {
-        var ores = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "ores"));
+        var ores = TagKey.create(Registries.BLOCK, Utils.instance.resources.createResourceLocation(Main.MODID, "ores"));
         return blockState.is(ores);
     }
 

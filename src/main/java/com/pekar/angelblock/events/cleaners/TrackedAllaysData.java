@@ -3,7 +3,6 @@ package com.pekar.angelblock.events.cleaners;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.pekar.angelblock.Main;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.animal.allay.Allay;
@@ -13,6 +12,8 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
 
 public class TrackedAllaysData extends SavedData
 {
@@ -95,7 +96,7 @@ public class TrackedAllaysData extends SavedData
     );
 
     public static final SavedDataType<TrackedAllaysData> TYPE = new SavedDataType<TrackedAllaysData>(
-            Identifier.fromNamespaceAndPath(Main.MODID, "tracked_allays"),
+            createResourceLocation(Main.MODID, "tracked_allays"),
             TrackedAllaysData::new,
             CODEC
     );

@@ -2,7 +2,6 @@ package com.pekar.angelblock.utils;
 
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.armor.ModHumanoidArmor;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -39,7 +38,7 @@ public class AttributeModifiers
                 correctionSum += correction;
             }
 
-            var armorModifierId = Identifier.fromNamespaceAndPath(Main.MODID, getArmorAttributeMofifierId(entity));
+            var armorModifierId = Utils.instance.resources.createResourceLocation(Main.MODID, getArmorAttributeMofifierId(entity));
             armorAttribute.removeModifier(armorModifierId);
 
             if (Math.abs(correctionSum) > 1e-12)
@@ -55,7 +54,7 @@ public class AttributeModifiers
 
         if (armorAttribute != null)
         {
-            var armorModifierId = Identifier.fromNamespaceAndPath(Main.MODID, getArmorAttributeMofifierId(entity));
+            var armorModifierId = Utils.instance.resources.createResourceLocation(Main.MODID, getArmorAttributeMofifierId(entity));
             armorAttribute.removeModifier(armorModifierId);
         }
     }
