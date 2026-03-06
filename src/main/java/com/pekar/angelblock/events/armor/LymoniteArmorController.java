@@ -8,7 +8,6 @@ import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -20,6 +19,8 @@ import net.minecraft.world.entity.monster.Witch;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
 
 public class LymoniteArmorController extends PlayerArmor
 {
@@ -348,7 +349,7 @@ public class LymoniteArmorController extends PlayerArmor
 
     private boolean isVulnerable(DamageSource damageSource)
     {
-        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Main.MODID, "limonite_armor_vulnerabilities"));
+        var vulnerabilities = TagKey.create(Registries.DAMAGE_TYPE, createResourceLocation(Main.MODID, "limonite_armor_vulnerabilities"));
         return damageSource.is(vulnerabilities);
     }
 
