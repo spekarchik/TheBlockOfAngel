@@ -12,7 +12,7 @@ public class Resources
 
     }
 
-    public ResourceLocation createResourceLocation(String namespace, String name)
+    public static ResourceLocation createResourceLocation(String namespace, String name)
     {
         return ResourceLocation.fromNamespaceAndPath(namespace, name); //was: new ResourceLocation(name),
     }
@@ -21,7 +21,7 @@ public class Resources
     {
         return ResourceKey.create(
                 EquipmentAssets.ROOT_ID,
-                ResourceLocation.fromNamespaceAndPath(namespace, armorName));
+                createResourceLocation(namespace, armorName));
     }
 
 }
