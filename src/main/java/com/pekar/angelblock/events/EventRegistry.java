@@ -16,6 +16,7 @@ public class EventRegistry
         register(new TickEvents());
         register(new CustomizationEvents());
         register(new AnimalEvents());
+        register(new LootEvents());
     }
 
     public static void registerEventsOnModBus(IEventBus modEventBus)
