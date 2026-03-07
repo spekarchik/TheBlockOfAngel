@@ -648,7 +648,7 @@ public class LootEvents implements IEventHandler
                     .build();
 
             var pool2 = LootPool.lootPool()
-                    .add(LootItem.lootTableItem(Items.BOOK).apply(EnchantWithLevelsFunction.enchantWithLevels(event.getRegistries(), UniformGenerator.between(25f, 30f)).fromOptions(event.getRegistries().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ON_GOOD_LOOT_ENCHANTMENTS))))
+                    .add(LootItem.lootTableItem(Items.BOOK).apply(EnchantWithLevelsFunction.enchantWithLevels(event.getRegistries(), UniformGenerator.between(25f, 30f)).withOptions(event.getRegistries().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ON_GOOD_LOOT_ENCHANTMENTS))))
                     .setRolls(ConstantValue.exactly(1f))
                     .build();
 
