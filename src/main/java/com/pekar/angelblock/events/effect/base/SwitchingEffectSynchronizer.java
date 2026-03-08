@@ -1,7 +1,5 @@
 package com.pekar.angelblock.events.effect.base;
 
-import com.pekar.angelblock.events.effect.State;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.pekar.angelblock.events.effect.base;
 
 import com.pekar.angelblock.events.armor.IPlayerArmor;
-import com.pekar.angelblock.events.effect.State;
 import com.pekar.angelblock.events.mob.IModMobEffectInstance;
 import com.pekar.angelblock.events.player.IPlayer;
 import net.minecraft.core.Holder;
