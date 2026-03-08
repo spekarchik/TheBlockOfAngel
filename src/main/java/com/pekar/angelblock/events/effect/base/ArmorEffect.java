@@ -5,7 +5,6 @@ import com.pekar.angelblock.events.armor.IAnimalArmor;
 import com.pekar.angelblock.events.armor.IArmor;
 import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.effect.PlayerArmorEffectSetup;
-import com.pekar.angelblock.events.effect.State;
 import com.pekar.angelblock.events.mob.IMob;
 import com.pekar.angelblock.events.mob.IModMobEffectInstance;
 import com.pekar.angelblock.events.mob.ModMobEffectInstance;
