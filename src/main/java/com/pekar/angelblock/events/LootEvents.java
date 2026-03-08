@@ -1,11 +1,13 @@
 package com.pekar.angelblock.events;
 
+import com.pekar.angelblock.Main;
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
@@ -19,6 +21,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 
 import static com.pekar.angelblock.loot.LootRegistry.*;
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
 
 public class LootEvents implements IEventHandler
 {
@@ -32,7 +35,7 @@ public class LootEvents implements IEventHandler
 
     private void chestLootTableLoad(LootTableLoadEvent event)
     {
-        if (event.getName().toString().equals("minecraft:chests/abandoned_mineshaft"))
+        if (event.getKey().equals(BuiltInLootTables.ABANDONED_MINESHAFT))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.STRENGTH_PEARL).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(0f, 4f))))
@@ -47,7 +50,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/ancient_city"))
+        if (event.getKey().equals(BuiltInLootTables.ANCIENT_CITY))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.SUPER_POWDER).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 2f))))
@@ -60,7 +63,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/bastion_bridge"))
+        if (event.getKey().equals(BuiltInLootTables.BASTION_BRIDGE))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(BlockRegistry.NETHER_BARS).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 10f))))
@@ -72,7 +75,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/bastion_hoglin_stable"))
+        if (event.getKey().equals(BuiltInLootTables.BASTION_HOGLIN_STABLE))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(BlockRegistry.NETHER_BARS).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 10f))))
@@ -84,7 +87,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/bastion_other"))
+        if (event.getKey().equals(BuiltInLootTables.BASTION_OTHER))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(BlockRegistry.NETHER_BARS).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 5f))))
@@ -96,7 +99,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/bastion_treasure"))
+        if (event.getKey().equals(BuiltInLootTables.BASTION_TREASURE))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(BlockRegistry.NETHER_BARS).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f))))
@@ -108,7 +111,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/buried_treasure"))
+        if (event.getKey().equals(BuiltInLootTables.BURIED_TREASURE))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.SUPER_ARMOR_UPGRADE_KIT))
@@ -129,7 +132,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/desert_pyramid"))
+        if (event.getKey().equals(BuiltInLootTables.DESERT_PYRAMID))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.VESICULAR_TERRACOTTA).setWeight(1))
@@ -152,7 +155,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/end_city_treasure"))
+        if (event.getKey().equals(BuiltInLootTables.END_CITY_TREASURE))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.END_SAPPHIRE).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 2f))))
@@ -163,7 +166,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/igloo_chest"))
+        if (event.getKey().equals(BuiltInLootTables.IGLOO_CHEST))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.ANCIENT_CANINE).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 5f))))
@@ -182,7 +185,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/jungle_temple"))
+        if (event.getKey().equals(BuiltInLootTables.JUNGLE_TEMPLE))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.LIMONITE_ARMOR_UPGRADE_KIT).setWeight(2))
@@ -220,7 +223,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/nether_bridge"))
+        if (event.getKey().equals(BuiltInLootTables.NETHER_BRIDGE))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.FLAME_STONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(0f, 2f))))
@@ -251,7 +254,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/pillager_outpost"))
+        if (event.getKey().equals(BuiltInLootTables.PILLAGER_OUTPOST))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.STRENGTH_PEARL).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 2f))))
@@ -264,7 +267,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/ruined_portal"))
+        if (event.getKey().equals(BuiltInLootTables.RUINED_PORTAL))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.SLIME_BALL).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 2f))))
@@ -280,7 +283,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/shipwreck_treasure"))
+        if (event.getKey().equals(BuiltInLootTables.SHIPWRECK_TREASURE))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.SHULKER_SHELL).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))
@@ -293,7 +296,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/simple_dungeon"))
+        if (event.getKey().equals(BuiltInLootTables.SIMPLE_DUNGEON))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.MINER_FIGURE))
@@ -312,7 +315,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/stronghold_corridor"))
+        if (event.getKey().equals(BuiltInLootTables.STRONGHOLD_CORRIDOR))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.DIAMITHIC_ARMOR_UPGRADE_KIT).setWeight(2))
@@ -363,7 +366,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/stronghold_crossing"))
+        if (event.getKey().equals(BuiltInLootTables.STRONGHOLD_CROSSING))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.DIAMITHIC_ARMOR_UPGRADE_KIT).setWeight(2))
@@ -414,7 +417,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/stronghold_library"))
+        if (event.getKey().equals(BuiltInLootTables.STRONGHOLD_LIBRARY))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.ANCIENT_SCROLL).setWeight(1))
@@ -457,7 +460,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/underwater_ruin_big"))
+        if (event.getKey().equals(BuiltInLootTables.UNDERWATER_RUIN_BIG))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.MARINE_CRYSTAL).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0f, 2f))))
@@ -487,7 +490,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/underwater_ruin_small"))
+        if (event.getKey().equals(BuiltInLootTables.UNDERWATER_RUIN_SMALL))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FIRE_CORAL).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0f, 2f))))
@@ -509,7 +512,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/woodland_mansion"))
+        if (event.getKey().equals(BuiltInLootTables.WOODLAND_MANSION))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.EVOKER_AMULET).setWeight(2))
@@ -557,7 +560,7 @@ public class LootEvents implements IEventHandler
 
     private void villageChestLootTableLoad(LootTableLoadEvent event)
     {
-        if (event.getName().toString().equals("minecraft:chests/village/village_armorer"))
+        if (event.getKey().equals(BuiltInLootTables.VILLAGE_ARMORER))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.RENDELITHIC_ARMOR_UPGRADE_KIT).setWeight(1))
@@ -588,7 +591,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/village/village_fisher"))
+        if (event.getKey().equals(BuiltInLootTables.VILLAGE_FISHER))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FISHING_ROD).apply(EnchantRandomlyFunction.randomEnchantment().withOneOf(event.getRegistries().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ON_GOOD_LOOT_ENCHANTMENTS))))
@@ -600,7 +603,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/village/village_fletcher"))
+        if (event.getKey().equals(BuiltInLootTables.VILLAGE_FLETCHER))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.BOOK).apply(EnchantRandomlyFunction.randomEnchantment().withOneOf(event.getRegistries().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(FLETCHER_SPECIFIC_ENCHANTMENTS))))
@@ -611,7 +614,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/village/village_tannery"))
+        if (event.getKey().equals(BuiltInLootTables.VILLAGE_TANNERY))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.RENDELITHIC_ARMOR_UPGRADE_KIT).setWeight(1))
@@ -640,7 +643,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/village/village_temple"))
+        if (event.getKey().equals(BuiltInLootTables.VILLAGE_TEMPLE))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.EXPERIENCE_BOTTLE))
@@ -657,7 +660,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/village/village_toolsmith"))
+        if (event.getKey().equals(BuiltInLootTables.VILLAGE_TOOLSMITH))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.RENDELITHIC_TOOL_UPGRADE_KIT).setWeight(1))
@@ -679,7 +682,7 @@ public class LootEvents implements IEventHandler
             return;
         }
 
-        if (event.getName().toString().equals("minecraft:chests/village/village_weaponsmith"))
+        if (event.getKey().equals(BuiltInLootTables.VILLAGE_WEAPONSMITH))
         {
             var pool1 = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.RENDELITHIC_TOOL_UPGRADE_KIT).setWeight(1))
@@ -704,7 +707,8 @@ public class LootEvents implements IEventHandler
 
     private void entitiesLootTableLoad(LootTableLoadEvent event)
     {
-        if (event.getName().toString().equals("minecraft:entities/elder_guardian"))
+        var elderGuardianLootTableId = createResourceLocation(Main.VANILLAID, "entities/elder_guardian");
+        if (event.getName().equals(elderGuardianLootTableId))
         {
             var pool = LootPool.lootPool()
                     .add(LootItem.lootTableItem(ItemRegistry.GUARDIAN_EYE).apply(LimitCount.limitCount(IntRange.exact(1))))
