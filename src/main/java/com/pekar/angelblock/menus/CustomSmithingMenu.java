@@ -1,8 +1,5 @@
 package com.pekar.angelblock.menus;
 
-import com.pekar.angelblock.armor.ArmorRegistry;
-import com.pekar.angelblock.armor.ModAnimalArmor;
-import com.pekar.angelblock.armor.ModArmorMaterial;
 import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.tools.*;
@@ -73,31 +70,31 @@ public class CustomSmithingMenu extends SmithingMenu
         {
             if (mainItem.getItem() instanceof ModHumanoidArmor armor)
             {
-                var materialName = armor.getArmorMaterial().getMaterialName();
+                var armorType = armor.getArmorType();
 
                 boolean isResultModArmor = result.getItem() instanceof ModHumanoidArmor;
                 var resultAsModArmor = isResultModArmor ? (ModHumanoidArmor)result.getItem() : null;
 
                 Item plate;
 
-                switch (materialName)
+                switch (armorType)
                 {
-                    case ModArmorMaterial.RENDELITHIC_MATERIAL_NAME:
+                    case RENDELITE:
                         plate = ItemRegistry.RENDELITHIC_PLATE.get();
                         break;
-                    case ModArmorMaterial.LIMONITE_MATERIAL_NAME:
+                    case LYMONITE:
                         plate = ItemRegistry.LIMONITE_PLATE.get();
                         break;
-                    case ModArmorMaterial.DIAMITHIC_MATERIAL_NAME:
+                    case DIAMITE:
                         plate = ItemRegistry.DIAMITHIC_PLATE.get();
                         break;
-                    case ModArmorMaterial.LAPIS_MATERIAL_NAME:
+                    case AQUARITE:
                         plate = ItemRegistry.LAPIS_PLATE.get();
                         break;
-                    case ModArmorMaterial.SUPER_MATERIAL_NAME:
+                    case SUPERYTE:
                         plate = ItemRegistry.SUPER_PLATE.get();
                         break;
-                    case ModArmorMaterial.FLYING_MATERIAL_NAME:
+                    case AERYTE:
                         plate = ItemRegistry.FLYING_PLATE.get();
                         break;
                     default:
