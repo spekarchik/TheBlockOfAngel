@@ -125,14 +125,19 @@ public class DiamiteArmorController extends PlayerArmor
     public void onLivingDamageEvent(LivingDamageEvent.Pre event)
     {
         var damageSource = event.getSource();
+
         if (isExplosionDamage(damageSource))
         {
             if (player.isChestPlateModifiedWithStrengthBooster(this))
-                event.setNewDamage(event.getNewDamage() * 0.5f);
+            {
+                float newDamage = recalculateArmorTypeDamage(event, 2F);
+                event.setNewDamage(newDamage);
+            }
         }
         else if (isBiting(damageSource.getEntity()))
         {
-            event.setNewDamage(event.getNewDamage() * 2f);
+            float newDamage = recalculateArmorTypeDamage(event, 0F);
+            event.setNewDamage(newDamage);
         }
     }
 

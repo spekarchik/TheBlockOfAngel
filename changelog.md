@@ -5,6 +5,27 @@
   Hunger was draining too quickly while Lymonite and Superyte Armor regenerated health in rain.
   Exhaustion gain has been reduced **4×**.
 
+### ⚙️ Armor Mechanics Update
+Reworked several armor weaknesses to make them more consistent and intuitive.
+
+**Limonite Armor**
+- Explosions and Wind Charge attacks now bypass armor protection.
+- Durability now drains **10× faster** when damaged by these sources.
+
+**Limonite Horse Armor**
+- Explosions and Wind Charge attacks now bypass armor protection.
+
+**Lapis Armor**
+- Fire, Magma, and Lava now bypass armor protection and wear the armor **10× faster**.
+- Freezing damage still deals **double damage**.
+
+**Diamithic Armor**
+- Bites from spiders, silverfish, and bees now bypass armor protection.
+
+**General Changes**
+- Armor no longer increases incoming damage (except for freezing).
+- Weaknesses now work by **bypassing armor protection** or **accelerating durability loss**, making armor behavior more predictable.
+
 
 ## 📦 Version 3.2.0
 
