@@ -223,7 +223,7 @@ public class FlyingArmorController extends PlayerArmor
     }
 
     @Override
-    public void onCreeperCheck()
+    public void onHeavyTick()
     {
         updateSlowFallingEffect();
 
