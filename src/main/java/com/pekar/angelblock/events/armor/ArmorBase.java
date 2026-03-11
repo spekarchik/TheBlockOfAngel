@@ -9,6 +9,8 @@ import net.minecraft.world.entity.animal.fish.Pufferfish;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Silverfish;
 import net.minecraft.world.entity.monster.spider.Spider;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 abstract class ArmorBase implements IArmor
 {
@@ -86,4 +88,17 @@ abstract class ArmorBase implements IArmor
         boolean isBee = entity instanceof Bee;
         return isSilverfish || isEndermite || isSpider || isBee;
     }
+
+    protected float recalculateArmorTypeDamage(LivingDamageEvent.Pre event, float damageReductionFactor)
+    {
+        float damageReductionByArmor = event.getContainer().getReduction(DamageContainer.Reduction.ARMOR);
+        float armorTypeDefenseRatio = getArmorTypeDefenseRatio();
+        float damageReductionByArmorType = damageReductionByArmor * armorTypeDefenseRatio;
+        float adjustedDamageReductionByArmorType = damageReductionByArmorType * damageReductionFactor;
+        float damageReductionCorrection = adjustedDamageReductionByArmorType - damageReductionByArmorType;
+        float adjustedNewDamage = event.getNewDamage() - damageReductionCorrection;
+        return adjustedNewDamage;
+    }
+
+    protected abstract float getArmorTypeDefenseRatio();
 }

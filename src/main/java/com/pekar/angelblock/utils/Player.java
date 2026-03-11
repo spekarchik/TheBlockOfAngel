@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class Player
 {
@@ -30,6 +32,11 @@ public class Player
     Player()
     {
 
+    }
+
+    public Set<ArmorType> getArmorTypes()
+    {
+        return Set.of(ArmorType.HELMET, ArmorType.CHESTPLATE, ArmorType.LEGGINGS, ArmorType.BOOTS);
     }
 
     public List<ItemStack> getArmorInSlots(LivingEntity entity)

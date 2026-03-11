@@ -41,7 +41,7 @@
   "item.angelblock.horse_lymonite_armor.desc7": "Характарыстыкі бранi",
   "item.angelblock.horse_lymonite_armor.desc8": " Імунітэт: замярзанне, атручванне, калючыя расліны",
   "item.angelblock.horse_lymonite_armor.desc9": " Асаблівасці: Не тоне ў Рыхлым снезе",
-  "item.angelblock.horse_lymonite_armor.desc10": " Уразлівасці: Высушэнне, выбухі — шкода +50%; Зарад ветру - шкода +200%",
+  "item.angelblock.horse_lymonite_armor.desc10": " Уразлівасці: Выбухі і Зарад ветру ігнаруюць абарону брані",
   "item.angelblock.horse_lymonite_armor.desc11": " Павышэнне здароўя: 2",
   "item.angelblock.horse_lymonite_armor.desc12": "",
   "item.angelblock.horse_lymonite_armor.desc13": "",
@@ -85,7 +85,7 @@
   "angelblock.diamithic_armor.desc14": "",
 
   "angelblock.lapis_armor.desc1": "§f§lПрызначэнне:§r§7 Падводны свет. Добрая абарона. Набор функцый спецыфічны для падводнага выжывання. Успрымальнасць да высокіх і нізкіх тэмператур",
-  "angelblock.lapis_armor.desc2": "§f§lУразлівасці:§r§7 агонь, магма, лава — шкода +20%; мароз — шкода +100%",
+  "angelblock.lapis_armor.desc2": "§f§lУразлівасці:§r§7 Агонь, Магма і Лава ігнаруюць абарону брані і зношваюць яе ў 10× хутчэй; Замярзанне наносіць падвойную шкоду",
   "angelblock.lapis_armor.desc3": "§f§lУласцівасці:§r§7 Кантакт з агнём і магмай выклікае эфект Высушэння на 30 сек",
   "angelblock.lapis_armor.desc4": "§6§lРамонт:§r§6 Акварытавы злітак",
   "angelblock.lapis_armor.desc5": "Агульныя характарыстыкі бранi",
@@ -100,7 +100,7 @@
   "angelblock.lapis_armor.desc14": "",
 
   "angelblock.limonite_armor.desc1": "§f§lПрызначэнне:§r§7 Універсальная браня. Слабаватая абарона, сярэдняя зносаўстойлівасць, але шырокі набор функцый. Падыходзіць для лесу, джунгляў, снежных біёмаў, гор, пячораў",
-  "angelblock.limonite_armor.desc2": "§f§lУразлівасці:§r§7 Высушэнне, выбухі — шкода +50%; Зарад ветру - шкода +200%",
+  "angelblock.limonite_armor.desc2": "§f§lУразлівасці:§r§7 Выбухі і Зарад ветру ігнаруюць браню; трываласць расходуецца ў 10× хутчэй",
   "angelblock.limonite_armor.desc3": "§f§lУласцівасці:§r§7 Пад дажджом аднаўляе здароўе да 10 HP. Абарона 50% ад укусаў павукоў, лускавіц, пчол. Абарона 100% ад замярзання. Нябачны для крыпераў на адлегласці больш за 3 блокі",
   "angelblock.limonite_armor.desc4": "§6§lРамонт:§r§6 Лайманітавы злітак",
   "angelblock.limonite_armor.desc5": "Агульныя характарыстыкі бранi",
