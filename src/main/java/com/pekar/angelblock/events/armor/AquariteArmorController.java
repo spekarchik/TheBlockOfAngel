@@ -153,7 +153,7 @@ public class AquariteArmorController extends PlayerArmor
     }
 
     @Override
-    public void onCreeperCheck()
+    public void onHeavyTick()
     {
         // none
     }
