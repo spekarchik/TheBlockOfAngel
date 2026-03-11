@@ -201,18 +201,28 @@ public class LymoniteArmorController extends PlayerArmor
         {
             if (player.isFullArmorSetPutOn(this))
             {
-                float damageAmount = event.getNewDamage();
-                event.setNewDamage(damageAmount * 0.5F);
+                float newDamage = recalculateArmorTypeDamage(event, 2F);
+                event.setNewDamage(newDamage);
             }
         }
-        else if (isVulnerable(damageSource))
+        else if (isVulnerable(damageSource) || damageSource.is(DamageTypes.WIND_CHARGE))
         {
-            event.setNewDamage(event.getNewDamage() * 1.5F);
+            float newDamage = recalculateArmorTypeDamage(event, 0F);
+            event.setNewDamage(newDamage);
         }
-        else if (damageSource.is(DamageTypes.WIND_CHARGE))
+    }
+
+    @Override
+    public void onArmorHurtEvent(ArmorHurtEvent event)
+    {
+        var damageSource = event.getDamageSource();
+
+        if (isVulnerable(damageSource) || damageSource.is(DamageTypes.WIND_CHARGE))
         {
-            event.setNewDamage(event.getNewDamage() * 3.0F);
+            setAdjustedArmorDamage(event, 10F);
         }
+
+        super.onArmorHurtEvent(event);
     }
 
     @Override
