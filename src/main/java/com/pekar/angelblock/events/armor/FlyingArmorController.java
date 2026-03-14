@@ -75,6 +75,7 @@ public class FlyingArmorController extends PlayerArmor
     @Override
     protected void updateActivityForFeetSlot()
     {
+        speedEffect.updateActivity();
     }
 
     @Override
@@ -92,7 +93,6 @@ public class FlyingArmorController extends PlayerArmor
     {
         slowFallingEffect.updateActivity();
         jumpBoostEffect.updateActivity();
-        speedEffect.updateActivity();
     }
 
     @Override
@@ -257,7 +257,8 @@ public class FlyingArmorController extends PlayerArmor
 
         return player.isArmorElementPutOn(this, EquipmentSlot.FEET)
                 && !player.isEffectActive(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT)
-//                && !player.isEffectActive(PotionRegistry.ENERGY_CRYSTAL_EFFECT)
+                && !player.isEffectActive(MobEffects.MOVEMENT_SLOWDOWN)
+                && !player.isEffectActive(PotionRegistry.ENERGY_CRYSTAL_EFFECT)
                 && boots.getDamageValue() < boots.getMaxDamage() / 2;
     }
 }

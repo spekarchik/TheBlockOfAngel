@@ -73,6 +73,7 @@ public class SuperyteArmorController extends PlayerArmor
         var jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, 5);
         jumpEffect.setupAvailability(this::availableOnBootsWithNoHeavyJump);
         var speedEffect = new SpeedSwitchingEffect(player, this, 1);
+        speedEffect.setupAvailability(this::isSpeedEffectAvailable);
         var strengthEffect = new StrengthSwitchingEffect(player, this, 2);
         waterBreathingEffect = new WaterBreathingPermanentEffect(player, this);
         hasteEffect = new HastePermanentArmorEffect(player, this);
@@ -539,5 +540,12 @@ public class SuperyteArmorController extends PlayerArmor
     private boolean isNightVisionAvailable(IPlayer player, IPlayerArmor armor)
     {
         return player.isArmorElementPutOn(this, EquipmentSlot.HEAD) && !player.isEffectActive(PotionRegistry.ELDER_GUARDIAN_EYE_EFFECT);
+    }
+
+    private boolean isSpeedEffectAvailable(IPlayer player, IPlayerArmor playerArmor)
+    {
+        return availableOnBootsWithNoHeavyJump(player, playerArmor)
+                && !player.isEffectActive(MobEffects.MOVEMENT_SLOWDOWN)
+                && !player.isEffectActive(PotionRegistry.ENERGY_CRYSTAL_EFFECT);
     }
 }
