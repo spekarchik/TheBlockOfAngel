@@ -36,9 +36,11 @@ public class SuperArmor extends ModHumanoidArmor
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
     {
+        if (isPlayerHeavy(wearer)) return false;
+
         var itemStack = wearer.getItemBySlot(EquipmentSlot.FEET);
         var bootsItem = itemStack.getItem();
         if (!(bootsItem instanceof ModHumanoidArmor boots)) return false;
-        return boots.getArmorType() == PlayerArmorType.SUPERYTE && !wearer.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT);
+        return boots.getArmorType() == PlayerArmorType.SUPERYTE;
     }
 }
