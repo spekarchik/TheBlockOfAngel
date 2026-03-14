@@ -88,12 +88,12 @@ public class FlyingArmorController extends PlayerArmor
     @Override
     protected void updateActivityForChestSlot()
     {
-        slowFallingEffect.updateActivity();
     }
 
     @Override
     protected void updateActivity(EquipmentSlot slot)
     {
+        slowFallingEffect.updateActivity();
         jumpBoostEffect.updateActivity();
         speedEffect.updateActivity();
     }
@@ -223,7 +223,7 @@ public class FlyingArmorController extends PlayerArmor
     }
 
     @Override
-    public void onCreeperCheck()
+    public void onHeavyTick()
     {
         updateSlowFallingEffect();
 

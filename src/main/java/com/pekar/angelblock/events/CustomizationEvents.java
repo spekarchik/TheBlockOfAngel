@@ -1,6 +1,5 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.menus.CustomCraftingMenu;
 import com.pekar.angelblock.menus.CustomCraftingMenuProvider;
 import com.pekar.angelblock.menus.CustomSmithingMenuProvider;
 import net.minecraft.core.BlockPos;
