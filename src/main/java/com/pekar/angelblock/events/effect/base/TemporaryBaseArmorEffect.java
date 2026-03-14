@@ -18,12 +18,14 @@ abstract class TemporaryBaseArmorEffect<M extends IMob, A extends IArmor> extend
     @Override
     public void tryActivate()
     {
+        updateAvailability();
         tryActivateInternal(defaultAmplifier, defaultDuration);
     }
 
     @Override
     public final void tryActivate(int duration)
     {
+        updateAvailability();
         tryActivateInternal(defaultAmplifier, duration);
     }
 

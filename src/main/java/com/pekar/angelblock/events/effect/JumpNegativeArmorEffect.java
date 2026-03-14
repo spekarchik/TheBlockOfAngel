@@ -7,6 +7,7 @@ import com.pekar.angelblock.network.packets.ForceLivingEquipmentChangeToClient;
 import com.pekar.angelblock.potions.ModMobEffect;
 import com.pekar.angelblock.potions.PotionRegistry;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffects;
 
 public class JumpNegativeArmorEffect extends NegativeTemporaryArmorEffect
 {
@@ -31,6 +32,21 @@ public class JumpNegativeArmorEffect extends NegativeTemporaryArmorEffect
             }
 
             playerEntity.removeEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT);
+        }
+
+        if (playerEntity.hasEffect(MobEffects.JUMP_BOOST))
+        {
+            playerEntity.removeEffect(MobEffects.JUMP_BOOST);
+        }
+
+        if (playerEntity.hasEffect(MobEffects.DOLPHINS_GRACE))
+        {
+            playerEntity.removeEffect(MobEffects.DOLPHINS_GRACE);
+        }
+
+        if (playerEntity.hasEffect(MobEffects.SPEED))
+        {
+            playerEntity.removeEffect(MobEffects.SPEED);
         }
     }
 
