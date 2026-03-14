@@ -1,3 +1,11 @@
+## 📦 Version 3.3.0
+
+### 📝 Improvements
+- Rain regeneration exhaustion rebalanced for **Lymonite and Superyte Armor**.
+  Hunger was draining too quickly while Lymonite and Superyte Armor regenerated health in rain.
+  Exhaustion gain has been reduced **4×**.
+
+
 ## 📦 Version 3.2.0
 
 ### 📝 Improvements
