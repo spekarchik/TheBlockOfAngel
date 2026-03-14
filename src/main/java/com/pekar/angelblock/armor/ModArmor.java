@@ -57,7 +57,7 @@ public abstract class ModArmor extends Item implements ITooltipProvider
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
     {
-        return stack.is(Items.LEATHER_BOOTS);
+        return false;
     }
 
     @Override
