@@ -6,8 +6,6 @@ public interface IModArmor
 {
     ModArmorMaterial getArmorMaterial();
 
-    String getArmorFamilyName();
-
     boolean isBroken(ItemStack stack);
 
     int getMaxDamage();

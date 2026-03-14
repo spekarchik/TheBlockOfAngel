@@ -228,7 +228,7 @@ public class LymoniteArmorController extends PlayerArmor
     }
 
     @Override
-    public void onCreeperCheck()
+    public void onHeavyTick()
     {
         var playerEntity = player.getPlayerEntity();
         if (!playerEntity.isUnderWater())

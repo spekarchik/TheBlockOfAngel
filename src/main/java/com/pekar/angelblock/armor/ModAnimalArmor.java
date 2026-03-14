@@ -38,12 +38,6 @@ public abstract class ModAnimalArmor extends AnimalArmorItem implements IModArmo
     }
 
     @Override
-    public String getArmorFamilyName()
-    {
-        return material.getMaterialName() + "_armor";
-    }
-
-    @Override
     public boolean isBroken(ItemStack stack)
     {
         return stack.getMaxDamage() - stack.getDamageValue() <= 1;

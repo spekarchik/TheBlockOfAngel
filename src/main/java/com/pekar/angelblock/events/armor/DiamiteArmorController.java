@@ -158,7 +158,7 @@ public class DiamiteArmorController extends PlayerArmor
     }
 
     @Override
-    public void onCreeperCheck()
+    public void onHeavyTick()
     {
         slownessEffect.updateAvailability();
         slownessEffect.updateActivity();
@@ -234,8 +234,6 @@ public class DiamiteArmorController extends PlayerArmor
     @Override
     public void onBeingInWater()
     {
-        slownessEffect.updateAvailability();
-        slownessEffect.updateActivity();
     }
 
     @Override

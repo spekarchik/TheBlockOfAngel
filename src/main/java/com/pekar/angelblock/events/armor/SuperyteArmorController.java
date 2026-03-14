@@ -297,7 +297,7 @@ public class SuperyteArmorController extends PlayerArmor
     }
 
     @Override
-    public void onCreeperCheck()
+    public void onHeavyTick()
     {
         updateSlowFallingEffect();
 

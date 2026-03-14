@@ -33,13 +33,16 @@ public abstract class ModArmor extends ArmorItem implements ITooltipProvider, IM
         return material;
     }
 
-    @Override
-    public String getArmorFamilyName()
+    public ArmorItem.Type getArmorSlotType()
     {
-        return material.getMaterialName() + "_armor";
+        return armorSlotType;
     }
 
-    @Override
+    public int getDefense()
+    {
+        return getArmorMaterial().getMaterial().value().getDefense(getArmorSlotType());
+    }
+
     public boolean isBroken(ItemStack stack)
     {
         return stack.getMaxDamage() - stack.getDamageValue() <= 1;
