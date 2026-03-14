@@ -293,11 +293,6 @@ public class RendeliteArmorController extends PlayerArmor
                 {
                     jumpEffect.trySwitchOff();
                 }
-
-                if (player.hasArmorEffect(MobEffects.JUMP_BOOST))
-                {
-                    player.getPlayerEntity().removeEffect(MobEffects.JUMP_BOOST);
-                }
             }
         }
     }

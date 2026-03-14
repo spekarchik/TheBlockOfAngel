@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.effect.*;
 import com.pekar.angelblock.events.effect.base.*;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
@@ -59,6 +60,7 @@ public class LymoniteArmorController extends PlayerArmor
         var jumpEffect = new JumpBoostSwitchingArmorEffect(player, this, JUMP_EFFECT_AMPLIFIER_DEFAULT);
         jumpEffect.setupAvailability(this::availableOnBootsWithNoHeavyJump);
         var speedEffect = new SpeedSwitchingEffect(player, this, 0);
+        speedEffect.setupAvailability(this::isSpeedEffectAvailable);
         var slowFallingEffect = new SlowFallingSwitchingEffect(player, this);
         slowFallingEffect.setup().availableIfSlotSet(EquipmentSlot.CHEST);
 
@@ -256,8 +258,8 @@ public class LymoniteArmorController extends PlayerArmor
             if (regenerationEffect.isAvailable() && !regenerationEffect.isAnyActive() && player.getPlayerEntity().getHealth() < player.getPlayerEntity().getMaxHealth())
             {
                 jumpEffect.trySwitchOff();
-                jumpNegativeEffect.tryActivate();
 
+                jumpNegativeEffect.tryActivate();
                 regenerationEffect.tryActivate();
             }
         }
@@ -354,5 +356,12 @@ public class LymoniteArmorController extends PlayerArmor
     private boolean isLuckEffectAvailable(IPlayer player, IPlayerArmor armor)
     {
         return player.isChestPlateModifiedWithLuck(armor);
+    }
+
+    private boolean isSpeedEffectAvailable(IPlayer player, IPlayerArmor playerArmor)
+    {
+        return availableOnBootsWithNoHeavyJump(player, playerArmor)
+                && !player.isEffectActive(MobEffects.SLOWNESS)
+                && !player.isEffectActive(PotionRegistry.ENERGY_CRYSTAL_EFFECT);
     }
 }

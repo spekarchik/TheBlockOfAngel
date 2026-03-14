@@ -35,6 +35,7 @@ public class SwitchingArmorEffect extends ArmorEffect<IPlayer, IPlayerArmor> imp
     @Override
     public void trySwitch(int amplifier)
     {
+        updateAvailability();
         var invertedState = getState().isOn() ? State.OFF : State.ON;
         trySwitchTo(isAvailable() && invertedState.isOn(), amplifier);
     }
@@ -42,6 +43,8 @@ public class SwitchingArmorEffect extends ArmorEffect<IPlayer, IPlayerArmor> imp
     @Override
     public void trySwitchOn(int amplifier)
     {
+        updateAvailability();
+
         if (isAnotherActive())
         {
             if (isInfinite()) updateActivity(amplifier);
@@ -60,6 +63,7 @@ public class SwitchingArmorEffect extends ArmorEffect<IPlayer, IPlayerArmor> imp
     @Override
     public void trySwitchOff()
     {
+        updateAvailability();
         tryRemove();
     }
 
