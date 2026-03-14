@@ -64,7 +64,7 @@ public class LymoniteHorseArmorController extends AnimalArmor
     {
         var damageSource = event.getSource();
 
-        if (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.WITHER))
+        if (isExplosionDamage(damageSource) || damageSource.is(DamageTypes.WITHER))
         {
             event.setNewDamage(event.getNewDamage() * 1.5F);
         }

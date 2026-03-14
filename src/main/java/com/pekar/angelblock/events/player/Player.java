@@ -4,11 +4,13 @@ import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.mob.Mob;
-import com.pekar.angelblock.network.packets.HoldingAngelRodPacket;
 import com.pekar.angelblock.tools.ToolRegistry;
 import com.pekar.angelblock.utils.Utils;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
@@ -256,12 +258,28 @@ public class Player extends Mob implements IPlayer
 
     private boolean generatePacketIfHoldsAngel(ItemStack handItemStack)
     {
+        final double EFFECTIVE_RADIUS = 20.0;
+
         if (handItemStack.isEmpty()) return false;
 
         var item = handItemStack.getItem();
         if (item != ToolRegistry.ANGEL_ROD.get()) return false;
 
-        new HoldingAngelRodPacket().sendToServer();
+        if (!(entity instanceof ServerPlayer serverPlayer)) return false;
+
+        var monsters = serverPlayer.level().getEntities((LivingEntity)null,
+                serverPlayer.getBoundingBox().inflate(EFFECTIVE_RADIUS),
+                entity -> entity instanceof Enemy);
+
+        for (Entity entity : monsters)
+        {
+            if (serverPlayer.getFoodData().getFoodLevel() > 0)
+            {
+                entity.discard();
+                Utils.instance.player.causePlayerExhaustion(serverPlayer, 2);
+            }
+        }
+
         return true;
     }
 }

@@ -7,23 +7,30 @@ import java.util.function.Function;
 
 public enum PlayerArmorType
 {
-    RENDELITE(RendeliteArmorController::new),
-    DIAMITE(DiamiteArmorController::new),
-    AQUARITE(AquariteArmorController::new),
-    LYMONITE(LymoniteArmorController::new),
-    AERYTE(FlyingArmorController::new),
-    SUPERYTE(SuperyteArmorController::new),
-    OTHER(p -> {throw new UnsupportedOperationException();});
+    RENDELITE(RendeliteArmorController::new, ModArmorMaterial.RENDELITHIC),
+    DIAMITE(DiamiteArmorController::new, ModArmorMaterial.DIAMITHIC),
+    AQUARITE(AquariteArmorController::new, ModArmorMaterial.LAPIS),
+    LYMONITE(LymoniteArmorController::new, ModArmorMaterial.LIMONITE),
+    AERYTE(FlyingArmorController::new, ModArmorMaterial.FLYING),
+    SUPERYTE(SuperyteArmorController::new, ModArmorMaterial.SUPER),
+    OTHER(p -> {throw new UnsupportedOperationException();}, null);
 
-    private final Function<IPlayer, ? extends IPlayerArmor> armorBehaviorFactory;
+    private final Function<IPlayer, ? extends IPlayerArmor> armorControllerFactory;
+    private final ModArmorMaterial material;
 
-    PlayerArmorType(Function<IPlayer, ? extends IPlayerArmor> armorBehaviorFactory)
+    PlayerArmorType(Function<IPlayer, ? extends IPlayerArmor> armorControllerFactory, ModArmorMaterial material)
     {
-        this.armorBehaviorFactory = armorBehaviorFactory;
+        this.armorControllerFactory = armorControllerFactory;
+        this.material = material;
     }
 
     public IPlayerArmor createController(IPlayer player)
     {
-        return armorBehaviorFactory.apply(player);
+        return armorControllerFactory.apply(player);
+    }
+
+    public ModArmorMaterial getMaterial()
+    {
+        return material;
     }
 }
