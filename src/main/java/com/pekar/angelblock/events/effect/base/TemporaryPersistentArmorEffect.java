@@ -42,6 +42,7 @@ abstract class TemporaryPersistentArmorEffect<M extends IMob, A extends IArmor>
     @Override
     public void tryActivate(int amplifier, int duration)
     {
+        updateAvailability();
         super.tryActivateInternal(amplifier, duration);
     }
 

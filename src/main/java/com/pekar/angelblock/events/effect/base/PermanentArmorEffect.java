@@ -31,6 +31,7 @@ class PermanentArmorEffect<M extends IMob, A extends IArmor>
     @Override
     public void tryActivate(int amplifier)
     {
+        updateAvailability();
         super.tryActivateInternal(amplifier, MobEffectInstance.INFINITE_DURATION);
     }
 
