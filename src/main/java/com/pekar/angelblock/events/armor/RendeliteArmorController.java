@@ -164,7 +164,7 @@ public class RendeliteArmorController extends PlayerArmor
     }
 
     @Override
-    public void onCreeperCheck()
+    public void onHeavyTick()
     {
         if (player.getPlayerEntity() instanceof ServerPlayer serverPlayer)
             breakBlockUnderPlayer(serverPlayer,true, isIcePredicate, Blocks.WATER.defaultBlockState(), playIceBreakSound, 32);

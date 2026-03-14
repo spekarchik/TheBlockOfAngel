@@ -23,7 +23,6 @@ public final class NetworkingEventHandler implements IEventHandler
         registerPacket(registrar, new KeyPressedPacket());
         registerPacket(registrar, new ToolsModeChangePacket());
         registerPacket(registrar, new PlaySoundPacket());
-        registerPacket(registrar, new HoldingAngelRodPacket());
         registerPacket(registrar, new UpdateArmorDurabilityPacketToServer());
         registerPacket(registrar, new UpdateArmorDurabilityPacketToClient());
         registerPacket(registrar, new FindAllayPacketToClient());
