@@ -32,6 +32,16 @@ public class SlownessPermanentArmorEffect extends PermanentPlayerArmorEffect
 
             playerEntity.removeEffect(PotionRegistry.ENERGY_CRYSTAL_EFFECT);
         }
+
+        if (playerEntity.hasEffect(MobEffects.MOVEMENT_SPEED))
+        {
+            playerEntity.removeEffect(MobEffects.MOVEMENT_SPEED);
+        }
+
+        if (playerEntity.hasEffect(MobEffects.DOLPHINS_GRACE))
+        {
+            playerEntity.removeEffect(MobEffects.DOLPHINS_GRACE);
+        }
     }
 
     @Override

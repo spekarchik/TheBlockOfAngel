@@ -7,6 +7,7 @@ import com.pekar.angelblock.events.effect.base.IArmorEffectWithOptions;
 import com.pekar.angelblock.events.effect.base.IPlayerArmorEffectSetup;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.potions.PotionRegistry;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 
 public class PlayerArmorEffectSetup<E extends IArmorEffectWithOptions<IPlayer, IPlayerArmor>> extends ArmorEffectSetup<E, IPlayer, IPlayerArmor> implements IPlayerArmorEffectSetup<E>
@@ -40,7 +41,7 @@ public class PlayerArmorEffectSetup<E extends IArmorEffectWithOptions<IPlayer, I
     @Override
     public IArmorEffectSetup<E, IPlayer, IPlayerArmor> availableOnBootsWithSeaPower()
     {
-        effect.setupAvailability(IPlayer::areBootsModifiedWithSeaPower);
+        effect.setupAvailability(this::areBootsModifiedWithSeaPowerAndNoHeavyJump);
         return this;
     }
 
@@ -91,5 +92,12 @@ public class PlayerArmorEffectSetup<E extends IArmorEffectWithOptions<IPlayer, I
     {
         effect.setupAvailability((player1, armor1) -> player1.isAllArmorElementsPutOn(armor1, slots));
         return this;
+    }
+
+    private boolean areBootsModifiedWithSeaPowerAndNoHeavyJump(IPlayer player, IPlayerArmor playerArmor)
+    {
+        return player.areBootsModifiedWithSeaPower(playerArmor)
+                && !player.isEffectActive(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT)
+                && !(player.hasArmorEffect(MobEffects.MOVEMENT_SLOWDOWN));
     }
 }
