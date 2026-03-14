@@ -20,6 +20,6 @@ public interface IPlayerArmorEvents
     void onBeingInLava();
     void onBeingInWater();
     void onBeingUnderRain();
-    void onCreeperCheck();
+    void onHeavyTick();
     void onEffectAddedEvent(MobEffectEvent.Added event);
 }

@@ -41,7 +41,7 @@ public class TickEvents implements IEventHandler
             for (IPlayerArmor armor : player.getArmorTypesUsed())
             {
                 if (runHeavy)
-                    armor.onCreeperCheck();
+                    armor.onHeavyTick();
 
                 if (serverPlayer.isInWater())
                 {
