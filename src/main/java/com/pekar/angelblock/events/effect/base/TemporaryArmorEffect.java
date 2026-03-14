@@ -37,6 +37,7 @@ class TemporaryArmorEffect<M extends IMob, A extends IArmor>
     public void tryActivate(int amplifier, int duration)
     {
         if (isAnotherActive()) return;
+        updateAvailability();
         super.tryActivateInternal(amplifier, duration);
     }
 
