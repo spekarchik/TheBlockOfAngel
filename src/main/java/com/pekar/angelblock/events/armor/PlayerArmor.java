@@ -21,6 +21,7 @@ import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -29,6 +30,7 @@ import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
@@ -39,10 +41,12 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
     private boolean needUpdateStatesAfterLogin = false;
     private final PlayerArmorType armorType;
 
+    private final int MAX_ARMOR_TYPE_DEFENSE;
+
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
     private static final double CREEPER_AGRY_DISTANCE = 3.0;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 20;
-    protected static final float EXHAUSTION_INCREMENT = 0.8F;
+    protected static final float EXHAUSTION_INCREMENT = 0.2F;
     protected static final int UNDER_RAIN_REGENERATION_EFFECT_DURATION = 100;
 
     protected final TriPredicate<Block, BlockPos, Level> isIcePredicate = (block, pos, level) ->
@@ -72,6 +76,16 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
     {
         this.player = player;
         this.armorType = armorType;
+
+        var materialDefense = armorType.getMaterial().getMaterial().defense();
+        int maxDefense = 0;
+        for (var armorItemType : Set.of(ArmorType.HELMET, ArmorType.CHESTPLATE, ArmorType.LEGGINGS, ArmorType.BOOTS))
+        {
+            int armorTypeDefense = materialDefense.get(armorItemType);
+            maxDefense += armorTypeDefense;
+        }
+
+        MAX_ARMOR_TYPE_DEFENSE = maxDefense;
     }
 
     protected abstract void updateAvailability();
@@ -332,6 +346,11 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
             return false;
 
         return player.isArmorElementPutOn(armor, EquipmentSlot.FEET);
+    }
+
+    protected final float getFullArmorSetDefense()
+    {
+        return MAX_ARMOR_TYPE_DEFENSE;
     }
 
     @Override

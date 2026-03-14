@@ -75,7 +75,7 @@ abstract class ArmorBase implements IArmor
 
     protected boolean isExplosionDamage(DamageSource damageSource)
     {
-        return damageSource.is(DamageTypes.EXPLOSION);
+        return damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION);
     }
 
     protected boolean isBiting(Entity entity)

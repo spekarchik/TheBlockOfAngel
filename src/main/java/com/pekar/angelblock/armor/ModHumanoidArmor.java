@@ -233,6 +233,11 @@ public class ModHumanoidArmor extends ModArmor
         return getDescriptionId();
     }
 
+    private String getArmorFamilyName()
+    {
+        return material.getMaterialName() + "_armor";
+    }
+
     private String getCommonDescriptionRoot()
     {
         return getFullArmorModelName(getArmorFamilyName()).replace(':', '.').replaceAll("[0-9]", "");

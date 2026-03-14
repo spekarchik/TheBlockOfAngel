@@ -173,7 +173,8 @@ public class PlayerManager implements IEventHandler, IPlayerManager
 
             ToIntFunction<IPlayerArmor> armorPriority = getArmorPriorityFunction(event);
 
-            for (IPlayerArmor armor : armorAffected.stream().sorted(Comparator.comparingInt(armorPriority)).toList())
+            var sortedArmor = armorAffected.stream().sorted(Comparator.comparingInt(armorPriority)).toList();
+            for (IPlayerArmor armor : sortedArmor)
             {
                 armor.onLivingEquipmentChangeEvent(event);
             }
