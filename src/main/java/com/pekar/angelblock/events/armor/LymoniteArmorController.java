@@ -207,7 +207,7 @@ public class LymoniteArmorController extends PlayerArmor
                 event.setNewDamage(newDamage);
             }
         }
-        else if (isVulnerable(damageSource) || damageSource.is(DamageTypes.WIND_CHARGE))
+        else if (isVulnerable(damageSource))
         {
             float newDamage = recalculateArmorTypeDamage(event, 0F);
             event.setNewDamage(newDamage);
@@ -219,7 +219,7 @@ public class LymoniteArmorController extends PlayerArmor
     {
         var damageSource = event.getDamageSource();
 
-        if (isVulnerable(damageSource) || damageSource.is(DamageTypes.WIND_CHARGE))
+        if (isVulnerable(damageSource))
         {
             setAdjustedArmorDamage(event, 10F);
         }
