@@ -41,7 +41,7 @@
   "item.angelblock.horse_lymonite_armor.desc7": "Armor general stats",
   "item.angelblock.horse_lymonite_armor.desc8": " Immunity: Freezing, Poison, plant thorns damage",
   "item.angelblock.horse_lymonite_armor.desc9": " Features: Does not sink in Powder Snow",
-  "item.angelblock.horse_lymonite_armor.desc10": " Weaknesses: Wither and explosions: +50% damage; Wind Charge: +200% damage",
+  "item.angelblock.horse_lymonite_armor.desc10": " Weaknesses: Explosions and Wind Charge bypass armor protection",
   "item.angelblock.horse_lymonite_armor.desc11": " Health Boost: 2",
   "item.angelblock.horse_lymonite_armor.desc12": "",
   "item.angelblock.horse_lymonite_armor.desc13": "",
@@ -70,7 +70,7 @@
   "angelblock.rendelithic_armor.desc14": "",
 
   "angelblock.diamithic_armor.desc1": "§f§lPurpose:§r§7 For boss fights, a versatile armor. Excellent protection, decent functionality. Heavy",
-  "angelblock.diamithic_armor.desc2": "§f§lWeaknesses:§r§7 bites from spiders, silverfish, or bees §o(double damage)",
+  "angelblock.diamithic_armor.desc2": "§f§lWeaknesses:§r§7 Bites from Spiders, Silverfish, or Bees bypass armor protection",
   "angelblock.diamithic_armor.desc3": "§f§lTraits:§r§7 Grants full protection against lightning strikes. Slows down the player. Chance to fall through Ice and Netherrack (Netherrack affected by jumping only). Slow Falling prevents falling, but only when jumping",
   "angelblock.diamithic_armor.desc4": "§6§lRepair:§r§6 Diamite Ingot",
   "angelblock.diamithic_armor.desc5": "Armor general stats",
@@ -85,7 +85,7 @@
   "angelblock.diamithic_armor.desc14": "",
 
   "angelblock.lapis_armor.desc1": "§f§lPurpose:§r§7 Designed for underwater survival. Good protection. Sensitive to extreme temperatures",
-  "angelblock.lapis_armor.desc2": "§f§lWeaknesses:§r§7 fire, magma, and lava: +20% damage; freezing: +100% damage",
+  "angelblock.lapis_armor.desc2": "§f§lWeaknesses:§r§7 Fire, Magma, and Lava bypass armor and wear it much faster (~10×); Freezing deals double damage",
   "angelblock.lapis_armor.desc3": "§f§lTraits:§r§7 Contact with fire or magma applies Wither effect for 30 sec",
   "angelblock.lapis_armor.desc4": "§6§lRepair:§r§6 Aquarite Ingot",
   "angelblock.lapis_armor.desc5": "Armor general stats",
@@ -100,7 +100,7 @@
   "angelblock.lapis_armor.desc14": "",
 
   "angelblock.limonite_armor.desc1": "§f§lPurpose:§r§7 All-purpose armor. Moderate protection, average durability, wide range of abilities. Suitable for forests, jungles, snowy biomes, mountains, and caves",
-  "angelblock.limonite_armor.desc2": "§f§lWeaknesses:§r§7 Wither and explosions: +50% damage; Wind Charge: +200% damage",
+  "angelblock.limonite_armor.desc2": "§f§lWeaknesses:§r§7 Explosions and Wind Charge bypass armor; durability drains much faster (~10×)",
   "angelblock.limonite_armor.desc3": "§f§lTraits:§r§7 Restores health under rain up to 10 HP. 50% bite protection (spiders, silverfish, bees). 100% freezing protection. Invisible to creepers beyond 3 blocks",
   "angelblock.limonite_armor.desc4": "§6§lRepair:§r§6 Lymonite Ingot",
   "angelblock.limonite_armor.desc5": "Armor general stats",

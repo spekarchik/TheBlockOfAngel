@@ -132,11 +132,13 @@ public class AquariteArmorController extends PlayerArmor
 
         if (isVulnerable(damageSource))
         {
-            event.setNewDamage(event.getNewDamage() * 1.2f);
+            var newDamage = recalculateArmorTypeDamage(event, 0F);
+            event.setNewDamage(newDamage);
+            damageArmor(20);
         }
         else if (isFreezeDamage(damageSource))
         {
-            event.setNewDamage(event.getNewDamage() * 2f);
+            event.setNewDamage(event.getNewDamage() * 2F);
         }
     }
 
