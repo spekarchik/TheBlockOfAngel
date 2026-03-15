@@ -1,8 +1,10 @@
 package com.pekar.angelblock.armor;
 
 import com.pekar.angelblock.Main;
+import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -57,6 +59,12 @@ public class ModHumanoidArmor extends ModArmor
         if (isAutoFlightDamage(stack, entity, amount)) return 0;
 
         return super.damageItem(stack, amount, entity, onBroken);
+    }
+
+    protected boolean isPlayerHeavy(LivingEntity player)
+    {
+        return player.hasEffect(PotionRegistry.ARMOR_HEAVY_JUMP_EFFECT)
+                || (player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN) && player.getEffect(MobEffects.MOVEMENT_SLOWDOWN).isInfiniteDuration());
     }
 
     public final boolean isModifiedWithDetector()
