@@ -11,7 +11,6 @@ import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -203,17 +202,15 @@ public class LymoniteArmorController extends PlayerArmor
         {
             if (player.isFullArmorSetPutOn(this))
             {
-                float damageAmount = event.getNewDamage();
-                event.setNewDamage(damageAmount * 0.5F);
+                float newDamage = recalculateArmorTypeDamage(event, 2F);
+                event.setNewDamage(newDamage);
             }
         }
         else if (isVulnerable(damageSource))
         {
-            event.setNewDamage(event.getNewDamage() * 1.5F);
-        }
-        else if (damageSource.is(DamageTypes.WIND_CHARGE))
-        {
-            event.setNewDamage(event.getNewDamage() * 3.0F);
+            float newDamage = recalculateArmorTypeDamage(event, 0F);
+            event.setNewDamage(newDamage);
+            damageArmor(50);
         }
     }
 
