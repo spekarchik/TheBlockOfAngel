@@ -49,6 +49,14 @@ public abstract class ModArmor extends Item implements ITooltipProvider
         return stack.getMaxDamage() - stack.getDamageValue() <= 1;
     }
 
+    public float getDurabilityPercent(ItemStack stack)
+    {
+        int maxDamage = getMaxDamage();
+        if (maxDamage <= 0) return 1.0f;
+        int durability = maxDamage - stack.getDamageValue();
+        return (float) durability / maxDamage;
+    }
+
     public int getMaxDamage()
     {
         return components().getOrDefault(DataComponents.MAX_DAMAGE, maxDamage);
