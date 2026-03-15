@@ -11,6 +11,7 @@ import com.pekar.angelblock.events.effect.base.SwitchingEffectSynchronizer;
 import com.pekar.angelblock.events.player.IPlayer;
 import com.pekar.angelblock.keybinds.KeyRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;

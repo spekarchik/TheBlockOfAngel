@@ -63,6 +63,8 @@ public class FlyingArmor extends ModHumanoidArmor
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
     {
+        if (isPlayerHeavy(wearer)) return false;
+
         return wearer.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof ModHumanoidArmor modArmor
                 && modArmor.getArmorType() == PlayerArmorType.AERYTE;
     }
