@@ -386,7 +386,8 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
             armorTypeDefense += getArmorType().getMaterial().getMaterial().defense().get(armorType) * durabilityPercent;
         }
 
-        return armorTypeDefense / playerEntity.getArmorValue();
+        float ratio = armorTypeDefense / playerEntity.getArmorValue();
+        return Float.isFinite(ratio) ? ratio : 0F;
     }
 
     protected final float getFullArmorSetDefense()
