@@ -269,7 +269,10 @@ public class SuperyteArmorController extends PlayerArmor
         else if (isExplosionDamage(damageSource))
         {
             if (player.isChestPlateModifiedWithStrengthBooster(this))
-                event.setNewDamage(event.getNewDamage() * 0.5f);
+            {
+                var newDamage = recalculateArmorTypeDamage(event, 2F);
+                event.setNewDamage(newDamage);
+            }
         }
     }
 

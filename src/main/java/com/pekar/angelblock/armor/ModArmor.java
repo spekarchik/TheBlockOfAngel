@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
@@ -46,6 +45,14 @@ public abstract class ModArmor extends ArmorItem implements ITooltipProvider, IM
     public boolean isBroken(ItemStack stack)
     {
         return stack.getMaxDamage() - stack.getDamageValue() <= 1;
+    }
+
+    public float getDurabilityPercent(ItemStack stack)
+    {
+        int maxDamage = getMaxDamage();
+        if (maxDamage <= 0) return 1.0f;
+        int durability = maxDamage - stack.getDamageValue();
+        return (float) durability / maxDamage;
     }
 
     @Override

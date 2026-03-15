@@ -19,7 +19,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -30,7 +29,6 @@ import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-import java.util.Set;
 import java.util.function.BiConsumer;
 
 abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
@@ -79,7 +77,7 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
 
         var materialDefense = armorType.getMaterial().getMaterial().value().defense();
         int maxDefense = 0;
-        for (var armorItemType : Set.of(ArmorItem.Type.HELMET, ArmorItem.Type.CHESTPLATE, ArmorItem.Type.LEGGINGS, ArmorItem.Type.BOOTS))
+        for (var armorItemType : utils.player.getArmorTypes())
         {
             int armorTypeDefense = materialDefense.get(armorItemType);
             maxDefense += armorTypeDefense;
@@ -302,6 +300,23 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
         }
     }
 
+    protected void damageArmor(int damageValue)
+    {
+        var playerEntity = player.getPlayerEntity();
+        for (var slot : utils.player.getArmorSlots())
+        {
+            var armor = playerEntity.getItemBySlot(slot);
+            if (armor.isEmpty()) continue;
+            if (!(armor.getItem() instanceof ModHumanoidArmor modArmor)) continue;
+            if (modArmor.getArmorType() != getArmorType()) continue;
+
+            int durability = armor.getMaxDamage() - armor.getDamageValue();
+            int damageToApply = Math.min(damageValue, durability - 1);
+
+            armor.hurtAndBreak(damageToApply, playerEntity, slot);
+        }
+    }
+
     // for tests
     protected void damageArmor(boolean damage)
     {
@@ -346,6 +361,29 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
             return false;
 
         return player.isArmorElementPutOn(armor, EquipmentSlot.FEET);
+    }
+
+    protected float getArmorTypeDefenseRatio()
+    {
+        float armorTypeDefense = 0;
+        var playerEntity = player.getPlayerEntity();
+
+        for (var armorType : utils.player.getArmorTypes())
+        {
+            var armorItem = playerEntity.getItemBySlot(armorType.getSlot());
+            if (armorItem.isEmpty()) continue;
+
+            if (!(armorItem.getItem() instanceof ModHumanoidArmor modArmor)) continue;
+            if (modArmor.isBroken(armorItem)) continue;
+            if (modArmor.getArmorType() != getArmorType()) continue;
+
+            float durabilityPercent = modArmor.getDurabilityPercent(armorItem);
+
+            armorTypeDefense += getArmorType().getMaterial().getMaterial().value().getDefense(armorType) * durabilityPercent;
+        }
+
+        float ratio = armorTypeDefense / playerEntity.getArmorValue();
+        return Float.isFinite(ratio) ? ratio : 0F;
     }
 
     protected final float getFullArmorSetDefense()
