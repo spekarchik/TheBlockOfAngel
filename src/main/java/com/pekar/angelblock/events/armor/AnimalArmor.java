@@ -37,6 +37,12 @@ abstract class AnimalArmor extends ArmorBase implements IAnimalArmor
     }
 
     @Override
+    protected float getArmorTypeDefenseRatio()
+    {
+        return 1F;
+    }
+
+    @Override
     public boolean equals(Object obj)
     {
         if (!(obj instanceof AnimalArmor armor))
