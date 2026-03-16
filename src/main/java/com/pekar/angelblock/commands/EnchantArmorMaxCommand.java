@@ -27,6 +27,7 @@ public class EnchantArmorMaxCommand
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final TagKey<Enchantment> EXCLUSIVE_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(Main.MODID, "exclusive_enchantments"));
     private static final String commandName = "enchantArmorMax";
+    private enum Mode { DEFAULT, ALL, CLEAR }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
@@ -38,16 +39,19 @@ public class EnchantArmorMaxCommand
 
         dispatcher.register(Commands.literal(commandName)
                 .requires(src -> src.permissions().hasPermission(Permissions.COMMANDS_ADMIN))
-                .executes(ctx -> handleEnchantArmorCommand(ctx, false))
+                .executes(ctx -> handleEnchantArmorCommand(ctx, Mode.DEFAULT))
                 .then(Commands.literal("all")
-                        .executes(ctx -> handleEnchantArmorCommand(ctx, true))
+                        .executes(ctx -> handleEnchantArmorCommand(ctx, Mode.ALL))
+                )
+                .then(Commands.literal("clear")
+                        .executes(ctx -> handleEnchantArmorCommand(ctx, Mode.CLEAR))
                 )
         );
 
         LOGGER.debug("EnchantArmorMaxCommand registered");
     }
 
-    private static int handleEnchantArmorCommand(CommandContext<CommandSourceStack> ctx, boolean includeAll)
+    private static int handleEnchantArmorCommand(CommandContext<CommandSourceStack> ctx, Mode mode)
     {
         try
         {
@@ -79,17 +83,17 @@ public class EnchantArmorMaxCommand
                 var mutableEnchantments = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
                 for (var enchantment : registry.listElements().toList())
                 {
-                    if (enchantment.is(EnchantmentTags.CURSE)) continue;
                     int level = enchantment.value().getMaxLevel();
+                    if (enchantment.is(EnchantmentTags.CURSE) || mode == Mode.CLEAR) level = 0;
 
-                    if (!includeAll)
+                    if (mode != Mode.ALL)
                     {
                         if (enchantment.is(EXCLUSIVE_ENCHANTMENTS)) level = 0;
                         boolean isExclusive = enchantment.value().exclusiveSet().stream().anyMatch(x -> mutableEnchantments.keySet().contains(x));
                         if (isExclusive) level = 0;
                     }
 
-                    if (stack.supportsEnchantment(enchantment))
+                    if (stack.supportsEnchantment(enchantment) || mode == Mode.CLEAR)
                     {
                         mutableEnchantments.set(enchantment, level);
                     }
