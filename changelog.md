@@ -4,7 +4,7 @@
 - Rain regeneration exhaustion rebalanced for **Lymonite and Superyte Armor**.
   Hunger was draining too quickly while Lymonite and Superyte Armor regenerated health in rain.
   Exhaustion gain has been reduced **4×**.
-- **Rod of Angel** no longer removes monsters when out of durability.
+- **Rod of Angel** no longer removes monsters when out of durability, even when placed as a block.
 - **Lymonite, Aerite and Superyte Boots** no longer prevent the player from sinking in Powdered Snow when combined with **Diamite Armor** pieces.
 - *Heavyness* effect now cancels *Dolphin's Grace* and prevents it from being applied. This improves the balance when the player combines **Aquarite Armor** with **Lymonite Leggings** and activates *regeneration* underwater.
 - Additional improvements to armor cross-compatibility (when combining pieces from different sets).
