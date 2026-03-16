@@ -89,8 +89,14 @@ public class EnchantMaxCommand
 
             EnchantmentHelper.setEnchantments(stack, mutableEnchantments.toImmutable());
 
+            var commandResult = switch (mode)
+            {
+                case ALL -> "Applied max enchantments (including exclusive ones)";
+                case CLEAR -> "Cleared all enchantments";
+                default -> "Applied max enchantments";
+            };
             ctx.getSource().sendSuccess(
-                    () -> Component.literal("Applied max enchantments"),
+                    () -> Component.literal(commandResult),
                     false
             );
 
