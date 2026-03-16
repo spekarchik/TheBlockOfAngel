@@ -10,7 +10,9 @@ import net.minecraft.world.level.block.state.BlockState;
 public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlockEntity>
 {
     private static final String DamageTagName = Main.MODID + ":AngelRodDamage";
+    private static final String IsBrokenTagName = Main.MODID + ":AngelRodIsBroken";
     private int damage;
+    private boolean isBroken;
 
     public AngelRodBlockEntity(BlockPos blockPos, BlockState blockState)
     {
@@ -26,22 +28,25 @@ public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlock
     @Override
     protected boolean needToDespawnEntity(Entity entity)
     {
-        return entity instanceof Enemy;
+        return !isBroken && entity instanceof Enemy;
     }
 
     protected void loadModTag(CompoundTag tag)
     {
         damage = tag.getInt(DamageTagName);
+        isBroken = tag.getBoolean(IsBrokenTagName);
     }
 
     protected void saveModTag(CompoundTag tag)
     {
         tag.putInt(DamageTagName, damage);
+        tag.putBoolean(IsBrokenTagName, isBroken);
     }
 
-    public void setDamage(int damage)
+    public void setDamage(int damage, boolean isBroken)
     {
         this.damage = damage;
+        this.isBroken = isBroken;
         var tag = new CompoundTag();
         saveModTag(tag);
     }
