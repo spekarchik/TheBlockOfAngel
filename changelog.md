@@ -7,7 +7,7 @@
 - **Lymonite, Aerite and Superyte Boots** no longer prevent the player from sinking in Powdered Snow when combined with **Diamite Armor** pieces.
 - *Heavyness* effect now cancels *Dolphin's Grace* and prevents it from being applied. This improves the balance when the player combines **Aquarite Armor** with **Lymonite Leggings** and activates *regeneration* underwater.
 - Additional improvements to armor cross-compatibility (when combining pieces from different sets).
-- Performance optimizations.
+- Various performance optimizations.
 
 ### ⚙️ Armor Mechanics Update
 Reworked several armor weaknesses to make them more consistent and intuitive.
@@ -23,13 +23,24 @@ Reworked several armor weaknesses to make them more consistent and intuitive.
 - Fire, Magma, and Lava now bypass armor protection and wear the armor **10× faster**.
 - Freezing damage still deals **double damage**.
 
-**Diamithic Armor**
+**Diamite Armor**
 - Bites from spiders, silverfish, and bees now bypass armor protection.
 
 **General Changes**
 - Armor no longer increases incoming damage (except for freezing).
 - Weaknesses now work by **bypassing armor protection** or **accelerating durability loss**, making armor behavior more predictable.
 
+### ✨ New
+- Added console commands for testing purposes:
+  - `damageMainHand [half | <damageValue>]` – set damage of main-hand item
+  - `damageArmor [half | <damageValue>]` – set damage of worn armor
+  - `repairMainHand [half | <durabilityValue>]` – set durability of main-hand item
+  - `repairArmor [half | <durabilityValue>]` – set durability of worn armor
+  - `hp [<hpValue>]` – set player health
+  - `food [<foodLevel>]` – set hunger level (resets saturation)
+  - `enchantMax [all]` – apply max compatible enchantments to main-hand item
+  - `enchantArmorMax [all]` – apply max compatible enchantments to worn armor
+  
 ### 🐞 Fixed
 - **Diamite and Superyte Armor** did not reduce damage from some explosion sources.
 - **Lymonite Horse Armor** did not increase or bypass damage from some explosion sources.
