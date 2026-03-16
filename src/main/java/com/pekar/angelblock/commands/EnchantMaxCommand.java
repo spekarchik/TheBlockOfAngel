@@ -13,11 +13,9 @@ import net.minecraft.server.permissions.Permissions;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import org.slf4j.Logger;
 
@@ -28,6 +26,7 @@ public class EnchantMaxCommand
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final TagKey<Enchantment> EXCLUSIVE_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(Main.MODID, "exclusive_enchantments"));
     private static final String commandName = "enchantMax";
+    private enum Mode { DEFAULT, ALL, CLEAR }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
@@ -39,16 +38,19 @@ public class EnchantMaxCommand
 
         dispatcher.register(Commands.literal(commandName)
                 .requires(src -> src.permissions().hasPermission(Permissions.COMMANDS_ADMIN))
-                .executes(ctx -> handleEnchantMaxCommand(ctx, false))
+                .executes(ctx -> handleEnchantMaxCommand(ctx, Mode.DEFAULT))
                 .then(Commands.literal("all")
-                        .executes(ctx -> handleEnchantMaxCommand(ctx, true))
+                        .executes(ctx -> handleEnchantMaxCommand(ctx, Mode.ALL))
+                )
+                .then(Commands.literal("clear")
+                        .executes(ctx -> handleEnchantMaxCommand(ctx, Mode.CLEAR))
                 )
         );
 
         LOGGER.debug("EnchantMaxCommand registered");
     }
 
-    private static int handleEnchantMaxCommand(CommandContext<CommandSourceStack> ctx, boolean includeAll)
+    private static int handleEnchantMaxCommand(CommandContext<CommandSourceStack> ctx, Mode mode)
     {
         try
         {
@@ -68,18 +70,18 @@ public class EnchantMaxCommand
             var mutableEnchantments = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
             for (var enchantment : registry.listElements().toList())
             {
-                if (enchantment.is(EnchantmentTags.CURSE)) continue;
                 int level = enchantment.value().getMaxLevel();
+                if (enchantment.is(EnchantmentTags.CURSE) || mode == Mode.CLEAR) level = 0;
 
                 // Skip Frost Walker and Silk Touch unless the 'all' literal was provided
-                if (!includeAll)
+                if (mode != Mode.ALL)
                 {
                     if (enchantment.is(EXCLUSIVE_ENCHANTMENTS)) level = 0;
                     boolean isExclusive = enchantment.value().exclusiveSet().stream().anyMatch(x -> mutableEnchantments.keySet().contains(x));
                     if (isExclusive) level = 0;
                 }
 
-                if (stack.supportsEnchantment(enchantment))
+                if (stack.supportsEnchantment(enchantment) || mode == Mode.CLEAR)
                 {
                     mutableEnchantments.set(enchantment, level);
                 }

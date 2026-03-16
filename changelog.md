@@ -38,8 +38,8 @@ Reworked several armor weaknesses to make them more consistent and intuitive.
   - `repairArmor [half | <durabilityValue>]` – set durability of worn armor
   - `hp [<hpValue>]` – set player health
   - `food [<foodLevel>]` – set hunger level (resets saturation)
-  - `enchantMax [all]` – apply max compatible enchantments to main-hand item
-  - `enchantArmorMax [all]` – apply max compatible enchantments to worn armor
+  - `enchantMax [all | clear]` – apply max compatible enchantments to main-hand item
+  - `enchantArmorMax [all | clear]` – apply max compatible enchantments to worn armor
   
 ### 🐞 Fixed
 - **Diamite and Superyte Armor** did not reduce damage from some explosion sources.
