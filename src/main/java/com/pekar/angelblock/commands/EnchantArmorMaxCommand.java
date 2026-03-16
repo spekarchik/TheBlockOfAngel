@@ -101,7 +101,13 @@ public class EnchantArmorMaxCommand
 
                 EnchantmentHelper.setEnchantments(stack, mutableEnchantments.toImmutable());
                 anyChanged = true;
-                sb.append(slotNames[i]).append(": applied; ");
+                var commandResult = switch (mode)
+                {
+                    case ALL -> "applied all";
+                    case CLEAR -> "cleared";
+                    default -> "applied";
+                };
+                sb.append(slotNames[i]).append(": ").append(commandResult).append("; ");
             }
 
             if (anyChanged)
