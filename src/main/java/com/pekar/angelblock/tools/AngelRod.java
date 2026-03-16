@@ -9,7 +9,6 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -82,12 +81,7 @@ public class AngelRod extends EndRod
         var pos = context.getClickedPos();
         var blockState = level.getBlockState(pos);
         var facing = context.getClickedFace();
-        var mainHandItemStack = player.getMainHandItem();
-        var offHandItemStack = player.getOffhandItem();
-        var hand = !mainHandItemStack.isEmpty() && mainHandItemStack.getItem() == this
-                ? InteractionHand.MAIN_HAND
-                : InteractionHand.OFF_HAND;
-        var itemStack = hand == InteractionHand.MAIN_HAND ? mainHandItemStack : offHandItemStack;
+        var itemStack = context.getItemInHand();
 
         if (player.isShiftKeyDown() && blockState.isSolidRender(level, pos))
         {
@@ -103,7 +97,7 @@ public class AngelRod extends EndRod
                     var blockEntity = level.getBlockEntity(pos.above());
                     if (blockEntity instanceof AngelRodBlockEntity angelRodBlockEntity)
                     {
-                        angelRodBlockEntity.setDamage(getDamage(itemStack));
+                        angelRodBlockEntity.setDamage(getDamage(itemStack), hasCriticalDamage(itemStack));
                     }
 
                     if (player instanceof ServerPlayer serverPlayer)
