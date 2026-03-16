@@ -4,6 +4,7 @@ import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.armor.PlayerArmorType;
 import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.mob.Mob;
+import com.pekar.angelblock.tools.IDamageable;
 import com.pekar.angelblock.tools.ToolRegistry;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.server.level.ServerPlayer;
@@ -260,12 +261,13 @@ public class Player extends Mob implements IPlayer
     {
         final double EFFECTIVE_RADIUS = 20.0;
 
+        if (!(entity instanceof ServerPlayer serverPlayer)) return false;
+
         if (handItemStack.isEmpty()) return false;
 
-        var item = handItemStack.getItem();
-        if (item != ToolRegistry.ANGEL_ROD.get()) return false;
+        if (!handItemStack.is(ToolRegistry.ANGEL_ROD)) return false;
 
-        if (!(entity instanceof ServerPlayer serverPlayer)) return false;
+        if (!(handItemStack.getItem() instanceof IDamageable damageable) || damageable.hasCriticalDamage(handItemStack)) return false;
 
         var monsters = serverPlayer.level().getEntities((LivingEntity)null,
                 serverPlayer.getBoundingBox().inflate(EFFECTIVE_RADIUS),
