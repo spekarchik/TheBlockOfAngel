@@ -61,7 +61,7 @@ public class ModArmorMaterial
             1, 4F, 0.2F, 43, SoundEvents.ARMOR_EQUIP_NETHERITE, ItemRegistry.SUPER_INGOT_TAG, true);
     public static final ModArmorMaterial FLYING = new ModArmorMaterial(FLYING_MATERIAL_NAME, "flying_armor",
             createArmorTypeMap(1, 2, 3, 1, 2),
-            1, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, ItemRegistry.FLYING_INGOT_TAG, false);
+            0, 0F, 0F, 3, SoundEvents.ARMOR_EQUIP_ELYTRA, ItemRegistry.FLYING_INGOT_TAG, false);
 
     // other armor models (other textures)
     protected static final ModArmorMaterial RENDELITHIC2 = copyOf(RENDELITHIC, "rendelithic_armor2");
