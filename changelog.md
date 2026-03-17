@@ -1,3 +1,9 @@
+## 📦 Version 3.3.1
+
+### 📝 Improvements
+- Updated armor durability display in tooltips: replaced generic "Durability resistance" number with **Material durability** using filled/empty circles (●○) alongside the numeric value for clearer visual feedback.
+
+
 ## 📦 Version 3.3.0
 
 ### 📝 Improvements
