@@ -1,6 +1,8 @@
 ## 📦 Version 3.4.0
 
 ### 📝 Improvements
+- Recipes:
+  - **Aerite Plate** recipe updated: replaced **Basalt-Blaze Fiber** with **Resin Clump**, removing the need to visit the *Nether*.
 - Sword durability:
   - Increased durability of **Enhanced Superyte Sword** from 525 to 1020.
   - Durability of **Primary Superyte Sword** adjusted to 510 (previously 525).
