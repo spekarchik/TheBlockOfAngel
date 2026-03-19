@@ -1,6 +1,7 @@
-## 📦 Version 3.3.1
+## 📦 Version 3.4.0
 
 ### 📝 Improvements
+- **Aerite Plate** recipe updated: replaced **Basalt-Blaze Fiber** with **Resin Clump**, removing the need to visit the *Nether*.
 - Updated armor durability display in tooltips: replaced generic "Durability resistance" number with **Material durability** using filled/empty circles (●○) alongside the numeric value for clearer visual feedback.
 - Improved the texture of **Lymonite Horse Armor**.
 
