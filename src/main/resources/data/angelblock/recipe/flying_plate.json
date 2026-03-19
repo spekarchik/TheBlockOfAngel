@@ -8,7 +8,7 @@
     ],
     "key": {
         "@": "angelblock:flying_ingot",
-        "A": "angelblock:armor_fiber",
+        "A": "minecraft:resin_clump",
         "P": "minecraft:phantom_membrane"
     },
     "result": {
