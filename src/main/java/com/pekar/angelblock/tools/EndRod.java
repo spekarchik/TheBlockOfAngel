@@ -248,9 +248,9 @@ public class EndRod extends AmethystRod
 
     protected void appendCommonPostInfo(ITooltip tooltip)
     {
-        for (int i = 16; i <= 17; i++)
+        for (int i = 16; i <= 18; i++)
         {
-            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 16).apply();
+            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i <= 17).apply();
         }
     }
 
