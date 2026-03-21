@@ -64,8 +64,8 @@
   "angelblock.rendelithic_armor.desc8": " Burns, slows down, or highlights attackers: -",
   "angelblock.rendelithic_armor.desc9": "§a Material durability: ●●○○○ (11)",
   "angelblock.rendelithic_armor.desc10": "✎ Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
-  "angelblock.rendelithic_armor.desc11": "",
-  "angelblock.rendelithic_armor.desc12": "",
+  "angelblock.rendelithic_armor.desc11": "✎ The more armor a player wears, the higher the chance blocks beneath will break.",
+  "angelblock.rendelithic_armor.desc12": "✎ Ice: 6–50% chance to break, depending on armor pieces.",
   "angelblock.rendelithic_armor.desc13": "",
   "angelblock.rendelithic_armor.desc14": "",
 
@@ -79,9 +79,9 @@
   "angelblock.diamithic_armor.desc8": " Burns, slows down, or highlights attackers: -",
   "angelblock.diamithic_armor.desc9": "§a Material durability: ●●●●● (45)",
   "angelblock.diamithic_armor.desc10": "✎ Armor protection depends on durability. Fully broken armor stays but loses all its positive effects",
-  "angelblock.diamithic_armor.desc11": "",
-  "angelblock.diamithic_armor.desc12": "",
-  "angelblock.diamithic_armor.desc13": "",
+  "angelblock.diamithic_armor.desc11": "✎ The more armor a player wears, the higher the chance blocks beneath will break.",
+  "angelblock.diamithic_armor.desc12": "✎ Netherrack: 10–85% chance to break when fall on, depending on armor pieces.",
+  "angelblock.diamithic_armor.desc13": "✎ Ice and cracked blocks: may collapse even w/o jump (6–50%), 100% on jump.",
   "angelblock.diamithic_armor.desc14": "",
 
   "angelblock.lapis_armor.desc1": "§b§l\uD83C\uDFAF§r§7 Underwater survival. Good protection, sensitive to extreme temperatures",

@@ -6,6 +6,13 @@
 - Sword durability:
   - Increased durability of **Enhanced Superyte Sword** from 525 to 1020.
   - Durability of **Primary Superyte Sword** adjusted to 510 (previously 525).
+- **Diamite Armor** now breaks more blocks under the player:
+  - Cracked Deepslate Bricks
+  - Cracked Deepslate Tiles
+  - Cracked Nether Bricks
+  - Cracked Polished Blackstone Bricks
+  - Cracked Stone Bricks
+  - Infested Cracked Stone Bricks  
 - Tooltips:
   - Tooltips globally redesigned: durability indicators (●○) added for all items with durability, item stats simplified and clarified, icons added, and descriptions made more readable.
   - **End Rod** (mod item) has been renamed to **Ender Rod** to prevent confusion with the vanilla End Rod.

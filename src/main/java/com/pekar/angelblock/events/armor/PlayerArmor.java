@@ -60,7 +60,10 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
     };
 
     protected final TriPredicate<Block, BlockPos, Level> isCrackedBlockPredicate = (block, pos, level) ->
-            block == BlockRegistry.CRACKED_ENDSTONE.get() || block == BlockRegistry.CRACKED_OBSIDIAN.get();
+            block == BlockRegistry.CRACKED_ENDSTONE.get() || block == BlockRegistry.CRACKED_OBSIDIAN.get()
+            || block == Blocks.CRACKED_DEEPSLATE_BRICKS || block == Blocks.CRACKED_DEEPSLATE_TILES
+            || block == Blocks.CRACKED_STONE_BRICKS || block == Blocks.CRACKED_NETHER_BRICKS
+            || block == Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS || block == Blocks.INFESTED_CRACKED_STONE_BRICKS;
 
     protected final TriPredicate<Block, BlockPos, Level> isNetherrackPredicate = (block, pos, level) ->
             block == Blocks.NETHERRACK;

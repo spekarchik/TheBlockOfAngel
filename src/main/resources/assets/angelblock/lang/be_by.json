@@ -64,8 +64,8 @@
   "angelblock.rendelithic_armor.desc8": " Падпальвае/запавольвае і падсвятляе нападнікаў: -",
   "angelblock.rendelithic_armor.desc9": "§a Трываласць матэрыялу: ●●○○○ (11)",
   "angelblock.rendelithic_armor.desc10": "✎ Абарона бранi залежыць ад зносу. Поўнасцю зношаная браня не ламаецца, але губляе ўсе станоўчыя ўласцівасці",
-  "angelblock.rendelithic_armor.desc11": "",
-  "angelblock.rendelithic_armor.desc12": "",
+  "angelblock.rendelithic_armor.desc11": "✎ Чым больш элементаў бранi ў гульца, тым верагодней, што блок пад ім зламаецца.",
+  "angelblock.rendelithic_armor.desc12": "✎ Лёд: 6–50% верагоднасць зламацца, у залежнасці ад бранi.",
   "angelblock.rendelithic_armor.desc13": "",
   "angelblock.rendelithic_armor.desc14": "",
 
@@ -79,9 +79,9 @@
   "angelblock.diamithic_armor.desc8": " Падпальвае/запавольвае і падсвятляе нападнікаў: -",
   "angelblock.diamithic_armor.desc9": "§a Трываласць матэрыялу: ●●●●● (45)",
   "angelblock.diamithic_armor.desc10": "✎ Абарона бранi залежыць ад зносу. Поўнасцю зношаная браня не ламаецца, але губляе ўсе станоўчыя ўласцівасці",
-  "angelblock.diamithic_armor.desc11": "",
-  "angelblock.diamithic_armor.desc12": "",
-  "angelblock.diamithic_armor.desc13": "",
+  "angelblock.diamithic_armor.desc11": "✎ Чым больш элементаў бранi ў гульца, тым верагодней, што блок пад ім зламаецца.",
+  "angelblock.diamithic_armor.desc12": "✎ Нэдаррэк: 10–85% верагоднасць зламацца пры скачку, у залежнасці ад бранi.",
+  "angelblock.diamithic_armor.desc13": "✎ Лёд і патрэсканыя блокі: могуць праваліцца нават без скачка (6-50%); пры скачку — 100%.",
   "angelblock.diamithic_armor.desc14": "",
 
   "angelblock.lapis_armor.desc1": "§b§l\uD83C\uDFAF§r§7 Падводны свет. Добрая абарона. Адчувальная да тэмператур",

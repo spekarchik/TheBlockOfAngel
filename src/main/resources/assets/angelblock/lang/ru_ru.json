@@ -64,8 +64,8 @@
   "angelblock.rendelithic_armor.desc8": " Поджигает/замедляет и подсвечивает атаковавших: -",
   "angelblock.rendelithic_armor.desc9": "§a Прочность материала: ●●○○○ (11)",
   "angelblock.rendelithic_armor.desc10": "✎ Защита брони зависит от износа. Полностью изношенная броня не ломается, но теряет все положительные свойства",
-  "angelblock.rendelithic_armor.desc11": "",
-  "angelblock.rendelithic_armor.desc12": "",
+  "angelblock.rendelithic_armor.desc11": "✎ Чем больше элементов брони на игроке, тем вероятнее, что блок под ним сломается.",
+  "angelblock.rendelithic_armor.desc12": "✎ Лёд: 6–50% вероятность сломаться, зависит от брони.",
   "angelblock.rendelithic_armor.desc13": "",
   "angelblock.rendelithic_armor.desc14": "",
 
@@ -79,9 +79,9 @@
   "angelblock.diamithic_armor.desc8": " Поджигает/замедляет и подсвечивает атаковавших: -",
   "angelblock.diamithic_armor.desc9": "§a Прочность материала: ●●●●● (45)",
   "angelblock.diamithic_armor.desc10": "✎ Защита брони зависит от износа. Полностью изношенная броня не ломается, но теряет все положительные свойства",
-  "angelblock.diamithic_armor.desc11": "",
-  "angelblock.diamithic_armor.desc12": "",
-  "angelblock.diamithic_armor.desc13": "",
+  "angelblock.diamithic_armor.desc11": "✎ Чем больше элементов брони на игроке, тем вероятнее, что блок под ним сломается.",
+  "angelblock.diamithic_armor.desc12": "✎ Незерак: 10–85% вероятность сломаться при прыжке, зависит от брони.",
+  "angelblock.diamithic_armor.desc13": "✎ Лёд и потрескавшиеся блоки: могут провалиться даже без прыжка (6–50%), при прыжке — 100%.",
   "angelblock.diamithic_armor.desc14": "",
 
   "angelblock.lapis_armor.desc1": "§b§l\uD83C\uDFAF§r§7 Подводный мир. Хорошая защита. Чувствительна к температурам",
