@@ -107,13 +107,13 @@ public class Planter extends WorkRod
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
-        for (int i = 0; i <= 9; i++)
+        for (int i = 0; i <= 10; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1 || i == 3)
                     .styledAs(TextStyle.Notice, i == 6)
                     .styledAs(TextStyle.ImportantNotice, i == 5)
-                    .styledAs(TextStyle.DarkGray, i == 7 || i == 8)
+                    .styledAs(TextStyle.DarkGray, i >= 7 && i <= 9)
                     .apply();
 
             if (i == 6) tooltip.addEmptyLine();

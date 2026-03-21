@@ -148,7 +148,7 @@ public class ToolRegistry
             p -> new SuperPrimarySword(ToolMaterials.SUPER_SWORD, 3, -2.0F, p), p -> p.rarity(Rarity.COMMON));
 
     public static final DeferredItem<ModSword> SUPER_SWORD = Main.ITEMS.registerItem("super_sword",
-            p -> new SuperSword(ToolMaterials.SUPER_SWORD, 3, -2.0F, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new SuperSword(ToolMaterials.SUPER_SWORD_ENHANCED, 3, -2.0F, p), p -> p.rarity(Rarity.UNCOMMON));
 
 
     public static void initStatic()
