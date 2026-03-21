@@ -112,11 +112,13 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 5; i++)
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 6; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1)
-                    .styledAs(TextStyle.DarkGray, i == 4)
+                    .styledAs(TextStyle.DarkGray, i >= 4 && i <= 5)
                     .apply();
         }
     }

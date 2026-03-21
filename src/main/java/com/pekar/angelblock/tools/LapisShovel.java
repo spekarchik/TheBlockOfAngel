@@ -20,12 +20,12 @@ public class LapisShovel extends EnhancedShovel
 
         tooltip.ignoreEmptyLines();
 
-        for (int i = 0; i <= 9; i++)
+        for (int i = 0; i <= 10; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1 || i == 6)
                     .styledAs(TextStyle.Notice, i == 4)
-                    .styledAs(TextStyle.DarkGray, i == 8)
+                    .styledAs(TextStyle.DarkGray, i >= 8 && i <= 9)
                     .apply();
         }
     }

@@ -235,9 +235,9 @@ public class FireRod extends MarineRod
     {
         tooltip.includeEmptyLines();
 
-        for (int i = 23; i <= 24; i++)
+        for (int i = 23; i <= 25; i++)
         {
-            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 23).apply();
+            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i <= 24).apply();
         }
     }
 
