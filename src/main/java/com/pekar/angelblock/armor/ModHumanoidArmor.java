@@ -206,7 +206,7 @@ public class ModHumanoidArmor extends ModArmor
             {
                 tooltip.addLine(getSpecificDescriptionRoot(), i)
                         .styledAs(TextStyle.Header, i == 1)
-                        .styledAs(TextStyle.Notice, armorSlotType.getSlot() == EquipmentSlot.FEET && i == 9)
+                        .styledAs(TextStyle.DarkGray, armorSlotType.getSlot() == EquipmentSlot.FEET && i == 9)
                         .apply();
             }
 
