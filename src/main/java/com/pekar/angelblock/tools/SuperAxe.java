@@ -33,12 +33,14 @@ public class SuperAxe extends EnhancedAxe
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
-        for (int i = 0; i <= 10; i++)
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 11; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1)
                     .styledAs(TextStyle.Notice, i == 6)
-                    .styledAs(TextStyle.DarkGray, i == 9)
+                    .styledAs(TextStyle.DarkGray, i >= 9 && i <= 10)
                     .apply();
         }
     }

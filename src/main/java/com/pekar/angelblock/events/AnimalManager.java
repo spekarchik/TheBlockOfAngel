@@ -77,7 +77,7 @@ public class AnimalManager implements IAnimalManager, IEventHandler
 
         var entity = event.getEntity();
         boolean isTameAnimal = (entity instanceof TamableAnimal tamable && tamable.isTame());
-        boolean isTamedHorse = (entity instanceof AbstractHorse horse && horse.isWearingBodyArmor() && horse.isTamed());
+        boolean isTamedHorse = (entity instanceof AbstractHorse horse && horse.isTamed());
         if (isTameAnimal || isTamedHorse)
         {
             animals.remove(entity.getUUID());
