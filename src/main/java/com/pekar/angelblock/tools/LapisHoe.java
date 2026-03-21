@@ -63,12 +63,14 @@ public class LapisHoe extends EnhancedHoe
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 16; i++)
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 17; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1 || i == 5 || i == 9)
                     .styledAs(TextStyle.Notice, i == 3)
-                    .styledAs(TextStyle.DarkGray, i == 15)
+                    .styledAs(TextStyle.DarkGray, i >= 15 && i <= 16)
                     .apply();
         }
     }

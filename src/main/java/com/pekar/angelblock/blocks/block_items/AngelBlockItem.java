@@ -50,6 +50,7 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
             for (int i = 29; i <= 32; i++)
             {
                 tooltip.addLine(getItemDescriptionId(), i)
+                        .styledAs(TextStyle.DarkGray, i == 29)
                         .withFormatting(ChatFormatting.AQUA, i == 30)
                         .withFormatting(ChatFormatting.DARK_AQUA, i == 31)
                         .apply();
