@@ -3,7 +3,6 @@ package com.pekar.angelblock.events;
 import com.pekar.angelblock.events.animal.IAnimal;
 import com.pekar.angelblock.events.armor.IAnimalArmorEvents;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,7 +34,7 @@ public class AnimalEvents implements IEventHandler
         {
             var damageSource = event.getSource();
             var directEntity = damageSource.getDirectEntity();
-            if (damageSource.is(DamageTypes.PLAYER_EXPLOSION) && (directEntity == null || !directEntity.is(EntityType.TNT)))
+            if (damageSource.is(DamageTypes.PLAYER_EXPLOSION) && (directEntity == null || directEntity instanceof Player))
             {
                 var attacker = damageSource.getEntity();
                 if (attacker instanceof Player player && mob.getControllingPassenger() instanceof Player passenger && player.getUUID().equals(passenger.getUUID()))
