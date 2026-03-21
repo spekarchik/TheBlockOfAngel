@@ -200,13 +200,13 @@ public class Builder extends WorkRod
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
-        for (int i = 0; i <= 9; i++)
+        for (int i = 0; i <= 10; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1)
                     .styledAs(TextStyle.Subheader, i == 4 || i == 2)
                     .styledAs(TextStyle.ImportantNotice, i == 6)
-                    .styledAs(TextStyle.DarkGray, i >= 7 && i <= 8)
+                    .styledAs(TextStyle.DarkGray, i >= 7 && i <= 9)
                     .apply();
 
             if (i == 6)
