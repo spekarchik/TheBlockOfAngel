@@ -245,9 +245,9 @@ public class AncientRod extends MagneticRod
 
     protected void appendCommonPostInfo(ITooltip tooltip)
     {
-        for (int i = 22; i <= 23; i++)
+        for (int i = 22; i <= 24; i++)
         {
-            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 22).apply();
+            tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i <= 23).apply();
         }
     }
 

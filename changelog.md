@@ -1,8 +1,22 @@
-## 📦 Version 3.3.1
+## 📦 Version 3.4.0
 
 ### 📝 Improvements
-- Updated armor durability display in tooltips: replaced generic "Durability resistance" number with **Material durability** using filled/empty circles (●○) alongside the numeric value for clearer visual feedback.
-- Improved the texture of **Lymonite Horse Armor**.
+- Sword durability:
+  - Increased durability of **Enhanced Superyte Sword** from 525 to 1020.
+  - Durability of **Primary Superyte Sword** adjusted to 510 (previously 525).
+- **Diamite Armor** now breaks more blocks under the player:
+  - Cracked Deepslate Bricks
+  - Cracked Deepslate Tiles
+  - Cracked Nether Bricks
+  - Cracked Polished Blackstone Bricks
+  - Cracked Stone Bricks
+  - Infested Cracked Stone Bricks
+- Animals no longer take damage from explosions caused by the rider's **Diamite or Superyte Sword**.
+- Tooltips:
+  - Tooltips globally redesigned: durability indicators (●○) added for all items with durability, item stats simplified and clarified, icons added, and descriptions made more readable.
+  - **End Rod** (mod item) has been renamed to **Ender Rod** to prevent confusion with the vanilla End Rod.
+- Textures:
+  - Improved the texture of **Lymonite Horse Armor**.
 
 
 ## 📦 Version 3.3.0

@@ -1,7 +1,8 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.Main;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ToolRegistry
@@ -148,7 +149,7 @@ public class ToolRegistry
             p -> new SuperPrimarySword(ToolMaterials.SUPER_SWORD, 3, -2.0F, p), new Item.Properties().rarity(Rarity.COMMON));
 
     public static final DeferredItem<ModSword> SUPER_SWORD = Main.ITEMS.registerItem("super_sword",
-            p -> new SuperSword(ToolMaterials.SUPER_SWORD, 3, -2.0F, p), new Item.Properties().rarity(Rarity.UNCOMMON));
+            p -> new SuperSword(ToolMaterials.SUPER_SWORD_ENHANCED, 3, -2.0F, p), new Item.Properties().rarity(Rarity.UNCOMMON));
 
 
     public static void initStatic()

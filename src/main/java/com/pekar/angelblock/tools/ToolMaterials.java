@@ -68,7 +68,9 @@ public class ToolMaterials
             2100, 11.0F, 8.5F, 4, 1, ItemRegistry.SUPER_INGOT_TAG).fireResistant();
     // damagePerSecond = 25, singleDamage = 12.5;  Axe: damagePerSecond = 20.3, singleDamage = 14.5
 
-    static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_NAME, 525);
+    static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_NAME, 510);
+
+    static final ModToolMaterial SUPER_SWORD_ENHANCED = SUPER.clone(SUPER_MATERIAL_NAME, 1020);
 
     static final ModToolMaterial ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, BlockTags.INCORRECT_FOR_WOODEN_TOOL,
             60, 2.0F, 0F, 0, 1, ItemRegistry.BAMBOO_TAG); // incorrectBlocksForDrops does nothing if you don't use it

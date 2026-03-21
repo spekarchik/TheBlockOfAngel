@@ -18,12 +18,14 @@ public class DiamithicPickaxe extends EnhancedPickaxe
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 7; i++)
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 9; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1)
                     .styledAs(TextStyle.Notice, i == 4)
-                    .styledAs(TextStyle.DarkGray, i == 6)
+                    .styledAs(TextStyle.DarkGray, i >= 6 && i <= 8)
                     .apply();
         }
     }
