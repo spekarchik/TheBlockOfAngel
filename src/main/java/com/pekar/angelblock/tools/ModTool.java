@@ -1,13 +1,18 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
 
-public abstract class ModTool extends Item implements IModTool
+import java.util.List;
+
+public abstract class ModTool extends Item implements IModTool, ITooltipProvider
 {
     protected final Utils utils = new Utils();
 
@@ -25,6 +30,12 @@ public abstract class ModTool extends Item implements IModTool
         }
 
         return "";
+    }
+
+    @Override
+    public final void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    {
+        ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
     }
 
     @Override
