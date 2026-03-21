@@ -4,14 +4,12 @@ import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.GreenDiamondBlock;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
-import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +24,6 @@ import net.minecraft.world.level.block.InfestedBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
 import java.util.Random;
 import java.util.function.BiFunction;
 
@@ -189,12 +186,6 @@ public class AncientRod extends MagneticRod
     {
         var block = state.getBlock();
         return !hasCriticalDamage(stack) && block == Blocks.COBWEB;
-    }
-
-    @Override
-    public final void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
     }
 
     // Should not be virtual!

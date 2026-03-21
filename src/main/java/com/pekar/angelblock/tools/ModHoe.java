@@ -2,6 +2,9 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.ITooltipProvider;
+import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.SoundType;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
@@ -25,7 +28,7 @@ import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
-public class ModHoe extends HoeItem implements IModToolEnhanceable
+public class ModHoe extends HoeItem implements IModToolEnhanceable, ITooltipProvider
 {
     private static final int USE_MAGIC_EXHAUSTION_MULTIPLIER = 16;
 
@@ -104,13 +107,22 @@ public class ModHoe extends HoeItem implements IModToolEnhanceable
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public final void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 5; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1, false, false, false, i == 4));
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.DarkGray, i == 4)
+                    .apply();
         }
     }
 

@@ -1,9 +1,10 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tools.properties.LapisHoeProperties;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -11,8 +12,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-
-import java.util.List;
 
 public class LapisHoe extends EnhancedHoe
 {
@@ -60,13 +59,17 @@ public class LapisHoe extends EnhancedHoe
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
-        if (!utils.text.showExtendedDescription(tooltipComponents)) return;
+        if (!utils.text.showExtendedDescription(tooltip)) return;
 
         for (int i = 0; i <= 16; i++)
         {
-            tooltipComponents.add(getDescription(i, i == 1 || i == 5 || i == 9, false, i == 3, false, i == 15));
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1 || i == 5 || i == 9)
+                    .styledAs(TextStyle.Notice, i == 3)
+                    .styledAs(TextStyle.DarkGray, i == 15)
+                    .apply();
         }
     }
 }
