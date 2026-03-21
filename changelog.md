@@ -12,7 +12,8 @@
   - Cracked Nether Bricks
   - Cracked Polished Blackstone Bricks
   - Cracked Stone Bricks
-  - Infested Cracked Stone Bricks  
+  - Infested Cracked Stone Bricks
+- Animals no longer take damage from explosions caused by the rider's **Diamite or Superyte Sword**.
 - Tooltips:
   - Tooltips globally redesigned: durability indicators (●○) added for all items with durability, item stats simplified and clarified, icons added, and descriptions made more readable.
   - **End Rod** (mod item) has been renamed to **Ender Rod** to prevent confusion with the vanilla End Rod.

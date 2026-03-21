@@ -2,6 +2,10 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.animal.IAnimal;
 import com.pekar.angelblock.events.armor.IAnimalArmorEvents;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -27,6 +31,20 @@ public class AnimalEvents implements IEventHandler
     public void onLivingHurtEvent(LivingIncomingDamageEvent event)
     {
         var entity = event.getEntity();
+        if (entity instanceof Mob mob)
+        {
+            var damageSource = event.getSource();
+            var directEntity = damageSource.getDirectEntity();
+            if (damageSource.is(DamageTypes.PLAYER_EXPLOSION) && (directEntity == null || !directEntity.is(EntityType.TNT)))
+            {
+                var attacker = damageSource.getEntity();
+                if (attacker instanceof Player player && mob.getControllingPassenger() instanceof Player passenger && player.getUUID().equals(passenger.getUUID()))
+                {
+                    event.setCanceled(true);
+                }
+            }
+        }
+
         var animal = animalManager.getAnimalByUUID(entity.getUUID());
         if (animal == null) return;
 
