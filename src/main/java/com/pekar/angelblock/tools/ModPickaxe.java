@@ -1,23 +1,20 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.tooltip.ITooltip;
-import com.pekar.angelblock.tooltip.ITooltipProvider;
-import com.pekar.angelblock.tooltip.TextStyle;
-import com.pekar.angelblock.utils.Utils;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
+import com.pekar.angelblock.tooltip.ITooltip;
+import com.pekar.angelblock.tooltip.TextStyle;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
-import java.util.List;
-
-public class ModPickaxe extends ModTool implements IModToolEnhanceable, ITooltipProvider
+public class ModPickaxe extends ModTool implements IModToolEnhanceable
 {
     protected final IMaterialProperties materialProperties;
     protected final Utils utils = new Utils();
@@ -77,12 +74,6 @@ public class ModPickaxe extends ModTool implements IModToolEnhanceable, ITooltip
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
         return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(itemAbility);
-    }
-
-    @Override
-    public final void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        ITooltipProvider.appendHoverText(this, stack, context, tooltipComponents, tooltipFlag);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.tooltip.ITooltip;
-import com.pekar.angelblock.tooltip.ITooltipProvider;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -23,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.common.ItemAbility;
 
-public abstract class ModRod extends ModTool implements IModTool, ITooltipProvider
+public abstract class ModRod extends ModTool implements IModTool
 {
     private final boolean isMagnetic;
     private final ModToolMaterial material;
