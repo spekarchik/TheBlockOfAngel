@@ -117,6 +117,19 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
     }
 
     @Override
+    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
+    {
+        if (!utils.text.showExtendedDescription(tooltip)) return;
+
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 4; i++)
+        {
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i >= 2 && i <= 3).apply();
+        }
+    }
+
+    @Override
     public final IMaterialProperties getMaterialProperties()
     {
         return materialProperties;
@@ -189,17 +202,6 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
             {
                 return InteractionResult.PASS;
             }
-        }
-    }
-
-    @Override
-    public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
-    {
-        if (!utils.text.showExtendedDescription(tooltip)) return;
-
-        for (int i = 0; i <= 3; i++)
-        {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 2).apply();
         }
     }
 }

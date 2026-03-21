@@ -20,12 +20,12 @@ public class LimonitePickaxe extends EnhancedPickaxe
 
         tooltip.ignoreEmptyLines();
 
-        for (int i = 0; i <= 8; i++)
+        for (int i = 0; i <= 9; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1)
                     .styledAs(TextStyle.Notice, i == 4)
-                    .styledAs(TextStyle.DarkGray, i == 7)
+                    .styledAs(TextStyle.DarkGray, i >= 7 && i <= 8)
                     .apply();
         }
     }
