@@ -123,6 +123,8 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
+        tooltip.ignoreEmptyLines();
+
         for (int i = 0; i <= 4; i++)
         {
             tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i >= 2 && i <= 3).apply();

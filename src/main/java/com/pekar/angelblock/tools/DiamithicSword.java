@@ -71,6 +71,8 @@ public class DiamithicSword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
+        tooltip.ignoreEmptyLines();
+
         for (int i = 0; i <= 10; i++)
         {
             tooltip.addLine(getDescriptionId(), i)

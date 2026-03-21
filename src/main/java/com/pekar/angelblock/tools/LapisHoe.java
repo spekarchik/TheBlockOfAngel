@@ -63,6 +63,8 @@ public class LapisHoe extends EnhancedHoe
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
+        tooltip.ignoreEmptyLines();
+
         for (int i = 0; i <= 17; i++)
         {
             tooltip.addLine(getDescriptionId(), i)

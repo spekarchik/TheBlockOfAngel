@@ -180,6 +180,8 @@ public class SuperSword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
+        tooltip.ignoreEmptyLines();
+
         for (int i = 0; i <= 21; i++)
         {
             tooltip.addLine(getDescriptionId(), i)

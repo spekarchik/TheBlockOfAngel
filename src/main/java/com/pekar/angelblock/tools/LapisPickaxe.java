@@ -18,6 +18,8 @@ public class LapisPickaxe extends EnhancedPickaxe
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
+        tooltip.ignoreEmptyLines();
+
         for (int i = 0; i <= 8; i++)
         {
             tooltip.addLine(getDescriptionId(), i)

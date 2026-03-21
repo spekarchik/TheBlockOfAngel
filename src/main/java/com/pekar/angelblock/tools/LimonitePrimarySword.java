@@ -49,9 +49,14 @@ public class LimonitePrimarySword extends ModSword
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
+        tooltip.ignoreEmptyLines();
+
         for (int i = 0; i <= 9; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 1).styledAs(TextStyle.DarkGray, i >= 5 && i <= 8).apply();
+            tooltip.addLine(getDescriptionId(), i)
+                    .styledAs(TextStyle.Header, i == 1)
+                    .styledAs(TextStyle.DarkGray, i >= 5 && i <= 8)
+                    .apply();
         }
     }
 }
