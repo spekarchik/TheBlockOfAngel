@@ -144,7 +144,7 @@ public class MarineRod extends AncientRod
         }
     }
 
-    protected void appendCommonPostInfo(ITooltip tooltip)
+    protected void appendMainPostInfo(ITooltip tooltip)
     {
         for (int i = 22; i <= 24; i++)
         {
