@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": "angelblock:wolf_armor_handbook",
+    "addition": "angelblock:rendelithic_plate",
+    "result": {
+        "id": "angelblock:wolf_rendelite_armor"
+    },
+    "template": "angelblock:rendelithic_armor_upgrade_kit"
+}

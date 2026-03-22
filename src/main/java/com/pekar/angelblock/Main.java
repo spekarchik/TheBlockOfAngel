@@ -1,10 +1,14 @@
 package com.pekar.angelblock;
 
+import com.mojang.serialization.MapCodec;
 import com.pekar.angelblock.armor.ArmorRegistry;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
-import com.pekar.angelblock.events.*;
+import com.pekar.angelblock.events.ClientSetupEvents;
+import com.pekar.angelblock.events.EventRegistry;
+import com.pekar.angelblock.events.KeyboardMouseEvents;
 import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.loot.LootRegistry;
 import com.pekar.angelblock.menus.MenuRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.recipe.RecipeRegistry;
@@ -16,7 +20,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -25,10 +29,12 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,6 +55,7 @@ public class Main
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(Registries.POTION, MODID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, MODID);
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS = DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, Main.MODID);
+    public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(NeoForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MODID);
 
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
 
@@ -65,6 +72,7 @@ public class Main
         MOB_EFFECTS.register(modEventBus);
         POTIONS.register(modEventBus);
         ENTITY_TYPES.register(modEventBus);
+        LOOT_MODIFIERS.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
@@ -93,10 +101,10 @@ public class Main
 
         ClientSetupEvents.initStatic();
         KeyboardMouseEvents.initStatic();
-        ClientTickEvents.initStatic();
 
         RecipeRegistry.initStatic();
         MenuRegistry.initStatic();
+        LootRegistry.initStatic();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

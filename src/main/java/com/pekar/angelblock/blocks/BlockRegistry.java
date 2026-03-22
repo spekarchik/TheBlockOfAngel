@@ -3,7 +3,6 @@ package com.pekar.angelblock.blocks;
 import com.pekar.angelblock.Main;
 import com.pekar.angelblock.blocks.block_items.*;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -18,12 +17,14 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
+
 public class BlockRegistry
 {
-    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_MINE = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_mine"));
-    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "planter_compatible_to_plant"));
-    public static final TagKey<Block> REPLACEABLE_BY_PLANTER = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "planter_replaceables"));
-    public static final TagKey<Block> TRACK_LAYER_COMPATIBLE = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "track_layer_compatible"));
+    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_MINE = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "planter_compatible_to_mine"));
+    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "planter_compatible_to_plant"));
+    public static final TagKey<Block> REPLACEABLE_BY_PLANTER = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "planter_replaceables"));
+    public static final TagKey<Block> TRACK_LAYER_COMPATIBLE = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "track_layer_compatible"));
 
     public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SNOW).requiresCorrectToolForDrops());
@@ -38,15 +39,15 @@ public class BlockRegistry
     public static final DeferredBlock<Block> SALTPETER_BLOCK = register("saltpeter_block", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
     public static final DeferredBlock<Block> DIAMITHIC_MATERIAL_BLOCK = register("diamithic_material_block", Block::new,
-            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f), true);
     public static final DeferredBlock<Block> RENDELITHIC_MATERIAL_BLOCK = register("rendelithic_material_block", Block::new,
-            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f), true);
     public static final DeferredBlock<Block> LIMONITE_MATERIAL_BLOCK = register("limonite_material_block", Block::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
     public static final DeferredBlock<Block> LAPIS_MATERIAL_BLOCK = register("lapis_material_block", Block::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
     public static final DeferredBlock<Block> SUPER_MATERIAL_BLOCK = register("super_material_block", Block::new,
-            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f), true);
     public static final DeferredBlock<Block> FLYING_MATERIAL_BLOCK = register("flying_material_block", Block::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.7f, 9f));
 
@@ -119,6 +120,13 @@ public class BlockRegistry
     {
         var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, () -> properties);
         Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), p));
+        return blockObject;
+    }
+
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> blockSupplier, BlockBehaviour.Properties properties, boolean isFireResistant)
+    {
+        var blockObject = Main.BLOCKS.registerBlock(name, blockSupplier, () -> properties);
+        Main.ITEMS.registerItem(name, p -> new ModBlockItem(blockObject.get(), isFireResistant ? p.fireResistant() : p));
         return blockObject;
     }
 

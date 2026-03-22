@@ -1,8 +1,7 @@
 package com.pekar.angelblock.utils;
 
 import com.pekar.angelblock.Main;
-import com.pekar.angelblock.armor.ModArmor;
-import net.minecraft.resources.Identifier;
+import com.pekar.angelblock.armor.ModHumanoidArmor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -22,14 +21,14 @@ public class AttributeModifiers
             for (var stack : Utils.instance.player.getArmorInSlots(entity))
             {
                 if (stack.isEmpty()) continue;
-                boolean isModArmor = stack.getItem() instanceof ModArmor;
+                boolean isModArmor = stack.getItem() instanceof ModHumanoidArmor;
 
                 double maxDamage = stack.getMaxDamage();
                 if (maxDamage <= 0) continue;
 
                 double damage = isModArmor ? stack.getDamageValue() : 0.0;
 
-                if (!(stack.getItem() instanceof ModArmor modArmor)) continue;
+                if (!(stack.getItem() instanceof ModHumanoidArmor modArmor)) continue;
 
                 double defense = modArmor.getDefense();
                 double durability = maxDamage - damage;
@@ -39,7 +38,7 @@ public class AttributeModifiers
                 correctionSum += correction;
             }
 
-            var armorModifierId = Identifier.fromNamespaceAndPath(Main.MODID, getArmorAttributeMofifierId(entity));
+            var armorModifierId = Utils.instance.resources.createResourceLocation(Main.MODID, getArmorAttributeMofifierId(entity));
             armorAttribute.removeModifier(armorModifierId);
 
             if (Math.abs(correctionSum) > 1e-12)
@@ -55,7 +54,7 @@ public class AttributeModifiers
 
         if (armorAttribute != null)
         {
-            var armorModifierId = Identifier.fromNamespaceAndPath(Main.MODID, getArmorAttributeMofifierId(entity));
+            var armorModifierId = Utils.instance.resources.createResourceLocation(Main.MODID, getArmorAttributeMofifierId(entity));
             armorAttribute.removeModifier(armorModifierId);
         }
     }

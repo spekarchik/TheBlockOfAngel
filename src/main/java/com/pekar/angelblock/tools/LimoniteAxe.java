@@ -33,12 +33,12 @@ public class LimoniteAxe extends EnhancedAxe
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
 
-        for (int i = 0; i <= 7; i++)
+        for (int i = 0; i <= 8; i++)
         {
             tooltip.addLine(getDescriptionId(), i)
                     .styledAs(TextStyle.Header, i == 1)
                     .styledAs(TextStyle.Notice, i == 3)
-                    .styledAs(TextStyle.DarkGray, i == 6)
+                    .styledAs(TextStyle.DarkGray, i >= 6 && i <= 7)
                     .apply();
         }
     }

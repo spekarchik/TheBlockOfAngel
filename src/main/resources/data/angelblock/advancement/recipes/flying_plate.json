@@ -35,7 +35,7 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "items":  "angelblock:armor_fiber"
+                                                                        "items":  "minecraft:resin_clump"
                                                                     }
                                                                 ]
                                                   }

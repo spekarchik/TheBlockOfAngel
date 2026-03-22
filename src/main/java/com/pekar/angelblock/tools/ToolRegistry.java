@@ -123,7 +123,7 @@ public class ToolRegistry
             p -> new TrackLayer(ToolMaterials.ROD_MATERIAL6, p), p -> p.rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> BUILDER = Main.ITEMS.registerItem("builder",
-            p -> new Builder(ToolMaterials.ROD_MATERIAL7, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new Builder(ToolMaterials.ROD_MATERIAL7, p), p -> p.rarity(Rarity.UNCOMMON).fireResistant());
 
     // Swords
     public static final DeferredItem<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.registerItem("diamithic_primary_sword",
@@ -148,7 +148,7 @@ public class ToolRegistry
             p -> new SuperPrimarySword(ToolMaterials.SUPER_SWORD, 3, -2.0F, p), p -> p.rarity(Rarity.COMMON));
 
     public static final DeferredItem<ModSword> SUPER_SWORD = Main.ITEMS.registerItem("super_sword",
-            p -> new SuperSword(ToolMaterials.SUPER_SWORD, 3, -2.0F, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new SuperSword(ToolMaterials.SUPER_SWORD_ENHANCED, 3, -2.0F, p), p -> p.rarity(Rarity.UNCOMMON));
 
 
     public static void initStatic()

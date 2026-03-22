@@ -126,11 +126,11 @@ public class AmethystRod extends FireRod
         }
     }
 
-    protected void appendCommonPostInfo(ITooltip tooltip)
+    protected void appendMainPostInfo(ITooltip tooltip)
     {
-        for (int i = 22; i <= 23; i++)
+        for (int i = 22; i <= 24; i++)
         {
-            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 22).apply();
+            tooltip.addLine(getRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i <= 23).apply();
         }
     }
 

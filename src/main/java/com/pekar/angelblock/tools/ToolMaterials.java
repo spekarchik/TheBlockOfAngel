@@ -41,13 +41,13 @@ public class ToolMaterials
     public static final String ROD_MATERIAL7_NAME = "rod7";
 
     static final ModToolMaterial RENDELITHIC = new ModToolMaterial(RENDELITHIC_MATERIAL_NAME, BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
-            600, 8F, 4.8F, 3, 25, ItemRegistry.RENDELITHIC_INGOT_TAG);
+            600, 8F, 4.8F, 3, 25, ItemRegistry.RENDELITHIC_INGOT_TAG).fireResistant();
     // damagePerSecond = 15, singleDamage = 8.8; Axe: damagePerSecond = 12, singleDamage = 10.8
     
     static final ModToolMaterial RENDELITHIC_SWORD = RENDELITHIC.clone(RENDELITHIC_MATERIAL_NAME, 150);
 
     static final ModToolMaterial DIAMITHIC = new ModToolMaterial(DIAMITHIC_MATERIAL_NAME, BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
-            2100, 7F, 8.3F, 4, 14, ItemRegistry.DIAMITHIC_INGOT_TAG);
+            2100, 7F, 8.3F, 4, 14, ItemRegistry.DIAMITHIC_INGOT_TAG).fireResistant();
     // damagePerSecond = 16, singleDamage = 12.3;  Axe: damagePerSecond = 11.4, singleDamage = 14.3
 
     static final ModToolMaterial DIAMITHIC_SWORD = DIAMITHIC.clone(DIAMITHIC_MATERIAL_NAME, 525);
@@ -65,21 +65,23 @@ public class ToolMaterials
     static final ModToolMaterial LIMONITE_SWORD = LIMONITE.clone(LIMONITE_MATERIAL_NAME, 250);
 
     static final ModToolMaterial SUPER = new ModToolMaterial(SUPER_MATERIAL_NAME, BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
-            2100, 11.0F, 8.5F, 4, 1, ItemRegistry.SUPER_INGOT_TAG);
+            2100, 11.0F, 8.5F, 4, 1, ItemRegistry.SUPER_INGOT_TAG).fireResistant();
     // damagePerSecond = 25, singleDamage = 12.5;  Axe: damagePerSecond = 20.3, singleDamage = 14.5
 
-    static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_NAME, 525);
+    static final ModToolMaterial SUPER_SWORD = SUPER.clone(SUPER_MATERIAL_NAME, 510);
+
+    static final ModToolMaterial SUPER_SWORD_ENHANCED = SUPER.clone(SUPER_MATERIAL_NAME, 1020);
 
     static final ModToolMaterial ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, BlockTags.INCORRECT_FOR_WOODEN_TOOL,
             60, 2.0F, 0F, 0, 1, ItemRegistry.BAMBOO_TAG); // incorrectBlocksForDrops does nothing if you don't use it
 
     static final ModToolMaterial ROD_MATERIAL2 = ROD_MATERIAL1.clone(ROD_MATERIAL2_NAME, 120);
 
-    static final ModToolMaterial ROD_MATERIAL3 = ROD_MATERIAL1.clone(ROD_MATERIAL3_NAME, 200);
+    static final ModToolMaterial ROD_MATERIAL3 = ROD_MATERIAL1.clone(ROD_MATERIAL3_NAME, 200).fireResistant();
 
-    static final ModToolMaterial ROD_MATERIAL4 = ROD_MATERIAL1.clone(ROD_MATERIAL4_NAME, 500);
+    static final ModToolMaterial ROD_MATERIAL4 = ROD_MATERIAL1.clone(ROD_MATERIAL4_NAME, 500).fireResistant();
 
-    static final ModToolMaterial ROD_MATERIAL5 = ROD_MATERIAL1.clone(ROD_MATERIAL5_NAME, 1000);
+    static final ModToolMaterial ROD_MATERIAL5 = ROD_MATERIAL1.clone(ROD_MATERIAL5_NAME, 1000).fireResistant();
 
     static final ModToolMaterial ROD_MATERIAL6 = ROD_MATERIAL1.clone(ROD_MATERIAL6_NAME, 2000);
 

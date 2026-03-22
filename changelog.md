@@ -1,3 +1,205 @@
+## 📦 Version 3.4.0
+
+### 📝 Improvements
+- Recipes:
+  - **Aerite Plate** recipe updated: replaced **Basalt-Blaze Fiber** with **Resin Clump**, removing the need to visit the *Nether*.
+- Sword durability:
+  - Increased durability of **Enhanced Superyte Sword** from 525 to 1020.
+  - Durability of **Primary Superyte Sword** adjusted to 510 (previously 525).
+- **Diamite Armor** now breaks more blocks under the player:
+  - Cracked Deepslate Bricks
+  - Cracked Deepslate Tiles
+  - Cracked Nether Bricks
+  - Cracked Polished Blackstone Bricks
+  - Cracked Stone Bricks
+  - Infested Cracked Stone Bricks
+- Animals no longer take damage from explosions caused by the rider's **Diamite or Superyte Sword**.
+- Tooltips:
+  - Tooltips globally redesigned: durability indicators (●○) added for all items with durability, item stats simplified and clarified, icons added, and descriptions made more readable.
+  - **End Rod** (mod item) has been renamed to **Ender Rod** to prevent confusion with the vanilla End Rod.
+- Textures:
+  - Improved the texture of **Lymonite Horse Armor**.
+
+
+## 📦 Version 3.3.0
+
+### 📝 Improvements
+- Rain regeneration exhaustion rebalanced for **Lymonite and Superyte Armor**.
+  Hunger was draining too quickly while Lymonite and Superyte Armor regenerated health in rain.
+  Exhaustion gain has been reduced **4×**.
+- **Rod of Angel** no longer removes monsters when out of durability, even when placed as a block.
+- **Lymonite, Aerite and Superyte Boots** no longer prevent the player from sinking in Powdered Snow when combined with **Diamite Armor** pieces.
+- *Heavyness* effect now cancels *Dolphin's Grace* and prevents it from being applied. This improves the balance when the player combines **Aquarite Armor** with **Lymonite Leggings** and activates *regeneration* underwater.
+- Additional improvements to armor cross-compatibility (when combining pieces from different sets).
+- Various performance optimizations.
+
+### ⚙️ Armor Mechanics Update
+Reworked several armor weaknesses to make them more consistent and intuitive.
+
+**Limonite Armor**
+- Explosions and Wind Charge attacks now bypass armor protection.
+- Durability now drains **10× faster** when damaged by these sources.
+
+**Limonite Horse Armor**
+- Explosions and Wind Charge attacks now bypass armor protection.
+
+**Lapis Armor**
+- Fire, Magma, and Lava now bypass armor protection and wear the armor **10× faster**.
+- Freezing damage still deals **double damage**.
+
+**Diamite Armor**
+- Bites from spiders, silverfish, and bees now bypass armor protection.
+
+**General Changes**
+- Armor no longer increases incoming damage (except for freezing).
+- Weaknesses now work by **bypassing armor protection** or **accelerating durability loss**, making armor behavior more predictable.
+
+### ✨ New
+- Added console commands for testing purposes:
+  - `damageMainHand [half | <damageValue>]` – set damage of main-hand item
+  - `damageArmor [half | <damageValue>]` – set damage of worn armor
+  - `repairMainHand [half | <durabilityValue>]` – set durability of main-hand item
+  - `repairArmor [half | <durabilityValue>]` – set durability of worn armor
+  - `hp [<hpValue>]` – set player health
+  - `food [<foodLevel>]` – set hunger level (resets saturation)
+  - `enchantMax [all | clear]` – apply max compatible enchantments to main-hand item
+  - `enchantArmorMax [all | clear]` – apply max compatible enchantments to worn armor
+  
+### 🐞 Fixed
+- **Diamite and Superyte Armor** did not reduce damage from some explosion sources.
+- **Lymonite Horse Armor** did not increase or bypass damage from some explosion sources.
+- When wearing a full **Aerite Armor** set with *Slow Falling* activated by the armor, removing any piece except the chestplate did not deactivate the effect.
+
+
+## 📦 Version 3.2.0
+
+### 📝 Improvements
+- **Lymonite Horse Armor** item texture adjusted: now aligned with vanilla horse armor.
+- Downgrading recipes for animal armor have been added:
+  - **Lymonite Horse Armor**
+  - **Rendelite Wolf Armor**
+  - **Netherite Horse Armor**
+  - **Netherite Nautilus Armor**
+
+
+### 🐞 Fixed
+- Shift-crafting behavior in the *Smithing Table*:
+  - Shift-crafting is now blocked for downgrading recipes using the **Downgrade Kit** to prevent incorrect ingredient delivery.
+  - Shift-crafting no longer consumes **Animal Armor Handbooks** when crafting armor.
+
+
+## 📦 Version 3.1.0
+
+### 🐞 Fixed
+- Fixed an issue where the Rod of Angel didn't despawn monsters when held by the player.
+
+### 📝 Improvements
+- **Horse Lymonite Armor** can now be found in *Jungle Temples* or *Woodland Mansions*.
+
+
+## 📦 Version 3.0.2
+
+### 📝 Improvements
+- Minor performance optimizations.
+
+
+## 📦 Version 3.0.1
+
+### 📝 Improvements
+- **Bucket of Blue Axolotl** renamed to **Bucket of Rare Axolotl**.
+- Stack size adjustments:
+  - **The Dormant Block of Angel** - reduced from 64 to 1.
+  - **The Block of Angel** - reduced from 64 to 1.
+  - **The Block of Devil** - reduced from 64 to 1.
+  - **Bucket of Rare Axolotl** - reduced from 64 to 1.
+  - **Animal Armor Handbook** - reduced from 64 to 4.
+  - **Armor plates** - reduced from 64 to 16.
+
+
+## 📦 Version 3.0.0
+
+### ✨ New
+- Animal armor has been added:
+  - **Rendelite Wolf Armor**
+    - Designed to protect wolves in the *Nether*.
+    - Has properties similar to players' **Rendelite Armor**.
+    - Has immunity from *Lava*, *Fire*, *Magma* blocks and *Wither* effect.
+    - Behaves like **Armadillo Wolf Armor** (fully absorbs damage from most sources by losing durability).
+    - When fully broken, any damage taken by an animal applies Glowing for 5 minutes to allow the player to know and react.
+    - Has almost 3 times higher durability than **Armadillo Wolf Armor** (11 vs 4).
+    - Applies *Slowness IV* and *Heavy Jump IV* effects to the animal when contacting with water (directly or in rain).
+    - Fully broken armor **does not disappear**: remains equipped but loses all protection and immunities.
+    - Does not burn in Lava when dropped as an item.
+  - **Lymonite Horse Armor**
+    - All-purpose armor. But designed for snowy mountains.
+    - Has properties similar to players' **Lymonite Armor**.
+    - Protects the horse from sinking in *Powder Snow*.
+    - Grants 100% freezing protection like **Leather Armor**.
+    - Grants immunity to Poison effect and thorns damage (Sweet Berry Bushes, Cacti).
+    - The defense is between **Diamond Horse Armor** and **Gold Horse Armor**: body defense 9 and toughness 1.
+    - Applies Health Boost +4 hearts.
+    - Weak against *Wither* effect and explosions: +50% damage, against *Wind Charge*: +200% damage.
+- New items:
+    - **Animal Armor Handbook: Horse** for crafting **Lymonite Horse Armor**.
+    - **Animal Armor Handbook: Wolf** for crafting **Rendelite Wolf Armor**.
+    - **Animal Armor Handbook: Marine – Nautilus** for crafting **Diamond Nautilus Armor**.
+      - Provides an alternative way to acquire **Diamond Nautilus Armor**.
+      - Consumes **Diamond Block** as a basic resource.
+    - All can be found in *Stronghold libraries*.
+    - Used in smithing recipes.
+    - Are not consumed in crafting.
+
+
+### 📝 Improvements
+- Interactions using **Marine Crystal** and **Soaring Spore Essence** have been improved: now ignore the default animal interactions.
+- Tooltip localizations improved.
+- Minor corrections for Lymonite and Superyte armor.
+
+
+## 📦 Version 2.21.6
+
+### 📝 Improvements
+- Many items are now fire resistant:
+  - **Rendelite**, **Diamite** and **Superyte** gear and all related materials (powders, ingots, plates and blocks).
+  - All crystals and **Vesicular Terracotta**.
+  - **Fire Rod** and all upgraded variants, including magnetic versions and the **Builder Rod**.
+  - **Rod Sensor**.
+  - **The Block of Angel** (both *dormant* and *activated* versions) and **The Block of Devil**.
+  - **Nether Bars**.
+
+
+## 📦 Version 2.21.5
+
+### 📝 Improvements
+- When a player wearing **Rendelite Armor** comes into contact with water (directly or in rain):
+  - *Nausea* and *Heavy Jump* effects now remove the armor’s *Jump Boost* effect (if active) and prevent it from being activated.
+  - *Nausea* and *Heavy Jump* effects now remove the armor’s *Slow Falling* effect only while the player is on the ground.
+- Minor **Rendelite Armor** tooltip correction.
+
+
+## 📦 Version 2.21.4
+
+### 📝 Improvements
+- Using any type of **magnetic rods** in *magnetic mode* now increases damage.
+
+
+## 📦 Version 2.21.3
+
+### 🐞 Fixed
+- Placing water by the **Aquarite Hoe**:
+  - now also causes *exhaustion*, the same way as for **Marine Rod**.
+  - the hoe does not place water again if the water source already exists in the position.
+- Minor tooltip fixes for **Superyte armor**.
+
+### 📝 Improvements
+- **Lymonite armor**:
+  - Bite damage resistance from *spiders*, *silverfish*, and *bees* reduced to 50% (was 80%).
+  - Wind Charge damage vulnerability increased to +200% (was +50%).
+  - Wither and blast damage vulnerability remains unchanged (+50%).
+- **Superyte armor**:
+  - Bite damage resistance from *spiders*, *silverfish*, and *bees* has been removed.
+
+
 ## 📦 Version 2.21.0
 
 ### 📝 Improvements

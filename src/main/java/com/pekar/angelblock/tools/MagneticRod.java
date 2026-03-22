@@ -6,7 +6,6 @@ import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
@@ -20,6 +19,8 @@ import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.Objects;
 import java.util.function.Function;
+
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
 
 public abstract class MagneticRod extends ModRod
 {
@@ -39,7 +40,8 @@ public abstract class MagneticRod extends ModRod
         if (result == InteractionResult.PASS) return InteractionResult.FAIL;
         if (result == InteractionResult.SUCCESS || result == InteractionResult.SUCCESS_SERVER)
         {
-            if (!context.getLevel().isClientSide())
+            var level = context.getLevel();
+            if (!level.isClientSide())
             {
                 var player = context.getPlayer();
                 var exhaustionMultiplier = isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)
@@ -47,6 +49,7 @@ public abstract class MagneticRod extends ModRod
                         : NORMAL_USE_EXHAUSTION_MULTIPLIER;
 
                 utils.player.causePlayerExhaustion(player, exhaustionMultiplier);
+                damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
         }
         return result;
@@ -278,14 +281,14 @@ public abstract class MagneticRod extends ModRod
     protected boolean canBeReplaced(Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
-        var replaceables = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "overworld_replaceables"));
+        var replaceables = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "overworld_replaceables"));
         return blockState.is(replaceables);
     }
 
     protected boolean isShiftingOre(Level level, BlockPos pos)
     {
         var blockState = level.getBlockState(pos);
-        var shiftingOres = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Main.MODID, "overworld_shifting_ores"));
+        var shiftingOres = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "overworld_shifting_ores"));
         return blockState.is(shiftingOres);
     }
 

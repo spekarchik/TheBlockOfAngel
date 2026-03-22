@@ -7,11 +7,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.equipment.ArmorType;
 
-public class FlyingArmor extends ModArmor
+public class FlyingArmor extends ModHumanoidArmor
 {
     protected FlyingArmor(ModArmorMaterial material, ArmorType equipmentSlot, Properties properties)
     {
-        super(material, equipmentSlot, properties);
+        super(material, equipmentSlot, PlayerArmorType.AERYTE, properties);
     }
 
     @Override
@@ -23,14 +23,13 @@ public class FlyingArmor extends ModArmor
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer)
     {
-        return getModelName(wearer, EquipmentSlot.FEET)
-            .equals(ArmorRegistry.FLYING_BOOTS.get().getArmorFamilyName());
-    }
+        if (isPlayerHeavy(wearer)) return false;
 
-    private String getModelName(LivingEntity entity, EquipmentSlot slot)
-    {
-        var item = entity.getItemBySlot(slot).getItem();
-        if (!(item instanceof ModArmor armorItem)) return "";
-        return armorItem.getArmorFamilyName();
+        if (wearer.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof ModHumanoidArmor armorItem)
+        {
+            return armorItem.getArmorType() == PlayerArmorType.AERYTE;
+        }
+
+        return false;
     }
 }
