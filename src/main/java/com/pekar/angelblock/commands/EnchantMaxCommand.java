@@ -24,7 +24,7 @@ import static com.pekar.angelblock.utils.Resources.createResourceLocation;
 public class EnchantMaxCommand
 {
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final TagKey<Enchantment> EXCLUSIVE_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(Main.MODID, "exclusive_enchantments"));
+    private static final TagKey<Enchantment> EXCLUDED_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(Main.MODID, "excluded_enchantments"));
     private static final String commandName = "enchantMax";
     private enum Mode { DEFAULT, ALL, CLEAR }
 
@@ -76,7 +76,7 @@ public class EnchantMaxCommand
                 // Skip Frost Walker and Silk Touch unless the 'all' literal was provided
                 if (mode != Mode.ALL)
                 {
-                    if (enchantment.is(EXCLUSIVE_ENCHANTMENTS)) level = 0;
+                    if (enchantment.is(EXCLUDED_ENCHANTMENTS)) level = 0;
                     boolean isExclusive = enchantment.value().exclusiveSet().stream().anyMatch(x -> mutableEnchantments.keySet().contains(x));
                     if (isExclusive) level = 0;
                 }
