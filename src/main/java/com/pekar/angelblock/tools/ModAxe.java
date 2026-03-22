@@ -92,9 +92,11 @@ public class ModAxe extends AxeItem implements IModToolEnhanceable, ITooltipProv
     {
         if (!utils.text.showExtendedDescription(tooltip)) return;
 
-        for (int i = 0; i <= 2; i++)
+        tooltip.ignoreEmptyLines();
+
+        for (int i = 0; i <= 3; i++)
         {
-            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i == 1).apply();
+            tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i >= 1 && i <= 2).apply();
         }
     }
 }

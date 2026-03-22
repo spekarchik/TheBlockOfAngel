@@ -180,7 +180,7 @@ public class ToolRegistry
                     new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final DeferredItem<ModSword> SUPER_SWORD = Main.ITEMS.register("super_sword",
-            () -> new SuperSword(ToolMaterials.SUPER_SWORD, 3, -2.0F,
+            () -> new SuperSword(ToolMaterials.SUPER_SWORD_ENHANCED, 3, -2.0F,
                     new Item.Properties().rarity(Rarity.UNCOMMON)));
 
 
