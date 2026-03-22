@@ -24,8 +24,9 @@ public class EnchantMaxCommand
 {
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final TagKey<Enchantment> EXCLUDED_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(Main.MODID, "excluded_enchantments"));
+    private static final TagKey<Enchantment> EXCLUDED_FROM_BASIC_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(Main.MODID, "excluded_from_basic_enchantments"));
     private static final String commandName = "enchantMax";
-    private enum Mode { DEFAULT, ALL, CLEAR }
+    private enum Mode { DEFAULT, ALL, BASIC, CLEAR }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
@@ -40,6 +41,9 @@ public class EnchantMaxCommand
                 .executes(ctx -> handleEnchantMaxCommand(ctx, Mode.DEFAULT))
                 .then(Commands.literal("all")
                         .executes(ctx -> handleEnchantMaxCommand(ctx, Mode.ALL))
+                )
+                .then(Commands.literal("basic")
+                        .executes(ctx -> handleEnchantMaxCommand(ctx, Mode.BASIC))
                 )
                 .then(Commands.literal("clear")
                         .executes(ctx -> handleEnchantMaxCommand(ctx, Mode.CLEAR))
@@ -76,6 +80,7 @@ public class EnchantMaxCommand
                 if (mode != Mode.ALL)
                 {
                     if (enchantment.is(EXCLUDED_ENCHANTMENTS)) level = 0;
+                    if (mode == Mode.BASIC && enchantment.is(EXCLUDED_FROM_BASIC_ENCHANTMENTS)) level = 0;
                     boolean isExclusive = enchantment.value().exclusiveSet().stream().anyMatch(x -> mutableEnchantments.keySet().contains(x));
                     if (isExclusive) level = 0;
                 }
@@ -91,6 +96,7 @@ public class EnchantMaxCommand
             var commandResult = switch (mode)
             {
                 case ALL -> "Applied max enchantments (including exclusive ones)";
+                case BASIC -> "Applied basic enchantments";
                 case CLEAR -> "Cleared all enchantments";
                 default -> "Applied max enchantments";
             };
