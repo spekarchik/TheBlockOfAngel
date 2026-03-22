@@ -243,12 +243,16 @@ public class AncientRod extends MagneticRod
             tooltip.addLine(getDescriptionId(), 1).apply();
     }
 
-    protected void appendCommonPostInfo(ITooltip tooltip)
+    protected void appendMainPostInfo(ITooltip tooltip)
     {
         for (int i = 22; i <= 24; i++)
         {
             tooltip.addLine(getUnenhancedRodDescriptionId(), i).styledAs(TextStyle.DarkGray, i <= 23).apply();
         }
+    }
+
+    protected void appendCommonPostInfo(ITooltip tooltip)
+    {
     }
 
     @Override
@@ -266,6 +270,7 @@ public class AncientRod extends MagneticRod
             // Placing
             appendPlacingBlockInfo(tooltip, true);
             tooltip.addEmptyLine();
+            appendMainPostInfo(tooltip);
         }
         else if (Screen.hasAltDown())
         {

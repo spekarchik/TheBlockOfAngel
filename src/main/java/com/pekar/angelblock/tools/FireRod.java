@@ -231,7 +231,7 @@ public class FireRod extends MarineRod
         }
     }
 
-    protected void appendCommonPostInfo(ITooltip tooltip)
+    protected void appendMainPostInfo(ITooltip tooltip)
     {
         tooltip.includeEmptyLines();
 
