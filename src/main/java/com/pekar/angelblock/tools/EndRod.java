@@ -246,7 +246,7 @@ public class EndRod extends AmethystRod
         }
     }
 
-    protected void appendCommonPostInfo(ITooltip tooltip)
+    protected void appendMainPostInfo(ITooltip tooltip)
     {
         for (int i = 16; i <= 18; i++)
         {

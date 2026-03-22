@@ -62,7 +62,7 @@ public class AngelRod extends EndRod
         super.appendMagneticInfo(tooltip);
     }
 
-    protected void appendCommonPostInfo(ITooltip tooltip)
+    protected void appendMainPostInfo(ITooltip tooltip)
     {
         for (int i = 7; i <= 9; i++)
         {
