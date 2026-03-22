@@ -26,8 +26,9 @@ public class EnchantArmorMaxCommand
 {
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final TagKey<Enchantment> EXCLUDED_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(Main.MODID, "excluded_enchantments"));
+    private static final TagKey<Enchantment> EXCLUDED_FROM_BASIC_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(Main.MODID, "excluded_from_basic_enchantments"));
     private static final String commandName = "enchantArmorMax";
-    private enum Mode { DEFAULT, ALL, CLEAR }
+    private enum Mode { DEFAULT, ALL, BASIC, CLEAR }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
@@ -42,6 +43,9 @@ public class EnchantArmorMaxCommand
                 .executes(ctx -> handleEnchantArmorCommand(ctx, Mode.DEFAULT))
                 .then(Commands.literal("all")
                         .executes(ctx -> handleEnchantArmorCommand(ctx, Mode.ALL))
+                )
+                .then(Commands.literal("basic")
+                        .executes(ctx -> handleEnchantArmorCommand(ctx, Mode.BASIC))
                 )
                 .then(Commands.literal("clear")
                         .executes(ctx -> handleEnchantArmorCommand(ctx, Mode.CLEAR))
@@ -89,6 +93,7 @@ public class EnchantArmorMaxCommand
                     if (mode != Mode.ALL)
                     {
                         if (enchantment.is(EXCLUDED_ENCHANTMENTS)) level = 0;
+                        if (mode == Mode.BASIC && enchantment.is(EXCLUDED_FROM_BASIC_ENCHANTMENTS)) level = 0;
                         boolean isExclusive = enchantment.value().exclusiveSet().stream().anyMatch(x -> mutableEnchantments.keySet().contains(x));
                         if (isExclusive) level = 0;
                     }
@@ -104,6 +109,7 @@ public class EnchantArmorMaxCommand
                 var commandResult = switch (mode)
                 {
                     case ALL -> "applied all";
+                    case BASIC -> "applied basic";
                     case CLEAR -> "cleared";
                     default -> "applied";
                 };
