@@ -127,7 +127,7 @@ public class AmethystRod extends FireRod
         }
     }
 
-    protected void appendCommonPostInfo(ITooltip tooltip)
+    protected void appendMainPostInfo(ITooltip tooltip)
     {
         for (int i = 22; i <= 24; i++)
         {
