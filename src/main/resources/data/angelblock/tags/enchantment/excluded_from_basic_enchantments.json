@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:mending",
+    "minecraft:thorns",
+    "minecraft:wind_burst",
+    "minecraft:sweeping_edge",
+    "minecraft:knockback",
+    "minecraft:fire_aspect",
+    "minecraft:flame",
+    "minecraft:punch",
+    "minecraft:channeling",
+    "minecraft:fortune",
+    "minecraft:looting"
+  ]
+}
