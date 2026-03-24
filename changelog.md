@@ -1,3 +1,13 @@
+## 📦 Version 3.4.1
+
+### ✨ New
+- Now available for Minecraft 26.1
+- Added `basic` parameter for `enchantMax` and `enchantArmorMax` console commands:
+  - `enchantMax basic` – apply basic enchantments to the main-hand item
+  - `enchantArmorMax basic` – apply basic enchantments to worn armor
+  - basic enchantments exclude *Mending*, *Thorns*, *Knockback*, *Flame*, *Sweeping Edge*, *Fortune*, and other enchantments that may interfere with testing
+
+
 ## 📦 Version 3.4.0
 
 ### 📝 Improvements
