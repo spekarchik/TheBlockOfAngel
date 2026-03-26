@@ -45,7 +45,7 @@ public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlock
         output.putBoolean(IsBrokenTagName, isBroken);
     }
 
-    protected void saveModTag(CompoundTag tag)
+    protected void syncModTag(CompoundTag tag)
     {
         tag.putInt(DamageTagName, damage);
     }
@@ -55,7 +55,7 @@ public class AngelRodBlockEntity extends DespawnMonsterBlockEntity<AngelRodBlock
         this.damage = damage;
         this.isBroken = isBroken;
         var tag = new CompoundTag();
-        saveModTag(tag);
+        syncModTag(tag);
     }
 
     public int getDamage()

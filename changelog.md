@@ -1,11 +1,16 @@
 ## 📦 Version 3.4.1
 
 ### ✨ New
-- Now available for Minecraft 26.1
 - Added `basic` parameter for `enchantMax` and `enchantArmorMax` console commands:
   - `enchantMax basic` – apply basic enchantments to the main-hand item
   - `enchantArmorMax basic` – apply basic enchantments to worn armor
   - basic enchantments exclude *Mending*, *Thorns*, *Knockback*, *Flame*, *Sweeping Edge*, *Fortune*, and other enchantments that may interfere with testing
+
+### 📝 Improvements
+- **Block of Angel** now warms up over an in-game day (12s on *Peaceful* difficulty) after being placed in the world or awakened with *Echo Shard*.
+  - While warming up, it does not remove monsters
+  - New animation added for the warmed-up state
+  - Tooltips updated for both **Block of Angel** and **Dormant Block of Angel**
 
 
 ## 📦 Version 3.4.0
