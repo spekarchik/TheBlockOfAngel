@@ -50,7 +50,7 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
     public CompoundTag getUpdateTag(HolderLookup.Provider registries)
     {
         var tag = new CompoundTag();
-        saveModTag(tag);
+        syncModTag(tag);
         return tag;
     }
 
@@ -58,7 +58,7 @@ public abstract class DespawnMonsterBlockEntity<T extends BlockEntity> extends B
 
     protected abstract void saveModTag(ValueOutput output);
 
-    protected abstract void saveModTag(CompoundTag tag);
+    protected abstract void syncModTag(CompoundTag tag);
 
     protected abstract double getEffectiveRadius();
 

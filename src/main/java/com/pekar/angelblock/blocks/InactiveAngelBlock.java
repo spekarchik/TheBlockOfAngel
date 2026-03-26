@@ -29,7 +29,8 @@ public class InactiveAngelBlock extends ModBlock
         {
             if (!isClientSide)
             {
-                level.setBlock(pos, BlockRegistry.ANGEL_BLOCK.get().defaultBlockState(), InactiveAngelBlock.UPDATE_ALL_IMMEDIATE);
+                var angelBlock = BlockRegistry.ANGEL_BLOCK.get();
+                level.setBlock(pos, angelBlock.defaultBlockState().setValue(AngelBlock.IS_WORMING_UP, true), InactiveAngelBlock.UPDATE_ALL_IMMEDIATE);
             }
 
             return getInteractionSidedSuccess(isClientSide);

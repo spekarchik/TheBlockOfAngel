@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "ambientocclusion": false,
+  "textures":
+  {
+    "side": "angelblock:block/angel_block_wormup_anim",
+    "front": "angelblock:block/angel_block_wormup_anim",
+    "top": "angelblock:block/angel_block_up_wormup_anim",
+    "bottom": "angelblock:block/angel_block_bottom"
+  }
+}

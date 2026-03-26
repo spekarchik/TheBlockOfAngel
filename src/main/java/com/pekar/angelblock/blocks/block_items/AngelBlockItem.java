@@ -47,12 +47,12 @@ public class AngelBlockItem extends ModBlockItem implements ITooltipProvider
 
             tooltip.addEmptyLine();
 
-            for (int i = 29; i <= 32; i++)
+            for (int i = 29; i <= 33; i++)
             {
                 tooltip.addLine(getItemDescriptionId(), i)
-                        .styledAs(TextStyle.DarkGray, i == 29)
-                        .withFormatting(ChatFormatting.AQUA, i == 30)
-                        .withFormatting(ChatFormatting.DARK_AQUA, i == 31)
+                        .styledAs(TextStyle.DarkGray, i <= 31)
+                        .withFormatting(ChatFormatting.AQUA, i == 32)
+                        .withFormatting(ChatFormatting.DARK_AQUA, i == 33)
                         .apply();
             }
 

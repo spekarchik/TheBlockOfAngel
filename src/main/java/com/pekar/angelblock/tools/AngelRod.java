@@ -52,7 +52,10 @@ public class AngelRod extends EndRod
         for (int i = 2; i <= 5; i++)
         {
             if (i == 3) continue;
-            tooltip.addLine(getRodDescriptionId(), i).withFormatting(ChatFormatting.WHITE, selectAsNew).apply();
+            tooltip.addLine(getRodDescriptionId(), i)
+                    .withFormatting(ChatFormatting.WHITE, selectAsNew && i == 2)
+                    .styledAs(TextStyle.DarkGray, i >= 3)
+                    .apply();
         }
     }
 
