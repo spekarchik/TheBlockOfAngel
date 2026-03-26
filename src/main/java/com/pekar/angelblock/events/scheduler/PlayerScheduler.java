@@ -7,9 +7,9 @@ import java.util.List;
 
 public abstract class PlayerScheduler
 {
-    private static final List<IScheduledTask<?>> tasks = new ArrayList<>();
+    private static final List<IPlayerScheduledTask> tasks = new ArrayList<>();
 
-    public static void add(IScheduledTask<?> task)
+    public static void add(IPlayerScheduledTask task)
     {
         tasks.add(task);
     }
