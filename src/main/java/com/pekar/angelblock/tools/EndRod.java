@@ -5,8 +5,8 @@ import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
+import com.pekar.angelblock.utils.Weather;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,7 +21,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ServerLevelData;
 
 public class EndRod extends AmethystRod
 {
@@ -109,16 +108,10 @@ public class EndRod extends AmethystRod
 
         if (offHandItem == ItemRegistry.FLAME_STONE.get())
         {
+            Weather.of(level).clear();
             if (player instanceof ServerPlayer serverPlayer)
             {
-                var serverLevel = serverPlayer.level();
-                var weatherData = serverLevel.getWeatherData();
-
                 playWeatherSound(serverPlayer);
-                weatherData.setRaining(false);
-                weatherData.setThundering(false);
-                weatherData.setRainTime(0);
-                weatherData.setThunderTime(0);
                 damageMainHandItem(1, player);
                 utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
@@ -131,61 +124,32 @@ public class EndRod extends AmethystRod
         }
         else if (offHandItem == ItemRegistry.MARINE_CRYSTAL.get())
         {
+            Weather.of(level).rain();
             if (player instanceof ServerPlayer serverPlayer)
             {
-                var serverLevel = serverPlayer.level();
-                var weatherData = serverLevel.getWeatherData();
-
                 playWeatherSound(serverPlayer);
-                weatherData.setRaining(true);
-                weatherData.setThundering(false);
-                level.setRainLevel(0.3F);
-                level.setThunderLevel(0);
-                if (weatherData.getRainTime() == 0)
-                {
-                    var weatherLasts = level.getRandom().nextIntBetweenInclusive(1200, 24000);
-                    weatherData.setRainTime(weatherLasts);
-                }
-                weatherData.setThunderTime(0);
                 damageMainHandItem(1, player);
                 utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
             else
             {
                 player.swing(interactionHand);
-                level.setRainLevel(0.3F);
-                level.setThunderLevel(0);
             }
 
             return InteractionResult.CONSUME;
         }
         else if (offHandItem == ItemRegistry.STRENGTH_PEARL.get())
         {
+            Weather.of(level).thunder();
             if (player instanceof ServerPlayer serverPlayer)
             {
-                var serverLevel = serverPlayer.level();
-                var weatherData = serverLevel.getWeatherData();
-
                 playWeatherSound(serverPlayer);
-                weatherData.setClearWeatherTime(0);
-                weatherData.setRaining(true);
-                weatherData.setThundering(true);
-                level.setThunderLevel(1.0F);
-                level.setRainLevel(1.0F);
-                if (weatherData.getRainTime() == 0 || weatherData.getThunderTime() == 0)
-                {
-                    var weatherLasts = level.getRandom().nextIntBetweenInclusive(1200, 24000);
-                    weatherData.setRainTime(weatherLasts);
-                    weatherData.setThunderTime(weatherLasts);
-                }
                 damageMainHandItem(1, player);
                 utils.player.causePlayerExhaustion(player, WEATHER_CHANGE_EXHAUSTION_MULTIPLIER);
             }
             else
             {
                 player.swing(interactionHand);
-                level.setThunderLevel(1.0F);
-                level.setRainLevel(1.0F);
             }
 
             return InteractionResult.CONSUME;
