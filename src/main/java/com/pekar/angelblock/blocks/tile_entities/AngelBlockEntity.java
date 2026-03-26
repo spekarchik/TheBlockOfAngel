@@ -1,18 +1,23 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
 import com.pekar.angelblock.Main;
+import com.pekar.angelblock.blocks.AngelBlock;
 import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
+import com.pekar.angelblock.events.scheduler.base.IScheduledTask;
+import com.pekar.angelblock.events.scheduler.base.ScheduledTask;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -24,11 +29,16 @@ import java.util.Set;
 
 public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity>
 {
+    private static final int HOSTILE_LEVEL_WARMING_UP_TIME_TICKS = 24000;
+    private static final int PEACEFUL_LEVEL_WORMING_UP_TIME_TICKS = 240;
     private static final String MonsterFilterTagName = Main.MODID + ":MonsterFilter";
+    private static final String WormTicksLeftTagName = Main.MODID + ":WormTicksLeft";
 
     private final Set<IMonster> monstersToIgnore = new HashSet<>();
     private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
     private final Map<Integer, IMonster> monstersById = new HashMap<>();
+    private IScheduledTask wormingUpTask;
+    private int wormTicksLeft;
 
     public AngelBlockEntity(BlockPos blockPos, BlockState blockState)
     {
@@ -102,6 +112,49 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
         return true;
     }
 
+    @Override
+    public void tick(Level level, BlockPos pos, BlockState blockState, AngelBlockEntity entity)
+    {
+        if (level == null || level.isClientSide()) return;
+
+        if (wormingUpTask != null)
+        {
+            wormTicksLeft = wormingUpTask.getCounter();
+            if (wormTicksLeft % 100 == 0) setChanged();
+            wormingUpTask.decrementOrExecute();
+        }
+
+        super.tick(level, pos, blockState, entity);
+    }
+
+    public void startWormingUp()
+    {
+        int wormingUpTicks = level != null && level.getLevelData().getDifficulty() == Difficulty.PEACEFUL ? PEACEFUL_LEVEL_WORMING_UP_TIME_TICKS : HOSTILE_LEVEL_WARMING_UP_TIME_TICKS;
+        wormingUpTask = new ScheduledTask<>(wormingUpTicks, this, this::onWormedUp);
+    }
+
+    private void continueWormingUp()
+    {
+        if (wormingUpTask == null)
+        {
+            wormingUpTask = new ScheduledTask<>(wormTicksLeft, this, this::onWormedUp);
+        }
+    }
+
+    private void onWormedUp(AngelBlockEntity angelBlockEntity)
+    {
+        var blockState = angelBlockEntity.getBlockState();
+        if (blockState.getBlock() instanceof AngelBlock angelBlock)
+        {
+            var level = angelBlockEntity.getLevel();
+            if (level == null) return;
+            angelBlock.setBlockStateForWarmingUp(level, angelBlockEntity.getBlockPos(), false);
+            wormingUpTask = null;
+            wormTicksLeft = 0;
+            setChanged();
+        }
+    }
+
     public int monstersInFilter()
     {
         return monstersToIgnore.size();
@@ -116,7 +169,7 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
     @Override
     protected boolean needToDespawnEntity(Entity entity)
     {
-        return entity instanceof Enemy && monstersToIgnore.stream().noneMatch(m -> m.belongs((LivingEntity) entity));
+        return wormingUpTask == null && entity instanceof Enemy && monstersToIgnore.stream().noneMatch(m -> m.belongs((LivingEntity) entity));
     }
 
     @Override
@@ -128,6 +181,12 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
         for (var monsterId : array)
         {
             monstersToIgnore.add(monstersById.get(monsterId));
+        }
+
+        wormTicksLeft = input.getInt(WormTicksLeftTagName).orElse(0);
+        if (wormTicksLeft > 0)
+        {
+            continueWormingUp();
         }
     }
 
@@ -143,10 +202,11 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
         }
 
         output.putIntArray(MonsterFilterTagName, array);
+        output.putInt(WormTicksLeftTagName, wormTicksLeft);
     }
 
     @Override
-    protected void saveModTag(CompoundTag tag)
+    protected void syncModTag(CompoundTag tag)
     {
         var array = new int[monstersToIgnore.size()];
 
@@ -157,6 +217,7 @@ public class AngelBlockEntity extends DespawnMonsterBlockEntity<AngelBlockEntity
         }
 
         tag.putIntArray(MonsterFilterTagName, array);
+        tag.putInt(WormTicksLeftTagName, wormTicksLeft);
     }
 
     private void addToMonsterMap(IMonster monster)
