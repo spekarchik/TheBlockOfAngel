@@ -34,18 +34,11 @@ public class Weather
             var weatherData = serverLevel.getWeatherData();
             weatherData.setRaining(true);
             weatherData.setThundering(false);
-            level.setRainLevel(0.3F);
-            level.setThunderLevel(0);
             if (weatherData.getRainTime() == 0)
             {
                 var weatherLasts = level.getRandom().nextIntBetweenInclusive(1200, 24000);
                 weatherData.setRainTime(weatherLasts);
             }
-        }
-        else
-        {
-            level.setRainLevel(0.3F);
-            level.setThunderLevel(0);
         }
     }
 
@@ -56,19 +49,12 @@ public class Weather
             var weatherData = serverLevel.getWeatherData();
             weatherData.setRaining(true);
             weatherData.setThundering(true);
-            level.setThunderLevel(1.0F);
-            level.setRainLevel(1.0F);
             if (weatherData.getRainTime() == 0 || weatherData.getThunderTime() == 0)
             {
                 var weatherLasts = level.getRandom().nextIntBetweenInclusive(1200, 24000);
                 weatherData.setRainTime(weatherLasts);
                 weatherData.setThunderTime(weatherLasts);
             }
-        }
-        else
-        {
-            level.setThunderLevel(1.0F);
-            level.setRainLevel(1.0F);
         }
     }
 }
