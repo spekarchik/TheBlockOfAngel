@@ -1,3 +1,12 @@
+## 📦 Version 3.5.0
+
+### ✨ New
+- Added console commands for testing:
+  - `dayLock [night|cancel]` — set clear weather, set time (day or night), and freeze the weather & day/night cycle.
+  - `xp500 [level]` — set player experience to 500 levels by default.
+  - `resetProgress` — reset player's advancements and unlocked recipes.
+
+
 ## 📦 Version 3.4.1
 
 ### ✨ New
