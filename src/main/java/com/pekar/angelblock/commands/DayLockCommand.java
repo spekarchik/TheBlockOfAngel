@@ -3,11 +3,11 @@ package com.pekar.angelblock.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.logging.LogUtils;
+import com.pekar.angelblock.utils.GameRulesAccessor;
 import com.pekar.angelblock.utils.Weather;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permissions;
@@ -55,15 +55,15 @@ public class DayLockCommand
             }
 
             ServerLevel level = serverPlayer.level();
-            MinecraftServer server = level.getServer();
+            var gameRules = GameRulesAccessor.of(level);
 
             switch (param)
             {
                 case CANCEL ->
                 {
                     // Re-enable daylight and weather advancement
-                    level.getGameRules().set(GameRules.ADVANCE_TIME, true, server);
-                    level.getGameRules().set(GameRules.ADVANCE_WEATHER, true, server);
+                    gameRules.set(GameRules.ADVANCE_TIME, true);
+                    gameRules.set(GameRules.ADVANCE_WEATHER, true);
 
                     ctx.getSource().sendSuccess(() -> Component.literal(commandName + ": unlocked (advance_time and advance_weather enabled)"), false);
                 }
@@ -71,8 +71,8 @@ public class DayLockCommand
                 case NIGHT ->
                 {
                     // Disable daylight and weather advancement
-                    level.getGameRules().set(GameRules.ADVANCE_TIME, false, server);
-                    level.getGameRules().set(GameRules.ADVANCE_WEATHER, false, server);
+                    gameRules.set(GameRules.ADVANCE_TIME, false);
+                    gameRules.set(GameRules.ADVANCE_WEATHER, false);
 
                     // Set time to day (same as 'time set day')
                     ctx.getSource().getServer().getCommands()
@@ -87,8 +87,8 @@ public class DayLockCommand
                 case DEFAULT ->
                 {
                     // Disable daylight and weather advancement
-                    level.getGameRules().set(GameRules.ADVANCE_TIME, false, server);
-                    level.getGameRules().set(GameRules.ADVANCE_WEATHER, false, server);
+                    gameRules.set(GameRules.ADVANCE_TIME, false);
+                    gameRules.set(GameRules.ADVANCE_WEATHER, false);
 
                     // Set time to day (same as 'time set day')
                     ctx.getSource().getServer().getCommands()
