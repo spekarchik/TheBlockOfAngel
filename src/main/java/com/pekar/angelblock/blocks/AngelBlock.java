@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
@@ -27,12 +29,14 @@ public class AngelBlock extends ModBlock implements EntityBlock
 {
     public static final int MaxMonstersFilterValue = 4;
     public static final IntegerProperty MONSTERS_IN_FILTER = IntegerProperty.create("monsters_in_filter", 0, MaxMonstersFilterValue);
+    public static final BooleanProperty IS_WORMING_UP = BooleanProperty.create("is_worming_up");
 
     public AngelBlock(Properties properties)
     {
         super(properties);
 
         registerDefaultState(this.stateDefinition.any().setValue(MONSTERS_IN_FILTER, 0));
+        registerDefaultState(this.stateDefinition.any().setValue(IS_WORMING_UP, false));
     }
 
     @Override
@@ -45,6 +49,11 @@ public class AngelBlock extends ModBlock implements EntityBlock
 
             var isClientSide = level.isClientSide();
 
+            if (level.getBlockState(pos).getValue(IS_WORMING_UP))
+            {
+                return InteractionResult.FAIL;
+            }
+
             var interactionItem = stack.getItem();
             if (interactionItem == Items.ECHO_SHARD)
             {
@@ -54,7 +63,7 @@ public class AngelBlock extends ModBlock implements EntityBlock
 
                 if (!isClientSide)
                 {
-                    setBlockStateValue(level, pos, 0);
+                    setBlockStateForMonsterFilter(level, pos, 0);
                 }
 
                 return getInteractionSidedSuccess(isClientSide);
@@ -64,7 +73,7 @@ public class AngelBlock extends ModBlock implements EntityBlock
                 var isAdded = angelBlockEntity.addMonsterToFilter(interactionItem, player);
                 if (isAdded)
                 {
-                    setBlockStateValue(level, pos, angelBlockEntity.monstersInFilter());
+                    setBlockStateForMonsterFilter(level, pos, angelBlockEntity.monstersInFilter());
                 }
                 return isAdded ? getInteractionSidedSuccess(isClientSide) : InteractionResult.FAIL;
             }
@@ -92,19 +101,38 @@ public class AngelBlock extends ModBlock implements EntityBlock
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        builder.add(MONSTERS_IN_FILTER);
+        builder.add(IS_WORMING_UP, MONSTERS_IN_FILTER);
     }
 
-    public void setBlockStateValue(Level level, BlockPos pos, int value)
+    private void setBlockStateForMonsterFilter(Level level, BlockPos pos, int value)
     {
+        var state = level.getBlockState(pos);
+
+        if (state.getValue(IS_WORMING_UP))
+        {
+            return;
+        }
+
         if (value > MaxMonstersFilterValue)
         {
+            level.playSound(null, pos, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 1.0f, 1.0f);
             level.setBlock(pos, BlockRegistry.INACTIVE_ANGEL_BLOCK.get().defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
             return;
         }
 
-        var state = level.getBlockState(pos);
         level.setBlock(pos, state.setValue(MONSTERS_IN_FILTER, value), Block.UPDATE_ALL_IMMEDIATE);
+    }
+
+    public void setBlockStateForWarmingUp(Level level, BlockPos pos, boolean isWarmingUp)
+    {
+        var state = level.getBlockState(pos);
+        level.setBlock(pos, state.setValue(IS_WORMING_UP, isWarmingUp), Block.UPDATE_ALL_IMMEDIATE);
+    }
+
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context)
+    {
+        return defaultBlockState().setValue(MONSTERS_IN_FILTER, 0).setValue(IS_WORMING_UP, true);
     }
 
     @Override
@@ -112,7 +140,20 @@ public class AngelBlock extends ModBlock implements EntityBlock
     {
         if (!level.isClientSide)
         {
-            level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 1.0f, 1.0f);
+            if (state.getValue(IS_WORMING_UP))
+            {
+                level.playSound(null, pos, SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 1.0f, 1.0f);
+
+                var blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof AngelBlockEntity angelBlockEntity)
+                {
+                    angelBlockEntity.startWormingUp();
+                }
+            }
+            else if (oldState.getValue(IS_WORMING_UP) && !state.getValue(IS_WORMING_UP) && state.getValue(MONSTERS_IN_FILTER) == 0)
+            {
+                level.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0f, 1.0f);
+            }
         }
     }
 }
