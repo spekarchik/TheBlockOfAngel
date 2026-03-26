@@ -1,11 +1,9 @@
 package com.pekar.angelblock.events.scheduler;
 
+import com.pekar.angelblock.events.scheduler.base.IScheduledTask;
 import net.minecraft.server.level.ServerPlayer;
 
-public interface IScheduledTask<T>
+public interface IPlayerScheduledTask extends IScheduledTask
 {
-    void decrementOrExecute();
-    void execute();
-    boolean isCompleted();
     boolean belongsTo(ServerPlayer player);
 }
