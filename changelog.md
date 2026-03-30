@@ -6,6 +6,12 @@
   - `xp500 [level]` — set player experience to 500 levels by default.
   - `resetProgress` — reset player's advancements and unlocked recipes.
 
+### 📝 Improvements
+- **Block of Angel** now warms up over an in-game day (12s on *Peaceful* difficulty) after being placed in the world or awakened with *Echo Shard*.
+  - While warming up, it does not remove monsters
+  - New animation added for the warmed-up state
+  - Tooltips updated for both **Block of Angel** and **Dormant Block of Angel**
+
 
 ## 📦 Version 3.4.1
 
