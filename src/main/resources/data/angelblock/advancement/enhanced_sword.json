@@ -1,0 +1,39 @@
+{
+  "parent": "angelblock:first_crystal",
+  "criteria": {
+    "enhanced_sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:diamithic_sword",
+              "angelblock:rendelithic_sword",
+              "angelblock:limonite_sword",
+              "angelblock:super_sword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.enhanced_sword.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:limonite_sword"
+    },
+    "title": {
+      "translate": "advancements.angelblock.enhanced_sword.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["enhanced_sword"]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,36 @@
+{
+  "parent": "angelblock:root",
+  "criteria": {
+    "aeryte_mixture": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:flying_powder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.aeryte_mixture.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:flying_powder"
+    },
+    "title": {
+      "translate": "advancements.angelblock.aeryte_mixture.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["aeryte_mixture"]
+  ],
+  "sends_telemetry_event": false
+}
