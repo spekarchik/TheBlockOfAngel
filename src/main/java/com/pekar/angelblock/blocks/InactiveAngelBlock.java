@@ -1,6 +1,8 @@
 package com.pekar.angelblock.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,10 +29,11 @@ public class InactiveAngelBlock extends ModBlock
         var interactionItem = stack.getItem();
         if (interactionItem == Items.ECHO_SHARD)
         {
-            if (!isClientSide)
+            if (level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer)
             {
                 var angelBlock = BlockRegistry.ANGEL_BLOCK.get();
                 level.setBlock(pos, angelBlock.defaultBlockState().setValue(AngelBlock.IS_WORMING_UP, true), InactiveAngelBlock.UPDATE_ALL_IMMEDIATE);
+                utils.player.awardAdvancement(serverPlayer, serverLevel, "angel_block", "inactive_angel_block");
             }
 
             return getInteractionSidedSuccess(isClientSide);
