@@ -1,20 +1,26 @@
 ## 📦 Version 3.5.0
 
-### ✨ New (tests)
-- Added console commands for testing:
-  - `dayLock [night|cancel]` — set clear weather, set time (day or night), and freeze the weather & day/night cycle.
-  - `xp500 [level]` — set player experience to 500 levels by default.
-  - `resetProgress` — reset player's advancements and unlocked recipes.
-- Added `basic` parameter for `enchantMax` and `enchantArmorMax` console commands:
-  - `enchantMax basic` – apply basic enchantments to the main-hand item
-  - `enchantArmorMax basic` – apply basic enchantments to worn armor
-  - basic enchantments exclude *Mending*, *Thorns*, *Knockback*, *Flame*, *Sweeping Edge*, *Fortune*, and other enchantments that may interfere with testing
+### ✨ New
+- ℹ️ **Cracked End Stone is now best mined with a pickaxe** (was shovel).
+- **Cracked End Stone** no longer requires a correct tool to drop (**Cracked Obsidian** still requires one).
+- Breaking **Cracked End Stone** and **Cracked Obsidian** now give less XP.
+- Sounds for **Cracked End Stone** and **Cracked Obsidian** changed to more appropriate ones.
 
 ### 📝 Improvements
 - **Block of Angel** now warms up over an in-game day (12s on *Peaceful* difficulty) after being placed in the world or awakened with *Echo Shard*.
   - While warming up, it does not remove monsters
   - New animation added for the warmed-up state
   - Tooltips updated for both **Block of Angel** and **Dormant Block of Angel**
+
+### ⚙️ Others
+- Added console commands for testing:
+  - `dayLock [night|cancel]` — set clear weather, time (day or night), and freeze the weather & day/night cycle.
+  - `xp500 [level]` — set the player's experience to 500 levels, or to the specified level if provided.
+  - `resetProgress` — reset player's advancements and unlocked recipes.
+- Added `basic` parameter for `enchantMax` and `enchantArmorMax` console commands:
+  - `enchantMax basic` – apply basic enchantments to the main-hand item
+  - `enchantArmorMax basic` – apply basic enchantments to worn armor
+  - basic enchantments exclude *Mending*, *Thorns*, *Knockback*, *Flame*, *Sweeping Edge*, *Fortune*, and other enchantments that may interfere with testing
 
 
 ## 📦 Version 3.4.0
