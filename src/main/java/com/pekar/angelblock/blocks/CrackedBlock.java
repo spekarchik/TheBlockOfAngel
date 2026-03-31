@@ -3,9 +3,9 @@ package com.pekar.angelblock.blocks;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
 
-public class CrackedObsidianBlock extends ModDropExperienceBlock
+public class CrackedBlock extends ModDropExperienceBlock
 {
-    protected CrackedObsidianBlock(Properties properties)
+    public CrackedBlock(Properties properties)
     {
         super(properties);
     }
@@ -13,6 +13,6 @@ public class CrackedObsidianBlock extends ModDropExperienceBlock
     @Override
     protected IntProvider getXpRange()
     {
-        return UniformInt.of(2, 5);
+        return UniformInt.of(1, 2);
     }
 }
