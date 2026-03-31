@@ -1,0 +1,36 @@
+{
+  "parent": "angelblock:destroying_potion",
+  "criteria": {
+    "diamond_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:diamond_powder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.diamond_powder.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:diamond_powder"
+    },
+    "title": {
+      "translate": "advancements.angelblock.diamond_powder.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["diamond_powder"]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,39 @@
+{
+  "parent": "angelblock:root",
+  "criteria": {
+    "first_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+                "angelblock:bios_diamond",
+                "angelblock:flame_stone",
+                "angelblock:strength_pearl",
+                "angelblock:marine_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.first_crystal.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:marine_crystal"
+    },
+    "title": {
+      "translate": "advancements.angelblock.first_crystal.title"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["first_crystal"]
+  ],
+  "sends_telemetry_event": false
+}

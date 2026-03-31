@@ -1,0 +1,60 @@
+{
+  "parent": "angelblock:aeryte_mixture",
+  "criteria": {
+    "flying_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:flying_helmet"] }
+        ]
+      }
+    },
+    "flying_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:flying_chestplate"] }
+        ]
+      }
+    },
+    "flying_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:flying_leggings"] }
+        ]
+      }
+    },
+    "flying_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:flying_boots"] }
+        ]
+      }
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.angelblock.aeryte_armor.title"
+    },
+    "description": {
+      "translate": "advancements.angelblock.aeryte_armor.description"
+    },
+    "icon": {
+      "id": "angelblock:flying_chestplate",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    ["flying_helmet"],
+    ["flying_chestplate"],
+    ["flying_leggings"],
+    ["flying_boots"]
+  ],
+  "sends_telemetry_event": true
+}

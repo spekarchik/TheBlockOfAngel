@@ -1,0 +1,60 @@
+{
+  "parent": "angelblock:new_materials",
+  "criteria": {
+    "rendelite_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:rendelithic_helmet", "angelblock:rendelithic_helmet_with_nv"] }
+        ]
+      }
+    },
+    "rendelite_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:rendelithic_chestplate", "angelblock:rendelithic_chestplate_with_levitation"] }
+        ]
+      }
+    },
+    "rendelite_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:rendelithic_leggings", "angelblock:rendelithic_leggings_with_regenerator"] }
+        ]
+      }
+    },
+    "rendelite_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:rendelithic_boots", "angelblock:rendelithic_boots_with_strength_boost"] }
+        ]
+      }
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.angelblock.rendelite_armor.title"
+    },
+    "description": {
+      "translate": "advancements.angelblock.rendelite_armor.description"
+    },
+    "icon": {
+      "id": "angelblock:rendelithic_chestplate",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    ["rendelite_helmet"],
+    ["rendelite_chestplate"],
+    ["rendelite_leggings"],
+    ["rendelite_boots"]
+  ],
+  "sends_telemetry_event": true
+}

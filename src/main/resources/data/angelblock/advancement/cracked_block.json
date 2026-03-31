@@ -1,0 +1,37 @@
+{
+  "parent": "angelblock:root",
+  "criteria": {
+    "cracked_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:cracked_endstone_block",
+              "angelblock:cracked_obsidian_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.cracked_block.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:cracked_endstone_block"
+    },
+    "title": {
+      "translate": "advancements.angelblock.cracked_block.title"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["cracked_block"]
+  ],
+  "sends_telemetry_event": false
+}
