@@ -1,6 +1,10 @@
 ## 📦 Version 3.5.0
 
 ### ✨ New
+- ℹ️ **Cracked End Stone is now best mined with a pickaxe** (was shovel).
+- **Cracked End Stone** no longer requires a correct tool to drop (**Cracked Obsidian** still requires one).
+- Breaking **Cracked End Stone** and **Cracked Obsidian** now give less XP.
+- Sounds for **Cracked End Stone** and **Cracked Obsidian** changed to more appropriate ones.
 - Added console commands for testing:
   - `dayLock [night|cancel]` — set clear weather, set time (day or night), and freeze the weather & day/night cycle.
   - `xp500 [level]` — set player experience to 500 levels by default.
