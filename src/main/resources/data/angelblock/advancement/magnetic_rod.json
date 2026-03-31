@@ -24,7 +24,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "angelblock:rod_sensor"
+      "id": "minecraft:lodestone"
     },
     "title": {
       "translate": "advancements.angelblock.magnetic_rod.title"
