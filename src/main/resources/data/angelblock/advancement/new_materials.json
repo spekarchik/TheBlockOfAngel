@@ -1,0 +1,38 @@
+{
+  "parent": "angelblock:cracked_block_powder",
+  "criteria": {
+    "new_materials": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:limonite_powder",
+              "angelblock:rendelithic_powder",
+              "angelblock:lapis_powder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.new_materials.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:limonite_powder"
+    },
+    "title": {
+      "translate": "advancements.angelblock.new_materials.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["new_materials"]
+  ],
+  "sends_telemetry_event": false
+}

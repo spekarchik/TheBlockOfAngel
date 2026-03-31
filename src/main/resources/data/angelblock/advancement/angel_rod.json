@@ -1,0 +1,34 @@
+{
+  "parent": "angelblock:magnetic_rod",
+  "criteria": {
+    "angel_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "angelblock:angel_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.angel_rod.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:angel_rod"
+    },
+    "title": {
+      "translate": "advancements.angelblock.angel_rod.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["angel_rod"]
+  ],
+  "sends_telemetry_event": false
+}

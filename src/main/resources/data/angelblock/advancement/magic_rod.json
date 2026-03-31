@@ -1,0 +1,43 @@
+{
+  "parent": "angelblock:root",
+  "criteria": {
+    "magic_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:ancient_rod",
+              "angelblock:marine_rod",
+              "angelblock:fire_rod",
+              "angelblock:amethyst_rod",
+              "angelblock:end_rod",
+              "angelblock:planter",
+              "angelblock:track_layer",
+              "angelblock:builder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.magic_rod.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:ancient_rod"
+    },
+    "title": {
+      "translate": "advancements.angelblock.magic_rod.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["magic_rod"]
+  ],
+  "sends_telemetry_event": false
+}
