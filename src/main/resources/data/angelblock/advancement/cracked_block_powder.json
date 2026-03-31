@@ -1,0 +1,37 @@
+{
+  "parent": "angelblock:cracked_block",
+  "criteria": {
+    "cracked_block_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:endstone_powder",
+              "angelblock:obsidian_powder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.cracked_block_powder.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:endstone_powder"
+    },
+    "title": {
+      "translate": "advancements.angelblock.cracked_block_powder.title"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["cracked_block_powder"]
+  ],
+  "sends_telemetry_event": false
+}

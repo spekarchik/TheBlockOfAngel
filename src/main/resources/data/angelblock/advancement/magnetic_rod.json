@@ -1,0 +1,40 @@
+{
+  "parent": "angelblock:magic_rod",
+  "criteria": {
+    "magnetic_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:ancient_magnetic_rod",
+              "angelblock:marine_magnetic_rod",
+              "angelblock:fire_magnetic_rod",
+              "angelblock:amethyst_magnetic_rod",
+              "angelblock:end_magnetic_rod"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.magnetic_rod.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:lodestone"
+    },
+    "title": {
+      "translate": "advancements.angelblock.magnetic_rod.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["magnetic_rod"]
+  ],
+  "sends_telemetry_event": false
+}

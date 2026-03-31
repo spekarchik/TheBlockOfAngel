@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "angelblock:textures/gui/advancements/backgrounds/leaves.png",
+    "description": {
+      "translate": "advancements.angelblock.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:spyglass"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.angelblock.root.title"
+    }
+  },
+  "requirements": [
+    ["tick"]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,60 @@
+{
+  "parent": "angelblock:new_materials",
+  "criteria": {
+    "aquarite_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:lapis_helmet", "angelblock:lapis_helmet_with_detector"] }
+        ]
+      }
+    },
+    "aquarite_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:lapis_chestplate", "angelblock:lapis_chestplate_with_strength"] }
+        ]
+      }
+    },
+    "aquarite_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:lapis_leggings", "angelblock:lapis_leggings_with_regenerator"] }
+        ]
+      }
+    },
+    "aquarite_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:lapis_boots", "angelblock:lapis_boots_with_sea_power"] }
+        ]
+      }
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.angelblock.aquarite_armor.title"
+    },
+    "description": {
+      "translate": "advancements.angelblock.aquarite_armor.description"
+    },
+    "icon": {
+      "id": "angelblock:lapis_chestplate",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    ["aquarite_helmet"],
+    ["aquarite_chestplate"],
+    ["aquarite_leggings"],
+    ["aquarite_boots"]
+  ],
+  "sends_telemetry_event": true
+}

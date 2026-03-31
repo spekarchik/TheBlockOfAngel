@@ -1,6 +1,7 @@
 ## 📦 Version 3.5.0
 
 ### ✨ New
+- Added an advancement system.
 - ℹ️ **Cracked End Stone is now best mined with a pickaxe** (was shovel).
 - **Cracked End Stone** no longer requires a correct tool to drop (**Cracked Obsidian** still requires one).
 - Breaking **Cracked End Stone** and **Cracked Obsidian** now give less XP.
