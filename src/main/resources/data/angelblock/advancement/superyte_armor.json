@@ -1,0 +1,67 @@
+{
+  "parent": "angelblock:diamite_armor",
+  "criteria": {
+    "superyte_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:super_helmet", "angelblock:super_helmet_with_detector"] }
+        ]
+      }
+    },
+    "superyte_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:super_chestplate", "angelblock:super_chestplate_flying"] }
+        ]
+      }
+    },
+    "superyte_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:super_leggings", "angelblock:super_leggings_with_regenerator"] }
+        ]
+      }
+    },
+    "superyte_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:super_boots",
+              "angelblock:super_boots_with_strength",
+              "angelblock:super_boots_with_sea_power",
+              "angelblock:super_boots_with_strength_and_sea_power"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.angelblock.superyte_armor.title"
+    },
+    "description": {
+      "translate": "advancements.angelblock.superyte_armor.description"
+    },
+    "icon": {
+      "id": "angelblock:super_chestplate",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    ["superyte_helmet"],
+    ["superyte_chestplate"],
+    ["superyte_leggings"],
+    ["superyte_boots"]
+  ],
+  "sends_telemetry_event": true
+}

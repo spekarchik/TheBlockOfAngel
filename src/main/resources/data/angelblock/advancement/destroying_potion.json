@@ -1,0 +1,36 @@
+{
+  "parent": "angelblock:prismarine_shard",
+  "criteria": {
+    "destroying_potion": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:block_breaker_potion_item"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.destroying_potion.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:block_breaker_potion_item"
+    },
+    "title": {
+      "translate": "advancements.angelblock.destroying_potion.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["destroying_potion"]
+  ],
+  "sends_telemetry_event": false
+}

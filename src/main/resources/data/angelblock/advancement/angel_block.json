@@ -1,0 +1,37 @@
+{
+  "parent": "angelblock:devil_block",
+  "criteria": {
+    "inactive_angel_block": {
+      "conditions": {
+        "location": [
+          {
+            "block": "angelblock:inactive_angel_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.angel_block.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:inactive_angel_block"
+    },
+    "title": {
+      "translate": "advancements.angelblock.angel_block.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    [
+      "inactive_angel_block"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

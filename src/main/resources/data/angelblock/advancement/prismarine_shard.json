@@ -1,0 +1,36 @@
+{
+  "parent": "angelblock:root",
+  "criteria": {
+    "prismarine_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:prismarine_shard"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.prismarine_shard.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:prismarine_shard"
+    },
+    "title": {
+      "translate": "advancements.angelblock.prismarine_shard.title"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["prismarine_shard"]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,42 @@
+{
+  "parent": "angelblock:root",
+  "criteria": {
+    "first_artifact": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+                "angelblock:guardian_eye",
+                "angelblock:miner_figure",
+                "angelblock:ancient_canine",
+                "angelblock:evoker_amulet",
+                "angelblock:ancient_scroll",
+                "angelblock:nether_bars_block",
+                "minecraft:dragon_head"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.first_artifact.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:evoker_amulet"
+    },
+    "title": {
+      "translate": "advancements.angelblock.first_artifact.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["first_artifact"]
+  ],
+  "sends_telemetry_event": false
+}
