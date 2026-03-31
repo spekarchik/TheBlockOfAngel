@@ -1,0 +1,67 @@
+{
+  "parent": "angelblock:diamond_powder",
+  "criteria": {
+    "diamite_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:diamithic_helmet", "angelblock:diamithic_helmet_with_detector"] }
+        ]
+      }
+    },
+    "diamite_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+            "angelblock:diamithic_chestplate",
+            "angelblock:diamithic_chestplate_with_strength",
+            "angelblock:diamithic_chestplate_with_levitation",
+            "angelblock:diamithic_chestplate_with_strength_and_levitation"
+            ]
+          }
+        ]
+      }
+    },
+    "diamite_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:diamithic_leggings", "angelblock:diamithic_leggings_with_regenerator"] }
+        ]
+      }
+    },
+    "diamite_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:diamithic_boots", "angelblock:diamithic_boots_with_strength"] }
+        ]
+      }
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.angelblock.diamite_armor.title"
+    },
+    "description": {
+      "translate": "advancements.angelblock.diamite_armor.description"
+    },
+    "icon": {
+      "id": "angelblock:diamithic_chestplate",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    ["diamite_helmet"],
+    ["diamite_chestplate"],
+    ["diamite_leggings"],
+    ["diamite_boots"]
+  ],
+  "sends_telemetry_event": true
+}
