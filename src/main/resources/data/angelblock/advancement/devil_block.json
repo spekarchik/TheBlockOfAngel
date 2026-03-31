@@ -1,0 +1,35 @@
+{
+  "parent": "angelblock:first_artifact",
+  "criteria": {
+    "devil_block": {
+      "conditions": {
+        "location": [
+          {
+            "block": "angelblock:devil_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.devil_block.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:devil_block"
+    },
+    "title": {
+      "translate": "advancements.angelblock.devil_block.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["devil_block"]
+  ],
+  "sends_telemetry_event": false
+}

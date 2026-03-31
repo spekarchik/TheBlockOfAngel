@@ -24,6 +24,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import static com.pekar.angelblock.Main.MODID;
+import static com.pekar.angelblock.utils.Resources.createResourceLocation;
+
 public class Player
 {
 
@@ -57,6 +60,16 @@ public class Player
                 EquipmentSlot.LEGS,
                 EquipmentSlot.FEET
         );
+    }
+
+    public void awardAdvancement(ServerPlayer serverPlayer, ServerLevel serverLevel, String name, String criterion)
+    {
+        var advancements = serverPlayer.getAdvancements();
+        var advancement = serverLevel.getServer().getAdvancements().get(createResourceLocation(MODID, name));
+        if (advancement != null)
+        {
+            advancements.award(advancement, criterion);
+        }
     }
 
     public Direction getDirection(LivingEntity entityLiving, BlockPos pos)

@@ -1,0 +1,60 @@
+{
+  "parent": "angelblock:new_materials",
+  "criteria": {
+    "lymonite_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:limonite_helmet", "angelblock:limonite_helmet_with_detector"] }
+        ]
+      }
+    },
+    "lymonite_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:limonite_chestplate", "angelblock:limonite_chestplate_with_luck"] }
+        ]
+      }
+    },
+    "lymonite_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:limonite_leggings", "angelblock:limonite_leggings_with_regenerator"] }
+        ]
+      }
+    },
+    "lymonite_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["angelblock:limonite_boots", "angelblock:limonite_boots_with_strength"] }
+        ]
+      }
+    }
+  },
+  "display": {
+    "title": {
+      "translate": "advancements.angelblock.lymonite_armor.title"
+    },
+    "description": {
+      "translate": "advancements.angelblock.lymonite_armor.description"
+    },
+    "icon": {
+      "id": "angelblock:limonite_chestplate",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    ["lymonite_helmet"],
+    ["lymonite_chestplate"],
+    ["lymonite_leggings"],
+    ["lymonite_boots"]
+  ],
+  "sends_telemetry_event": true
+}

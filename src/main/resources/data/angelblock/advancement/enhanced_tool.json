@@ -1,0 +1,47 @@
+{
+  "parent": "angelblock:first_crystal",
+  "criteria": {
+    "enhanced_tool": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angelblock:diamithic_pickaxe",
+              "angelblock:diamithic_axe",
+              "angelblock:rendelithic_pickaxe",
+              "angelblock:rendelithic_shovel",
+              "angelblock:limonite_pickaxe",
+              "angelblock:limonite_axe",
+              "angelblock:lapis_pickaxe",
+              "angelblock:lapis_shovel",
+              "angelblock:lapis_hoe",
+              "angelblock:super_pickaxe",
+              "angelblock:super_axe",
+              "angelblock:super_shovel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.enhanced_tool.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:rendelithic_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.angelblock.enhanced_tool.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["enhanced_tool"]
+  ],
+  "sends_telemetry_event": false
+}
