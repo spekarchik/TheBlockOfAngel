@@ -26,10 +26,10 @@ public class BlockRegistry
     public static final TagKey<Block> REPLACEABLE_BY_PLANTER = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "planter_replaceables"));
     public static final TagKey<Block> TRACK_LAYER_COMPATIBLE = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "track_layer_compatible"));
 
-    public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedEndStoneBlock::new, ModBlockItemWithHoverText::new,
-            BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SNOW).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedObsidianBlock::new, ModBlockItemWithHoverText::new,
-            BlockBehaviour.Properties.of().strength(10f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedBlock::new, ModBlockItemWithHoverText::new,
+            BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.NETHER_BRICKS));
+    public static final DeferredBlock<Block> CRACKED_OBSIDIAN = register("cracked_obsidian_block", CrackedBlock::new, ModBlockItemWithHoverText::new,
+            BlockBehaviour.Properties.of().strength(10f).sound(SoundType.BONE_BLOCK).requiresCorrectToolForDrops());
     public static final DeferredBlock<Block> DIAMOND_POWDER_BLOCK = register("diamond_powder_block", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).strength(0.7f, 9f).sound(SoundType.SNOW));
     public static final DeferredBlock<Block> OBSIDIAN_POWDER_BLOCK = register("obsidian_powder_block", Block::new,
