@@ -1608,6 +1608,7 @@
   "key.angelblock.levitation": "Slow Falling (On/Off)",
   "key.angelblock.sword_effects": "Sword/Tool Mode",
   "key.angelblock.super_jump": "Super Jump (On/Off)",
+  "key.category.angelblock.general": "The Block of Angel",
 
   "effect.angelblock.tool_advanced_mode_effect": "Enhanced Mode",
   "effect.angelblock.sword_explosion_mode_effect": "Sword Explosion Mode",
