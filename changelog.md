@@ -1,5 +1,8 @@
 ## 📦 Version 3.5.1
 
+### ✨ New
+- Now supports Minecraft 26.1.1
+
 ### 🐞 Fixed
 - Updated the loot table for *Woodland Mansion* chests (removed **Name Tag**) to match Minecraft 26.1 changes.
 
