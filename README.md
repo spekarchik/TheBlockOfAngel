@@ -1,96 +1,295 @@
-# 🌟 The Block of Angel — The Adventurer's Path
+# 🌟 The Block of Angel — Control the World, or Corrupt It
 
-**Start your adventure with nothing but a leather tunic and a stone sword.**  
-In a world where survival is a true challenge, every step forward feels like a real achievement.  
-Welcome to **The Block of Angel** — a world of vibrant landscapes, hidden artifacts, and earned power.
+**Start with nothing but a leather tunic and a stone sword.**  
+Survive, explore, and uncover artifacts that let you bend the rules of the world itself.
 
-Here, you won't spend hours building resource farms or digging endless tunnels.  
-Instead, you'll explore ancient temples, ocean monuments, fortresses, and the End — facing real danger to gain real rewards.
+This is not about grinding.  
+This is about **power you earn — and how you choose to use it.**
 
-**The Block of Angel** and **The Rod of Angel** are your ultimate goals — powerful artifacts that purify the land and protect you as you journey.  
-Crafting them is not easy — it’s the culmination of your growth, your triumph over the world’s challenges.
+---
 
-## ✨ Features
+## 🎯 Your Goal
 
-- **True survival progression:** leather armor, stone weapons, and real hardship at the start.
-- **Unique armor sets:** six types, each with upgrade paths and special abilities. Fully compatible with Armor Trims. Armor, tools, weapons, and rods can be upgraded using **Smithing Kits**, preserving all enchantments. In rare cases, the right kit also allows **downgrading** gear — useful when switching styles or optimizing resources.
-- **Legendary weapons:** transform the battlefield with magic effects at the cost of stamina.
-- **Smart tools:** speed up tunneling without causing dangerous collapses.
-- **Armor condition matters:** protection scales with durability — worn gear still looks tough, but no longer shields you from harm.
-- **Tools and weapons degrade with use:** a mighty sword grows dull, and a perfect pickaxe slows down when nearing its limits. At zero durability, they stay in your hands — but lose their function completely.
-- **Elemental Rods:** five tiers of rods unlock powerful world-altering abilities — from planting crops and transforming terrain, to generating water sources and even creating valuable resources like slime, glowstone, blaze powder, or budding amethyst. Each rod can be upgraded to a magnetic version, allowing remote ore extraction with increasing range and depth. The final form, the **The Rod of Angel**, adds monster despawning in a radius and can be placed as a block to protect an area passively.
-- **Magnetic Rods:** pull ores to the surface, avoiding endless mining. Also act as detectors, emitting specific sounds when scanning downward for otherwise unreachable targets within a small radius: valuable resources like diamond ore and amethyst clusters, and structure-related blocks like rails (for locating abandoned mineshafts) or sculk (for finding the Deep Dark).
-- **Planter Rods:** sow entire crop rows or fertilize them instantly.
-- **Builder and Layer Rods:** lay down blocks, fences, and rails quickly and precisely.
-- **Bios Diamond:** an upgrade material used in armor enhancement and Earth Rod crafting. It also serves as a **Trim Material** with a distinct, luminous yellow-green tint — subtle, yet otherworldly.
-- **Tuff reimagined:** once just decorative, tuff now contains saltpeter — a key ingredient in crafting gunpowder.
-- **Gunpowder block:** a compact way to store gunpowder, with a twist — it behaves like falling sand, explodes when ignited, and detonates on impact or when jumped on. Perfect for building deadly traps.
-- **Alchemy with a twist:** two exotic potions expand your environmental control:
-  - **Splash Destroying Potion** — brewed from a Prismarine Shard and a Splash Awkward Potion. Destroys and transforms blocks on impact, and sometimes drops valuable resources. Useful for farming Saltpeter from Tuff, Clay from sand near water, Prismarine Crystals, Diamond Powder, and more.
-  - **Soaring Spore Essence** — made from a Froglight and Potion of Slow Falling. Grants the **Glowing** and **Slow Falling** effects to mobs or players, toggled on or off with each use. Can also be used to upgrade armor, giving it toggleable passive effects.
-- **The Block of Angel:** creates a safe zone, free from monsters. The block can ignore specific monsters by using filters, which are activated by items. Using an Echo Shard resets the filter, and the block's color changes based on the number of monsters added to the filter.
-- **The Rod of Angel:** grants mobile protection while exploring; place it as a camp beacon or carry it in your hand.
-- **The Block of Devil** while it prevents monsters from dying, it also gradually spreads an epidemic, changing the surrounding blocks. By using certain items on The Block of Devil, you can summon monsters — useful for collecting rare drops like monster heads and music discs.
-- **Meaningful progression:** each shortcut is earned, not given.
+Your first true objective is clear:
 
-> *Survive first. Shine later.*
+> **Create a place where monsters cannot exist.**
 
-## 🏛️ Decorative Elements
+To achieve this, you must craft **The Block of Angel** — a powerful artifact that purifies the land and creates a safe haven.
+It can only be assembled by **looting structures across the entire world**.
 
-Even in a harsh and dangerous world, beauty finds a place.
-  
-* **Nether Bars**: a black, blast-resistant grating with a dusty, scorched finish — forged in the depths of the Nether.
-  Perfect for moody structures like fortresses, shrines, or dark corridors, it adds tension and mystery without looking worn or decayed. Use it for windows, vents, or architectural accents where a sense of danger is more important than age.
+This is not a shortcut.  
+It is the result of full exploration — temples, fortresses, the End, and beyond.
 
-* **Cracked Obsidian** and **Cracked Endstone**: familiar materials with a fractured, rugged twist.  
-  These blocks hint at time, stress, or magical interference — ideal for ruins, battle-scarred lands, or ancient structures hidden deep underground.
+⚠️ Once placed, the block does not work immediately.  
+It must **awaken over the course of one full in-game day** before it begins to purify the area.
 
-* **Fusion Storage Blocks**: solid-colored, full-sized blocks forged from advanced ingots.  
-  While primarily designed for compact storage and sorting, their smooth surfaces and vivid colors make them a clean and striking building material — perfect for color-coded bases, signal markers, or minimalist structures.
+But this is not the end.
 
-These elements let you express your style without clutter — and add contrast to the rough survival journey ahead.
+Once you reach safety, the world opens up in new ways —  
+and power begins to change how you play.
+
+---
+
+## ⚖️ Two Forces — Angel and Devil
+
+Two powerful artifacts define the late game:
+
+- **The Block of Angel** — protection, control, peace.
+- **The Block of Devil** — chaos, corruption, and power.
+
+The first one removes monsters and creates a safe zone.
+The second prevents monster deaths and corrupts the environment.
+
+The Devil Block is obtained earlier — and is required to craft the Angel Block.  
+To keep both, you will need to gather enough resources to create it twice.
+
+Placed in the world, the Devil Block slowly **infects the surroundings**:
+- forests decay into bare trunks  
+- grass turns into mycelium  
+- stone becomes infested or unstable  
+
+And yet… it gives you something in return.
+Used together, these blocks unlock advanced control:
+- filter which monsters are removed
+- spawn specific ones
+- farm rare drops like **mob heads and music discs**
+
+---
+
+## 🧭 How the Game Changes
+
+Early game is harsh survival.  
+But as you grow stronger, your playstyle evolves.
+
+After crafting **The Rod of Angel**, a new phase begins:
+
+> **Survival without constant danger.**
+
+- Build freely — monsters no longer interrupt you  
+- Explore dangerous places with confidence  
+- Return to areas like the Deep Dark without fear — if you're careful  
+
+⚠️ But not everything is safe.  
+Some threats still reach you if you lose control.
+
+---
+
+## 🏗️ Build Faster, Think Bigger
+
+Specialized rods unlock a new kind of gameplay:
+
+- **Track Layer Rod** — place rails, fences, and redstone in long lines  
+- **Builder Rod** — construct structures at speed using offhand resources  
+- **Planter Rods** — automate farming  
+- **Magnetic Rods** — extract ores without endless mining  
+
+This is where the mod shines:
+
+> **You still gather resources — but you build on a completely different scale.**
+
+---
+
+## 🧪 Artifacts That Change the Rules
+
+Scattered across structures are rare artifacts with unique effects:
+
+- influence the environment  
+- support combat or survival  
+- provide situational advantages  
+
+Some are simple.  
+Some are powerful.  
+Some behave in unexpected ways.
+Learning how and when to use them is part of the experience.
+
+---
+
+## 🛡️ Six Materials — Six Playstyles
+
+The mod introduces **6 unique materials**, each defining a different approach to survival:
+
+- mobility vs protection  
+- environment adaptation (water, fire, nature)  
+- risk vs stability  
+
+Armor, tools, and weapons evolve through a simple system:
+
+> **Base → Enhanced**
+
+No complexity — just meaningful upgrades.
+
+---
+
+## 🔮 Elemental Rods — Evolving Power
+
+A core system of the mod is a progression of **5 elemental rods**:
+
+- Earth → Water → Fire → Amethyst → End  
+
+Each rod upgrades the previous one, inheriting all abilities and adding new ones.
+
+They allow you to:
+- generate or transform resources  
+- modify terrain in unconventional ways  
+- reduce the need to carry basic materials  
+
+Examples:
+- plant crops or vegetation instantly  
+- create water sources  
+- convert materials into useful resources  
+
+Each rod can be upgraded into a **Magnetic version**,  
+allowing you to **pull ore blocks toward the surface**.
+
+Ores are not mined automatically — they must still be broken manually.
+
+⚠️ Ores can only travel through stone-like blocks or air, and cannot pass through liquids or loose materials.
+
+⚠️ All abilities consume hunger. Power comes at a cost.
+
+---
+
+## ⚔️ Enhanced Weapons
+
+Upgraded weapons gain **active abilities** triggered by right-click:
+
+- create webs to trap enemies  
+- generate fire zones  
+- trigger explosions  
+- form defensive barriers depending on terrain and stance  
+
+These abilities consume hunger and require timing and positioning.
+
+Combat becomes more than just attacking —  
+it becomes **control and decision-making**.
+
+---
+
+## ⛏️ Smart Tools
+
+Enhanced tools don’t just mine faster — they **change how mining works**:
+
+- blocks are mined in small groups instead of one by one  
+- tunneling becomes significantly faster  
+- large-scale excavation feels smooth and efficient  
+
+Combined with durability mechanics, this creates a balance:
+
+> **speed vs longevity**
+
+---
+
+## ⚙️ Durability Matters
+
+Equipment degrades — but never disappears:
+
+- Armor loses protection as durability drops  
+- Weapons lose damage  
+- Tools lose efficiency (in stages)  
+
+At zero durability:
+- items remain in your inventory  
+- but become functionally useless  
+
+👉 You feel the loss — without losing the item.
+
+---
+
+## 💣 Reworked Resources
+
+Some vanilla materials gain new purpose:
+
+- **Tuff** now contains saltpeter — a primary ingredient for crafting gunpowder  
+- **Charcoal** complements it as a secondary component  
+
+Gunpowder itself evolves into something more:
+
+- 9 gunpowder → **Gunpowder Block**  
+- behaves like a falling block  
+- explodes on impact or when jumped on  
+
+This creates new possibilities:
+
+- traps  
+- chain reactions  
+- environmental destruction  
+
+> Even simple materials can become dangerous.
+
+---
+
+## 💀 Expect the Unexpected
+
+Power comes with consequences.
+
+Heavy armor can:
+- break blocks beneath your feet  
+- collapse terrain  
+- drop you into danger  
+
+The world reacts to your strength.
+
+Sometimes violently.
+
+---
+
+## ✨ Key Features
+
+- Survival-focused progression without grind  
+- Exploration-driven rewards  
+- World-altering artifacts
+- Complementary Angel and Devil mechanics
+- Advanced building tools  
+- Environmental transformation  
+- Meaningful, risk-based mechanics  
+- Interconnected systems that reinforce each other
 
 ---
 
 ## 🧡 Who is this mod for?
 
-This mod is for those who are drawn to Minecraft's colorful world and its spirit of exploration.  
-For players who are not interested in grinding endless resources, building farms, or re-crafting Netherite gear six times a game.  
-For those who want to experience every discovery once — and move forward.  
-For adventurers who seek to **explore, conquer, and uncover artifacts**, not repeat the same tasks over and over.
+For players who:
+- prefer exploration over farming  
+- want every discovery to matter  
+- enjoy systems with risk and reward  
+- like adapting their playstyle over time  
 
-If you love making every moment meaningful, **The Block of Angel** was made for you.
+If you want Minecraft to feel like a journey — not a routine —  
+**this mod is for you.**
 
 ---
 
-## 💫 Thank You for Playing
+## 💬 Final Words
 
-Thank you for choosing the path of the true adventurer.  
-Whether you're standing on a cliff at sunrise, holding your The Rod of Angel… or exploring deep ruins with barely a heart left — you're living a story that matters.
+> *Survive first. Shape the world later.*
 
-We hope every moment in **The Block of Angel** makes your Minecraft world feel a little more magical.  
-Stay safe, stay curious — and always move forward. 🌿
+Whether you choose to create a safe haven…  
+or reshape the land into something darker —  
+
+**The Block of Angel** gives you the tools.
+
+What you do with them is up to you.
 
 ---
 
 # 🛠️ Installation and Technical Information
 
 ## Installation
-- Make sure you have **Minecraft 1.21.1** or **1.21.3 - 26.1** with **NeoForge** installed.
+- Make sure you have **Minecraft 1.21.1**, **1.21.3 - 1.21.11**, or **26.1** with **NeoForge** installed.
 - Download the mod `.jar` file.
 - Place it into your `mods` folder.
 - Launch the game and enjoy your adventure!
 
 ## Technical Details
 - **Developer:** Sergey Pekarchik (with testing and creative support by Tima Pekarchik)
-- **Supported Minecraft versions:** 1.21.1, 1.21.3 - 26.1
+- **Supported Minecraft versions:** 1.21.1, 1.21.3 - 1.21.11, 26.1
 - **Texture resolution:** 32×32
 - **Supported languages:** English, Belarusian, Russian
 
 ## 💡 Optional Visual Enhancement
 
 To enjoy full visual fidelity of helmets with transparent glass,  
-we recommend using the client-side mod [Shoulder Surfing Reloaded](https://www.curseforge.com/minecraft/mc-mods/shoulder-surfing-reloaded).  
+I recommend using the client-side mod [Shoulder Surfing Reloaded](https://www.curseforge.com/minecraft/mc-mods/shoulder-surfing-reloaded).  
 It allows proper rendering of semi-transparent blocks in first- and third-person views.
 
 *(Licensed under MIT — freely shareable and fully compatible.)*
@@ -99,7 +298,7 @@ It allows proper rendering of semi-transparent blocks in first- and third-person
 
 ## 🧩 Related Mods
 
-The Block of Angel mod is fully compatible with the following mods by the same author:
+The Block of Angel mod is fully compatible with my following mods:
 
 - **[🌟 Pouch & Paper](https://modrinth.com/mod/pouch-and-paper)** — introduces compact forms of tradeable resources for easier storage and trading:  
   • paper (stackable and block form),  
