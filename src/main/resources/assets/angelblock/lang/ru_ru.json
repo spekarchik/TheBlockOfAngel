@@ -1608,6 +1608,7 @@
   "key.angelblock.levitation": "Плавное падение (Вкл./Выкл.)",
   "key.angelblock.sword_effects": "Режимы оружия/инструментов (циклическое переключение)",
   "key.angelblock.super_jump": "Суперпрыжок (Вкл./Выкл.)",
+  "key.category.angelblock.general": "The Block of Angel",
 
   "effect.angelblock.tool_advanced_mode_effect": "Улучшенный режим",
   "effect.angelblock.sword_explosion_mode_effect": "Режим Взрыва",
