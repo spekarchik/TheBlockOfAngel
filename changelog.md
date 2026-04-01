@@ -1,3 +1,9 @@
+## 📦 Version 3.5.2
+
+### 📝 Improvements
+- **Key bindings** are now grouped under a separate category.
+
+
 ## 📦 Version 3.5.0
 
 ### ✨ New
