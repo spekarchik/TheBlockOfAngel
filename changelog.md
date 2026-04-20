@@ -1,5 +1,9 @@
 ## 📦 Version 3.5.3
 
+### 🛠️ Changes
+- Split mod distribution due to NeoForge API changes.
+- Added separate builds for Minecraft **26.1–26.1.1** and **26.1.2+** compatibility.
+
 ### 📝 Improvements
 - Added more details to the **Diamite Armor** tooltip.
 
