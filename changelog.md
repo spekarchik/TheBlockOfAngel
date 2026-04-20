@@ -1,3 +1,9 @@
+## 📦 Version 3.5.3
+
+### 📝 Improvements
+- Added more details to the **Diamite Armor** tooltip.
+
+
 ## 📦 Version 3.5.2
 
 ### 📝 Improvements
