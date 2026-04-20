@@ -26,9 +26,9 @@ public class ReplaceEnchantedBookModifier extends LootModifier
      *
      * @param conditionsIn the ILootConditions that need to be matched before the loot is modified.
      */
-    protected ReplaceEnchantedBookModifier(LootItemCondition[] conditionsIn)
+    protected ReplaceEnchantedBookModifier(LootItemCondition[] conditionsIn, int priority)
     {
-        super(conditionsIn);
+        super(conditionsIn, priority);
     }
 
     @Override
