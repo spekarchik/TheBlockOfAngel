@@ -1,3 +1,11 @@
+## 📦 Version 3.5.4
+
+### 🛠️ Changes
+- ⚠ This version is built for **NeoForge 26.1.2.21-beta**.
+- Due to frequent breaking changes in NeoForge beta builds, compatibility is **strictly limited to this version**.
+- Using other NeoForge versions may cause crashes or missing features.
+
+
 ## 📦 Version 3.5.3
 
 ### 🛠️ Changes

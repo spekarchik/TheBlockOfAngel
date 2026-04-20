@@ -30,7 +30,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.LogicalSide;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 
 import java.util.EnumSet;
 import java.util.Map;
@@ -146,7 +146,7 @@ public class PlayerInteractionEvents implements IEventHandler
     }
 
     @SubscribeEvent
-    public void onBreakEvent(BlockEvent.BreakEvent event)
+    public void onBreakEvent(BreakBlockEvent event)
     {
         var pos = event.getPos();
         var player = event.getPlayer();
