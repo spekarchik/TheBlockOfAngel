@@ -58,6 +58,12 @@ public class AnimalEvents implements IEventHandler
                 if (entity.level() instanceof ServerLevel serverLevel)
                 {
                     var managedNautilus = AnimalManager.instance().getAnimalByUUID(nautilus.getUUID());
+                    if (managedNautilus == null)
+                    {
+                        AnimalManager.instance().addAnimal(nautilus);
+                        managedNautilus = AnimalManager.instance().getAnimalByUUID(nautilus.getUUID());
+                    }
+
                     if (managedNautilus != null)
                     {
                         if (managedNautilus.every(20))
