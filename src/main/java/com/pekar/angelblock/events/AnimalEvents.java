@@ -2,9 +2,15 @@ package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.events.animal.IAnimal;
 import com.pekar.angelblock.events.armor.IAnimalArmorEvents;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.nautilus.AbstractNautilus;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -40,6 +46,34 @@ public class AnimalEvents implements IEventHandler
                 if (attacker instanceof Player player && mob.getControllingPassenger() instanceof Player passenger && player.getUUID().equals(passenger.getUUID()))
                 {
                     event.setCanceled(true);
+                }
+            }
+
+            if (damageSource.is(DamageTypes.HOT_FLOOR)
+                    && entity instanceof AbstractNautilus nautilus
+                    && nautilus.getBodyArmorItem().is(Items.NETHERITE_NAUTILUS_ARMOR))
+            {
+                event.setCanceled(true);
+
+                if (entity.level() instanceof ServerLevel serverLevel)
+                {
+                    var managedNautilus = AnimalManager.instance().getAnimalByUUID(nautilus.getUUID());
+                    if (managedNautilus != null)
+                    {
+                        if (managedNautilus.every(20))
+                        {
+                            var pos = nautilus.blockPosition();
+                            serverLevel.sendParticles(
+                                    ParticleTypes.END_ROD,
+                                    pos.getX(), pos.getY(), pos.getZ(),
+                                    10,
+                                    0.5, 0.5, 0.5,
+                                    0.1
+                            );
+
+                            serverLevel.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0F, 1.0F);
+                        }
+                    }
                 }
             }
         }

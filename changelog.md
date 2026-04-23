@@ -1,3 +1,9 @@
+## 📦 Version 3.6.0
+
+### ✨ New
+- **Netherite Nautilus Armor** now grants immunity to damage from **Magma Blocks**.
+
+
 ## 📦 Version 3.5.3
 
 ### 📝 Improvements
