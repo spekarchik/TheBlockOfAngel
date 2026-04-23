@@ -6,6 +6,7 @@ import com.pekar.angelblock.events.armor.IAnimalArmor;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.equine.AbstractHorse;
+import net.minecraft.world.entity.animal.nautilus.AbstractNautilus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
@@ -36,7 +37,8 @@ public class AnimalManager implements IAnimalManager, IEventHandler
         return animals.get(uuid);
     }
 
-    private void addAnimal(Animal entity)
+    @Override
+    public void addAnimal(Animal entity)
     {
         IAnimal animal = new ModAnimal(entity);
         animals.put(animal.getEntity().getUUID(), animal);
