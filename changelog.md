@@ -1,3 +1,9 @@
+## 📦 Version 3.6.1
+
+### 📝 Improvements
+- **Magnetic Rods** now detect *amethyst geodes* using **Amethyst blocks** instead of **Smooth Basalt** and **Calcite**.
+
+
 ## 📦 Version 3.6.0
 
 ### ✨ New
