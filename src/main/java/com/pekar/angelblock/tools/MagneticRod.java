@@ -291,7 +291,7 @@ public abstract class MagneticRod extends ModRod
 
     private boolean isAmethystGeode(Block block)
     {
-        return block == Blocks.SMOOTH_BASALT || block == Blocks.CALCITE;
+        return block == Blocks.AMETHYST_BLOCK || block == Blocks.BUDDING_AMETHYST || block == Blocks.AMETHYST_CLUSTER;
     }
 
     protected void causeMinePlayerExhaustion(Player player)
