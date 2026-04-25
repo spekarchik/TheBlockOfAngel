@@ -3,6 +3,9 @@
 ### 📝 Improvements
 - **Magnetic Rods** now detect *amethyst geodes* using **Amethyst blocks** instead of **Smooth Basalt** and **Calcite**.
 
+### ⚙️ Compatibility
+- Tested with **NeoForge 26.1.2.21-beta – 26.1.2.29-beta**. Future versions may not be supported by this build.
+
 
 ## 📦 Version 3.6.0
 
