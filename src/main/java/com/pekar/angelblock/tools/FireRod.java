@@ -94,25 +94,6 @@ public class FireRod extends MarineRod
 
         if (!isBrokenOrPlayerExhausted)
         {
-//            Block woolBlock = null;
-//
-//            if (!isClientSide)
-//            {
-//                woolBlock = utils.blocks.types.getDestroyingWoolBlock(block);
-//
-//                if (woolBlock != null)
-//                {
-//                    level.setBlock(pos, woolBlock.defaultBlockState(), 0);
-//                    level.destroyBlock(pos, true, player, 1);
-//                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
-//                }
-//            }
-//
-//            if (woolBlock != null)
-//            {
-//                return getToolInteractionResult(true, isClientSide);
-//            }
-
             if (block == Blocks.MAGMA_BLOCK)
             {
                 setBlockWithClientSound(player, pos, Blocks.GLOWSTONE);
