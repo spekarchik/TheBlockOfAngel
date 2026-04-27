@@ -1,0 +1,11 @@
+{
+  "type": "angelblock:replace_single_item_with_chance",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/hero_of_the_village/armorer_gift"
+    }
+  ],
+  "numOfOptions": 5,
+  "item": "angelblock:super_armor_upgrade_kit"
+}

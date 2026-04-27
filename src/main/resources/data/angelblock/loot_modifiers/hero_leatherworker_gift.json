@@ -1,0 +1,9 @@
+{
+  "type": "angelblock:modify_hero_leatherworker_gift",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/hero_of_the_village/leatherworker_gift"
+    }
+  ]
+}
