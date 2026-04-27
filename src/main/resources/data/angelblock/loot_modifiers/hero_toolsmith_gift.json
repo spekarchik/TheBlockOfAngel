@@ -1,0 +1,18 @@
+{
+  "type": "angelblock:modify_hero_toolsmith_gift",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {
+          "condition": "neoforge:loot_table_id",
+          "loot_table_id": "minecraft:gameplay/hero_of_the_village/toolsmith_gift"
+        },
+        {
+          "condition": "neoforge:loot_table_id",
+          "loot_table_id": "minecraft:gameplay/hero_of_the_village/weaponsmith_gift"
+        }
+      ]
+    }
+  ]
+}
