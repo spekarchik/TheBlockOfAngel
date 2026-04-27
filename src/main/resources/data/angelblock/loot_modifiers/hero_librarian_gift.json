@@ -1,0 +1,11 @@
+{
+  "type": "angelblock:replace_enchanted_book",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/hero_of_the_village/librarian_gift"
+    }
+  ],
+  "enchantmentCost": 39,
+  "itemToReplace": "minecraft:book"
+}

@@ -5,5 +5,7 @@
       "condition": "neoforge:loot_table_id",
       "loot_table_id": "minecraft:chests/stronghold_library"
     }
-  ]
+  ],
+  "enchantmentCost": 30,
+  "itemToReplace": "minecraft:enchanted_book"
 }
