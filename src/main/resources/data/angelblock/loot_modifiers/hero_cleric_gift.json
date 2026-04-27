@@ -1,0 +1,12 @@
+{
+  "type": "angelblock:replace_single_item_with_chance",
+  "priority": 1000,
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/hero_of_the_village/cleric_gift"
+    }
+  ],
+  "numOfOptions": 11,
+  "item": "angelblock:rod_upgrade_kit"
+}

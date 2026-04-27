@@ -1,0 +1,12 @@
+{
+  "type": "angelblock:replace_single_item_with_chance",
+  "priority": 1000,
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/hero_of_the_village/fisherman_gift"
+    }
+  ],
+  "numOfOptions": 100,
+  "item": "angelblock:blue_axolotl_bucket"
+}

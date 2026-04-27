@@ -1,0 +1,12 @@
+{
+  "type": "angelblock:replace_single_item_with_chance",
+  "priority": 1000,
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/hero_of_the_village/farmer_gift"
+    }
+  ],
+  "numOfOptions": 10,
+  "item": "angelblock:planter"
+}

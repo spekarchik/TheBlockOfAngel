@@ -1,9 +1,12 @@
 package com.pekar.angelblock.loot;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -14,27 +17,35 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 
 import static com.pekar.angelblock.loot.LootRegistry.ON_GOOD_LOOT_ENCHANTMENTS;
 
-public class ReplaceEnchantedBookModifier extends LootModifier
+public class ReplaceToEnchantedBookModifier extends LootModifier
 {
-    public static final MapCodec<ReplaceEnchantedBookModifier> CODEC =
+    public static final MapCodec<ReplaceToEnchantedBookModifier> CODEC =
             RecordCodecBuilder.mapCodec(inst ->
-                    codecStart(inst).apply(inst, ReplaceEnchantedBookModifier::new)
+                    codecStart(inst)
+                            .and(inst.group(Codec.INT.fieldOf("enchantmentCost").forGetter(e -> e.enchantmentCost),
+                                    BuiltInRegistries.ITEM.byNameCodec().fieldOf("itemToReplace").forGetter(e -> e.itemToReplace)))
+                            .apply(inst, ReplaceToEnchantedBookModifier::new)
             );
+
+    private final int enchantmentCost;
+    private final Item itemToReplace;
 
     /**
      * Constructs a LootModifier.
      *
      * @param conditionsIn the ILootConditions that need to be matched before the loot is modified.
      */
-    protected ReplaceEnchantedBookModifier(LootItemCondition[] conditionsIn, int priority)
+    protected ReplaceToEnchantedBookModifier(LootItemCondition[] conditionsIn, int priority, int enchantmentCost, Item itemToReplace)
     {
         super(conditionsIn, priority);
+        this.enchantmentCost = enchantmentCost;
+        this.itemToReplace = itemToReplace;
     }
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
-        boolean removed = generatedLoot.removeIf(x -> x.is(Items.ENCHANTED_BOOK));
+        boolean removed = generatedLoot.removeIf(x -> x.is(itemToReplace));
         if (removed)
         {
             var enchantedBook = createEnchantedBookWithGoodLootEnchantment(context);
@@ -59,7 +70,7 @@ public class ReplaceEnchantedBookModifier extends LootModifier
         return EnchantmentHelper.enchantItem(
                 context.getRandom(),
                 book,
-                30,
+                enchantmentCost,
                 registryAccess,
                 holderSet
         );
