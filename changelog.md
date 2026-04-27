@@ -1,3 +1,10 @@
+## 📦 Version 3.7.0
+
+### 📝 Improvements
+- Improved compatibility with other mods by removing all remaining JSON loot tables.
+  The mod no longer overrides any loot tables and does not rely on loot content.
+
+
 ## 📦 Version 3.6.1
 
 ### 📝 Improvements

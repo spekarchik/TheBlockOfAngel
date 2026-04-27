@@ -20,8 +20,26 @@ public class LootRegistry
     public static final TagKey<Enchantment> WEAPONSMITH_SPECIFIC_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(MODID, "weaponsmith_specific"));
     public static final TagKey<Enchantment> ON_GOOD_LOOT_ENCHANTMENTS = TagKey.create(Registries.ENCHANTMENT, createResourceLocation(MODID, "on_good_loot"));
 
-    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ReplaceEnchantedBookModifier>> REPLACE_ENCHANTED_BOOK_LOOT_MODIFIER =
-            LOOT_MODIFIERS.register("replace_enchanted_book", () -> ReplaceEnchantedBookModifier.CODEC);
+    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ReplaceToEnchantedBookModifier>> REPLACE_ENCHANTED_BOOK_LOOT_MODIFIER =
+            LOOT_MODIFIERS.register("replace_enchanted_book", () -> ReplaceToEnchantedBookModifier.CODEC);
+
+//    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ModifyStrongholdCorridorModifier>> MODIFY_STRONGHOLD_CORRIDOR_LOOT_MODIFIER =
+//            LOOT_MODIFIERS.register("modify_stronghold_corridor", () -> ModifyStrongholdCorridorModifier.CODEC);
+
+    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ModifyDesertArcheologyModifier>> MODIFY_DESERT_ARCHAEOLOGY_LOOT_MODIFIER =
+            LOOT_MODIFIERS.register("modify_desert_archaeology", () -> ModifyDesertArcheologyModifier.CODEC);
+
+    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ModifyOceanArcheologyModifier>> MODIFY_OCEAN_ARCHAEOLOGY_LOOT_MODIFIER =
+            LOOT_MODIFIERS.register("modify_ocean_archaeology", () -> ModifyOceanArcheologyModifier.CODEC);
+
+    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ReplaceSingleItemWithChanceModifier>> REPLACE_SINGLE_ITEM_WITH_CHANCE_LOOT_MODIFIER =
+            LOOT_MODIFIERS.register("replace_single_item_with_chance", () -> ReplaceSingleItemWithChanceModifier.CODEC);
+
+    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ModifyHeroLeatherworkerGiftModifier>> MODIFY_HERO_LEATHERWORKER_GIFT_LOOT_MODIFIER =
+            LOOT_MODIFIERS.register("modify_hero_leatherworker_gift", () -> ModifyHeroLeatherworkerGiftModifier.CODEC);
+
+    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ModifyHeroToolsmithGiftModifier>> MODIFY_HERO_TOOLSMITH_GIFT_LOOT_MODIFIER =
+            LOOT_MODIFIERS.register("modify_hero_toolsmith_gift", () -> ModifyHeroToolsmithGiftModifier.CODEC);
 
     public static void initStatic()
     {
