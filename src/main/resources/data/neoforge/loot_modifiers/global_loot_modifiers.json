@@ -1,6 +1,15 @@
 {
   "replace": false,
   "entries": [
-    "angelblock:replace_enchanted_book"
+    "angelblock:archaeology_desert",
+    "angelblock:archaeology_ocean",
+    "angelblock:chest_library_enchanted_book",
+    "angelblock:hero_armorer_gift",
+    "angelblock:hero_cleric_gift",
+    "angelblock:hero_farmer_gift",
+    "angelblock:hero_fisherman_gift",
+    "angelblock:hero_leatherworker_gift",
+    "angelblock:hero_librarian_gift",
+    "angelblock:hero_toolsmith_gift"
   ]
 }
