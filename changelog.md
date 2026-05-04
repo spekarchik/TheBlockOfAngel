@@ -6,6 +6,9 @@
   - Blocks with block entities are still mined individually.
   - *Axes* and *hoes* only affect blocks of the same type.
   - *Pickaxes* only affect full blocks when mining multiple blocks.
+- Improved **Helmets with Creeper Detector**:
+  - The player hears a periodic sound when a creeper is within 17 blocks (existing behavior).
+  - When a creeper is within 10 blocks, the sound becomes more frequent.
 
 
 ## 📦 Version 3.6.1
