@@ -4,7 +4,6 @@ import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -61,7 +60,7 @@ public class EnhancedHoe extends ModHoe implements IModToolEnhanceable
 
         BlockState blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
-        if (canNotBeMinedInGroup(blockState, level, pos)) return;
+        if (canNotBeMinedInGroup(blockState)) return;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
 
@@ -127,7 +126,7 @@ public class EnhancedHoe extends ModHoe implements IModToolEnhanceable
         var block = blockState.getBlock();
 
         if (block != originBlock) return;
-        if (canNotBeMinedInGroup(blockState, level, pos)) return;
+        if (canNotBeMinedInGroup(blockState)) return;
 
         float hardness = block.defaultDestroyTime();
         float originHardness = originBlock.defaultDestroyTime();
@@ -140,9 +139,8 @@ public class EnhancedHoe extends ModHoe implements IModToolEnhanceable
         }
     }
 
-    private boolean canNotBeMinedInGroup(BlockState blockState, Level level, BlockPos pos)
+    private boolean canNotBeMinedInGroup(BlockState blockState)
     {
-        if (blockState.is(BlockTags.LEAVES)) return false;
         return blockState.hasBlockEntity();
     }
 }
