@@ -1,11 +1,9 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -40,10 +38,9 @@ public class EnhancedPickaxe extends ModPickaxe
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        if (!canBeMinedInGroup(blockState)) return;
+        if (canNotBeMinedInGroup(blockState, level, pos)) return;
 
         float originHardness = blockState.getBlock().defaultDestroyTime();
-        if (originHardness == 0.0F) return;
 
         Direction facing = utils.player.getDirection(entityLiving, pos);
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
@@ -72,9 +69,9 @@ public class EnhancedPickaxe extends ModPickaxe
                 }
     }
 
-    private static boolean canBeMinedInGroup(BlockState blockState)
+    private boolean canNotBeMinedInGroup(BlockState blockState, Level level, BlockPos pos)
     {
-        return !blockState.hasBlockEntity() && (blockState == blockState.getBlock().defaultBlockState() || blockState.is(BlockTags.REDSTONE_ORES) || blockState.is(BlockRegistry.GREEN_DIAMOND_ORE));
+        return blockState.hasBlockEntity() || !blockState.isCollisionShapeFullBlock(level, pos);
     }
 
     protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
@@ -82,17 +79,17 @@ public class EnhancedPickaxe extends ModPickaxe
         var blockState = level.getBlockState(pos);
 
         var block = blockState.getBlock();
-        if (!canBeMinedInGroup(blockState)) return;
+        if (canNotBeMinedInGroup(blockState, level, pos)) return;
 
         float hardness = block.defaultDestroyTime();
 
         if (hardness <= originHardness && isToolEffective(entityLiving, pos)
-                && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
+                && (materialProperties.isSafeToBreak(entityLiving, pos) || entityLiving.isShiftKeyDown()))
         {
             boolean areTheSameOres = isSameOre(originBlockState, blockState);
             if (!utils.blocks.types.isOre(originBlockState) || areTheSameOres)
             {
-                if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+                if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState))
                     damageMainHandItem(1, entityLiving);
             }
         }
