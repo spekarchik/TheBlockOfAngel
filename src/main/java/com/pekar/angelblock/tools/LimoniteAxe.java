@@ -1,9 +1,9 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.potions.PotionRegistry;
+import com.pekar.angelblock.tools.properties.LimoniteAxeProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
-import com.pekar.angelblock.tools.properties.LimoniteAxeProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -54,20 +54,18 @@ public class LimoniteAxe extends EnhancedAxe
 
         if (!isToolEffective(entityLiving, pos)) return;
 
-        float initialHardness = block.defaultDestroyTime();
-
-        if (initialHardness != 0.0F && isCorrectToolForDrops(itemStack, blockState) && !isCompatiblePlant(itemStack, blockState))
+        if (isCorrectToolForDrops(itemStack, blockState) && !isCompatiblePlant(itemStack, blockState))
         {
             int increment = 1;
             while (canProceed(entityLiving, pos.above(increment)))
             {
-                onBlockMining(itemStack, level, blockState, initialHardness, pos.above(increment++), entityLiving);
+                onBlockMining(itemStack, level, pos.above(increment++), block, entityLiving);
             }
 
             increment = 1;
             while (canProceed(entityLiving, pos.below(increment)))
             {
-                onBlockMining(itemStack, level, blockState, initialHardness, pos.below(increment++), entityLiving);
+                onBlockMining(itemStack, level, pos.below(increment++), block, entityLiving);
             }
         }
 
