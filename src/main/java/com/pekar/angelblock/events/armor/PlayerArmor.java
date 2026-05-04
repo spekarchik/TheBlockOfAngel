@@ -42,6 +42,7 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
     private final int MAX_ARMOR_TYPE_DEFENSE;
 
     private static final double CREEPER_NOTIFY_DISTANCE = 17.0;
+    private static final double CREEPER_CLOSE_DISTANCE = 10.0;
     private static final double CREEPER_AGRY_DISTANCE = 3.0;
     private static final int CREEPER_GLOWING_EFFECT_DURATION = 20;
     protected static final float EXHAUSTION_INCREMENT = 0.2F;
@@ -178,20 +179,25 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
         var entityPlayer = player.getPlayerEntity();
         var level = entityPlayer.level();
 
-        if (level.isClientSide()) return;
+        if (!(entityPlayer instanceof ServerPlayer serverPlayer)) return;
 
         var monsters = level.getEntitiesOfClass(Creeper.class, entityPlayer.getBoundingBox().inflate(CREEPER_NOTIFY_DISTANCE));
 
         if (!monsters.isEmpty())
         {
+            boolean hasCloseCreepers = false;
             for (var entity : monsters)
             {
+                var distanceToPlayer = entity.distanceTo(entityPlayer);
+                if (distanceToPlayer <= CREEPER_CLOSE_DISTANCE) hasCloseCreepers = true;
+
                 if (detect && (!entity.hasEffect(MobEffects.GLOWING) || entity.getEffect(MobEffects.GLOWING).getDuration() < CREEPER_GLOWING_EFFECT_DURATION / 2))
                 {
                     var potionEffect = new MobEffectInstance(MobEffects.GLOWING, CREEPER_GLOWING_EFFECT_DURATION, 0 /*amplifier*/, false /*ambient*/, false /*visible*/, false /*showIcon*/);
                     entity.addEffect(potionEffect);
                 }
-                if (makeNeutral && entity.distanceTo(entityPlayer) >= CREEPER_AGRY_DISTANCE && entity.getTarget() == entityPlayer)
+
+                if (makeNeutral && distanceToPlayer >= CREEPER_AGRY_DISTANCE && entity.getTarget() == entityPlayer)
                 {
                     entity.setTarget(null);
                 }
@@ -200,9 +206,13 @@ abstract class PlayerArmor extends ArmorBase implements IPlayerArmor
             if (detect)
             {
                 if (creeperDetectedCounter > 3)
+                {
                     creeperDetectedCounter = 0;
-                else if (creeperDetectedCounter++ == 0)
-                    creeperDetectedPacket.sendToPlayer((ServerPlayer) entityPlayer);
+                }
+                else if (creeperDetectedCounter++ == 0 || hasCloseCreepers)
+                {
+                    creeperDetectedPacket.sendToPlayer(serverPlayer);
+                }
             }
         }
         else
