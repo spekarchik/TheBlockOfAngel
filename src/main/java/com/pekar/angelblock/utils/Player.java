@@ -114,7 +114,7 @@ public class Player
         return entityLiving.getDirection();
     }
 
-    public boolean destroyBlockByMainHandTool(Level level, BlockPos pos, LivingEntity entityLiving, BlockState blockState, Block block)
+    public boolean destroyBlockByMainHandTool(Level level, BlockPos pos, LivingEntity entityLiving, BlockState blockState)
     {
         if (level.isClientSide()) return false;
 
