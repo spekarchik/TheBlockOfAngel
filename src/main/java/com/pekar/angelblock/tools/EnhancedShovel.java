@@ -58,10 +58,9 @@ public class EnhancedShovel extends ModShovel
             return;
 
         BlockState blockState = level.getBlockState(pos);
-        if (blockState.hasBlockEntity() || blockState != blockState.getBlock().defaultBlockState()) return;
+        if (canNotBeMinedInGroup(blockState)) return;
 
         float originHardness = blockState.getBlock().defaultDestroyTime();
-        if (originHardness == 0.0F) return;
 
         var facing = utils.player.getDirectionForShovel(entityLiving, pos);
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
@@ -86,7 +85,7 @@ public class EnhancedShovel extends ModShovel
                 for (int z = posZ - c; z <= posZ + c; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockMining(level, blockState, originHardness, new BlockPos(x, y, z), entityLiving);
+                    onBlockMining(level, originHardness, new BlockPos(x, y, z), entityLiving);
                 }
     }
 
@@ -131,20 +130,24 @@ public class EnhancedShovel extends ModShovel
         return haveAnyTransformed;
     }
 
-    protected void onBlockMining(Level level, BlockState originBlockState, float originHardness, BlockPos pos, LivingEntity entityLiving)
+    protected void onBlockMining(Level level, float originHardness, BlockPos pos, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
+        if (canNotBeMinedInGroup(blockState)) return;
 
         var block = blockState.getBlock();
-        if (blockState.hasBlockEntity() || blockState != block.defaultBlockState()) return;
-
         float hardness = block.defaultDestroyTime();
 
         if (hardness <= originHardness && isToolEffective(entityLiving, pos)
                 && (materialProperties.isSafeToBreak(entityLiving, pos) ||  entityLiving.isShiftKeyDown()))
         {
-            if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState, block))
+            if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState))
                 damageMainHandItem(1, entityLiving);
         }
+    }
+
+    private boolean canNotBeMinedInGroup(BlockState blockState)
+    {
+        return blockState.hasBlockEntity();
     }
 }
