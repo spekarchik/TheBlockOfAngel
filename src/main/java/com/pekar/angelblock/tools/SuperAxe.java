@@ -72,8 +72,7 @@ public class SuperAxe extends EnhancedAxe
             }
         }
 
-        if (isCompatiblePlant(itemStack, blockState))
-            super.mineAdditionalBlocks(itemStack, level, pos, entityLiving);
+        super.mineAdditionalBlocks(itemStack, level, pos, entityLiving);
     }
 
     private boolean canProceed(LivingEntity entityLiving, BlockPos pos)
