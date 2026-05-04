@@ -1,3 +1,13 @@
+## 📦 Version 3.8.0
+
+### 📝 Improvements
+- Reworked **Enhanced Tools** mining behavior in *Enhanced Mode*.
+  - Tools can now mine multiple blocks at once, regardless of block state differences.
+  - Blocks with block entities are still mined individually.
+  - *Axes* and *hoes* only affect blocks of the same type.
+  - *Pickaxes* only affect full blocks when mining multiple blocks.
+
+
 ## 📦 Version 3.6.1
 
 ### 📝 Improvements

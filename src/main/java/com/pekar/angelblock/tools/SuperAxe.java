@@ -46,7 +46,7 @@ public class SuperAxe extends EnhancedAxe
     }
 
     @Override
-    protected void mineAdditionalBlocks(Level level, BlockPos pos, LivingEntity entityLiving)
+    protected void mineAdditionalBlocks(ItemStack itemStack, Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (!isEnhanced() || !entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
@@ -57,24 +57,22 @@ public class SuperAxe extends EnhancedAxe
         if (!isToolEffective(entityLiving, pos) /*&& !isCompatiblePlant(block)*/)
             return;
 
-        float initialHardness = block.defaultDestroyTime();
-
-        if (initialHardness != 0.0F && !isCompatiblePlant(block))
+        if (isCorrectToolForDrops(itemStack, blockState) && !isCompatiblePlant(block))
         {
             int increment = 1;
             while (canProceed(entityLiving, pos.above(increment)))
             {
-                onBlockMining(level, blockState, initialHardness, pos.above(increment++), entityLiving);
+                onBlockMining(itemStack, level, pos.above(increment++), block, entityLiving);
             }
 
             increment = 1;
             while (canProceed(entityLiving, pos.below(increment)))
             {
-                onBlockMining(level, blockState, initialHardness, pos.below(increment++), entityLiving);
+                onBlockMining(itemStack, level, pos.below(increment++), block, entityLiving);
             }
         }
 
-        super.mineAdditionalBlocks(level, pos, entityLiving);
+        super.mineAdditionalBlocks(itemStack, level, pos, entityLiving);
     }
 
     private boolean canProceed(LivingEntity entityLiving, BlockPos pos)
