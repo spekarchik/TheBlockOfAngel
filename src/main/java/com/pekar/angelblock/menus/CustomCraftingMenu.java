@@ -54,7 +54,7 @@ public class CustomCraftingMenu extends CraftingMenu
             var damagedRod = getDamagedRod(ToolRegistry.END_MAGNETIC_ROD.get());
             if (!damagedRod.isEmpty())
             {
-                resultSlots.getItem(0).setDamageValue(damagedRod.getDamageValue());
+                resultSlot.getItem().setDamageValue(damagedRod.getDamageValue());
             }
         }
     }
@@ -75,9 +75,10 @@ public class CustomCraftingMenu extends CraftingMenu
 
     private ItemStack getDamagedRod(Item rodItem)
     {
-        for (int i = 0; i < this.craftSlots.getContainerSize(); i++)
+        for (int i = 0; i < slots.size(); i++)
         {
-            var stack = this.craftSlots.getItem(i);
+            var slot = slots.get(i);
+            var stack = slot.getItem();
             if (stack.is(rodItem) && stack.isDamaged())
             {
                 return stack;
