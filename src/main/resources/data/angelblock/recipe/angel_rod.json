@@ -1,15 +1,24 @@
 {
-    "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "angelblock:end_magnetic_rod"
-    },
-    "addition": {
-        "item": "angelblock:angel_block"
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "pattern": [
+        "V",
+        "#",
+        "|"
+    ],
+    "key": {
+        "V": {
+            "item": "minecraft:totem_of_undying"
+        },
+        "#": {
+            "item": "angelblock:angel_block"
+        },
+        "|": {
+            "item": "angelblock:end_magnetic_rod"
+        }
     },
     "result": {
-        "id": "angelblock:angel_rod"
-    },
-    "template": {
-        "item": "minecraft:totem_of_undying"
+        "id": "angelblock:angel_rod",
+        "count": 1
     }
 }
