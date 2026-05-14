@@ -1,3 +1,9 @@
+## 📦 Version 3.8.1
+
+### 🐞 Fixed
+- Fixed a bug where placing the **Rod of Angel** on a block incorrectly caused player exhaustion and consumed rod durability.
+
+
 ## 📦 Version 3.8.0
 
 ### 📝 Improvements
