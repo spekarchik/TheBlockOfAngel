@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -36,6 +37,7 @@ public abstract class MagneticRod extends ModRod
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        var itemInHand = context.getItemInHand().copy();
         var result = useOnInternal(context);
         if (result == InteractionResult.PASS) return InteractionResult.FAIL;
         if (result == InteractionResult.SUCCESS || result == InteractionResult.SUCCESS_SERVER)
@@ -44,15 +46,23 @@ public abstract class MagneticRod extends ModRod
             if (!level.isClientSide())
             {
                 var player = context.getPlayer();
-                var exhaustionMultiplier = isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)
-                        ? MAGNETIC_USE_EXHAUSTION_MULTIPLIER
-                        : NORMAL_USE_EXHAUSTION_MULTIPLIER;
+                if (shouldCauseExhaustion(player, itemInHand))
+                {
+                    var exhaustionMultiplier = isEnhanced() && player.hasEffect(PotionRegistry.ROD_MAGNETIC_MODE_EFFECT)
+                            ? MAGNETIC_USE_EXHAUSTION_MULTIPLIER
+                            : NORMAL_USE_EXHAUSTION_MULTIPLIER;
 
-                utils.player.causePlayerExhaustion(player, exhaustionMultiplier);
-                damageMainHandItemIfSurvivalIgnoreClient(player, level);
+                    utils.player.causePlayerExhaustion(player, exhaustionMultiplier);
+                    damageMainHandItemIfSurvivalIgnoreClient(player, level);
+                }
             }
         }
         return result;
+    }
+
+    private boolean shouldCauseExhaustion(Player player, ItemStack itemInHand)
+    {
+        return player != null && !player.isCreative() && (!player.isShiftKeyDown() || !itemInHand.is(ToolRegistry.ANGEL_ROD));
     }
 
     protected InteractionResult useOnInternal(UseOnContext context)
