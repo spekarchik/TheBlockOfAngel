@@ -1,7 +1,11 @@
-## 📦 Version 3.8.1
+## 📦 Version 3.9.0
 
 ### 🐞 Fixed
 - Fixed a bug where placing the **Rod of Angel** on a block incorrectly caused player exhaustion and consumed rod durability.
+
+### 🛠️ Changes
+- Changed the **Rod of Angel** recipe from smithing to crafting.
+  - The recipe ingredients remain unchanged.
 
 
 ## 📦 Version 3.8.0
