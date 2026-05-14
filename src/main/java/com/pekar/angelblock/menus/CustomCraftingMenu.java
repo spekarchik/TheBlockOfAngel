@@ -48,6 +48,14 @@ public class CustomCraftingMenu extends CraftingMenu
                 resultSlots.setItem(0, ItemStack.EMPTY);
             }
         }
+        else if (!result.isEmpty() && result.is(ToolRegistry.ANGEL_ROD))
+        {
+            var damagedRod = getDamagedRod(ToolRegistry.END_MAGNETIC_ROD.get());
+            if (!damagedRod.isEmpty())
+            {
+                resultSlots.getItem(0).setDamageValue(damagedRod.getDamageValue());
+            }
+        }
     }
 
     private boolean hasDamagedRod(Item rodItem)
@@ -61,5 +69,19 @@ public class CustomCraftingMenu extends CraftingMenu
             }
         }
         return false;
+    }
+
+    private ItemStack getDamagedRod(Item rodItem)
+    {
+        for (int i = 0; i < this.craftSlots.getContainerSize(); i++)
+        {
+            var stack = this.craftSlots.getItem(i);
+            if (stack.is(rodItem) && stack.isDamaged())
+            {
+                return stack;
+            }
+        }
+
+        return ItemStack.EMPTY;
     }
 }
