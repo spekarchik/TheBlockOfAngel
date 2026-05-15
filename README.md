@@ -101,7 +101,7 @@ It allows proper rendering of semi-transparent blocks in first- and third-person
 
 The Block of Angel mod is fully compatible with the following mods by the same author:
 
-- **[🌟 Pouch & Paper](https://modrinth.com/mod/pouch-and-paper)** — introduces compact forms of tradeable resources for easier storage and trading:  
+- **[🌟 Pouch & Paper](https://www.curseforge.com/minecraft/mc-mods/pouch-and-paper)** — introduces compact forms of tradeable resources for easier storage and trading:  
   • paper (stackable and block form),  
   • ink and glow ink (bottled),  
   • leather (bundled),  
@@ -109,11 +109,11 @@ The Block of Angel mod is fully compatible with the following mods by the same a
   • feathers (as compact packs).  
   Includes the *Burnt Paper Block* — crafted by setting a Paper Block on fire. It attracts creepers and repels bees, perfect for traps and moody builds.
 
-- **[🔧 EnchantOnce](https://modrinth.com/mod/enchantonce)** — a minimalistic but powerful rework of enchanting and repairing.  
+- **[🔧 EnchantOnce](https://www.curseforge.com/minecraft/mc-mods/enchantonce)** — a minimalistic but powerful rework of enchanting and repairing.  
   Fixed XP costs, enchanted book duplication, material-based repairs, and perfect gear cloning — all with vanilla-style mechanics.  
   Fully supports custom gear and enchantments from The Block of Angel.
 
-- **[🧭 Compass Cleaner](https://modrinth.com/mod/compass-cleaner)** — adds a minimalist recipe to reset a _Lodestone Compass_ to a regular _Compass_.  
+- **[🧭 Compass Cleaner](https://www.curseforge.com/minecraft/mc-mods/compass-cleaner)** — adds a minimalist recipe to reset a _Lodestone Compass_ to a regular _Compass_.  
     Ideal for tidying up obsolete compasses after you lose or remove their lodestone targets.
 
 ---
