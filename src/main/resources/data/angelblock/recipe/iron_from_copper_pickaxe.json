@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:copper_pickaxe",
-    "addition": "minecraft:iron_pickaxe",
-    "result": {
-        "id": "minecraft:iron_pickaxe"
-    },
-    "template": "angelblock:iron_tool_upgrade_kit"
-}

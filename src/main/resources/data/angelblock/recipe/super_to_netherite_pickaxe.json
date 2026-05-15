@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "angelblock:super_pickaxe",
-  "addition": "minecraft:flint",
-  "result": {
-    "id": "minecraft:netherite_pickaxe"
-  },
-  "template": "angelblock:downgrade_kit"
-}

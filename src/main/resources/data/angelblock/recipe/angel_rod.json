@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:end_magnetic_rod",
-    "addition": "angelblock:angel_block",
-    "result": {
-        "id": "angelblock:angel_rod"
-    },
-    "template": "minecraft:totem_of_undying"
-}

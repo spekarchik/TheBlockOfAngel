@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:diamithic_helmet",
-    "addition": "minecraft:calibrated_sculk_sensor",
-    "result": {
-        "id": "angelblock:diamithic_helmet_with_detector"
-    },
-    "template": "angelblock:diamithic_armor_upgrade_kit"
-}

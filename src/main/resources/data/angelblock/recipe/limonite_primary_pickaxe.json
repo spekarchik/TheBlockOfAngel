@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "minecraft:diamond_pickaxe",
-  "addition": "angelblock:limonite_ingot",
-  "result": {
-    "id": "angelblock:limonite_primary_pickaxe"
-  },
-  "template": "angelblock:limonite_tool_upgrade_kit"
-}

@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:leather_leggings",
-    "addition": "angelblock:flying_plate",
-    "result": {
-        "id": "angelblock:flying_leggings"
-    },
-    "template": "angelblock:flying_armor_upgrade_kit"
-}

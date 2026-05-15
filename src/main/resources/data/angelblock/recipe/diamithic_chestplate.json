@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:netherite_chestplate",
-    "addition": "angelblock:diamithic_plate",
-    "result": {
-        "id": "angelblock:diamithic_chestplate"
-    },
-    "template": "angelblock:diamithic_armor_upgrade_kit"
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "ambientocclusion": false,
-  "textures":
-  {
-    "all": "angelblock:block/green_diamond_ore"
-  }
-}

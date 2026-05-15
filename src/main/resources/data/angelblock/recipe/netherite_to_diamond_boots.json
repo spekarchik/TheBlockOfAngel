@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "minecraft:netherite_boots",
-  "addition": "minecraft:flint",
-  "result": {
-    "id": "minecraft:diamond_boots"
-  },
-  "template": "angelblock:downgrade_kit"
-}

@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:copper_sword",
-    "addition": "minecraft:iron_sword",
-    "result": {
-        "id": "minecraft:iron_sword"
-    },
-    "template": "angelblock:iron_tool_upgrade_kit"
-}

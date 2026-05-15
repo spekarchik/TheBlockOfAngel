@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:ancient_rod",
-    "addition": "angelblock:marine_crystal",
-    "result": {
-        "id": "angelblock:marine_rod"
-    },
-    "template": "angelblock:rod_upgrade_kit"
-}

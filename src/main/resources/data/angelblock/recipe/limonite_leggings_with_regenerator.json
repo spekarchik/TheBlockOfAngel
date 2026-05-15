@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:limonite_leggings",
-    "addition": "angelblock:bios_diamond",
-    "result": {
-        "id": "angelblock:limonite_leggings_with_regenerator"
-    },
-    "template": "angelblock:limonite_armor_upgrade_kit"
-}

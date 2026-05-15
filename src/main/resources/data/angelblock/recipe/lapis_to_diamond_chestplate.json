@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "angelblock:lapis_chestplate",
-  "addition": "minecraft:flint",
-  "result": {
-    "id": "minecraft:diamond_chestplate"
-  },
-  "template": "angelblock:downgrade_kit"
-}

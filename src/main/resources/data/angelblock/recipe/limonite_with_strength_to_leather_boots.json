@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "angelblock:limonite_boots_with_strength",
-  "addition": "minecraft:flint",
-  "result": {
-    "id": "minecraft:leather_boots"
-  },
-  "template": "angelblock:downgrade_kit"
-}

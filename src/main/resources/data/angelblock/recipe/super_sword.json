@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:super_primary_sword",
-    "addition": "angelblock:super_crystal",
-    "result": {
-        "id": "angelblock:super_sword"
-    },
-    "template": "angelblock:super_tool_upgrade_kit"
-}

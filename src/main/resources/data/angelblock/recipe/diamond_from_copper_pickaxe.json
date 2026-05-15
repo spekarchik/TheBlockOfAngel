@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:copper_pickaxe",
-    "addition": "minecraft:diamond_pickaxe",
-    "result": {
-        "id": "minecraft:diamond_pickaxe"
-    },
-    "template": "angelblock:diamond_tool_upgrade_kit"
-}

@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:chainmail_leggings",
-    "addition": "angelblock:limonite_plate",
-    "result": {
-        "id": "angelblock:limonite_leggings"
-    },
-    "template": "angelblock:limonite_armor_upgrade_kit"
-}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "angelblock:diamithic_helmet",
-  "addition": "minecraft:flint",
-  "result": {
-    "id": "minecraft:netherite_helmet"
-  },
-  "template": "angelblock:downgrade_kit"
-}

@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:amethyst_rod",
-    "addition": "angelblock:super_crystal",
-    "result": {
-        "id": "angelblock:end_rod"
-    },
-    "template": "angelblock:rod_upgrade_kit"
-}

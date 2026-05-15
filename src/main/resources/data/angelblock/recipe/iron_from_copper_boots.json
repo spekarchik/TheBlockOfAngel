@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:copper_boots",
-    "addition": "minecraft:iron_boots",
-    "result": {
-        "id": "minecraft:iron_boots"
-    },
-    "template": "angelblock:iron_armor_upgrade_kit"
-}

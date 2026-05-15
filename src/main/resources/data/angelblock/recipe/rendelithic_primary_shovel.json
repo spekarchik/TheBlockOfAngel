@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "minecraft:diamond_shovel",
-  "addition": "angelblock:rendelithic_ingot",
-  "result": {
-    "id": "angelblock:rendelithic_primary_shovel"
-  },
-  "template": "angelblock:rendelithic_tool_upgrade_kit"
-}

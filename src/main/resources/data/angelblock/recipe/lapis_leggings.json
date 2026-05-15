@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:diamond_leggings",
-    "addition": "angelblock:lapis_plate",
-    "result": {
-        "id": "angelblock:lapis_leggings"
-    },
-    "template": "angelblock:lapis_armor_upgrade_kit"
-}

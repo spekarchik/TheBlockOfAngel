@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:super_boots",
-    "addition": "angelblock:strength_pearl",
-    "result": {
-        "id": "angelblock:super_boots_with_strength"
-    },
-    "template": "angelblock:super_armor_upgrade_kit"
-}

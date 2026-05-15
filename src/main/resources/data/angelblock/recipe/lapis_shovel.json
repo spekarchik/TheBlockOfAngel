@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:lapis_primary_shovel",
-    "addition": "angelblock:marine_crystal",
-    "result": {
-        "id": "angelblock:lapis_shovel"
-    },
-    "template": "angelblock:lapis_tool_upgrade_kit"
-}

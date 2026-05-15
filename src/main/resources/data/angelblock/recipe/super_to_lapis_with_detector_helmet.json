@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "angelblock:super_helmet",
-  "addition": "minecraft:flint",
-  "result": {
-    "id": "angelblock:lapis_helmet_with_detector"
-  },
-  "template": "angelblock:downgrade_kit"
-}

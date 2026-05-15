@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:leather_chestplate",
-    "addition": "angelblock:flying_plate",
-    "result": {
-        "id": "angelblock:flying_chestplate"
-    },
-    "template": "angelblock:flying_armor_upgrade_kit"
-}

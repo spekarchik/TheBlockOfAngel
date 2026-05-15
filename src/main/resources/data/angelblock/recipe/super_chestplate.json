@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:diamithic_chestplate_with_strength_and_levitation",
-    "addition": "angelblock:super_plate",
-    "result": {
-        "id": "angelblock:super_chestplate"
-    },
-    "template": "angelblock:super_armor_upgrade_kit"
-}

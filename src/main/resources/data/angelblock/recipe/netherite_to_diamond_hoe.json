@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "minecraft:netherite_hoe",
-  "addition": "minecraft:flint",
-  "result": {
-    "id": "minecraft:diamond_hoe"
-  },
-  "template": "angelblock:downgrade_kit"
-}

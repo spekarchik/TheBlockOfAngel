@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:horse_armor_handbook",
-    "addition": "angelblock:limonite_plate",
-    "result": {
-        "id": "angelblock:horse_lymonite_armor"
-    },
-    "template": "angelblock:limonite_armor_upgrade_kit"
-}

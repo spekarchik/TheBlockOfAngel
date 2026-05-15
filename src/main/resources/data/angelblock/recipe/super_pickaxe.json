@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:super_primary_pickaxe",
-    "addition": "angelblock:super_crystal",
-    "result": {
-        "id": "angelblock:super_pickaxe"
-    },
-    "template": "angelblock:super_tool_upgrade_kit"
-}

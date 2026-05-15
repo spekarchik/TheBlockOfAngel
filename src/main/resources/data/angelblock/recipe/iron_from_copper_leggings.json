@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:copper_leggings",
-    "addition": "minecraft:iron_leggings",
-    "result": {
-        "id": "minecraft:iron_leggings"
-    },
-    "template": "angelblock:iron_armor_upgrade_kit"
-}

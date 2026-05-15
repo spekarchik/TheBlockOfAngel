@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:rendelithic_shovel",
-    "addition": "minecraft:flint",
-    "result": {
-        "id": "minecraft:diamond_shovel"
-    },
-    "template": "angelblock:downgrade_kit"
-}

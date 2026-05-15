@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:limonite_boots",
-    "addition": "angelblock:super_plate",
-    "result": {
-        "id": "angelblock:super_boots"
-    },
-    "template": "angelblock:super_armor_upgrade_kit"
-}

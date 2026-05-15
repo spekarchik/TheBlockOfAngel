@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:copper_hoe",
-    "addition": "minecraft:diamond_hoe",
-    "result": {
-        "id": "minecraft:diamond_hoe"
-    },
-    "template": "angelblock:diamond_tool_upgrade_kit"
-}

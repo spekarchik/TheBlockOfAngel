@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "angelblock:wolf_rendelite_armor",
-    "addition": "minecraft:flint",
-    "result": {
-        "id": "angelblock:rendelithic_plate"
-    },
-    "template": "angelblock:downgrade_kit"
-}

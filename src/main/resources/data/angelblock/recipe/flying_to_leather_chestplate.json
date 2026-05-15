@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "angelblock:flying_chestplate",
-  "addition": "minecraft:flint",
-  "result": {
-    "id": "minecraft:leather_chestplate"
-  },
-  "template": "angelblock:downgrade_kit"
-}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": "minecraft:diamond_pickaxe",
-  "addition": "angelblock:rendelithic_ingot",
-  "result": {
-    "id": "angelblock:rendelithic_primary_pickaxe"
-  },
-  "template": "angelblock:rendelithic_tool_upgrade_kit"
-}

@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "base": "minecraft:turtle_helmet",
-    "addition": "angelblock:lapis_plate",
-    "result": {
-        "id": "angelblock:lapis_helmet"
-    },
-    "template": "angelblock:lapis_armor_upgrade_kit"
-}
