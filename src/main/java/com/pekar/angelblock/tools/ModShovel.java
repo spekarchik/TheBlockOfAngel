@@ -6,13 +6,10 @@ import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -31,11 +28,8 @@ import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.Map;
 
-public class ModShovel extends ModTool implements IModToolEnhanceable
+public class ModShovel extends ModMiningTool
 {
-    protected final IMaterialProperties materialProperties;
-    protected final Utils utils = new Utils();
-    private final ModToolMaterial material;
     protected static final Map<Block, BlockState> FLATTENABLES;
 
     static
@@ -58,9 +52,7 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
 
     public ModShovel(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.shovel(material.getVanillaMaterial(), attackDamage, attackSpeed));
-        this.materialProperties = materialProperties;
-        this.material = material;
+        super(material, properties.shovel(material.getVanillaMaterial(), attackDamage, attackSpeed), materialProperties);
     }
 
     @Override
@@ -86,38 +78,6 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
     }
 
     @Override
-    public boolean isTool()
-    {
-        return true;
-    }
-
-    @Override
-    public void setDamage(ItemStack stack, int damage)
-    {
-        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - getCriticalDurability());
-        stack.set(DataComponents.DAMAGE, modifiedDamage);
-    }
-
-    @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
-    {
-        return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
-    }
-
-    @Override
-    public ModToolMaterial getMaterial()
-    {
-        return material;
-    }
-
-    @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state)
-    {
-        if (hasCriticalDamage(stack)) return 1F;
-        return super.getDestroySpeed(stack, state);
-    }
-
-    @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
         return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility);
@@ -134,12 +94,6 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
         {
             tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i >= 2 && i <= 3).apply();
         }
-    }
-
-    @Override
-    public final IMaterialProperties getMaterialProperties()
-    {
-        return materialProperties;
     }
 
     protected boolean onBlockProcessing(Player player, Level level, BlockPos originalPos, BlockPos pos, Direction facing)
