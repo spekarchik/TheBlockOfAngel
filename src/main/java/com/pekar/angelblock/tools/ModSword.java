@@ -41,8 +41,13 @@ public abstract class ModSword extends Item implements IModTool
 
     public ModSword(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
-        super(material.getVanillaMaterial().applySwordProperties(material.isFireResistant() ? properties.fireResistant() : properties, attackDamage, attackSpeed));
+        super(applyFireResistance(properties, material.isFireResistant()).sword(material.getVanillaMaterial(), attackDamage, attackSpeed));
         this.material = material;
+    }
+
+    private static Item.Properties applyFireResistance(Item.Properties properties, boolean isFireResistant)
+    {
+        return isFireResistant ? properties.fireResistant() : properties;
     }
 
     public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {

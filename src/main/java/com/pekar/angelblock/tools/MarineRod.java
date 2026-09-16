@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
@@ -19,9 +20,9 @@ import java.util.Random;
 
 public class MarineRod extends AncientRod
 {
-    public MarineRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
+    public MarineRod(ModToolMaterial material, boolean isMagnetic, TagKey<Block> mineableBlocks, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, isMagnetic, mineableBlocks, properties);
     }
 
     @Override

@@ -9,6 +9,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -17,9 +18,9 @@ import net.minecraft.world.level.block.Block;
 
 public class AngelRod extends EndRod
 {
-    public AngelRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
+    public AngelRod(ModToolMaterial material, boolean isMagnetic, TagKey<Block> mineableBlocks, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, isMagnetic, mineableBlocks, properties);
     }
 
     private String getRodDescriptionId()

@@ -1,6 +1,7 @@
 package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.Main;
+import com.pekar.angelblock.blocks.BlockRegistry;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -84,46 +85,46 @@ public class ToolRegistry
 
     // Rods
     public static final DeferredItem<ModRod> ANCIENT_ROD = Main.ITEMS.registerItem("ancient_rod",
-            p -> new AncientRod(ToolMaterials.ROD_MATERIAL1, false, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new AncientRod(ToolMaterials.ANCIENT_ROD_MATERIAL, false, BlockRegistry.MINEABLE_WITH_ANCIENT_ROD, p), p -> p.rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> MARINE_ROD = Main.ITEMS.registerItem("marine_rod",
-            p -> new MarineRod(ToolMaterials.ROD_MATERIAL2, false, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new MarineRod(ToolMaterials.MARINE_ROD_MATERIAL, false, BlockRegistry.MINEABLE_WITH_ANCIENT_ROD, p), p -> p.rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> FIRE_ROD = Main.ITEMS.registerItem("fire_rod",
-            p -> new FireRod(ToolMaterials.ROD_MATERIAL3, false, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new FireRod(ToolMaterials.FIRE_ROD_MATERIAL, false, BlockRegistry.MINEABLE_WITH_FIRE_ROD, p), p -> p.rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> AMETHYST_ROD = Main.ITEMS.registerItem("amethyst_rod",
-            p -> new AmethystRod(ToolMaterials.ROD_MATERIAL4, false, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new AmethystRod(ToolMaterials.AMETHYST_ROD_MATERIAL, false, BlockRegistry.MINEABLE_WITH_FIRE_ROD, p), p -> p.rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> END_ROD = Main.ITEMS.registerItem("end_rod",
-            p -> new EndRod(ToolMaterials.ROD_MATERIAL5, false, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new EndRod(ToolMaterials.END_ROD_MATERIAL, false, BlockRegistry.MINEABLE_WITH_END_ROD, p), p -> p.rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> ANCIENT_MAGNETIC_ROD = Main.ITEMS.registerItem("ancient_magnetic_rod",
-            p -> new AncientRod(ToolMaterials.ROD_MATERIAL1, true, p), p -> p.rarity(Rarity.RARE));
+            p -> new AncientRod(ToolMaterials.ANCIENT_ROD_MATERIAL, true, BlockRegistry.MINEABLE_WITH_ANCIENT_ROD, p), p -> p.rarity(Rarity.RARE));
 
     public static final DeferredItem<ModRod> MARINE_MAGNETIC_ROD = Main.ITEMS.registerItem("marine_magnetic_rod",
-            p -> new MarineRod(ToolMaterials.ROD_MATERIAL2, true, p), p -> p.rarity(Rarity.RARE));
+            p -> new MarineRod(ToolMaterials.MARINE_ROD_MATERIAL, true, BlockRegistry.MINEABLE_WITH_ANCIENT_ROD, p), p -> p.rarity(Rarity.RARE));
 
     public static final DeferredItem<ModRod> FIRE_MAGNETIC_ROD = Main.ITEMS.registerItem("fire_magnetic_rod",
-            p -> new FireRod(ToolMaterials.ROD_MATERIAL3, true, p), p -> p.rarity(Rarity.RARE));
+            p -> new FireRod(ToolMaterials.FIRE_ROD_MATERIAL, true, BlockRegistry.MINEABLE_WITH_FIRE_ROD, p), p -> p.rarity(Rarity.RARE));
 
     public static final DeferredItem<ModRod> AMETHYST_MAGNETIC_ROD = Main.ITEMS.registerItem("amethyst_magnetic_rod",
-            p -> new AmethystRod(ToolMaterials.ROD_MATERIAL4, true, p), p -> p.rarity(Rarity.RARE));
+            p -> new AmethystRod(ToolMaterials.AMETHYST_ROD_MATERIAL, true, BlockRegistry.MINEABLE_WITH_FIRE_ROD, p), p -> p.rarity(Rarity.RARE));
 
     public static final DeferredItem<ModRod> END_MAGNETIC_ROD = Main.ITEMS.registerItem("end_magnetic_rod",
-            p -> new EndRod(ToolMaterials.ROD_MATERIAL5, true, p), p -> p.rarity(Rarity.RARE));
+            p -> new EndRod(ToolMaterials.END_ROD_MATERIAL, true, BlockRegistry.MINEABLE_WITH_END_ROD, p), p -> p.rarity(Rarity.RARE));
 
     public static final DeferredItem<ModRod> ANGEL_ROD = Main.ITEMS.registerItem("angel_rod",
-            p -> new AngelRod(ToolMaterials.ROD_MATERIAL5, true, p), p -> p.rarity(Rarity.EPIC));
+            p -> new AngelRod(ToolMaterials.END_ROD_MATERIAL, true, BlockRegistry.MINEABLE_WITH_END_ROD, p), p -> p.rarity(Rarity.EPIC));
 
     public static final DeferredItem<ModRod> PLANTER = Main.ITEMS.registerItem("planter",
-            p -> new Planter(ToolMaterials.ROD_MATERIAL7, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new Planter(ToolMaterials.PLANTER_ROD_MATERIAL, p), p -> p.rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> TRACK_LAYER = Main.ITEMS.registerItem("track_layer",
-            p -> new TrackLayer(ToolMaterials.ROD_MATERIAL6, p), p -> p.rarity(Rarity.UNCOMMON));
+            p -> new TrackLayer(ToolMaterials.TRACK_LAYER_ROD_MATERIAL, p), p -> p.rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<ModRod> BUILDER = Main.ITEMS.registerItem("builder",
-            p -> new Builder(ToolMaterials.ROD_MATERIAL7, p), p -> p.rarity(Rarity.UNCOMMON).fireResistant());
+            p -> new Builder(ToolMaterials.PLANTER_ROD_MATERIAL, p), p -> p.rarity(Rarity.UNCOMMON).fireResistant());
 
     // Swords
     public static final DeferredItem<ModSword> DIAMITHIC_PRIMARY_SWORD = Main.ITEMS.registerItem("diamithic_primary_sword",

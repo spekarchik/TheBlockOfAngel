@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
@@ -16,9 +17,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AmethystRod extends FireRod
 {
-    public AmethystRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
+    public AmethystRod(ModToolMaterial material, boolean isMagnetic, TagKey<Block> mineableBlocks, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, isMagnetic, mineableBlocks, properties);
     }
 
     @Override
