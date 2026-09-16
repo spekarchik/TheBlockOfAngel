@@ -4,11 +4,14 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.pekar.angelblock.items.ItemRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
+
+import java.util.Optional;
 
 public class ModifyHeroLeatherworkerGiftModifier extends LootModifier
 {
@@ -20,16 +23,18 @@ public class ModifyHeroLeatherworkerGiftModifier extends LootModifier
     /**
      * Constructs a LootModifier.
      *
-     * @param conditionsIn the ILootConditions that need to be matched before the loot is modified.
+     * @param condition the loot condition that needs to match before the loot is modified.
      */
-    protected ModifyHeroLeatherworkerGiftModifier(LootItemCondition[] conditionsIn, int priority)
+    protected ModifyHeroLeatherworkerGiftModifier(Optional<Holder<LootItemCondition>> condition, int priority)
     {
-        super(conditionsIn, priority);
+        super(condition, priority);
     }
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
+        if (generatedLoot.isEmpty()) return generatedLoot;
+
         int option = context.getRandom().nextIntBetweenInclusive(1, 7);
         if (option > 5) return generatedLoot;
 

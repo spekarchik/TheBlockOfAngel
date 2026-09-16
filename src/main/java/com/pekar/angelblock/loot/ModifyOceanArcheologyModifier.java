@@ -6,6 +6,7 @@ import com.pekar.angelblock.items.ItemRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
+
+import java.util.Optional;
 
 public class ModifyOceanArcheologyModifier extends LootModifier
 {
@@ -24,16 +27,18 @@ public class ModifyOceanArcheologyModifier extends LootModifier
     /**
      * Constructs a LootModifier.
      *
-     * @param conditionsIn the ILootConditions that need to be matched before the loot is modified.
+     * @param condition the loot condition that needs to match before the loot is modified.
      */
-    protected ModifyOceanArcheologyModifier(LootItemCondition[] conditionsIn, int priority)
+    protected ModifyOceanArcheologyModifier(Optional<Holder<LootItemCondition>> condition, int priority)
     {
-        super(conditionsIn, priority);
+        super(condition, priority);
     }
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
+        if (generatedLoot.isEmpty()) return generatedLoot;
+
         boolean needReplace = context.getRandom().nextIntBetweenInclusive(1, 8) == 2;
         if (!needReplace) return generatedLoot;
 
