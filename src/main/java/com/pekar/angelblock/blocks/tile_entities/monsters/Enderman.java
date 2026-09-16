@@ -6,7 +6,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -20,7 +19,7 @@ public class Enderman extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof EnderMan;
+        return livingEntity instanceof net.minecraft.world.entity.monster.Enderman;
     }
 
     @Override

@@ -1,11 +1,11 @@
 package com.pekar.angelblock.blocks;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -13,12 +13,10 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class GunpowderBlock extends FallingBlock
 {
-    private static final MapCodec<GunpowderBlock> CODEC = simpleCodec(GunpowderBlock::new);
-
     public GunpowderBlock(BlockBehaviour.Properties properties)
     {
         super(properties);
@@ -68,7 +66,7 @@ public class GunpowderBlock extends FallingBlock
     }
 
     @Override
-    public boolean onCaughtFire(BlockState state, Level level, BlockPos pos, @Nullable Direction direction, @Nullable LivingEntity igniter)
+    public boolean onCaughtFire(BlockState state, Level level, BlockPos pos, @Nullable Direction direction, @Nullable LivingEntity igniter, ItemStack ignitionItem)
     {
         explodeBlock(level, pos);
         return true;
@@ -78,12 +76,6 @@ public class GunpowderBlock extends FallingBlock
     public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction)
     {
         return 300; // 100%
-    }
-
-    @Override
-    protected MapCodec<? extends FallingBlock> codec()
-    {
-        return CODEC;
     }
 
     @Override
