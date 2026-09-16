@@ -1,14 +1,14 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
+import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
-import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
-import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
 
@@ -25,7 +25,7 @@ public class ModPickaxe extends ModTool implements IModToolEnhanceable
 
     public ModPickaxe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, BlockTags.MINEABLE_WITH_PICKAXE, attackDamage, attackSpeed, properties);
+        super(material, properties.pickaxe(material.getVanillaMaterial(), attackDamage, attackSpeed));
         this.materialProperties = materialProperties;
         this.material = material;
     }

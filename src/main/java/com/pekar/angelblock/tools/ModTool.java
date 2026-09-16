@@ -3,12 +3,10 @@ package com.pekar.angelblock.tools;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.level.block.Block;
 
 import java.util.function.Consumer;
 
@@ -16,10 +14,9 @@ public abstract class ModTool extends Item implements IModTool
 {
     protected final Utils utils = new Utils();
 
-    public ModTool(ModToolMaterial material, TagKey<Block> mineableBlocks, float attackDamage, float attackSpeed, Properties properties)
+    public ModTool(ModToolMaterial material, Properties properties)
     {
-        super(material.getVanillaMaterial().applyToolProperties(material.isFireResistant() ? properties.fireResistant() : properties, mineableBlocks, attackDamage, attackSpeed, /*disableBlockingForSeconds*/ 0));
-        // ToolMaterial#applyToolProperties now takes in a boolean of whether the weapon can disable a blocker (e.g., shield)
+        super(material.isFireResistant() ? properties.fireResistant() : properties);
     }
 
     @Override
