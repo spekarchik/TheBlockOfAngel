@@ -9,6 +9,7 @@ import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -28,9 +29,9 @@ import java.util.function.BiFunction;
 
 public class AncientRod extends MagneticRod
 {
-    public AncientRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
+    public AncientRod(ModToolMaterial material, boolean isMagnetic, TagKey<Block> mineableBlocks, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, isMagnetic, mineableBlocks, properties);
     }
 
     @Override
