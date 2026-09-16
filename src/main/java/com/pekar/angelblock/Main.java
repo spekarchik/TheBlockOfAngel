@@ -9,7 +9,6 @@ import com.pekar.angelblock.items.ItemRegistry;
 import com.pekar.angelblock.loot.LootRegistry;
 import com.pekar.angelblock.menus.MenuRegistry;
 import com.pekar.angelblock.potions.PotionRegistry;
-import com.pekar.angelblock.recipe.RecipeRegistry;
 import com.pekar.angelblock.tab.MainTab;
 import com.pekar.angelblock.tools.ToolRegistry;
 import net.minecraft.core.component.DataComponentType;
@@ -97,7 +96,6 @@ public class Main
         ToolRegistry.initStatic();
         PotionRegistry.initStatic();
 
-        RecipeRegistry.initStatic();
         MenuRegistry.initStatic();
         LootRegistry.initStatic();
     }

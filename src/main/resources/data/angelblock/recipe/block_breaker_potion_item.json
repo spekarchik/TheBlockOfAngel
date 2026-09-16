@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:splash_potion",
+    "potion_contents": {
+      "potion": "minecraft:awkward"
+    }
+  },
+  "reagent": {
+    "item": "minecraft:prismarine_shard"
+  },
+  "output": {
+    "id": "angelblock:block_breaker_potion_item"
+  }
+}
