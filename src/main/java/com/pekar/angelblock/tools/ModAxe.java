@@ -1,24 +1,24 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
+import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.Utils;
-import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
-import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemInstance;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,7 +42,7 @@ public class ModAxe extends ModTool implements IModToolEnhanceable
 
     public ModAxe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, BlockTags.MINEABLE_WITH_AXE, attackDamage, attackSpeed, properties);
+        super(material, properties.axe(material.getVanillaMaterial(), attackDamage, attackSpeed));
         this.materialProperties = materialProperties;
         this.material = material;
     }

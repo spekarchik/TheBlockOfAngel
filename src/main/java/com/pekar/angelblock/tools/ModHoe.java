@@ -12,7 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -46,7 +45,7 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
 
     public ModHoe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, BlockTags.MINEABLE_WITH_HOE, attackDamage, attackSpeed, properties);
+        super(material, properties.hoe(material.getVanillaMaterial(), attackDamage, attackSpeed));
         this.materialProperties = materialProperties;
         this.material = material;
     }

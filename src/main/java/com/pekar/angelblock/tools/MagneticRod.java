@@ -29,9 +29,9 @@ public abstract class MagneticRod extends ModRod
     private static final int NORMAL_USE_EXHAUSTION_MULTIPLIER = 16;
     private static final int MINE_EXHAUSTION_MULTIPLIER = 2;
 
-    public MagneticRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
+    public MagneticRod(ModToolMaterial material, boolean isMagnetic, TagKey<Block> mineableBlocks, Properties properties)
     {
-        super(material, isMagnetic, properties);
+        super(material, isMagnetic, mineableBlocks, properties);
     }
 
     @Override

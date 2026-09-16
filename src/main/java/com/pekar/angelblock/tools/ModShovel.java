@@ -12,7 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -42,7 +41,15 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
 
     static
     {
-        FLATTENABLES = Maps.newHashMap((new ImmutableMap.Builder()).put(Blocks.GRASS_BLOCK, Blocks.DIRT_PATH.defaultBlockState()).put(Blocks.DIRT, Blocks.DIRT_PATH.defaultBlockState()).put(Blocks.PODZOL, Blocks.DIRT_PATH.defaultBlockState()).put(Blocks.COARSE_DIRT, Blocks.DIRT_PATH.defaultBlockState()).put(Blocks.MYCELIUM, Blocks.DIRT_PATH.defaultBlockState()).put(Blocks.ROOTED_DIRT, Blocks.DIRT_PATH.defaultBlockState()).build());
+        FLATTENABLES = Maps.newHashMap((new ImmutableMap.Builder())
+                .put(Blocks.GRASS_BLOCK, Blocks.DIRT_PATH.defaultBlockState())
+                .put(Blocks.DIRT, Blocks.DIRT_PATH.defaultBlockState())
+                .put(Blocks.PODZOL, Blocks.DIRT_PATH.defaultBlockState())
+                .put(Blocks.COARSE_DIRT, Blocks.DIRT_PATH.defaultBlockState())
+                .put(Blocks.MYCELIUM, Blocks.DIRT_PATH.defaultBlockState())
+                .put(Blocks.ROOTED_DIRT, Blocks.DIRT_PATH.defaultBlockState())
+                .put(Blocks.FARMLAND, Blocks.DIRT_PATH.defaultBlockState())
+                .build());
     }
 
     public static ModShovel createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
@@ -52,10 +59,9 @@ public class ModShovel extends ModTool implements IModToolEnhanceable
 
     public ModShovel(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, BlockTags.MINEABLE_WITH_SHOVEL, attackDamage, attackSpeed, properties);
+        super(material, properties.shovel(material.getVanillaMaterial(), attackDamage, attackSpeed));
         this.materialProperties = materialProperties;
         this.material = material;
-        FLATTENABLES.put(Blocks.FARMLAND, Blocks.DIRT_PATH.defaultBlockState());
     }
 
     @Override

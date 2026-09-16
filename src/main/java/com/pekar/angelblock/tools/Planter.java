@@ -31,7 +31,7 @@ public class Planter extends WorkRod
 {
     public Planter(ModToolMaterial material, Properties properties)
     {
-        super(material, properties);
+        super(material, BlockRegistry.MINEABLE_WITH_PLANTER, properties);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Planter extends WorkRod
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
-        if (!level.isClientSide() && blockState.is(BlockRegistry.PLANTER_COMPATIBLE_TO_MINE) && livingEntity instanceof Player player)
+        if (!level.isClientSide() && blockState.is(BlockRegistry.MINEABLE_WITH_PLANTER) && livingEntity instanceof Player player)
         {
             grabPlants(player, level, pos, 3, true); // no tool damage
         }
@@ -93,7 +93,7 @@ public class Planter extends WorkRod
     @Override
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
     {
-        return state.getBlock().defaultBlockState().is(BlockRegistry.PLANTER_COMPATIBLE_TO_MINE);
+        return state.getBlock().defaultBlockState().is(BlockRegistry.MINEABLE_WITH_PLANTER);
     }
 
     @Override
@@ -164,7 +164,7 @@ public class Planter extends WorkRod
 
     private boolean supportsFastGrabbing(BlockState blockState)
     {
-        return blockState.getBlock() instanceof VegetationBlock || blockState.is(BlockRegistry.PLANTER_COMPATIBLE_TO_MINE);
+        return blockState.getBlock() instanceof VegetationBlock || blockState.is(BlockRegistry.MINEABLE_WITH_PLANTER);
     }
 
     protected boolean plantOffHandItems(Player player, Level level, BlockPos clickedPos, Direction facing)

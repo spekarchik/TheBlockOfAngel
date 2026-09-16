@@ -23,7 +23,7 @@ public class TrackLayer extends WorkRod
 {
     public TrackLayer(ModToolMaterial material, Properties properties)
     {
-        super(material, properties);
+        super(material, BlockRegistry.MINEABLE_WITH_TRACK_LAYER, properties);
     }
 
     @Override
@@ -264,7 +264,7 @@ public class TrackLayer extends WorkRod
 
     private boolean isTrackLayerCompatible(BlockState blockState)
     {
-        return blockState.is(BlockRegistry.TRACK_LAYER_COMPATIBLE);
+        return blockState.is(BlockRegistry.MINEABLE_WITH_TRACK_LAYER);
     }
 
     private boolean dropBlock(Player player, Level level, Block originBlock, BlockPos pos, ItemStack toolItemStack, boolean shouldDrop)
