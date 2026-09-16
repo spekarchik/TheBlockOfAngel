@@ -3,12 +3,10 @@
   "criteria": {
     "devil_block": {
       "conditions": {
-        "location": [
-          {
-            "block": "angelblock:devil_block",
-            "condition": "minecraft:block_state_property"
-          }
-        ]
+        "location": {
+          "type": "minecraft:match_block",
+          "blocks": "angelblock:devil_block"
+        }
       },
       "trigger": "minecraft:placed_block"
     }

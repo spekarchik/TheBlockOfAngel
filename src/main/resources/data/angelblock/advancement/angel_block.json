@@ -2,14 +2,6 @@
   "parent": "angelblock:devil_block",
   "criteria": {
     "inactive_angel_block": {
-      "conditions": {
-        "location": [
-          {
-            "block": "angelblock:inactive_angel_block",
-            "condition": "minecraft:block_state_property"
-          }
-        ]
-      },
       "trigger": "minecraft:impossible"
     }
   },
