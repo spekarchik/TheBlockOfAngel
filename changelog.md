@@ -1,3 +1,8 @@
+## 📦 Version 3.10.4-beta
+
+- Now supports Minecraft 26.3
+
+
 ## 📦 Version 3.10.4
 
 - Released as stable following the official NeoForge release for Minecraft 26.2.
