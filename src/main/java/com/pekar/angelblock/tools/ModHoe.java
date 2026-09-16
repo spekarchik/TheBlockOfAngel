@@ -6,13 +6,10 @@ import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
 import com.pekar.angelblock.utils.SoundType;
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,13 +26,9 @@ import net.neoforged.neoforge.common.ItemAbility;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class ModHoe extends ModTool implements IModToolEnhanceable
+public class ModHoe extends ModMiningTool
 {
     private static final int USE_MAGIC_EXHAUSTION_MULTIPLIER = 16;
-
-    protected final IMaterialProperties materialProperties;
-    protected final Utils utils = new Utils();
-    private final ModToolMaterial material;
 
     public static ModHoe createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
@@ -44,9 +37,7 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
 
     public ModHoe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.hoe(material.getVanillaMaterial(), attackDamage, attackSpeed));
-        this.materialProperties = materialProperties;
-        this.material = material;
+        super(material, properties.hoe(material.getVanillaMaterial(), attackDamage, attackSpeed), materialProperties);
     }
 
     @Override
@@ -93,13 +84,6 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
     }
 
     @Override
-    public void setDamage(ItemStack stack, int damage)
-    {
-        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - getCriticalDurability());
-        stack.set(DataComponents.DAMAGE, modifiedDamage);
-    }
-
-    @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility)
     {
         return !hasCriticalDamage(stack) && ItemAbilities.DEFAULT_HOE_ACTIONS.contains(itemAbility);
@@ -140,37 +124,6 @@ public class ModHoe extends ModTool implements IModToolEnhanceable
         }
 
         return false;
-    }
-
-    @Override
-    public boolean isTool()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
-    {
-        return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
-    }
-
-    @Override
-    public ModToolMaterial getMaterial()
-    {
-        return material;
-    }
-
-    @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state)
-    {
-        if (hasCriticalDamage(stack)) return 1F;
-        return super.getDestroySpeed(stack, state);
-    }
-
-    @Override
-    public IMaterialProperties getMaterialProperties()
-    {
-        return materialProperties;
     }
 
     // copied from HoeItem

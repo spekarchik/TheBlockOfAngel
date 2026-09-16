@@ -4,20 +4,12 @@ import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
-import com.pekar.angelblock.utils.Utils;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
 
-public class ModPickaxe extends ModTool implements IModToolEnhanceable
+public class ModPickaxe extends ModMiningTool
 {
-    protected final IMaterialProperties materialProperties;
-    protected final Utils utils = new Utils();
-    private final ModToolMaterial material;
-
     public static ModPickaxe createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         return new ModPickaxe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
@@ -25,47 +17,7 @@ public class ModPickaxe extends ModTool implements IModToolEnhanceable
 
     public ModPickaxe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.pickaxe(material.getVanillaMaterial(), attackDamage, attackSpeed));
-        this.materialProperties = materialProperties;
-        this.material = material;
-    }
-
-    @Override
-    public boolean isTool()
-    {
-        return true;
-    }
-
-    @Override
-    public IMaterialProperties getMaterialProperties()
-    {
-        return materialProperties;
-    }
-
-    @Override
-    public void setDamage(ItemStack stack, int damage)
-    {
-        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - getCriticalDurability());
-        stack.set(DataComponents.DAMAGE, modifiedDamage);
-    }
-
-    @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state)
-    {
-        if (hasCriticalDamage(stack)) return 1F;
-        return super.getDestroySpeed(stack, state);
-    }
-
-    @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
-    {
-        return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
-    }
-
-    @Override
-    public ModToolMaterial getMaterial()
-    {
-        return material;
+        super(material, properties.pickaxe(material.getVanillaMaterial(), attackDamage, attackSpeed), materialProperties);
     }
 
     @Override
