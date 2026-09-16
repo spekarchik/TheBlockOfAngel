@@ -8,6 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,9 +29,9 @@ public abstract class ModRod extends ModTool implements IModTool
     private final boolean isMagnetic;
     private final ModToolMaterial material;
 
-    public ModRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
+    public ModRod(ModToolMaterial material, boolean isMagnetic, TagKey<Block> mineableBlocks, Properties properties)
     {
-        super(material, material.getIncorrectBlocksForDrops(), 0F, -3.0F, properties);
+        super(material, properties.tool(material.getVanillaMaterial(), mineableBlocks, 0F, -3.0F, 0F));
         this.isMagnetic = isMagnetic;
         this.material = material;
     }
