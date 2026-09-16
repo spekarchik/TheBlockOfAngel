@@ -21,10 +21,14 @@ import static com.pekar.angelblock.utils.Resources.createResourceLocation;
 
 public class BlockRegistry
 {
-    public static final TagKey<Block> PLANTER_COMPATIBLE_TO_MINE = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "planter_compatible_to_mine"));
+    public static final TagKey<Block> MINEABLE_WITH_PLANTER = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "mineable/planter"));
     public static final TagKey<Block> PLANTER_COMPATIBLE_TO_PLANT = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "planter_compatible_to_plant"));
     public static final TagKey<Block> REPLACEABLE_BY_PLANTER = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "planter_replaceables"));
-    public static final TagKey<Block> TRACK_LAYER_COMPATIBLE = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "track_layer_compatible"));
+    public static final TagKey<Block> MINEABLE_WITH_TRACK_LAYER = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "mineable/track_layer"));
+    public static final TagKey<Block> MINEABLE_WITH_DEFAULT_ROD = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "mineable/default_rod"));
+    public static final TagKey<Block> MINEABLE_WITH_ANCIENT_ROD = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "mineable/ancient_rod"));
+    public static final TagKey<Block> MINEABLE_WITH_FIRE_ROD = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "mineable/fire_rod"));
+    public static final TagKey<Block> MINEABLE_WITH_END_ROD = TagKey.create(Registries.BLOCK, createResourceLocation(Main.MODID, "mineable/end_rod"));
 
     public static final DeferredBlock<Block> CRACKED_ENDSTONE = register("cracked_endstone_block", CrackedBlock::new, ModBlockItemWithHoverText::new,
             BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.NETHER_BRICKS));

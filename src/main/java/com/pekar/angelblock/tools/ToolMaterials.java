@@ -32,13 +32,13 @@ public class ToolMaterials
     public static final String DIAMITHIC_MATERIAL_NAME = "diamithic";
     public static final String LAPIS_MATERIAL_NAME = "lapis";
     public static final String SUPER_MATERIAL_NAME = "super";
-    public static final String ROD_MATERIAL1_NAME = "rod1";
-    public static final String ROD_MATERIAL2_NAME = "rod2";
-    public static final String ROD_MATERIAL3_NAME = "rod3";
-    public static final String ROD_MATERIAL4_NAME = "rod4";
-    public static final String ROD_MATERIAL5_NAME = "rod5";
-    public static final String ROD_MATERIAL6_NAME = "rod6";
-    public static final String ROD_MATERIAL7_NAME = "rod7";
+    public static final String ANCIENT_ROD_MATERIAL_NAME = "rod1";
+    public static final String MARINE_ROD_MATERIAL_NAME = "rod2";
+    public static final String FIRE_ROD_MATERIAL_NAME = "rod3";
+    public static final String AMETHYST_ROD_MATERIAL_NAME = "rod4";
+    public static final String END_ROD_MATERIAL_NAME = "rod5";
+    public static final String TRACK_LAYER_ROD_MATERIAL_NAME = "rod6";
+    public static final String PLANTER_ROD_MATERIAL_NAME = "rod7";
 
     static final ModToolMaterial RENDELITHIC = new ModToolMaterial(RENDELITHIC_MATERIAL_NAME, BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
             600, 8F, 4.8F, 3, 25, ItemRegistry.RENDELITHIC_INGOT_TAG).fireResistant();
@@ -72,20 +72,20 @@ public class ToolMaterials
 
     static final ModToolMaterial SUPER_SWORD_ENHANCED = SUPER.clone(SUPER_MATERIAL_NAME, 1020);
 
-    static final ModToolMaterial ROD_MATERIAL1 = new ModToolMaterial(ROD_MATERIAL1_NAME, BlockTags.INCORRECT_FOR_WOODEN_TOOL,
-            60, 2.0F, 0F, 0, 1, ItemRegistry.BAMBOO_TAG); // incorrectBlocksForDrops does nothing if you don't use it
+    static final ModToolMaterial ANCIENT_ROD_MATERIAL = new ModToolMaterial(ANCIENT_ROD_MATERIAL_NAME, BlockTags.INCORRECT_FOR_WOODEN_TOOL,
+            60, 2.0F, 0F, 0, 1, ItemRegistry.BAMBOO_TAG); // incorrectBlocksForDrops does nothing for rods if you don't use it
 
-    static final ModToolMaterial ROD_MATERIAL2 = ROD_MATERIAL1.clone(ROD_MATERIAL2_NAME, 120);
+    static final ModToolMaterial MARINE_ROD_MATERIAL = ANCIENT_ROD_MATERIAL.clone(MARINE_ROD_MATERIAL_NAME, 120);
 
-    static final ModToolMaterial ROD_MATERIAL3 = ROD_MATERIAL1.clone(ROD_MATERIAL3_NAME, 200).fireResistant();
+    static final ModToolMaterial FIRE_ROD_MATERIAL = ANCIENT_ROD_MATERIAL.clone(FIRE_ROD_MATERIAL_NAME, 200).fireResistant();
 
-    static final ModToolMaterial ROD_MATERIAL4 = ROD_MATERIAL1.clone(ROD_MATERIAL4_NAME, 500).fireResistant();
+    static final ModToolMaterial AMETHYST_ROD_MATERIAL = ANCIENT_ROD_MATERIAL.clone(AMETHYST_ROD_MATERIAL_NAME, 500).fireResistant();
 
-    static final ModToolMaterial ROD_MATERIAL5 = ROD_MATERIAL1.clone(ROD_MATERIAL5_NAME, 1000).fireResistant();
+    static final ModToolMaterial END_ROD_MATERIAL = ANCIENT_ROD_MATERIAL.clone(END_ROD_MATERIAL_NAME, 1000).fireResistant();
 
-    static final ModToolMaterial ROD_MATERIAL6 = ROD_MATERIAL1.clone(ROD_MATERIAL6_NAME, 2000);
+    static final ModToolMaterial TRACK_LAYER_ROD_MATERIAL = ANCIENT_ROD_MATERIAL.clone(TRACK_LAYER_ROD_MATERIAL_NAME, 2000);
 
-    static final ModToolMaterial ROD_MATERIAL7 = ROD_MATERIAL1.clone(ROD_MATERIAL7_NAME, 5000);
+    static final ModToolMaterial PLANTER_ROD_MATERIAL = ANCIENT_ROD_MATERIAL.clone(PLANTER_ROD_MATERIAL_NAME, 5000);
 
 //    static final Tier RENDELITHIC = EnumHelper
 //            .addToolMaterial("materialext:rendelithic_tool", 3, 2200, 7, 3, 15)
