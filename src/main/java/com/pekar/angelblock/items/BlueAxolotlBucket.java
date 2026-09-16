@@ -3,7 +3,6 @@ package com.pekar.angelblock.items;
 import com.pekar.angelblock.mixins.AxolotlAccessor;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -46,7 +45,7 @@ public class BlueAxolotlBucket extends ModItem implements ITooltipProvider
                 axolotl.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
                 ((AxolotlAccessor)axolotl).invokeSetVariant(Axolotl.Variant.BLUE);
                 axolotl.setBaby(true);
-                axolotl.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(new BlockPos(pos)), EntitySpawnReason.BUCKET, null);
+                axolotl.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(pos), EntitySpawnReason.BUCKET, null);
                 var result = serverLevel.addFreshEntity(axolotl);
 
                 if (result)
