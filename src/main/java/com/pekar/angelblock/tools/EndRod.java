@@ -18,6 +18,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -119,7 +120,7 @@ public class EndRod extends AmethystRod
             }
             else
             {
-                player.swing(interactionHand);
+                player.swing(interactionHand, SwingAnimation.DEFAULT, false);
             }
 
             return InteractionResult.CONSUME;
@@ -135,7 +136,7 @@ public class EndRod extends AmethystRod
             }
             else
             {
-                player.swing(interactionHand);
+                player.swing(interactionHand, SwingAnimation.DEFAULT, false);
             }
 
             return InteractionResult.CONSUME;
@@ -151,7 +152,7 @@ public class EndRod extends AmethystRod
             }
             else
             {
-                player.swing(interactionHand);
+                player.swing(interactionHand, SwingAnimation.DEFAULT, false);
             }
 
             return InteractionResult.CONSUME;

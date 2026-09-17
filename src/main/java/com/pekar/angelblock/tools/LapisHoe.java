@@ -35,7 +35,7 @@ public class LapisHoe extends EnhancedHoe
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
 
-            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL);
+            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL.value());
 
             return true;
         }
@@ -51,7 +51,7 @@ public class LapisHoe extends EnhancedHoe
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
 
-            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL);
+            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL.value());
 
             return true;
         }

@@ -21,6 +21,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -371,13 +372,13 @@ public class Planter extends WorkRod
         int itemCount = itemStack.getCount();
         if (itemCount < 1) return false;
 
-        if (bonemealableBlock.isValidBonemealTarget(level, posToBonemeal, blockStateAtPosToBonemeal))
+        if (bonemealableBlock.isValidBonemealTarget(level, posToBonemeal, blockStateAtPosToBonemeal, BonemealSource.INTERACTION))
         {
             if (!level.isClientSide())
             {
-                bonemealableBlock.performBonemeal((ServerLevel) level, level.getRandom(), posToBonemeal, blockStateAtPosToBonemeal);
+                bonemealableBlock.performBonemeal((ServerLevel) level, level.getRandom(), posToBonemeal, blockStateAtPosToBonemeal, BonemealSource.INTERACTION);
 
-                if (bonemealableBlock.isBonemealSuccess(level, level.getRandom(), posToBonemeal, blockStateAtPosToBonemeal))
+                if (bonemealableBlock.isBonemealSuccess(level, level.getRandom(), posToBonemeal, blockStateAtPosToBonemeal, BonemealSource.INTERACTION))
                 {
                     damageMainHandItemIfSurvivalIgnoreClient(player, level);
 
