@@ -1,6 +1,5 @@
 package com.pekar.angelblock.tools;
 
-import com.mojang.datafixers.util.Pair;
 import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
@@ -9,23 +8,14 @@ import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
-
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class ModHoe extends ModMiningTool
 {
@@ -44,7 +34,7 @@ public class ModHoe extends ModMiningTool
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
-        var result = useOnBasic(context);
+        var result = super.useOn(context);
         if (result == InteractionResult.FAIL) return result;
 
         var player = context.getPlayer();
@@ -85,12 +75,6 @@ public class ModHoe extends ModMiningTool
     }
 
     @Override
-    public boolean canPerformAction(ItemInstance itemInstance, ItemAbility itemAbility)
-    {
-        return !hasCriticalDamage(itemInstance) && ItemAbilities.DEFAULT_HOE_ACTIONS.contains(itemAbility);
-    }
-
-    @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
         if (!utils.text.showExtendedDescription(tooltip, flag)) return;
@@ -119,59 +103,11 @@ public class ModHoe extends ModMiningTool
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
             }
 
-            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL);
+            utils.sound.playSoundByBlock(player, pos, SoundEvents.HOE_TILL.value());
 
             return true;
         }
 
         return false;
-    }
-
-    // copied from HoeItem
-    private InteractionResult useOnBasic(UseOnContext context)
-    {
-        Level level = context.getLevel();
-        BlockPos blockpos = context.getClickedPos();
-        BlockState toolModifiedState = level.getBlockState(blockpos).getToolModifiedState(context, ItemAbilities.HOE_TILL, false);
-        Pair<Predicate<UseOnContext>, Consumer<UseOnContext>> pair = toolModifiedState == null ? null : Pair.of((Predicate) (ctx) -> true, changeIntoState(toolModifiedState));
-        if (pair == null)
-        {
-            return InteractionResult.PASS;
-        }
-        else
-        {
-            Predicate<UseOnContext> predicate = (Predicate) pair.getFirst();
-            Consumer<UseOnContext> consumer = (Consumer) pair.getSecond();
-            if (predicate.test(context))
-            {
-                Player player = context.getPlayer();
-                level.playSound(player, blockpos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-                if (!level.isClientSide())
-                {
-                    consumer.accept(context);
-                    if (player != null)
-                    {
-                        var slot = context.getHand() == net.minecraft.world.InteractionHand.MAIN_HAND ? net.minecraft.world.entity.EquipmentSlot.MAINHAND : net.minecraft.world.entity.EquipmentSlot.OFFHAND;
-                        context.getItemInHand().hurtAndBreak(1, player, slot);
-                    }
-                }
-
-                return InteractionResult.SUCCESS;
-            }
-            else
-            {
-                return InteractionResult.PASS;
-            }
-        }
-    }
-
-    // copied from HoeItem
-    private static Consumer<UseOnContext> changeIntoState(BlockState state)
-    {
-        return (context) ->
-        {
-            context.getLevel().setBlock(context.getClickedPos(), state, 11);
-            context.getLevel().gameEvent(GameEvent.BLOCK_CHANGE, context.getClickedPos(), GameEvent.Context.of(context.getPlayer(), state));
-        };
     }
 }

@@ -4,28 +4,8 @@ import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
-import net.minecraft.advancements.triggers.CriteriaTriggers;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class ModAxe extends ModMiningTool
 {
@@ -39,50 +19,6 @@ public class ModAxe extends ModMiningTool
         super(material, properties.axe(material.getVanillaMaterial(), attackDamage, attackSpeed), materialProperties);
     }
 
-    // copied from AxeItem
-    public InteractionResult useOn(UseOnContext context)
-    {
-        Level level = context.getLevel();
-        BlockPos blockpos = context.getClickedPos();
-        Player player = context.getPlayer();
-        if (playerHasBlockingItemUseIntent(context))
-        {
-            return InteractionResult.PASS;
-        }
-        else
-        {
-            Optional<BlockState> optional = this.evaluateNewBlockState(level, blockpos, player, level.getBlockState(blockpos), context);
-            if (optional.isEmpty())
-            {
-                return InteractionResult.PASS;
-            }
-            else
-            {
-                ItemStack itemstack = context.getItemInHand();
-                if (player instanceof ServerPlayer)
-                {
-                    CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockpos, itemstack);
-                }
-
-                level.setBlock(blockpos, (BlockState) optional.get(), 11);
-                level.gameEvent(GameEvent.BLOCK_CHANGE, blockpos, GameEvent.Context.of(player, (BlockState) optional.get()));
-                if (player != null)
-                {
-                    var slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-                    itemstack.hurtAndBreak(1, player, slot);
-                }
-
-                return InteractionResult.SUCCESS;
-            }
-        }
-    }
-
-    @Override
-    public boolean canPerformAction(ItemInstance itemInstance, ItemAbility itemAbility)
-    {
-        return !hasCriticalDamage(itemInstance) && ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility);
-    }
-
     @Override
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
@@ -93,46 +29,6 @@ public class ModAxe extends ModMiningTool
         for (int i = 0; i <= 3; i++)
         {
             tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.DarkGray, i >= 1 && i <= 2).apply();
-        }
-    }
-
-    private static boolean playerHasBlockingItemUseIntent(UseOnContext context)
-    {
-        Player player = context.getPlayer();
-        return context.getHand().equals(InteractionHand.MAIN_HAND) && player.getOffhandItem().has(DataComponents.BLOCKS_ATTACKS) && !player.isSecondaryUseActive();
-    }
-
-    private Optional<BlockState> evaluateNewBlockState(Level level, BlockPos pos, @Nullable Player player, BlockState state, UseOnContext context)
-    {
-        Optional<BlockState> optional = Optional.ofNullable(state.getToolModifiedState(context, ItemAbilities.AXE_STRIP, false));
-        if (optional.isPresent())
-        {
-            level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return optional;
-        }
-        else
-        {
-            Optional<BlockState> optional1 = Optional.ofNullable(state.getToolModifiedState(context, ItemAbilities.AXE_SCRAPE, false));
-            if (optional1.isPresent())
-            {
-                level.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                level.levelEvent(player, 3005, pos, 0);
-                return optional1;
-            }
-            else
-            {
-                Optional<BlockState> optional2 = Optional.ofNullable(state.getToolModifiedState(context, ItemAbilities.AXE_WAX_OFF, false));
-                if (optional2.isPresent())
-                {
-                    level.playSound(player, pos, SoundEvents.AXE_WAX_OFF, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    level.levelEvent(player, 3004, pos, 0);
-                    return optional2;
-                }
-                else
-                {
-                    return Optional.empty();
-                }
-            }
         }
     }
 }
