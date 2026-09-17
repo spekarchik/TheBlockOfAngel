@@ -1,5 +1,5 @@
 {
-  "asset_name": "bios_diamond",
+  "palette_id": "angelblock:trim/bios_diamond",
   "description": {
     "color": "#6EECB2",
     "translate": "trim_material.angelblock.bios_diamond"
