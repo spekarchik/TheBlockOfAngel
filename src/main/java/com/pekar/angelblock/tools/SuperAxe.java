@@ -1,14 +1,10 @@
 package com.pekar.angelblock.tools;
 
-import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.properties.SuperAxeProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -20,12 +16,17 @@ public class SuperAxe extends EnhancedAxe
     }
 
     @Override
-    public float getDestroySpeed(ItemStack itemStack, BlockState blockState)
+    protected boolean supportsVerticalMining()
     {
-        if (hasCriticalDamage(itemStack)) return 1F;
+        return true;
+    }
 
-        if (blockState.getBlock() == Blocks.CACTUS) return 12.0F;
-        return super.getDestroySpeed(itemStack, blockState);
+    @Override
+    public float getDestroySpeed(ItemStack tool, BlockState blockState)
+    {
+        if (hasCriticalDamage(tool)) return 1F;
+        if (blockState.getBlock() == Blocks.CACTUS) return 12F;
+        return super.getDestroySpeed(tool, blockState);
     }
 
     @Override
@@ -43,40 +44,5 @@ public class SuperAxe extends EnhancedAxe
                     .styledAs(TextStyle.DarkGray, i >= 9 && i <= 10)
                     .apply();
         }
-    }
-
-    @Override
-    protected void mineAdditionalBlocks(ItemStack itemStack, Level level, BlockPos pos, LivingEntity entityLiving)
-    {
-        if (!isEnhanced() || !entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
-            return;
-
-        BlockState blockState = level.getBlockState(pos);
-        var block = blockState.getBlock();
-
-        if (!isToolEffective(entityLiving, pos) /*&& !isCompatiblePlant(block)*/)
-            return;
-
-        if (isCorrectToolForDrops(itemStack, blockState) && !isCompatiblePlant(itemStack, blockState))
-        {
-            int increment = 1;
-            while (canProceed(entityLiving, pos.above(increment)))
-            {
-                onBlockMining(itemStack, level, pos.above(increment++), block, entityLiving);
-            }
-
-            increment = 1;
-            while (canProceed(entityLiving, pos.below(increment)))
-            {
-                onBlockMining(itemStack, level, pos.below(increment++), block, entityLiving);
-            }
-        }
-
-        super.mineAdditionalBlocks(itemStack, level, pos, entityLiving);
-    }
-
-    private boolean canProceed(LivingEntity entityLiving, BlockPos pos)
-    {
-        return !entityLiving.level().isEmptyBlock(pos) && isToolEffective(entityLiving, pos);
     }
 }

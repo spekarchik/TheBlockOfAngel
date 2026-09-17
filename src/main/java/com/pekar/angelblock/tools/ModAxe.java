@@ -4,18 +4,17 @@ import com.pekar.angelblock.tools.properties.DefaultMaterialProperties;
 import com.pekar.angelblock.tools.properties.IMaterialProperties;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
@@ -28,12 +27,8 @@ import net.neoforged.neoforge.common.ItemAbility;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class ModAxe extends ModTool implements IModToolEnhanceable
+public class ModAxe extends ModMiningTool
 {
-    protected final IMaterialProperties materialProperties;
-    protected final Utils utils = new Utils();
-    private final ModToolMaterial material;
-
     public static ModAxe createPrimary(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties)
     {
         return new ModAxe(material, attackDamage, attackSpeed, properties, new DefaultMaterialProperties());
@@ -41,9 +36,7 @@ public class ModAxe extends ModTool implements IModToolEnhanceable
 
     public ModAxe(ModToolMaterial material, float attackDamage, float attackSpeed, Properties properties, IMaterialProperties materialProperties)
     {
-        super(material, properties.axe(material.getVanillaMaterial(), attackDamage, attackSpeed));
-        this.materialProperties = materialProperties;
-        this.material = material;
+        super(material, properties.axe(material.getVanillaMaterial(), attackDamage, attackSpeed), materialProperties);
     }
 
     // copied from AxeItem
@@ -82,44 +75,6 @@ public class ModAxe extends ModTool implements IModToolEnhanceable
                 return InteractionResult.SUCCESS;
             }
         }
-    }
-
-    @Override
-    public boolean isTool()
-    {
-        return true;
-    }
-
-    @Override
-    public IMaterialProperties getMaterialProperties()
-    {
-        return materialProperties;
-    }
-
-    @Override
-    public void setDamage(ItemStack stack, int damage)
-    {
-        var modifiedDamage = Mth.clamp(damage, 0, stack.getMaxDamage() - getCriticalDurability());
-        stack.set(DataComponents.DAMAGE, modifiedDamage);
-    }
-
-    @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state)
-    {
-        return !hasCriticalDamage(stack) && super.isCorrectToolForDrops(stack, state);
-    }
-
-    @Override
-    public ModToolMaterial getMaterial()
-    {
-        return material;
-    }
-
-    @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state)
-    {
-        if (hasCriticalDamage(stack)) return 1F;
-        return super.getDestroySpeed(stack, state);
     }
 
     @Override
