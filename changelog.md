@@ -1,4 +1,4 @@
-## 📦 Version 3.10.5-beta
+## 📦 Version 3.10.5-alpha
 
 - Now supports Minecraft 26.3
 
