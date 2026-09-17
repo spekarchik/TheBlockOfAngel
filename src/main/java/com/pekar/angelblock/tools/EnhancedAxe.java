@@ -30,7 +30,7 @@ public class EnhancedAxe extends ModAxe
         return super.mineBlock(itemStack, level, blockState, pos, livingEntity);
     }
 
-    protected void mineAdditionalBlocks(ItemStack itemStack, Level level, BlockPos pos, LivingEntity entityLiving)
+    protected void mineAdditionalBlocks(ItemStack tool, Level level, BlockPos pos, LivingEntity entityLiving)
     {
         if (!entityLiving.hasEffect(PotionRegistry.TOOL_ADVANCED_MODE_EFFECT))
             return;
@@ -39,6 +39,12 @@ public class EnhancedAxe extends ModAxe
         var block = blockState.getBlock();
         if (!isToolEffective(entityLiving, pos)) return;
 
+        if (supportsVerticalMining() && isCorrectToolForDrops(tool, blockState) && !isCompatiblePlant(tool, blockState))
+        {
+            mineVerticalBlocks(tool, level, pos, entityLiving, block);
+        }
+
+        if (!shouldMineAdditionalBlocksAround(tool, blockState)) return;
         if (canNotBeMinedInGroup(blockState)) return;
 
         final int posX = pos.getX(), posY = pos.getY(), posZ = pos.getZ();
@@ -48,16 +54,26 @@ public class EnhancedAxe extends ModAxe
                 for (int z = posZ - 1; z <= posZ + 1; z++)
                 {
                     if (x == posX && y == posY && z == posZ) continue;
-                    onBlockMining(itemStack, level, new BlockPos(x, y, z), block, entityLiving);
+                    onBlockMining(tool, level, new BlockPos(x, y, z), block, entityLiving);
                 }
     }
 
-    protected final boolean isCompatiblePlant(ItemStack itemStack, BlockState blockState)
+    protected boolean supportsVerticalMining()
     {
-        return isCorrectToolForDrops(itemStack, blockState) && blockState.getBlock() instanceof VegetationBlock;
+        return false;
     }
 
-    protected void onBlockMining(ItemStack itemStack, Level level, BlockPos pos, Block originBlock, LivingEntity entityLiving)
+    protected boolean shouldMineAdditionalBlocksAround(ItemStack itemStack, BlockState blockState)
+    {
+        return true;
+    }
+
+    protected final boolean isCompatiblePlant(ItemStack tool, BlockState blockState)
+    {
+        return isCorrectToolForDrops(tool, blockState) && blockState.getBlock() instanceof VegetationBlock;
+    }
+
+    protected void onBlockMining(ItemStack tool, Level level, BlockPos pos, Block originBlock, LivingEntity entityLiving)
     {
         var blockState = level.getBlockState(pos);
         var block = blockState.getBlock();
@@ -74,6 +90,26 @@ public class EnhancedAxe extends ModAxe
             if (utils.player.destroyBlockByMainHandTool(level, pos, entityLiving, blockState))
                 damageMainHandItem(1, entityLiving);
         }
+    }
+
+    private void mineVerticalBlocks(ItemStack tool, Level level, BlockPos pos, LivingEntity entityLiving, Block originBlock)
+    {
+        int increment = 1;
+        while (canProceed(entityLiving, pos.above(increment)))
+        {
+            onBlockMining(tool, level, pos.above(increment++), originBlock, entityLiving);
+        }
+
+        increment = 1;
+        while (canProceed(entityLiving, pos.below(increment)))
+        {
+            onBlockMining(tool, level, pos.below(increment++), originBlock, entityLiving);
+        }
+    }
+
+    private boolean canProceed(LivingEntity entityLiving, BlockPos pos)
+    {
+        return !entityLiving.level().isEmptyBlock(pos) && isToolEffective(entityLiving, pos);
     }
 
     private boolean canNotBeMinedInGroup(BlockState blockState)
