@@ -1,6 +1,9 @@
-## 📦 Version 3.10.4-beta
+## 📦 Version 3.10.5-beta
 
 - Now supports Minecraft 26.3
+
+### ⚙️ Updated
+- **Green Diamond Ore** now has the same mining speed as vanilla **Diamond Ore**.
 
 
 ## 📦 Version 3.10.4
