@@ -1,61 +1,35 @@
 {
   "type": "minecraft:block",
-  "pools":
-  [
+  "pools": [
     {
       "rolls": 1.0,
-      "bonus_rolls": 0.0,
-      "entries":
-      [
+      "entries": [
         {
           "type": "minecraft:alternatives",
-          "children":
-          [
+          "children": [
             {
               "type": "minecraft:item",
-              "conditions":
-              [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate":
-                  {
-                    "predicates":
-                    {
-                      "minecraft:enchantments":
-                      [
-                        {
-                          "enchantments": "minecraft:silk_touch",
-                          "levels":
-                          {
-                            "min": 1
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              ],
-              "name": "angelblock:green_diamond_ore"
+              "name": "angelblock:green_diamond_ore",
+              "condition": "minecraft:tool/can_silk_touch"
             },
             {
               "type": "minecraft:item",
-              "functions":
-              [
+              "name": "angelblock:bios_diamond",
+              "modifier": [
                 {
-                  "function": "minecraft:set_count",
                   "count": 1.0,
-                  "add": false
+                  "add": false,
+                  "type": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:apply_bonus",
                   "enchantment": "minecraft:fortune",
                   "formula": "minecraft:uniform_bonus_count",
                   "parameters": {
                     "bonusMultiplier": 1.0
-                  }
+                  },
+                  "type": "minecraft:apply_bonus"
                 }
-              ],
-              "name": "angelblock:bios_diamond"
+              ]
             }
           ]
         }

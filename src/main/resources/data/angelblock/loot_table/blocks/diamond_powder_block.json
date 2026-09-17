@@ -1,17 +1,15 @@
 {
   "type": "minecraft:block",
-  "pools":
-  [
+  "pools": [
     {
       "rolls": 1.0,
-      "bonus_rolls": 0.0,
-		"entries": [
-			{
-				"type": "minecraft:item",
-				"name": "angelblock:diamond_powder_block"
-			}
-		]
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "angelblock:diamond_powder_block"
+        }
+      ]
     }
   ],
-	"random_sequence": "angelblock:blocks/diamond_powder_block"
+  "random_sequence": "angelblock:blocks/diamond_powder_block"
 }
