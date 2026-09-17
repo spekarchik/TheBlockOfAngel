@@ -3,7 +3,7 @@
   "input": {
     "item": "minecraft:potion",
     "potion_contents": {
-      "potion": "minecraft:slow_falling"
+      "potions": "minecraft:slow_falling"
     }
   },
   "reagent": {

@@ -3,7 +3,7 @@
   "input": {
     "item": "minecraft:splash_potion",
     "potion_contents": {
-      "potion": "minecraft:awkward"
+      "potions": "minecraft:awkward"
     }
   },
   "reagent": {
