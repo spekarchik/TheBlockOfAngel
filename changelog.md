@@ -1,3 +1,9 @@
+## 📦 Version 3.10.5
+
+### ⚙️ Updated
+- **Green Diamond Ore** now has the same mining speed as vanilla **Diamond Ore**.
+
+
 ## 📦 Version 3.10.4
 
 - Released as stable following the official NeoForge release for Minecraft 26.2.
