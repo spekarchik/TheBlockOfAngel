@@ -95,7 +95,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> MINER_FIGURE = Main.ITEMS.registerItem("miner_figure", MinerFigure::new);
     public static final DeferredItem<Item> ANCIENT_CANINE = Main.ITEMS.registerItem("ancient_canine", p -> new ModItemWithHoverText(TextStyle.Notice, p));
     public static final DeferredItem<Item> EVOKER_AMULET = Main.ITEMS.registerItem("evoker_amulet", EvokerAmulet::new);
-    public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.registerItem("ancient_scroll", p -> new ModItemWithHoverText(TextStyle.Notice, p));
+    public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.registerItem("ancient_scroll", ModItemWithDoubleHoverText::new);
     public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.registerItem("blue_axolotl_bucket", BlueAxolotlBucket::new, p -> p.rarity(Rarity.EPIC).stacksTo(1));
     public static final DeferredItem<Item> ROD_SENSOR = Main.ITEMS.registerItem("rod_sensor", ModItem::new, Item.Properties::fireResistant);
 
