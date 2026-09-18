@@ -6,7 +6,8 @@
   "mixins": [
     "AxolotlAccessor",
     "AxolotlMixin",
-    "PowderSnowBlockMixin"
+    "PowderSnowBlockMixin",
+    "VillagerAncientScrollMixin"
   ],
   "client": [],
   "injectors": {
