@@ -1,3 +1,9 @@
+## 📦 Version 3.10.5
+
+### ⚙️ Updated
+- **Green Diamond Ore** now has the same mining speed as vanilla **Diamond Ore**.
+
+
 ## 📦 Version 3.10.1
 
 ### 🐞 Fixed
