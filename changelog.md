@@ -1,9 +1,13 @@
-## 📦 Version 3.10.5-alpha
+## 📦 Version 3.11.0-beta **Wisdom Update**
 
-- Now supports Minecraft 26.3
+### ✨ New
+- **Ancient Scrolls** can now be given to *Nitwits*. After reading a scroll, they become *Unemployed* villagers and can learn professions.
 
-### ⚙️ Updated
+### 📝 Improvements
 - **Green Diamond Ore** now has the same mining speed as vanilla **Diamond Ore**.
+
+### 🐞 Fixed
+- Fixed modded axes not disabling shields like vanilla axes.
 
 
 ## 📦 Version 3.10.4
