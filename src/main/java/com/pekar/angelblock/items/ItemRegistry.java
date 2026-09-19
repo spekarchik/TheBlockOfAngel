@@ -76,7 +76,7 @@ public class ItemRegistry
     public static final DeferredItem<Item> ANCIENT_CANINE = Main.ITEMS.register("ancient_canine", () -> new ModItemWithHoverText(TextStyle.Notice));
     public static final DeferredItem<Item> EVOKER_AMULET = Main.ITEMS.register("evoker_amulet", EvokerAmulet::new);
 //    public static final DeferredItem<Item> NETHER_BARS = Main.ITEMS.registerItem("nether_bars", p -> new ModItemWithHoverText(TextStyle.Notice, p));
-    public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.register("ancient_scroll", () -> new ModItemWithHoverText(TextStyle.Notice));
+    public static final DeferredItem<Item> ANCIENT_SCROLL = Main.ITEMS.register("ancient_scroll", () -> new ModItemWithDoubleHoverText());
     public static final DeferredItem<Item> BLUE_AXOLOTL_BUCKET = Main.ITEMS.register("blue_axolotl_bucket", BlueAxolotlBucket::new);
 
     public static final DeferredItem<Item> BLOCK_BREAKER_POTION_ITEM = Main.ITEMS.register("block_breaker_potion_item", BlockBreakerPotionItem::new);
