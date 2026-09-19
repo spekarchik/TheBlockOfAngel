@@ -1,4 +1,4 @@
-## 📦 Version 3.11.0 (The Enlightenment Update)
+## 📦 Version 3.11.1 (The Enlightenment Update)
 
 ### ✨ New
 - **Ancient Scrolls** can now be given to *Nitwits*. After reading a scroll, they become *Unemployed* villagers and can learn professions.
@@ -9,6 +9,7 @@
 
 ### 🐞 Fixed
 - Fixed modded axes not disabling shields like vanilla axes.
+- Fixed a spelling mistake in an advancement description (en_us).
 
 
 ## 📦 Version 3.10.1
