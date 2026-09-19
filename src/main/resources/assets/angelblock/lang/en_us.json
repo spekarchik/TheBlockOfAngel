@@ -1647,6 +1647,8 @@
   "advancements.angelblock.enhanced_sword.description": "It no longer just cuts — it answers your will.\n§7Enhance a sword using a crystal.",
   "advancements.angelblock.enhanced_tool.title": "Expanded Reach",
   "advancements.angelblock.enhanced_tool.description": "The world no longer yields block by block — it retreats in leaps.\n§7Enhance a tool using a crystal.",
+  "advancements.angelblock.educate_nitwit.title": "There Is Hope!",
+  "advancements.angelblock.educate_nitwit.description": "Educate a Nitwit using an Ancient Scroll.",
 
   "trim_material.angelblock.bios_diamond": "Green Diamond Material",
   "container.custom_smithing": "Upgrade/Downgrade Gear",

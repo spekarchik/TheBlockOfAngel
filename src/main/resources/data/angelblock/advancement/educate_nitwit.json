@@ -1,0 +1,27 @@
+{
+  "parent": "angelblock:root",
+  "criteria": {
+    "educate_nitwit": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.educate_nitwit.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:ancient_scroll"
+    },
+    "title": {
+      "translate": "advancements.angelblock.educate_nitwit.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["educate_nitwit"]
+  ],
+  "sends_telemetry_event": false
+}

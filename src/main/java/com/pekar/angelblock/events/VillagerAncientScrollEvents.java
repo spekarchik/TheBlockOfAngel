@@ -1,9 +1,11 @@
 package com.pekar.angelblock.events;
 
 import com.pekar.angelblock.items.ItemRegistry;
+import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -17,6 +19,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.Map;
+import java.util.UUID;
 import java.util.WeakHashMap;
 
 /** Handles the timed part of a nitwit reading an ancient scroll. */
@@ -38,10 +41,10 @@ public class VillagerAncientScrollEvents implements IEventHandler
     }
 
     /** Claims the first scroll immediately, before vanilla can process another item entity. */
-    public static void beginReading(Villager villager, ItemStack scroll)
+    public static void beginReading(Villager villager, ItemStack scroll, UUID educatorId)
     {
         scroll.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
-        READING_STATES.put(villager, new ReadingState(READING_TIME_TICKS, scroll));
+        READING_STATES.put(villager, new ReadingState(READING_TIME_TICKS, scroll, educatorId));
         villager.setCanPickUpLoot(false);
     }
 
@@ -103,7 +106,7 @@ public class VillagerAncientScrollEvents implements IEventHandler
                     || villager.getVillagerData().getProfession() != VillagerProfession.NITWIT) return;
 
             ItemStack scroll = villager.getMainHandItem();
-            beginReading(villager, scroll);
+            beginReading(villager, scroll, null);
             readingState = READING_STATES.get(villager);
         }
 
@@ -114,7 +117,7 @@ public class VillagerAncientScrollEvents implements IEventHandler
         if (ticksRemaining <= 1)
         {
             READING_STATES.remove(villager);
-            finishReading(serverLevel, villager, readingState.scroll());
+            finishReading(serverLevel, villager, readingState);
         }
         else
         {
@@ -146,13 +149,22 @@ public class VillagerAncientScrollEvents implements IEventHandler
         return villager.getMainHandItem().is(ItemRegistry.ANCIENT_SCROLL.get());
     }
 
-    private static void finishReading(ServerLevel level, Villager villager, ItemStack ownedScroll)
+    private static void finishReading(ServerLevel level, Villager villager, ReadingState readingState)
     {
-        ItemStack scroll = takeScrollFromHand(villager, ownedScroll);
+        ItemStack scroll = takeScrollFromHand(villager, readingState.scroll());
 
         villager.setVillagerData(villager.getVillagerData().setProfession(VillagerProfession.NONE));
         villager.refreshBrain(level);
         villager.setCanPickUpLoot(true);
+
+        if (readingState.educatorId() != null)
+        {
+            ServerPlayer educator = level.getServer().getPlayerList().getPlayer(readingState.educatorId());
+            if (educator != null)
+            {
+                Utils.instance.player.awardAdvancement(educator, level, "educate_nitwit", "educate_nitwit");
+            }
+        }
 
         throwScroll(villager, scroll);
     }
@@ -216,11 +228,11 @@ public class VillagerAncientScrollEvents implements IEventHandler
         }
     }
 
-    private record ReadingState(int ticksRemaining, ItemStack scroll)
+    private record ReadingState(int ticksRemaining, ItemStack scroll, UUID educatorId)
     {
         private ReadingState withTicksRemaining(int ticks)
         {
-            return new ReadingState(ticks, scroll);
+            return new ReadingState(ticks, scroll, educatorId);
         }
     }
 }

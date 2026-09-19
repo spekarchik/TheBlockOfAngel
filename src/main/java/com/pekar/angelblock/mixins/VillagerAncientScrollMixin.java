@@ -2,6 +2,8 @@ package com.pekar.angelblock.mixins;
 
 import com.pekar.angelblock.events.VillagerAncientScrollEvents;
 import com.pekar.angelblock.items.ItemRegistry;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -45,6 +47,7 @@ public abstract class VillagerAncientScrollMixin extends AbstractVillager
         ci.cancel();
         if (!VillagerAncientScrollEvents.canStartReading(villager)) return;
 
+        Entity itemOwner = itemEntity.getOwner();
         ItemStack scroll = droppedStack.copyWithCount(1);
         this.onItemPickup(itemEntity);
         this.take(itemEntity, 1);
@@ -56,6 +59,10 @@ public abstract class VillagerAncientScrollMixin extends AbstractVillager
         }
 
         this.setItemSlot(EquipmentSlot.MAINHAND, scroll);
-        VillagerAncientScrollEvents.beginReading(villager, scroll);
+        VillagerAncientScrollEvents.beginReading(
+                villager,
+                scroll,
+                itemOwner instanceof ServerPlayer player ? player.getUUID() : null
+        );
     }
 }
