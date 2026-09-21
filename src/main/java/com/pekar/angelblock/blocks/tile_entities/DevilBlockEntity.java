@@ -5,12 +5,14 @@ import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
 import com.pekar.angelblock.events.ILivingDeathEventHandler;
 import com.pekar.angelblock.events.PlayerInteractionEvents;
-import com.pekar.angelblock.utils.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
@@ -111,7 +113,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
             if (pos == null) continue;
 
-            Utils.instance.sound.playSoundByBlock(player, getBlockPos(), SoundEvents.DRIPSTONE_BLOCK_PLACE);
+            level.playSound(null, getBlockPos(), SoundEvents.APPLY_EFFECT_TRIAL_OMEN, SoundSource.BLOCKS);
 
             if (level.isClientSide() || !(getLevel() instanceof ServerLevel serverLevel))
                 return true;
@@ -123,12 +125,28 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
             var entityType = monster.getEntityType();
             var entity = entityType.spawn(serverLevel, interactionHandItemStack, player, pos, EntitySpawnReason.SPAWNER, true, true);
             if (entity != null)
+            {
                 chunk.addEntity(entity);
+                playSpawnEffects(serverLevel, entity);
+            }
 
             return true;
         }
 
         return false;
+    }
+
+    private void playSpawnEffects(ServerLevel level, Entity entity)
+    {
+        level.sendParticles(
+                ParticleTypes.PORTAL,
+                entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(),
+                50, 0.5, 1, 0.5, 0.1
+        );
+        level.playSound(
+                null, entity.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE,
+                1.0F, 1.0F
+        );
     }
 
     @Override

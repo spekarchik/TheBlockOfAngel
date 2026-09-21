@@ -8,6 +8,9 @@
 - **Illusioners** can now be summoned by using **Amethyst Shard** on **The Block of Devil**.
 - The **Diamite Enhanced Sword** and **Superyte Enhanced Sword** now have an anvil attack: while **Explosion Mode** is active, use the sword while sneaking to rain temporary anvils beyond the target.
 
+### 📝 Improvements
+- Monsters summoned by **The Block of Devil** now appear with portal particles and a teleport sound.
+
 
 ## 📦 Version 3.11.0-beta (The Enlightenment Update)
 
