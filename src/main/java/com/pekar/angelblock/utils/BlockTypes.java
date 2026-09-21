@@ -109,6 +109,13 @@ public class BlockTypes
         return blockState.is(Blocks.GRASS_BLOCK) || blockState.is(Blocks.DIRT_PATH) || blockState.is(Blocks.DIRT);
     }
 
+    public boolean isSafeGroundBlock(Level level, BlockPos pos)
+    {
+        var state = level.getBlockState(pos);
+        return (state.isCollisionShapeFullBlock(level, pos) || state.is(Blocks.SOUL_SAND) || state.is(Blocks.DIRT_PATH))
+                && !state.is(Blocks.MAGMA_BLOCK);
+    }
+
     public Block getDestroyingWoolBlock(Block block)
     {
         if (block == Blocks.WHITE_WOOL)
