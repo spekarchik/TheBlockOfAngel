@@ -58,7 +58,8 @@ public abstract class Cleaner
         {
             var target = iterator.next();
 
-            if (target.getOwner().getUUID().equals(player.getUUID()))
+            var owner = target.getOwner();
+            if (owner != null && owner.getUUID().equals(player.getUUID()))
             {
                 var behavior = target.getBehavior();
                 if (behavior.canBeRemovedOnClean())
