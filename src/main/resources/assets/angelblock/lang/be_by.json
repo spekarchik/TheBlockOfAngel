@@ -1473,7 +1473,8 @@
   "item.angelblock.nautilus_armor_handbook.desc4": "Кіраўніцтва выглядае недарэчным",
 
   "item.angelblock.green_diamond_ore": "§eЗялёна-дыяментавая руда",
-  "item.angelblock.green_diamond_ore.desc": "Уздзеянне Посахам Зямлі на блок Дыяментавай Руды пераўтварае яго ў блок Зялёна-Дыяментавай Руды",
+  "item.angelblock.green_diamond_ore.desc1": "Уздзеянне Посахам Зямлі на блок Дыяментавай Руды пераўтварае яго ў блок Зялёна-Дыяментавай Руды",
+  "item.angelblock.green_diamond_ore.desc2": "Пры пераўтварэнні руды з'яўляюцца Ілюзіяне або Тапельцы",
   "item.angelblock.cracked_endstone_block": "Патрэсканы камень Энда",
   "item.angelblock.cracked_endstone_block.desc": "Пры разбурэнні выпадае 0-7 Эндарнякавага пылу",
   "item.angelblock.cracked_obsidian_block": "Патрэсканы абсідыян",
@@ -1533,7 +1534,7 @@
   "item.angelblock.devil_block.desc14": " Згустак магмы: Магмакуб           Вогненны шар: Гаст",
   "item.angelblock.devil_block.desc15": " Кавалак золата: Піглін             Мембрана Фантома: Фантом",
   "item.angelblock.devil_block.desc16": " Залаты злітак: Брутальны Піглін    Прызмарынавы аскепак: Вартавы",
-  "item.angelblock.devil_block.desc17": "",
+  "item.angelblock.devil_block.desc17": " Асколак аметысту: Ілюзіянін",
   "item.angelblock.devil_block.desc18": "§2Выкарыстаны прадмет расходуецца!",
   "item.angelblock.devil_block.desc19": "✨ Усталяваны блок з часам змяняе навакольныя блокі:",
   "item.angelblock.devil_block.desc20": " Зямля з дзёрнам, Падзол → Міцэлій",

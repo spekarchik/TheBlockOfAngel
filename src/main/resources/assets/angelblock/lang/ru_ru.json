@@ -1473,7 +1473,8 @@
   "item.angelblock.nautilus_armor_handbook.desc4": "Справочник выглядит неуместным",
 
   "item.angelblock.green_diamond_ore": "§eЗелёно-алмазная руда",
-  "item.angelblock.green_diamond_ore.desc": "Воздействие Посохом Земли на блок Алмазной Руды превращает его в блок Зелено-Алмазной Руды",
+  "item.angelblock.green_diamond_ore.desc1": "Воздействие Посохом Земли на блок Алмазной Руды превращает его в блок Зелено-Алмазной Руды",
+  "item.angelblock.green_diamond_ore.desc2": "При превращении руды появляются Иллюзоры или Утопленники",
   "item.angelblock.cracked_endstone_block": "Потрескавшийся эндерняк",
   "item.angelblock.cracked_endstone_block.desc": "При рарушении выпадает 0-7 Эндерняковой пыли",
   "item.angelblock.cracked_obsidian_block": "Потрескавшийся обсидиан",
@@ -1533,7 +1534,7 @@
   "item.angelblock.devil_block.desc14": " Сгусток магмы: Магмовый куб           Огненный заряд: Гаст",
   "item.angelblock.devil_block.desc15": " Кусочек золота: Пиглин                Мембрана Фантома: Фантом",
   "item.angelblock.devil_block.desc16": " Золотой слиток: Брутальный Пиглин     Осколок призмарина: Страж",
-  "item.angelblock.devil_block.desc17": "",
+  "item.angelblock.devil_block.desc17": " Осколок аметиста: Иллюзор",
   "item.angelblock.devil_block.desc18": "§2Использованный предмет расходуется!",
   "item.angelblock.devil_block.desc19": "✨ Установленный блок со временем меняет окружающие блоки:",
   "item.angelblock.devil_block.desc20": " Дёрн, Подзол → Мицелиум",
