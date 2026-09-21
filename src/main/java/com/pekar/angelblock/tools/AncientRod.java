@@ -15,13 +15,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.illager.Illusioner;
 import net.minecraft.world.entity.monster.zombie.Drowned;
@@ -391,7 +391,7 @@ public class AncientRod extends MagneticRod
             spawnPos = findDrownedSpawnPos(level, pos, player);
             if (spawnPos != null)
             {
-                var drowned = EntityTypes.DROWNED.spawn(
+                var drowned = EntityType.DROWNED.spawn(
                         level, ItemStack.EMPTY, player, spawnPos, EntitySpawnReason.TRIGGERED, true, true);
                 if (drowned != null)
                     playSpawnEffects(level, drowned);
@@ -399,7 +399,7 @@ public class AncientRod extends MagneticRod
             return;
         }
 
-        var illusioner = EntityTypes.ILLUSIONER.spawn(
+        var illusioner = EntityType.ILLUSIONER.spawn(
                 level, ItemStack.EMPTY, player, spawnPos, EntitySpawnReason.TRIGGERED, true, true);
 
         if (illusioner != null)
