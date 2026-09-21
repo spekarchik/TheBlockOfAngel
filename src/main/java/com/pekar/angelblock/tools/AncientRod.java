@@ -2,6 +2,11 @@ package com.pekar.angelblock.tools;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.GreenDiamondBlock;
+import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
+import com.pekar.angelblock.blocks.tile_entities.spawn.ISpawnStrategy;
+import com.pekar.angelblock.blocks.tile_entities.spawn.InWaterMonsterSpawnStrategy;
+import com.pekar.angelblock.events.scheduler.LevelScheduledTask;
+import com.pekar.angelblock.events.scheduler.LevelScheduler;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.TextStyle;
@@ -10,8 +15,16 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.monster.Drowned;
+import net.minecraft.world.entity.monster.Illusioner;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -23,12 +36,21 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.InfestedBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import java.util.Random;
 import java.util.function.BiFunction;
 
 public class AncientRod extends MagneticRod
 {
+    private static final int ILLUSIONER_CHECK_RADIUS = 20;
+    private static final int ILLUSIONER_SPAWN_RADIUS = 10;
+    private static final int ILLUSIONER_SPAWN_ATTEMPTS = 5;
+    private static final int MIN_ILLUSIONER_SPAWN_DELAY = 10;
+    private static final int MAX_ILLUSIONER_SPAWN_DELAY = 100;
+    private static final int MAX_NEARBY_SUMMONED_MONSTERS = 3;
+    private static final ISpawnStrategy DROWNED_SPAWN_STRATEGY = new InWaterMonsterSpawnStrategy();
+
     public AncientRod(ModToolMaterial material, boolean isMagnetic, Properties properties)
     {
         super(material, isMagnetic, properties);
@@ -100,6 +122,8 @@ public class AncientRod extends MagneticRod
             {
                 boolean isDark = block == Blocks.DEEPSLATE_DIAMOND_ORE;
                 setBlockWithClientSound(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState().setValue(GreenDiamondBlock.IS_DARK, isDark));
+                if (level instanceof ServerLevel serverLevel && scheduleIllusioners(serverLevel, pos, player))
+                    serverLevel.playSound(null, pos, SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.BLOCKS, 1.0F, 1.0F);
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
@@ -330,6 +354,119 @@ public class AncientRod extends MagneticRod
                         level.destroyBlock(localPos, true);
                     }
                 }
+    }
+
+    private boolean scheduleIllusioners(ServerLevel level, BlockPos pos, Player player)
+    {
+        int requestedCount = switch (level.getDifficulty())
+        {
+            case PEACEFUL -> 0;
+            case EASY -> 1;
+            case NORMAL -> level.getRandom().nextIntBetweenInclusive(1, 2);
+            case HARD -> level.getRandom().nextIntBetweenInclusive(1, 3);
+        };
+
+        if (requestedCount == 0) return false;
+
+        int nearbyCount = getNearbySummonedMonsterCount(level, pos);
+        int spawnCount = Math.min(requestedCount, Math.max(0, MAX_NEARBY_SUMMONED_MONSTERS - nearbyCount));
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+            int delay = level.getRandom().nextIntBetweenInclusive(MIN_ILLUSIONER_SPAWN_DELAY, MAX_ILLUSIONER_SPAWN_DELAY);
+            LevelScheduler.add(new LevelScheduledTask(level, delay, scheduledLevel ->
+                    spawnIllusionerOrDrowned(scheduledLevel, pos, player)));
+        }
+
+        return spawnCount > 0;
+    }
+
+    private void spawnIllusionerOrDrowned(ServerLevel level, BlockPos pos, Player player)
+    {
+        if (getNearbySummonedMonsterCount(level, pos) >= MAX_NEARBY_SUMMONED_MONSTERS) return;
+
+        var spawnPos = findIllusionerSpawnPos(level, pos, player);
+        if (spawnPos == null)
+        {
+            spawnPos = findDrownedSpawnPos(level, pos, player);
+            if (spawnPos != null)
+            {
+                var drowned = EntityType.DROWNED.spawn(
+                        level, ItemStack.EMPTY, player, spawnPos, MobSpawnType.TRIGGERED, true, true);
+                if (drowned != null)
+                    playSpawnEffects(level, drowned);
+            }
+            return;
+        }
+
+        var illusioner = EntityType.ILLUSIONER.spawn(
+                level, ItemStack.EMPTY, player, spawnPos, MobSpawnType.TRIGGERED, true, true);
+
+        if (illusioner != null)
+            playSpawnEffects(level, illusioner);
+    }
+
+    private void playSpawnEffects(ServerLevel level, LivingEntity entity)
+    {
+        level.sendParticles(
+                ParticleTypes.PORTAL,
+                entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(),
+                50, 0.5, 1, 0.5, 0.1
+        );
+        level.playSound(
+                null, entity.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE,
+                1.0F, 1.0F
+        );
+    }
+
+    private int getNearbySummonedMonsterCount(ServerLevel level, BlockPos pos)
+    {
+        var area = new AABB(pos).inflate(ILLUSIONER_CHECK_RADIUS);
+        double maxDistanceSqr = ILLUSIONER_CHECK_RADIUS * ILLUSIONER_CHECK_RADIUS;
+
+        int illusionerCount = level.getEntitiesOfClass(
+                Illusioner.class,
+                area,
+                illusioner -> illusioner.distanceToSqr(
+                        pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= maxDistanceSqr).size();
+        int drownedCount = level.getEntitiesOfClass(
+                Drowned.class,
+                area,
+                drowned -> drowned.distanceToSqr(
+                        pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= maxDistanceSqr).size();
+
+        return illusionerCount + drownedCount;
+    }
+
+    private BlockPos findIllusionerSpawnPos(ServerLevel level, BlockPos origin, Player player)
+    {
+        return findMonsterSpawnPos(level, origin, player, Monsters.Illusioner.getSpawnStrategy());
+    }
+
+    private BlockPos findDrownedSpawnPos(ServerLevel level, BlockPos origin, Player player)
+    {
+        return findMonsterSpawnPos(level, origin, player, DROWNED_SPAWN_STRATEGY);
+    }
+
+    private BlockPos findMonsterSpawnPos(ServerLevel level, BlockPos origin, Player player, ISpawnStrategy spawnStrategy)
+    {
+        for (int attempt = 0; attempt < ILLUSIONER_SPAWN_ATTEMPTS; attempt++)
+        {
+            int shiftX = level.getRandom().nextIntBetweenInclusive(-ILLUSIONER_SPAWN_RADIUS, ILLUSIONER_SPAWN_RADIUS);
+            int maxShiftZ = (int)Math.sqrt(ILLUSIONER_SPAWN_RADIUS * ILLUSIONER_SPAWN_RADIUS - shiftX * shiftX);
+            int shiftZ = level.getRandom().nextIntBetweenInclusive(-maxShiftZ, maxShiftZ);
+
+            var startPos = origin.offset(shiftX, 0, shiftZ);
+            int minY = origin.getY() - ILLUSIONER_SPAWN_RADIUS;
+
+            for (var candidate = startPos.above(ILLUSIONER_SPAWN_RADIUS); candidate.getY() > minY; candidate = candidate.below())
+            {
+                if (spawnStrategy.canSpawnAtPos(level, candidate, player))
+                    return candidate;
+            }
+        }
+
+        return null;
     }
 
     private InteractionResult setVine(BlockPlaceContext context, BlockPos pos)

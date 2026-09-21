@@ -1451,7 +1451,8 @@
   "item.angelblock.nautilus_armor_handbook.desc4": "The handbook seems out of place",
 
   "item.angelblock.green_diamond_ore": "§eGreen Diamond Ore",
-  "item.angelblock.green_diamond_ore.desc": "Use the Rod of Terra on Diamond Ore to turn it into the Green Diamond Ore",
+  "item.angelblock.green_diamond_ore.desc1": "Use the Rod of Terra on Diamond Ore to turn it into the Green Diamond Ore",
+  "item.angelblock.green_diamond_ore.desc2": "Illusioners or Drowned spawn when the ore transforms",
   "item.angelblock.cracked_endstone_block": "Cracked End Stone",
   "item.angelblock.cracked_endstone_block.desc": "Drops 0–7 endstone powder",
   "item.angelblock.cracked_obsidian_block": "Cracked Obsidian",
@@ -1511,7 +1512,7 @@
   "item.angelblock.devil_block.desc14": " Magma Cream: Magma Cube       Fire Charge: Ghast",
   "item.angelblock.devil_block.desc15": " Gold Nugget: Pigline           Phantom Membrane: Phantom",
   "item.angelblock.devil_block.desc16": " Gold Ingot: Pigline Brute       Prismarine Shard: Guardian",
-  "item.angelblock.devil_block.desc17": "",
+  "item.angelblock.devil_block.desc17": " Amethyst Shard: Illusioner",
   "item.angelblock.devil_block.desc18": "§2The item used on the block is consumed!",
   "item.angelblock.devil_block.desc19": "✨ The placed block gradually changes surrounding blocks:",
   "item.angelblock.devil_block.desc20": " Grass Block, Podzol → Mycelium",

@@ -21,7 +21,8 @@ public class GreenDiamondOreBlockItem extends ModBlockItem implements ITooltipPr
     public void addTooltip(ItemStack stack, TooltipContext context, ITooltip tooltip, TooltipFlag flag)
     {
         if (!Utils.instance.text.showExtendedDescription(tooltip)) return;
-        tooltip.addLine(getDescriptionId()).asNotice().apply();
+        tooltip.addLine(getDescriptionId(), 1).asNotice().apply();
+        tooltip.addLine(getDescriptionId(), 2).asDarkGrey().apply();
     }
 
     @Override

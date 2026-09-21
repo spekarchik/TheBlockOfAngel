@@ -4,7 +4,9 @@ import com.pekar.angelblock.events.animal.IAnimal;
 import com.pekar.angelblock.events.armor.IPlayerArmor;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.player.IPlayer;
+import com.pekar.angelblock.events.scheduler.LevelScheduler;
 import com.pekar.angelblock.events.scheduler.PlayerScheduler;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.Animal;
@@ -25,6 +27,8 @@ public class TickEvents implements IEventHandler
     {
         var level = event.getLevel();
         if (level.isClientSide) return;
+
+        LevelScheduler.doOnTick((ServerLevel)level);
 
         Cleaner.decrementOrRemove();
 //        LightCleaner.decrementOrRemove();
