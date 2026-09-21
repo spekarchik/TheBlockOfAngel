@@ -1,3 +1,13 @@
+## 📦 Version 3.12.0
+
+### ✨ New
+- Transforming **Diamond Ore** or **Deepslate Diamond Ore** into **Green Diamond Ore** with the **Rod of Terra** or its improved version now summons **Illusioners**.
+  - If no valid Illusioner position is found, the game attempts to summon a **Drowned** in water instead.
+  - Their number depends on difficulty, with a combined maximum of three Illusioners and Drowned within 20 blocks.
+  - Each monster spawns after an independent random delay of 10–100 ticks at a valid position within a 10-block horizontal radius.
+- **Illusioners** can now be summoned by using **Amethyst Shard** on **The Block of Devil**.
+
+
 ## 📦 Version 3.11.0 (The Enlightenment Update)
 
 ### ✨ New
