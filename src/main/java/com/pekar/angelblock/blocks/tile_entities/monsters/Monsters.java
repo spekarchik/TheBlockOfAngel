@@ -34,4 +34,5 @@ public class Monsters
     public static final IMonster Pillager = new Pillager(id++);
     public static final IMonster Breeze = new Breeze(id++);
     public static final IMonster Creaking = new Creaking(id++);
+    public static final IMonster Illusioner = new Illusioner(id++);
 }
