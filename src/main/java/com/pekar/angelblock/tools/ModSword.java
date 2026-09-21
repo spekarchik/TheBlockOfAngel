@@ -1,5 +1,6 @@
 package com.pekar.angelblock.tools;
 
+import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.events.cleaners.Cleaner;
 import com.pekar.angelblock.events.cleaners.TrackedBlock;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
@@ -14,18 +15,29 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.common.ItemAbility;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ModSword extends SwordItem implements IModTool, ITooltipProvider
 {
+    private static final int ANVIL_COUNT = 10;
+    private static final int ATTACK_DISTANCE = 4;
+    private static final int ATTACK_RADIUS = 4;
+    private static final int MIN_ANVIL_HEIGHT = 8;
+    private static final int ANVIL_HEIGHT_VARIATION = 7;
+    private static final int MIN_CLEARANCE_BELOW_OBSTACLE = 5;
+
     private static final int[] dx = { 3, -3, 2, 2, -2, -2, 0, 0, 1, 1, -1, -1 };
     private static final int[] dz = { 0, 0, 1, -1, 1, -1, 3, -3, 2, -2, 2, -2 };
     private static final int CactusLifeTime = 1200;
@@ -360,6 +372,109 @@ public abstract class ModSword extends SwordItem implements IModTool, ITooltipPr
             damageMainHandItemIfSurvivalIgnoreClient(player, level);
         else
             damageOffHandItemIfSurvivalIgnoreClient(player, level);
+    }
+
+    protected void dropAnvils(Player player, InteractionHand hand, Level level, BlockPos clickedPos)
+    {
+        if (player.getFoodData().getFoodLevel() <= 0) return;
+
+        double directionX = clickedPos.getX() + 0.5 - player.getX();
+        double directionZ = clickedPos.getZ() + 0.5 - player.getZ();
+        double horizontalDistance = Math.sqrt(directionX * directionX + directionZ * directionZ);
+
+        double centerX = clickedPos.getX() + 0.5;
+        double centerZ = clickedPos.getZ() + 0.5;
+        if (horizontalDistance > 0.0001)
+        {
+            centerX += directionX / horizontalDistance * ATTACK_DISTANCE;
+            centerZ += directionZ / horizontalDistance * ATTACK_DISTANCE;
+        }
+
+        int centerBlockX = (int)Math.floor(centerX);
+        int centerBlockZ = (int)Math.floor(centerZ);
+        List<BlockPos> candidates = createAnvilCandidates(centerBlockX, centerBlockZ, clickedPos.getY());
+        int spawned = 0;
+
+        for (int attempt = 0; attempt < ANVIL_COUNT && !candidates.isEmpty(); attempt++)
+        {
+            BlockPos candidate = candidates.remove(level.getRandom().nextInt(candidates.size()));
+            int intendedY = clickedPos.getY() + MIN_ANVIL_HEIGHT + level.getRandom().nextInt(ANVIL_HEIGHT_VARIATION);
+            BlockPos spawnPos = findAnvilSpawnPosition(level, candidate.getX(), candidate.getZ(), clickedPos.getY(), intendedY);
+            if (spawnPos == null) continue;
+
+            var anvilState = BlockRegistry.TRANSIENT_ANVIL.get().defaultBlockState()
+                    .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom()));
+            FallingBlockEntity anvil = FallingBlockEntity.fall(level, spawnPos, anvilState);
+            anvil.setHurtsEntities(2.0F, 40);
+            spawned++;
+        }
+
+        if (spawned > 0)
+        {
+            damageProperHandItemIfSurvivalIgnoreClient(player, hand, level);
+            causePlayerMultiEffectExhaustion(player);
+        }
+    }
+
+    private List<BlockPos> createAnvilCandidates(int centerX, int centerZ, int y)
+    {
+        List<BlockPos> candidates = new ArrayList<>();
+        for (int dx = -ATTACK_RADIUS; dx <= ATTACK_RADIUS; dx++)
+            for (int dz = -ATTACK_RADIUS; dz <= ATTACK_RADIUS; dz++)
+                if (dx * dx + dz * dz <= ATTACK_RADIUS * ATTACK_RADIUS)
+                    candidates.add(new BlockPos(centerX + dx, y, centerZ + dz));
+        return candidates;
+    }
+
+    private BlockPos findAnvilSpawnPosition(Level level, int x, int z, int clickedY, int intendedY)
+    {
+        BlockPos intendedPos = new BlockPos(x, intendedY, z);
+        if (!level.isInWorldBounds(intendedPos) || !level.hasChunkAt(x, z)) return null;
+
+        int surfaceTopY = findSurfaceTop(level, x, z, clickedY, intendedY);
+        if (surfaceTopY > intendedY) return null;
+
+        BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos(x, surfaceTopY, z);
+        for (int y = surfaceTopY; y <= intendedY; y++)
+        {
+            cursor.setY(y);
+            if (FallingBlock.isFree(level.getBlockState(cursor))) continue;
+
+            int freeBlocks = y - surfaceTopY;
+            if (freeBlocks < MIN_CLEARANCE_BELOW_OBSTACLE) return null;
+
+            BlockPos belowObstacle = new BlockPos(x, y - 1, z);
+            return level.isEmptyBlock(belowObstacle) ? belowObstacle : null;
+        }
+
+        return level.isEmptyBlock(intendedPos) ? intendedPos : null;
+    }
+
+    private int findSurfaceTop(Level level, int x, int z, int clickedY, int intendedY)
+    {
+        int minY = level.getMinBuildHeight();
+        int maxY = Math.min(intendedY, level.getMinBuildHeight() + level.getHeight() - 1);
+        BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos(x, Math.min(clickedY, maxY), z);
+
+        if (isBlocking(level, cursor))
+        {
+            while (cursor.getY() < maxY && isBlocking(level, cursor))
+                cursor.move(Direction.UP);
+            return cursor.getY();
+        }
+
+        while (cursor.getY() > minY)
+        {
+            cursor.move(Direction.DOWN);
+            if (isBlocking(level, cursor)) return cursor.getY() + 1;
+        }
+
+        return minY;
+    }
+
+    private boolean isBlocking(Level level, BlockPos pos)
+    {
+        return !FallingBlock.isFree(level.getBlockState(pos));
     }
 
     @Override

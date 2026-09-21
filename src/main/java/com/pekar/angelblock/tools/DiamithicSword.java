@@ -32,7 +32,14 @@ public class DiamithicSword extends ModSword
         if (player.hasEffect(PotionRegistry.SWORD_EXPLOSION_MODE_EFFECT))
         {
             if (!level.isClientSide())
-                explode(player, context.getHand(), level, pos);
+            {
+                if (player.isShiftKeyDown())
+                {
+                    dropAnvils(player, context.getHand(), level, pos);
+                }
+                else
+                    explode(player, context.getHand(), level, pos);
+            }
 
             return getToolInteractionResult(true, level.isClientSide());
         }

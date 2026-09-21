@@ -6,6 +6,7 @@
   - Their number depends on difficulty, with a combined maximum of three Illusioners and Drowned within 20 blocks.
   - Each monster spawns after an independent random delay of 10–100 ticks at a valid position within a 10-block horizontal radius.
 - **Illusioners** can now be summoned by using **Amethyst Shard** on **The Block of Devil**.
+- The **Diamite Enhanced Sword** and **Superyte Enhanced Sword** now have an anvil attack: while **Explosion Mode** is active, use the sword while sneaking to rain temporary anvils beyond the target.
 
 
 ## 📦 Version 3.11.1 (The Enlightenment Update)

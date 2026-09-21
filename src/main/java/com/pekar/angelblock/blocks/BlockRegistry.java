@@ -70,6 +70,8 @@ public class BlockRegistry
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS).strength(10F, 1200F).requiresCorrectToolForDrops());
 
     // Internal blocks (not added to Creative Tab)
+    public static final DeferredBlock<TransientAnvilBlock> TRANSIENT_ANVIL = registerSkipTab("transient_anvil", TransientAnvilBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.ANVIL).noLootTable());
     //public static final DeferredBlock<Block> DESTROYING_DIAMOND_BLOCK = registerSkipTab("destroying_diamond_block", AirBlock::new);
     public static final DeferredBlock<Block> DESTROYING_DIAMOND_POWDER_BLOCK = registerSkipTab("destroying_diamond_powder_block", AirBlock::new);
     public static final DeferredBlock<Block> DESTROYING_PRISMARINE_SHARD_BLOCK = registerSkipTab("destroying_prismarine_shard_block", AirBlock::new);
