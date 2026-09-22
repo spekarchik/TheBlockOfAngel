@@ -41,9 +41,9 @@ public class DevilBlockItem extends ModBlockItem implements ITooltipProvider
         }
         else if (Screen.hasAltDown())
         {
-            for (int i = 19; i <= 37; i++)
+            for (int i = 19; i <= 38; i++)
             {
-                tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 19).styledAs(TextStyle.DarkGray, i >= 34).apply();
+                tooltip.addLine(getDescriptionId(), i).styledAs(TextStyle.Header, i == 19).styledAs(TextStyle.DarkGray, i >= 37).apply();
             }
 
             tooltip.addEmptyLine();
