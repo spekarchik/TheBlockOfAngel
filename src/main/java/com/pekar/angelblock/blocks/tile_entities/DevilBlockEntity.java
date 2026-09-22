@@ -113,8 +113,6 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
             if (pos == null) continue;
 
-            level.playSound(null, getBlockPos(), SoundEvents.APPLY_EFFECT_TRIAL_OMEN, SoundSource.BLOCKS);
-
             if (level.isClientSide() || !(getLevel() instanceof ServerLevel serverLevel))
                 return true;
 
