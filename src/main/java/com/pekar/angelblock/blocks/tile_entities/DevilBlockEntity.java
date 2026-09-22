@@ -414,7 +414,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                         ? SoundEvents.PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED
                         : SoundEvents.PIGLIN_CONVERTED_TO_ZOMBIFIED;
                 piglin.makeSound(conversionSound);
-                piglin.convertTo(EntityTypes.ZOMBIFIED_PIGLIN, ConversionParams.single(piglin, true, true), zombifiedPiglin -> {});
+                piglin.convertTo(EntityType.ZOMBIFIED_PIGLIN, ConversionParams.single(piglin, true, true), zombifiedPiglin -> {});
             }
         }
     }
@@ -431,9 +431,8 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
             return;
         }
 
-        villager.convertTo(EntityTypes.ZOMBIE_VILLAGER, ConversionParams.single(villager, true, true), zombieVillager ->
+        villager.convertTo(EntityType.ZOMBIE_VILLAGER, ConversionParams.single(villager, true, true), zombieVillager ->
         {
-            zombieVillager.setVillagerDataFinalized(villager.getVillagerDataFinalized());
             zombieVillager.finalizeSpawn(
                     level,
                     level.getCurrentDifficultyAt(zombieVillager.blockPosition()),
