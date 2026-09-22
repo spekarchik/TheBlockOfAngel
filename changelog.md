@@ -14,6 +14,8 @@
   - *Villagers* now randomly become *Nitwits* or *Zombie Villagers*, while existing *Nitwits* remain unaffected and *Zombie Villagers* retain their profession.
   - *Piglins* and *Piglin Brutes* become *Zombified Piglins*.
   - *Players* in Survival Mode receive *Nausea* for 5 seconds.
+  - Destroyed *Leaves* now produce *Leaf Litter* on the nearest suitable ground, replacing blocks such as grass, flowers, and snow layers.
+    - *Leaf Litter* accumulates up to four pieces; attempting to add another piece converts an underlying *Grass Block* into *Podzol*.
   - Affected creatures and blocks are limited to an 18-block radius in all directions.
 
 
