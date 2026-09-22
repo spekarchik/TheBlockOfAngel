@@ -14,6 +14,7 @@ public class EventRegistry
         register(new PlayerDataEvents());
         register(new PlayerInteractionEvents());
         register(new TickEvents());
+        register(new LevelSchedulerEvents());
         register(new CustomizationEvents());
         register(new AnimalEvents());
         register(new VillagerAncientScrollEvents());
