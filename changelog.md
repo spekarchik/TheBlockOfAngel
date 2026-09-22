@@ -10,6 +10,11 @@
 
 ### 📝 Improvements
 - Monsters summoned by **The Block of Devil** now appear with portal particles and a teleport sound.
+- Expanded **The Block of Devil**'s corruption effects:
+  - *Villagers* now randomly become *Nitwits* or *Zombie Villagers*, while existing *Nitwits* remain unaffected and *Zombie Villagers* retain their profession.
+  - *Piglins* and *Piglin Brutes* become *Zombified Piglins*.
+  - *Players* in Survival Mode receive *Nausea* for 5 seconds.
+  - Affected creatures and blocks are limited to an 18-block radius in all directions.
 
 
 ## 📦 Version 3.11.0 (The Enlightenment Update)
