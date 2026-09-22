@@ -2,6 +2,8 @@ package com.pekar.angelblock.blocks;
 
 import com.pekar.angelblock.blocks.tile_entities.DevilBlockEntity;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
+import com.pekar.angelblock.events.scheduler.LevelScheduledTask;
+import com.pekar.angelblock.events.scheduler.LevelScheduler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -24,6 +26,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class DevilBlock extends ModBlock implements EntityBlock
 {
+    private static final int MIN_MONSTER_SPAWN_DELAY = 20;
+    private static final int MAX_MONSTER_SPAWN_DELAY = 60;
+
     public DevilBlock(Properties properties)
     {
         super(properties);
@@ -40,8 +45,13 @@ public class DevilBlock extends ModBlock implements EntityBlock
 
             var interactionItem = interactionItemStack.getItem();
 
-            if (!level.isClientSide())
-                devilBlockEntity.spawnMonster(interactionItem, player, interactionItemStack);
+            if (level instanceof ServerLevel serverLevel)
+            {
+                level.playSound(null, pos, SoundEvents.APPLY_EFFECT_TRIAL_OMEN, SoundSource.BLOCKS);
+                int delay = serverLevel.getRandom().nextIntBetweenInclusive(MIN_MONSTER_SPAWN_DELAY, MAX_MONSTER_SPAWN_DELAY);
+                LevelScheduler.add(new LevelScheduledTask(serverLevel, delay, scheduledLevel ->
+                        devilBlockEntity.spawnMonster(interactionItem, player, interactionItemStack)));
+            }
 
             return getInteractionSidedSuccess(level.isClientSide());
         }
