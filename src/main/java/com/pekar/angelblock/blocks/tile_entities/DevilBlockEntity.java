@@ -8,24 +8,33 @@ import com.pekar.angelblock.events.PlayerInteractionEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
+import net.minecraft.world.entity.monster.piglin.PiglinBrute;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import java.util.HashMap;
@@ -37,6 +46,11 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
     private static final int EFFECTIVE_RADIUS = 70;
     private static final int SQR_EFFECTIVE_RADIUS = EFFECTIVE_RADIUS * EFFECTIVE_RADIUS;
     private static final int MONSTER_SPAWN_RADIUS = 30;
+    private static final int CORRUPTION_RADIUS = 18;
+    private static final int SQR_CORRUPTION_RADIUS = CORRUPTION_RADIUS * CORRUPTION_RADIUS;
+    private static final int AFFECTED_HORIZONTAL_RADIUS = 1;
+    private static final double AFFECT_VILLAGERS_RADIUS = 1.5;
+    private static final double SQR_AFFECT_VILLAGERS_RADIUS = AFFECT_VILLAGERS_RADIUS * AFFECT_VILLAGERS_RADIUS;
     private static final Random random = new Random();
 
     private final Map<Item, IMonster> monstersByActionItem = new HashMap<>();
@@ -183,30 +197,35 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
         if (level.getDifficulty() == Difficulty.PEACEFUL) return;
         if (level.isClientSide() || level.getGameTime() % 20 != 0) return;
 
-        final int horizRadius = 18;
-        final int vertRadius = 5;
+        final int vertRadius = 10;
         for (int i = 0; i < 5; i++)
         {
-            int dx = random.nextInt((horizRadius << 1) + 1) - horizRadius;
+            int dx = random.nextInt((CORRUPTION_RADIUS << 1) + 1) - CORRUPTION_RADIUS;
             int x = pos.getX() + dx;
-            int radiusDecrement = Math.max(Math.abs(dx) - horizRadius / 2, 0);
-            int newRadius = horizRadius - radiusDecrement;
+            int radiusDecrement = Math.max(Math.abs(dx) - CORRUPTION_RADIUS / 2, 0);
+            int newRadius = CORRUPTION_RADIUS - radiusDecrement;
             int z = pos.getZ() + random.nextInt((newRadius << 1) + 1) - newRadius;
             int y = pos.getY() + random.nextInt((vertRadius << 1) + 1) - vertRadius;
 
             var targetPos = new BlockPos(x, y, z);
+            affectNearbyEntities((ServerLevel)level, pos, targetPos);
+
+            if (pos.distSqr(targetPos) > SQR_CORRUPTION_RADIUS) continue;
+
             var targetState = level.getBlockState(targetPos);
             var abovePos = targetPos.above();
             var aboveState = level.getBlockState(abovePos);
 
             if (targetState.is(BlockTags.LOGS))
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 4; j++)
                 {
                     int lx = targetPos.getX() + random.nextInt(11) - 5;
                     int ly = targetPos.getY() + random.nextInt(8) - 2;
                     int lz = targetPos.getZ() + random.nextInt(11) - 5;
                     BlockPos leafPos = new BlockPos(lx, ly, lz);
+                    if (pos.distSqr(leafPos) > SQR_CORRUPTION_RADIUS) continue;
+
                     BlockState leafState = level.getBlockState(leafPos);
 
                     if (leafState.is(BlockTags.LEAVES))
@@ -219,12 +238,14 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
             {
                 level.destroyBlock(targetPos, true);
 
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 4; j++)
                 {
                     int lx = targetPos.getX() + random.nextInt(11) - 5;
                     int ly = targetPos.getY() + random.nextInt(9) - 4;
                     int lz = targetPos.getZ() + random.nextInt(11) - 5;
                     BlockPos leafPos = new BlockPos(lx, ly, lz);
+                    if (pos.distSqr(leafPos) > SQR_CORRUPTION_RADIUS) continue;
+
                     BlockState leafState = level.getBlockState(leafPos);
 
                     if (leafState.is(BlockTags.LEAVES))
@@ -315,6 +336,84 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
                 }
             }
         }
+    }
+
+    private void affectNearbyEntities(ServerLevel level, BlockPos devilPos, BlockPos targetPos)
+    {
+        double centerX = targetPos.getX() + 0.5;
+        double centerZ = targetPos.getZ() + 0.5;
+        var searchArea = new AABB(
+                centerX - AFFECTED_HORIZONTAL_RADIUS, level.getMinY(), centerZ - AFFECTED_HORIZONTAL_RADIUS,
+                centerX + AFFECTED_HORIZONTAL_RADIUS, level.getMaxY(), centerZ + AFFECTED_HORIZONTAL_RADIUS
+        );
+
+        var entities = level.getEntities((Entity)null, searchArea, entity ->
+        {
+            if (entity.distanceToSqr(devilPos.getX(), devilPos.getY(), devilPos.getZ()) > SQR_CORRUPTION_RADIUS) return false;
+
+            if (entity instanceof ServerPlayer player)
+            {
+                return player.gameMode() == GameType.SURVIVAL;
+            }
+
+            if (entity.distanceToSqr(targetPos.getX(), targetPos.getY(), targetPos.getZ()) > SQR_AFFECT_VILLAGERS_RADIUS) return false;
+
+            return entity instanceof Villager || entity instanceof AbstractPiglin;
+        });
+
+        for (var entity : entities)
+        {
+            if (entity instanceof ServerPlayer player)
+            {
+                player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 100, 0, false, false, true));
+            }
+            else if (entity instanceof Villager villager)
+            {
+                transformVillager(level, villager);
+            }
+            else if (entity instanceof AbstractPiglin piglin)
+            {
+                var conversionSound = piglin instanceof PiglinBrute
+                        ? SoundEvents.PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED
+                        : SoundEvents.PIGLIN_CONVERTED_TO_ZOMBIFIED;
+                piglin.makeSound(conversionSound);
+                piglin.convertTo(EntityType.ZOMBIFIED_PIGLIN, ConversionParams.single(piglin, true, true), zombifiedPiglin -> {});
+            }
+        }
+    }
+
+    private void transformVillager(ServerLevel level, Villager villager)
+    {
+        if (villager.getVillagerData().profession().is(VillagerProfession.NITWIT)) return;
+
+        if (random.nextBoolean())
+        {
+            villager.setVillagerData(villager.getVillagerData().withProfession(level.registryAccess(), VillagerProfession.NITWIT));
+            villager.refreshBrain(level);
+            level.playSound(null, villager.blockPosition(), SoundEvents.VILLAGER_NO, SoundSource.AMBIENT, 1.2F, 0.7F);
+            return;
+        }
+
+        villager.convertTo(EntityType.ZOMBIE_VILLAGER, ConversionParams.single(villager, true, true), zombieVillager ->
+        {
+            zombieVillager.finalizeSpawn(
+                    level,
+                    level.getCurrentDifficultyAt(zombieVillager.blockPosition()),
+                    EntitySpawnReason.CONVERSION,
+                    new Zombie.ZombieGroupData(false, true)
+            );
+            zombieVillager.setVillagerData(villager.getVillagerData());
+            zombieVillager.setGossips(villager.getGossips().copy());
+            zombieVillager.setTradeOffers(villager.getOffers().copy());
+            zombieVillager.setVillagerXp(villager.getVillagerXp());
+            playVillagerTransformationSound(level, zombieVillager);
+        });
+    }
+
+    private void playVillagerTransformationSound(ServerLevel level, LivingEntity entity)
+    {
+        if (!entity.isSilent())
+            level.levelEvent(null, LevelEvent.SOUND_ZOMBIE_INFECTED, entity.blockPosition(), 0);
     }
 
     private boolean isPlant(BlockState blockState)
