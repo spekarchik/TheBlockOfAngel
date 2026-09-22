@@ -27,10 +27,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LevelEvent;
-import net.minecraft.world.level.block.VegetationBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
@@ -230,13 +227,13 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
                     if (leafState.is(BlockTags.LEAVES))
                     {
-                        level.destroyBlock(leafPos, true);
+                        destroyLeafAndPlaceLitter(level, leafPos);
                     }
                 }
             }
             else if (targetState.is(BlockTags.LEAVES))
             {
-                level.destroyBlock(targetPos, true);
+                destroyLeafAndPlaceLitter(level, targetPos);
 
                 for (int j = 0; j < 4; j++)
                 {
@@ -250,7 +247,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
                     if (leafState.is(BlockTags.LEAVES))
                     {
-                        level.destroyBlock(leafPos, true);
+                        destroyLeafAndPlaceLitter(level, leafPos);
                     }
                 }
             }
@@ -338,6 +335,46 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
         }
     }
 
+    private void destroyLeafAndPlaceLitter(Level level, BlockPos leafPos)
+    {
+        if (!level.destroyBlock(leafPos, true)) return;
+
+        for (var currentPos = leafPos.below(); currentPos.getY() >= level.getMinY(); currentPos = currentPos.below())
+        {
+            var currentState = level.getBlockState(currentPos);
+            if (currentState.is(Blocks.LEAF_LITTER))
+            {
+                addLeafLitter(level, currentPos, currentState);
+                return;
+            }
+            if (currentState.isAir() || currentState.is(BlockTags.LEAVES) || currentState.is(BlockTags.REPLACEABLE)) continue;
+
+            var litterPos = currentPos.above();
+            var litterState = level.getBlockState(litterPos);
+            if (litterState.isAir() || litterState.is(BlockTags.REPLACEABLE))
+            {
+                var newLitterState = Blocks.LEAF_LITTER.defaultBlockState();
+                if (newLitterState.canSurvive(level, litterPos))
+                    level.setBlock(litterPos, newLitterState, Block.UPDATE_ALL);
+            }
+            return;
+        }
+    }
+
+    private void addLeafLitter(Level level, BlockPos litterPos, BlockState litterState)
+    {
+        int amount = litterState.getValue(SegmentableBlock.AMOUNT);
+        if (amount < SegmentableBlock.MAX_SEGMENT)
+        {
+            level.setBlock(litterPos, litterState.setValue(SegmentableBlock.AMOUNT, amount + 1), Block.UPDATE_ALL);
+            return;
+        }
+
+        var groundPos = litterPos.below();
+        if (level.getBlockState(groundPos).is(Blocks.GRASS_BLOCK))
+            level.setBlock(groundPos, Blocks.PODZOL.defaultBlockState(), Block.UPDATE_ALL);
+    }
+
     private void affectNearbyEntities(ServerLevel level, BlockPos devilPos, BlockPos targetPos)
     {
         double centerX = targetPos.getX() + 0.5;
@@ -418,6 +455,8 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
     private boolean isPlant(BlockState blockState)
     {
+        if (blockState.is(Blocks.LEAF_LITTER)) return false;
+
         var block = blockState.getBlock();
         return block instanceof VegetationBlock || blockState.is(Blocks.CACTUS) || blockState.is(Blocks.SUGAR_CANE) || blockState.is(Blocks.BAMBOO);
     }
