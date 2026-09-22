@@ -18,6 +18,9 @@
     - *Leaf Litter* accumulates up to four pieces; attempting to add another piece converts an underlying *Grass Block* into *Podzol*.
   - Affected creatures and blocks are limited to an 18-block radius in all directions.
 
+### 🐞 Fixed
+- Fixed **The Block of Angel** tooltip displaying the outdated smithing recipe for the **Rod of Angel**.
+
 
 ## 📦 Version 3.11.0-beta (The Enlightenment Update)
 
