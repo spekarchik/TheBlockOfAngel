@@ -18,7 +18,7 @@ public class Illusioner extends Monster
     @Override
     public boolean belongs(LivingEntity livingEntity)
     {
-        return livingEntity instanceof net.minecraft.world.entity.monster.illager.Illusioner;
+        return livingEntity instanceof net.minecraft.world.entity.monster.Illusioner;
     }
 
     @Override
