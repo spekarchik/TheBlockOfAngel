@@ -16,6 +16,9 @@
   - *Players* in Survival Mode receive *Nausea* for 5 seconds.
   - Affected creatures and blocks are limited to an 18-block radius in all directions.
 
+### 🐞 Fixed
+- Fixed **The Block of Angel** tooltip displaying the outdated smithing recipe for the **Rod of Angel**.
+
 
 ## 📦 Version 3.11.1 (The Enlightenment Update)
 
