@@ -122,8 +122,16 @@ public class AncientRod extends MagneticRod
             {
                 boolean isDark = block == Blocks.DEEPSLATE_DIAMOND_ORE;
                 setBlockWithClientSound(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState().setValue(GreenDiamondBlock.IS_DARK, isDark));
-                if (level instanceof ServerLevel serverLevel && scheduleIllusioners(serverLevel, pos, player))
-                    serverLevel.playSound(null, pos, SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                if (level instanceof ServerLevel serverLevel)
+                {
+                    serverLevel.sendParticles(
+                            ParticleTypes.OMINOUS_SPAWNING,
+                            pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            50, 0.5, 0.5, 0.5, 0.1
+                    );
+                    if (scheduleIllusioners(serverLevel, pos, player))
+                        serverLevel.playSound(null, pos, SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                }
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
@@ -414,8 +422,8 @@ public class AncientRod extends MagneticRod
                 50, 0.5, 1, 0.5, 0.1
         );
         level.playSound(
-                null, entity.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE,
-                1.0F, 1.0F
+                null, entity.blockPosition(), SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.HOSTILE,
+                1.0F, 1.3F
         );
     }
 
