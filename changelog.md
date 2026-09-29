@@ -1,3 +1,9 @@
+## 📦 Version 3.12.1-beta
+
+### 📝 Improvements
+- **Soaring Spore Essence** renamed to **Glowing Bottle**.
+
+
 ## 📦 Version 3.12.0-beta
 
 ### ✨ New
