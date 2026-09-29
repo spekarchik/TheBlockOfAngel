@@ -5,6 +5,10 @@ on:
     branches:
       - 'Neo/1.21.*'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
