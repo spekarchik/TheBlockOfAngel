@@ -6,10 +6,11 @@ import net.minecraft.network.chat.MutableComponent;
 
 import javax.annotation.CheckReturnValue;
 
-public class TooltipLine implements ITooltipLine
+public class TooltipLine implements IMutableTooltipLine
 {
+    public static final String PLACEHOLDER = "{}";
     private final Tooltip tooltip;
-    private final MutableComponent component;
+    private MutableComponent component;
     private final boolean ignoreEmptyLines;
 
     TooltipLine(Tooltip tooltip, String descriptionRoot, boolean ignoreEmptyLines)
@@ -17,6 +18,13 @@ public class TooltipLine implements ITooltipLine
         this.tooltip = tooltip;
         this.component = Component.translatable(descriptionRoot).withStyle(ChatFormatting.GRAY);
         this.ignoreEmptyLines = ignoreEmptyLines;
+    }
+
+    TooltipLine(Tooltip tooltip, String text)
+    {
+        this.tooltip = tooltip;
+        this.component = Component.literal(text);
+        this.ignoreEmptyLines = false;
     }
 
     TooltipLine(Tooltip tooltip)
@@ -87,6 +95,35 @@ public class TooltipLine implements ITooltipLine
         if (applyFormatting)
             component.withStyle(formatting);
 
+        return this;
+    }
+
+    @Override
+    public ITooltipLine fillWith(Object... values)
+    {
+        String text = component.getString();
+        int firstPlaceholder = text.indexOf(PLACEHOLDER);
+        if (firstPlaceholder < 0 || values == null || values.length == 0)
+            return this;
+
+        StringBuilder replacedText = new StringBuilder(text.length());
+        int valueIndex = 0;
+        int currentIndex = 0;
+
+        while (firstPlaceholder >= 0)
+        {
+            replacedText.append(text, currentIndex, firstPlaceholder);
+            if (valueIndex < values.length)
+                replacedText.append(values[valueIndex++]);
+            else
+                replacedText.append(PLACEHOLDER);
+
+            currentIndex = firstPlaceholder + 2;
+            firstPlaceholder = text.indexOf(PLACEHOLDER, currentIndex);
+        }
+
+        replacedText.append(text.substring(currentIndex));
+        component = Component.literal(replacedText.toString()).withStyle(component.getStyle());
         return this;
     }
 
