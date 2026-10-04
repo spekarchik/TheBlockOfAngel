@@ -2,7 +2,7 @@ package com.pekar.angelblock.client;
 
 import com.mojang.logging.LogUtils;
 import com.pekar.angelblock.clientaccess.INetworkClientAccessor;
-import com.pekar.angelblock.network.ClientToServerPacket;
+import com.pekar.angelblock.network.base.ClientToServerPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.player.LocalPlayer;

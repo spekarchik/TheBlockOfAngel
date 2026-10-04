@@ -1,14 +1,14 @@
 package com.pekar.angelblock.network.packets;
 
-import com.pekar.angelblock.network.IPacket;
-import com.pekar.angelblock.network.ServerToClientPacket;
+import com.pekar.angelblock.network.base.IPacket;
+import com.pekar.angelblock.network.base.ServerToClientPacket;
 import net.minecraft.network.FriendlyByteBuf;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.minecraft.world.entity.player.Player;
 
 public class FindAllayPacketToClient extends ServerToClientPacket
 {
     @Override
-    public void onReceive(IPayloadContext context)
+    public void onReceive(Player player)
     {
         new FindAllayPacketToServer().sendToServer();
     }

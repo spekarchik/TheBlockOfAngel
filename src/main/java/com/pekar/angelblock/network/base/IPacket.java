@@ -1,4 +1,4 @@
-package com.pekar.angelblock.network;
+package com.pekar.angelblock.network.base;
 
 import net.minecraft.network.FriendlyByteBuf;
 

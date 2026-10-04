@@ -1,7 +1,7 @@
 package com.pekar.angelblock.network.packets;
 
-import com.pekar.angelblock.network.ClientToServerPacket;
-import com.pekar.angelblock.network.IPacket;
+import com.pekar.angelblock.network.base.ClientToServerPacket;
+import com.pekar.angelblock.network.base.IPacket;
 import com.pekar.angelblock.utils.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
