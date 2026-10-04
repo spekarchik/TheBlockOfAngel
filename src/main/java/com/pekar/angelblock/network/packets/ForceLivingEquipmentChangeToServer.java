@@ -1,13 +1,13 @@
 package com.pekar.angelblock.network.packets;
 
-import com.pekar.angelblock.network.ClientToServerPacket;
-import com.pekar.angelblock.network.IPacket;
+import com.pekar.angelblock.network.base.ClientToServerPacket;
+import com.pekar.angelblock.network.base.IPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 
 import java.util.Set;
 
