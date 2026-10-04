@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_13",
   "mixins": [
     "AxolotlMixin",
+    "CraftingMenuMixin",
+    "ItemCombinerMenuMixin",
     "PowderSnowBlockMixin",
+    "SmithingMenuMixin",
     "VillagerAncientScrollMixin"
   ],
   "client": [],
