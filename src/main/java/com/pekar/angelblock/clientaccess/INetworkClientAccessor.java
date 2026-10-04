@@ -1,6 +1,6 @@
 package com.pekar.angelblock.clientaccess;
 
-import com.pekar.angelblock.network.ClientToServerPacket;
+import com.pekar.angelblock.network.base.ClientToServerPacket;
 import net.minecraft.sounds.SoundEvent;
 
 public interface INetworkClientAccessor
