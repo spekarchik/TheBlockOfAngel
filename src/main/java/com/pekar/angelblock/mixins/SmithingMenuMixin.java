@@ -1,4 +1,4 @@
-package com.pekar.angelblock.menus;
+package com.pekar.angelblock.mixins;
 
 import com.pekar.angelblock.armor.ModHumanoidArmor;
 import com.pekar.angelblock.items.ItemRegistry;
@@ -7,51 +7,43 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SmithingMenu;
+import net.minecraft.world.inventory.ItemCombinerMenu;
+import net.minecraft.world.inventory.ItemCombinerMenuSlotDefinition;
+import net.minecraft.world.inventory.MenuType;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
-public class CustomSmithingMenu extends SmithingMenu
+@Mixin(SmithingMenu.class)
+public abstract class SmithingMenuMixin extends ItemCombinerMenu
 {
-    public CustomSmithingMenu(int containerId, Inventory playerInventory)
+    protected SmithingMenuMixin(MenuType<?> menuType, int containerId, Inventory inventory,
+            ContainerLevelAccess access, ItemCombinerMenuSlotDefinition slots)
     {
-        super(containerId, playerInventory);
+        super(menuType, containerId, inventory, access, slots);
     }
 
-    public CustomSmithingMenu(int containerId, Inventory playerInventory, ContainerLevelAccess access)
-    {
-        super(containerId, playerInventory, access);
-    }
-
-    @Override
-    public ItemStack quickMoveStack(Player player, int index)
-    {
-        if (index == getResultSlot())
-        {
-            if (getSlot(0).getItem().is(ItemRegistry.DOWNGRADE_KIT))
-            {
-                return ItemStack.EMPTY;
-            }
-        }
-
-        return super.quickMoveStack(player, index);
-    }
-
-    private boolean isCraftingHandbookItem(ItemStack mainItem)
+    @Unique
+    private boolean angelblock$isCraftingHandbookItem(ItemStack mainItem)
     {
         return mainItem.is(ItemRegistry.WOLF_ARMOR_HANDBOOK) || mainItem.is(ItemRegistry.HORSE_ARMOR_HANDBOOK) || mainItem.is(ItemRegistry.NAUTILUS_ARMOR_HANDBOOK);
     }
 
-    @Override
-    protected void onTake(Player player, ItemStack stack)
+    @Inject(method = "onTake", at = @At("HEAD"), cancellable = true)
+    private void angelblock$onTake(Player player, ItemStack stack, CallbackInfo ci)
     {
         var template = getSlot(0).getItem();
         var mainItem = getSlot(1).getItem();
         var secondaryItem = getSlot(2).getItem();
         var result = stack;
 
-        if (isCraftingHandbookItem(mainItem))
+        if (angelblock$isCraftingHandbookItem(mainItem))
         {
             template.shrink(1);
             secondaryItem.shrink(1);
@@ -63,6 +55,7 @@ public class CustomSmithingMenu extends SmithingMenu
             inputSlots.setChanged();
             slotsChanged(inputSlots);
 
+            ci.cancel();
             return;
         }
 
@@ -244,6 +237,5 @@ public class CustomSmithingMenu extends SmithingMenu
             }
         }
 
-        super.onTake(player, stack);
     }
 }
