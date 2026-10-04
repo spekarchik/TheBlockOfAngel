@@ -1,6 +1,6 @@
 package com.pekar.angelblock.events;
 
-import com.pekar.angelblock.network.NetworkingEventHandler;
+import com.pekar.angelblock.network.base.NetworkingEventHandler;
 import net.neoforged.bus.api.IEventBus;
 
 import static net.neoforged.neoforge.common.NeoForge.EVENT_BUS;

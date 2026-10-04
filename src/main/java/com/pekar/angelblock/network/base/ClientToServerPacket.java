@@ -1,8 +1,8 @@
-package com.pekar.angelblock.network;
+package com.pekar.angelblock.network.base;
 
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.neoforged.neoforge.network.handling.ServerPayloadContext;
 
 public abstract class ClientToServerPacket extends Packet implements IClientToServerPacket
 {
@@ -21,9 +21,8 @@ public abstract class ClientToServerPacket extends Packet implements IClientToSe
     }
 
     @Override
-    protected final void onReceive(IPayloadContext context)
+    protected final void onReceive(Player player)
     {
-        var serverContext = (ServerPayloadContext)context;
-        onReceive(serverContext.player());
+        onReceive((ServerPlayer) player);
     }
 }
