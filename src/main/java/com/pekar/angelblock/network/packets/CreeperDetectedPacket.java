@@ -1,16 +1,16 @@
 package com.pekar.angelblock.network.packets;
 
 import com.pekar.angelblock.clientaccess.ClientAccessor;
-import com.pekar.angelblock.network.Packet;
-import com.pekar.angelblock.network.ServerToClientPacket;
+import com.pekar.angelblock.network.base.Packet;
+import com.pekar.angelblock.network.base.ServerToClientPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.minecraft.world.entity.player.Player;
 
 public class CreeperDetectedPacket extends ServerToClientPacket
 {
     @Override
-    public void onReceive(IPayloadContext context)
+    public void onReceive(Player player)
     {
         var networkAccessor = ClientAccessor.networkAccessor();
         if (networkAccessor.isPauseScreen()) return;

@@ -1,13 +1,13 @@
 package com.pekar.angelblock.network.packets;
 
 import com.pekar.angelblock.clientaccess.ClientAccessor;
-import com.pekar.angelblock.network.Packet;
-import com.pekar.angelblock.network.ServerToClientPacket;
+import com.pekar.angelblock.network.base.Packet;
+import com.pekar.angelblock.network.base.ServerToClientPacket;
 import com.pekar.angelblock.utils.SoundType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.minecraft.world.entity.player.Player;
 
 public class PlaySoundPacket extends ServerToClientPacket
 {
@@ -52,7 +52,7 @@ public class PlaySoundPacket extends ServerToClientPacket
     }
 
     @Override
-    public void onReceive(IPayloadContext context)
+    public void onReceive(Player player)
     {
         ClientAccessor.networkAccessor().playClientSound(soundEvent, 1.0F, pitch);
     }

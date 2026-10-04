@@ -1,7 +1,7 @@
 package com.pekar.angelblock.network.packets;
 
-import com.pekar.angelblock.network.ClientToServerPacket;
-import com.pekar.angelblock.network.Packet;
+import com.pekar.angelblock.network.base.ClientToServerPacket;
+import com.pekar.angelblock.network.base.Packet;
 import com.pekar.angelblock.potions.PotionRegistry;
 import com.pekar.angelblock.tools.IModTool;
 import com.pekar.angelblock.tools.ModSword;
