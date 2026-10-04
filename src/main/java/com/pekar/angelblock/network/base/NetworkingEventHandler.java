@@ -1,4 +1,4 @@
-package com.pekar.angelblock.network;
+package com.pekar.angelblock.network.base;
 
 import com.pekar.angelblock.events.IEventHandler;
 import com.pekar.angelblock.network.packets.*;

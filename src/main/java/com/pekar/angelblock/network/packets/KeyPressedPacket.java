@@ -2,8 +2,8 @@ package com.pekar.angelblock.network.packets;
 
 import com.pekar.angelblock.events.PlayerManager;
 import com.pekar.angelblock.events.armor.IPlayerArmor;
-import com.pekar.angelblock.network.ClientToServerPacket;
-import com.pekar.angelblock.network.Packet;
+import com.pekar.angelblock.network.base.ClientToServerPacket;
+import com.pekar.angelblock.network.base.Packet;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 
