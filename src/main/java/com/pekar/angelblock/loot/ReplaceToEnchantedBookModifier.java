@@ -57,8 +57,12 @@ public class ReplaceToEnchantedBookModifier extends LootModifier
             {
                 if (stack.is(Items.ENCHANTED_BOOK))
                 {
-                    EnchantmentHelper.updateEnchantments(stack,
+                    var remainingEnchantments = EnchantmentHelper.updateEnchantments(stack,
                             enchantments -> enchantments.removeIf(enchantment -> enchantment.is(EnchantmentTags.CURSE)));
+                    if (remainingEnchantments.isEmpty())
+                    {
+                        iterator.set(new ItemStack(Items.BOOK, stack.getCount()));
+                    }
                     continue;
                 }
 
