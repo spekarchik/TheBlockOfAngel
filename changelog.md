@@ -1,4 +1,4 @@
-## 📦 Version 3.12.2
+## 📦 Version 3.13.0
 
 ### 📝 Improvements
 - Downgraded items can now be collected from the **Smithing Table** with *Shift-click*, with the same material refunds as a normal click.
