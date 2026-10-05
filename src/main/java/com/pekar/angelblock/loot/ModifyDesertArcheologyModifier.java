@@ -30,6 +30,8 @@ public class ModifyDesertArcheologyModifier extends LootModifier
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
+        if (generatedLoot.isEmpty()) return generatedLoot;
+
         int totalChances = context.getQueriedLootTableId().getPath().equals("archaeology/desert_pyramid") ? 9 : 5;
         boolean needReplace = context.getRandom().nextIntBetweenInclusive(1, totalChances) == 2;
         if (!needReplace) return generatedLoot;
