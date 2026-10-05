@@ -45,11 +45,18 @@ public class ReplaceToEnchantedBookModifier extends LootModifier
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
-        boolean removed = generatedLoot.removeIf(x -> x.is(itemToReplace));
-        if (removed)
+        var iterator = generatedLoot.listIterator();
+        while (iterator.hasNext())
         {
-            var enchantedBook = createEnchantedBookWithGoodLootEnchantment(context);
-            generatedLoot.add(enchantedBook);
+            var stack = iterator.next();
+            if (stack.is(itemToReplace))
+            {
+                iterator.set(createEnchantedBookWithGoodLootEnchantment(context));
+                for (int i = 1; i < stack.getCount(); i++)
+                {
+                    iterator.add(createEnchantedBookWithGoodLootEnchantment(context));
+                }
+            }
         }
         return generatedLoot;
     }
