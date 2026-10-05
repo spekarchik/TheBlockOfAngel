@@ -40,6 +40,8 @@ public class ReplaceSingleItemWithChanceModifier extends LootModifier
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
+        if (generatedLoot.isEmpty()) return generatedLoot;
+
         boolean needReplace = context.getRandom().nextIntBetweenInclusive(1, numOfOptions) == 2;
         if (!needReplace) return generatedLoot;
 

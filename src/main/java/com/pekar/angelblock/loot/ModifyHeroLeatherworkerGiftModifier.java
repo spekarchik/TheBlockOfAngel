@@ -30,6 +30,8 @@ public class ModifyHeroLeatherworkerGiftModifier extends LootModifier
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
+        if (generatedLoot.isEmpty()) return generatedLoot;
+
         int option = context.getRandom().nextIntBetweenInclusive(1, 7);
         if (option > 5) return generatedLoot;
 
