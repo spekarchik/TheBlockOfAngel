@@ -34,6 +34,8 @@ public class ModifyOceanArcheologyModifier extends LootModifier
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
+        if (generatedLoot.isEmpty()) return generatedLoot;
+
         boolean needReplace = context.getRandom().nextIntBetweenInclusive(1, 8) == 2;
         if (!needReplace) return generatedLoot;
 
