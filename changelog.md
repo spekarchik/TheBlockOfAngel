@@ -3,6 +3,7 @@
 ### 📝 Improvements
 - Downgraded items can now be collected from the **Smithing Table** with *Shift-click*, with the same material refunds as a normal click.
 - Improved compatibility with other mods that change the **Crafting Table** or **Smithing Table** menus.
+- Minor loot table fixes and adjustments.
 
 
 ## 📦 Version 3.12.1
