@@ -9,7 +9,7 @@
           "name": "angelblock:marine_crystal",
           "weight": 1
         },
-		{
+        {
           "type": "minecraft:item",
           "weight": 1,
           "functions": [
@@ -19,7 +19,7 @@
             }
           ],
           "name": "minecraft:turtle_helmet"
-		},
+        },
         {
           "type": "minecraft:item",
           "name": "minecraft:blade_pottery_sherd"

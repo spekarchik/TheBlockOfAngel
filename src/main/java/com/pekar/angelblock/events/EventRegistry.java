@@ -18,6 +18,7 @@ public class EventRegistry
         register(new AnimalEvents());
         register(new VillagerAncientScrollEvents());
         register(new ConsoleCommandEvents());
+        register(new LootEvents());
     }
 
     public static void registerEventsOnModBus(IEventBus modEventBus)
