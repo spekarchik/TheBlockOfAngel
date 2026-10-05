@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
@@ -54,6 +55,13 @@ public class ReplaceToEnchantedBookModifier extends LootModifier
             var stack = iterator.next();
             if (stack.is(itemToReplace))
             {
+                if (stack.is(Items.ENCHANTED_BOOK))
+                {
+                    EnchantmentHelper.updateEnchantments(stack,
+                            enchantments -> enchantments.removeIf(enchantment -> enchantment.is(EnchantmentTags.CURSE)));
+                    continue;
+                }
+
                 iterator.set(createEnchantedBookWithGoodLootEnchantment(context));
                 for (int i = 1; i < stack.getCount(); i++)
                 {
