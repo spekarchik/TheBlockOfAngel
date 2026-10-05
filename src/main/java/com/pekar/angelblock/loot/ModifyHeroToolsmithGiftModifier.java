@@ -35,6 +35,8 @@ public class ModifyHeroToolsmithGiftModifier extends LootModifier
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
+        if (generatedLoot.isEmpty()) return generatedLoot;
+
         int option = context.getRandom().nextIntBetweenInclusive(1, 8);
         if (option > 5)
         {
