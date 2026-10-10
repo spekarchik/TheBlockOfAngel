@@ -1,3 +1,12 @@
+## 📦 Version 3.14.0-beta
+
+### ✨ New
+- **Lymonite Horse Armor** now reduces Sweet Berry Bush slowdown by 50%.
+
+### 📝 Improvements
+- Updated **Lymonite Horse Armor** tooltip.
+
+
 ## 📦 Version 3.13.0-beta
 
 ### 📝 Improvements
