@@ -4,6 +4,7 @@
   "package": "com.pekar.angelblock.mixins",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "EntityBerryBushMixin",
     "AxolotlAccessor",
     "AxolotlMixin",
     "CraftingMenuMixin",
