@@ -1448,7 +1448,7 @@
   "item.angelblock.ancient_canine.desc": "Сустракаецца ў Іглу",
   "item.angelblock.evoker_amulet": "§eАмулет Заклінальніка",
   "item.angelblock.evoker_amulet.desc1": "Выкарыстанне выклікае Спакаёўку (не больш за 3 у радыусе 120 блокаў)",
-  "item.angelblock.evoker_amulet.desc2": "Спакаёўкі знікаюць, калі далёка і не перайменаваныя або не трымаюць прадмет",
+  "item.angelblock.evoker_amulet.desc2": "Спакаёўкі знікаюць калі далёка, і не перайменаваныя, не трымаюць прадмет і не прывязаныя павадком",
   "item.angelblock.evoker_amulet.desc3": "Сустракаецца ў Лясных Асабняках",
   "item.angelblock.ancient_scroll": "§eСтаражытны скрутак",
   "item.angelblock.ancient_scroll.desc1": "Пасля прачытання скрутка дурыла можа асвойваць прафесіі",
