@@ -14,6 +14,11 @@ public abstract class Cleaner
         targets.add(trackedTarget);
     }
 
+    public static void remove(ITrackedTarget trackedTarget)
+    {
+        targets.remove(trackedTarget);
+    }
+
     public static void decrementOrRemove()
     {
         if (targets.isEmpty()) return;
@@ -40,8 +45,7 @@ public abstract class Cleaner
                 target.remove();
                 iterator.remove();
             }
-
-            if (targetBehavior.shouldUntrack())
+            else if (targetBehavior.shouldUntrack()) // prevents to call `iterator.remove()` twice
             {
                 iterator.remove();
             }
@@ -66,13 +70,14 @@ public abstract class Cleaner
                 {
                     target.remove();
                     behavior.onRemove();
+                    iterator.remove();
                 }
                 else
                 {
                     behavior.onUnableToRemove();
+                    if (behavior.shouldUntrack())
+                        iterator.remove();
                 }
-
-                iterator.remove();
             }
         }
     }

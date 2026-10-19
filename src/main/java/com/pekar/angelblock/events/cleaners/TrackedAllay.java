@@ -4,11 +4,22 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.UUID;
+
 public class TrackedAllay extends TrackedTarget<Allay>
 {
-    public TrackedAllay(Allay allay, Player owner)
+    private final UUID ownerUuid;
+
+    public TrackedAllay(Allay allay, UUID ownerUuid)
     {
-        super(allay, owner, 6000);
+        super(allay, null, 6000);
+        this.ownerUuid = ownerUuid;
+    }
+
+    @Override
+    public Player getOwner()
+    {
+        return getTargetLevel().getPlayerByUUID(ownerUuid);
     }
 
     @Override

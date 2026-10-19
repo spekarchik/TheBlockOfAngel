@@ -2,6 +2,7 @@ package com.pekar.angelblock;
 
 import com.mojang.serialization.MapCodec;
 import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.attachments.AttachmentRegistry;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.events.EventRegistry;
@@ -66,6 +67,7 @@ public class Main
         POTIONS.register(modEventBus);
         ENTITY_TYPES.register(modEventBus);
         LOOT_MODIFIERS.register(modEventBus);
+        AttachmentRegistry.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);

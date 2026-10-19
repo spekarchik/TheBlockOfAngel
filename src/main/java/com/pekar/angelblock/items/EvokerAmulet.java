@@ -1,7 +1,6 @@
 package com.pekar.angelblock.items;
 
-import com.pekar.angelblock.events.cleaners.Cleaner;
-import com.pekar.angelblock.events.cleaners.TrackedAllay;
+import com.pekar.angelblock.events.cleaners.AllayManager;
 import com.pekar.angelblock.tooltip.ITooltip;
 import com.pekar.angelblock.tooltip.ITooltipProvider;
 import com.pekar.angelblock.tooltip.TextStyle;
@@ -13,7 +12,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.player.Player;
@@ -50,8 +48,8 @@ public class EvokerAmulet extends ModItem implements ITooltipProvider
                 {
                     level.getChunk(player.getOnPos()).addEntity(allay);
 
-                    var targetToTrack = new TrackedAllay(allay, player);
-                    Cleaner.add(targetToTrack);
+                    AllayManager.setTrackingData(allay, player);
+                    AllayManager.track(allay);
                 }
 
                 level.playSound(null, player, SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 1F, 2F);
