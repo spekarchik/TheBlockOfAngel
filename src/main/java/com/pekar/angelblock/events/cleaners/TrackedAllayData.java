@@ -1,21 +1,17 @@
 package com.pekar.angelblock.events.cleaners;
 
-import net.minecraft.nbt.CompoundTag;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.UUIDUtil;
 
 import java.util.UUID;
 
 public record TrackedAllayData(UUID allayUuid, UUID ownerUuid)
 {
-    public CompoundTag save()
-    {
-        CompoundTag tag = new CompoundTag();
-        tag.putUUID("Allay", allayUuid);
-        tag.putUUID("Owner", ownerUuid);
-        return tag;
-    }
-
-    public static TrackedAllayData load(CompoundTag tag)
-    {
-        return new TrackedAllayData(tag.getUUID("Allay"), tag.getUUID("Owner"));
-    }
+    public static final Codec<TrackedAllayData> CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    UUIDUtil.CODEC.fieldOf("allay").forGetter(TrackedAllayData::allayUuid),
+                    UUIDUtil.CODEC.fieldOf("owner").forGetter(TrackedAllayData::ownerUuid)
+            ).apply(instance, TrackedAllayData::new)
+    );
 }

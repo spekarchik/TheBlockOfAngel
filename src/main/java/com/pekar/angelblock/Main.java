@@ -2,6 +2,7 @@ package com.pekar.angelblock;
 
 import com.mojang.serialization.MapCodec;
 import com.pekar.angelblock.armor.ArmorRegistry;
+import com.pekar.angelblock.attachments.AttachmentRegistry;
 import com.pekar.angelblock.blocks.BlockRegistry;
 import com.pekar.angelblock.blocks.tile_entities.EntityRegistry;
 import com.pekar.angelblock.events.EventRegistry;
@@ -69,6 +70,7 @@ public class Main
         ENTITY_TYPES.register(modEventBus);
         ARMOR_MATERIALS.register(modEventBus);
         LOOT_MODIFIERS.register(modEventBus);
+        AttachmentRegistry.register(modEventBus);
 
         initializeRegistry();
 
