@@ -17,6 +17,11 @@ public class AllayEvents implements IEventHandler
         if (event.getLevel().isClientSide()) return;
         if (!(event.getEntity() instanceof Allay allay)) return;
         if (!allay.hasData(AttachmentRegistry.TRACKED_ALLAY)) return;
+        if (allay.hasCustomName())
+        {
+            allay.removeData(AttachmentRegistry.TRACKED_ALLAY);
+            return;
+        }
 
         AllayManager.track(allay);
     }
@@ -27,6 +32,11 @@ public class AllayEvents implements IEventHandler
         if (event.getSide() == LogicalSide.CLIENT) return;
         if (!(event.getTarget() instanceof Allay allay)) return;
         if (!allay.hasData(AttachmentRegistry.TRACKED_ALLAY)) return;
+        if (allay.hasCustomName())
+        {
+            allay.removeData(AttachmentRegistry.TRACKED_ALLAY);
+            return;
+        }
 
         AllayManager.track(allay);
     }
