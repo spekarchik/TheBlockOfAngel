@@ -34,7 +34,7 @@ class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
 
         var distanceToOwner = getDistanceToOwner();
 
-        return distanceToOwner >= DistanceToRemoveImmediately;
+        return distanceToOwner > DistanceToRemoveImmediately;
     }
 
     @Override
