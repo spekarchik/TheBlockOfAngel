@@ -13,6 +13,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 public class TickEvents implements IEventHandler
 {
@@ -23,9 +24,12 @@ public class TickEvents implements IEventHandler
         if (level.isClientSide()) return;
 
         LevelScheduler.doOnTick((ServerLevel)level);
+    }
 
+    @SubscribeEvent
+    public void onServerTickEvent(ServerTickEvent.Post event)
+    {
         Cleaner.decrementOrRemove();
-//        LightCleaner.decrementOrRemove();
     }
 
     @SubscribeEvent
