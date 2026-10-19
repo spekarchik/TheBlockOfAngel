@@ -3,7 +3,7 @@
 ### 🐞 Fixed
 - Fixed *Allays* summoned by the **Evoker's Amulet** sometimes permanently escaping cleanup after chunk reloads, player death, or dimension changes.
   - Completely reworked the Allay tracking system.
-  - Renamed Allays and Allays holding items remain protected from cleanup.
+  - Renamed Allays, Allays holding items, and leashed Allays remain protected from cleanup.
   - Allays summoned before this update remain untracked.
 - Fixed temporary entity and block cleanup timers running faster when multiple dimensions are loaded.
 
