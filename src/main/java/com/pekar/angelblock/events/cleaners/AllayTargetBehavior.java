@@ -73,6 +73,8 @@ class AllayTargetBehavior extends TargetBehavior<TrackedAllay>
         if (allay.isRemoved() && removalReason != null && !removalReason.shouldDestroy()) return true;
 
         return allay.isHolding(stack -> !stack.isEmpty())
-                || allay.hasCustomName();
+                || allay.hasCustomName()
+                // Include saved leashes whose holder has not been restored yet.
+                || allay.mayBeLeashed();
     }
 }

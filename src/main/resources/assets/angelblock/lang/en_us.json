@@ -1427,7 +1427,7 @@
   "item.angelblock.ancient_canine.desc": "Can be found in Igloos",
   "item.angelblock.evoker_amulet": "§eEvoker's Amulet",
   "item.angelblock.evoker_amulet.desc1": "Spawns up to 3 Allays (within 120 blocks)",
-  "item.angelblock.evoker_amulet.desc2": "Allays vanish if far away and not renamed or holding an item",
+  "item.angelblock.evoker_amulet.desc2": "Allays vanish when far away unless renamed, holding an item, or leashed",
   "item.angelblock.evoker_amulet.desc3": "Can be found in Woodland Mansions",
   "item.angelblock.ancient_scroll": "§eAntique Scroll",
   "item.angelblock.ancient_scroll.desc1": "After reading the scroll, a nitwit can learn professions",
