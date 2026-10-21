@@ -1,5 +1,8 @@
 ## 📦 Version 3.15.0
 
+### ✨ New
+- Added the **Too Good to Be True** advancement for transforming **Diamond Ore** or **Deepslate Diamond Ore** into **Green Diamond Ore** for the first time.
+
 ### 📝 Improvements
 - Rebalanced monster summons when transforming **Diamond Ore** or **Deepslate Diamond Ore** into **Green Diamond Ore** with the **Rod of Terra** or its improved versions.
   - Each transformation independently has a chance to summon monsters after a random delay of 2–40 seconds. Transforming more ore increases the overall chance of an encounter and makes an earlier first spawn more likely.
