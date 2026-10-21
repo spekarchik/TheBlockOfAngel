@@ -3,9 +3,9 @@
 ### 📝 Improvements
 - Rebalanced monster summons when transforming **Diamond Ore** or **Deepslate Diamond Ore** into **Green Diamond Ore** with the **Rod of Terra** or its improved versions.
   - Each transformation independently has a chance to summon monsters after a random delay of 2–40 seconds. Transforming more ore increases the overall chance of an encounter and makes an earlier first spawn more likely.
-  - On *Easy*: 50% chance to attempt one summon, with a nearby limit of two monsters.
-  - On *Normal*: 60% chance to attempt one or two summons, with a nearby limit of three monsters.
-  - On *Hard*: 70% chance to attempt one to three summons, with a nearby limit of four monsters.
+  - On *Easy*: 50% chance to attempt one summon, with a nearby limit of one monster.
+  - On *Normal*: 60% chance to attempt one or two summons, with a nearby limit of two monsters.
+  - On *Hard*: 70% chance to attempt one to three summons, with a nearby limit of three monsters.
   - No summons on *Peaceful*.
   - Limits count all **Illusioners** and **Drowned** within 20 blocks of the transformed ore and are checked again before each spawn.
   - Summons require a suitable position; if no valid Illusioner position is found, the game attempts to summon a **Drowned** in water instead.
