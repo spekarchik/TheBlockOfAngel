@@ -46,9 +46,8 @@ public class AncientRod extends MagneticRod
     private static final int ILLUSIONER_CHECK_RADIUS = 20;
     private static final int ILLUSIONER_SPAWN_RADIUS = 10;
     private static final int ILLUSIONER_SPAWN_ATTEMPTS = 5;
-    private static final int MIN_ILLUSIONER_SPAWN_DELAY = 10;
-    private static final int MAX_ILLUSIONER_SPAWN_DELAY = 100;
-    private static final int MAX_NEARBY_SUMMONED_MONSTERS = 3;
+    private static final int MIN_ILLUSIONER_SPAWN_DELAY = 40;
+    private static final int MAX_ILLUSIONER_SPAWN_DELAY = 800;
     private static final ISpawnStrategy DROWNED_SPAWN_STRATEGY = new InWaterMonsterSpawnStrategy();
 
     public AncientRod(ModToolMaterial material, boolean isMagnetic, TagKey<Block> mineableBlocks, Properties properties)
@@ -129,9 +128,11 @@ public class AncientRod extends MagneticRod
                             pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                             50, 0.5, 0.5, 0.5, 0.1
                     );
-                    if (scheduleIllusioners(serverLevel, pos, player))
-                        serverLevel.playSound(null, pos, SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                    scheduleIllusioners(serverLevel, pos, player);
+                    serverLevel.playSound(null, pos, SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.BLOCKS, 1.0F, 1.0F);
                 }
+
                 damageMainHandItemIfSurvivalIgnoreClient(player, level);
                 return getToolInteractionResult(true, isClientSide);
             }
@@ -364,34 +365,53 @@ public class AncientRod extends MagneticRod
                 }
     }
 
-    private boolean scheduleIllusioners(ServerLevel level, BlockPos pos, Player player)
+    private void scheduleIllusioners(ServerLevel level, BlockPos pos, Player player)
     {
-        int requestedCount = switch (level.getDifficulty())
+        var random = level.getRandom();
+        var difficulty = level.getDifficulty();
+
+        boolean skipSpawn = switch (difficulty)
         {
-            case PEACEFUL -> 0;
-            case EASY -> 1;
-            case NORMAL -> level.getRandom().nextIntBetweenInclusive(1, 2);
-            case HARD -> level.getRandom().nextIntBetweenInclusive(1, 3);
+            case PEACEFUL -> true;
+            case EASY -> random.nextBoolean();
+            case NORMAL -> random.nextIntBetweenInclusive(0, 4) <= 1;
+            case HARD -> random.nextIntBetweenInclusive(0, 9) <= 2;
         };
 
-        if (requestedCount == 0) return false;
+        if (skipSpawn) return;
+
+        int requestedCount = switch (difficulty)
+        {
+            case EASY -> 1;
+            case NORMAL -> random.nextIntBetweenInclusive(1, 2);
+            case HARD -> random.nextIntBetweenInclusive(1, 3);
+            default -> throw new IllegalStateException("Unexpected value: " + difficulty);
+        };
+
+        if (requestedCount == 0) return;
+
+        int maxNearbySummonedMonsters = switch (difficulty)
+        {
+            case EASY -> 2;
+            case NORMAL -> 3;
+            case HARD -> 4;
+            default -> throw new IllegalStateException("Unexpected value: " + difficulty);
+        };
 
         int nearbyCount = getNearbySummonedMonsterCount(level, pos);
-        int spawnCount = Math.min(requestedCount, Math.max(0, MAX_NEARBY_SUMMONED_MONSTERS - nearbyCount));
+        int spawnCount = Math.clamp(maxNearbySummonedMonsters - nearbyCount, 0, requestedCount);
 
         for (int i = 0; i < spawnCount; i++)
         {
-            int delay = level.getRandom().nextIntBetweenInclusive(MIN_ILLUSIONER_SPAWN_DELAY, MAX_ILLUSIONER_SPAWN_DELAY);
+            int delay = random.nextIntBetweenInclusive(MIN_ILLUSIONER_SPAWN_DELAY, MAX_ILLUSIONER_SPAWN_DELAY);
             LevelScheduler.add(new LevelScheduledTask(level, delay, scheduledLevel ->
-                    spawnIllusionerOrDrowned(scheduledLevel, pos, player)));
+                    spawnIllusionerOrDrowned(scheduledLevel, pos, player, maxNearbySummonedMonsters)));
         }
-
-        return spawnCount > 0;
     }
 
-    private void spawnIllusionerOrDrowned(ServerLevel level, BlockPos pos, Player player)
+    private void spawnIllusionerOrDrowned(ServerLevel level, BlockPos pos, Player player, int maxNearbySummonedMonsters)
     {
-        if (getNearbySummonedMonsterCount(level, pos) >= MAX_NEARBY_SUMMONED_MONSTERS) return;
+        if (getNearbySummonedMonsterCount(level, pos) >= maxNearbySummonedMonsters) return;
 
         var spawnPos = findIllusionerSpawnPos(level, pos, player);
         if (spawnPos == null)
@@ -469,7 +489,7 @@ public class AncientRod extends MagneticRod
 
             for (var candidate = startPos.above(ILLUSIONER_SPAWN_RADIUS); candidate.getY() > minY; candidate = candidate.below())
             {
-                if (spawnStrategy.canSpawnAtPos(level, candidate, player))
+                if (spawnStrategy.canSpawnAtPos(level, candidate, startPos))
                     return candidate;
             }
         }

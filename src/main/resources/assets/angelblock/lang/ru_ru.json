@@ -1474,7 +1474,12 @@
 
   "item.angelblock.green_diamond_ore": "§eЗелёно-алмазная руда",
   "item.angelblock.green_diamond_ore.desc1": "Воздействие Посохом Земли на блок Алмазной Руды превращает его в блок Зелено-Алмазной Руды",
-  "item.angelblock.green_diamond_ore.desc2": "При превращении руды появляются Иллюзоры или Утопленники",
+  "item.angelblock.green_diamond_ore.desc2": "Превращение может призвать Иллюзоров через 2–40 секунд, а если места на суше нет — Утопленников",
+  "item.angelblock.green_diamond_ore.desc3": "Мирная: без призыва",
+  "item.angelblock.green_diamond_ore.desc4": "Лёгкая: шанс 50%, до 1 монстра; лимит поблизости: 2",
+  "item.angelblock.green_diamond_ore.desc5": "Нормальная: шанс 60%, до 2 монстров; лимит поблизости: 3",
+  "item.angelblock.green_diamond_ore.desc6": "Сложная: шанс 70%, до 3 монстров; лимит поблизости: 4",
+  "item.angelblock.green_diamond_ore.desc7": "Лимит учитывает всех Иллюзоров и Утопленников в 20 блоках от руды",
   "item.angelblock.cracked_endstone_block": "Потрескавшийся эндерняк",
   "item.angelblock.cracked_endstone_block.desc": "При рарушении выпадает 0-7 Эндерняковой пыли",
   "item.angelblock.cracked_obsidian_block": "Потрескавшийся обсидиан",
