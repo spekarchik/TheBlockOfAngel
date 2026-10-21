@@ -392,9 +392,9 @@ public class AncientRod extends MagneticRod
 
         int maxNearbySummonedMonsters = switch (difficulty)
         {
-            case EASY -> 2;
-            case NORMAL -> 3;
-            case HARD -> 4;
+            case EASY -> 1;
+            case NORMAL -> 2;
+            case HARD -> 3;
             default -> throw new IllegalStateException("Unexpected value: " + difficulty);
         };
 
