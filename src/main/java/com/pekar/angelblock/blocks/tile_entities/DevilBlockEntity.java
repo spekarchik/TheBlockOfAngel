@@ -1,6 +1,7 @@
 package com.pekar.angelblock.blocks.tile_entities;
 
 import com.pekar.angelblock.blocks.BlockRegistry;
+import com.pekar.angelblock.blocks.GreenDiamondBlock;
 import com.pekar.angelblock.blocks.tile_entities.monsters.IMonster;
 import com.pekar.angelblock.blocks.tile_entities.monsters.Monsters;
 import com.pekar.angelblock.events.ILivingDeathEventHandler;
@@ -253,7 +254,8 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
             }
             else if (targetState.is(Blocks.DIAMOND_ORE) || targetState.is(Blocks.DEEPSLATE_DIAMOND_ORE))
             {
-                level.setBlock(targetPos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState(), Block.UPDATE_ALL);
+                var state = BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState().setValue(GreenDiamondBlock.IS_DARK, targetState.is(Blocks.DEEPSLATE_DIAMOND_ORE));
+                level.setBlock(targetPos, state, Block.UPDATE_ALL);
             }
             else if (targetState.is(Blocks.OBSIDIAN))
             {
