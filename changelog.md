@@ -16,6 +16,7 @@
 - Updated the **There Is Hope!** advancement description with flavor text.
 
 ### 🐞 Fixed
+- Fixed **The Block of Devil** transforming **Deepslate Diamond Ore** into the normal variant of **Green Diamond Ore** instead of its deepslate variant.
 - Fixed *Allays* summoned by the **Evoker's Amulet** sometimes permanently escaping cleanup after chunk reloads, player death, or dimension changes.
   - Completely reworked the Allay tracking system.
   - Renamed Allays, Allays holding items, and leashed Allays remain protected from cleanup.
