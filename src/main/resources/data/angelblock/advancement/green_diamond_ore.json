@@ -1,0 +1,27 @@
+{
+  "parent": "angelblock:magic_rod",
+  "criteria": {
+    "green_diamond_ore": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.angelblock.green_diamond_ore.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "angelblock:green_diamond_ore"
+    },
+    "title": {
+      "translate": "advancements.angelblock.green_diamond_ore.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    ["green_diamond_ore"]
+  ],
+  "sends_telemetry_event": false
+}
