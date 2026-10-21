@@ -1,16 +1,15 @@
 package com.pekar.angelblock.blocks.tile_entities.spawn;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class FlyingMonsterSpawnStrategy implements ISpawnStrategy
 {
     @Override
-    public boolean canSpawnAtPos(Level level, BlockPos pos, Player player)
+    public boolean canSpawnAtPos(Level level, BlockPos pos, BlockPos initialPos)
     {
         return level.getBlockState(pos).isAir()
-                && Math.abs(pos.getY() - player.getOnPos().getY()) <= 10
+                && Math.abs(pos.getY() - initialPos.getY()) <= 10
                 && hasSpaceBelow(level, pos)
                 && hasSpaceAbove(level, pos);
     }

@@ -1,14 +1,13 @@
 package com.pekar.angelblock.blocks.tile_entities.spawn;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
 public class InWaterMonsterSpawnStrategy implements ISpawnStrategy
 {
     @Override
-    public boolean canSpawnAtPos(Level level, BlockPos pos, Player player)
+    public boolean canSpawnAtPos(Level level, BlockPos pos, BlockPos initialPos)
     {
         return level.getBlockState(pos).is(Blocks.WATER) && hasSpaceAbove(level, pos);
     }
