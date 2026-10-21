@@ -13,6 +13,7 @@
   - Limits count all **Illusioners** and **Drowned** within 20 blocks of the transformed ore and are checked again before each spawn.
   - Summons require a suitable position; if no valid Illusioner position is found, the game attempts to summon a **Drowned** in water instead.
 - Updated the **Green Diamond Ore** tooltip to describe the summoning behavior.
+- Updated the **There Is Hope!** advancement description with flavor text.
 
 ### 🐞 Fixed
 - Fixed *Allays* summoned by the **Evoker's Amulet** sometimes permanently escaping cleanup after chunk reloads, player death, or dimension changes.
