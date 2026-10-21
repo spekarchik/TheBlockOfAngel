@@ -122,7 +122,7 @@ public class DevilBlockEntity extends BlockEntity implements ILivingDeathEventHa
 
             for (var p = startPos.above(MONSTER_SPAWN_RADIUS); p.getY() > minY; p = p.below())
             {
-                if (!monster.getSpawnStrategy().canSpawnAtPos(level, p, player)) continue;
+                if (!monster.getSpawnStrategy().canSpawnAtPos(level, p, startPos)) continue;
 
                 pos = p;
                 break;

@@ -1452,7 +1452,12 @@
 
   "item.angelblock.green_diamond_ore": "§eGreen Diamond Ore",
   "item.angelblock.green_diamond_ore.desc1": "Use the Rod of Terra on Diamond Ore to turn it into the Green Diamond Ore",
-  "item.angelblock.green_diamond_ore.desc2": "Illusioners or Drowned spawn when the ore transforms",
+  "item.angelblock.green_diamond_ore.desc2": "Transformation may summon Illusioners after 2–40 seconds, or Drowned if no land spawn is found",
+  "item.angelblock.green_diamond_ore.desc3": "Peaceful: no summons",
+  "item.angelblock.green_diamond_ore.desc4": "Easy: 50% chance, up to 1 monster; nearby cap: 2",
+  "item.angelblock.green_diamond_ore.desc5": "Normal: 60% chance, up to 2 monsters; nearby cap: 3",
+  "item.angelblock.green_diamond_ore.desc6": "Hard: 70% chance, up to 3 monsters; nearby cap: 4",
+  "item.angelblock.green_diamond_ore.desc7": "Caps count all Illusioners and Drowned within 20 blocks of the ore",
   "item.angelblock.cracked_endstone_block": "Cracked End Stone",
   "item.angelblock.cracked_endstone_block.desc": "Drops 0–7 endstone powder",
   "item.angelblock.cracked_obsidian_block": "Cracked Obsidian",
