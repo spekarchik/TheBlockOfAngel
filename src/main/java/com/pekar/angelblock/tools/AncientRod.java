@@ -17,6 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -123,6 +124,9 @@ public class AncientRod extends MagneticRod
                 setBlockWithClientSound(player, pos, BlockRegistry.GREEN_DIAMOND_ORE.get().defaultBlockState().setValue(GreenDiamondBlock.IS_DARK, isDark));
                 if (level instanceof ServerLevel serverLevel)
                 {
+                    if (player instanceof ServerPlayer serverPlayer)
+                        utils.player.awardAdvancement(serverPlayer, serverLevel, "green_diamond_ore", "green_diamond_ore");
+
                     serverLevel.sendParticles(
                             ParticleTypes.OMINOUS_SPAWNING,
                             pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
